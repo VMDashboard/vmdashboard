@@ -8392,7 +8392,6 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .navbar .navbar-brand {
-  text-transform: uppercase;
   font-size: 0.8571em;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -10986,7 +10985,6 @@ Created using IcoMoon - icomoon.io
 
 .sidebar .logo .simple-text,
 .off-canvas-sidebar .logo .simple-text {
-  text-transform: uppercase;
   padding: 0.5rem 0;
   display: block;
   white-space: nowrap;
@@ -12097,7 +12095,6 @@ Created using IcoMoon - icomoon.io
   color: inherit;
   padding: 0.5rem;
   font-size: 0.8571em;
-  text-transform: uppercase;
   text-decoration: none;
 }
 
