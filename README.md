@@ -13,6 +13,15 @@ This software is tested to run on a Ubuntu 16.04 server. Below are a list of the
     To give the www-data user permissions to use libvirt change the "unix_sock_rw_perms" option to read "0777" in the /etc/libvirt/libvirtd.conf
 
 
+
+Troubleshooting:
+
+VNC.
+If the VNC connection is not working, make sure that noVNC/utils/launch.sh is executable as well as noVNC/utils/websockify/run.
+
+
+
+
 There are still things to code:
 
     Delete storage drives from guest. Code is there but error says cannot attach disk. Seems like it is trying to add rather than remove
@@ -30,4 +39,3 @@ There are still things to code:
     Keep track of vm and hosts stats
     Create initial setup wizard for software, username, password, database connection, etc
     Setup network filters
-    
