@@ -1,0 +1,342 @@
+<?php
+require('header.php');
+
+$uuid = $_GET['uuid'];
+$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
+$dom = $lv->get_domain_object($domName);
+$protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
+$url = $protocol . $_SERVER['HTTP_HOST'];
+$page = basename($_SERVER['PHP_SELF']);
+
+
+// Setting up VNC connection information. tokens.list needs to have www-data ownership or 777 permissions
+$liststring = "";
+$listarray = $lv->get_domains();
+foreach ($listarray as $listname) {
+  $listdom = $lv->get_domain_object($listname);
+  $listinfo = libvirt_domain_get_info($listdom);
+  //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delay state status
+  $liststate = $lv->domain_state_translate($listinfo['state']);
+  if ($liststate == "running") {
+    $listdomuuid = libvirt_domain_get_uuid_string($listdom);
+    $listvnc = $lv->domain_get_vnc_port($listdom);
+    $liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
+  }
+}
+$listfile = "tokens.list";
+$list = file_put_contents($listfile, $liststring);
+
+
+// Domain Actions
+if ($action == 'domain-start') {
+  $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-pause') {
+  $ret = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-resume') {
+  $ret = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-stop') {
+  $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
+  $actioninfo = $lv->domain_get_info($dom);
+  $actionstate = $lv->domain_state_translate($actioninfo['state']);
+  if ($actionstate == "running"){
+    $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully shutdown";
+  }
+}
+
+if ($action == 'domain-destroy') {
+  $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-delete') {
+  $ret = $lv->domain_undefine($domName) ? "" : 'Error while deleting domain: '.$lv->get_last_error();
+  if (!$lv->domain_get_name_by_uuid($uuid))
+    header('Location: guests.php');
+}
+
+
+//Disk actions
+if ($action == 'domain-disk-remove') {
+  $ret = $lv->domain_disk_remove($domName, $_GET['dev']) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
+}
+
+
+//Snapshot Actions
+if ($action == 'domain-snapshot-create') {
+  $msg = $lv->domain_snapshot_create($domName) ? "Snapshot for $domName successfully created" : 'Error while taking snapshot of domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-snapshot-delete') {
+  $snapshot = $_GET['snapshot'];
+  $msg = $lv->domain_snapshot_delete($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully deleted" : 'Error while deleting snapshot of domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-snapshot-revert') {
+  $snapshot = $_GET['snapshot'];
+  $msg = $lv->domain_snapshot_revert($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully applied" : 'Error while reverting snapshot of domain: '.$lv->get_last_error();
+}
+
+if ($action == 'domain-snapshot-xml') {
+  $snapshot = $_GET['snapshot'];
+  $snapshotxml = $lv->domain_snapshot_get_xml($domName, $snapshot);
+  //Parsing the snapshot XML file - in Ubuntu requires the php-xml package
+  $xml = simplexml_load_string($snapshotxml);
+  //Alternative way to parse
+  //$xml = new SimpleXMLElement($snapshotxml);
+}
+
+//get info, mem, cpu, state, id, arch, and vnc after actions to reflect any changes to domain
+$info = $lv->domain_get_info($dom);
+$mem = number_format($info['memory'] / 1048576, 2, '.', ' ').' GB';
+$cpu = $info['nrVirtCpu'];
+$state = $lv->domain_state_translate($info['state']);
+$id = $lv->domain_get_id($dom);
+$arch = $lv->domain_get_arch($dom);
+$vnc = $lv->domain_get_vnc_port($dom);
+
+if (!$id)
+  $id = 'N/A';
+if ($vnc <= 0)
+	$vnc = 'N/A';
+
+require('navbar.php');
+?>
+
+<div class="panel-header panel-header-sm"></div>
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
+        </div>
+        <div class="card-body">
+          <hr />
+<?php
+
+/* General information */
+echo "<h3>General Information</h3>";
+echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
+echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
+echo "<b>Domain memory: </b>$mem<br/>";
+echo "<b>Number of vCPUs: </b>$cpu<br/>";
+echo "<b>Domain state: </b>$state<br/>";
+echo "<b>Domain architecture: </b>$arch<br/>";
+echo "<b>Domain ID: </b>$id<br/>";
+echo "<b>VNC Port: </b>$vnc<br/>";
+echo '<br/>';
+echo $ret;
+if ($die)
+  die('</body></html');
+echo "<br />";
+
+
+/* Disk information */
+echo "<h3>Disk devices</h3>";
+echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='now-ui-icons files_box'></i> Add new disk</a><br />";
+$tmp = $lv->get_disk_stats($domName);
+if (!empty($tmp)) {
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    //"<thead class='text-primary'>" .
+    "<tr>" .
+    "<th>Disk storage</th>" .
+    "<th>Storage driver type</th>" .
+    "<th>Domain device</th>" .
+    "<th>Disk capacity</th>" .
+    "<th>Disk allocation</th>" .
+    "<th>Physical disk size</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    //"</thead>" .
+    "<tbody>";
+  for ($i = 0; $i < sizeof($tmp); $i++) {
+    $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+    $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+    $physical = $lv->format_size($tmp[$i]['physical'], 2);
+    $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+    echo "<tr>" .
+      "<td>".basename($dev)."</td>" .
+      "<td>{$tmp[$i]['type']}</td>" .
+      "<td>{$tmp[$i]['device']}</td>" .
+      "<td>$capacity</td>" .
+      "<td>$allocation</td>" .
+      "<td>$physical</td>" .
+      "<td>" .
+        "<a title='Remove disk device' href=?action=domain-disk-remove&amp;uuid=" . $uuid . "&amp;dev=" . $tmp[$i]['device'] . "><i class='fas fa-trash-alt'></i></a>" .
+      "</td>" .
+      "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo "Domain doesn't have any disk devices";
+}
+echo "<br />";
+
+/* Network interface information */
+echo "<h3>Network devices</h3>";
+$tmp = $lv->get_nic_info($domName);
+if (!empty($tmp)) {
+  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+  echo "<table>" .
+    "<tr>" .
+    "<th>MAC Address</th>" .
+    "<th>NIC Type</th>" .
+    "<th>Network</th>" .
+    "<th>Network active</th>" .
+    "<th>Actions</th>" .
+    "</tr>";
+  for ($i = 0; $i < sizeof($tmp); $i++) {
+    if (in_array($tmp[$i]['network'], $anets))
+      $netUp = 'Yes';
+    else
+      $netUp = 'No <a href="">[Start]</a>';
+    echo "<tr>" .
+      "<td>{$tmp[$i]['mac']}</td>" .
+      "<td align=\"center\">{$tmp[$i]['nic_type']}</td>" .
+      "<td align=\"center\">{$tmp[$i]['network']}</td>" .
+      "<td align=\"center\">$netUp$spaces</td>" .
+      "<td align=\"center\">" .
+        "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-remove&amp;mac={$tmp[$i]['mac']}\">" .
+        "Remove network card</a>" .
+      "</td>" .
+      "</tr>";
+  }
+  echo "</table>";
+  echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
+} else {
+  echo '<p>Domain doesn\'t have any network devices</p>';
+}
+echo "<br />";
+
+
+/* Snapshot information */
+echo "<h3>Snapshots</h3>";
+echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='now-ui-icons media-1_camera-compact'></i> Create new snapshot</a><br />";
+$tmp = $lv->list_domain_snapshots($dom);
+if (!empty($tmp)) {
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    //"<thead class='text-primary'>" .
+    "<tr>" .
+    "<th>Name</th>" .
+    "<th>Creation Time</th>" .
+    "<th>State</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    //"</thead>" .
+    "<tbody>";
+
+  foreach ($tmp as $key => $value) {
+    //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+    $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+    $tmpxml = simplexml_load_string($tmpsnapshotxml);
+    $name = $tmpxml->name[0];
+    $creationTime = $tmpxml->creationTime[0];
+    $snapstate = $tmpxml->state[0];
+    echo "<tr>";
+    echo "<td>" . $name . "</td>";
+    echo "<td>" . date("D d M Y", $value) . " - ";
+    echo date("H:i:s", $value) . "</td>";
+    echo "<td>" . $snapstate . "</td>";
+    echo "<td>
+      <a title='Delete snapshot' href=?action=domain-snapshot-delete&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-trash-alt'></i></a>
+      <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
+      <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
+      </td>";
+    echo "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo "Domain does not have any snapshots";
+}
+
+if ($snapshotxml != null) {
+  echo "<hr>";
+  echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+  echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+}
+?>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="card-body" style="text-align: center;">
+
+          <?php
+            if ($state == "running") {
+              //screenshot will get raw png data at 300 pixels wide
+              $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 800);
+              //the raw png data needs to be encoded to use with html img tag
+              $screen64 = base64_encode($screenshot['data']);
+          ?>
+              <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+              <img src="data:image/png;base64,<?php echo $screen64 ?>" width="100%"/>
+              </a>
+          <?php
+            } else if ($state == "paused") {
+              echo "<img src='assets/img/paused.png' width='100%' >";
+            } else {
+              echo "<img src='assets/img/shutdown.png' width='100%' >";
+            }
+          ?>
+
+        </div>
+
+        <div class="button-container">
+          <?php  if ($state == "running") { ?>
+            <button title="VNC connect" onclick="window.open('<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>', '_blank');"  class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons tech_tv"></i>
+            </button>
+          <?php } ?>
+          
+          <?php if ($state == "shutoff") { ?>
+            <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons media-1_button-power"></i>
+            </button>
+          <?php } ?>
+
+          <?php  if ($state == "running") { ?>
+            <button title="Power off" onclick="window.open('?action=domain-stop&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons media-1_button-power"></i>
+            </button>
+            <button title="Pause" onclick="window.open('?action=domain-pause&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons media-1_button-pause"></i>
+            </button>
+          <?php } ?>
+
+          <?php  if ($state == "paused") { ?>
+            <button title="Resume" onclick="window.open('?action=domain-resume&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons media-1_button-play"></i>
+            </button>
+          <?php } ?>
+
+          <?php  if ($state != "shutoff") { ?>
+          <button title="Forceful shutdown" onclick="window.open('?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <?php } ?>
+
+          <?php  if ($state == "shutoff") { ?>
+          <button title="Delete" onclick="window.open('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+            <i class="fas fa-trash"></i>
+          </button>
+          <?php } ?>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php
+require('footer.php');
+?>
