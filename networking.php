@@ -122,8 +122,8 @@ require('navbar.php');
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> Table on Plain Background</h4>
-                                <p class="category"> Here is a subtitle for this table</p>
+                                <h4 class="card-title"> Network Filters</h4>
+                                <p class="category"> Network filters for domain</p>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -168,30 +168,6 @@ require('navbar.php');
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <?php
