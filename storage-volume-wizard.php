@@ -21,11 +21,8 @@ if (isset($_POST['finish'])) {
   exit;
 }
 
-
 require('navbar.php');
 ?>
-
-
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
@@ -101,7 +98,7 @@ require('navbar.php');
               </div>
             </div>
           </div>
-        </div>
+        
 
         <div class="card-footer">
           <div class="pull-right">
