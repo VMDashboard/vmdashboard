@@ -14,7 +14,7 @@
 
 
 					<?php echo (basename($_SERVER['PHP_SELF']) == "guests.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="/guests.php">
+                        <a href="guests.php">
                             <i class="now-ui-icons design_bullet-list-67"></i>
                             <p>VM Guests</p>
                         </a>
@@ -22,7 +22,7 @@
 
 
                     <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="/storage.php">
+                        <a href="storage.php">
                             <i class="now-ui-icons files_box"></i>
                             <p>Storage</p>
                         </a>
@@ -30,7 +30,7 @@
 
 
                     <?php echo (basename($_SERVER['PHP_SELF']) == "networking.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="/networking.php">
+                        <a href="networking.php">
                             <i class="now-ui-icons design_vector"></i>
                             <p>Networking</p>
                         </a>
@@ -38,7 +38,7 @@
 
 
                     <?php echo (basename($_SERVER['PHP_SELF']) == "host.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="/host.php">
+                        <a href="host.php">
                             <i class="now-ui-icons tech_laptop"></i>
                             <p>Host Info</p>
                         </a>
