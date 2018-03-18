@@ -22,7 +22,7 @@
 </head>
 
 <?php
-shell_exec("./noVNC/utils/websockify/run --web /var/www/html/noVNC/ --target-config ./tokens.list 192.168.2.10:6080 >/dev/null 2>&1 &");
+shell_exec("./noVNC/utils/websockify/run --web /var/www/html/openVM/noVNC/ --target-config ./tokens.list 192.168.2.10:6080 >/dev/null 2>&1 &");
 ?>
 
 <?php
