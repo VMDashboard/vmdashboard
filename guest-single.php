@@ -138,7 +138,7 @@ echo "<br />";
 
 /* Disk information */
 echo "<h3>Disk devices</h3>";
-echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='now-ui-icons files_box'></i> Add new disk</a><br />";
+echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-database'></i> Add new disk</a><br />";
 $tmp = $lv->get_disk_stats($domName);
 if (!empty($tmp)) {
   echo "<div class='table-responsive'>" .
@@ -297,7 +297,7 @@ if ($snapshotxml != null) {
               <i class="now-ui-icons tech_tv"></i>
             </button>
           <?php } ?>
-          
+
           <?php if ($state == "shutoff") { ?>
             <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
               <i class="now-ui-icons media-1_button-power"></i>
