@@ -31,7 +31,7 @@
 
                     <?php echo (basename($_SERVER['PHP_SELF']) == "networking.php") ? '<li class="active">' : '<li>'; ?>
                         <a href="networking.php">
-                            <i class="now-ui-icons design_vector"></i>
+                            <i class="fas fa-sitemap"></i>
                             <p>Networking</p>
                         </a>
                     </li>
