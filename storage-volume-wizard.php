@@ -40,7 +40,7 @@ require('navbar.php');
               <ul>
                 <li class="nav-item">
                   <a class="nav-link" href="#storage" data-toggle="tab">
-                    <i class="now-ui-icons files_box"></i>
+                    <i class="fas fa-database"></i>
                         Storage
                   </a>
                 </li>
@@ -98,7 +98,7 @@ require('navbar.php');
               </div>
             </div>
           </div>
-        
+
 
         <div class="card-footer">
           <div class="pull-right">
