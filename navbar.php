@@ -23,7 +23,7 @@
 
                     <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php") ? '<li class="active">' : '<li>'; ?>
                         <a href="storage.php">
-                            <i class="now-ui-icons files_box"></i>
+                            <i class="fas fa-database"></i>
                             <p>Storage</p>
                         </a>
                     </li>
