@@ -105,15 +105,15 @@ foreach ($doms as $name) {
     echo "<td align=\"center\">$spaces";
 
 	if ($lv->domain_is_running($name)){
-    echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Stop</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\"><i class='fas fa-plug'></i> Force shutdown</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause domain</a> |";
+    echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Stop guest</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Force shutdown</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause domain</a> |";
   } else if ($lv->domain_is_paused($name)){
-    echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume domain</a> | ";
+    echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume guest</a> | ";
   } else
-    echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class='fas fa-power-off'></i> Start</a> | ";
-  echo "<a href=\"?action=domain-get-xml&amp;uuid=$uuid\">Dump domain</a>";
+    echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class='fas fa-power-off'></i> Start guest</a>";
+  //echo "<a href=\"?action=domain-get-xml&amp;uuid=$uuid\">Dump domain</a>";
 
-	if (!$lv->domain_is_running($name))
-    echo "| <a href=\"?action=domain-edit&amp;uuid=$uuid\">Edit domain XML</a>";
+	//if (!$lv->domain_is_running($name))
+    //echo "| <a href=\"?action=domain-edit&amp;uuid=$uuid\">Edit domain XML</a>";
 
   echo "</td>" ;
 	echo "</tr>";
