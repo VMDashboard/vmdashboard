@@ -161,13 +161,13 @@ $random_mac = $lv->generate_random_mac_addr();
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#storage" data-toggle="tab">
-                    <i class="now-ui-icons files_box"></i>
+                    <i class="fas fa-database"></i>
                     Storage
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#networking" data-toggle="tab">
-                    <i class="now-ui-icons design_vector"></i>
+                    <i class="fas fa-sitemap"></i>
                     Networking
                   </a>
                 </li>

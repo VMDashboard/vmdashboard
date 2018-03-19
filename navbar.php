@@ -1,68 +1,63 @@
 <body class="">
-    <div class="wrapper ">
-        <div class="sidebar" data-color="orange">
-            <!--
+  <div class="wrapper ">
+    <div class="sidebar" data-color="orange">
+    <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
-            <div class="logo">
-                <a href="https://github.com/PenningDevelopment/openvm" class="simple-text logo-normal">
-                    <img src="assets/img/openVM.png" width="50px"> openVM &trade;
-                </a>
+      <div class="logo">
+        <a href="https://github.com/PenningDevelopment/openVM" class="simple-text logo-normal">
+          <img src="assets/img/openVM.png" width="50px"> openVM &trade;
+        </a>
+      </div>
+
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <?php echo (basename($_SERVER['PHP_SELF']) == "guests.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="guests.php">
+              <i class="now-ui-icons design_bullet-list-67"></i>
+              <p>VM Guests</p>
+            </a>
+          </li>
+
+          <?php echo (basename($_SERVER['PHP_SELF']) == "storage.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="storage.php">
+              <i class="fas fa-database"></i>
+              <p>Storage</p>
+            </a>
+          </li>
+
+          <?php echo (basename($_SERVER['PHP_SELF']) == "networking.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="networking.php">
+              <i class="fas fa-sitemap"></i>
+              <p>Networking</p>
+            </a>
+          </li>
+
+          <?php echo (basename($_SERVER['PHP_SELF']) == "host.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="host.php">
+              <i class="now-ui-icons tech_laptop"></i>
+              <p>Host Info</p>
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <div class="navbar-toggle">
+              <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+              </button>
             </div>
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-
-
-					<?php echo (basename($_SERVER['PHP_SELF']) == "guests.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="guests.php">
-                            <i class="now-ui-icons design_bullet-list-67"></i>
-                            <p>VM Guests</p>
-                        </a>
-                    </li>
-
-
-                    <?php echo (basename($_SERVER['PHP_SELF']) == "storage.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="storage.php">
-                            <i class="fas fa-database"></i>
-                            <p>Storage</p>
-                        </a>
-                    </li>
-
-
-                    <?php echo (basename($_SERVER['PHP_SELF']) == "networking.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="networking.php">
-                            <i class="fas fa-sitemap"></i>
-                            <p>Networking</p>
-                        </a>
-                    </li>
-
-
-                    <?php echo (basename($_SERVER['PHP_SELF']) == "host.php") ? '<li class="active">' : '<li>'; ?>
-                        <a href="host.php">
-                            <i class="now-ui-icons tech_laptop"></i>
-                            <p>Host Info</p>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-        </div>
-
-
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
-                <div class="container-fluid">
-                    <div class="navbar-wrapper">
-                        <div class="navbar-toggle">
-                            <button type="button" class="navbar-toggler">
-                                <span class="navbar-toggler-bar bar1"></span>
-                                <span class="navbar-toggler-bar bar2"></span>
-                                <span class="navbar-toggler-bar bar3"></span>
-                            </button>
-                        </div>
-                        <a class="navbar-brand" href="#">Open Source Virtual Management Software</a>
-                    </div>
+            <a class="navbar-brand" href="#">Open Source Virtual Management Software</a>
+          </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar navbar-kebab"></span>
                         <span class="navbar-toggler-bar navbar-kebab"></span>
