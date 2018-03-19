@@ -6,7 +6,7 @@
     -->
             <div class="logo">
                 <a href="https://github.com/PenningDevelopment/openvm" class="simple-text logo-normal">
-                    <img src="assets/img/openVM.png" width="50px"> openVM&trade;
+                    <img src="assets/img/openVM.png" width="50px"> openVM;
                 </a>
             </div>
             <div class="sidebar-wrapper">
@@ -61,7 +61,7 @@
                                 <span class="navbar-toggler-bar bar3"></span>
                             </button>
                         </div>
-                        <a class="navbar-brand" href="#">openVM&trade;</a>
+                        <a class="navbar-brand" href="#">Open Source Virtual Management Software;</a>
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-bar navbar-kebab"></span>
