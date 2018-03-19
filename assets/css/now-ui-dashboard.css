@@ -8392,7 +8392,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .navbar .navbar-brand {
-  font-size: 0.8571em;
+  font-size: 1.5em;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   line-height: 1.625rem;
@@ -10824,7 +10824,7 @@ Created using IcoMoon - icomoon.io
   position: relative;
   text-transform: uppercase;
   cursor: pointer;
-  font-size: 0.7142em;
+  font-size: 1em;
   padding: 10px 8px;
   line-height: 1.625rem;
 }
