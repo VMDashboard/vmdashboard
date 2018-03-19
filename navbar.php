@@ -6,7 +6,7 @@
     -->
             <div class="logo">
                 <a href="https://github.com/PenningDevelopment/openvm" class="simple-text logo-normal">
-                    <img src="assets/img/openVM.png" width="50px"> openVM
+                    <img src="assets/img/openVM.png" width="50px"> openVM <div style="font-size: 1em;">&trade;</div>
                 </a>
             </div>
             <div class="sidebar-wrapper">
