@@ -109,7 +109,7 @@ foreach ($doms as $name) {
   } else if ($lv->domain_is_paused($name)){
     echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume domain</a> | ";
   } else
-    echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class='fas fa-poweroff'></i>Start domain</a> | ";
+    echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class='fas fa-power-off'></i>Start domain</a> | ";
   echo "<a href=\"?action=domain-get-xml&amp;uuid=$uuid\">Dump domain</a>";
 
 	if (!$lv->domain_is_running($name))
