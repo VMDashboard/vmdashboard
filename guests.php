@@ -92,7 +92,11 @@ foreach ($doms as $name) {
         $id = '-';
     unset($dom);
 
-	echo "<tr " . if ($state == "shutoff") ? style='color:green' . ">" .
+    $color = "";
+    if ($state == "shutoff")
+      $color = "style='color:#333333;'";
+
+	echo "<tr " . $color . " >" .
     "<td>" .
     "<a href=\"guest-single.php?uuid=$uuid\">$name</a>" .
     "</td>" .
