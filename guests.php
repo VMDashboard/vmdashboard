@@ -56,7 +56,7 @@ if ($action) {
                                     <th>Memory</th>
                                     <th>Disk(s)</th>
                                     <th>Power State</th>
-                                    <th align="center">Action</th>
+                                    <th>Action</th>
                                 </thead>
                                 <tbody>
 <?php
@@ -93,10 +93,10 @@ foreach ($doms as $name) {
     "</td>" .
     "<td>$cpu</td>" .
     "<td>$mem</td>" .
-    "<td align=\"center\" title='$diskdesc'>$disks</td>" .
+    "<td title='$diskdesc'>$disks</td>" .
     "<td>$state</td>";
 
-    echo "<td align=\"center\">";
+    echo "<td>";
 
 	if ($lv->domain_is_running($name)){
     echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Force shutdown</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
