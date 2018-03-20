@@ -94,7 +94,7 @@ foreach ($doms as $name) {
     "<td>$cpu</td>" .
     "<td>$mem</td>" .
     "<td align=\"center\" title='$diskdesc'>$disks</td>" .
-    "<td>$state</td>" .
+    "<td>$state</td>";
 
     echo "<td align=\"center\">";
 
