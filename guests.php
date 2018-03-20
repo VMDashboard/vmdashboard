@@ -4,15 +4,15 @@ require('navbar.php');
 ?>
 
 <div class="panel-header panel-header-sm">
-    </div>
-    <div class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Virtual Machine Guests</h4> <a href="guest-wizard.php">Create new guest</a>
-                    </div>
-                    <div class="card-body">
+  </div>
+  <div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Virtual Machine Guests</h4> <a href="guest-wizard.php">Create new guest</a>
+          </div>
+          <div class="card-body">
 
 <?php
 if ($action) {
@@ -48,17 +48,17 @@ if ($action) {
 ?>
 
 
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead class=" text-primary">
-                                    <th>Name</th>
-                                    <th>CPU Cores</th>
-                                    <th>Memory</th>
-                                    <th>Disk(s)</th>
-                                    <th>Power State</th>
-                                    <th>Action</th>
-                                </thead>
-                                <tbody>
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>Name</th>
+                  <th>CPU Cores</th>
+                  <th>Memory</th>
+                  <th>Disk(s)</th>
+                  <th>Power State</th>
+                  <th>Action</th>
+                </thead>
+                <tbody>
 <?php
 $doms = $lv->get_domains();
 foreach ($doms as $name) {
@@ -82,10 +82,8 @@ foreach ($doms as $name) {
         $diskdesc = '';
     }
 
-
     unset($tmp);
     unset($dom);
-
 
 	echo "<tr>" .
     "<td>" .
@@ -115,14 +113,14 @@ foreach ($doms as $name) {
 ?>
 
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <?php
 require('footer.php');
