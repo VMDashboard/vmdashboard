@@ -56,8 +56,7 @@ if ($action) {
                                     <th>Memory</th>
                                     <th>Disk(s)</th>
                                     <th>Power State</th>
-                                    <th>ID/VNC Port</th>
-                                    <th>Action</th>
+                                    <th align="center">Action</th>
                                 </thead>
                                 <tbody>
 <?php
@@ -83,13 +82,8 @@ foreach ($doms as $name) {
         $diskdesc = '';
     }
 
-	if ($vnc < 0)
-        $vnc = '-';
-    else
-        $vnc = $_SERVER['HTTP_HOST'].':'.$vnc;
+
     unset($tmp);
-    if (!$id)
-        $id = '-';
     unset($dom);
 
 
@@ -101,9 +95,8 @@ foreach ($doms as $name) {
     "<td>$mem</td>" .
     "<td align=\"center\" title='$diskdesc'>$disks</td>" .
     "<td>$state</td>" .
-    "<td align=\"center\">$id / $vnc</td>";
 
-    echo "<td align=\"center\">$spaces";
+    echo "<td align=\"center\">";
 
 	if ($lv->domain_is_running($name)){
     echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Force shutdown</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
