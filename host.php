@@ -147,9 +147,6 @@ $hn = $lv->get_hostname();
                  echo "</table></div>";
 
 
-              $tmp = libvirt_connect_get_emulator($conn, "x86_64");
-              var_dump($tmp);
-
          }
 
 
