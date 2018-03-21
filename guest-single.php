@@ -169,9 +169,11 @@ echo "<br />";
 
           <div class="col-sm-4">
             <?php  if ($state == "running") { ?>
-              <button title="VNC connect" onclick="window.open('<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>', '_blank');"  class="btn btn-neutral btn-icon btn-round btn-lg">
+              <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+
                 <i class="now-ui-icons tech_tv"></i>VNC Connection<br />
-              </button>
+              
+              </a>
             <?php } ?>
 
             <?php if ($state == "shutoff") { ?>
