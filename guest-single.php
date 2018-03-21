@@ -90,6 +90,12 @@ if ($action == 'domain-snapshot-xml') {
   //$xml = new SimpleXMLElement($snapshotxml);
 }
 
+if ($action == 'domain-edit') {
+  if (@$_POST['xmldesc']) {
+    $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
+  }
+}
+
 //get info, mem, cpu, state, id, arch, and vnc after actions to reflect any changes to domain
 $info = $lv->domain_get_info($dom);
 $mem = number_format($info['memory'] / 1048576, 2, '.', ' ').' GB';
@@ -406,16 +412,14 @@ echo "<br />";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
-                  Efficiently unleash
+                  Domain XML
                   <?php
-                  if ($action == 'domain-edit') {
-                    if (@$_POST['xmldesc']) {
-                      $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
-                    } else {
-                      $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
-                        "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
-                        "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
-                    }
+                  if ($state == "shutoff"){
+                    $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
+                      "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
+                      "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
+                  } else {
+                    echo "Domain must be shutdown before editing XML";
                   }
                   ?>
                 </div>
