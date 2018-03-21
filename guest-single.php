@@ -380,13 +380,13 @@ require('navbar.php');
               <ul class="nav nav-pills nav-pills-primary nav-pills-icons flex-column" role="tablist">
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#linkxml" role="tablist">
-                    <i class="now-ui-icons objects_umbrella-13"></i>
+                    <i class="now-ui-icons text_caps-small"></i>
                     Info
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#linkxmlview" role="tablist">
-                    <i class="now-ui-icons ui-2_settings-90"></i>
+                    <i class="now-ui-icons education_paper"></i>
                     View XML
                   </a>
                 </li>
