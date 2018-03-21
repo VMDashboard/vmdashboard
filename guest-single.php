@@ -113,6 +113,16 @@ if ($vnc <= 0)
 
 require('navbar.php');
 ?>
+
+<style>
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+</style>
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="row row-eq-height">
@@ -146,14 +156,7 @@ echo "<br />";
       </div>
     </div>
 
-    <style>
-    .row-eq-height {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display:         flex;
-    }
-    </style>
+
 
     <div class="col-md-4">
       <div class="card card-user">
