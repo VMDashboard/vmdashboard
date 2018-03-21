@@ -181,7 +181,7 @@ echo "<br />";
             <?php } ?>
 
             <?php  if ($state == "running") { ?>
-              <a hfref="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                 <i class="now-ui-icons media-1_button-power"></i> Power guest off<br />
               </a>
               <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
