@@ -402,7 +402,7 @@ echo "<br />";
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
                   $xml = $lv->domain_get_xml($domName, $inactive);
                   $ret = htmlentities($xml);
-                  echo "<textarea rows=\"15\" cols=\"50%\" readonly>" . $ret . "</textarea>";
+                  echo "<textarea rows=\"15\" cols=\"60%\" readonly>" . $ret . "</textarea>";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
