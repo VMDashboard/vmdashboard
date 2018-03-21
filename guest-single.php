@@ -114,9 +114,9 @@ require('navbar.php');
       <div class="card">
         <div class="card-header">
           <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
-        </div>
+        <hr></div>
         <div class="card-body">
-          <hr />
+
 <?php
 
 /* General information */
