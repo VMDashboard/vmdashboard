@@ -408,14 +408,14 @@ echo "<br />";
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
                   $xml = $lv->domain_get_xml($domName, $inactive);
                   $ret = htmlentities($xml);
-                  echo "<textarea rows=\"20\" cols=\"60%\" readonly>" . $ret . "</textarea>";
+                  echo "<textarea rows=\"20\" cols=\"70%\" readonly>" . $ret . "</textarea>";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
                   <?php
                   if ($state == "shutoff"){
                     $ret = "<form method=\"POST\">" .
-                      "<textarea name=\"xmldesc\" rows=\"20\" cols=\"60%\">" . $xml . "</textarea>" .
+                      "<textarea name=\"xmldesc\" rows=\"20\" cols=\"70%\">" . $xml . "</textarea>" .
                       "<input type=\"submit\" value=\" Edit domain XML description \"></form>";
                     echo $ret;
                   } else {
