@@ -1,5 +1,13 @@
 <?php
 require('header.php');
+<style>
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+</style>
 
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
@@ -113,24 +121,6 @@ if ($vnc <= 0)
 
 require('navbar.php');
 ?>
-<style>
-.row-eq-height > [class^=col] {
-  display: flex;
-  flex-direction: column;
-}
-
-.row-eq-height > [class^=col]:last-of-type div {
-  margin: 10px;
-}
-
-.row-eq-height > [class^=col]:last-of-type div:first-of-type {
-  margin-top: 0;
-}
-
-.row-eq-height > [class^=col]:last-of-type div:last-of-type {
-  margin-bottom: 0;
-}
-</style>
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="row row-eq-height">
