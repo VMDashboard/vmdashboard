@@ -130,7 +130,7 @@ require('navbar.php');
 .row-eq-height > [class^=col]:last-of-type div:last-of-type {
   margin-bottom: 0;
 }
-</style
+</style>
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="row row-eq-height">
