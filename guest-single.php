@@ -170,40 +170,40 @@ echo "<br />";
           <div class="col-sm-4">
             <?php  if ($state == "running") { ?>
               <button title="VNC connect" onclick="window.open('<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>', '_blank');"  class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons tech_tv"></i>
+                <i class="now-ui-icons tech_tv"></i>VNC Connection<br />
               </button>
             <?php } ?>
 
             <?php if ($state == "shutoff") { ?>
               <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-power"></i>
+                <i class="now-ui-icons media-1_button-power"></i>Power guest on<br />
               </button>
             <?php } ?>
 
             <?php  if ($state == "running") { ?>
               <button title="Power off" onclick="window.open('?action=domain-stop&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-power"></i>
+                <i class="now-ui-icons media-1_button-power"></i>Power guest off<br />
               </button>
               <button title="Pause" onclick="window.open('?action=domain-pause&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-pause"></i>
+                <i class="now-ui-icons media-1_button-pause"></i>Pause guest<br />
               </button>
             <?php } ?>
 
             <?php  if ($state == "paused") { ?>
               <button title="Resume" onclick="window.open('?action=domain-resume&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-play"></i>
+                <i class="now-ui-icons media-1_button-play"></i>Resume guest<br />
               </button>
             <?php } ?>
 
             <?php  if ($state != "shutoff") { ?>
             <button title="Forceful shutdown" onclick="window.open('?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons ui-1_simple-remove"></i>
+              <i class="now-ui-icons ui-1_simple-remove"></i>Force Shutdown<br />
             </button>
             <?php } ?>
 
             <?php  if ($state == "shutoff") { ?>
             <button title="Delete" onclick="window.open('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-trash"></i>Delete guest<br />
             </button>
             <?php } ?>
           </div>
