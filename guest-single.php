@@ -136,47 +136,7 @@ if ($die)
 echo "<br />";
 
 
-/* Disk information */
-echo "<h3>Disk devices</h3>";
-echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-database'></i> Add new disk</a><br />";
-$tmp = $lv->get_disk_stats($domName);
-if (!empty($tmp)) {
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    //"<thead class='text-primary'>" .
-    "<tr>" .
-    "<th>Disk storage</th>" .
-    "<th>Storage driver type</th>" .
-    "<th>Domain device</th>" .
-    "<th>Disk capacity</th>" .
-    "<th>Disk allocation</th>" .
-    "<th>Physical disk size</th>" .
-    "<th>Actions</th>" .
-    "</tr>" .
-    //"</thead>" .
-    "<tbody>";
-  for ($i = 0; $i < sizeof($tmp); $i++) {
-    $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
-    $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
-    $physical = $lv->format_size($tmp[$i]['physical'], 2);
-    $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
-    echo "<tr>" .
-      "<td>".basename($dev)."</td>" .
-      "<td>{$tmp[$i]['type']}</td>" .
-      "<td>{$tmp[$i]['device']}</td>" .
-      "<td>$capacity</td>" .
-      "<td>$allocation</td>" .
-      "<td>$physical</td>" .
-      "<td>" .
-        "<a title='Remove disk device' href=?action=domain-disk-remove&amp;uuid=" . $uuid . "&amp;dev=" . $tmp[$i]['device'] . "><i class='fas fa-trash-alt'></i></a>" .
-      "</td>" .
-      "</tr>";
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo "Domain doesn't have any disk devices";
-}
-echo "<br />";
+
 
 /* Network interface information */
 echo "<h3>Network devices</h3>";
@@ -342,10 +302,52 @@ if ($snapshotxml != null) {
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
-        <hr></div>
+          <h3 class="title">Storage</h3>
+        </div>
         <div class="card-body">
-          disks
+          <?php
+          /* Disk information */
+          echo "<h3>Disk devices</h3>";
+          echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-database'></i> Add new disk</a><br />";
+          $tmp = $lv->get_disk_stats($domName);
+          if (!empty($tmp)) {
+            echo "<div class='table-responsive'>" .
+              "<table class='table'>" .
+              //"<thead class='text-primary'>" .
+              "<tr>" .
+              "<th>Disk storage</th>" .
+              "<th>Storage driver type</th>" .
+              "<th>Domain device</th>" .
+              "<th>Disk capacity</th>" .
+              "<th>Disk allocation</th>" .
+              "<th>Physical disk size</th>" .
+              "<th>Actions</th>" .
+              "</tr>" .
+              //"</thead>" .
+              "<tbody>";
+            for ($i = 0; $i < sizeof($tmp); $i++) {
+              $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+              $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+              $physical = $lv->format_size($tmp[$i]['physical'], 2);
+              $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+              echo "<tr>" .
+                "<td>".basename($dev)."</td>" .
+                "<td>{$tmp[$i]['type']}</td>" .
+                "<td>{$tmp[$i]['device']}</td>" .
+                "<td>$capacity</td>" .
+                "<td>$allocation</td>" .
+                "<td>$physical</td>" .
+                "<td>" .
+                  "<a title='Remove disk device' href=?action=domain-disk-remove&amp;uuid=" . $uuid . "&amp;dev=" . $tmp[$i]['device'] . "><i class='fas fa-trash-alt'></i></a>" .
+                "</td>" .
+                "</tr>";
+            }
+            echo "</tbody></table></div>";
+          } else {
+            echo "Domain doesn't have any disk devices";
+          }
+          echo "<br />";
+          ?>
         </div>
       </div>
     </div>
@@ -356,7 +358,7 @@ if ($snapshotxml != null) {
     <div class="col-md-6">
       <div class="card">
         <div class="card-header">
-          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
+          <h2 class="title"></h2>
         <hr></div>
         <div class="card-body">
           network
