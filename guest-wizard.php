@@ -248,11 +248,15 @@ $random_mac = $lv->generate_random_mac_addr();
                     <!--    Storage Tab     -->
                     <script>
                     function diskChangeOptions(selectEl) {
-                      let selectedTitle = selectEl.options[selectEl.selectedIndex].title;
+                      let selectedValue = selectEl.options[selectEl.selectedIndex].value;
                       let subForms = document.getElementsByClassName('diskChange')
                       for (let i = 0; i < subForms.length; i += 1) {
-                        if (selectedTitle === subForms[i].id) {
+                        if (selectedValue === subForms[i].id) {
                           subForms[i].setAttribute('style', 'display:block')
+                        } else if (selectedValue != "none" && selectedValue != "new"){
+                          subForms[i].setAttribute('style', 'display:block')
+
+
                         } else {
                           subForms[i].setAttribute('style', 'display:none')
                         }
@@ -291,8 +295,8 @@ $random_mac = $lv->generate_random_mac_addr();
                                   <div class="form-group">
                                       <label>Disk drive source file location</label>
                                       <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
-                                        <option value="none" title="none"> Select Disk </option>
-                                        <option value="new" title="new"> New Disk </option>
+                                        <option value="none"> Select Disk </option>
+                                        <option value="new"> New Disk </option>
                                       <?php
                                       $pools = $lv->get_storagepools();
                                       for ($i = 0; $i < sizeof($pools); $i++) {
@@ -304,7 +308,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                             $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
                                             $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
                                             if (strtolower($ext) != "iso")
-                                              echo "<option title='local' value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
                                           }
                                         }
                                       }
