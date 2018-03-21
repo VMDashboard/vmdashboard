@@ -148,10 +148,6 @@ echo "<br />";
           </div>
 
           <div class="col-sm-4">
-            Actions
-          </div>
-
-          <div class="col-sm-4">
             <?php
               if ($state == "running") {
                 //screenshot will get raw png data at 300 pixels wide
@@ -170,7 +166,48 @@ echo "<br />";
               }
             ?>
           </div>
-</div>
+
+          <div class="col-sm-4">
+            <?php  if ($state == "running") { ?>
+              <button title="VNC connect" onclick="window.open('<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>', '_blank');"  class="btn btn-neutral btn-icon btn-round btn-lg">
+                <i class="now-ui-icons tech_tv"></i>
+              </button>
+            <?php } ?>
+
+            <?php if ($state == "shutoff") { ?>
+              <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+                <i class="now-ui-icons media-1_button-power"></i>
+              </button>
+            <?php } ?>
+
+            <?php  if ($state == "running") { ?>
+              <button title="Power off" onclick="window.open('?action=domain-stop&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+                <i class="now-ui-icons media-1_button-power"></i>
+              </button>
+              <button title="Pause" onclick="window.open('?action=domain-pause&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+                <i class="now-ui-icons media-1_button-pause"></i>
+              </button>
+            <?php } ?>
+
+            <?php  if ($state == "paused") { ?>
+              <button title="Resume" onclick="window.open('?action=domain-resume&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+                <i class="now-ui-icons media-1_button-play"></i>
+              </button>
+            <?php } ?>
+
+            <?php  if ($state != "shutoff") { ?>
+            <button title="Forceful shutdown" onclick="window.open('?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="now-ui-icons ui-1_simple-remove"></i>
+            </button>
+            <?php } ?>
+
+            <?php  if ($state == "shutoff") { ?>
+            <button title="Delete" onclick="window.open('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
+              <i class="fas fa-trash"></i>
+            </button>
+            <?php } ?>
+          </div>
+          </div>
 
         </div>
       </div>
