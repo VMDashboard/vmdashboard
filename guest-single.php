@@ -181,29 +181,29 @@ echo "<br />";
             <?php } ?>
 
             <?php  if ($state == "running") { ?>
-              <button title="Power off" onclick="window.open('?action=domain-stop&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-power"></i>Power guest off<br />
-              </button>
-              <button title="Pause" onclick="window.open('?action=domain-pause&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-pause"></i>Pause guest<br />
-              </button>
+              <a hfref="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <i class="now-ui-icons media-1_button-power"></i> Power guest off<br />
+              </a>
+              <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <i class="now-ui-icons media-1_button-pause"></i> Pause guest<br />
+              </a>
             <?php } ?>
 
             <?php  if ($state == "paused") { ?>
-              <button title="Resume" onclick="window.open('?action=domain-resume&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-play"></i>Resume guest<br />
-              </button>
+              <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <i class="now-ui-icons media-1_button-play"></i> Resume guest<br />
+              </a>
             <?php } ?>
 
             <?php  if ($state != "shutoff") { ?>
-            <button title="Forceful shutdown" onclick="window.open('?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons ui-1_simple-remove"></i>Force Shutdown<br />
-            </button>
+            <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              <i class="now-ui-icons ui-1_simple-remove"></i> Force Shutdown<br />
+            </a>
             <?php } ?>
 
             <?php  if ($state == "shutoff") { ?>
-            <button title="Delete" onclick="window.open('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="fas fa-trash"></i>Delete guest<br />
+            <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              <i class="fas fa-trash"></i> Delete guest<br />
             </button>
             <?php } ?>
           </div>
