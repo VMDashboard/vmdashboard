@@ -123,6 +123,7 @@ require('navbar.php');
           <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
         <hr></div>
         <div class="card-body">
+          <div class="row">
           <div class="col-sm-4">
 
 <?php
@@ -169,7 +170,7 @@ echo "<br />";
               }
             ?>
           </div>
-
+</div>
 
         </div>
       </div>
