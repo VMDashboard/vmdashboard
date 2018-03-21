@@ -412,13 +412,12 @@ echo "<br />";
                   The virtual machine guest information is stored in XML format. Viewing the XML information will display all configured settings. Editing the XML can be performed when a guest is shutdown.
                 </div>
                 <div class="tab-pane" id="linkxmlview">
-                  <style>textarea { width: 100%; margin: 0; padding: 0; border-width: 0; }</style>
                   <?php
                   /* XML information */
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
                   $xml = $lv->domain_get_xml($domName, $inactive);
                   $ret = htmlentities($xml);
-                  echo "<textarea rows=\"15\" cols=\"2\" readonly>" . $ret . "</textarea>";
+                  echo "<textarea rows=\"15\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
