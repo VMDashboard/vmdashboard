@@ -124,7 +124,7 @@ require('navbar.php');
         <hr></div>
         <div class="card-body">
           <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-6">
 
 <?php
 
@@ -167,7 +167,7 @@ echo "<br />";
             ?>
           </div>
 
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <?php  if ($state == "running") { ?>
               <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
                 <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
