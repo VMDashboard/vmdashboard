@@ -105,7 +105,7 @@ $xml = "
 <clock offset='" . $clock_offset . "'/>
 
 <devices>
-    <emulator>" . $emulator . "</emulator>
+    
 
 " . $vda_xml . "
 
