@@ -379,7 +379,7 @@ echo "<br />";
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <h3>Advanced Editing</h3>
+          <h3>Editing (Advanced)</h3>
           <div class="row">
             <div class="col-lg-4 col-md-8">
             <!--
@@ -389,7 +389,7 @@ echo "<br />";
                 <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#linkxml" role="tablist">
                     <i class="now-ui-icons objects_umbrella-13"></i>
-                    XML Info
+                    Info
                   </a>
                 </li>
                 <li class="nav-item">
@@ -423,12 +423,12 @@ echo "<br />";
                 <div class="tab-pane" id="linkxmledit">
                   <?php
                   if ($state == "shutoff"){
-                    $ret = "<form method=\"POST\">" .
+                    $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
                       "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" >" . $xml . "</textarea>" .
-                      "<br /> <input type=\"submit\" value=\" Edit domain XML description \"></form>";
+                      "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
                     echo $ret;
                   } else {
-                    echo "Domain must be shutdown before editing XML";
+                    echo "Virtual machine must be shutdown before editing XML";
                   }
                   ?>
                 </div>
