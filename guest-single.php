@@ -116,20 +116,20 @@ require('navbar.php');
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
+
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
-        <hr></div>
+          <hr>
+        </div>
         <div class="card-body">
+          <h3>General Information</h3>
           <div class="row">
-          <div class="col-sm-5">
-
+            <div class="col-sm-5">
 <?php
-
 /* General information */
-echo "<h3>General Information</h3>";
 echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
 echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
 echo "<b>Domain memory: </b>$mem<br/>";
@@ -208,76 +208,6 @@ echo "<br />";
             <?php } ?>
           </div>
           </div>
-
-        </div>
-      </div>
-    </div>
-
-
-
-    <div class="col-md-4">
-      <div class="card card-user">
-        <div class="card-body" style="text-align: center;">
-
-          <?php
-            if ($state == "running") {
-              //screenshot will get raw png data at 300 pixels wide
-              $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
-              //the raw png data needs to be encoded to use with html img tag
-              $screen64 = base64_encode($screenshot['data']);
-          ?>
-              <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-              <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
-              </a>
-          <?php
-            } else if ($state == "paused") {
-              echo "<img src='assets/img/paused.png' width='400px' >";
-            } else {
-              echo "<img src='assets/img/shutdown.png' width='400px' >";
-            }
-          ?>
-
-        </div>
-
-        <div class="button-container">
-          <?php  if ($state == "running") { ?>
-            <button title="VNC connect" onclick="window.open('<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>', '_blank');"  class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons tech_tv"></i>
-            </button>
-          <?php } ?>
-
-          <?php if ($state == "shutoff") { ?>
-            <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons media-1_button-power"></i>
-            </button>
-          <?php } ?>
-
-          <?php  if ($state == "running") { ?>
-            <button title="Power off" onclick="window.open('?action=domain-stop&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons media-1_button-power"></i>
-            </button>
-            <button title="Pause" onclick="window.open('?action=domain-pause&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons media-1_button-pause"></i>
-            </button>
-          <?php } ?>
-
-          <?php  if ($state == "paused") { ?>
-            <button title="Resume" onclick="window.open('?action=domain-resume&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-              <i class="now-ui-icons media-1_button-play"></i>
-            </button>
-          <?php } ?>
-
-          <?php  if ($state != "shutoff") { ?>
-          <button title="Forceful shutdown" onclick="window.open('?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="now-ui-icons ui-1_simple-remove"></i>
-          </button>
-          <?php } ?>
-
-          <?php  if ($state == "shutoff") { ?>
-          <button title="Delete" onclick="window.open('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-            <i class="fas fa-trash"></i>
-          </button>
-          <?php } ?>
 
         </div>
       </div>
