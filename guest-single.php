@@ -379,7 +379,7 @@ echo "<br />";
           $inactive = (!$lv->domain_is_running($domName)) ? true : false;
           $xml = $lv->domain_get_xml($domName, $inactive);
           $ret = htmlentities($xml);
-          echo "<textarea rows=\"25\" cols=\"90%\">" . $ret . "</textarea>";
+          echo "<textarea rows=\"25\" cols=\"90%\" boarder='0px' readonly>" . $ret . "</textarea>";
 
           if ($action == 'domain-edit') {
             if (@$_POST['xmldesc']) {
