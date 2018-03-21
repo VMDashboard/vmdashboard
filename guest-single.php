@@ -414,9 +414,9 @@ echo "<br />";
                 <div class="tab-pane" id="linkxmledit">
                   <?php
                   if ($state == "shutoff"){
-                    $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
-                      "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
-                      "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
+                    $ret = "Editing domain XML description: <br/><br/><form method=\"POST\">" .
+                      "<textarea name=\"xmldesc\" rows=\"25\" cols=\"60%\">" . $xml . "</textarea>" .
+                      "<input type=\"submit\" value=\" Edit domain XML description \"></form>";
                     echo $ret;
                   } else {
                     echo "Domain must be shutdown before editing XML";
