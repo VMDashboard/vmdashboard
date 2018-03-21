@@ -417,15 +417,15 @@ echo "<br />";
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
                   $xml = $lv->domain_get_xml($domName, $inactive);
                   $ret = htmlentities($xml);
-                  echo "<textarea rows=\"15\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
+                  echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
                   <?php
                   if ($state == "shutoff"){
                     $ret = "<form method=\"POST\">" .
-                      "<textarea name=\"xmldesc\" rows=\"15\" cols=\"75%\">" . $xml . "</textarea>" .
-                      "<input type=\"submit\" value=\" Edit domain XML description \"></form>";
+                      "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" >" . $xml . "</textarea>" .
+                      "<br /> <input type=\"submit\" value=\" Edit domain XML description \"></form>";
                     echo $ret;
                   } else {
                     echo "Domain must be shutdown before editing XML";
