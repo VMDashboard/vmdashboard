@@ -270,7 +270,7 @@ echo "<br />";
 
   <div class="row">
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
           <?php
@@ -313,7 +313,7 @@ echo "<br />";
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
           <?php
