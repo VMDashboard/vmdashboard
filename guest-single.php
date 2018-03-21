@@ -127,94 +127,90 @@ require('navbar.php');
         <div class="card-body">
           <div class="row">
             <div class="col-sm-5">
-<?php
-/* General information */
-echo "<h3>General Information</h3>";
-echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
-echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
-echo "<b>Domain memory: </b>$mem<br/>";
-echo "<b>Number of vCPUs: </b>$cpu<br/>";
-echo "<b>Domain state: </b>$state<br/>";
-echo "<b>Domain architecture: </b>$arch<br/>";
-echo "<b>Domain ID: </b>$id<br/>";
-echo "<b>VNC Port: </b>$vnc<br/>";
-echo '<br/>';
-echo $ret;
-if ($die)
-  die('</body></html');
-echo "<br />";
+              <?php
+              /* General information */
+              echo "<h3>General Information</h3>";
+              echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
+              echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
+              echo "<b>Domain memory: </b>$mem<br/>";
+              echo "<b>Number of vCPUs: </b>$cpu<br/>";
+              echo "<b>Domain state: </b>$state<br/>";
+              echo "<b>Domain architecture: </b>$arch<br/>";
+              echo "<b>Domain ID: </b>$id<br/>";
+              echo "<b>VNC Port: </b>$vnc<br/>";
+              echo '<br/>';
+              echo $ret;
+              if ($die)
+                die('</body></html');
+              echo "<br />";
+              ?>
+            </div>
 
-?>
-          </div>
-
-          <div class="col-sm-4">
-            <?php
+            <div class="col-sm-4">
+              <?php
               if ($state == "running") {
                 //screenshot will get raw png data at 300 pixels wide
                 $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
                 //the raw png data needs to be encoded to use with html img tag
                 $screen64 = base64_encode($screenshot['data']);
-            ?>
+                ?>
                 <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
                 <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
                 </a>
-            <?php
+                <?php
               } else if ($state == "paused") {
                 echo "<img src='assets/img/paused.png' width='400px' >";
               } else {
                 echo "<img src='assets/img/shutdown.png' width='400px' >";
               }
-            ?>
-          </div>
+              ?>
+            </div>
 
-          <div class="col-sm-3">
-            <?php  if ($state == "running") { ?>
-              <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
-              </a>
-            <?php } ?>
+            <div class="col-sm-3">
+              <?php  if ($state == "running") { ?>
+                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                  <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
+                </a>
+              <?php } ?>
 
-            <?php if ($state == "shutoff") { ?>
-              <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="now-ui-icons media-1_button-power"></i> Power guest on<br />
-              </a>
-            <?php } ?>
+              <?php if ($state == "shutoff") { ?>
+                <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="now-ui-icons media-1_button-power"></i> Power guest on<br />
+                </a>
+              <?php } ?>
 
-            <?php  if ($state == "running") { ?>
-              <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              <?php  if ($state == "running") { ?>
+                <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                 <i class="now-ui-icons media-1_button-power"></i> Power guest off<br />
-              </a>
-              <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="now-ui-icons media-1_button-pause"></i> Pause guest<br />
-              </a>
-            <?php } ?>
+                </a>
+                <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="now-ui-icons media-1_button-pause"></i> Pause guest<br />
+                </a>
+              <?php } ?>
 
-            <?php  if ($state == "paused") { ?>
-              <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="now-ui-icons media-1_button-play"></i> Resume guest<br />
-              </a>
-            <?php } ?>
+              <?php  if ($state == "paused") { ?>
+                <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="now-ui-icons media-1_button-play"></i> Resume guest<br />
+                </a>
+              <?php } ?>
 
-            <?php  if ($state != "shutoff") { ?>
-            <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-              <i class="now-ui-icons ui-1_simple-remove"></i> Force Shutdown<br />
-            </a>
-            <?php } ?>
+              <?php  if ($state != "shutoff") { ?>
+                <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="now-ui-icons ui-1_simple-remove"></i> Force Shutdown<br />
+                </a>
+              <?php } ?>
 
-            <?php  if ($state == "shutoff") { ?>
-            <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-              <i class="fas fa-trash"></i> Delete guest<br />
-            </button>
-            <?php } ?>
+              <?php  if ($state == "shutoff") { ?>
+                <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fas fa-trash"></i> Delete guest<br />
+                </a>
+              <?php } ?>
+            </div>
           </div>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
-
-
 
   <div class="row">
     <div class="col-md-12">
@@ -269,7 +265,6 @@ echo "<br />";
 
 
   <div class="row">
-
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -312,7 +307,9 @@ echo "<br />";
         </div>
       </div>
     </div>
+  </div>
 
+  <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
@@ -367,10 +364,7 @@ echo "<br />";
         </div>
       </div>
     </div>
-
   </div>
-
-
 
 
   <div class="row">
@@ -433,29 +427,10 @@ echo "<br />";
               </div>
             </div>
           </div>
-
         </div>
-
-
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 
