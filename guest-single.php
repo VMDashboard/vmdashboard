@@ -125,11 +125,11 @@ require('navbar.php');
           <hr>
         </div>
         <div class="card-body">
-          <h3>General Information</h3>
           <div class="row">
             <div class="col-sm-5">
 <?php
 /* General information */
+echo "<h3>General Information</h3>";
 echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
 echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
 echo "<b>Domain memory: </b>$mem<br/>";
