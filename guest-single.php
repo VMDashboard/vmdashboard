@@ -117,12 +117,13 @@ require('navbar.php');
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
         <hr></div>
         <div class="card-body">
+          <div class="col-sm-4">
 
 <?php
 
@@ -143,6 +144,33 @@ if ($die)
 echo "<br />";
 
 ?>
+          </div>
+
+          <div class="col-sm-4">
+            Actions
+          </div>
+
+          <div class="col-sm-4">
+            <?php
+              if ($state == "running") {
+                //screenshot will get raw png data at 300 pixels wide
+                $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
+                //the raw png data needs to be encoded to use with html img tag
+                $screen64 = base64_encode($screenshot['data']);
+            ?>
+                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
+                </a>
+            <?php
+              } else if ($state == "paused") {
+                echo "<img src='assets/img/paused.png' width='400px' >";
+              } else {
+                echo "<img src='assets/img/shutdown.png' width='400px' >";
+              }
+            ?>
+          </div>
+
+
         </div>
       </div>
     </div>
