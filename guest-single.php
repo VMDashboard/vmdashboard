@@ -1,12 +1,6 @@
 <?php
 require('header.php');
 
-if ($action == 'domain-edit') {
-  if (@$_POST['xmldesc']) {
-    $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
-  }
-}
-
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
@@ -96,7 +90,12 @@ if ($action == 'domain-snapshot-xml') {
   //$xml = new SimpleXMLElement($snapshotxml);
 }
 
-
+if ($action == 'domain-edit') {
+  if (@$_POST['xmldesc']) {
+    $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
+  }
+  header('Location: $protocol.$url.$page?uuid=$uuid');
+}
 
 //get info, mem, cpu, state, id, arch, and vnc after actions to reflect any changes to domain
 $info = $lv->domain_get_info($dom);
