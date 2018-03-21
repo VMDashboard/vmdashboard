@@ -223,10 +223,10 @@ $random_mac = $lv->generate_random_mac_addr();
                                     <input type="text" value="x86_64" class="form-control" name="os_arch"/>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="display:none;">
                                 <div class="form-group">
                                     <label>OS type</label>
-                                      <input type="hidden" value="hvm" class="form-control" name="os_type"/>
+                                      <input type="text" value="hvm" class="form-control" name="os_type"/>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -235,10 +235,10 @@ $random_mac = $lv->generate_random_mac_addr();
                                     <input type="text" value="1" class="form-control" name="vcpu"/>
                                 </div>
                             </div>
-                            <div class="col-sm-5">
+                            <div class="col-sm-5" style="display:none;">
                                 <div class="form-group">
                                     <label>Timezone</label>
-                                      <input type="hidden" value="localtime" class="form-control" name="clock_offset"/>
+                                      <input type="text" value="localtime" class="form-control" name="clock_offset"/>
                                 </div>
                             </div>
 
