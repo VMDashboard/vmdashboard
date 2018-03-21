@@ -379,7 +379,7 @@ echo "<br />";
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <h3>Domain XML</h3>
+          <h3>Advanced Editing</h3>
           <div class="row">
             <div class="col-lg-4 col-md-8">
             <!--
@@ -387,8 +387,14 @@ echo "<br />";
             -->
               <ul class="nav nav-pills nav-pills-primary nav-pills-icons flex-column" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#linkxmlview" role="tablist">
+                  <a class="nav-link active" data-toggle="tab" href="#linkxml" role="tablist">
                     <i class="now-ui-icons objects_umbrella-13"></i>
+                    XML Info
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#linkxmlview" role="tablist">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
                     View XML
                   </a>
                 </li>
@@ -402,6 +408,9 @@ echo "<br />";
             </div>
             <div class="col-md-8">
               <div class="tab-content">
+                <div class="tab-pane active" id="linkxml">
+                  The virtual machine guest information is stored in XML format. Viewing the XML information will display all configured settings. Editing the XML can be performed when a guest is shutdown.
+                </div>
                 <div class="tab-pane active" id="linkxmlview">
                   <?php
                   /* XML information */
