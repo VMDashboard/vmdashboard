@@ -248,7 +248,7 @@ $random_mac = $lv->generate_random_mac_addr();
                     <!--    Storage Tab     -->
                         <div class="tab-pane fade" id="storage">
                           <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-sm-5">
                             <h5 class="info-text"> Hard Drive Storage </h5>
                             <div class="row justify-content-center">
 
@@ -326,7 +326,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             </div>
                           </div>
 
-                            <div class="col-md-5">
+                            <div class="col-sm-5">
                             <h5 class="info-text"> CD/DVD Storage </h5>
                             <div class="row justify-content-center">
 
