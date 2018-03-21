@@ -375,9 +375,11 @@ echo "<br />";
         <div class="card-body">
           <?php
           /* XML information */
+          echo "<h3>Domain XML</h3>";
           $inactive = (!$lv->domain_is_running($domName)) ? true : false;
           $xml = $lv->domain_get_xml($domName, $inactive);
           $ret = "Domain XML for domain <i>$domName</i>:<br/><br/>".htmlentities($xml);
+          echo $ret;
           ?>
         </div>
       </div>
