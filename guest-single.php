@@ -411,7 +411,7 @@ echo "<br />";
                 <div class="tab-pane active" id="linkxml">
                   The virtual machine guest information is stored in XML format. Viewing the XML information will display all configured settings. Editing the XML can be performed when a guest is shutdown.
                 </div>
-                <div class="tab-pane active" id="linkxmlview">
+                <div class="tab-pane" id="linkxmlview">
                   <?php
                   /* XML information */
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
