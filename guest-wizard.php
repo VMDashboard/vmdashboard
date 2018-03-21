@@ -13,7 +13,6 @@ $vcpu = $_POST['vcpu'];
 $os_arch = $_POST['os_arch'];
 $os_type = $_POST['os_type'];
 $clock_offset = $_POST['clock_offset'];
-$emulator = $_POST['emulator'];
 
 $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
@@ -105,7 +104,6 @@ $xml = "
 <clock offset='" . $clock_offset . "'/>
 
 <devices>
-    
 
 " . $vda_xml . "
 
@@ -228,7 +226,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>OS type</label>
-                                      <input type="text" value="hvm" class="form-control" name="os_type"/>
+                                      <input type="hidden" value="hvm" class="form-control" name="os_type"/>
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -240,15 +238,10 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-5">
                                 <div class="form-group">
                                     <label>Timezone</label>
-                                      <input type="text" value="localtime" class="form-control" name="clock_offset"/>
+                                      <input type="hidden" value="localtime" class="form-control" name="clock_offset"/>
                                 </div>
                             </div>
-                            <div class="col-sm-5">
-                                <div class="form-group">
-                                    <label>Emulator</label>
-                                      <input type="text" value="/usr/bin/kvm-spice" class="form-control" name="emulator"/>
-                                </div>
-                            </div>
+
                           </div>
                         </div>
 
