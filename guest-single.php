@@ -375,17 +375,9 @@ echo "<br />";
         <div class="card-body">
           <?php
           /* XML information */
+          $inactive = (!$lv->domain_is_running($domName)) ? true : false;
           $xml = $lv->domain_get_xml($domName, $inactive);
-          if ($action == 'domain-edit') {
-            if (@$_POST['xmldesc']) {
-              $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
-            } else {
-              $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
-                "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
-                "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
-            }
-          } else {
-            $ret = "Domain XML for domain <i>$domName</i>:<br/><br/>".htmlentities($xml);
+          $ret = "Domain XML for domain <i>$domName</i>:<br/><br/>".htmlentities($xml);
           ?>
         </div>
       </div>
