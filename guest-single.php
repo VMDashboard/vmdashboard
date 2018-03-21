@@ -121,11 +121,21 @@ require('navbar.php');
   display: -ms-flexbox;
   display:         flex;
 }
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
 </style>
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
-  <div class="row row-eq-height">
+  <div class="row display-flex">
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
