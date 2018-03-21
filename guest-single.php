@@ -170,16 +170,14 @@ echo "<br />";
           <div class="col-sm-4">
             <?php  if ($state == "running") { ?>
               <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-
-                <i class="now-ui-icons tech_tv"></i>VNC Connection<br />
-              
+                <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
               </a>
             <?php } ?>
 
             <?php if ($state == "shutoff") { ?>
-              <button title="Power on" onclick="window.open('?action=domain-start&amp;uuid=<?php echo $uuid; ?>', '_self')" class="btn btn-neutral btn-icon btn-round btn-lg">
-                <i class="now-ui-icons media-1_button-power"></i>Power guest on<br />
-              </button>
+              <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <i class="now-ui-icons media-1_button-power"></i> Power guest on<br />
+              </a>
             <?php } ?>
 
             <?php  if ($state == "running") { ?>
