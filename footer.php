@@ -13,7 +13,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="https://openvm.tech/news" target="_blank">
                                     News
                                 </a>
                             </li>

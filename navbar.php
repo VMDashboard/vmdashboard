@@ -5,8 +5,8 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="https://github.com/PenningDevelopment/openVM" class="simple-text logo-normal">
-          <img src="assets/img/openVM.png" width="50px"> openVM &trade;
+        <a href="https://openvm.tech" class="simple-text logo-normal">
+          <img src="assets/img/logo.png" width="50px">
         </a>
       </div>
 
@@ -58,20 +58,20 @@
             </div>
             <a class="navbar-brand" href="#">Open Source Virtual Management Software</a>
           </div>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-bar navbar-kebab"></span>
-                        <span class="navbar-toggler-bar navbar-kebab"></span>
-                        <span class="navbar-toggler-bar navbar-kebab"></span>
-                    </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
-                        <form>
-                            <div class="input-group no-border">
-                                <input type="text" value="" class="form-control" placeholder="Search...">
-                                <span class="input-group-addon">
-                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
-                                </span>
-                            </div>
-                        </form>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+            <span class="navbar-toggler-bar navbar-kebab"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation">
+            <form>
+              <div class="input-group no-border">
+                <input type="text" value="" class="form-control" placeholder="Search...">
+                <span class="input-group-addon">
+                  <i class="now-ui-icons ui-1_zoom-bold"></i>
+                </span>
+              </div>
+            </form>
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
