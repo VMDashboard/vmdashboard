@@ -135,92 +135,6 @@ if ($die)
   die('</body></html');
 echo "<br />";
 
-
-
-
-/* Network interface information */
-echo "<h3>Network devices</h3>";
-$tmp = $lv->get_nic_info($domName);
-if (!empty($tmp)) {
-  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-  echo "<table>" .
-    "<tr>" .
-    "<th>MAC Address</th>" .
-    "<th>NIC Type</th>" .
-    "<th>Network</th>" .
-    "<th>Network active</th>" .
-    "<th>Actions</th>" .
-    "</tr>";
-  for ($i = 0; $i < sizeof($tmp); $i++) {
-    if (in_array($tmp[$i]['network'], $anets))
-      $netUp = 'Yes';
-    else
-      $netUp = 'No <a href="">[Start]</a>';
-    echo "<tr>" .
-      "<td>{$tmp[$i]['mac']}</td>" .
-      "<td align=\"center\">{$tmp[$i]['nic_type']}</td>" .
-      "<td align=\"center\">{$tmp[$i]['network']}</td>" .
-      "<td align=\"center\">$netUp$spaces</td>" .
-      "<td align=\"center\">" .
-        "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-remove&amp;mac={$tmp[$i]['mac']}\">" .
-        "Remove network card</a>" .
-      "</td>" .
-      "</tr>";
-  }
-  echo "</table>";
-  echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
-} else {
-  echo '<p>Domain doesn\'t have any network devices</p>';
-}
-echo "<br />";
-
-
-/* Snapshot information */
-echo "<h3>Snapshots</h3>";
-echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='now-ui-icons media-1_camera-compact'></i> Create new snapshot</a><br />";
-$tmp = $lv->list_domain_snapshots($dom);
-if (!empty($tmp)) {
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    //"<thead class='text-primary'>" .
-    "<tr>" .
-    "<th>Name</th>" .
-    "<th>Creation Time</th>" .
-    "<th>State</th>" .
-    "<th>Actions</th>" .
-    "</tr>" .
-    //"</thead>" .
-    "<tbody>";
-
-  foreach ($tmp as $key => $value) {
-    //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-    $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-    $tmpxml = simplexml_load_string($tmpsnapshotxml);
-    $name = $tmpxml->name[0];
-    $creationTime = $tmpxml->creationTime[0];
-    $snapstate = $tmpxml->state[0];
-    echo "<tr>";
-    echo "<td>" . $name . "</td>";
-    echo "<td>" . date("D d M Y", $value) . " - ";
-    echo date("H:i:s", $value) . "</td>";
-    echo "<td>" . $snapstate . "</td>";
-    echo "<td>
-      <a title='Delete snapshot' href=?action=domain-snapshot-delete&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-trash-alt'></i></a>
-      <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
-      <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
-      </td>";
-    echo "</tr>";
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo "Domain does not have any snapshots";
-}
-
-if ($snapshotxml != null) {
-  echo "<hr>";
-  echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-  echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
-}
 ?>
         </div>
       </div>
@@ -351,25 +265,105 @@ if ($snapshotxml != null) {
 
 
   <div class="row">
+
     <div class="col-md-6">
       <div class="card">
-        <div class="card-header">
-          <h2 class="title"></h2>
-        <hr></div>
         <div class="card-body">
-          network
+          <?php
+          /* Network interface information */
+          echo "<h3>Network devices</h3>";
+          $tmp = $lv->get_nic_info($domName);
+          if (!empty($tmp)) {
+            $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+            echo "<table>" .
+              "<tr>" .
+              "<th>MAC Address</th>" .
+              "<th>NIC Type</th>" .
+              "<th>Network</th>" .
+              "<th>Network active</th>" .
+              "<th>Actions</th>" .
+              "</tr>";
+            for ($i = 0; $i < sizeof($tmp); $i++) {
+              if (in_array($tmp[$i]['network'], $anets))
+                $netUp = 'Yes';
+              else
+                $netUp = 'No <a href="">[Start]</a>';
+              echo "<tr>" .
+                "<td>{$tmp[$i]['mac']}</td>" .
+                "<td align=\"center\">{$tmp[$i]['nic_type']}</td>" .
+                "<td align=\"center\">{$tmp[$i]['network']}</td>" .
+                "<td align=\"center\">$netUp$spaces</td>" .
+                "<td align=\"center\">" .
+                  "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-remove&amp;mac={$tmp[$i]['mac']}\">" .
+                  "Remove network card</a>" .
+                "</td>" .
+                "</tr>";
+            }
+            echo "</table>";
+            echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
+          } else {
+            echo '<p>Domain doesn\'t have any network devices</p>';
+          }
+          ?>
         </div>
       </div>
     </div>
-
 
     <div class="col-md-6">
-      <div class="card card-user">
-        <div class="card-body" style="text-align: center;">
-          snapshots
+      <div class="card">
+        <div class="card-body">
+          <?php
+          /* Snapshot information */
+          echo "<h3>Snapshots</h3>";
+          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='now-ui-icons media-1_camera-compact'></i> Create new snapshot</a><br />";
+          $tmp = $lv->list_domain_snapshots($dom);
+          if (!empty($tmp)) {
+            echo "<div class='table-responsive'>" .
+              "<table class='table'>" .
+              //"<thead class='text-primary'>" .
+              "<tr>" .
+              "<th>Name</th>" .
+              "<th>Creation Time</th>" .
+              "<th>State</th>" .
+              "<th>Actions</th>" .
+              "</tr>" .
+              //"</thead>" .
+              "<tbody>";
+
+            foreach ($tmp as $key => $value) {
+              //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+              $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+              $tmpxml = simplexml_load_string($tmpsnapshotxml);
+              $name = $tmpxml->name[0];
+              $creationTime = $tmpxml->creationTime[0];
+              $snapstate = $tmpxml->state[0];
+              echo "<tr>";
+              echo "<td>" . $name . "</td>";
+              echo "<td>" . date("D d M Y", $value) . " - ";
+              echo date("H:i:s", $value) . "</td>";
+              echo "<td>" . $snapstate . "</td>";
+              echo "<td>
+                <a title='Delete snapshot' href=?action=domain-snapshot-delete&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-trash-alt'></i></a>
+                <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
+                <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
+                </td>";
+              echo "</tr>";
+            }
+            echo "</tbody></table></div>";
+          } else {
+            echo "Domain does not have any snapshots";
+          }
+
+          if ($snapshotxml != null) {
+            echo "<hr>";
+            echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+            echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+          }
+           ?>
         </div>
       </div>
     </div>
+
   </div>
 
 
