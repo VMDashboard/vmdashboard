@@ -335,6 +335,48 @@ if ($snapshotxml != null) {
       </div>
     </div>
   </div>
+
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
+        <hr></div>
+        <div class="card-body">
+          disks
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
+        <hr></div>
+        <div class="card-body">
+          network
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-6">
+      <div class="card card-user">
+        <div class="card-body" style="text-align: center;">
+          snapshots
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 </div>
 
 <?php
