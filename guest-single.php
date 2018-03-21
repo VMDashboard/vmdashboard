@@ -402,7 +402,7 @@ echo "<br />";
                   $inactive = (!$lv->domain_is_running($domName)) ? true : false;
                   $xml = $lv->domain_get_xml($domName, $inactive);
                   $ret = htmlentities($xml);
-                  echo "<textarea rows=\"25\" cols=\"90%\" boarder='0px' readonly>" . $ret . "</textarea>";
+                  echo "<textarea rows=\"15\" cols=\"90%\" readonly>" . $ret . "</textarea>";
                   ?>
                 </div>
                 <div class="tab-pane" id="linkxmledit">
@@ -423,7 +423,7 @@ echo "<br />";
             </div>
           </div>
 
-        
+        </div>
 
 
       </div>
