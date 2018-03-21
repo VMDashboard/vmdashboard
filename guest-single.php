@@ -219,7 +219,7 @@ echo "<br />";
 
 
 
-  <div class="row equal">
+  <div class="row-eq-height">
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
