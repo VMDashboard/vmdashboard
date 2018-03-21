@@ -1,13 +1,5 @@
 <?php
 require('header.php');
-<style>
-.row-eq-height {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display:         flex;
-}
-</style>
 
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
@@ -154,6 +146,14 @@ echo "<br />";
       </div>
     </div>
 
+    <style>
+    .row-eq-height {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display:         flex;
+    }
+    </style>
 
     <div class="col-md-4">
       <div class="card card-user">
