@@ -301,13 +301,10 @@ if ($snapshotxml != null) {
   <div class="row">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header">
-          <h3 class="title">Storage</h3>
-        </div>
         <div class="card-body">
           <?php
           /* Disk information */
-          echo "<h3>Disk devices</h3>";
+          echo "<h3>Storage</h3>";
           echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-database'></i> Add new disk</a><br />";
           $tmp = $lv->get_disk_stats($domName);
           if (!empty($tmp)) {
@@ -346,7 +343,6 @@ if ($snapshotxml != null) {
           } else {
             echo "Domain doesn't have any disk devices";
           }
-          echo "<br />";
           ?>
         </div>
       </div>
