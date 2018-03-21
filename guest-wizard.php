@@ -254,7 +254,7 @@ $random_mac = $lv->generate_random_mac_addr();
                         if (selectedValue === subForms[i].id) {
                           subForms[i].setAttribute('style', 'display:block')
                         } else if (selectedValue != "none" && selectedValue != "new"){
-                          subForms[i].setAttribute('style', 'display:block')
+                          subForms["local"].setAttribute('style', 'display:block')
 
 
                         } else {
