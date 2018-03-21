@@ -273,17 +273,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                   </div>
                               </div>
 
-                              <div class="col-sm-5">
-                                  <div class="form-group">
-                                      <label>Driver type</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
-                                          <option value="qcow2" selected="selected"> qcow2 </option>
-                                          <option value="raw"> raw </option>
-                                        </select>
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-5">
+                              <div class="col-sm-10">
                                   <div class="form-group">
                                       <label>Disk drive source file location</label>
                                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
@@ -307,6 +297,18 @@ $random_mac = $lv->generate_random_mac_addr();
                                       </select>
                                   </div>
                               </div>
+
+                              <div class="col-sm-10">
+                                  <div class="form-group">
+                                      <label>Driver type</label>
+                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
+                                          <option value="qcow2" selected="selected"> qcow2 </option>
+                                          <option value="raw"> raw </option>
+                                        </select>
+                                  </div>
+                              </div>
+
+
 
 
                               <div class="col-sm-5" style="display:none;">
