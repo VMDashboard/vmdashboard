@@ -167,6 +167,7 @@ require('navbar.php');
             </div>
 
             <div class="col-sm-3">
+              <h3>Actions</h3>
               <?php  if ($state == "running") { ?>
                 <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
                   <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
