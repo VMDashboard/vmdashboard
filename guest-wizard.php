@@ -246,6 +246,20 @@ $random_mac = $lv->generate_random_mac_addr();
                         </div>
 
                     <!--    Storage Tab     -->
+                    <script>
+                    function diskChangeOptions(selectEl) {
+                      let selectedTitle = selectEl.options[selectEl.selectedIndex].title;
+                      let subForms = document.getElementsByClassName('diskChange')
+                      for (let i = 0; i < subForms.length; i += 1) {
+                        if (selectedTitle === subForms[i].id) {
+                          subForms[i].setAttribute('style', 'display:block')
+                        } else {
+                          subForms[i].setAttribute('style', 'display:none')
+                        }
+                      }
+                    }
+                    </script>
+
                         <div class="tab-pane fade" id="storage">
                           <div class="row justify-content-center">
                             <div class="col-md-6">
@@ -276,8 +290,9 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-10">
                                   <div class="form-group">
                                       <label>Disk drive source file location</label>
-                                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
-                                        <option value="none">Select File</option>
+                                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
+                                        <option value="none" title="none"> Select Disk </option>
+                                        <option value="new" title="new"> New Disk </option>
                                       <?php
                                       $pools = $lv->get_storagepools();
                                       for ($i = 0; $i < sizeof($pools); $i++) {
@@ -289,7 +304,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                             $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
                                             $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
                                             if (strtolower($ext) != "iso")
-                                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                              echo "<option title='local' value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
                                           }
                                         }
                                       }
@@ -298,7 +313,24 @@ $random_mac = $lv->generate_random_mac_addr();
                                   </div>
                               </div>
 
-                              <div class="col-sm-10">
+                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                                  <div class="form-group">
+                                      <label>Disk Image Name</label>
+                                      <input type="text" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                                  </div>
+                              </div>
+
+                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                                  <div class="form-group">
+                                      <label>Image type</label>
+                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
+                                          <option value="qcow2" selected="selected"> qcow2 </option>
+                                          <option value="raw"> raw </option>
+                                        </select>
+                                  </div>
+                              </div>
+
+                              <div class="col-sm-10 diskChange" id="local" style="display:none;">
                                   <div class="form-group">
                                       <label>Driver type</label>
                                         <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
