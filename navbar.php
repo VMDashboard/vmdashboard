@@ -6,7 +6,7 @@
     -->
       <div class="logo">
         <a href="https://openvm.tech" class="simple-text logo-normal">
-          <img src="assets/img/logo.png" width="50px">
+          <img src="assets/img/logo3.png" width="100%">
         </a>
       </div>
 
