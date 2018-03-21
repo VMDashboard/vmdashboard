@@ -247,6 +247,8 @@ $random_mac = $lv->generate_random_mac_addr();
 
                     <!--    Storage Tab     -->
                         <div class="tab-pane fade" id="storage">
+                          <div class="row">
+                            <div class="col-md-5">
                             <h5 class="info-text"> Hard Drive Storage </h5>
                             <div class="row justify-content-center">
 
@@ -322,8 +324,9 @@ $random_mac = $lv->generate_random_mac_addr();
                               </div>
 
                             </div>
+                          </div>
 
-                            <br /> <br />
+                            <div class="col-md-5">
                             <h5 class="info-text"> CD/DVD Storage </h5>
                             <div class="row justify-content-center">
 
@@ -381,25 +384,28 @@ $random_mac = $lv->generate_random_mac_addr();
                               </div>
 
 
+                              <div class="col-sm-5" style="display:none;">
+                                <div class="form-group">
+                                  <label>Target device</label>
+                                  <input type="text" value="hda" class="form-control" name="target_dev_cd"/>
+                                </div>
+                              </div>
 
                               <div class="col-sm-5" style="display:none;">
-                              <div class="form-group">
-                              <label>Target device</label>
-                              <input type="text" value="hda" class="form-control" name="target_dev_cd"/>
-                              </div>
-                              </div>
-
-                              <div class="col-sm-5" style="display:none;">
-                              <div class="form-group">
-                              <label>Target bus</label>
-                              <input type="text" value="ide" class="form-control" name="target_bus_cd" />
-                              </div>
+                                <div class="form-group">
+                                  <label>Target bus</label>
+                                  <input type="text" value="ide" class="form-control" name="target_bus_cd" />
+                                </div>
                               </div>
 
 
 
                             </div>
                           </div>
+                        </div>
+                      </div>
+
+
 
 
                       <!--    Networking Tab     -->
