@@ -373,27 +373,62 @@ echo "<br />";
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <?php
-          /* XML information */
-          echo "<h3>Domain XML</h3>";
-          $inactive = (!$lv->domain_is_running($domName)) ? true : false;
-          $xml = $lv->domain_get_xml($domName, $inactive);
-          $ret = htmlentities($xml);
-          echo "<textarea rows=\"25\" cols=\"90%\" boarder='0px' readonly>" . $ret . "</textarea>";
+          <h3>Domain XML</h3>
+          <div class="row">
+            <div class="col-lg-4 col-md-8">
+            <!--
+              color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+            -->
+              <ul class="nav nav-pills nav-pills-primary nav-pills-icons flex-column" role="tablist">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#linkxmlview" role="tablist">
+                    <i class="now-ui-icons objects_umbrella-13"></i>
+                    View XML
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#linkxmledit" role="tablist">
+                    <i class="now-ui-icons ui-2_settings-90"></i>
+                    Edit XML
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-8">
+              <div class="tab-content">
+                <div class="tab-pane active" id="linkxmlview">
+                  <?php
+                  /* XML information */
+                  $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+                  $xml = $lv->domain_get_xml($domName, $inactive);
+                  $ret = htmlentities($xml);
+                  echo "<textarea rows=\"25\" cols=\"90%\" boarder='0px' readonly>" . $ret . "</textarea>";
+                  ?>
+                </div>
+                <div class="tab-pane" id="linkxmledit">
+                  Efficiently unleash
+                  <?php
+                  if ($action == 'domain-edit') {
+                    if (@$_POST['xmldesc']) {
+                      $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
+                    } else {
+                      $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
+                        "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
+                        "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
+                    }
+                  }
+                  ?>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          if ($action == 'domain-edit') {
-            if (@$_POST['xmldesc']) {
-              $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
-            } else {
-              $ret = "Editing domain XML description: <br/><br/><form method=\"POST\"><table><tr><td>Domain XML description: </td>".
-                "<td><textarea name=\"xmldesc\" rows=\"25\" cols=\"90%\">".$xml."</textarea></t\></tr><tr align=\"center\"><td colspan=\"2\">".
-                "<input type=\"submit\" value=\" Edit domain XML description \"></tr></form>";
-            }
-          }
-          ?>
-        </div>
+        
+
+
       </div>
     </div>
+  </div>
   </div>
 
 
