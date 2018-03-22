@@ -136,10 +136,10 @@ $xml = "
 $new_domain = $lv->domain_define($xml);
 
 if ($source_file_vda == "new") {
-  //$res = libvirt_domain_get_name($new_domain);
+
   $res = $new_domain;
-  //$img = libvirt_storagevolume_get_path($new_disk);
-  $img = "/var/lib/libvirt/images/sus";
+  $img = libvirt_storagevolume_get_path($new_disk);
+  //$img = "/var/lib/libvirt/images/sus";
   $dev = "vda";
   $typ = "virtio";
   //$driver = $driver_type;
