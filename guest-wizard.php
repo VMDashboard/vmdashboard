@@ -136,7 +136,7 @@ $xml = "
 $new_domain = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot add domain: ".$lv->get_last_error();
 
 if ($source_file_vda == "new") {
-  $res = $new_domain;
+  $res = libvirt_domain_get_name($new_domain);
   //$img = libvirt_storagevolume_get_path($new_disk);
   $img = "/var/lib/libvirt/images/sus";
   $dev = "vda";
