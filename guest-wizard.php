@@ -136,21 +136,13 @@ $xml = "
 $new_domain = $lv->domain_define($xml);
 
 if ($source_file_vda == "new") {
-
   $res = $new_domain;
   $img = libvirt_storagevolume_get_path($new_disk);
-  //$img = "/var/lib/libvirt/images/sus";
   $dev = "vda";
   $typ = "virtio";
   //$driver = $driver_type;
   $driver = "qcow2";
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
-
-$err = var_dump($ret);
-$errfile = "myerr.txt";
-$list = file_put_contents($errfile, $err);
-
-
 }
 
 header('Location: guests.php');
