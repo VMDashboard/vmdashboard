@@ -133,12 +133,11 @@ $xml = "
 </domain>
 ";
 
-$new_domain = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot add domain: ".$lv->get_last_error();
+$new_domain = $lv->domain_define($xml);
 
 if ($source_file_vda == "new") {
-  //$res = libvirt_domain_get_name($new_domain);
+  $res = libvirt_domain_get_name($new_domain);
   //$img = libvirt_storagevolume_get_path($new_disk);
-  $res = $domain_name;
   $img = "/var/lib/libvirt/images/sus";
   $dev = "vda";
   $typ = "virtio";
