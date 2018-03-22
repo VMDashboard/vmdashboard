@@ -146,7 +146,7 @@ if ($source_file_vda == "new") {
   $driver = "qcow2";
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 
-$err = var_dump($ret);
+$err = var_dump($img);
 $errfile = "myerr.txt";
 $list = file_put_contents($errfile, $err);
 
