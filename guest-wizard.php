@@ -137,10 +137,12 @@ $new_domain = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot a
 
 if ($source_file_vda == "new") {
   $res = $new_domain;
-  $img = libvirt_storagevolume_get_path($new_disk);
+  //$img = libvirt_storagevolume_get_path($new_disk);
+  $img = "/var/lib/libvirt/images/sus";
   $dev = "vda";
   $typ = "virtio";
-  $driver = $driver_type;
+  //$driver = $driver_type;
+  $driver = "qcow2";
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
