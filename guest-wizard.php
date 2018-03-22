@@ -133,8 +133,17 @@ $xml = "
 </domain>
 ";
 
-$ret = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot add domain: ".$lv->get_last_error();
-echo $ret;
+$new_domain = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot add domain: ".$lv->get_last_error();
+
+if ($source_file_vda == "new") {
+  $res = $new_domain;
+  $img = libvirt_storagevolume_get_path($new_disk);
+  $dev = "vda";
+  $typ = "virtio";
+  $driver = $driver_type;
+  $ret = lv->domain_disk_add($res, $img, $dev, $typ, $driver)
+}
+
 header('Location: guests.php');
 exit;
 }
