@@ -135,8 +135,8 @@ $xml = "
 
 $ret = $lv->domain_define($xml) ? "Domain successfully added" : "Cannot add domain: ".$lv->get_last_error();
 echo $ret;
-header('Location: guests.php');
-exit;
+//header('Location: guests.php');
+//exit;
 }
 ?>
 
@@ -160,6 +160,7 @@ $random_mac = $lv->generate_random_mac_addr();
 
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">
+              <?php var_dump($new_disk); ?>
               Create a new guest VM
             </h3>
 
