@@ -145,6 +145,12 @@ if ($source_file_vda == "new") {
   //$driver = $driver_type;
   $driver = "qcow2";
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+
+$err = var_dump($ret);
+$errfile = "myerr.txt";
+$list = file_put_contents($errfile, $err);
+
+
 }
 
 header('Location: guests.php');
