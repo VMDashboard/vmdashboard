@@ -161,6 +161,9 @@ $random_mac = $lv->generate_random_mac_addr();
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">
               <?php var_dump($new_disk); ?>
+              <br>
+              <?php echo $new_disk; ?>
+              <br>
               Create a new guest VM
             </h3>
 
