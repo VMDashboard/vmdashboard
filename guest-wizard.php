@@ -14,6 +14,8 @@ $os_arch = $_POST['os_arch'];
 $os_type = $_POST['os_type'];
 $clock_offset = $_POST['clock_offset'];
 
+
+//Hard drive information
 $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
 $driver_name_vda = $_POST['driver_name_vda'];
@@ -33,6 +35,19 @@ if ($source_file_vda == "none") {
   </disk>";
 }
 
+if ($source_file_vda == "new") {
+$pool = "default";
+$volume_image_name = "$_POST['new_target_dev']";
+$volume_capacity = "$_POST['new_volume_size']";
+$unit = "$_POST['new_unit']";
+$volume_size="$_POST['new_volume_size']";
+$driver_type="$_POST['new_driver_type']";
+$new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+$vda_xml = "";
+}
+
+
+//CD-DVD ISO Information
 $disk_type_cd = $_POST['disk_type_cd'];
 $disk_device_cd = $_POST['disk_device_cd'];
 $driver_name_cd = $_POST['driver_name_cd'];
@@ -320,20 +335,29 @@ $random_mac = $lv->generate_random_mac_addr();
                                   </div>
                               </div>
 
-                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Image type</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
-                                          <option value="qcow2" selected="selected"> qcow2 </option>
-                                          <option value="raw"> raw </option>
-                                        </select>
-                                  </div>
+
+
+                              <div class="col-sm-6 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Volume size</label>
+                                  <input type="number" class="form-control" name="new_volume_size" />
+                                </div>
                               </div>
 
-                              <div class="col-sm-10 diskChange" id="local" style="display:none;">
+                              <div class="col-sm-4 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Unit size</label>
+                                  <select class="selectpicker" data-style="btn btn-primary btn-round" title="Select Unit Size" name="new_unit">
+                                    <option value="M">MB</option>
+                                    <option value="G" selected>GB</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                   <div class="form-group">
                                       <label>Driver type</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type_vda">
+                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
                                           <option value="qcow2" selected="selected"> qcow2 </option>
                                           <option value="raw"> raw </option>
                                         </select>
