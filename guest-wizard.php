@@ -141,7 +141,7 @@ if ($source_file_vda == "new") {
   $dev = "vda";
   $typ = "virtio";
   $driver = $driver_type;
-  $ret = lv->domain_disk_add($res, $img, $dev, $typ, $driver)
+  $ret = lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
 header('Location: guests.php');
