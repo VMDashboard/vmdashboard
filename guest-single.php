@@ -182,7 +182,7 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a onclick="warnBeforeRedirect('&amp;action=domain-delete')" >
+                <a onclick="warnBeforeRedirect('&amp;action=domain-delete')" href="#">
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
@@ -197,7 +197,7 @@ function warnBeforeRedirect(linkURL) {
                  showCancelButton: true
                }).then(function($result) {
                  // Redirect the user
-                 window.location = "http://google.com";
+                 window.location = linkURL;
                });
              }
 </script>
