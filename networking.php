@@ -9,7 +9,7 @@ require('navbar.php');
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Networking</h4>
+          <h4 class="card-title">Private Networks</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -39,8 +39,7 @@ if ($subaction) {
   }
 }
 
-
-echo "<h5>List of private networks</h5>";
+//echo "Add new private network";
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
 echo "<table class='table'>" .
   "<thead class='text-primary'><tr>" .
