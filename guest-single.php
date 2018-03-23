@@ -114,8 +114,9 @@ if ($vnc <= 0)
 require('navbar.php');
 ?>
 
-<script type="text/javascript">
-swal('Good job!','You clicked the button!','success');
+<script>
+var alertRet = "<?php echo $ret; ?>";
+alert(alertRet);
 </script>
 
 <div class="panel-header panel-header-sm"></div>
