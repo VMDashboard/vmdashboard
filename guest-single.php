@@ -377,7 +377,7 @@ require('navbar.php');
     <div class="col-md-12">
       <div class="card">
         <div class="card-body">
-          <h3>Editing (Advanced)</h3>
+          <h3>XML Information (Advanced)</h3>
           <div class="row">
             <div class="col-lg-4 col-md-8">
             <!--
