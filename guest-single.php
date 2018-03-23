@@ -127,6 +127,7 @@ function retMessage() {
 <?php
 if ($ret != "") {
 echo "<script> retMessage(); </script>";
+echo "<script> swal('Good job!','You clicked the button!','success') </script>";
 }
 ?>
 
