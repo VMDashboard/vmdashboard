@@ -60,39 +60,45 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   $activity = $tmp2['active'] ? 'Active' : 'Inactive';
   $dhcp = 'Disabled';
   $forward = 'None';
-var_dump($tmp2);
+
   if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
     if (array_key_exists('forward_dev', $tmp2))
       $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
     else
       $forward = $tmp2['forwarding'];
   }
-            if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
-                $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
-            if (array_key_exists('ip', $tmp2))
-                $ip = $tmp2['ip'];
-            if (array_key_exists('ip_range', $tmp2))
-                $ip_range = $tmp2['ip_range'];
-            $act = "<a href=\"?action={$_GET['action']}&amp;subaction=" . ($tmp2['active'] ? "stop" : "start");
-            $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
-            $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
-            $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
-            if (!$tmp2['active'])
-                $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-            echo "<tr>" .
-                 "<td>{$tmp2['name']}</td>" .
-                 "<td align=\"center\">$activity</td>" .
-                 "<td align=\"center\">$ip</td>" .
-                 "<td align=\"center\">$ip_range</td>" .
-                 "<td align=\"center\">$forward</td>" .
-                 "<td align=\"center\">$dhcp</td>" .
-                 "<td align=\"center\">$act</td>" .
-                 "</tr>";
-        }
-        echo "</table>";
-        if ($ret)
-            echo "<pre>$ret</pre>";
-	?>
+
+  if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
+    $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
+
+  if (array_key_exists('ip', $tmp2))
+    $ip = $tmp2['ip'];
+
+  if (array_key_exists('ip_range', $tmp2))
+    $ip_range = $tmp2['ip_range'];
+
+  $act = "<a href=\"?action={$_GET['action']}&amp;subaction=" . ($tmp2['active'] ? "stop" : "start");
+  $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
+  $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
+  $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
+
+  if (!$tmp2['active'])
+    $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
+
+  echo "<tr>" .
+    "<td>{$tmp2['name']}</td>" .
+    "<td>$activity</td>" .
+    "<td>$ip</td>" .
+    "<td>$ip_range</td>" .
+    "<td>$forward</td>" .
+    "<td>$dhcp</td>" .
+    "<td>$act</td>" .
+    "</tr>";
+  }
+  echo "</table>";
+  if ($ret)
+    echo "<pre>$ret</pre>";
+?>
 
 
           </div>
