@@ -181,8 +181,13 @@ require('navbar.php');
                 </a>
               <?php } ?>
 
+              <?php  if ($state == "shutoff") { ?>
+                <a class="domain-delete" href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fas fa-trash"></i> Delete guest<br />
+                </a>
+              <?php } ?>
 
-        
+
 
               <script>
               $('a.domain-delete').click(function(e) {
@@ -206,11 +211,10 @@ require('navbar.php');
 
 
 
-              <?php  if ($state == "shutoff") { ?>
-                <a class="domain-delete" href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-trash"></i> Delete guest<br />
-                </a>
-              <?php } ?>
+
+
+
+
             </div>
 
             <div class="col-sm-4">
