@@ -182,18 +182,18 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a onclick="warnBeforeRedirect('&amp;action=domain-delete')" href="#">
+                <a onclick="domainDeleteWarning('&amp;action=domain-delete')" href="#">
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
 
 <script>
-function warnBeforeRedirect(linkURL) {
+function domainDeleteWarning(linkURL) {
                 linkURL = window.location.href + linkURL;
                swal({
-                 title: "Are you sure?",
-                 text: "This will delete the virtual machine configuration " ,
-                 type: "warning",
+                 title: 'Are you sure?',
+                 text: 'This will delete the virtual machine configuration',
+                 type: 'warning',
                  confirmButtonText: 'Yes, delete it!',
                  showCancelButton: true
                }).then(function($result) {
