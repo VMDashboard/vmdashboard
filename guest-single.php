@@ -182,7 +182,7 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a onclick="domainDeleteWarning('&amp;action=domain-delete')" href="#">
+                <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
@@ -256,7 +256,7 @@ require('navbar.php');
                 "<td>$allocation</td>" .
                 "<td>$physical</td>" .
                 "<td>" .
-                  "<a title='Remove disk device' onclick=\"diskRemoveWarning('&amp;action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
+                  "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
                 "</td>" .
                 "</tr>";
             }
@@ -447,7 +447,6 @@ require('footer.php');
 
 <script>
 function domainDeleteWarning(linkURL) {
-linkURL = window.location.href + linkURL;
   swal({
     title: 'Are you sure?',
     text: 'This will delete the virtual machine configuration',
@@ -461,7 +460,6 @@ linkURL = window.location.href + linkURL;
 }
 
 function diskRemoveWarning(linkURL) {
-linkURL = window.location.href + linkURL;
   swal({
     title: 'Are you sure?',
     text: 'This will remove the disk from the configuration',
@@ -475,7 +473,6 @@ linkURL = window.location.href + linkURL;
 }
 
 function snapshotDeleteWarning(linkURL) {
-
   swal({
     title: 'Are you sure?',
     text: 'This will delete the snapshot',
