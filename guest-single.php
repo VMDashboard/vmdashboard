@@ -187,36 +187,6 @@ require('navbar.php');
                 </a>
               <?php } ?>
 
-<script>
-function domainDeleteWarning(linkURL) {
-linkURL = window.location.href + linkURL;
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete the virtual machine configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-
-function diskRemoveWarning(linkURL) {
-linkURL = window.location.href + linkURL;
-  swal({
-    title: 'Are you sure?',
-    text: 'This will remove the disk from the configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, remove it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-</script>
-
             </div>
 
             <div class="col-sm-4">
@@ -381,7 +351,7 @@ linkURL = window.location.href + linkURL;
               echo date("H:i:s", $value) . "</td>";
               echo "<td>" . $snapstate . "</td>";
               echo "<td>
-                <a title='Delete snapshot' href=?action=domain-snapshot-delete&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-trash-alt'></i></a>
+                <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('&amp;action=domain-snapshot-delete&amp;snapshot=" . $value . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
                 <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
                 <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
                 </td>";
@@ -474,3 +444,47 @@ linkURL = window.location.href + linkURL;
 <?php
 require('footer.php');
 ?>
+
+<script>
+function domainDeleteWarning(linkURL) {
+linkURL = window.location.href + linkURL;
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete the virtual machine configuration',
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+
+function diskRemoveWarning(linkURL) {
+linkURL = window.location.href + linkURL;
+  swal({
+    title: 'Are you sure?',
+    text: 'This will remove the disk from the configuration',
+    type: 'warning',
+    confirmButtonText: 'Yes, remove it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+
+function snapshotDeleteWarning(linkURL) {
+linkURL = window.location.href + linkURL;
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete the snapshot',
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+</script>
