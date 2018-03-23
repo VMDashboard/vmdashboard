@@ -114,7 +114,7 @@ if ($vnc <= 0)
 require('navbar.php');
 ?>
 
-<script>
+<script type="text/javascript">
 function retMessage() {
   swal({
     title: 'Are you sure?',
@@ -127,8 +127,8 @@ function retMessage() {
 </script>
 
 <?php
-echo "<script> retMessage(); </script>";
-echo "<script> swal('Good job!','You clicked the button!','success') </script>";
+echo "<script type=\"text/javascript\"> retMessage(); </script>";
+echo "<script type=\"text/javascript\"> swal('Good job!','You clicked the button!','success') </script>";
 ?>
 
 <div class="panel-header panel-header-sm"></div>
