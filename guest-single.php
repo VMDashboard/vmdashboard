@@ -125,9 +125,10 @@ function retMessage() {
 </script>
 
 <?php
-if ($ret){
-  <script>retMessage()</script>
-} ?>
+if ($ret) {
+?>  <script>retMessage();</script> <?php
+}
+?>
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
