@@ -182,8 +182,7 @@ require('navbar.php');
               <?php } ?>
 
 
-              <a href="http://google.com">Visit Google!</a>
-              <a href="http://ludu.co">Visit Ludu!</a>
+        
 
               <script>
               $('a.domain-delete').click(function(e) {
@@ -194,7 +193,7 @@ require('navbar.php');
 
               function warnBeforeRedirect(linkURL) {
                 swal({
-                  title: "Leave this site?", 
+                  title: "Leave this site?",
                   text: "If you click 'OK', you will be redirected to " + linkURL,
                   type: "warning",
                   showCancelButton: true
