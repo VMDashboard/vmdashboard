@@ -127,10 +127,8 @@ function retMessage() {
 </script>
 
 <?php
-if ($ret != "") {
 echo "<script> retMessage(); </script>";
 echo "<script> swal('Good job!','You clicked the button!','success') </script>";
-}
 ?>
 
 <div class="panel-header panel-header-sm"></div>
