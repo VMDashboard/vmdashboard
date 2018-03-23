@@ -125,6 +125,7 @@ function retMessage() {
   })
 }
 retMessage();
+diskRemoveWarning();
 swal('Good job!','You clicked the button!','success')
 </script>
 
