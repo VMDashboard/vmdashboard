@@ -181,8 +181,34 @@ require('navbar.php');
                 </a>
               <?php } ?>
 
+
+              <a href="http://google.com">Visit Google!</a>
+              <a href="http://ludu.co">Visit Ludu!</a>
+
+              <script>
+              $('a.domain-delete').click(function(e) {
+                e.preventDefault(); // Prevent the href from redirecting directly
+                var linkURL = $(this).attr("href");
+                warnBeforeRedirect(linkURL);
+              });
+
+              function warnBeforeRedirect(linkURL) {
+                swal({
+                  title: "Leave this site?", 
+                  text: "If you click 'OK', you will be redirected to " + linkURL,
+                  type: "warning",
+                  showCancelButton: true
+                }, function() {
+                  // Redirect the user
+                  window.location.href = linkURL;
+                });
+              }
+              </script>
+
+
+
               <?php  if ($state == "shutoff") { ?>
-                <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <a class="domain-delete" href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
