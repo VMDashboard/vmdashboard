@@ -630,7 +630,10 @@ require('footer.php');
 <script type="text/javascript">
 
 function autoDiskName(f) {
-    f.new_target_dev.value = f.domain_name.value + ".qcow2";
+  var diskName = f.domain_name.value;
+  var ext = ".qcow2";
+  var fullDiskName = diskName.concat(ext);
+  f.new_target_dev.value = fullDiskName;
 }
 
 </script>
