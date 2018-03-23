@@ -40,32 +40,33 @@ if ($subaction) {
 }
 
 
-echo "<h5>Private networks</h5>";
+echo "<h5>List of private networks</h5>";
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
-var_dump($tmp);
 echo "<table class='table'>" .
   "<thead class='text-primary'><tr>" .
   "<th>Network name </th>" .
-             "<th> Network state </th>" .
-             "<th> Gateway IP Address </th>" .
-             "<th> IP Address Range </th>" .
-             "<th> Forwarding </th>" .
-             "<th> DHCP Range </th>" .
-             "<th> Actions </th>" .
-             "</tr></thead>";
-        for ($i = 0; $i < sizeof($tmp); $i++) {
-            $tmp2 = $lv->get_network_information($tmp[$i]);
-            $ip = '';
-            $ip_range = '';
-            $activity = $tmp2['active'] ? 'Active' : 'Inactive';
-            $dhcp = 'Disabled';
-            $forward = 'None';
-            if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
-                if (array_key_exists('forward_dev', $tmp2))
-                    $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
-                else
-                    $forward = $tmp2['forwarding'];
-            }
+  "<th> Network state </th>" .
+  "<th> Gateway IP Address </th>" .
+  "<th> IP Address Range </th>" .
+  "<th> Forwarding </th>" .
+  "<th> DHCP Range </th>" .
+  "<th> Actions </th>" .
+  "</tr></thead>";
+
+for ($i = 0; $i < sizeof($tmp); $i++) {
+  $tmp2 = $lv->get_network_information($tmp[$i]);
+  $ip = '';
+  $ip_range = '';
+  $activity = $tmp2['active'] ? 'Active' : 'Inactive';
+  $dhcp = 'Disabled';
+  $forward = 'None';
+var_dump($tmp2);
+  if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
+    if (array_key_exists('forward_dev', $tmp2))
+      $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
+    else
+      $forward = $tmp2['forwarding'];
+  }
             if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
                 $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
             if (array_key_exists('ip', $tmp2))
