@@ -182,11 +182,24 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a class="domain-delete" href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <a onclick="warnBeforeRedirect('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" >
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
 
+<script>
+function warnBeforeRedirect(linkURL) {
+               swal({
+                 title: "Leave this site?",
+                 text: "If you click 'OK', you will be redirected to " + linkURL,
+                 type: "warning",
+                 showCancelButton: true
+               }, function() {
+                 // Redirect the user
+                 window.location.href = linkURL;
+               });
+             }
+</script>
 
             </div>
 
