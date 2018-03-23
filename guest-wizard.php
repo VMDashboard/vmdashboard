@@ -217,7 +217,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Domain name</label>
-                                    <input type="text" class="form-control" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
+                                    <input type="text" class="form-control" onkeyup="CopyData(this)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
                                 </div>
                             </div>
 
@@ -345,7 +345,7 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                   <div class="form-group">
                                       <label>Disk Image Name</label>
-                                      <input type="text" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                                      <input type="text" id="DataImageName" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
                                   </div>
                               </div>
 
@@ -361,7 +361,7 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-4 diskChange" id="new" style="display:none;">
                                 <div class="form-group">
                                   <label>Unit size</label>
-                                  <select class="selectpicker" data-style="btn btn-primary btn-round" title="Select Unit Size" name="new_unit">
+                                  <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
                                     <option value="M">MB</option>
                                     <option value="G" selected>GB</option>
                                   </select>
@@ -626,3 +626,11 @@ $random_mac = $lv->generate_random_mac_addr();
 <?php
 require('footer.php');
 ?>
+
+<script type="text/javascript">
+    function CopyData(val){
+     var a = document.getElementById(val.id).value
+     document.getElementById("DataImageName").value=domain_name
+    }
+
+    </script>
