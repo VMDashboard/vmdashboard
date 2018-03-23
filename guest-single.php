@@ -195,10 +195,10 @@ function warnBeforeRedirect(linkURL) {
                  text: "If you click 'OK', you will be redirected to " + linkURL,
                  type: "warning",
                  showCancelButton: true
-               }, function() {
+               }.then(function($result) {
                  // Redirect the user
                  window.location = "http://google.com";
-               });
+               }));
              }
 </script>
 
