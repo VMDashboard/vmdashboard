@@ -141,7 +141,7 @@ if ($source_file_vda == "new") {
   $dev = "vda";
   $typ = "virtio";
   //$driver = $driver_type;
-  $driver = "qcow2";
+  $driver = $driver_type;
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
@@ -373,7 +373,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                       <label>Driver type</label>
                                         <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
                                           <option value="qcow2" selected="selected"> qcow2 </option>
-                                          <option value="raw"> raw </option>
+                                          <option value="raw" > raw </option>
                                         </select>
                                   </div>
                               </div>

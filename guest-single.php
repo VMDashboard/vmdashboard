@@ -119,7 +119,6 @@ if ($ret != "") {
 ?>
 <script>
 var alertRet = "<?php echo $ret; ?>";
-alert(alertRet);
 swal(alertRet);
 </script>
 <?php
