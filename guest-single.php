@@ -126,7 +126,7 @@ require('navbar.php');
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-md-4">
               <?php
               /* General information */
               echo "<h3>General Information</h3>";
@@ -146,7 +146,7 @@ require('navbar.php');
               ?>
             </div>
 
-            <div class="col-sm-3">
+            <div class="col-md-3">
               <h3>Actions</h3>
               <?php  if ($state == "running") { ?>
                 <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
@@ -189,7 +189,7 @@ require('navbar.php');
 
             </div>
 
-            <div class="col-sm-4">
+            <div class="col-md-4">
               <?php
               if ($state == "running") {
                 //screenshot will get raw png data at 300 pixels wide
