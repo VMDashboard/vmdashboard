@@ -371,7 +371,7 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                   <div class="form-group">
                                       <label>Driver type</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
+                                        <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
                                           <option value="qcow2" selected="selected"> qcow2 </option>
                                           <option value="raw"> raw </option>
                                         </select>
@@ -634,6 +634,23 @@ function autoDiskName(f) {
   var ext = ".qcow2";
   var fullDiskName = diskName.concat(ext);
   f.new_target_dev.value = fullDiskName;
+}
+
+function newExtenstion(f) {
+  var diskName = f.new_target_dev.value;
+  var n = diskName.lastIndexOf(".");
+  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
+  var driverType = f.new_driver_type.value;
+  if (driverType === "qcow2"){
+    var ext = ".qcow2";
+    var fullDiskName = diskName.concat(ext);
+    f.new_target_dev.value = fullDiskName;
+  }
+  if (driverType === "raw"){
+    var ext = ".img";
+    var fullDiskName = diskName.concat(ext);
+    f.new_target_dev.value = fullDiskName;
+  }
 }
 
 </script>
