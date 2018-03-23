@@ -125,8 +125,8 @@ function retMessage() {
 </script>
 
 <?php
-if ($ret) {
-?>  <script>retMessage();</script> <?php
+if ($ret != "") {
+echo "<script> retMessage(); </script>";
 }
 ?>
 
