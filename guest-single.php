@@ -189,18 +189,32 @@ require('navbar.php');
 
 <script>
 function domainDeleteWarning(linkURL) {
-                linkURL = window.location.href + linkURL;
-               swal({
-                 title: 'Are you sure?',
-                 text: 'This will delete the virtual machine configuration',
-                 type: 'warning',
-                 confirmButtonText: 'Yes, delete it!',
-                 showCancelButton: true
-               }).then(function($result) {
-                 // Redirect the user
-                 window.location = linkURL;
-               });
-             }
+linkURL = window.location.href + linkURL;
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete the virtual machine configuration',
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+
+function diskDeleteWarning(linkURL) {
+linkURL = window.location.href + linkURL;
+  swal({
+    title: 'Are you sure?',
+    text: 'This will remove the disk from the configuration',
+    type: 'warning',
+    confirmButtonText: 'Yes, remove it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
 </script>
 
             </div>
@@ -272,7 +286,7 @@ function domainDeleteWarning(linkURL) {
                 "<td>$allocation</td>" .
                 "<td>$physical</td>" .
                 "<td>" .
-                  "<a title='Remove disk device' href=?action=domain-disk-remove&amp;uuid=" . $uuid . "&amp;dev=" . $tmp[$i]['device'] . "><i class='fas fa-trash-alt'></i></a>" .
+                  "<a title='Remove disk device' onclick=\"domainDeleteWarning('&amp;action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] ."')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
                 "</td>" .
                 "</tr>";
             }
