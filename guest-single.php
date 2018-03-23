@@ -117,6 +117,11 @@ require('navbar.php');
 <script>
 var alertRet = "<?php echo $ret; ?>";
 alert(alertRet);
+swal(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+);
 </script>
 
 <div class="panel-header panel-header-sm"></div>
