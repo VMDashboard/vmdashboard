@@ -114,6 +114,21 @@ if ($vnc <= 0)
 require('navbar.php');
 ?>
 
+<script>
+function retMessage() {
+  swal(
+  'Good job!',
+  'You clicked the button!',
+  'success'
+)
+}
+</script>
+
+<?php
+if ($ret){
+  <script>retMessage()</script>
+} ?>
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
 
@@ -139,7 +154,6 @@ require('navbar.php');
               echo "<b>Domain ID: </b>$id<br/>";
               echo "<b>VNC Port: </b>$vnc<br/>";
               echo '<br/>';
-              echo $ret;
               if ($die)
                 die('</body></html');
               echo "<br />";
