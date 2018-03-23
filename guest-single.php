@@ -192,7 +192,7 @@ function warnBeforeRedirect(linkURL) {
                 linkURL = window.location.href + linkURL;
                swal({
                  title: "Delete this virtual machine?",
-                 text: "If you click 'OK', you will be redirected to " ,
+                 text: "If you click 'OK', you will delete the virtual machine " ,
                  type: "warning",
                  showCancelButton: true
                }).then(function($result) {
