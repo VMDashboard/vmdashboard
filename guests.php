@@ -97,7 +97,7 @@ foreach ($doms as $name) {
     echo "<td>";
 
 	if ($lv->domain_is_running($name)){
-    echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Force shutdown</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
+    echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Turn off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
   } else if ($lv->domain_is_paused($name)){
     echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
   } else

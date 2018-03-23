@@ -45,7 +45,7 @@ if ($action == 'domain-stop') {
   $actioninfo = $lv->domain_get_info($dom);
   $actionstate = $lv->domain_state_translate($actioninfo['state']);
   if ($actionstate == "running"){
-    $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully shutdown";
+    $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
   }
 }
 
@@ -177,7 +177,7 @@ require('navbar.php');
 
               <?php  if ($state != "shutoff") { ?>
                 <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="now-ui-icons ui-1_simple-remove"></i> Force Shutdown<br />
+                  <i class="fas fa-plug"></i> Turn off<br />
                 </a>
               <?php } ?>
 
