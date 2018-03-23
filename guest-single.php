@@ -114,15 +114,17 @@ if ($vnc <= 0)
 require('navbar.php');
 ?>
 
+<?php
+if ($ret != "") {
+?>
 <script>
 var alertRet = "<?php echo $ret; ?>";
 alert(alertRet);
-swal(
-  'Good job!',
-  'You clicked the button!',
-  'success'
-);
+swal('alertRet');
 </script>
+<?php
+}
+?>
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
