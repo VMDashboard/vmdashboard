@@ -197,7 +197,7 @@ function warnBeforeRedirect(linkURL) {
                  showCancelButton: true
                }, function() {
                  // Redirect the user
-                 window.location = linkURL;
+                 window.location = "http://google.com";
                });
              }
 </script>
