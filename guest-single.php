@@ -187,6 +187,24 @@ require('navbar.php');
                 </a>
               <?php } ?>
 
+<script>
+$('a').click(function(e){
+    e.preventDefault();
+    var link = $(this).attr('href');
+
+    swal({
+        title: "Are you sure?",
+        text: "By clicking 'OK' you will be redirected to the link.",
+        type: "warning",
+        showCancelButton: true
+    },
+    function(){
+        window.location.href = link;
+    });
+});
+</script>
+
+
 
             </div>
 
