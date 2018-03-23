@@ -318,7 +318,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                       <label>Disk drive source file location</label>
                                       <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
                                         <option value="none"> Select Disk </option>
-                                        <option value="new"> New Disk </option>
+                                        <option value="new"> Create New Disk Image </option>
                                       <?php
                                       $pools = $lv->get_storagepools();
                                       for ($i = 0; $i < sizeof($pools); $i++) {
