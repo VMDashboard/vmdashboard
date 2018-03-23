@@ -202,7 +202,7 @@ linkURL = window.location.href + linkURL;
   });
 }
 
-function diskDeleteWarning(linkURL) {
+function diskRemoveWarning(linkURL) {
 linkURL = window.location.href + linkURL;
   swal({
     title: 'Are you sure?',
@@ -286,7 +286,7 @@ linkURL = window.location.href + linkURL;
                 "<td>$allocation</td>" .
                 "<td>$physical</td>" .
                 "<td>" .
-                  "<a title='Remove disk device' onclick=\"domainDeleteWarning('&amp;action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] ."')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
+                  "<a title='Remove disk device' onclick=\"diskRemoveWarning('&amp;action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] ."')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
                 "</td>" .
                 "</tr>";
             }
