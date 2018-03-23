@@ -214,13 +214,21 @@ $random_mac = $lv->generate_random_mac_addr();
 
 <!--    Required fields are setup in assets/demo/demo.js     -->
 
-                            <div class="col-sm-5">
+                            <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Domain name</label>
                                     <input type="text" class="form-control" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
                                 </div>
                             </div>
-                            <div class="col-sm-5">
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Virtual CPUs</label>
+                                    <input type="text" value="1" class="form-control" name="vcpu"/>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-5" style="display:none;">
                                 <div class="form-group">
                                     <label>Domain type</label>
                                     <input type="text" value="kvm" class="form-control" name="domain_type"/>
@@ -243,7 +251,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                 </div>
                             </div>
 
-                            <div class="col-sm-4">
+                            <div class="col-sm-4" style="display:none;">
                                 <div class="form-group">
                                     <label>OS architecture</label>
                                     <input type="text" value="x86_64" class="form-control" name="os_arch"/>
@@ -255,12 +263,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                       <input type="text" value="hvm" class="form-control" name="os_type"/>
                                 </div>
                             </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label>Virtual CPUs</label>
-                                    <input type="text" value="1" class="form-control" name="vcpu"/>
-                                </div>
-                            </div>
+
                             <div class="col-sm-5" style="display:none;">
                                 <div class="form-group">
                                     <label>Timezone</label>
