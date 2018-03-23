@@ -182,11 +182,7 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a class="domain-delete" onclick='swal({ title:"Good job!", text: "You clicked the button!", type: "warning", showCancelButton: true, buttonsStyling: false, confirmButtonClass: "btn btn-success"},
-                function() {
-                  // Redirect the user
-                  window.location.href = "?action=domain-delete&amp;uuid=<?php echo $uuid; ?>";
-                })' >
+                <a class="domain-delete" href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
