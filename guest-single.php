@@ -115,17 +115,6 @@ require('navbar.php');
 ?>
 
 <script type="text/javascript">
-function retMessage() {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will remove the disk from the configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, remove it!',
-    showCancelButton: true
-  })
-}
-retMessage();
-diskRemoveWarning();
 swal('Good job!','You clicked the button!','success')
 </script>
 
