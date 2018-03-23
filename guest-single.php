@@ -146,26 +146,6 @@ require('navbar.php');
               ?>
             </div>
 
-            <div class="col-sm-4">
-              <?php
-              if ($state == "running") {
-                //screenshot will get raw png data at 300 pixels wide
-                $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
-                //the raw png data needs to be encoded to use with html img tag
-                $screen64 = base64_encode($screenshot['data']);
-                ?>
-                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
-                </a>
-                <?php
-              } else if ($state == "paused") {
-                echo "<img src='assets/img/paused.png' width='400px' >";
-              } else {
-                echo "<img src='assets/img/shutdown.png' width='400px' >";
-              }
-              ?>
-            </div>
-
             <div class="col-sm-3">
               <h3>Actions</h3>
               <?php  if ($state == "running") { ?>
@@ -207,6 +187,31 @@ require('navbar.php');
                 </a>
               <?php } ?>
             </div>
+
+            <div class="col-sm-4">
+              <?php
+              if ($state == "running") {
+                //screenshot will get raw png data at 300 pixels wide
+                $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
+                //the raw png data needs to be encoded to use with html img tag
+                $screen64 = base64_encode($screenshot['data']);
+                ?>
+                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
+                </a>
+                <?php
+              } else if ($state == "paused") {
+                echo "<img src='assets/img/paused.png' width='400px' >";
+              } else {
+                echo "<img src='assets/img/shutdown.png' width='400px' >";
+              }
+              ?>
+            </div>
+
+
+
+
+
           </div>
         </div>
       </div>
