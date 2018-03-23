@@ -189,6 +189,7 @@ require('navbar.php');
 
 <script>
 function warnBeforeRedirect(linkURL) {
+                linkURL = window.location.href + linkURL;
                swal({
                  title: "Leave this site?",
                  text: "If you click 'OK', you will be redirected to " + linkURL,
@@ -196,7 +197,7 @@ function warnBeforeRedirect(linkURL) {
                  showCancelButton: true
                }, function() {
                  // Redirect the user
-                 window.location.href = window.location.href + linkURL;
+                 window.location.href = linkURL;
                });
              }
 </script>
