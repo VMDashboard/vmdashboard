@@ -351,7 +351,7 @@ require('navbar.php');
               echo date("H:i:s", $value) . "</td>";
               echo "<td>" . $snapstate . "</td>";
               echo "<td>
-                <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('&amp;action=domain-snapshot-delete&amp;snapshot=" . $value . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
+                <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
                 <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
                 <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
                 </td>";
@@ -475,7 +475,7 @@ linkURL = window.location.href + linkURL;
 }
 
 function snapshotDeleteWarning(linkURL) {
-linkURL = window.location.href + linkURL;
+
   swal({
     title: 'Are you sure?',
     text: 'This will delete the snapshot',
