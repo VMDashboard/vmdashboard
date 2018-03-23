@@ -630,11 +630,7 @@ require('footer.php');
 <script type="text/javascript">
 
 function autoDiskName(f) {
-    f.new_target_dev.value = f.domain_name.value;
+    f.new_target_dev.value = f.domain_name.value + ".qcow2";
 }
 
-    function CopyData(val){
-     var a = document.getElementById(val.id).value
-     document.getElementById("DataImageName").value="domain_name"
-    }
 </script>
