@@ -106,7 +106,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
       </div>
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-12" style="display:none;">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title"> Network Filters</h4>
@@ -115,46 +115,47 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
         <div class="card-body">
           <div class="table-responsive">
 
+<?php
+echo "<h2>Network filters</h2>";
+echo "Here you can see all the network filters defined";
+$ret = false;
 
- <?php
-        echo "<h2>Network filters</h2>";
-        echo "Here you can see all the network filters defined";
-        $ret = false;
-        if (array_key_exists('subaction', $_GET)) {
-            $uuid = $_GET['uuid'];
-            $name = $_GET['name'];
-            if ($_GET['subaction'] == 'dumpxml')
-                $ret = "XML dump of nwfilter <i>$name</i>:<br/><br/>" . htmlentities($lv->get_nwfilter_xml($uuid));
-        }
-        $tmp = $lv->get_nwfilters();
-        echo "<table class='table'>" .
-             "<tr>" .
-             "<th>Name</th>" .
-             "<th>UUID</th>" .
-             "<th>Action</th>" .
-             "</tr>\n";
-        for ($i = 0; $i < sizeof($tmp); $i++) {
-            $name = libvirt_nwfilter_get_name($tmp[$i]);
-            $uuid = libvirt_nwfilter_get_uuid_string($tmp[$i]);
-            echo "<tr>" .
-                 "<td>" . $name . "</td>" .
-                 "<td>" . $uuid . "</td>" .
-                 "<td><a href=\"?action=$action&amp;subaction=dumpxml&amp;name=$name&amp;uuid={$uuid}\">Dump configuration</a></td>" .
-                 "</tr>\n";
-        }
-        echo "</table>\n";
-        if ($ret)
-            echo "<pre>$ret</pre>";
+if (array_key_exists('subaction', $_GET)) {
+  $uuid = $_GET['uuid'];
+  $name = $_GET['name'];
+  if ($_GET['subaction'] == 'dumpxml')
+    $ret = "XML dump of nwfilter <i>$name</i>:<br/><br/>" . htmlentities($lv->get_nwfilter_xml($uuid));
+}
 
+$tmp = $lv->get_nwfilters();
+echo "<table class='table'>" .
+  "<tr>" .
+  "<th>Name</th>" .
+  "<th>UUID</th>" .
+  "<th>Action</th>" .
+  "</tr>\n";
 
+for ($i = 0; $i < sizeof($tmp); $i++) {
+  $name = libvirt_nwfilter_get_name($tmp[$i]);
+  $uuid = libvirt_nwfilter_get_uuid_string($tmp[$i]);
+  echo "<tr>" .
+    "<td>" . $name . "</td>" .
+    "<td>" . $uuid . "</td>" .
+    "<td><a href=\"?action=$action&amp;subaction=dumpxml&amp;name=$name&amp;uuid={$uuid}\">Dump configuration</a></td>" .
+    "</tr>\n";
+}
+
+echo "</table>\n";
+if ($ret)
+  echo "<pre>$ret</pre>";
 ?>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <?php
