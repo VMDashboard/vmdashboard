@@ -3,20 +3,16 @@ require('header.php');
 require('navbar.php');
 ?>
 
-
-            <div class="panel-header panel-header-sm">
-            </div>
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Networking</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-
-
+<div class="panel-header panel-header-sm"></div>
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Networking</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
 
 <?php
 $ret = false;
@@ -42,17 +38,20 @@ if ($subaction) {
     }
   }
 }
-echo "<h3>List of networks</h3>";
+
+
+echo "<h5>Private networks</h5>";
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
+var_dump($tmp);
 echo "<table class='table'>" .
   "<thead class='text-primary'><tr>" .
-  "<th>Network name $spaces</th>" .
-             "<th>$spaces Network state $spaces</th>" .
-             "<th>$spaces Gateway IP Address $spaces</th>" .
-             "<th>$spaces IP Address Range $spaces</th>" .
-             "<th>$spaces Forwarding $spaces</th>" .
-             "<th>$spaces DHCP Range $spaces</th>" .
-             "<th>$spaces Actions $spaces</th>" .
+  "<th>Network name </th>" .
+             "<th> Network state </th>" .
+             "<th> Gateway IP Address </th>" .
+             "<th> IP Address Range </th>" .
+             "<th> Forwarding </th>" .
+             "<th> DHCP Range </th>" .
+             "<th> Actions </th>" .
              "</tr></thead>";
         for ($i = 0; $i < sizeof($tmp); $i++) {
             $tmp2 = $lv->get_network_information($tmp[$i]);
@@ -80,13 +79,13 @@ echo "<table class='table'>" .
             if (!$tmp2['active'])
                 $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
             echo "<tr>" .
-                 "<td>$spaces{$tmp2['name']}$spaces</td>" .
-                 "<td align=\"center\">$spaces$activity$spaces</td>" .
-                 "<td align=\"center\">$spaces$ip$spaces</td>" .
-                 "<td align=\"center\">$spaces$ip_range$spaces</td>" .
-                 "<td align=\"center\">$spaces$forward$spaces</td>" .
-                 "<td align=\"center\">$spaces$dhcp$spaces</td>" .
-                 "<td align=\"center\">$spaces$act$spaces</td>" .
+                 "<td>{$tmp2['name']}</td>" .
+                 "<td align=\"center\">$activity</td>" .
+                 "<td align=\"center\">$ip</td>" .
+                 "<td align=\"center\">$ip_range</td>" .
+                 "<td align=\"center\">$forward</td>" .
+                 "<td align=\"center\">$dhcp</td>" .
+                 "<td align=\"center\">$act</td>" .
                  "</tr>";
         }
         echo "</table>";
@@ -95,21 +94,19 @@ echo "<table class='table'>" .
 	?>
 
 
+          </div>
+        </div>
+      </div>
+    </div>
 
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title"> Network Filters</h4>
-                                <p class="category"> Network filters for domain</p>
-                            </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title"> Network Filters</h4>
+          <p class="category"> Network filters for domain</p>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
 
 
  <?php
