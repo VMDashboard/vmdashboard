@@ -196,7 +196,7 @@ function warnBeforeRedirect(linkURL) {
                  showCancelButton: true
                }, function() {
                  // Redirect the user
-                 window.location.href = linkURL;
+                 window.location.href = window.location.href + linkURL;
                });
              }
 </script>
