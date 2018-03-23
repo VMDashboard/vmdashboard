@@ -115,7 +115,7 @@ require('navbar.php');
 ?>
 
 <script type="text/javascript">
-swal('Good job!','You clicked the button!','success')
+swal('Good job!','You clicked the button!','success');
 </script>
 
 <div class="panel-header panel-header-sm"></div>
