@@ -643,12 +643,12 @@ function newExtenstion(f) {
   var driverType = f.new_driver_type.value;
   if (driverType === "qcow2"){
     var ext = ".qcow2";
-    var fullDiskName = diskName.concat(ext);
+    var fullDiskName = noExt.concat(ext);
     f.new_target_dev.value = fullDiskName;
   }
   if (driverType === "raw"){
     var ext = ".img";
-    var fullDiskName = diskName.concat(ext);
+    var fullDiskName = noExt.concat(ext);
     f.new_target_dev.value = fullDiskName;
   }
 }
