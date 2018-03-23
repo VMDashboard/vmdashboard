@@ -194,7 +194,7 @@ function warnBeforeRedirect(linkURL) {
                  title: "Are you sure?",
                  text: "This will delete the virtual machine configuration " ,
                  type: "warning",
-                 confirmButtonText: "Yes, delete it! ",
+                 confirmButtonText: 'Yes, delete it!',
                  showCancelButton: true
                }).then(function($result) {
                  // Redirect the user
