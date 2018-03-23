@@ -217,7 +217,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Domain name</label>
-                                    <input type="text" class="form-control" onkeyup="CopyData(this)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
+                                    <input type="text" class="form-control" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
                                 </div>
                             </div>
 
@@ -628,6 +628,11 @@ require('footer.php');
 ?>
 
 <script type="text/javascript">
+
+function autoDiskName(f) {
+    f.new_target_dev.value = f.domain_name.value;
+}
+
     function CopyData(val){
      var a = document.getElementById(val.id).value
      document.getElementById("DataImageName").value="domain_name"
