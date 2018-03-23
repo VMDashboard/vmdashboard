@@ -191,8 +191,8 @@ require('navbar.php');
 function warnBeforeRedirect(linkURL) {
                 linkURL = window.location.href + linkURL;
                swal({
-                 title: "Leave this site?",
-                 text: "If you click 'OK', you will be redirected to " + linkURL,
+                 title: "Delete virtual machine?",
+                 text: "If you click 'OK', you will delete this virtual machine",
                  type: "warning",
                  showCancelButton: true
                }).then(function($result) {
