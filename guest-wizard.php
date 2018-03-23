@@ -630,7 +630,6 @@ require('footer.php');
 <script type="text/javascript">
     function CopyData(val){
      var a = document.getElementById(val.id).value
-     document.getElementById("DataImageName").value=domain_name
+     document.getElementById("DataImageName").value="domain_name"
     }
-
-    </script>
+</script>
