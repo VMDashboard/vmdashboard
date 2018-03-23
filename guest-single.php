@@ -182,7 +182,7 @@ require('navbar.php');
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
-                <a onclick="warnBeforeRedirect('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" >
+                <a onclick="warnBeforeRedirect('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#">
                   <i class="fas fa-trash"></i> Delete guest<br />
                 </a>
               <?php } ?>
