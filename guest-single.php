@@ -110,7 +110,11 @@ if (!$id)
   $id = 'N/A';
 if ($vnc <= 0)
 	$vnc = 'N/A';
-
+?>
+<script>
+showNotification('top','right');
+</script>
+<?php
 require('navbar.php');
 ?>
 
