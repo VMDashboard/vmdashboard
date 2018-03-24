@@ -19,7 +19,7 @@ require('navbar.php');
       <div class="card">
         <div class="card-header">
           <h2 class="card-title" style="color:#f96332;"> <?php echo $pools[$i]; ?></h2>
-          Storage Pool
+          Storage Pool Information:
         </div>
         <div class="card-body">
 
