@@ -115,17 +115,16 @@ require('navbar.php');
 ?>
 
 
-<!--  Notifications Plugin    -->
-<script src="assets/js/plugins/bootstrap-notify.js"></script>
+
 
 <?php
 if ($ret != "") {
 ?>
 <script>
-var alertRet = "<?php echo $ret; ?>";
-swal(alertRet);
 $.notify("Hello World");
 showNotification('top','right');
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
 </script>
 <?php
 }
