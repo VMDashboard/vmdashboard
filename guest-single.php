@@ -496,8 +496,8 @@ function snapshotDeleteWarning(linkURL) {
   });
 }
 
-function showNotification(from, align, message){
-    	color = 'primary';
+function showNotification(from, align) {
+    var	color = 'primary';
 
     	$.notify({
         	icon: "now-ui-icons ui-1_bell-53",
