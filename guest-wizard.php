@@ -38,6 +38,7 @@ if ($source_file_vda == "none") {
 if ($source_file_vda == "new") {
   $pool = "default";
   $volume_image_name = $_POST['new_target_dev'];
+    $volume_image_name = str_replace(' ','',$volume_image_name); 
   $volume_capacity = $_POST['new_volume_size'];
   $unit = $_POST['new_unit'];
   $volume_size = $_POST['new_volume_size'];
