@@ -130,12 +130,6 @@ showNotification('top','right');
 }
 ?>
 
-<div class="alert alert-primary">
-    <button type="button" aria-hidden="true" class="close">
-        <i class="now-ui-icons ui-1_simple-remove"></i>
-    </button>
-    <span><b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
-</div>
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
@@ -507,7 +501,7 @@ function snapshotDeleteWarning(linkURL) {
   });
 }
 
-function showNotification(from, align) {
+function showNotification2(from, align) {
     var	color = 'primary';
     	$.notify({
         	icon: "now-ui-icons ui-1_bell-53",
@@ -521,4 +515,21 @@ function showNotification(from, align) {
             }
         });
 	}
+
+  function showNotification(from, align){
+      color = 'primary';
+
+      $.notify({
+          icon: "now-ui-icons ui-1_bell-53",
+          message: "Welcome to <b>Now Ui Dashboard Pro</b> - a beautiful freebie for every web developer."
+
+        },{
+            type: color,
+            timer: 8000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+  }
 </script>
