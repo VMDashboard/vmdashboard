@@ -10,7 +10,9 @@ require('navbar.php');
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Virtual Machine Guests</h4> <a href="guest-wizard.php">Create new guest</a>
+            <h4 class="card-title">Virtual Machine Guests</h4>
+            <button onclick="window.location.href='guest-wizard.php'" class="btn btn-primary btn-simple">Create new guest </button>
+            <a href="guest-wizard.php">Create new guest</a>
           </div>
           <div class="card-body">
 
