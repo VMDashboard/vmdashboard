@@ -22,7 +22,8 @@ require('navbar.php');
             $info = $lv->get_storagepool_info($pools[$i]);
           ?>
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
-          <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create">Create new volume</a>
+          <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create">Create new volume</a><br>
+
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           echo "Activity: " . $act . "<br />";
           echo "State: " . $lv->translate_storagepool_state($info['state']) . "<br />";
@@ -31,13 +32,9 @@ require('navbar.php');
           echo "Available: " . $lv->format_size($info['available'], 2) . "<br />";
           echo "Path: " . $info['path'] . "<br />";
           ?>
-          <div class="table-responsive">
-            <table class="table">
-              <thead></thead>
-              <tbody>
+
 
 <?php
-
     if ($action == 'storage-pools') {
       $msg = '';
 
@@ -105,17 +102,21 @@ require('navbar.php');
 
 //sub table, will need responsive info added
 
+
             if ($info['volume_count'] > 0) {
-                echo "<tr>" .
-                     "<td colspan=\"10\" style='padding-left: 40px'><table>" .
-                     "<tr>" .
-                     "<th>Name</th>" .
-                     "<th>Type</th>" .
-                     "<th>Capacity</th>" .
-                     "<th>Allocation</th>" .
-                     "<th>Path</th>" .
-                     "<th>Actions</th>" .
-                     "</tr>";
+                echo "<div class=\"table-responsive\">" .
+                  "<table class=\"table\">" .
+                  "<thead>" .
+                  "<tr>" .
+                  "<th>Name</th>" .
+                  "<th>Type</th>" .
+                  "<th>Capacity</th>" .
+                  "<th>Allocation</th>" .
+                  "<th>Path</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "</thead>" .
+                  "</tbody>";
                 $tmp = $lv->storagepool_get_volume_information($pools[$i]);
                 $tmp_keys = array_keys($tmp);
                 for ($ii = 0; $ii < sizeof($tmp); $ii++) {
@@ -129,8 +130,7 @@ require('navbar.php');
                          "<td><a href=\"?action=storage-pools&amp;path=$path&amp;subaction=volume-delete\">Delete volume</a></td>" .
                          "</tr>";
                 }
-                echo "</table></td>" .
-                     "</tr>";
+                echo "</tbody></table></div>";
             }
         }
 
@@ -139,9 +139,8 @@ require('navbar.php');
 
 
 
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                                
                             </div>
                         </div>
                     </div>
