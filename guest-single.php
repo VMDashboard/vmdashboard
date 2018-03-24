@@ -160,7 +160,7 @@ swal(alertRet);
               <h3>Actions</h3>
               <?php  if ($state == "running") { ?>
                 <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                  <i class="fas fa-tv"></i> VNC Connection<br />
+                  <i class="fas fa-desktop"></i> VNC Connection<br />
                 </a>
               <?php } ?>
 
@@ -333,7 +333,7 @@ swal(alertRet);
           <?php
           /* Snapshot information */
           echo "<h3>Snapshots</h3>";
-          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='now-ui-icons media-1_camera-compact'></i> Create new snapshot</a><br />";
+          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-camera-retro'></i> Create new snapshot</a><br />";
           $tmp = $lv->list_domain_snapshots($dom);
           if (!empty($tmp)) {
             echo "<div class='table-responsive'>" .
