@@ -21,32 +21,22 @@ require('navbar.php');
           for ($i = 0; $i < sizeof($pools); $i++) {
             $info = $lv->get_storagepool_info($pools[$i]);
           ?>
-          
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
+          <a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool={$pools[$i]}&amp;subaction=volume-create\">Create new volume</a>
+          <?php $act = $info['active'] ? 'Active' : 'Inactive';
+          echo "Activity: " . $act . "<br />";
+          echo "State: " . {$lv->translate_storagepool_state($info['state'])} . "<br />";
+          echo "Capacity: " . {$lv->format_size($info['capacity'], 2)} . "<br />";
+          echo "Allocation: " . {$lv->format_size($info['allocation'], 2)} . "<br />";
+          echo "Available: " . {$lv->format_size($info['available'], 2)} . "<br />";
+          echo "Path: " . {$info['path']} . "<br />";
+          ?>
           <div class="table-responsive">
             <table class="table">
-              <thead class=" text-primary">
-                <th>Activity</th>
-                <th>State</th>
-                <th>Capacity</th>
-                <th>Allocation</th>
-                <th>Available</th>
-                <th>Path</th>
-                <th>Actions</th>
-              </thead>
+
               <tbody>
 
 <?php
-  $act = $info['active'] ? 'Active' : 'Inactive';
-  echo "<tr>" .
-    "<td>$act</td>" .
-    "<td>{$lv->translate_storagepool_state($info['state'])}</td>" .
-    "<td>{$lv->format_size($info['capacity'], 2)}</td>" .
-    "<td>{$lv->format_size($info['allocation'], 2)}</td>" .
-    "<td>{$lv->format_size($info['available'], 2)}</td>" .
-    "<td>{$info['path']}</td>" .
-    "<td><a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool={$pools[$i]}&amp;subaction=volume-create\">Create new volume</a></td>" .
-    "</tr>";
 
     if ($action == 'storage-pools') {
       $msg = '';
@@ -109,6 +99,11 @@ require('navbar.php');
 		echo "<br/>";
     echo "<br/>";
 	 }
+
+
+
+
+//sub table, will need responsive info added
 
             if ($info['volume_count'] > 0) {
                 echo "<tr>" .
