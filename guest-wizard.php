@@ -7,7 +7,7 @@ require('header.php');
 if (isset($_POST['finish'])) {
 $domain_type = $_POST['domain_type'];
 $domain_name = $_POST['domain_name'];
-  $domain_name = str_replace(' ','',$domain_name); 
+  $domain_name = str_replace(' ','',$domain_name);
 $memory_unit = $_POST['memory_unit'];
 $memory = $_POST['memory'];
 $vcpu = $_POST['vcpu'];
@@ -219,7 +219,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Domain name</label>
-                                    <input type="text" class="form-control" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
+                                    <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
                                 </div>
                             </div>
 
