@@ -630,6 +630,7 @@ require('footer.php');
 
 function autoDiskName(f) {
   var diskName = f.domain_name.value;
+  diskName = diskName.replace(/\s+/g, '');
   var ext = ".qcow2";
   var fullDiskName = diskName.concat(ext);
   f.new_target_dev.value = fullDiskName;
@@ -637,6 +638,7 @@ function autoDiskName(f) {
 
 function newExtenstion(f) {
   var diskName = f.new_target_dev.value;
+  diskName = diskName.replace(/\s+/g, '');
   var n = diskName.lastIndexOf(".");
   var noExt = n > -1 ? diskName.substr(0, n) : diskName;
   var driverType = f.new_driver_type.value;
