@@ -111,14 +111,14 @@ if (!$id)
 if ($vnc <= 0)
 	$vnc = 'N/A';
 ?>
+<!--  Notifications Plugin    -->
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
 <script>
 showNotification('top','right');
 </script>
 <?php
 require('navbar.php');
 ?>
-
-
 
 
 <?php
