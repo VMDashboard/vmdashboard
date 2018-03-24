@@ -19,7 +19,6 @@ require('navbar.php');
               <thead class=" text-primary">
                 <th>Name</th>
                 <th>Activity</th>
-                <th>Volume Count</th>
                 <th>State</th>
                 <th>Capacity</th>
                 <th>Allocation</th>
@@ -37,7 +36,6 @@ for ($i = 0; $i < sizeof($pools); $i++) {
   echo "<tr>" .
     "<td>{$pools[$i]}</td>" .
     "<td>$act</td>" .
-    "<td>{$info['volume_count']}</td>" .
     "<td>{$lv->translate_storagepool_state($info['state'])}</td>" .
     "<td>{$lv->format_size($info['capacity'], 2)}</td>" .
     "<td>{$lv->format_size($info['allocation'], 2)}</td>" .
