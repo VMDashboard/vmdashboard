@@ -17,6 +17,18 @@
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>VM Guests</p>
             </a>
+
+              <ul class="nav">
+                <li>
+                    <a href="guest-wizard.pgp">
+                        <span class="sidebar-mini-icon">P</span>
+                        <span class="sidebar-normal">New Guest</span>
+                    </a>
+                </li>
+              </ul>
+
+
+
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "storage.php") ? '<li class="active">' : '<li>'; ?>
@@ -64,7 +76,7 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            
+
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
