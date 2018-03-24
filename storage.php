@@ -10,7 +10,7 @@ require('navbar.php');
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h2 class="card-title">Storage Pools</h2>
+          <h4 class="card-title">Storage Pools</h4>
         </div>
         <div class="card-body">
 
@@ -119,7 +119,7 @@ require('navbar.php');
                   "<table class=\"table\">" .
                   "<thead>" .
                   "<tr>" .
-                  "<th>Name</th>" .
+                  "<th>File Name</th>" .
                   "<th>Type</th>" .
                   "<th>Capacity</th>" .
                   "<th>Allocation</th>" .
