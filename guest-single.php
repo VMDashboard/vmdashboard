@@ -110,13 +110,7 @@ if (!$id)
   $id = 'N/A';
 if ($vnc <= 0)
 	$vnc = 'N/A';
-?>
-<!--  Notifications Plugin    -->
-<script src="assets/js/plugins/bootstrap-notify.js"></script>
-<script>
-showNotification('top','right');
-</script>
-<?php
+
 require('navbar.php');
 ?>
 
@@ -463,7 +457,9 @@ swal(alertRet);
 require('footer.php');
 ?>
 
+
 <script>
+
 function domainDeleteWarning(linkURL) {
   swal({
     title: 'Are you sure?',
@@ -503,35 +499,4 @@ function snapshotDeleteWarning(linkURL) {
   });
 }
 
-function showNotification2(from, align) {
-    var	color = 'primary';
-    	$.notify({
-        	icon: "now-ui-icons ui-1_bell-53",
-        	message: 'test'
-        },{
-            type: color,
-            timer: 8000,
-            placement: {
-                from: from,
-                align: align
-            }
-        });
-	}
-
-  function showNotification(from, align){
-      color = 'primary';
-
-      $.notify({
-          icon: "now-ui-icons ui-1_bell-53",
-          message: "Welcome to <b>Now Ui Dashboard Pro</b> - a beautiful freebie for every web developer."
-
-        },{
-            type: color,
-            timer: 8000,
-            placement: {
-                from: from,
-                align: align
-            }
-        });
-  }
 </script>
