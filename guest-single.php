@@ -120,6 +120,7 @@ if ($ret != "") {
 <script>
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);
+showNotification('top','right','<?php echo $ret; ?>');
 </script>
 <?php
 }
@@ -494,4 +495,21 @@ function snapshotDeleteWarning(linkURL) {
     window.location = linkURL;
   });
 }
+
+function showNotification(from, align, message){
+    	color = 'primary';
+
+    	$.notify({
+        	icon: "now-ui-icons ui-1_bell-53",
+        	message: message
+
+        },{
+            type: color,
+            timer: 8000,
+            placement: {
+                from: from,
+                align: align
+            }
+        });
+	}
 </script>
