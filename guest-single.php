@@ -114,12 +114,13 @@ if ($vnc <= 0)
 require('navbar.php');
 ?>
 
-<?php
-if ($ret != "") {
-?>
+
 <!--  Notifications Plugin    -->
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 
+<?php
+if ($ret != "") {
+?>
 <script>
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);
