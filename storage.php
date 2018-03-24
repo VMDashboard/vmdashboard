@@ -98,7 +98,7 @@ require('navbar.php');
           <div class="row">
             <div class="col-md-3">
             <font style="font-size:24px; color:#f96332;"><?php echo $pools[$i]; ?></font><hr />
-            <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i>Create new volume </a>
+            <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i> Create new volume </a>
             <br />
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
