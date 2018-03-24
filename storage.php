@@ -34,7 +34,7 @@ $pools = $lv->get_storagepools();
 for ($i = 0; $i < sizeof($pools); $i++) {
   $info = $lv->get_storagepool_info($pools[$i]);
   $act = $info['active'] ? 'Active' : 'Inactive';
-  echo "<tr align=\"center\">" .
+  echo "<tr>" .
     "<td>{$pools[$i]}</td>" .
     "<td>$act</td>" .
     "<td>{$info['volume_count']}</td>" .
