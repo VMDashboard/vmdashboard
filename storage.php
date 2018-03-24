@@ -88,10 +88,6 @@ require('navbar.php');
 
 
 
-
-
-
-
           <?php
           $pools = $lv->get_storagepools();
           for ($i = 0; $i < sizeof($pools); $i++) {
@@ -100,7 +96,7 @@ require('navbar.php');
           <hr>
           <div class="row">
             <div class="col-md-3">
-            <font style="font-size:24px; color:#f96332;"><?php echo $pools[$i]; ?></font><br />
+            <font style="font-size:24px; color:#f96332;"><?php echo $pools[$i]; ?></font><hr />
             <button onclick="window.location.href='storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create'" class="btn btn-primary btn-round btn-simple">Create new volume </button>
             <br />
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
@@ -148,21 +144,14 @@ require('navbar.php');
                 echo "</tbody></table></div>";
             }
         }
-
 		?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-
-
-
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 <?php
 require('footer.php');
