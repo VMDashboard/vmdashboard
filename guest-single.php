@@ -130,6 +130,13 @@ showNotification('top','right');
 }
 ?>
 
+<div class="alert alert-primary">
+    <button type="button" aria-hidden="true" class="close">
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+    </button>
+    <span><b> Primary - </b> This is a regular notification made with ".alert-primary"</span>
+</div>
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
 
