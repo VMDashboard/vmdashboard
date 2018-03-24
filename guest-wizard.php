@@ -541,7 +541,7 @@ $random_mac = $lv->generate_random_mac_addr();
                                 <div class="col-sm-5 netChange" id="direct" style="display:none;">
                                     <div class="form-group">
                                         <label>Mode</label>
-                                        <input type="text" class="form-control" name="source_mode" value="bridge">
+                                        <input type="text" class="form-control" name="source_mode" value="bridge" readonly >
                                     </div>
                                 </div>
 
