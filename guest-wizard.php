@@ -209,7 +209,7 @@ $random_mac = $lv->generate_random_mac_addr();
                     <div class="tab-content">
           <!--    General Tab     -->
                         <div class="tab-pane fade show active" id="general">
-                          <h5 class="info-text"> Let's start with the basic information (with validation)</h5>
+                          <h5 class="info-text"> Let's start with the basic information</h5>
                           <div class="row justify-content-center">
 
 <!--    Required fields are setup in assets/demo/demo.js     -->
@@ -237,7 +237,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Memory</label>
-                                    <input type="number" placeholder="Enter the amount of RAM (required)" class="form-control" name="memory"/>
+                                    <input type="number" value="2048" placeholder="Enter the amount of RAM" class="form-control" name="memory"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
