@@ -120,7 +120,7 @@ if ($ret != "") {
 <script>
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);
-showNotification('top','right','<?php echo $ret; ?>');
+showNotification('top','right');
 </script>
 <?php
 }
