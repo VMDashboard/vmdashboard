@@ -17,18 +17,6 @@
               <i class="now-ui-icons design_bullet-list-67"></i>
               <p>VM Guests</p>
             </a>
-
-              <ul class="nav">
-                <li>
-                    <a href="guest-wizard.php">
-                        
-                        <p>New Guest</p>
-                    </a>
-                </li>
-              </ul>
-
-
-
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "storage.php") ? '<li class="active">' : '<li>'; ?>
