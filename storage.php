@@ -25,8 +25,6 @@ require('navbar.php');
                 <th>Allocation</th>
                 <th>Available</th>
                 <th>Path</th>
-                <th>Permissions</th>
-                <th>Ownership</th>
                 <th>Actions</th>
               </thead>
               <tbody>
@@ -45,8 +43,6 @@ for ($i = 0; $i < sizeof($pools); $i++) {
     "<td>{$lv->format_size($info['allocation'], 2)}</td>" .
     "<td>{$lv->format_size($info['available'], 2)}</td>" .
     "<td>{$info['path']}</td>" .
-    "<td>{$lv->translate_perms($info['permissions'])}</td>" .
-    "<td>{$info['id_user']} / {$info['id_group']}</td>" .
     "<td><a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool={$pools[$i]}&amp;subaction=volume-create\">Create new volume</a></td>" .
     "</tr>";
 
