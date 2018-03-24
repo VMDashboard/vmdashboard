@@ -390,7 +390,7 @@ swal(alertRet);
         <div class="card-body">
           <h3>XML Information (Advanced)</h3>
           <div class="row">
-            <div class="col-lg-4 col-md-8">
+            <div class="col-lg-3 col-md-8">
             <!--
               color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
             -->
