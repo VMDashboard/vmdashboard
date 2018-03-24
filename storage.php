@@ -103,7 +103,7 @@ require('navbar.php');
 
           <div class="row">
             <div class="col-md-3">
-            <h3><font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h3>
+            <font style="font-size:3; color:#f96332;"><?php echo $pools[$i]; ?></font>
             <button onclick="window.location.href='storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create'" class="btn btn-primary btn-round btn-simple">Create new volume </button>
             <br />
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
