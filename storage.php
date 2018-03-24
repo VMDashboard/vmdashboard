@@ -22,18 +22,18 @@ require('navbar.php');
             $info = $lv->get_storagepool_info($pools[$i]);
           ?>
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
-          <a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool={$pools[$i]}&amp;subaction=volume-create\">Create new volume</a>
+          <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo {$pools[$i]}; ?>&amp;subaction=volume-create">Create new volume</a>
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           echo "Activity: " . $act . "<br />";
-          echo "State: " . {$lv->translate_storagepool_state($info['state'])} . "<br />";
-          echo "Capacity: " . {$lv->format_size($info['capacity'], 2)} . "<br />";
-          echo "Allocation: " . {$lv->format_size($info['allocation'], 2)} . "<br />";
-          echo "Available: " . {$lv->format_size($info['available'], 2)} . "<br />";
-          echo "Path: " . {$info['path']} . "<br />";
+          echo "State: " . $lv->translate_storagepool_state($info['state']) . "<br />";
+          echo "Capacity: " . $lv->format_size($info['capacity'], 2) . "<br />";
+          echo "Allocation: " . $lv->format_size($info['allocation'], 2) . "<br />";
+          echo "Available: " . $lv->format_size($info['available'], 2) . "<br />";
+          echo "Path: " . $info['path'] . "<br />";
           ?>
           <div class="table-responsive">
             <table class="table">
-
+              <thead></thead>
               <tbody>
 
 <?php
