@@ -20,9 +20,9 @@
 
               <ul class="nav">
                 <li>
-                    <a href="guest-wizard.pgp">
-                        <span class="sidebar-mini-icon">P</span>
-                        <span class="sidebar-normal">New Guest</span>
+                    <a href="guest-wizard.php">
+                        
+                        <p>New Guest</p>
                     </a>
                 </li>
               </ul>
