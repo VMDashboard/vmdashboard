@@ -11,7 +11,7 @@ require('navbar.php');
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Storage Pools</h4>
-          <button onclick="window.location.href='storage.php" class="btn btn-primary btn-round btn-simple">Create new storage pool </button>
+          <a href="storage.php">Create new storage pool </a>
         </div>
         <div class="card-body">
 
