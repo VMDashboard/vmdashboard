@@ -46,9 +46,11 @@
           <li>
               <a data-toggle="collapse" href="#pagesExamples">
                   <i class="now-ui-icons design_image"></i>
+                  <a href="../pages/pricing.html">
                   <p>Pages
                      <b class="caret"></b>
                   </p>
+                </a>
               </a>
 
               <div class="collapse" id="pagesExamples">
