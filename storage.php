@@ -11,8 +11,15 @@ require('navbar.php');
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Storage Pools</h4>
+          <h4 class="card-title"> Storage</h4>
         </div>
+
+        <?php
+        $pools = $lv->get_storagepools();
+        for ($i = 0; $i < sizeof($pools); $i++) {
+          $info = $lv->get_storagepool_info($pools[$i]);
+          echo {$pools[$i]} . " Storage Pool";
+        ?>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table">
@@ -29,9 +36,7 @@ require('navbar.php');
               <tbody>
 
 <?php
-$pools = $lv->get_storagepools();
-for ($i = 0; $i < sizeof($pools); $i++) {
-  $info = $lv->get_storagepool_info($pools[$i]);
+
   $act = $info['active'] ? 'Active' : 'Inactive';
   echo "<tr>" .
     "<td>{$pools[$i]}</td>" .
