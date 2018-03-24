@@ -501,7 +501,7 @@ function showNotification(from, align, message){
 
     	$.notify({
         	icon: "now-ui-icons ui-1_bell-53",
-        	message: message
+        	message: 'test'
 
         },{
             type: color,
