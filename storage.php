@@ -106,7 +106,7 @@ require('navbar.php');
             <h4><font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
             <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create">Create new volume</a><br>
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
-          echo "<strong>Pool Name:</strong> " . $pools[$i]; . "<br />";
+          echo "<strong>Pool Name:</strong> " . $pools['$i']; . "<br />";
           echo "<strong>Activity:</strong> " . $act . "<br />";
           echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
           echo "<strong>Capacity:</strong> " . $lv->format_size($info['capacity'], 2) . "<br />";
