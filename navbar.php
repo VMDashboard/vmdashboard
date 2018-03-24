@@ -44,9 +44,9 @@
 
 
           <li>
-              <a data-toggle="collapse" href="guests.php#pagesExamples">
+              <a data-toggle="collapse" href="guests.php">
                   <i class="now-ui-icons design_image"></i>
-                  
+
                   <p>Pages
                      <b class="caret"></b>
                   </p>
