@@ -346,7 +346,7 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                   <div class="form-group">
                                       <label>Disk Image Name</label>
-                                      <input type="text" id="DataImageName" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
                                   </div>
                               </div>
 
