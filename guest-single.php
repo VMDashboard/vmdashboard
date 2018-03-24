@@ -123,6 +123,7 @@ if ($ret != "") {
 <script>
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);
+$.notify("Hello World");
 showNotification('top','right');
 </script>
 <?php
@@ -501,11 +502,9 @@ function snapshotDeleteWarning(linkURL) {
 
 function showNotification(from, align) {
     var	color = 'primary';
-
     	$.notify({
         	icon: "now-ui-icons ui-1_bell-53",
         	message: 'test'
-
         },{
             type: color,
             timer: 8000,
