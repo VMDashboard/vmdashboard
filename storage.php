@@ -7,13 +7,6 @@ require('navbar.php');
 </div>
 
 <div class="content">
-
-  <?php
-  $pools = $lv->get_storagepools();
-  for ($i = 0; $i < sizeof($pools); $i++) {
-    $info = $lv->get_storagepool_info($pools[$i]);
-  ?>
-
   <div class="row">
     <div class="col-md-12">
       <div class="card">
@@ -22,6 +15,13 @@ require('navbar.php');
           <hr>
         </div>
         <div class="card-body">
+
+          <?php
+          $pools = $lv->get_storagepools();
+          for ($i = 0; $i < sizeof($pools); $i++) {
+            $info = $lv->get_storagepool_info($pools[$i]);
+          ?>
+          
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
           <div class="table-responsive">
             <table class="table">
