@@ -117,6 +117,9 @@ require('navbar.php');
 <?php
 if ($ret != "") {
 ?>
+<!--  Notifications Plugin    -->
+<script src="assets/js/plugins/bootstrap-notify.js"></script>
+
 <script>
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);

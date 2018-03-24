@@ -44,5 +44,3 @@ $subaction = array_key_exists('subaction', $_GET) ? $_GET['subaction'] : false;
 ?>
 <!--  Plugin for Sweet Alert -->
 <script src="assets/js/plugins/sweetalert2.min.js"></script>
-<!--  Notifications Plugin    -->
-<script src="assets/js/plugins/bootstrap-notify.js"></script>
