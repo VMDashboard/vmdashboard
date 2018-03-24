@@ -121,7 +121,6 @@ require('navbar.php');
 if ($ret != "") {
 ?>
 <script>
-showNotification('top','right');
 var alertRet = "<?php echo $ret; ?>";
 swal(alertRet);
 </script>
