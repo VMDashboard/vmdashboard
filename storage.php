@@ -18,14 +18,14 @@ require('navbar.php');
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> <?php echo $pools[$i] . " Storage Pool"; ?></h4>
+          <h4 class="card-title"> <?php echo $pools[$i]; ?></h4>
+          Storage Pool
         </div>
         <div class="card-body">
 
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
-                <th>Name</th>
                 <th>Activity</th>
                 <th>State</th>
                 <th>Capacity</th>
@@ -40,7 +40,6 @@ require('navbar.php');
 
   $act = $info['active'] ? 'Active' : 'Inactive';
   echo "<tr>" .
-    "<td>{$pools[$i]}</td>" .
     "<td>$act</td>" .
     "<td>{$lv->translate_storagepool_state($info['state'])}</td>" .
     "<td>{$lv->format_size($info['capacity'], 2)}</td>" .
