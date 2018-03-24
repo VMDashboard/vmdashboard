@@ -7,6 +7,7 @@ require('header.php');
 if (isset($_POST['finish'])) {
 $domain_type = $_POST['domain_type'];
 $domain_name = $_POST['domain_name'];
+  $domain_name = str_replace(' ','',$domain_name); 
 $memory_unit = $_POST['memory_unit'];
 $memory = $_POST['memory'];
 $vcpu = $_POST['vcpu'];
@@ -38,7 +39,7 @@ if ($source_file_vda == "none") {
 if ($source_file_vda == "new") {
   $pool = "default";
   $volume_image_name = $_POST['new_target_dev'];
-    $volume_image_name = str_replace(' ','',$volume_image_name); 
+    $volume_image_name = str_replace(' ','',$volume_image_name);
   $volume_capacity = $_POST['new_volume_size'];
   $unit = $_POST['new_unit'];
   $volume_size = $_POST['new_volume_size'];
