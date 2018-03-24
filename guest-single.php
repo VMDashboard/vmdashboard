@@ -160,28 +160,28 @@ swal(alertRet);
               <h3>Actions</h3>
               <?php  if ($state == "running") { ?>
                 <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                  <i class="now-ui-icons tech_tv"></i> VNC Connection<br />
+                  <i class="fas fa-tv"></i> VNC Connection<br />
                 </a>
               <?php } ?>
 
               <?php if ($state == "shutoff") { ?>
                 <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="now-ui-icons media-1_button-power"></i> Power guest on<br />
+                  <i class="fas fa-power-off"></i> Power guest on<br />
                 </a>
               <?php } ?>
 
               <?php  if ($state == "running") { ?>
                 <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="now-ui-icons media-1_button-power"></i> Power guest off<br />
+                <i class="fas fa-power-off"></i> Power guest off<br />
                 </a>
                 <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="now-ui-icons media-1_button-pause"></i> Pause guest<br />
+                  <i class="fas fa-pause"></i> Pause guest<br />
                 </a>
               <?php } ?>
 
               <?php  if ($state == "paused") { ?>
                 <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="now-ui-icons media-1_button-play"></i> Resume guest<br />
+                  <i class="fas fa-play"></i> Resume guest<br />
                 </a>
               <?php } ?>
 
