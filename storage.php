@@ -3,8 +3,7 @@ require('header.php');
 require('navbar.php');
 ?>
 
-<div class="panel-header panel-header-sm">
-</div>
+<div class="panel-header panel-header-sm"></div>
 
 <div class="content">
   <div class="row">
@@ -16,6 +15,84 @@ require('navbar.php');
         </div>
         <div class="card-body">
 
+
+
+
+
+          <?php
+              if ($action == 'storage-pools') {
+                $msg = '';
+
+                if ($subaction == 'volume-delete') {
+                  if ((array_key_exists('confirm', $_GET)) && ($_GET['confirm'] == 'yes')) {
+                    $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+                  } else {
+                    $msg = "<table>" .
+                      "<tr>" .
+                      "<td colspan=\"2\">" .
+                      "<b>Do you really want to delete volume <i>".base64_decode($_GET['path'])."</i> ?</b><br/>" .
+                      "</td>" .
+                      "</tr>" .
+                      "<tr align=\"center\">" .
+                      "<td>" .
+                      "<a href=". $_SERVER['REQUEST_URI'] . "&amp;confirm=yes>Yes, delete it</a>" .
+                      "</td>" .
+                      "<td>" .
+                      "<a href=\"?action=".$action."\">No, go back</a>" .
+                      "</td>" .
+                      "</tr>" .
+                      "</table>" ;
+                  }
+
+                } else if ($subaction == 'volume-create') {
+                  if (array_key_exists('sent', $_POST)) {
+                    $msg = $lv->storagevolume_create($_GET['pool'], $_POST['name'], $_POST['capacity'], $_POST['allocation'], $_POST['type']) ?
+                      'Volume has been created successfully' : 'Cannot create volume';
+                  } else {
+                    $msg = "<h3>Create a new volume</h3><form method=\"POST\">" .
+                      "<table>" .
+                      "<tr>" .
+                      "<td>Volume name: </td>" .
+                      "<td><input type=\"text\" name=\"name\"></td>" .
+                      "</tr>" .
+                      "<tr>" .
+                      "<td>Capacity (e.g. 10M or 1G): </td>" .
+                      "<td><input type=\"text\" name=\"capacity\"></td>" .
+                      "</tr>" .
+                      "<tr>" .
+                      "<td>Allocation (e.g. 10M or 1G): </td>" .
+                      "<td><input type=\"text\" name=\"allocation\"></td>" .
+                      "</tr>" .
+                      "<tr>" .
+                      "<td>Format Type (e.g. qcow2 or raw): </td>" .
+                      "<td><input type=\"text\" name=\"type\" value=\"qcow2\"></td>" .
+                      "</tr>" .
+                      "<tr align=\"center\">" .
+                      "<td colspan=\"2\"><input type=\"submit\" value=\" Add storage volume \"></td>" .
+                      "</tr>" .
+                      "<input type=\"hidden\" name=\"sent\" value=\"1\" />" .
+                      "</table>" .
+                      "</form>";
+                  }
+                }
+          	     echo "<br/>";
+          		echo "<br/>";
+          		echo (strpos($msg, '<form')) ? $msg : '<pre>'.$msg.'</pre>';
+          		echo "<br/>";
+              echo "<br/>";
+          	 }
+
+?>
+
+
+
+
+
+
+
+
+
+
           <?php
           $pools = $lv->get_storagepools();
           for ($i = 0; $i < sizeof($pools); $i++) {
@@ -23,6 +100,9 @@ require('navbar.php');
           ?>
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
           <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create">Create new volume</a><br>
+
+          <div class="row">
+            <div class="col-md-4">
 
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           echo "Activity: " . $act . "<br />";
@@ -32,73 +112,11 @@ require('navbar.php');
           echo "Available: " . $lv->format_size($info['available'], 2) . "<br />";
           echo "Path: " . $info['path'] . "<br />";
           ?>
+            </div>
 
 
-<?php
-    if ($action == 'storage-pools') {
-      $msg = '';
-
-      if ($subaction == 'volume-delete') {
-        if ((array_key_exists('confirm', $_GET)) && ($_GET['confirm'] == 'yes')) {
-          $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
-        } else {
-          $msg = "<table>" .
-            "<tr>" .
-            "<td colspan=\"2\">" .
-            "<b>Do you really want to delete volume <i>".base64_decode($_GET['path'])."</i> ?</b><br/>" .
-            "</td>" .
-            "</tr>" .
-            "<tr align=\"center\">" .
-            "<td>" .
-            "<a href=". $_SERVER['REQUEST_URI'] . "&amp;confirm=yes>Yes, delete it</a>" .
-            "</td>" .
-            "<td>" .
-            "<a href=\"?action=".$action."\">No, go back</a>" .
-            "</td>" .
-            "</tr>" .
-            "</table>" ;
-        }
-
-      } else if ($subaction == 'volume-create') {
-        if (array_key_exists('sent', $_POST)) {
-          $msg = $lv->storagevolume_create($_GET['pool'], $_POST['name'], $_POST['capacity'], $_POST['allocation'], $_POST['type']) ?
-            'Volume has been created successfully' : 'Cannot create volume';
-        } else {
-          $msg = "<h3>Create a new volume</h3><form method=\"POST\">" .
-            "<table>" .
-            "<tr>" .
-            "<td>Volume name: </td>" .
-            "<td><input type=\"text\" name=\"name\"></td>" .
-            "</tr>" .
-            "<tr>" .
-            "<td>Capacity (e.g. 10M or 1G): </td>" .
-            "<td><input type=\"text\" name=\"capacity\"></td>" .
-            "</tr>" .
-            "<tr>" .
-            "<td>Allocation (e.g. 10M or 1G): </td>" .
-            "<td><input type=\"text\" name=\"allocation\"></td>" .
-            "</tr>" .
-            "<tr>" .
-            "<td>Format Type (e.g. qcow2 or raw): </td>" .
-            "<td><input type=\"text\" name=\"type\" value=\"qcow2\"></td>" .
-            "</tr>" .
-            "<tr align=\"center\">" .
-            "<td colspan=\"2\"><input type=\"submit\" value=\" Add storage volume \"></td>" .
-            "</tr>" .
-            "<input type=\"hidden\" name=\"sent\" value=\"1\" />" .
-            "</table>" .
-            "</form>";
-        }
-      }
-	     echo "<br/>";
-		echo "<br/>";
-		echo (strpos($msg, '<form')) ? $msg : '<pre>'.$msg.'</pre>';
-		echo "<br/>";
-    echo "<br/>";
-	 }
-
-
-
+<div class="col-md-8">
+  <?php
 
 //sub table, will need responsive info added
 
@@ -135,12 +153,14 @@ require('navbar.php');
         }
 
 		?>
+  </div>
+</div>
 
 
 
 
 
-                                
+
                             </div>
                         </div>
                     </div>
