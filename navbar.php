@@ -40,70 +40,6 @@
             </a>
           </li>
 
-
-
-
-          <li>
-              <a data-toggle="collapse" href="guests.php">
-                  <i class="now-ui-icons design_image"></i>
-
-                  <p>Pages
-                     <b class="caret"></b>
-                  </p>
-
-              </a>
-
-              <div class="collapse" id="pagesExamples">
-                  <ul class="nav">
-                      <li>
-                          <a href="../pages/pricing.html">
-                              <span class="sidebar-mini-icon">P</span>
-                              <span class="sidebar-normal">Pricing</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="../pages/timeline.html">
-                              <span class="sidebar-mini-icon">T</span>
-                              <span class="sidebar-normal">Timeline</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="../pages/login.html">
-                              <span class="sidebar-mini-icon">L</span>
-                              <span class="sidebar-normal">Login</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="../pages/register.html">
-                              <span class="sidebar-mini-icon">R</span>
-                              <span class="sidebar-normal">Register</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="../pages/lock.html">
-                              <span class="sidebar-mini-icon">LS</span>
-                              <span class="sidebar-normal">Lock Screen</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a href="../pages/user.html">
-                              <span class="sidebar-mini-icon">UP</span>
-                              <span class="sidebar-normal">User Profile</span>
-                          </a>
-                      </li>
-                  </ul>
-              </div>
-          </li>
-
-
-
-
-
-
-
-
-
-
         </ul>
       </div>
     </div>
@@ -128,7 +64,7 @@
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-
+            
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link" href="#">
