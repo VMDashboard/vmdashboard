@@ -224,7 +224,7 @@ $random_mac = $lv->generate_random_mac_addr();
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Virtual CPUs</label>
-                                    <input type="text" value="1" class="form-control" name="vcpu"/>
+                                    <input type="number" value="1" class="form-control" name="vcpu"/>
                                 </div>
                             </div>
 
@@ -244,9 +244,9 @@ $random_mac = $lv->generate_random_mac_addr();
                                 <div class="form-group">
                                     <label>Memory Unit</label>
                                     <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit">
-                                        <option value="KiB"> KiB </option>
-                                        <option value="MiB" selected="selected"> MiB </option>
-                                        <option value="GiB"> GiB </option>
+                                        <option value="KiB"> KB </option>
+                                        <option value="MiB" selected="selected"> MB </option>
+                                        <option value="GiB"> GB </option>
                                     </select>
                                 </div>
                             </div>
