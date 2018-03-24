@@ -22,7 +22,7 @@ require('navbar.php');
             $info = $lv->get_storagepool_info($pools[$i]);
           ?>
           <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
-          <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo {$pools[$i]}; ?>&amp;subaction=volume-create">Create new volume</a>
+          <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create">Create new volume</a>
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           echo "Activity: " . $act . "<br />";
           echo "State: " . $lv->translate_storagepool_state($info['state']) . "<br />";
