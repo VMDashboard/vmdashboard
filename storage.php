@@ -20,10 +20,9 @@ require('navbar.php');
         <div class="card-header">
           <h2 class="card-title">Storage Pools</h2>
           <hr>
-          <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
         </div>
         <div class="card-body">
-
+          <h4>Storage Pool: <font style="color:#f96332;"><?php echo $pools[$i]; ?></font></h4>
           <div class="table-responsive">
             <table class="table">
               <thead class=" text-primary">
@@ -38,7 +37,6 @@ require('navbar.php');
               <tbody>
 
 <?php
-
   $act = $info['active'] ? 'Active' : 'Inactive';
   echo "<tr>" .
     "<td>$act</td>" .
