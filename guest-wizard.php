@@ -197,12 +197,7 @@ $random_mac = $lv->generate_random_mac_addr();
                     Networking
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#display" data-toggle="tab">
-                    <i class="now-ui-icons tech_tv"></i>
-                    Display
-                  </a>
-                </li>
+                
               </ul>
             </div>
           </div>
