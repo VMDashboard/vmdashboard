@@ -7,17 +7,11 @@ $xml = "
 <pool type='dir'>
   <name>test</name>
   <uuid></uuid>
-  <capacity unit='bytes'>538628128768</capacity>
-  <allocation unit='bytes'>74496483328</allocation>
-  <available unit='bytes'>464131645440</available>
   <source>
   </source>
   <target>
-    <path>/home/matthew</path>
+    <path>/root</path>
     <permissions>
-      <mode>0711</mode>
-      <owner>0</owner>
-      <group>0</group>
     </permissions>
   </target>
 </pool>";
