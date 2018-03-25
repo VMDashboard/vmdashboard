@@ -7,7 +7,8 @@ require('header.php');
 if (isset($_POST['finish'])) {
 $domain_type = $_POST['domain_type'];
 $domain_name = $_POST['domain_name'];
-  $domain_name = str_replace(' ','',$domain_name);
+//Just in case someone entered in a domain name with spaces, lets remove them
+$domain_name = str_replace(' ','',$domain_name);
 $memory_unit = $_POST['memory_unit'];
 $memory = $_POST['memory'];
 $vcpu = $_POST['vcpu'];
@@ -197,7 +198,7 @@ $random_mac = $lv->generate_random_mac_addr();
                     Networking
                   </a>
                 </li>
-                
+
               </ul>
             </div>
           </div>
