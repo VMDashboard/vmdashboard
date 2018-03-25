@@ -11,7 +11,7 @@ require('navbar.php');
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Storage Pools</h4>
-          <a href="storage.php">Create new storage pool </a>
+          <a href="storage.php"><i class="fas fa-plus"></i>Create new storage pool </a>
         </div>
         <div class="card-body">
 
