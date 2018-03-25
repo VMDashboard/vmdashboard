@@ -5,7 +5,7 @@ require('navbar.php');
 
 $xml = "
 <pool type='dir'>
-  <name>default</name>
+  <name>test</name>
   <uuid>590c3fdc-a6bb-48c7-aad4-aa39802fba8d</uuid>
   <capacity unit='bytes'>538628128768</capacity>
   <allocation unit='bytes'>74496483328</allocation>
