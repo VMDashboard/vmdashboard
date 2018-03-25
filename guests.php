@@ -11,7 +11,7 @@ require('navbar.php');
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Virtual Machine Guests</h4>
-            <button onclick="window.location.href='guest-wizard.php'" class="btn btn-primary btn-round btn-simple">Create new guest </button>
+            <i class="fas fa-plus"></i><a href="guest-wizard.php">Create new guest </a>
           </div>
           <div class="card-body">
 
