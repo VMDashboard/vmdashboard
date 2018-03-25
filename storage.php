@@ -5,9 +5,20 @@ require('navbar.php');
 
 $xml = "
 <pool type='dir'>
-  <name>default2</name>
+  <name>default</name>
+  <uuid>590c3fdc-a6bb-48c7-aad4-aa39802fba8d</uuid>
+  <capacity unit='bytes'>538628128768</capacity>
+  <allocation unit='bytes'>74496483328</allocation>
+  <available unit='bytes'>464131645440</available>
+  <source>
+  </source>
   <target>
-    <path>/home/matthew</path>
+    <path>/var/lib/libvirt/test</path>
+    <permissions>
+      <mode>0711</mode>
+      <owner>0</owner>
+      <group>0</group>
+    </permissions>
   </target>
 </pool>";
 
