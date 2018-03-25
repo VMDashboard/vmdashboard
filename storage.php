@@ -3,7 +3,7 @@ require('header.php');
 require('navbar.php');
 
 
-$ xml = "
+$xml = "
 <pool type='dir'>
   <name>default2</name>
   <target>
