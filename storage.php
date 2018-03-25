@@ -11,7 +11,8 @@ $xml = "
   </target>
 </pool>";
 
-libvirt_storagepool_define_xml($conn, $xml);
+$tmp = libvirt_storagepool_define_xml($conn, $xml);
+var_dump($tmp);
 ?>
 
 <div class="panel-header panel-header-sm"></div>
