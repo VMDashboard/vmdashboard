@@ -71,7 +71,7 @@ require('navbar.php');
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label>Unit size</label>
-                      <select class="selectpicker" data-style="btn btn-primary btn-round" title="Select Unit Size" name="unit">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="unit">
                         <option value="M">MB</option>
                         <option value="G" selected>GB</option>
                       </select>
@@ -81,7 +81,7 @@ require('navbar.php');
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>Driver type</label>
-                      <select class="selectpicker" data-style="btn btn-primary btn-round" title="Select volume type" name="driver_type">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
                         <option value="qcow2" selected>qcow2</option>
                         <option value="raw">raw</option>
                       </select>
