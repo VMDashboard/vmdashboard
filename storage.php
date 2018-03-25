@@ -3,6 +3,39 @@ require('header.php');
 require('navbar.php');
 ?>
 
+
+<?php
+if ($action == 'volume-delete') {
+  $msg = '';
+  $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+}
+if ($msg != "") {
+?>
+<script>
+var alertRet = "<?php echo $msg; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
+
+<script>
+function volumeDeleteWarning(linkURL) {
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete the storage volume',
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+</script>
+
+
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="row">
@@ -13,67 +46,7 @@ require('navbar.php');
         </div>
         <div class="card-body">
 
-        <?php
-          if ($action == 'storage-pools') {
-            $msg = '';
-              if ($subaction == 'volume-delete') {
-                if ((array_key_exists('confirm', $_GET)) && ($_GET['confirm'] == 'yes')) {
-                  $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
-                } else {
-                  $msg = "<table>" .
-                    "<tr>" .
-                    "<td colspan=\"2\">" .
-                    "<b>Do you really want to delete volume <i>".base64_decode($_GET['path'])."</i> ?</b><br/>" .
-                    "</td>" .
-                    "</tr>" .
-                    "<tr align=\"center\">" .
-                    "<td>" .
-                    "<a href=". $_SERVER['REQUEST_URI'] . "&amp;confirm=yes>Yes, delete it</a>" .
-                    "</td>" .
-                    "<td>" .
-                    "<a href=\"?action=".$action."\">No, go back</a>" .
-                    "</td>" .
-                    "</tr>" .
-                    "</table>" ;
-                }
-              } else if ($subaction == 'volume-create') {
-                if (array_key_exists('sent', $_POST)) {
-                  $msg = $lv->storagevolume_create($_GET['pool'], $_POST['name'], $_POST['capacity'], $_POST['allocation'], $_POST['type']) ?
-                    'Volume has been created successfully' : 'Cannot create volume';
-                } else {
-                  $msg = "<h3>Create a new volume</h3><form method=\"POST\">" .
-                    "<table>" .
-                    "<tr>" .
-                    "<td>Volume name: </td>" .
-                    "<td><input type=\"text\" name=\"name\"></td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td>Capacity (e.g. 10M or 1G): </td>" .
-                    "<td><input type=\"text\" name=\"capacity\"></td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td>Allocation (e.g. 10M or 1G): </td>" .
-                    "<td><input type=\"text\" name=\"allocation\"></td>" .
-                    "</tr>" .
-                    "<tr>" .
-                    "<td>Format Type (e.g. qcow2 or raw): </td>" .
-                    "<td><input type=\"text\" name=\"type\" value=\"qcow2\"></td>" .
-                    "</tr>" .
-                    "<tr align=\"center\">" .
-                    "<td colspan=\"2\"><input type=\"submit\" value=\" Add storage volume \"></td>" .
-                    "</tr>" .
-                    "<input type=\"hidden\" name=\"sent\" value=\"1\" />" .
-                    "</table>" .
-                    "</form>";
-                }
-              }
-          	  echo "<br/>";
-          		echo "<br/>";
-          		echo (strpos($msg, '<form')) ? $msg : '<pre>'.$msg.'</pre>';
-          		echo "<br/>";
-              echo "<br/>";
-            }
-            ?>
+
 
 
           <?php
@@ -126,13 +99,17 @@ require('navbar.php');
                          "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2)}</td>" .
                          "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                          "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
-                         "<td><a href=\"?action=storage-pools&amp;path=$path&amp;subaction=volume-delete\">Delete volume</a></td>" .
+                         "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete volume</a></td>" .
                          "</tr>";
                 }
                 echo "</tbody></table></div>";
             }
         }
 		?>
+                  
+
+
+
             </div>
           </div>
         </div>
