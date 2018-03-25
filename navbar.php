@@ -5,8 +5,8 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="https://openvm.tech" class="simple-text logo-normal">
-          <img src="assets/img/logo3.png" width="100%">
+        <a href="#" class="simple-text logo-normal">
+          <img src="assets/img/logoWhiteV.png" width="100%">
         </a>
       </div>
 
