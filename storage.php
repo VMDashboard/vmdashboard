@@ -1,6 +1,17 @@
 <?php
 require('header.php');
 require('navbar.php');
+
+
+$ xml = "
+<pool type='dir'>
+  <name>default2</name>
+  <target>
+    <path>/home/matthew</path>
+  </target>
+</pool>";
+
+libvirt_storagepool_define_xml($conn, $xml);
 ?>
 
 <div class="panel-header panel-header-sm"></div>
