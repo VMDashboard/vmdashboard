@@ -13,7 +13,7 @@ $xml = "
   <source>
   </source>
   <target>
-    <path>/var/lib/libvirt/test</path>
+    <path>/home/matthew</path>
     <permissions>
       <mode>0711</mode>
       <owner>0</owner>
