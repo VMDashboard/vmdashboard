@@ -6,7 +6,7 @@
     -->
       <div class="logo">
         <a href="#" class="simple-text logo-normal">
-          <img src="assets/img/logoWhiteV.png" width="100%">
+          <img src="assets/img/logoWhiteLetters.png" width="100%">
         </a>
       </div>
 
