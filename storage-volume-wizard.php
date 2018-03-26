@@ -86,7 +86,7 @@ function newExtenstion(f) {
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label>Volume size</label>
-                      <input type="number" class="form-control" name="volume_size" />
+                      <input type="number" class="form-control" name="volume_size" min="1" value="40" />
                     </div>
                   </div>
 

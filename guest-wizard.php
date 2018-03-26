@@ -351,7 +351,7 @@ $random_mac = $lv->generate_random_mac_addr();
                               <div class="col-sm-6 diskChange" id="new" style="display:none;">
                                 <div class="form-group">
                                   <label>Volume size</label>
-                                  <input type="number" value="1" class="form-control" name="new_volume_size" min="1" />
+                                  <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
                                 </div>
                               </div>
 
