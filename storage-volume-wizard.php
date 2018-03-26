@@ -30,7 +30,7 @@ function newExtenstion(f) {
   diskName = diskName.replace(/\s+/g, '');
   var n = diskName.lastIndexOf(".");
   var noExt = n > -1 ? diskName.substr(0, n) : diskName;
-  var driverType = f.new_driver_type.value;
+  var driverType = f.driver_type.value;
   if (driverType === "qcow2"){
     var ext = ".qcow2";
     var fullDiskName = noExt.concat(ext);
