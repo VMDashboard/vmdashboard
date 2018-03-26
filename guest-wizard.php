@@ -21,6 +21,8 @@ $clock_offset = $_POST['clock_offset'];
 $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
 $driver_name_vda = $_POST['driver_name_vda'];
+//Just in case someone entered in a disk name with spaces, lets remove them
+$driver_name_vda = str_replace(' ','',$driver_name_vda);
 $driver_type_vda = $_POST['driver_type_vda'];
 $source_file_vda = $_POST['source_file_vda'];
 $target_dev_vda = $_POST['target_dev_vda'];

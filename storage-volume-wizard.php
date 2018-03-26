@@ -9,6 +9,8 @@ $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 if (isset($_POST['finish'])) {
   $pool = $_POST['pool'];
   $volume_image_name = $_POST['volume_image_name'];
+  //Just in case someone entered in a volume name with spaces, lets remove them
+  $volume_image_name = str_replace(' ','',$volume_image_name);
   $volume_capacity = $_POST['volume_size'];
   $volume_size = $_POST['volume_size'];
   $unit = $_POST['unit'];
