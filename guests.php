@@ -34,15 +34,16 @@ if ($action) {
     $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
   }
 }
-?>
 
 
-<?php if ($ret != "") { ?>
+if ($ret != "") {
+echo "
 <script>
-var alertRet = "<?php echo $ret; ?>";
+var alertRet = '$ret'
 swal(alertRet);
-</script>
-<?php } ?>
+</script>";
+}
+?>
 
 
 <div class="panel-header panel-header-sm"></div>
