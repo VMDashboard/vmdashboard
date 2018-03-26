@@ -4,7 +4,7 @@
                         <ul>
                             <li>
                                 <a href="https://openvm.tech">
-                                    openVM&trade;
+                                    openVM
                                 </a>
                             </li>
                             <li>
