@@ -24,6 +24,28 @@ if (isset($_POST['finish'])) {
 require('navbar.php');
 ?>
 
+<script>
+function newExtenstion(f) {
+  var diskName = f.image_volume_name.value;
+  diskName = diskName.replace(/\s+/g, '');
+  var n = diskName.lastIndexOf(".");
+  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
+  var driverType = f.new_driver_type.value;
+  if (driverType === "qcow2"){
+    var ext = ".qcow2";
+    var fullDiskName = noExt.concat(ext);
+    f.image_volume_name.value = fullDiskName;
+  }
+  if (driverType === "raw"){
+    var ext = ".img";
+    var fullDiskName = noExt.concat(ext);
+    f.image_volume_name.value = fullDiskName;
+  }
+}
+</script>
+
+
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="col-md-10 mr-auto ml-auto">
@@ -57,7 +79,7 @@ require('navbar.php');
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Volume image name</label>
-                      <input type="text" placeholder="Ex. volumename.qcow2 or volumename.img" class="form-control" name="volume_image_name" />
+                      <input type="text" value="newVolume.qcow2" placeholder="Enter name for new volume image" class="form-control" name="volume_image_name" />
                     </div>
                   </div>
 
@@ -78,10 +100,10 @@ require('navbar.php');
                     </div>
                   </div>
 
-                  <div class="col-sm-5">
+                  <div class="col-sm-10">
                     <div class="form-group">
                       <label>Driver type</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
+                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
                         <option value="qcow2" selected>qcow2</option>
                         <option value="raw">raw</option>
                       </select>
