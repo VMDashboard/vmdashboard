@@ -9,13 +9,22 @@ if ($action) {
 
 	if ($action == 'domain-start') {
     $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
-  } else if ($action == 'domain-pause') {
+  }
+  if ($action == 'domain-pause') {
     $ret = $lv->domain_suspend($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
-  } else if ($action == 'domain-resume') {
+  }
+  if ($action == 'domain-resume') {
     $ret = $lv->domain_resume($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
-  } else if ($action == 'domain-stop') {
+  }
+  if ($action == 'domain-stop') {
     $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
-  } else if ($action == 'domain-destroy') {
+    $actioninfo = $lv->domain_get_info($dom);
+    $actionstate = $lv->domain_state_translate($actioninfo['state']);
+    if ($actionstate == "running"){
+      $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
+    }
+  }
+  if ($action == 'domain-destroy') {
     $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
   }
 }
