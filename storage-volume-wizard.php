@@ -26,7 +26,7 @@ require('navbar.php');
 
 <script>
 function newExtenstion(f) {
-  var diskName = f.image_volume_name.value;
+  var diskName = f.volume_image_name.value;
   diskName = diskName.replace(/\s+/g, '');
   var n = diskName.lastIndexOf(".");
   var noExt = n > -1 ? diskName.substr(0, n) : diskName;
@@ -34,12 +34,12 @@ function newExtenstion(f) {
   if (driverType === "qcow2"){
     var ext = ".qcow2";
     var fullDiskName = noExt.concat(ext);
-    f.image_volume_name.value = fullDiskName;
+    f.volume_image_name.value = fullDiskName;
   }
   if (driverType === "raw"){
     var ext = ".img";
     var fullDiskName = noExt.concat(ext);
-    f.image_volume_name.value = fullDiskName;
+    f.volume_image_name.value = fullDiskName;
   }
 }
 </script>
