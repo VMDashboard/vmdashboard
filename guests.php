@@ -1,21 +1,26 @@
 <?php
 require('header.php');
 require('navbar.php');
-?>
 
-<?php
+$uuid = $_GET['uuid'];
+$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
+$dom = $lv->get_domain_object($domName);
+
 if ($action) {
   $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 
 	if ($action == 'domain-start') {
     $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
   }
+
   if ($action == 'domain-pause') {
-    $ret = $lv->domain_suspend($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
+    $ret = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
   }
+
   if ($action == 'domain-resume') {
-    $ret = $lv->domain_resume($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
+    $ret = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
   }
+
   if ($action == 'domain-stop') {
     $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
     $actioninfo = $lv->domain_get_info($dom);
@@ -24,6 +29,7 @@ if ($action) {
       $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
     }
   }
+
   if ($action == 'domain-destroy') {
     $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
   }
