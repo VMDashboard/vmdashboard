@@ -9,24 +9,6 @@ $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
 
 
-// Setting up VNC connection information. tokens.list needs to have www-data ownership or 777 permissions
-$liststring = "";
-$listarray = $lv->get_domains();
-foreach ($listarray as $listname) {
-  $listdom = $lv->get_domain_object($listname);
-  $listinfo = libvirt_domain_get_info($listdom);
-  //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delay state status
-  $liststate = $lv->domain_state_translate($listinfo['state']);
-  if ($liststate == "running") {
-    $listdomuuid = libvirt_domain_get_uuid_string($listdom);
-    $listvnc = $lv->domain_get_vnc_port($listdom);
-    $liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
-  }
-}
-$listfile = "tokens.list";
-$list = file_put_contents($listfile, $liststring);
-
-
 // Domain Actions
 if ($action == 'domain-start') {
   $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
@@ -124,6 +106,23 @@ swal(alertRet);
 </script>
 <?php
 }
+
+// Setting up VNC connection information. tokens.list needs to have www-data ownership or 777 permissions
+$liststring = "";
+$listarray = $lv->get_domains();
+foreach ($listarray as $listname) {
+  $listdom = $lv->get_domain_object($listname);
+  $listinfo = libvirt_domain_get_info($listdom);
+  //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delay state status
+  $liststate = $lv->domain_state_translate($listinfo['state']);
+  if ($liststate == "running") {
+    $listdomuuid = libvirt_domain_get_uuid_string($listdom);
+    $listvnc = $lv->domain_get_vnc_port($listdom);
+    $liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
+  }
+}
+$listfile = "tokens.list";
+$list = file_put_contents($listfile, $liststring);
 ?>
 
 
