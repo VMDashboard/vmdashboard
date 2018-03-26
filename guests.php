@@ -42,7 +42,6 @@ echo "
 var alertRet = '$ret'
 swal(alertRet);
 </script>";
-$ret = "";
 }
 ?>
 
