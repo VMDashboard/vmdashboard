@@ -1,0 +1,15 @@
+---
+filter:
+    excluded_paths:
+        - bin/*
+        - docker/*
+        - tests/*
+
+checks:
+    php:
+        code_rating: true
+
+tools:
+    external_code_coverage:
+        timeout: 300
+    php_code_coverage: false
