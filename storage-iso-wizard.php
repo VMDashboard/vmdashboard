@@ -47,14 +47,13 @@ if (isset($_POST['finish'])) {
 
 require('navbar.php');
 
-
-if ($ret != "") {
+//if ($ret != "") {
 echo "
 <script>
 var alertRet = '$ret $file_type'
 swal(alertRet);
 </script>";
-}
+//}
 
 
 
