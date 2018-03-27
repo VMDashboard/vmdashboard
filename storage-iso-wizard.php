@@ -8,13 +8,13 @@ $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
   $pool = $_POST['pool'];
-  $volume_image_name = $_POST['volume_image_name'];
+  //$volume_image_name = $_POST['volume_image_name'];
   //Just in case someone entered in a volume name with spaces, lets remove them
-  $volume_image_name = str_replace(' ','',$volume_image_name);
-  $volume_capacity = $_POST['volume_size'];
-  $volume_size = $_POST['volume_size'];
-  $unit = $_POST['unit'];
-  $driver_type = $_POST['driver_type'];
+  //$volume_image_name = str_replace(' ','',$volume_image_name);
+  //$volume_capacity = $_POST['volume_size'];
+  //$volume_size = $_POST['volume_size'];
+  //$unit = $_POST['unit'];
+  //$driver_type = $_POST['driver_type'];
   $original_page = $_POST['original_page'];
 
 
@@ -49,7 +49,7 @@ if (isset($_POST['finish'])) {
   swal(alertRet);
   </script>";
   }
-  
+
 
 
   //header('Location: ' . $original_page);
@@ -61,6 +61,18 @@ if (isset($_POST['finish'])) {
 
 
 require('navbar.php');
+
+
+if ($ret != "") {
+echo "
+<script>
+var alertRet = '$ret $file_type'
+swal(alertRet);
+</script>";
+}
+
+
+
 ?>
 
 <script>
