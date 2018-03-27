@@ -49,7 +49,7 @@ if (isset($_POST['finish'])) {
   swal(alertRet);
   </script>";
   }
-  ?>
+  
 
 
   //header('Location: ' . $original_page);
