@@ -120,6 +120,8 @@ function newExtenstion(f) {
 	                       <span class="fileinput-exists">Change</span>
                          <input type="file" name="fileToUpload" id="fileToUpload" data-style="btn btn-plain btn-round"/>
                       </span>
+                      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
+                        <i class="fa fa-times"></i> Remove</a>
                     </div>
                   </div>
 
