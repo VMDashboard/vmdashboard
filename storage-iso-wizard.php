@@ -130,23 +130,13 @@ function newExtenstion(f) {
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Select ISO file to upload</label>
-                      <input type="file" name="fileToUpload" id="fileToUpload" data-style="btn btn-plain btn-round"/>
+                      <span class="btn btn-raised btn-round btn-default btn-file">
+	                       <span class="fileinput-new">Select ISO</span>
+	                       <span class="fileinput-exists">Change</span>
+                         <input type="file" name="fileToUpload" id="fileToUpload" data-style="btn btn-plain btn-round"/>
+                      </span>
                     </div>
                   </div>
-
-
-
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <label>Driver type</label>
-                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
-                        <option value="qcow2" selected>qcow2</option>
-                        <option value="raw">raw</option>
-                      </select>
-                    </div>
-                  </div>
-
-
 
 
                   <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="original_page"/>
