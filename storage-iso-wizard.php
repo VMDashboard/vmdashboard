@@ -40,24 +40,9 @@ if (isset($_POST['finish'])) {
   //Time to do the uploading
   $ret = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) ? "success" : "failed";
 
-
-
-  if ($ret != "") {
-  echo "
-  <script>
-  var alertRet = '$ret $file_type'
-  swal(alertRet);
-  </script>";
-  }
-
-
-
   //header('Location: ' . $original_page);
   //exit;
 }
-
-
-
 
 
 require('navbar.php');
