@@ -42,7 +42,14 @@ if (isset($_POST['finish'])) {
 
 
 
-
+  if ($ret != "") {
+  echo "
+  <script>
+  var alertRet = '$ret $file_type'
+  swal(alertRet);
+  </script>";
+  }
+  ?>
 
 
   //header('Location: ' . $original_page);
