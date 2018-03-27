@@ -17,33 +17,39 @@ if (isset($_POST['finish'])) {
   $driver_type = $_POST['driver_type'];
   $original_page = $_POST['original_page'];
 
-  $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
-  $msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-  header('Location: ' . $original_page);
-  exit;
+
+
+  //Location where uploaded images go
+  $target_dir = "/var/lib/libvirt/images";
+  //Filepath for uploaded image
+  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+  //Determine the file extension
+  $target_file_extension = pathinfo($target_file,PATHINFO_EXTENSION);
+  //Check for file type
+  $finfo = finfo_open(FILEINFO_MIME_TYPE);
+  $file_type = finfo_file($finfo, $_FILES["fileToUpload"]["tmp_name"]);
+
+  //Check for duplicate file names
+  if (file_exists($target_file)){
+  	$msg = "A file by that name already exists";
+  }
+  //Check file size restriction
+  if ($_FILES["fileToUpload"]["size"] > 2000000){
+  	$msg = "You file was too big";
+  }
+  //Time to do the uploading
+  $ret = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) ? "success" : "failed";
+
+
+
+
+
+
+  //header('Location: ' . $original_page);
+  //exit;
 }
 
 
-//Location where uploaded images go
-$target_dir = "/var/lib/libvirt/images";
-//Filepath for uploaded image
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-//Determine the file extension
-$target_file_extension = pathinfo($target_file,PATHINFO_EXTENSION);
-//Check for file type
-$finfo = finfo_open(FILEINFO_MIME_TYPE);
-$file_type = finfo_file($finfo, $_FILES["fileToUpload"]["tmp_name"]);
-
-//Check for duplicate file names
-if (file_exists($target_file)){
-	$msg = "A file by that name already exists";
-}
-//Check file size restriction
-if ($_FILES["fileToUpload"]["size"] > 2000000){
-	$msg = "You file was too big";
-}
-//Time to do the uploading
-$ret = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) ? "success" : "failed";
 
 
 
@@ -101,29 +107,15 @@ function newExtenstion(f) {
               <div class="tab-pane fade" id="storage">
                 <h5 class="info-text"> New Volume Image </h5>
                 <div class="row justify-content-center">
+
                   <div class="col-sm-10">
                     <div class="form-group">
-                      <label>Volume image name</label>
-                      <input type="text" value="newVolume.qcow2" placeholder="Enter name for new volume image" class="form-control" name="volume_image_name" />
-                    </div>
-                  </div>
-
-                  <div class="col-sm-6">
-                    <div class="form-group">
                       <label>Select ISO file to upload</label>
-                      <input type="file" name="fileToUpload" id="fileToUpload" />
+                      <input type="file" name="fileToUpload" id="fileToUpload" data-style="btn btn-plain btn-round"/>
                     </div>
                   </div>
 
-                  <div class="col-sm-4">
-                    <div class="form-group">
-                      <label>Unit size</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="unit">
-                        <option value="M">MB</option>
-                        <option value="G" selected>GB</option>
-                      </select>
-                    </div>
-                  </div>
+
 
                   <div class="col-sm-10">
                     <div class="form-group">
