@@ -23,6 +23,30 @@ if (isset($_POST['finish'])) {
   exit;
 }
 
+
+//Location where uploaded images go
+$target_dir = "/var/lib/libvirt/images";
+//Filepath for uploaded image
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+//Determine the file extension
+$target_file_extension = pathinfo($target_file,PATHINFO_EXTENSION);
+//Check for file type
+$finfo = finfo_open(FILEINFO_MIME_TYPE);
+$file_type = finfo_file($finfo, $_FILES["fileToUpload"]["tmp_name"]);
+
+//Check for duplicate file names
+if (file_exists($target_file)){
+	$msg = "A file by that name already exists";
+}
+//Check file size restriction
+if ($_FILES["fileToUpload"]["size"] > 2000000){
+	$msg = "You file was too big";
+}
+//Time to do the uploading
+$ret = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) ? "success" : "failed";
+
+
+
 require('navbar.php');
 ?>
 
@@ -47,25 +71,24 @@ function newExtenstion(f) {
 </script>
 
 
-
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="col-md-10 mr-auto ml-auto">
     <!--      Wizard container        -->
     <div class="wizard-container">
       <div class="card card-wizard" data-color="primary" id="wizardProfile">
-        <form action="<?php echo $_SERVER['PHP_SELF'] . '?uuid=' . $uuid;?>" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF'] . '?uuid=' . $uuid;?>" method="post" enctype="multipart/form-data">
         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
           <div class="card-header text-center" data-background-color="orange">
-            <h3 class="card-title">Add new disk volume image</h3>
-            <h5 class="description">This form will allow you to create a new disk volume image.</h5>
+            <h3 class="card-title">Add new iso image</h3>
+            <h5 class="description">This form will allow you to upload a new iso image.</h5>
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
                   <a class="nav-link" href="#storage" data-toggle="tab">
                     <i class="fas fa-database"></i>
-                        Storage
+                        ISO Image Upload
                   </a>
                 </li>
               </ul>
@@ -87,8 +110,8 @@ function newExtenstion(f) {
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Volume size</label>
-                      <input type="number" class="form-control" name="volume_size" min="1" value="40" />
+                      <label>Select ISO file to upload</label>
+                      <input type="file" name="fileToUpload" id="fileToUpload" />
                     </div>
                   </div>
 
