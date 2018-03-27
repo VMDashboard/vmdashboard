@@ -114,14 +114,11 @@ function newExtenstion(f) {
 
                   <div class="col-sm-10">
                     <div class="form-group">
-                      <label>Select ISO file to upload</label>
-                      <span class="btn btn-raised btn-round btn-default btn-file">
-	                       <span class="fileinput-new">Select ISO</span>
-	                       <span class="fileinput-exists">Change</span>
-                         <input type="file" name="fileToUpload" id="fileToUpload" data-style="btn btn-plain btn-round"/>
-                      </span>
-                      <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput">
-                        <i class="fa fa-times"></i> Remove</a>
+                      <div class="custom-file">
+                        <input type="file" name="fileToUpload" class="custom-file-input" id="validatedCustomFile" required>
+                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                        <div class="invalid-feedback">Example invalid custom file feedback</div>
+                      </div>
                     </div>
                   </div>
 
