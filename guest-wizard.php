@@ -1,20 +1,19 @@
 <?php
 require('header.php');
-?>
 
-<?php
-//will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
+//will redirect to guests.php.
 if (isset($_POST['finish'])) {
-$domain_type = $_POST['domain_type'];
-$domain_name = $_POST['domain_name'];
-//Just in case someone entered in a domain name with spaces, lets remove them
-$domain_name = str_replace(' ','',$domain_name);
-$memory_unit = $_POST['memory_unit'];
-$memory = $_POST['memory'];
-$vcpu = $_POST['vcpu'];
-$os_arch = $_POST['os_arch'];
-$os_type = $_POST['os_type'];
-$clock_offset = $_POST['clock_offset'];
+  $domain_type = $_POST['domain_type'];
+  $domain_name = $_POST['domain_name'];
+  //Just in case someone entered in a domain name with spaces, lets remove them
+  $domain_name = str_replace(' ','',$domain_name);
+  $domain_name = filter_var($domain_name, FILTER_SANITIZE_STRING);
+  $memory_unit = $_POST['memory_unit'];
+  $memory = $_POST['memory'];
+  $vcpu = $_POST['vcpu'];
+  $os_arch = $_POST['os_arch'];
+  $os_type = $_POST['os_type'];
+  $clock_offset = $_POST['clock_offset'];
 
 
 //Hard drive information
