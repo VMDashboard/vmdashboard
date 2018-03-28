@@ -1,13 +1,20 @@
 <?php
 require('header.php');
 
+function clean_name_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  $data = str_replace(' ','',$data);
+  $data = filter_var($data, FILTER_SANITIZE_STRING);
+  return $data;
+}
+
+
 //will redirect to guests.php.
 if (isset($_POST['finish'])) {
   $domain_type = $_POST['domain_type'];
-  $domain_name = $_POST['domain_name'];
-  //Just in case someone entered in a domain name with spaces, lets remove them
-  $domain_name = str_replace(' ','',$domain_name);
-  $domain_name = filter_var($domain_name, FILTER_SANITIZE_STRING);
+  $domain_name = clean_name_input($_POST['domain_name']);
   $memory_unit = $_POST['memory_unit'];
   $memory = $_POST['memory'];
   $vcpu = $_POST['vcpu'];
