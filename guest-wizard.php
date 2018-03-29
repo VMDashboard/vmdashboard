@@ -52,7 +52,7 @@ if ($source_file_vda == "new") {
   $volume_image_name = clean_name_input($_POST['new_target_dev']);
     //Lets check for empty string
     if ($volume_image_name == "") {
-      $volume_image_name = $domain_name . "-volume-image"
+      $volume_image_name = $domain_name . "-volume-image";
     }
   $volume_capacity = $_POST['new_volume_size'];
   $unit = $_POST['new_unit'];
