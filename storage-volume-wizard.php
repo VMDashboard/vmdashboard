@@ -1,16 +1,21 @@
 <?php
 require('header.php');
-?>
 
-<?php
+function clean_name_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  $data = str_replace(' ','',$data);
+  $data = filter_var($data, FILTER_SANITIZE_STRING);
+  return $data;
+}
+
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
   $pool = $_POST['pool'];
-  $volume_image_name = $_POST['volume_image_name'];
-  //Just in case someone entered in a volume name with spaces, lets remove them
-  $volume_image_name = str_replace(' ','',$volume_image_name);
+  $volume_image_name = clean_name_input($_POST['volume_image_name']);
   $volume_capacity = $_POST['volume_size'];
   $volume_size = $_POST['volume_size'];
   $unit = $_POST['unit'];
