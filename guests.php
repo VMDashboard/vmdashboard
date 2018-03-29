@@ -86,37 +86,38 @@ swal(alert_msg);
                   $vnc = $lv->domain_get_vnc_port($dom);
                   $nics = $lv->get_network_cards($dom);
 
-	                 if (($diskcnt = $lv->get_disk_count($dom)) > 0) {
-                     $disks = $diskcnt.' / '.$lv->get_disk_capacity($dom);
-                     $diskdesc = 'Current physical size: '.$lv->get_disk_capacity($dom, true);
-                   } else {
-                     $disks = '-';
-                     $diskdesc = '';
-                   }
+	                if (($diskcnt = $lv->get_disk_count($dom)) > 0) {
+                    $disks = $diskcnt.' / '.$lv->get_disk_capacity($dom);
+                    $diskdesc = 'Current physical size: '.$lv->get_disk_capacity($dom, true);
+                  } else {
+                    $disks = '-';
+                    $diskdesc = '';
+                  }
 
-                   unset($tmp);
-                   unset($dom);
+                  unset($tmp);
+                  unset($dom);
 
-	                 echo "<tr>" .
+	                echo "<tr>" .
                     "<td>" .
                     "<a href=\"guest-single.php?uuid=$uuid\">$name</a>" .
                     "</td>" .
                     "<td>$cpu</td>" .
                     "<td>$mem</td>" .
                     "<td title='$diskdesc'>$disks</td>" .
-                    "<td>$state</td>";
-                   echo "<td>";
+                    "<td>$state</td>" .
+                    "<td>";
 
-	                 if ($lv->domain_is_running($name)){
-                     echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Turn off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
-                   } else if ($lv->domain_is_paused($name)){
-                     echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
-                   } else
+	                if ($lv->domain_is_running($name)){
+                   echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Turn off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
+                  } else if ($lv->domain_is_paused($name)){
+                   echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
+                  } else {
                    echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class='fas fa-power-off'></i> Power on</a>";
-                   echo "</td>" ;
-	                  echo "</tr>";
                   }
-                  ?>
+                  echo "</td>";
+	                echo "</tr>";
+                }
+                ?>
 
               </tbody>
             </table>
