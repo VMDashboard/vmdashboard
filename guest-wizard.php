@@ -10,25 +10,20 @@ function clean_name_input($data) {
   return $data;
 }
 
-
-//will redirect to guests.php.
 if (isset($_POST['finish'])) {
-  $domain_type = $_POST['domain_type'];
-  $domain_name = clean_name_input($_POST['domain_name']);
-  $memory_unit = $_POST['memory_unit'];
-  $memory = $_POST['memory'];
-  $vcpu = $_POST['vcpu'];
-  $os_arch = $_POST['os_arch'];
-  $os_type = $_POST['os_type'];
-  $clock_offset = $_POST['clock_offset'];
+  $domain_type = $_POST['domain_type']; //set to kvm in hidden field for now.
+  $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
+  $memory_unit = $_POST['memory_unit']; //choice of MiB or GiB
+  $memory = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
+  $vcpu = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
+  $os_arch = $_POST['os_arch']; //set to x86_64 in hidden form field, need to change to host type as well as provide options
+  $os_type = "hvm"; //hvm is standard operating system VM
+  $clock_offset = $_POST['clock_offset']; //set to localtime in hidden form field
 
-
-//Hard drive information
+  //Hard drive information
 $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
-$driver_name_vda = $_POST['driver_name_vda'];
-//Just in case someone entered in a disk name with spaces, lets remove them
-$driver_name_vda = str_replace(' ','',$driver_name_vda);
+  $driver_name_vda = clean_name_input($_POST['driver_name_vda']); //name of disk image, removes spaces and sanitizes
 $driver_type_vda = $_POST['driver_type_vda'];
 $source_file_vda = $_POST['source_file_vda'];
 $target_dev_vda = $_POST['target_dev_vda'];
@@ -108,50 +103,45 @@ $network_interface_xml = "
 }
 
 
-//Graphics Information
-$graphics_type = $_POST['graphics_type'];
-$graphics_port = $_POST['graphics_port'];
-$autoport = $_POST['autoport'];
+  //Graphics Information
+  $graphics_type = "vnc";
+  $graphics_port = "-1";
+  $autoport = "yes";
 
 
-//Final XML
-$xml = "
-<domain type='" . $domain_type . "'>
-<name>" . $domain_name . "</name>
-<memory unit='" . $memory_unit . "'>" . $memory . "</memory>
-<vcpu>" . $vcpu . "</vcpu>
+  //Final XML
+  $xml = "
+    <domain type='" . $domain_type . "'>
+    <name>" . $domain_name . "</name>
+    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
+    <vcpu>" . $vcpu . "</vcpu>
 
-<os>
-<type arch='" . $os_arch . "'>" . $os_type . "</type>
-<boot dev='hd'/>
-<boot dev='cdrom'/>
-<boot dev='network'/>
-</os>
+    <os>
+      <type arch='" . $os_arch . "'>" . $os_type . "</type>
+      <boot dev='hd'/>
+      <boot dev='cdrom'/>
+      <boot dev='network'/>
+    </os>
 
-<clock offset='" . $clock_offset . "'/>
+    <clock offset='" . $clock_offset . "'/>
 
-<devices>
+    <devices>
+      " . $vda_xml . "
+      " . $cd_xml . "
+      " . $network_interface_xml . "
+      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
+    </devices>
+    </domain> ";
 
-" . $vda_xml . "
+  //Define the new guest domain based off the XML information
+  $new_domain = $lv->domain_define($xml);
 
-" . $cd_xml . "
-
-" . $network_interface_xml . "
-
-    <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
-
-  </devices>
-</domain>
-";
-
-$new_domain = $lv->domain_define($xml);
-
+//need to check to make sure $new_domain is not false befoe this code exectues
 if ($source_file_vda == "new") {
   $res = $new_domain;
   $img = libvirt_storagevolume_get_path($new_disk);
-  $dev = "vda";
+  $dev = "vda"; //because it is virtio type, will choose the "v" and this should be first disk so "vda"
   $typ = "virtio";
-  //$driver = $driver_type;
   $driver = $driver_type;
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
@@ -159,15 +149,9 @@ if ($source_file_vda == "new") {
 header('Location: guests.php');
 exit;
 }
-?>
 
-<?php
-require('navbar.php');
-?>
-
-
-<?php
-$random_mac = $lv->generate_random_mac_addr();
+$random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
+require('navbar.php'); //bring in sidebar and page layout
 ?>
 
 <div class="panel-header panel-header-sm"></div>
@@ -260,12 +244,6 @@ $random_mac = $lv->generate_random_mac_addr();
                                 <div class="form-group">
                                     <label>OS architecture</label>
                                     <input type="text" value="x86_64" class="form-control" name="os_arch"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-4" style="display:none;">
-                                <div class="form-group">
-                                    <label>OS type</label>
-                                      <input type="text" value="hvm" class="form-control" name="os_type"/>
                                 </div>
                             </div>
 
@@ -574,39 +552,6 @@ $random_mac = $lv->generate_random_mac_addr();
 
                             </div>
                         </div>
-
-                        <!--    Display Tab     -->
-                          <div class="tab-pane fade" id="display">
-                              <div class="row justify-content-center">
-                                  <div class="col-sm-12">
-                                      <h5 class="info-text"> Display options </h5>
-                                  </div>
-
-
-                                  <div class="col-sm-10">
-                                      <div class="form-group">
-                                          <label>Graphics type</label>
-                                          <input type="text" class="form-control" name="graphics_type" value="vnc" />
-                                      </div>
-                                  </div>
-
-                                  <div class="col-sm-5">
-                                      <div class="form-group">
-                                          <label>Port</label>
-                                          <input type="text" class="form-control" name="graphics_port" value="-1" />
-                                      </div>
-                                  </div>
-
-                                  <div class="col-sm-5">
-                                      <div class="form-group">
-                                          <label>Auto Port</label>
-                                          <input type="text" class="form-control" name="autoport" value="yes" />
-                                      </div>
-                                  </div>
-
-                              </div>
-                          </div>
-
 
                     </div>
                 </div>
