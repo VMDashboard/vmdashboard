@@ -3,7 +3,7 @@ require('header.php');
 require('navbar.php');
 
 $uuid = $_GET['uuid'];
-$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
+$domName = $lv->domain_get_name_by_uuid($uuid);
 $dom = $lv->get_domain_object($domName);
 
 	if ($action == 'domain-start') {
