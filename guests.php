@@ -2,43 +2,48 @@
 require('header.php');
 require('navbar.php');
 
-$uuid = $_GET['uuid'];
-$action = $_GET['action'];
-$domName = $lv->domain_get_name_by_uuid($uuid);
-$dom = $lv->get_domain_object($domName);
+$uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
+$action = $_GET['action']; //grab the $action variable from $_GET
+$domName = $lv->domain_get_name_by_uuid($uuid); //get the name of virtual machine with $uuid is present
+$dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 
-	if ($action == 'domain-start') {
-    $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+//This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
+if ($action == 'domain-start') {
+  $msg = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+}
+
+//This will pause a virtual machine and temporaily save it's state
+if ($action == 'domain-pause') {
+  $msg = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
+}
+
+//This will resume a paused virtual machine. Option is given only if a machine is paused
+if ($action == 'domain-resume') {
+  $msg = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
+}
+
+//This is used to gracefully shutdown the guest.
+//There are many reasons why a guest cannot gracefully shutdown so if it can't, let the user know that
+if ($action == 'domain-stop') {
+  $msg = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
+  $actioninfo = $lv->domain_get_info($dom);
+  $actionstate = $lv->domain_state_translate($actioninfo['state']);
+  if ($actionstate == "running"){
+    $msg = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
   }
+}
 
-  if ($action == 'domain-pause') {
-    $ret = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
-  }
+//This will forcefully shutdown the virtual machine guest
+if ($action == 'domain-destroy') {
+  $msg = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
+}
 
-  if ($action == 'domain-resume') {
-    $ret = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
-  }
-
-  if ($action == 'domain-stop') {
-    $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
-    $actioninfo = $lv->domain_get_info($dom);
-    $actionstate = $lv->domain_state_translate($actioninfo['state']);
-    if ($actionstate == "running"){
-      $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
-    }
-  }
-
-  if ($action == 'domain-destroy') {
-    $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
-  }
-
-
-
-if ($ret != "") {
+//Will display a sweet alert if a return message exists
+if ($msg != "") {
 echo "
 <script>
-var alertRet = '$ret'
-swal(alertRet);
+var alert_msg = '$msg'
+swal(alert_msg);
 </script>";
 }
 ?>
