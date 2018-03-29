@@ -6,9 +6,6 @@ $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
 
-if ($action) {
-  $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
-
 	if ($action == 'domain-start') {
     $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
   }
@@ -33,7 +30,7 @@ if ($action) {
   if ($action == 'domain-destroy') {
     $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
   }
-}
+
 
 
 if ($ret != "") {
