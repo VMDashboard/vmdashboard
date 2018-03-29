@@ -11,14 +11,26 @@ function clean_name_input($data) {
 }
 
 if (isset($_POST['finish'])) {
-  $domain_type = $_POST['domain_type']; //set to kvm in hidden field for now.
+  $domain_type = $_POST['domain_type']; //set to "kvm" in hidden field for now.
   $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
-  $memory_unit = $_POST['memory_unit']; //choice of MiB or GiB
+  $memory_unit = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $memory = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $vcpu = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
   $os_arch = $_POST['os_arch']; //set to x86_64 in hidden form field, need to change to host type as well as provide options
   $os_type = "hvm"; //hvm is standard operating system VM
   $clock_offset = $_POST['clock_offset']; //set to localtime in hidden form field
+
+  //Lets check for empty strings
+  if ($domain_name == "") {
+    $rand = substr(uniqid('', true), -5);
+    $domain_name = "openVM-" . $rand;
+  }
+
+  if ($memory == "") {
+    $memory = "1";
+    $memory_unit = "GiB"
+  }
+
 
   //Hard drive information
 $disk_type_vda = $_POST['disk_type_vda'];
@@ -227,15 +239,15 @@ require('navbar.php'); //bring in sidebar and page layout
                             <div class="col-sm-7">
                                 <div class="form-group">
                                     <label>Memory</label>
-                                    <input type="number" value="2048" placeholder="Enter the amount of RAM" class="form-control" name="memory" min="1"/>
+                                    <input type="number" value="2" placeholder="Enter the amount of RAM" class="form-control" name="memory" min="1"/>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group">
                                     <label>Memory Unit</label>
                                     <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit">
-                                        <option value="MiB" selected="selected"> MB </option>
-                                        <option value="GiB"> GB </option>
+                                        <option value="MiB"> MB </option>
+                                        <option value="GiB" selected="selected"> GB </option>
                                     </select>
                                 </div>
                             </div>
