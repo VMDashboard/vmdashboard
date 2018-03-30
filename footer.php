@@ -74,7 +74,7 @@
 <script>
     $(document).ready(function() {
         // Javascript method's body can be found in assets/demo/demos.js
-        demo.initDashboardPageCharts();
+        initDashboardPageCharts();
     });
 </script>
 
@@ -83,7 +83,7 @@
 <script>
   $(document).ready(function(){
     // Initialise the wizard
-    demo.initNowUiWizard();
+    initNowUiWizard();
     setTimeout(function(){
       $('.card.card-wizard').addClass('active');
     },600);
