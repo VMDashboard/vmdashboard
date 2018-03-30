@@ -73,7 +73,7 @@
 <!--   Code for Dashboard   -->
 <script>
     $(document).ready(function() {
-        // Javascript method's body can be found in assets/js/demos.js
+        // Javascript method's body can be found in assets/demo/demos.js
         demo.initDashboardPageCharts();
     });
 </script>
