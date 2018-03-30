@@ -254,14 +254,14 @@ function newExtenstion(f) {
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Domain name</label>
-                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name" required>
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Virtual CPUs</label>
-                      <input type="number" value="1" name="vcpu" min="1"/>
+                      <input type="number" value="1" class="form-control" name="vcpu" min="1"/>
                     </div>
                   </div>
 
