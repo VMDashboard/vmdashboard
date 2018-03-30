@@ -168,6 +168,20 @@ $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address
 require('navbar.php'); //bring in sidebar and page layout
 ?>
 
+<script>
+  function diskChangeOptions(selectEl) {
+    let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    let subForms = document.getElementsByClassName('diskChange')
+    for (let i = 0; i < subForms.length; i += 1) {
+      if (selectedValue === subForms[i].id) {
+        subForms[i].setAttribute('style', 'display:block')
+      } else {
+        subForms[i].setAttribute('style', 'display:none')
+      }
+    }
+  }
+</script>
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="col-md-10 mr-auto ml-auto">
@@ -175,13 +189,9 @@ require('navbar.php'); //bring in sidebar and page layout
     <div class="wizard-container">
       <div class="card card-wizard" data-color="primary" id="wizardProfile">
         <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
-
+          <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
           <div class="card-header text-center" data-background-color="orange">
-            <h3 class="card-title">
-              Create a new guest VM
-            </h3>
-
+            <h3 class="card-title">Create a new guest VM</h3>
             <h5 class="description">This wizard will guide you through setting up a new domain.</h5>
 
             <div class="wizard-navigation">
@@ -204,123 +214,88 @@ require('navbar.php'); //bring in sidebar and page layout
                     Networking
                   </a>
                 </li>
-
               </ul>
             </div>
           </div>
 
-                <div class="card-body">
-                    <div class="tab-content">
-          <!--    General Tab     -->
-                        <div class="tab-pane fade show active" id="general">
-                          <h5 class="info-text"> Let's start with the basic information</h5>
-                          <div class="row justify-content-center">
+          <div class="card-body">
+            <div class="tab-content">
+              <!--    General Tab     -->
+              <div class="tab-pane fade show active" id="general">
+                <h5 class="info-text"> Let's start with the basic information</h5>
+                <div class="row justify-content-center">
+                  <!--    Required fields are setup in assets/demo/demo.js     -->
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label>Domain name</label>
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
+                    </div>
+                  </div>
 
-<!--    Required fields are setup in assets/demo/demo.js     -->
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Virtual CPUs</label>
+                      <input type="number" value="1" class="form-control" name="vcpu" min="1"/>
+                    </div>
+                  </div>
 
-                            <div class="col-sm-7">
-                              <div class="form-group">
-                                <label>Domain name</label>
-                                <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
-                              </div>
-                            </div>
+                  <div class="col-sm-5" style="display:none;">
+                    <div class="form-group">
+                      <label>Domain type</label>
+                      <input type="text" value="kvm" class="form-control" name="domain_type"/>
+                    </div>
+                  </div>
 
-                            <div class="col-sm-3">
-                              <div class="form-group">
-                                <label>Virtual CPUs</label>
-                                <input type="number" value="1" class="form-control" name="vcpu" min="1"/>
-                              </div>
-                            </div>
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label>Memory</label>
+                      <input type="number" value="2" placeholder="Enter the amount of RAM" class="form-control" name="memory" min="1"/>
+                    </div>
+                  </div>
 
-                            <div class="col-sm-5" style="display:none;">
-                                <div class="form-group">
-                                    <label>Domain type</label>
-                                    <input type="text" value="kvm" class="form-control" name="domain_type"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <div class="form-group">
-                                    <label>Memory</label>
-                                    <input type="number" value="2" placeholder="Enter the amount of RAM" class="form-control" name="memory" min="1"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Memory Unit</label>
-                                    <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit">
-                                        <option value="MiB"> MB </option>
-                                        <option value="GiB" selected="selected"> GB </option>
-                                    </select>
-                                </div>
-                            </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Memory Unit</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit">
+                        <option value="MiB"> MB </option>
+                        <option value="GiB" selected="selected"> GB </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-
-
-
-
-                          </div>
+              <!--    Storage Tab     -->
+              <div class="tab-pane fade" id="storage">
+                <div class="row justify-content-center">
+                  <div class="col-md-6">
+                    <h5 class="info-text"> Hard Drive Storage </h5>
+                    <div class="row justify-content-center">
+                      <div class="col-sm-10">
+                        <div class="form-group">
+                          <label>Disk drive source file location</label>
+                          <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
+                            <option value="none"> Select Disk </option>
+                            <option value="new"> Create New Disk Image </option>
+                            <?php
+                            $pools = $lv->get_storagepools();
+                            for ($i = 0; $i < sizeof($pools); $i++) {
+                              $info = $lv->get_storagepool_info($pools[$i]);
+                              if ($info['volume_count'] > 0) {
+                                $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                $tmp_keys = array_keys($tmp);
+                                for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                  $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                  $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                  if (strtolower($ext) != "iso")
+                                    echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                }
+                              }
+                            }
+                            ?>
+                          </select>
                         </div>
-
-                    <!--    Storage Tab     -->
-                    <script>
-                    function diskChangeOptions(selectEl) {
-                      let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-                      let subForms = document.getElementsByClassName('diskChange')
-                      for (let i = 0; i < subForms.length; i += 1) {
-                        if (selectedValue === subForms[i].id) {
-                          subForms[i].setAttribute('style', 'display:block')
-                        } else {
-                          subForms[i].setAttribute('style', 'display:none')
-                        }
-                      }
-                    }
-                    </script>
-
-                        <div class="tab-pane fade" id="storage">
-                          <div class="row justify-content-center">
-                            <div class="col-md-6">
-                            <h5 class="info-text"> Hard Drive Storage </h5>
-                            <div class="row justify-content-center">
-
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Disk device</label>
-                                      <input type="text" value="disk" class="form-control" name="disk_device_vda" readonly/>
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Driver name</label>
-                                        <input type="text" value="qemu" class="form-control" name="driver_name_vda"/>
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-10">
-                                  <div class="form-group">
-                                      <label>Disk drive source file location</label>
-                                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
-                                        <option value="none"> Select Disk </option>
-                                        <option value="new"> Create New Disk Image </option>
-                                      <?php
-                                      $pools = $lv->get_storagepools();
-                                      for ($i = 0; $i < sizeof($pools); $i++) {
-                                        $info = $lv->get_storagepool_info($pools[$i]);
-                                        if ($info['volume_count'] > 0) {
-                                          $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                                          $tmp_keys = array_keys($tmp);
-                                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                                            $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                                            $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                                            if (strtolower($ext) != "iso")
-                                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                                          }
-                                        }
-                                      }
-                                      ?>
-                                      </select>
-                                  </div>
-                              </div>
+                      </div>
 
                               <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                   <div class="form-group">
@@ -361,19 +336,8 @@ require('navbar.php'); //bring in sidebar and page layout
 
 
 
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Target device</label>
-                                      <input type="text" value="vda" class="form-control" name="target_dev_vda"/>
-                                  </div>
-                              </div>
 
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Target bus</label>
-                                      <input type="text" value="virtio" class="form-control" name="target_bus_vda"/>
-                                  </div>
-                              </div>
+              
 
                             </div>
                           </div>
