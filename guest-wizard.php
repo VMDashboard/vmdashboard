@@ -169,18 +169,17 @@ require('navbar.php'); //bring in sidebar and page layout
 ?>
 
 <script>
-  function diskChangeOptions(selectEl) {
-    let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-    let subForms = document.getElementsByClassName('diskChange')
-    for (let i = 0; i < subForms.length; i += 1) {
-      if (selectedValue === subForms[i].id) {
-        subForms[i].setAttribute('style', 'display:block')
-      } else {
-        subForms[i].setAttribute('style', 'display:none')
-      }
+function diskChangeOptions(selectEl) {
+  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+  let subForms = document.getElementsByClassName('diskChange')
+  for (let i = 0; i < subForms.length; i += 1) {
+    if (selectedValue === subForms[i].id) {
+      subForms[i].setAttribute('style', 'display:block')
+    } else {
+      subForms[i].setAttribute('style', 'display:none')
     }
   }
-
+}
 
 function autoDiskName(f) {
   var diskName = f.domain_name.value;
@@ -207,7 +206,6 @@ function newExtenstion(f) {
     f.new_target_dev.value = fullDiskName;
   }
 }
-
 </script>
 
 <div class="panel-header panel-header-sm"></div>
@@ -263,7 +261,7 @@ function newExtenstion(f) {
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Virtual CPUs</label>
-                      <input type="number" value="1" class="form-control" name="vcpu" min="1"/>
+                      <input type="number" value="1" name="vcpu" min="1"/>
                     </div>
                   </div>
 
