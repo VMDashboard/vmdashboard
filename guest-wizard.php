@@ -206,6 +206,7 @@ function newExtenstion(f) {
     f.new_target_dev.value = fullDiskName;
   }
 }
+
 </script>
 
 <div class="panel-header panel-header-sm"></div>
@@ -254,7 +255,7 @@ function newExtenstion(f) {
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Domain name</label>
-                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name" required>
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
                     </div>
                   </div>
 
