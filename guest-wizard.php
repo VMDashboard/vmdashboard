@@ -20,11 +20,17 @@ if (isset($_POST['finish'])) {
   $os_type = "hvm"; //hvm is standard operating system VM
   $clock_offset = $_POST['clock_offset']; //set to localtime in hidden form field
 
+  //Lets check for empty strings
+  if ($domain_name == "") {
+    $rand = substr(uniqid('', true), -5);
+    $domain_name = "openVM-" . $rand;
+  }
+
 
   //Hard drive information
-  $disk_type_vda = "file";
-  $disk_device_vda = "disk";
-  $driver_name_vda = "qemu";
+  $disk_type_vda = $_POST['disk_type_vda'];
+$disk_device_vda = $_POST['disk_device_vda'];
+  $driver_name_vda = $_POST['driver_name_vda']); 
 $source_file_vda = $_POST['source_file_vda'];
 $target_dev_vda = $_POST['target_dev_vda'];
 $target_bus_vda = $_POST['target_bus_vda'];
@@ -280,6 +286,20 @@ require('navbar.php'); //bring in sidebar and page layout
                             <div class="col-md-6">
                             <h5 class="info-text"> Hard Drive Storage </h5>
                             <div class="row justify-content-center">
+
+                              <div class="col-sm-5" style="display:none;">
+                                  <div class="form-group">
+                                      <label>Disk device</label>
+                                      <input type="text" value="disk" class="form-control" name="disk_device_vda" readonly/>
+                                  </div>
+                              </div>
+
+                              <div class="col-sm-5" style="display:none;">
+                                  <div class="form-group">
+                                      <label>Driver name</label>
+                                        <input type="text" value="qemu" class="form-control" name="driver_name_vda"/>
+                                  </div>
+                              </div>
 
                               <div class="col-sm-10">
                                   <div class="form-group">
