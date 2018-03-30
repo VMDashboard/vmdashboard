@@ -1014,14 +1014,6 @@ demo = {
         // Code for the Validator
         var $validator = $('.card-wizard form').validate({
     		  rules: {
-            domain_name: {
-    		      required: true,
-    		      minlength: 1
-    		    },
-            memory: {
-    		      required: true,
-    		      minlength: 1
-    		    },
     		    firstname: {
     		      required: true,
     		      minlength: 3
