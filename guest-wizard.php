@@ -36,13 +36,13 @@ if (isset($_POST['finish'])) {
   $target_bus_vda = $_POST['target_bus_vda'];
 
   //determine disk file extension
-  $dot_array = explode('.', $source_file_vda);
-  $extension = end($dot_array);
-  if ($extension == "qcow2") {
+  //$dot_array = explode('.', $source_file_vda);
+  //$extension = end($dot_array);
+  //if ($extension == "qcow2") {
     $driver_type_vda = "qcow2";
-  } else {
-    $driver_type_vda = "raw";
-  }
+  //} else {
+  //  $driver_type_vda = "raw";
+  //}
 
 
 if ($source_file_vda == "none") {
