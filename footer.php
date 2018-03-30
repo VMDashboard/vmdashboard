@@ -1,34 +1,24 @@
-              <footer class="footer">
-                <div class="container-fluid">
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="https://openvm.tech">
-                                    openVM
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    About
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://openvm.tech/news" target="_blank">
-                                    News
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <div class="copyright">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>, Developed by <a href="https://matthewpenning.com" target="_blank">Matthew Penning</a>.
-                    </div>
-                </div>
-            </footer>
+      <footer class="footer">
+        <div class="container-fluid">
+          <nav>
+            <ul>
+              <li><a href="https://openvm.tech" target="_blank">openVM</a></li>
+              <li><a href="https://openvm.tech/about" target="_blank">About</a></li>
+              <li><a href="https://openvm.tech/news" target="_blank">News</a></li>
+            </ul>
+          </nav>
+
+          <div class="copyright">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>, Developed by <a href="https://matthewpenning.com" target="_blank">Matthew Penning</a>.
+          </div>
+
         </div>
+      </footer>
     </div>
+  </div>
 </body>
 
 
@@ -45,8 +35,7 @@
 <script src="assets/js/plugins/bootstrap-notify.js"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="assets/js/now-ui-dashboard.js?v=1.0.1"></script>
-<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-<script src="assets/demo/demo.js"></script>
+
 
 
 <script src="assets/js/plugins/moment.min.js"></script>
