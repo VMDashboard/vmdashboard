@@ -11,7 +11,7 @@ function clean_name_input($data) {
 }
 
 if (isset($_POST['finish'])) {
-  $domain_type = $_POST['domain_type']; //set to "kvm" in hidden field for now.
+  $domain_type = "kvm"; //set to "kvm"
   $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
   $memory_unit = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $memory = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
@@ -255,21 +255,14 @@ function newExtenstion(f) {
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Domain name</label>
-                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name" required>
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Virtual CPUs</label>
-                      <input type="number" value="1" class="form-control" name="vcpu" min="1"/>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-5" style="display:none;">
-                    <div class="form-group">
-                      <label>Domain type</label>
-                      <input type="text" value="kvm" class="form-control" name="domain_type"/>
+                      <input type="number" value="1" class="form-control" name="vcpu" min="1" required/>
                     </div>
                   </div>
 
