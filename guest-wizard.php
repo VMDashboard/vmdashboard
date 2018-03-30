@@ -37,7 +37,7 @@ if (isset($_POST['finish'])) {
 
   //determine disk file extension
   $dot_array = explode('.', $source_file_vda);
-  $extension = end($dot_array);)
+  $extension = end($dot_array);
   if ($extension == "qcow2") {
     $driver_type_vda = "qcow2";
   } else {
