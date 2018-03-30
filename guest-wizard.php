@@ -30,7 +30,7 @@ if (isset($_POST['finish'])) {
   //Hard drive information
   $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
-  $driver_name_vda = $_POST['driver_name_vda']); 
+  $driver_name_vda = $_POST['driver_name_vda']; 
 $source_file_vda = $_POST['source_file_vda'];
 $target_dev_vda = $_POST['target_dev_vda'];
 $target_bus_vda = $_POST['target_bus_vda'];
