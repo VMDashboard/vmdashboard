@@ -30,7 +30,7 @@ if (isset($_POST['finish'])) {
   //Hard drive information
   $disk_type_vda = $_POST['disk_type_vda'];
 $disk_device_vda = $_POST['disk_device_vda'];
-  $driver_name_vda = $_POST['driver_name_vda']; 
+  $driver_name_vda = $_POST['driver_name_vda'];
 $source_file_vda = $_POST['source_file_vda'];
 $target_dev_vda = $_POST['target_dev_vda'];
 $target_bus_vda = $_POST['target_bus_vda'];
@@ -155,12 +155,13 @@ if ($source_file_vda == "new") {
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
-header('Location: guests.php');
-exit;
+//header('Location: guests.php');
+//exit;
 }
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
 require('navbar.php'); //bring in sidebar and page layout
+echo $vda_xml;
 ?>
 
 <div class="panel-header panel-header-sm"></div>
