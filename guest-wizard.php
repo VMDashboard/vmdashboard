@@ -20,56 +20,52 @@ if (isset($_POST['finish'])) {
   $os_type = "hvm"; //hvm is standard operating system VM
   $clock_offset = $_POST['clock_offset']; //set to localtime in hidden form field
 
-  //Lets check for empty strings
-  if ($domain_name == "") {
-    $rand = substr(uniqid('', true), -5);
-    $domain_name = "openVM-" . $rand;
-  }
-
-
   //Hard drive information
   $disk_type_vda = "file";
   $disk_device_vda = "disk";
   $driver_name_vda = "qemu";
-  $source_file_vda = $_POST['source_file_vda'];
-  $target_dev_vda = "vda"; //$_POST['target_dev_vda'];
-  $target_bus_vda = "virtio"; //$_POST['target_bus_vda'];
+  $source_file_vda = $_POST['source_file_vda']; //This will be the volume image that the user selects
+  $target_dev_vda = "vda";
+  $target_bus_vda = "virtio";
 
-  //determine disk file extension
-  //$dot_array = explode('.', $source_file_vda);
-  //$extension = end($dot_array);
-  //if ($extension == "qcow2") {
+  //determine disk file extension to determine driver type
+  $dot_array = explode('.', $source_file_vda);
+  $extension = end($dot_array);
+  if ($extension == "qcow2") {
     $driver_type_vda = "qcow2";
-  //} else {
-  //  $driver_type_vda = "raw";
-  //}
+  } else {
+    $driver_type_vda = "raw";
+  }
 
+  //determine what the hard drive xml will be
+  switch ($source_file_vda) {
+    case "none":
+      $vda_xml = "";
+      break;
 
-if ($source_file_vda == "none") {
-  $vda_xml = "";
-} else {
-  $vda_xml = "
-  <disk type='" . $disk_type_vda . "' device='" . $disk_device_vda . "'>
-    <driver name='" . $driver_name_vda . "' type='" . $driver_type_vda . "'/>
-    <source file='" . $source_file_vda . "'/>
-    <target dev='" . $target_dev_vda . "' bus='" . $target_bus_vda . "'/>
-  </disk>";
-}
+    case "new":
+      $pool = "default";
+      $volume_image_name = clean_name_input($_POST['new_target_dev']);
+      //Lets check for empty string
+      if ($volume_image_name == "") {
+        $volume_image_name = $domain_name . "-volume-image";
+      }
+      $volume_capacity = $_POST['new_volume_size'];
+      $unit = $_POST['new_unit'];
+      $volume_size = $_POST['new_volume_size'];
+      $driver_type = $_POST['new_driver_type'];
+      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+      $vda_xml = "";
+      break;
 
-if ($source_file_vda == "new") {
-  $pool = "default";
-  $volume_image_name = clean_name_input($_POST['new_target_dev']);
-    //Lets check for empty string
-    if ($volume_image_name == "") {
-      $volume_image_name = $domain_name . "-volume-image";
-    }
-  $volume_capacity = $_POST['new_volume_size'];
-  $unit = $_POST['new_unit'];
-  $volume_size = $_POST['new_volume_size'];
-  $driver_type = $_POST['new_driver_type'];
-  $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-  $vda_xml = "";
-}
+    default:
+      $vda_xml = "
+      <disk type='" . $disk_type_vda . "' device='" . $disk_device_vda . "'>
+      <driver name='" . $driver_name_vda . "' type='" . $driver_type_vda . "'/>
+      <source file='" . $source_file_vda . "'/>
+      <target dev='" . $target_dev_vda . "' bus='" . $target_bus_vda . "'/>
+      </disk>";
+  }
 
 
 
