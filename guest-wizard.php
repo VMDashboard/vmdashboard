@@ -68,26 +68,26 @@ if (isset($_POST['finish'])) {
   }
 
 
-//CD-DVD ISO Information
-$disk_type_cd = "file";
-$disk_device_cd = "cdrom";
-$driver_name_cd = "qemu";
-$driver_type_cd = "raw";
-$source_file_cd = $_POST['source_file_cd'];
-$target_dev_cd = "hda";
-$target_bus_cd = "ide";
+  //CD-DVD ISO Information
+  $disk_type_cd = "file";
+  $disk_device_cd = "cdrom";
+  $driver_name_cd = "qemu";
+  $driver_type_cd = "raw";
+  $source_file_cd = $_POST['source_file_cd'];
+  $target_dev_cd = "hda";
+  $target_bus_cd = "ide";
 
-if ($source_file_cd == "none") {
-  $cd_xml = "";
-} else {
-  $cd_xml = "
-    <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
-    <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
-    <source file='" . $source_file_cd . "'/>
-    <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
-    <readonly/>
-    </disk>";
-}
+  if ($source_file_cd == "none") {
+    $cd_xml = "";
+  } else {
+    $cd_xml = "
+      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
+      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
+      <source file='" . $source_file_cd . "'/>
+      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
+      <readonly/>
+      </disk>";
+  }
 
 
 //Network Information
