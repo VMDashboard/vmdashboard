@@ -180,6 +180,34 @@ require('navbar.php'); //bring in sidebar and page layout
       }
     }
   }
+
+
+function autoDiskName(f) {
+  var diskName = f.domain_name.value;
+  diskName = diskName.replace(/\s+/g, '');
+  var ext = ".qcow2";
+  var fullDiskName = diskName.concat(ext);
+  f.new_target_dev.value = fullDiskName;
+}
+
+function newExtenstion(f) {
+  var diskName = f.new_target_dev.value;
+  diskName = diskName.replace(/\s+/g, '');
+  var n = diskName.lastIndexOf(".");
+  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
+  var driverType = f.new_driver_type.value;
+  if (driverType === "qcow2"){
+    var ext = ".qcow2";
+    var fullDiskName = noExt.concat(ext);
+    f.new_target_dev.value = fullDiskName;
+  }
+  if (driverType === "raw"){
+    var ext = ".img";
+    var fullDiskName = noExt.concat(ext);
+    f.new_target_dev.value = fullDiskName;
+  }
+}
+
 </script>
 
 <div class="panel-header panel-header-sm"></div>
@@ -228,7 +256,7 @@ require('navbar.php'); //bring in sidebar and page layout
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Domain name</label>
-                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Unique Name of Virtual Machine (required)" name="domain_name">
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
                     </div>
                   </div>
 
@@ -337,7 +365,7 @@ require('navbar.php'); //bring in sidebar and page layout
 
 
 
-              
+
 
                             </div>
                           </div>
@@ -489,33 +517,3 @@ require('navbar.php'); //bring in sidebar and page layout
 <?php
 require('footer.php');
 ?>
-
-<script type="text/javascript">
-
-function autoDiskName(f) {
-  var diskName = f.domain_name.value;
-  diskName = diskName.replace(/\s+/g, '');
-  var ext = ".qcow2";
-  var fullDiskName = diskName.concat(ext);
-  f.new_target_dev.value = fullDiskName;
-}
-
-function newExtenstion(f) {
-  var diskName = f.new_target_dev.value;
-  diskName = diskName.replace(/\s+/g, '');
-  var n = diskName.lastIndexOf(".");
-  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
-  var driverType = f.new_driver_type.value;
-  if (driverType === "qcow2"){
-    var ext = ".qcow2";
-    var fullDiskName = noExt.concat(ext);
-    f.new_target_dev.value = fullDiskName;
-  }
-  if (driverType === "raw"){
-    var ext = ".img";
-    var fullDiskName = noExt.concat(ext);
-    f.new_target_dev.value = fullDiskName;
-  }
-}
-
-</script>
