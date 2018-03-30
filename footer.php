@@ -86,15 +86,6 @@
     });
 </script>
 
-<!--   Code for Wizard   -->
-<script>
-  $(document).ready(function(){
-    // Initialise the wizard
-    demo.initNowUiWizard();
-    setTimeout(function(){
-      $('.card.card-wizard').addClass('active');
-    },600);
-  });
-</script>
+
 
 </html>

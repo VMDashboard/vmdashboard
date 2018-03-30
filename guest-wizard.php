@@ -68,26 +68,26 @@ if (isset($_POST['finish'])) {
   }
 
 
-  //CD-DVD ISO Information
-  $disk_type_cd = "file";
-  $disk_device_cd = "cdrom";
-  $driver_name_cd = "qemu";
-  $driver_type_cd = "raw";
-  $source_file_cd = $_POST['source_file_cd'];
-  $target_dev_cd = "hda";
-  $target_bus_cd = "ide";
+//CD-DVD ISO Information
+$disk_type_cd = "file";
+$disk_device_cd = "cdrom";
+$driver_name_cd = "qemu";
+$driver_type_cd = "raw";
+$source_file_cd = $_POST['source_file_cd'];
+$target_dev_cd = "hda";
+$target_bus_cd = "ide";
 
-  if ($source_file_cd == "none") {
-    $cd_xml = "";
-  } else {
-    $cd_xml = "
-      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
-      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
-      <source file='" . $source_file_cd . "'/>
-      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
-      <readonly/>
-      </disk>";
-  }
+if ($source_file_cd == "none") {
+  $cd_xml = "";
+} else {
+  $cd_xml = "
+    <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
+    <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
+    <source file='" . $source_file_cd . "'/>
+    <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
+    <readonly/>
+    </disk>";
+}
 
 
 //Network Information
@@ -207,6 +207,18 @@ function newExtenstion(f) {
   }
 }
 
+function changeOptions(selectEl) {
+  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+  let subForms = document.getElementsByClassName('netChange')
+  for (let i = 0; i < subForms.length; i += 1) {
+    if (selectedValue === subForms[i].id) {
+      subForms[i].setAttribute('style', 'display:block')
+    } else {
+      subForms[i].setAttribute('style', 'display:none')
+    }
+  }
+}
+
 </script>
 
 <div class="panel-header panel-header-sm"></div>
@@ -269,7 +281,7 @@ function newExtenstion(f) {
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Memory</label>
-                      <input type="number" value="2" placeholder="Enter the amount of RAM" class="form-control" name="memory" min="1"/>
+                      <input type="number" value="2" placeholder="Enter the amount of RAM (required)" class="form-control" name="memory" min="1" required/>
                     </div>
                   </div>
 
@@ -397,19 +409,6 @@ function newExtenstion(f) {
 
 
                       <!--    Networking Tab     -->
-                      <script>
-                      function changeOptions(selectEl) {
-                        let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-                        let subForms = document.getElementsByClassName('netChange')
-                        for (let i = 0; i < subForms.length; i += 1) {
-                          if (selectedValue === subForms[i].id) {
-                            subForms[i].setAttribute('style', 'display:block')
-                          } else {
-                            subForms[i].setAttribute('style', 'display:none')
-                          }
-                        }
-                      }
-                      </script>
 
                         <div class="tab-pane fade" id="networking">
                             <div class="row justify-content-center">
