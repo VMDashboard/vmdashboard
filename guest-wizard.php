@@ -16,9 +16,9 @@ if (isset($_POST['finish'])) {
   $memory_unit = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $memory = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $vcpu = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
-  $os_arch = $_POST['os_arch']; //set to x86_64 in hidden form field, need to change to host type as well as provide options
+  $os_arch = "x86_64"; //set to x86_64, need to change to host type as well as provide options
   $os_type = "hvm"; //hvm is standard operating system VM
-  $clock_offset = $_POST['clock_offset']; //set to localtime in hidden form field
+  $clock_offset = "localtime"; //set to localtime
 
   //Hard drive information
   $disk_type_vda = "file";
@@ -68,27 +68,26 @@ if (isset($_POST['finish'])) {
   }
 
 
+  //CD-DVD ISO Information
+  $disk_type_cd = "file";
+  $disk_device_cd = "cdrom";
+  $driver_name_cd = "qemu";
+  $driver_type_cd = "raw";
+  $source_file_cd = $_POST['source_file_cd'];
+  $target_dev_cd = "hda";
+  $target_bus_cd = "ide";
 
-//CD-DVD ISO Information
-$disk_type_cd = $_POST['disk_type_cd'];
-$disk_device_cd = $_POST['disk_device_cd'];
-$driver_name_cd = $_POST['driver_name_cd'];
-$driver_type_cd = $_POST['driver_type_cd'];
-$source_file_cd = $_POST['source_file_cd'];
-$target_dev_cd = $_POST['target_dev_cd'];
-$target_bus_cd = $_POST['target_bus_cd'];
-
-if ($source_file_cd == "none") {
-  $cd_xml = "";
-} else {
-  $cd_xml = "
-  <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
-    <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
-    <source file='" . $source_file_cd . "'/>
-    <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
-    <readonly/>
-  </disk>";
-}
+  if ($source_file_cd == "none") {
+    $cd_xml = "";
+  } else {
+    $cd_xml = "
+      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
+      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
+      <source file='" . $source_file_cd . "'/>
+      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
+      <readonly/>
+      </disk>";
+  }
 
 
 //Network Information
@@ -255,19 +254,9 @@ require('navbar.php'); //bring in sidebar and page layout
                                 </div>
                             </div>
 
-                            <div class="col-sm-4" style="display:none;">
-                                <div class="form-group">
-                                    <label>OS architecture</label>
-                                    <input type="text" value="x86_64" class="form-control" name="os_arch"/>
-                                </div>
-                            </div>
 
-                            <div class="col-sm-5" style="display:none;">
-                                <div class="form-group">
-                                    <label>Timezone</label>
-                                      <input type="text" value="localtime" class="form-control" name="clock_offset"/>
-                                </div>
-                            </div>
+
+
 
                           </div>
                         </div>
@@ -393,82 +382,34 @@ require('navbar.php'); //bring in sidebar and page layout
                             <h5 class="info-text"> CD/DVD Storage </h5>
                             <div class="row justify-content-center">
 
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Disk type</label>
-                                      <input type="text" value="file" class="form-control" name="disk_type_cd" />
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Disk device</label>
-                                      <input type="text" value="cdrom" class="form-control" name="disk_device_cd" />
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-5" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Driver name</label>
-                                        <input type="text" value="qemu" class="form-control" name="driver_name_cd"/>
-                                  </div>
-                              </div>
-
-                              <div class="col-sm-5"  style="display:none;">
-                                  <div class="form-group">
-                                      <label>Driver type</label>
-                                        <input type="text" value="raw" class="form-control" name="driver_type_cd" />
-                                  </div>
-                              </div>
-
                               <div class="col-sm-10">
-                                  <div class="form-group">
-                                      <label>ISO location for cdrom</label>
-                                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_cd">
-                                        <option value="none">Select File</option>
-                                        <?php
-                                        $pools = $lv->get_storagepools();
-                                        for ($i = 0; $i < sizeof($pools); $i++) {
-                                          $info = $lv->get_storagepool_info($pools[$i]);
-                                          if ($info['volume_count'] > 0) {
-                                            $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                                            $tmp_keys = array_keys($tmp);
-                                            for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                                              $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                                              $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                                              if (strtolower($ext) == "iso")
-                                                echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                                            }
-                                          }
+                                <div class="form-group">
+                                  <label>ISO location for cdrom</label>
+                                  <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_cd">
+                                    <option value="none">Select File</option>
+                                    <?php
+                                    $pools = $lv->get_storagepools();
+                                    for ($i = 0; $i < sizeof($pools); $i++) {
+                                      $info = $lv->get_storagepool_info($pools[$i]);
+                                      if ($info['volume_count'] > 0) {
+                                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                        $tmp_keys = array_keys($tmp);
+                                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                          if (strtolower($ext) == "iso")
+                                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
                                         }
-                                        ?>
-                                      </select>
-                                  </div>
-                              </div>
-
-
-                              <div class="col-sm-5" style="display:none;">
-                                <div class="form-group">
-                                  <label>Target device</label>
-                                  <input type="text" value="hda" class="form-control" name="target_dev_cd"/>
+                                      }
+                                    }
+                                    ?>
+                                  </select>
                                 </div>
                               </div>
-
-                              <div class="col-sm-5" style="display:none;">
-                                <div class="form-group">
-                                  <label>Target bus</label>
-                                  <input type="text" value="ide" class="form-control" name="target_bus_cd" />
-                                </div>
-                              </div>
-
-
-
                             </div>
                           </div>
                         </div>
                       </div>
-
-
 
 
                       <!--    Networking Tab     -->
