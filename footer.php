@@ -67,6 +67,9 @@
 
 
 
+
+<!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
+<script src="assets/demo/demo.js"></script>
 <!--   Code for Dashboard   -->
 <script>
     $(document).ready(function() {
@@ -74,6 +77,7 @@
         demo.initDashboardPageCharts();
     });
 </script>
+
 
 <!--   Code for Wizard   -->
 <script>
