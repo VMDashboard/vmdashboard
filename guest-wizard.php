@@ -28,12 +28,12 @@ if (isset($_POST['finish'])) {
 
 
   //Hard drive information
-  $disk_type_vda = $_POST['disk_type_vda'];
-  $disk_device_vda = $_POST['disk_device_vda'];
-  $driver_name_vda = $_POST['driver_name_vda'];
+  $disk_type_vda = "file";
+  $disk_device_vda = "disk";
+  $driver_name_vda = "qemu";
   $source_file_vda = $_POST['source_file_vda'];
-  $target_dev_vda = $_POST['target_dev_vda'];
-  $target_bus_vda = $_POST['target_bus_vda'];
+  $target_dev_vda = "vda"; //$_POST['target_dev_vda'];
+  $target_bus_vda = "virtio"; //$_POST['target_bus_vda'];
 
   //determine disk file extension
   //$dot_array = explode('.', $source_file_vda);
