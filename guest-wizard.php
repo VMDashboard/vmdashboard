@@ -267,33 +267,34 @@ function changeOptions(selectEl) {
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Domain name</label>
-                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name" required>
+                      <input type="text" class="form-control" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name" required />
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Virtual CPUs</label>
-                      <input type="number" value="1" class="form-control" name="vcpu" min="1" required/>
+                      <input type="number" value="1" class="form-control" name="vcpu" min="1" required />
                     </div>
                   </div>
 
                   <div class="col-sm-7">
                     <div class="form-group">
                       <label>Memory</label>
-                      <input type="number" value="2" placeholder="Enter the amount of RAM (required)" class="form-control" name="memory" min="1" required/>
+                      <input type="number" value="2" placeholder="Enter the amount of RAM (required)" class="form-control" name="memory" min="1" required />
                     </div>
                   </div>
 
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label>Memory Unit</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Single Select" name="memory_unit" />
                         <option value="MiB"> MB </option>
                         <option value="GiB" selected="selected"> GB </option>
                       </select>
                     </div>
                   </div>
+
                 </div>
               </div>
 
@@ -329,182 +330,175 @@ function changeOptions(selectEl) {
                         </div>
                       </div>
 
-                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Disk Image Name</label>
-                                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
-                                  </div>
-                              </div>
-
-
-
-                              <div class="col-sm-6 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Volume size</label>
-                                  <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
-                                </div>
-                              </div>
-
-                              <div class="col-sm-4 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Unit size</label>
-                                  <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
-                                    <option value="M">MB</option>
-                                    <option value="G" selected>GB</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                                  <div class="form-group">
-                                      <label>Driver type</label>
-                                        <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
-                                          <option value="qcow2" selected="selected"> qcow2 </option>
-                                          <option value="raw" > raw </option>
-                                        </select>
-                                  </div>
-                              </div>
-
-
-
-
-
-
-
-                            </div>
-                          </div>
-
-                            <div class="col-md-6">
-                            <h5 class="info-text"> CD/DVD Storage </h5>
-                            <div class="row justify-content-center">
-
-                              <div class="col-sm-10">
-                                <div class="form-group">
-                                  <label>ISO location for cdrom</label>
-                                  <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_cd">
-                                    <option value="none">Select File</option>
-                                    <?php
-                                    $pools = $lv->get_storagepools();
-                                    for ($i = 0; $i < sizeof($pools); $i++) {
-                                      $info = $lv->get_storagepool_info($pools[$i]);
-                                      if ($info['volume_count'] > 0) {
-                                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                                        $tmp_keys = array_keys($tmp);
-                                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                                          if (strtolower($ext) == "iso")
-                                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                                        }
-                                      }
-                                    }
-                                    ?>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                        <div class="form-group">
+                          <label>Disk Image Name</label>
+                          <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
                         </div>
                       </div>
 
-
-                      <!--    Networking Tab     -->
-
-                        <div class="tab-pane fade" id="networking">
-                            <div class="row justify-content-center">
-                                <div class="col-sm-12">
-                                    <h5 class="info-text"> Networking Interface Setup </h5>
-                                </div>
-
-                                <div class="col-sm-7">
-                                    <div class="form-group">
-                                        <label>Interface type</label>
-                                        <select onchange="changeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="interface_type" title="Select Interface Type">
-                                          <option value="network" selected="selected">nat</option>
-                                          <option value="direct">bridge</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-3">
-                                    <div class="form-group">
-                                        <label>MAC address</label>
-                                        <input type="text" class="form-control" name="mac_address" value="<?php echo $random_mac; ?>">
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-5 netChange" id="direct" style="display:none;">
-                                    <div class="form-group">
-                                        <label>Source device</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Network Interface" name="source_dev">
-                                        <?php
-                                          $tmp = $lv->get_node_device_cap_options();
-                                          for ($i = 0; $i < sizeof($tmp); $i++) {
-                                            $tmp1 = $lv->get_node_devices($tmp[$i]);
-                                            for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
-                                              $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                                              if ($tmp2['capability'] == 'net') {
-                                                $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
-                                                echo "<option value='$ident'> $ident </option>";
-                                              }
-                                            }
-                                          }
-                                        ?>
-                                      </select>
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-5 netChange" id="direct" style="display:none;">
-                                    <div class="form-group">
-                                        <label>Mode</label>
-                                        <input type="text" class="form-control" name="source_mode" value="bridge" readonly >
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-10 netChange" id="network">
-                                    <div class="form-group">
-                                        <label>Source network</label>
-                                        <input type="text" class="form-control" name="source_network" value="default">
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-10">
-                                    <div class="form-group">
-                                        <label>Model type</label>
-                                        <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Model" name="model_type">
-                                            <option value="virtio" selected="selected"> virtio </option>
-                                            <option value="default" disabled> default </option>
-                                            <option value="rtl8139"> rtl8139 </option>
-                                            <option value="e1000"> e1000 </option>
-                                            <option value="pcnet" disabled> pcnet </option>
-                                            <option value="ne2k_pci" disabled> ne2k_pci </option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </div>
+                      <div class="col-sm-6 diskChange" id="new" style="display:none;">
+                        <div class="form-group">
+                          <label>Volume size</label>
+                          <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
                         </div>
+                      </div>
+
+                      <div class="col-sm-4 diskChange" id="new" style="display:none;">
+                        <div class="form-group">
+                          <label>Unit size</label>
+                          <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
+                            <option value="M">MB</option>
+                            <option value="G" selected>GB</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                        <div class="form-group">
+                          <label>Driver type</label>
+                          <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
+                            <option value="qcow2" selected="selected"> qcow2 </option>
+                            <option value="raw" > raw </option>
+                          </select>
+                        </div>
+                      </div>
 
                     </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <h5 class="info-text"> CD/DVD Storage </h5>
+                    <div class="row justify-content-center">
+
+                      <div class="col-sm-10">
+                        <div class="form-group">
+                          <label>ISO location for cdrom</label>
+                          <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_cd">
+                            <option value="none">Select File</option>
+                            <?php
+                            $pools = $lv->get_storagepools();
+                            for ($i = 0; $i < sizeof($pools); $i++) {
+                              $info = $lv->get_storagepool_info($pools[$i]);
+                              if ($info['volume_count'] > 0) {
+                                $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                $tmp_keys = array_keys($tmp);
+                                for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                  $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                  $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                  if (strtolower($ext) == "iso")
+                                    echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                }
+                              }
+                            }
+                            ?>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
+              </div>
 
-                <div class="card-footer">
-                    <div class="pull-right">
-                        <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
-                        <input type='submit' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' />
-                    </div>
 
-                    <div class="pull-left">
-                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+              <!--    Networking Tab     -->
+              <div class="tab-pane fade" id="networking">
+                <div class="row justify-content-center">
+                  <div class="col-sm-12">
+                    <h5 class="info-text"> Networking Interface Setup </h5>
+                  </div>
+
+                  <div class="col-sm-7">
+                    <div class="form-group">
+                      <label>Interface type</label>
+                      <select onchange="changeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="interface_type" title="Select Interface Type">
+                        <option value="network" selected="selected">nat</option>
+                        <option value="direct">bridge</option>
+                      </select>
                     </div>
-                    <div class="clearfix"></div>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>MAC address</label>
+                      <input type="text" class="form-control" name="mac_address" value="<?php echo $random_mac; ?>">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5 netChange" id="direct" style="display:none;">
+                    <div class="form-group">
+                      <label>Source device</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Network Interface" name="source_dev">
+                        <?php
+                        $tmp = $lv->get_node_device_cap_options();
+                        for ($i = 0; $i < sizeof($tmp); $i++) {
+                          $tmp1 = $lv->get_node_devices($tmp[$i]);
+                          for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                            $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                            if ($tmp2['capability'] == 'net') {
+                              $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
+                              echo "<option value='$ident'> $ident </option>";
+                            }
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5 netChange" id="direct" style="display:none;">
+                    <div class="form-group">
+                      <label>Mode</label>
+                      <input type="text" class="form-control" name="source_mode" value="bridge" readonly >
+                    </div>
+                  </div>
+
+                  <div class="col-sm-10 netChange" id="network">
+                    <div class="form-group">
+                      <label>Source network</label>
+                      <input type="text" class="form-control" name="source_network" value="default">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label>Model type</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Model" name="model_type">
+                        <option value="virtio" selected="selected"> virtio </option>
+                        <option value="default" disabled> default </option>
+                        <option value="rtl8139"> rtl8139 </option>
+                        <option value="e1000"> e1000 </option>
+                        <option value="pcnet" disabled> pcnet </option>
+                        <option value="ne2k_pci" disabled> ne2k_pci </option>
+                      </select>
+                    </div>
+                  </div>
+
                 </div>
+              </div>
 
-            </form>
-        </div>
+            </div>
+          </div>
+
+          <div class="card-footer">
+            <div class="pull-right">
+              <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
+              <input type='submit' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' />
+            </div>
+
+            <div class="pull-left">
+              <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+            </div>
+
+            <div class="clearfix"></div>
+          </div>
+
+        </form>
+      </div>
     </div> <!-- wizard container -->
+  </div>
 </div>
-
 <?php
 require('footer.php');
 ?>
