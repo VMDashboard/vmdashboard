@@ -171,6 +171,9 @@ require('navbar.php'); //bring in sidebar and page layout
 <script>
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    if (selectedValue.charAt(0) === "/") {
+      selectedValue = "existing";
+    }
   let subForms = document.getElementsByClassName('diskChange')
   for (let i = 0; i < subForms.length; i += 1) {
     if (selectedValue === subForms[i].id) {
@@ -304,6 +307,7 @@ function changeOptions(selectEl) {
                   <div class="col-md-6">
                     <h5 class="info-text"> Hard Drive Storage </h5>
                     <div class="row justify-content-center">
+
                       <div class="col-sm-10">
                         <div class="form-group">
                           <label>Disk drive source file location</label>

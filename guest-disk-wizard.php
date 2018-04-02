@@ -11,6 +11,7 @@ if (isset($_POST['finish'])) {
   $disk_device_vda = "disk";
   $driver_name = "qemu"; //not used
   $driver_type = $_POST['driver_type'];
+  $new_driver_type = $_POST['new_driver_type'];
   $source_file = $_POST['source_file'];
   $target_dev = ""; //changed to an autoincremting option below.
   $target_bus = $_POST['target_bus'];
@@ -59,6 +60,24 @@ if (isset($_POST['finish'])) {
 require('navbar.php');
 ?>
 
+<script>
+function diskChangeOptions(selectEl) {
+  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    if (selectedValue.charAt(0) === "/") {
+      selectedValue = "existing";
+    }
+  let subForms = document.getElementsByClassName('diskChange')
+  for (let i = 0; i < subForms.length; i += 1) {
+    if (selectedValue === subForms[i].id) {
+      subForms[i].setAttribute('style', 'display:block')
+    } else {
+      subForms[i].setAttribute('style', 'display:none')
+    }
+  }
+}
+</script>
+
+
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
   <div class="col-md-10 mr-auto ml-auto">
@@ -89,8 +108,9 @@ require('navbar.php');
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Disk drive source file location</label>
-                      <select class="selectpicker" data-size="3" data-style="btn btn-plain btn-round" name="source_file">
-                        <option value="none">Select File</option>
+                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file">
+                        <option value="none"> Select Disk </option>
+                        <option value="new"> Create New Disk Image </option>
                         <?php
                         $pools = $lv->get_storagepools();
                         for ($i = 0; $i < sizeof($pools); $i++) {
@@ -111,7 +131,41 @@ require('navbar.php');
                     </div>
                   </div>
 
-                  <div class="col-sm-5">
+                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                    <div class="form-group">
+                      <label>Disk Image Name</label>
+                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 diskChange" id="new" style="display:none;">
+                    <div class="form-group">
+                      <label>Volume size</label>
+                      <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-4 diskChange" id="new" style="display:none;">
+                    <div class="form-group">
+                      <label>Unit size</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
+                        <option value="M">MB</option>
+                        <option value="G" selected>GB</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                    <div class="form-group">
+                      <label>Driver type</label>
+                      <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
+                        <option value="qcow2" selected="selected"> qcow2 </option>
+                        <option value="raw" > raw </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
                     <div class="form-group">
                       <label>Driver type</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
@@ -121,7 +175,7 @@ require('navbar.php');
                     </div>
                   </div>
 
-                  <div class="col-sm-5">
+                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
                     <div class="form-group">
                       <label>Target bus</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="target_bus">
