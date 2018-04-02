@@ -88,10 +88,10 @@ if (isset($_POST['finish'])) {
   if ($source_file != "new") {
   $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   }
-  echo "<script>alert(\"$ret\")</script>";
+
   //Return back to the orignal web page
-  header('Location: ' . $original_page);
-  exit;
+  //header('Location: ' . $original_page);
+  //exit;
 }
 
 require('navbar.php');
@@ -125,7 +125,7 @@ function diskChangeOptions(selectEl) {
           <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">Add new storage</h3>
-            <h5 class="description">This form will allow you to add a new disk image.</h5>
+            <h5 class="description"><?php echo "$ret";?>This form will allow you to add a new disk image.</h5>
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
