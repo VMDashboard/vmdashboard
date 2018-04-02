@@ -16,7 +16,6 @@ if (isset($_POST['finish'])) {
   $target_bus = $_POST['target_bus'];
   $original_page = $_POST['original_page'];
 
-
   //If bus type is virtio then we need to determine highest assigned value of drive, ex. vda, vdb, vdc...
   if ($target_bus == "virtio"){
     $virtio_array = array();
@@ -32,7 +31,6 @@ if (isset($_POST['finish'])) {
       $target_dev = "vda";
     }
   }
-
 
   //If bus type is ide then we need to determine highest assigned value of drive, ex. hda, hdb, hdc...
   if ($target_bus == "ide"){
@@ -58,7 +56,6 @@ if (isset($_POST['finish'])) {
   exit;
 }
 
-
 require('navbar.php');
 ?>
 
@@ -69,18 +66,14 @@ require('navbar.php');
     <div class="wizard-container">
       <div class="card card-wizard" data-color="primary" id="wizardProfile">
         <form action="<?php echo $_SERVER['PHP_SELF'] . '?uuid=' . $uuid;?>" method="post">
-        <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
-
+          <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">Add new storage</h3>
             <h5 class="description">This form will allow you to add a new disk image.</h5>
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
-                  <a class="nav-link" href="#storage" data-toggle="tab">
-                    <i class="fas fa-database"></i>
-                        Storage
-                  </a>
+                  <a class="nav-link" href="#storage" data-toggle="tab"><i class="fas fa-database"></i>Storage</a>
                 </li>
               </ul>
             </div>
@@ -93,40 +86,39 @@ require('navbar.php');
                 <h5 class="info-text"> Hard Drive Storage </h5>
                 <div class="row justify-content-center">
 
-
                   <div class="col-sm-10">
-                      <div class="form-group">
-                          <label>Disk drive source file location</label>
-                          <select class="selectpicker" data-size="3" data-style="btn btn-primary btn-round" name="source_file">
-                            <option value="none">Select File</option>
-                          <?php
-                          $pools = $lv->get_storagepools();
-                          for ($i = 0; $i < sizeof($pools); $i++) {
-                            $info = $lv->get_storagepool_info($pools[$i]);
-                            if ($info['volume_count'] > 0) {
-                              $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                              $tmp_keys = array_keys($tmp);
-                              for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                                $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                                $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                                if (strtolower($ext) != "iso")
-                                  echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                              }
+                    <div class="form-group">
+                      <label>Disk drive source file location</label>
+                      <select class="selectpicker" data-size="3" data-style="btn btn-plain btn-round" name="source_file">
+                        <option value="none">Select File</option>
+                        <?php
+                        $pools = $lv->get_storagepools();
+                        for ($i = 0; $i < sizeof($pools); $i++) {
+                          $info = $lv->get_storagepool_info($pools[$i]);
+                          if ($info['volume_count'] > 0) {
+                            $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                            $tmp_keys = array_keys($tmp);
+                            for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                              $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                              $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                              if (strtolower($ext) != "iso")
+                                echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
                             }
                           }
-                          ?>
-                          </select>
-                      </div>
+                        }
+                        ?>
+                      </select>
+                    </div>
                   </div>
 
                   <div class="col-sm-5">
-                      <div class="form-group">
-                          <label>Driver type</label>
-                            <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
-                              <option value="qcow2" selected="selected"> qcow2 </option>
-                              <option value="raw"> raw </option>
-                            </select>
-                      </div>
+                    <div class="form-group">
+                      <label>Driver type</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
+                        <option value="qcow2" selected="selected"> qcow2 </option>
+                        <option value="raw"> raw </option>
+                      </select>
+                    </div>
                   </div>
 
                   <div class="col-sm-5">
@@ -157,7 +149,7 @@ require('navbar.php');
       </div>
     </div> <!-- wizard container -->
   </div>
-
+</div>
 <?php
 require('footer.php');
 ?>
