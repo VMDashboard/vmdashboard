@@ -17,8 +17,8 @@ function clean_name_input($data) {
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
   $original_page = $_POST['original_page'];
-  $disk_type_vda = "file";
-  $disk_device_vda = "disk";
+  $disk_type = "file";
+  $disk_device= "disk";
   $driver_name = "qemu"; //not used
   $source_file = $_POST['source_file']; //determines if none, new, or existing disk is added
 
@@ -195,8 +195,8 @@ function diskChangeOptions(selectEl) {
                     <div class="form-group">
                       <label>Driver type</label>
                       <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
-                        <option value="qcow2" selected="selected"> qcow2 </option>
-                        <option value="raw" > raw </option>
+                        <option value="qcow2" selected="selected">qcow2</option>
+                        <option value="raw" >raw</option>
                       </select>
                     </div>
                   </div>
@@ -205,8 +205,8 @@ function diskChangeOptions(selectEl) {
                     <div class="form-group">
                       <label>Target bus</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="new_target_bus">
-                        <option value="virtio" selected="selected"> virtio </option>
-                        <option value="ide"> ide </option>
+                        <option value="virtio" selected="selected">virtio</option>
+                        <option value="ide">ide</option>
                       </select>
                     </div>
                   </div>
@@ -215,8 +215,8 @@ function diskChangeOptions(selectEl) {
                     <div class="form-group">
                       <label>Driver type</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_driver_type">
-                        <option value="qcow2" selected="selected"> qcow2 </option>
-                        <option value="raw"> raw </option>
+                        <option value="qcow2" selected="selected">qcow2</option>
+                        <option value="raw">raw</option>
                       </select>
                     </div>
                   </div>
@@ -225,8 +225,8 @@ function diskChangeOptions(selectEl) {
                     <div class="form-group">
                       <label>Target bus</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_target_bus">
-                        <option value="virtio" selected="selected"> virtio </option>
-                        <option value="ide"> ide </option>
+                        <option value="virtio" selected="selected">virtio</option>
+                        <option value="ide">ide</option>
                       </select>
                     </div>
                   </div>
