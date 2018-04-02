@@ -125,7 +125,7 @@ function diskChangeOptions(selectEl) {
           <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">Add new storage</h3>
-            <h5 class="description"><?php echo "$ret";?>This form will allow you to add a new disk image.</h5>
+            <h5 class="description"><?php echo "$ret-$source_file-$target_dev";?>This form will allow you to add a new disk image.</h5>
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
