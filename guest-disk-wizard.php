@@ -86,7 +86,7 @@ if (isset($_POST['finish'])) {
 
   //add an existing disk to domain if selected
   if ($source_file != "new") {
-  $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
+  $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   }
 
   //Return back to the orignal web page
