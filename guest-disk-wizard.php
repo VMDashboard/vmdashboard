@@ -7,12 +7,12 @@ $dom = $lv->get_domain_object($domName);
 
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
-  $disk_type_vda = $_POST['disk_type_vda'];
-  $disk_device_vda = $_POST['disk_device_vda'];
-  $driver_name_vda = $_POST['driver_name_vda'];
+  $disk_type_vda = "file";
+  $disk_device_vda = "disk";
+  $driver_name = "qemu"; //not used
   $driver_type = $_POST['driver_type'];
   $source_file = $_POST['source_file'];
-  $target_dev = ""; //changed to an autoincremting option below.  $target_dev = $_POST['target_dev'];
+  $target_dev = ""; //changed to an autoincremting option below.
   $target_bus = $_POST['target_bus'];
   $original_page = $_POST['original_page'];
 
@@ -93,38 +93,8 @@ require('navbar.php');
                 <h5 class="info-text"> Hard Drive Storage </h5>
                 <div class="row justify-content-center">
 
-                  <div class="col-sm-5" style="display:none;">
-                    <div class="form-group">
-                      <label>Disk type</label>
-                      <input type="text" value="file" class="form-control" name="disk_type_vda" />
-                    </div>
-                  </div>
 
-                  <div class="col-sm-5" style="display:none;">
-                    <div class="form-group">
-                      <label>Disk device</label>
-                      <input type="text" value="disk" class="form-control" name="disk_device_vda" />
-                    </div>
-                  </div>
-
-                  <div class="col-sm-5" style="display:none;">
-                    <div class="form-group">
-                      <label>Driver name</label>
-                      <input type="text" value="qemu" class="form-control" name="driver_name_vda" />
-                    </div>
-                  </div>
-
-                  <div class="col-sm-5">
-                      <div class="form-group">
-                          <label>Driver type</label>
-                            <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
-                              <option value="qcow2" selected="selected"> qcow2 </option>
-                              <option value="raw"> raw </option>
-                            </select>
-                      </div>
-                  </div>
-
-                  <div class="col-sm-5">
+                  <div class="col-sm-10">
                       <div class="form-group">
                           <label>Disk drive source file location</label>
                           <select class="selectpicker" data-size="3" data-style="btn btn-primary btn-round" name="source_file">
@@ -149,11 +119,14 @@ require('navbar.php');
                       </div>
                   </div>
 
-                  <div class="col-sm-5" style="display:none;">
-                    <div class="form-group">
-                      <label>Target device</label>
-                      <input type="text" placeholder="vdb or hdb" class="form-control" name="target_dev"/>
-                    </div>
+                  <div class="col-sm-5">
+                      <div class="form-group">
+                          <label>Driver type</label>
+                            <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
+                              <option value="qcow2" selected="selected"> qcow2 </option>
+                              <option value="raw"> raw </option>
+                            </select>
+                      </div>
                   </div>
 
                   <div class="col-sm-5">
