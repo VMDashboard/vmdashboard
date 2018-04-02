@@ -80,7 +80,7 @@ if (isset($_POST['finish'])) {
     $img = libvirt_storagevolume_get_path($new_disk);
     $dev = $target_dev;
     $typ = $target_bus;
-    $driver = "qcow2";//$driver_type;
+    $driver = $driver_type;
     $ret = $lv->domain_disk_add($dom, $img, $dev, $typ, $driver);
   }
 
