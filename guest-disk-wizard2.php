@@ -78,7 +78,7 @@ if (isset($_POST['finish'])) {
   //add the new disk to domain if selected
   if ($source_file == "new") {
     $img = libvirt_storagevolume_get_path($new_disk);
-    $dev = "vdb"; //$target_dev;
+    $dev = $target_dev;
     $typ = "virtio";//$target_bus;
     $driver = "qcow2";//$driver_type;
     $ret = $lv->domain_disk_add($dom, $img, $dev, $typ, $driver);
