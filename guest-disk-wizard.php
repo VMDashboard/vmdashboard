@@ -81,7 +81,7 @@ if (isset($_POST['finish'])) {
     $dev = $target_dev;
     $typ = $target_bus;
     $driver = $driver_type;
-    $ret = $lv->domain_disk_add($dom, $img, $dev, $typ, $driver);
+    $ret = $lv->domain_disk_add($domName, $img, $dev, $typ, $driver);
   }
 
   //add an existing disk to domain if selected
