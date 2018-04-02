@@ -90,8 +90,8 @@ if (isset($_POST['finish'])) {
   }
 
   //Return back to the orignal web page
-  //header('Location: ' . $original_page);
-  //exit;
+  header('Location: ' . $original_page);
+  exit;
 }
 
 require('navbar.php');
@@ -141,8 +141,6 @@ function diskChangeOptions(selectEl) {
               <div class="tab-pane fade" id="storage">
                 <h5 class="info-text"> Hard Drive Storage </h5>
                 <div class="row justify-content-center">
-
-<?php echo "$ret<br>$domName<br>$source_file<br>$target_dev<br>$target_bus<br>$driver_type";?>
 
                   <div class="col-sm-10">
                     <div class="form-group">
