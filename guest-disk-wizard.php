@@ -86,7 +86,7 @@ if (isset($_POST['finish'])) {
 
   //add an existing disk to domain if selected
   if ($source_file != "new") {
-    $target_dev = "vdg";
+    
     $target_bus = "virtio";
     $driver_type = "qcow2";
   $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
