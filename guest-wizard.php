@@ -45,7 +45,7 @@ if (isset($_POST['finish'])) {
 
     case "new":
       $pool = "default";
-      $volume_image_name = clean_name_input($_POST['new_target_dev']);
+      $volume_image_name = clean_name_input($_POST['new_volume_name']);
       //Lets check for empty string
       if ($volume_image_name == "") {
         $volume_image_name = $domain_name . "-volume-image";
@@ -189,11 +189,11 @@ function autoDiskName(f) {
   diskName = diskName.replace(/\s+/g, '');
   var ext = ".qcow2";
   var fullDiskName = diskName.concat(ext);
-  f.new_target_dev.value = fullDiskName;
+  f.new_volume_name.value = fullDiskName;
 }
 
 function newExtenstion(f) {
-  var diskName = f.new_target_dev.value;
+  var diskName = f.new_volume_name.value;
   diskName = diskName.replace(/\s+/g, '');
   var n = diskName.lastIndexOf(".");
   var noExt = n > -1 ? diskName.substr(0, n) : diskName;
@@ -201,12 +201,12 @@ function newExtenstion(f) {
   if (driverType === "qcow2"){
     var ext = ".qcow2";
     var fullDiskName = noExt.concat(ext);
-    f.new_target_dev.value = fullDiskName;
+    f.new_volume_name.value = fullDiskName;
   }
   if (driverType === "raw"){
     var ext = ".img";
     var fullDiskName = noExt.concat(ext);
-    f.new_target_dev.value = fullDiskName;
+    f.new_volume_name.value = fullDiskName;
   }
 }
 
@@ -337,7 +337,7 @@ function changeOptions(selectEl) {
                       <div class="col-sm-10 diskChange" id="new" style="display:none;">
                         <div class="form-group">
                           <label>Disk Image Name</label>
-                          <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                          <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_volume_name"/>
                         </div>
                       </div>
 

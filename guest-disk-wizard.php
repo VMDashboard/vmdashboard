@@ -5,19 +5,44 @@ $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
 
+function clean_name_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  $data = str_replace(' ','',$data);
+  $data = filter_var($data, FILTER_SANITIZE_STRING);
+  return $data;
+}
+
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
+  $original_page = $_POST['original_page'];
   $disk_type_vda = "file";
   $disk_device_vda = "disk";
   $driver_name = "qemu"; //not used
-  $driver_type = $_POST['driver_type'];
-  $new_driver_type = $_POST['new_driver_type'];
-  $source_file = $_POST['source_file'];
-  $target_dev = ""; //changed to an autoincremting option below.
-  $target_bus = $_POST['target_bus'];
-  $original_page = $_POST['original_page'];
+  $source_file = $_POST['source_file']; //determines if none, new, or existing disk is added
 
-  //If bus type is virtio then we need to determine highest assigned value of drive, ex. vda, vdb, vdc...
+  if ($source_file == "new") {
+    $pool = "default"; //using the default storage pool to store images
+    $volume_image_name = clean_name_input($_POST['new_volume_name']); //the new name of the volume disk image
+    $volume_capacity = $_POST['new_volume_size']; //number used for volume size
+    $unit = $_POST['new_unit']; //determines MiB or GiB
+    $volume_size = $_POST['new_volume_size'];
+    $driver_type = $_POST['new_driver_type']; //qcow2 or raw
+    //Create the new disk now
+    $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+    $target_bus = $_POST['new_target_bus']; //virtio or ide, used when adding disk to domain
+
+  } elseif ($source_file == "none") {
+    //
+  } else {
+    $driver_type = $_POST['existing_driver_type']; //qcow2 or raw
+    $target_bus = $_POST['existing_target_bus']; //virtio or ide
+  }
+
+  $target_dev = ""; //changed to an autoincremting option below.
+
+  //If $target_bus type is virtio then we need to determine highest assigned value of drive, ex. vda, vdb, vdc...
   if ($target_bus == "virtio"){
     $virtio_array = array();
     for ($i = 'a'; $i < 'z'; $i++)
@@ -33,7 +58,7 @@ if (isset($_POST['finish'])) {
     }
   }
 
-  //If bus type is ide then we need to determine highest assigned value of drive, ex. hda, hdb, hdc...
+  //If $target_bus type is ide then we need to determine highest assigned value of drive, ex. hda, hdb, hdc...
   if ($target_bus == "ide"){
     $ide_array = array();
     for ($i = 'a'; $i < 'z'; $i++)
@@ -49,9 +74,20 @@ if (isset($_POST['finish'])) {
     }
   }
 
-  //Add the new disk now
-  $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
 
+  //add the new disk to domain if selected
+  if ($source_file == "new") {
+    $img = libvirt_storagevolume_get_path($new_disk);
+    $dev = $target_dev;
+    $typ = $target_bus;
+    $driver = $driver_type;
+    $ret = $lv->domain_disk_add($dom, $img, $dev, $typ, $driver);
+  }
+
+  //add an existing disk to domain if selected
+  if ($source_file != "new") {
+  $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
+  }
   //Return back to the orignal web page
   header('Location: ' . $original_page);
   exit;
@@ -134,7 +170,7 @@ function diskChangeOptions(selectEl) {
                   <div class="col-sm-10 diskChange" id="new" style="display:none;">
                     <div class="form-group">
                       <label>Disk Image Name</label>
-                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_target_dev"/>
+                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_volume_name"/>
                     </div>
                   </div>
 
@@ -165,20 +201,30 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
+                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                    <div class="form-group">
+                      <label>Target bus</label>
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="new_target_bus">
+                        <option value="virtio" selected="selected"> virtio </option>
+                        <option value="ide"> ide </option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="col-sm-5 diskChange" id="existing" style="display:none;">
                     <div class="form-group">
                       <label>Driver type</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="driver_type">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_driver_type">
                         <option value="qcow2" selected="selected"> qcow2 </option>
                         <option value="raw"> raw </option>
                       </select>
                     </div>
                   </div>
 
-                  <div class="col-sm-5 diskChange" id="existing new" style="display:none;">
+                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
                     <div class="form-group">
                       <label>Target bus</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="target_bus">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_target_bus">
                         <option value="virtio" selected="selected"> virtio </option>
                         <option value="ide"> ide </option>
                       </select>
