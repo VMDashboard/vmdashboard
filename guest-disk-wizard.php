@@ -79,7 +79,7 @@ if (isset($_POST['finish'])) {
   if ($source_file == "new") {
     $img = libvirt_storagevolume_get_path($new_disk);
     $dev = $target_dev;
-    $typ = "vdc"; //$target_bus;
+    $typ = $target_bus;
     $driver = $driver_type;
     $ret = $lv->domain_disk_add($domName, $img, $dev, $typ, $driver);
   }
@@ -88,6 +88,7 @@ if (isset($_POST['finish'])) {
   if ($source_file != "new") {
   $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   }
+  <script>alert("<?php echo $ret ?>") </script>
   //Return back to the orignal web page
   header('Location: ' . $original_page);
   exit;
