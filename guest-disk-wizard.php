@@ -86,7 +86,7 @@ if (isset($_POST['finish'])) {
 
   //add an existing disk to domain if selected
   if ($source_file != "new") {
-  $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
+  $ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   }
 
   //Return back to the orignal web page
@@ -125,7 +125,7 @@ function diskChangeOptions(selectEl) {
           <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
           <div class="card-header text-center" data-background-color="orange">
             <h3 class="card-title">Add new storage</h3>
-            <h5 class="description"><?php echo "$ret-$target_bus-$driver_type";?>This form will allow you to add a new disk image.</h5>
+            <h5 class="description">This form will allow you to add a new disk image.</h5>
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
@@ -141,6 +141,8 @@ function diskChangeOptions(selectEl) {
               <div class="tab-pane fade" id="storage">
                 <h5 class="info-text"> Hard Drive Storage </h5>
                 <div class="row justify-content-center">
+
+<?php echo "$ret<br>$domName<br>$source_file<br>$target_dev<br>$target_bus<br>$driver_type";?>
 
                   <div class="col-sm-10">
                     <div class="form-group">
