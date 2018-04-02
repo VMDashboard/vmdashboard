@@ -175,7 +175,7 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
-                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
+                  <div class="col-sm-5 diskChange" id="existing new" style="display:none;">
                     <div class="form-group">
                       <label>Target bus</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" name="target_bus">
