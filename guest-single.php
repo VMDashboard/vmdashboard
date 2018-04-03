@@ -44,10 +44,9 @@ if ($action == 'domain-delete') {
 
 //Disk actions
 if ($action == 'domain-disk-remove') {
-  $ret = $lv->domain_disk_remove($domName, $_GET['dev']) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
   $dev = $_GET['dev'];
-  shell_exec("virsh detach-disk $domName $dev");
-
+  $ret = $lv->domain_disk_remove($domName, $dev) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
+  shell_exec("virsh detach-disk $domName $dev --live --config");
 }
 
 
