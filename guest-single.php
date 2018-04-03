@@ -45,7 +45,7 @@ if ($action == 'domain-delete') {
 //Disk actions
 if ($action == 'domain-disk-remove') {
   //$ret = $lv->domain_disk_remove($domName, $_GET['dev']) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
-  $ret = $lv->domain_disk_remove($domName, "newVM4.qcow2") ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
+  $ret = $lv->domain_disk_remove($domName, "/var/lib/libvirt/images/newVM4.qcow2") ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
 
 }
 
