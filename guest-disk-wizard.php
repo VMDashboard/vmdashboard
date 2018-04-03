@@ -16,7 +16,6 @@ function clean_name_input($data) {
 
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
-  $original_page = $_POST['original_page'];
   $disk_type = "file";
   $disk_device= "disk";
   $driver_name = "qemu"; //not used
@@ -87,12 +86,12 @@ if (isset($_POST['finish'])) {
   //add an existing disk to domain if selected
   if ($source_file != "new") {
 
-    
+
   $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   }
 
   //Return back to the orignal web page
-  header('Location: ' . $original_page);
+  header('Location: ' . guest-single.php?uuid=$uuid);
   exit;
 }
 
@@ -233,9 +232,6 @@ function diskChangeOptions(selectEl) {
                       </select>
                     </div>
                   </div>
-
-                  <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="original_page">
-
                 </div>
               </div>
             </div>
