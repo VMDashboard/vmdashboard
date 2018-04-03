@@ -91,7 +91,7 @@ if (isset($_POST['finish'])) {
   }
 
   //Return back to the orignal web page
-  header('Location: ' . guest-single.php?uuid=$uuid);
+  header('Location: ' . "guest-single.php?uuid=$uuid");
   exit;
 }
 
