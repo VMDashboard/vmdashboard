@@ -624,6 +624,10 @@ class Libvirt {
         return true;
     }
 
+    function network_define_xml($xml) {
+      libvirt_network_define_xml($this->conn, $xml);
+    }
+
     function translate_storagepool_state($state) {
         switch ($state) {
         case 0: return 'Not running';
