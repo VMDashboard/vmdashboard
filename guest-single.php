@@ -436,7 +436,7 @@ $list = file_put_contents($listfile, $liststring);
                   <?php
                   if ($state == "shutoff"){
                     $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
-                      "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#555555;\" >" . $xml . "</textarea>" .
+                      "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
                       "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
                     echo $ret;
                   } else {
