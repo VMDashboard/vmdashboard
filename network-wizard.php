@@ -15,24 +15,21 @@ function clean_name_input($data) {
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
 
-  $xml = "<network>
+  $xml = "
+  <network>
     <name>test</name>
-    <forward mode='nat'>
-      <nat>
-        <port start='1024' end='65535'/>
-      </nat>
-    </forward>
+    <forward mode='nat'/>
     <bridge name='virbr0' stp='on' delay='0'/>
-    <mac address='52:54:00:00:44:88'/>
-    <ip address='192.168.200.1' netmask='255.255.255.0'>
+    <mac address='52:54:00:0e:45:59'/>
+    <ip address='192.168.122.1' netmask='255.255.255.0'>
       <dhcp>
-        <range start='192.168.200.100' end='192.168.200.254'/>
+        <range start='192.168.122.2' end='192.168.122.254'/>
       </dhcp>
     </ip>
   </network>";
 
   $lv->network_define_xml($xml);
-  
+
 
 //network_name = "network1"
 //network_id = "192.168.1.0"
