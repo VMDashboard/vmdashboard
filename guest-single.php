@@ -306,10 +306,10 @@ $list = file_put_contents($listfile, $liststring);
                 $netUp = 'No <a href="">[Start]</a>';
               echo "<tr>" .
                 "<td>{$tmp[$i]['mac']}</td>" .
-                "<td align=\"center\">{$tmp[$i]['nic_type']}</td>" .
-                "<td align=\"center\">{$tmp[$i]['network']}</td>" .
-                "<td align=\"center\">$netUp$spaces</td>" .
-                "<td align=\"center\">" .
+                "<td>{$tmp[$i]['nic_type']}</td>" .
+                "<td>{$tmp[$i]['network']}</td>" .
+                "<td>$netUp</td>" .
+                "<td>" .
                   "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-remove&amp;mac={$tmp[$i]['mac']}\">" .
                   "Remove network card</a>" .
                 "</td>" .
