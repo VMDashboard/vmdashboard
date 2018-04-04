@@ -289,14 +289,16 @@ $list = file_put_contents($listfile, $liststring);
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-            echo "<table>" .
+            echo "<div class='table-responsive'>" .
+              "<table class='table'>" .
               "<tr>" .
               "<th>MAC Address</th>" .
               "<th>NIC Type</th>" .
               "<th>Network</th>" .
               "<th>Network active</th>" .
               "<th>Actions</th>" .
-              "</tr>";
+              "</tr>" .
+              "<tbody>";
             for ($i = 0; $i < sizeof($tmp); $i++) {
               if (in_array($tmp[$i]['network'], $anets))
                 $netUp = 'Yes';
@@ -313,7 +315,7 @@ $list = file_put_contents($listfile, $liststring);
                 "</td>" .
                 "</tr>";
             }
-            echo "</table>";
+            echo "</tbody></table></div>";
           } else {
             echo '<p>Domain doesn\'t have any network devices</p>';
           }
