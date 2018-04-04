@@ -222,10 +222,6 @@ $list = file_put_contents($listfile, $liststring);
               ?>
             </div>
 
-
-
-
-
           </div>
         </div>
       </div>
@@ -244,7 +240,6 @@ $list = file_put_contents($listfile, $liststring);
           if (!empty($tmp)) {
             echo "<div class='table-responsive'>" .
               "<table class='table'>" .
-              //"<thead class='text-primary'>" .
               "<tr>" .
               "<th>Disk storage</th>" .
               "<th>Storage driver type</th>" .
@@ -254,7 +249,6 @@ $list = file_put_contents($listfile, $liststring);
               "<th>Physical disk size</th>" .
               "<th>Actions</th>" .
               "</tr>" .
-              //"</thead>" .
               "<tbody>";
             for ($i = 0; $i < sizeof($tmp); $i++) {
               $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
@@ -291,6 +285,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Network interface information */
           echo "<h3>Network devices</h3>";
+          echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
@@ -319,7 +314,6 @@ $list = file_put_contents($listfile, $liststring);
                 "</tr>";
             }
             echo "</table>";
-            echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
           } else {
             echo '<p>Domain doesn\'t have any network devices</p>';
           }
