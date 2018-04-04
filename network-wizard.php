@@ -81,7 +81,7 @@ function newExtenstion(f) {
     <!--      Wizard container        -->
     <div class="wizard-container">
       <div class="card card-wizard" data-color="primary" id="wizardProfile">
-        <form action="<?php echo $_SERVER['PHP_SELF'] . '?uuid=' . $uuid;?>" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
           <div class="card-header text-center" data-background-color="orange">
