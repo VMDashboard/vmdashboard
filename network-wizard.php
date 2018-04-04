@@ -19,7 +19,7 @@ if (isset($_POST['finish'])) {
   <network>
     <name>test</name>
     <forward mode='nat'/>
-    <bridge name='virbr0' stp='on' delay='0'/>
+    <bridge name='virbr1' stp='on' delay='0'/>
     <mac address='52:54:00:0e:45:59'/>
     <ip address='192.168.122.1' netmask='255.255.255.0'>
       <dhcp>
