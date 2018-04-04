@@ -285,7 +285,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Network interface information */
           echo "<h3>Network devices</h3>";
-          echo "<br/><a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network card</a>";
+          echo "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-add\">Add new network interface</a>";
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
