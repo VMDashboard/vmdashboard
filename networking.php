@@ -49,6 +49,21 @@ swal(alertRet);
 }
 ?>
 
+<script>
+function networkDeleteWarning(linkURL) {
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete the virtual machine configuration',
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
+</script>
+
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
@@ -106,9 +121,14 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
   $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
 
+
+
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= ' | <a href="?action=delete-network&amp;network='.$tmp2['name'].'">Delete</a>';
+    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."\") href=\"#\">Delete</a>";
+
+  
+
   }
   echo "<tr>" .
     "<td>{$tmp2['name']}</td>" .
