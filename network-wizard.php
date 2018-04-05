@@ -15,6 +15,10 @@ function clean_name_input($data) {
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
 
+  //network_name = "network1"
+  //network_id = "192.168.1.0"
+  //subnet_mask = "255.255.255.0"
+
   $xml = "
   <network>
     <name>test2</name>
@@ -30,9 +34,7 @@ if (isset($_POST['finish'])) {
   $lv->network_define_xml($xml);
 
 
-//network_name = "network1"
-//network_id = "192.168.1.0"
-//subnet_mask = "255.255.255.0"
+
 
 
   //$pool = $_POST['pool'];

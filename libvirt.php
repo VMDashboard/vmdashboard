@@ -625,7 +625,8 @@ class Libvirt {
     }
 
     function network_define_xml($xml) {
-      libvirt_network_define_xml($this->conn, $xml);
+      $tmp = libvirt_network_define_xml($this->conn, $xml);
+      return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
     function translate_storagepool_state($state) {
