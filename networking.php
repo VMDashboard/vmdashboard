@@ -3,9 +3,10 @@ require('header.php');
 
 $ret = false;
 $action = $_GET['action'];
+
 if ($action == 'delete-network') {
   $network = $_GET['network'];
-  $ret = $lv->network_undefine($network);
+  $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
 
 require('navbar.php');
