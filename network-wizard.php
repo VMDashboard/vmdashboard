@@ -150,7 +150,7 @@ function newExtenstion(f) {
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>IP Address</label>
-                      <input type="number" class="form-control" name="ip_address" min="1" value="192.168.1.1" />
+                      <input type="text" class="form-control" name="ip_address" min="1" value="192.168.1.1" />
                     </div>
                   </div>
 
@@ -167,14 +167,14 @@ function newExtenstion(f) {
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>DHCP Starting Address</label>
-                      <input type="number" class="form-control" name="dhcp_start_address" min="1" value="192.168.1.2" />
+                      <input type="text" class="form-control" name="dhcp_start_address" min="1" value="192.168.1.2" />
                     </div>
                   </div>
 
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>DHCP Ending Address</label>
-                      <input type="number" class="form-control" name="dhcp_end_address" min="1" value="192.168.1.254" />
+                      <input type="text" class="form-control" name="dhcp_end_address" min="1" value="192.168.1.254" />
                     </div>
                   </div>
 
