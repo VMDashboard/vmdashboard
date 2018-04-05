@@ -632,7 +632,7 @@ class Libvirt {
 
 //added by me
     function network_undefine($name) {
-      $net = libvirt_network_get($this->conn, $name)
+      $net = libvirt_network_get($this->conn, $name);
       $tmp = libvirt_network_undefine($net);
       return ($tmp) ? $tmp : $this->_set_last_error();
     }
