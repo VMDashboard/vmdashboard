@@ -469,6 +469,7 @@ function changeOptions(selectEl) {
                         //echo "<option value=\"$tmp2['name']\"> $tmp2['name'] </option>";
                       }
                       ?>
+                    </select>
                     </div>
                   </div>
 
