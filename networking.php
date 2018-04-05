@@ -1,9 +1,7 @@
 <?php
 require('header.php');
-
 if ($action == "delete-network") {
-  $name = $_GET['name'];
-  $lv->network_undefine($name);
+
 }
 require('navbar.php');
 ?>
