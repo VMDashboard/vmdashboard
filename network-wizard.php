@@ -10,9 +10,8 @@ function clean_name_input($data) {
   return $data;
 }
 
-//$uuid = $_GET['uuid'];
-//$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
-//will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
+
+//will redirect to networking.php.
 if (isset($_POST['finish'])) {
 
   $network_name = clean_name_input($_POST['network_name']);
@@ -22,7 +21,6 @@ if (isset($_POST['finish'])) {
   $subnet_mask = $_POST['subnet_mask'];
   $dhcp_start_address = $_POST['dhcp_start_address'];
   $dhcp_end_address = $_POST['dhcp_end_address'];
-
 
   $xml = "
   <network>
@@ -39,29 +37,16 @@ if (isset($_POST['finish'])) {
   $ret = $lv->network_define_xml($xml);
   header('Location: networking.php');
   exit;
-
-
-
-
-  //$pool = $_POST['pool'];
-  //$volume_image_name = clean_name_input($_POST['volume_image_name']);
-  //$volume_capacity = $_POST['volume_size'];
-  //$volume_size = $_POST['volume_size'];
-  //$unit = $_POST['unit'];
-  //$driver_type = $_POST['driver_type'];
-  //$original_page = $_POST['original_page'];
-
-  //$ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
-  //$msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-  //header('Location: ' . $original_page);
-  //exit;
 }
 
 require('navbar.php');
+
 $random_mac = $lv->generate_random_mac_addr();
+
 ?>
 
 <?php
+//alert
 if ($ret != "") {
 ?>
 <script>

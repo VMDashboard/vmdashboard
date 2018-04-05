@@ -9,22 +9,6 @@ if ($action == 'delete-network') {
   $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
 
-require('navbar.php');
-?>
-
-<div class="panel-header panel-header-sm"></div>
-<div class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Private Networks</h4>
-          <a href="network-wizard.php"><i class="fas fa-plus"></i> Create new network </a>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-
-<?php
 
 if ($subaction) {
   $name = $_GET['name'];
@@ -48,6 +32,39 @@ if ($subaction) {
     }
   }
 }
+
+
+require('navbar.php');
+?>
+
+<?php
+//alert
+if ($ret != "") {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
+
+
+<div class="panel-header panel-header-sm"></div>
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Private Networks</h4>
+          <a href="network-wizard.php"><i class="fas fa-plus"></i> Create new network </a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+
+<?php
+
+
 
 //echo "Add new private network";
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
