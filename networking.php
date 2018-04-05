@@ -1,8 +1,13 @@
 <?php
 require('header.php');
-if ($action == "delete-network") {
 
+$ret = false;
+
+if ($action == "delete-network") {
+  $name = $_GET['name'];
+  $ret = $lv->network_undefine($name);
 }
+
 require('navbar.php');
 ?>
 
@@ -19,7 +24,7 @@ require('navbar.php');
           <div class="table-responsive">
 
 <?php
-$ret = false;
+
 if ($subaction) {
   $name = $_GET['name'];
   if ($subaction == 'start') {

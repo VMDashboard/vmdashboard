@@ -624,8 +624,16 @@ class Libvirt {
         return true;
     }
 
+//added by me
     function network_define_xml($xml) {
       $tmp = libvirt_network_define_xml($this->conn, $xml);
+      return ($tmp) ? $tmp : $this->_set_last_error();
+    }
+
+//added by me
+    function network_undefine($name) {
+      $net = libvirt_network_get($this->conn, $name)
+      $tmp = libvirt_network_undefine($net);
       return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
