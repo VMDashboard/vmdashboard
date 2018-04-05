@@ -1,15 +1,15 @@
 <?php
 require('header.php');
 
-$ret = false;
-$action = $_GET['action'];
+$ret = false; //starts false, later if set will display alert
+$action = $_GET['action']; //used to determine if network action has been selected
 
 if ($action == 'network-delete') {
   $network = $_GET['network'];
   $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
 
-
+//need to change these to actions rather than subactions
 if ($subaction) {
   $name = $_GET['name'];
   if ($subaction == 'start') {
@@ -33,8 +33,7 @@ if ($subaction) {
   }
 }
 
-
-require('navbar.php');
+require('navbar.php'); //bring in the sidebar and menu
 ?>
 
 <?php
@@ -77,72 +76,65 @@ function networkDeleteWarning(linkURL) {
         <div class="card-body">
           <div class="table-responsive">
 
-<?php
+            <?php
+            $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
+            echo "<table class='table'>" .
+              "<thead class='text-primary'><tr>" .
+              "<th>Network name</th>" .
+              "<th>Network state</th>" .
+              "<th>Gateway IP Address</th>" .
+              "<th>IP Address Range</th>" .
+              "<th>Forwarding</th>" .
+              "<th>DHCP Range</th>" .
+              "<th>Actions</th>" .
+              "</tr></thead>";
 
-//echo "Add new private network";
-$tmp = $lv->get_networks(VIR_NETWORKS_ALL);
-echo "<table class='table'>" .
-  "<thead class='text-primary'><tr>" .
-  "<th>Network name</th>" .
-  "<th>Network state</th>" .
-  "<th>Gateway IP Address</th>" .
-  "<th>IP Address Range</th>" .
-  "<th>Forwarding</th>" .
-  "<th>DHCP Range</th>" .
-  "<th>Actions</th>" .
-  "</tr></thead>";
+            for ($i = 0; $i < sizeof($tmp); $i++) {
+              $tmp2 = $lv->get_network_information($tmp[$i]);
+              $ip = '';
+              $ip_range = '';
+              $activity = $tmp2['active'] ? 'Active' : 'Inactive';
+              $dhcp = 'Disabled';
+              $forward = 'None';
 
-for ($i = 0; $i < sizeof($tmp); $i++) {
-  $tmp2 = $lv->get_network_information($tmp[$i]);
-  $ip = '';
-  $ip_range = '';
-  $activity = $tmp2['active'] ? 'Active' : 'Inactive';
-  $dhcp = 'Disabled';
-  $forward = 'None';
+              if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
+                if (array_key_exists('forward_dev', $tmp2))
+                  $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
+                else
+                  $forward = $tmp2['forwarding'];
+              }
 
-  if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
-    if (array_key_exists('forward_dev', $tmp2))
-      $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
-    else
-      $forward = $tmp2['forwarding'];
-  }
+              if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
+                $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
 
-  if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
-    $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
+              if (array_key_exists('ip', $tmp2))
+                $ip = $tmp2['ip'];
 
-  if (array_key_exists('ip', $tmp2))
-    $ip = $tmp2['ip'];
+              if (array_key_exists('ip_range', $tmp2))
+                $ip_range = $tmp2['ip_range'];
 
-  if (array_key_exists('ip_range', $tmp2))
-    $ip_range = $tmp2['ip_range'];
+              $act = "<a href=\"?action={$_GET['action']}&amp;subaction=" . ($tmp2['active'] ? "stop" : "start");
+              $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
+              $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
+              $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
 
-  $act = "<a href=\"?action={$_GET['action']}&amp;subaction=" . ($tmp2['active'] ? "stop" : "start");
-  $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
-  $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
-  $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
+              if (!$tmp2['active']) {
+                $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
+                $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
+              }
 
-
-
-  if (!$tmp2['active']) {
-    $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
-
-
-
-  }
-  echo "<tr>" .
-    "<td>{$tmp2['name']}</td>" .
-    "<td>$activity</td>" .
-    "<td>$ip</td>" .
-    "<td>$ip_range</td>" .
-    "<td>$forward</td>" .
-    "<td>$dhcp</td>" .
-    "<td>$act</td>" .
-    "</tr>";
-  }
-  echo "</table>";
-?>
-
+              echo "<tr>" .
+                "<td>{$tmp2['name']}</td>" .
+                "<td>$activity</td>" .
+                "<td>$ip</td>" .
+                "<td>$ip_range</td>" .
+                "<td>$forward</td>" .
+                "<td>$dhcp</td>" .
+                "<td>$act</td>" .
+                "</tr>";
+            }
+            echo "</table>";
+            ?>
 
           </div>
         </div>
