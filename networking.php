@@ -4,7 +4,7 @@ require('header.php');
 //$ret = false;
 
 if ($action == "delete-network") {
-  $netname = $_GET['netname'];
+//  $netname = $_GET['netname'];
 //  $ret = $lv->network_undefine($netname);
 }
 
