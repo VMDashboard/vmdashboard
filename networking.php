@@ -10,6 +10,7 @@ require('navbar.php');
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Private Networks</h4>
+          <a href="network-wizard.php"><i class="fas fa-plus"></i> Create new network </a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
