@@ -44,13 +44,13 @@ if ($subaction) {
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
 echo "<table class='table'>" .
   "<thead class='text-primary'><tr>" .
-  "<th>Network name </th>" .
-  "<th> Network state </th>" .
-  "<th> Gateway IP Address </th>" .
-  "<th> IP Address Range </th>" .
-  "<th> Forwarding </th>" .
-  "<th> DHCP Range </th>" .
-  "<th> Actions </th>" .
+  "<th>Network name</th>" .
+  "<th>Network state</th>" .
+  "<th>Gateway IP Address</th>" .
+  "<th>IP Address Range</th>" .
+  "<th>Forwarding</th>" .
+  "<th>DHCP Range</th>" .
+  "<th>Actions</th>" .
   "</tr></thead>";
 
 for ($i = 0; $i < sizeof($tmp); $i++) {
@@ -82,9 +82,10 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
   $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
 
-  if (!$tmp2['active'])
+  if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-
+    $act .= ' | <a href="?action=delete-network">Delete</a>;
+  }
   echo "<tr>" .
     "<td>{$tmp2['name']}</td>" .
     "<td>$activity</td>" .
