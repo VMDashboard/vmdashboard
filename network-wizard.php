@@ -17,13 +17,12 @@ if (isset($_POST['finish'])) {
 
   $xml = "
   <network>
-    <name>test</name>
+    <name>test2</name>
     <forward mode='nat'/>
-    <bridge name='virbr1' stp='on' delay='0'/>
-    <mac address='52:54:00:0e:45:59'/>
-    <ip address='192.168.122.1' netmask='255.255.255.0'>
+    <mac address='52:54:00:00:11:22'/>
+    <ip address='192.168.12.1' netmask='255.255.255.0'>
       <dhcp>
-        <range start='192.168.122.2' end='192.168.122.254'/>
+        <range start='192.168.12.2' end='192.168.12.254'/>
       </dhcp>
     </ip>
   </network>";
