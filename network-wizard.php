@@ -31,7 +31,7 @@ if (isset($_POST['finish'])) {
     </ip>
   </network>";
 
-  $ret = $lv->network_define_xml($xml);
+  $ret = $lv->network_define_xml($xml) ? true : 'Error while creating network: '.$lv->get_last_error();
   if ($ret) {
     header('Location: networking.php');
     exit;
