@@ -1,13 +1,10 @@
 <?php
 require('header.php');
 
-//$ret = false;
-//$action = $_GET['action'];
-//if ($action == 'delete-network') {
-//  $netname = $_GET['netname'];
-//  $ret = $lv->network_undefine($netname);
-//}
-
+if ($action == "delete-network") {
+  $name = $_GET['name'];
+  $lv->network_undefine($name);
+}
 require('navbar.php');
 ?>
 
@@ -24,7 +21,7 @@ require('navbar.php');
           <div class="table-responsive">
 
 <?php
-
+$ret = false;
 if ($subaction) {
   $name = $_GET['name'];
   if ($subaction == 'start') {
@@ -92,7 +89,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    //$act .= ' | <a href="?action=delete-network&amp;network='.$tmp2['netname'].'">Delete</a>';
+    $act .= ' | <a href="?action=delete-network&amp;network='.$tmp2['name'].'">Delete</a>';
   }
   echo "<tr>" .
     "<td>{$tmp2['name']}</td>" .
