@@ -1,12 +1,12 @@
 <?php
 require('header.php');
 
-//$ret = false;
-//$action = $_GET['action'];
-//if ($action == 'delete-network') {
-//  $netname = $_GET['netname'];
-//  $ret = $lv->network_undefine($netname);
-//}
+$ret = false;
+$action = $_GET['action'];
+if ($action == 'delete-network') {
+  $network = $_GET['network'];
+  $ret = $lv->network_undefine($network);
+}
 
 require('navbar.php');
 ?>
@@ -92,7 +92,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= ' | <a href="?action=delete-network&amp;network='.$tmp2['netname'].'">Delete</a>';
+    $act .= ' | <a href="?action=delete-network&amp;network='.$tmp2['name'].'">Delete</a>';
   }
   echo "<tr>" .
     "<td>{$tmp2['name']}</td>" .
