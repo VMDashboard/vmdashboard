@@ -4,7 +4,7 @@ require('header.php');
 $ret = false;
 $action = $_GET['action'];
 
-if ($action == 'delete-network') {
+if ($action == 'network-delete') {
   $network = $_GET['network'];
   $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
@@ -125,9 +125,9 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."\") href=\"#\">Delete</a>";
+    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
 
-  
+
 
   }
   echo "<tr>" .
