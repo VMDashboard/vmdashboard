@@ -147,15 +147,6 @@ function newExtenstion(f) {
                     </div>
                   </div>
 
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <label>Network type</label>
-                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select forward type" name="forward_mode">
-                        <option value="nat" selected>nat</option>
-                      </select>
-                    </div>
-                  </div>
-
                   <div class="col-sm-5">
                     <div class="form-group">
                       <label>IP Address</label>
