@@ -18,7 +18,6 @@ class Libvirt {
     function set_logfile($filename) {
         if (!libvirt_logfile_set($filename))
             return $this->_set_last_error();
-
         return true;
     }
 
@@ -624,13 +623,13 @@ class Libvirt {
         return true;
     }
 
-//added by me
+    //added by me, creates new private network
     function network_define_xml($xml) {
       $tmp = libvirt_network_define_xml($this->conn, $xml);
       return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
-//added by me
+    //added by me, removes private network
     function network_undefine($network) {
       $net = libvirt_network_get($this->conn, $network);
       $tmp = libvirt_network_undefine($net);
@@ -1237,12 +1236,12 @@ class Libvirt {
 
 
     //list all snapshots for domain
-    		function domain_snapshots_list($domain) {
-    			$tmp = libvirt_list_domain_snapshots($domain);
-    			return ($tmp) ? $tmp : $this->_set_last_error();
-    		}
+    function domain_snapshots_list($domain) {
+    	$tmp = libvirt_list_domain_snapshots($domain);
+    	return ($tmp) ? $tmp : $this->_set_last_error();
+    }
 
-        //get snapshot description
+    //get snapshot description
 		function domain_snapshot_get_info($domain, $name) {
 			$domain = $this->get_domain_object($domain);
 			$tmp = $this->get_xpath($domain, '//domain/metadata/snapshot'.$name, false);

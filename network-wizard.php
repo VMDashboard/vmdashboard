@@ -10,17 +10,14 @@ function clean_name_input($data) {
   return $data;
 }
 
-
-//will redirect to networking.php.
 if (isset($_POST['finish'])) {
-
   $network_name = clean_name_input($_POST['network_name']);
   $forward_mode = $_POST['forward_mode'];
   $mac_address = $_POST['mac_address'];
-  $ip_address = $_POST['ip_address'];
+  $ip_address = clean_name_input($_POST['ip_address']);
   $subnet_mask = $_POST['subnet_mask'];
-  $dhcp_start_address = $_POST['dhcp_start_address'];
-  $dhcp_end_address = $_POST['dhcp_end_address'];
+  $dhcp_start_address = clean_name_input($_POST['dhcp_start_address']);
+  $dhcp_end_address = clean_name_input($_POST['dhcp_end_address']);
 
   $xml = "
   <network>
@@ -35,14 +32,15 @@ if (isset($_POST['finish'])) {
   </network>";
 
   $ret = $lv->network_define_xml($xml);
-  header('Location: networking.php');
-  exit;
+  if ($ret) {
+    header('Location: networking.php');
+    exit;
+  }
 }
 
 require('navbar.php');
 
 $random_mac = $lv->generate_random_mac_addr();
-
 ?>
 
 <?php
@@ -56,28 +54,6 @@ swal(alertRet);
 <?php
 }
 ?>
-
-<script>
-function newExtenstion(f) {
-  var diskName = f.volume_image_name.value;
-  diskName = diskName.replace(/\s+/g, '');
-  var n = diskName.lastIndexOf(".");
-  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
-  var driverType = f.driver_type.value;
-  if (driverType === "qcow2"){
-    var ext = ".qcow2";
-    var fullDiskName = noExt.concat(ext);
-    f.volume_image_name.value = fullDiskName;
-  }
-  if (driverType === "raw"){
-    var ext = ".img";
-    var fullDiskName = noExt.concat(ext);
-    f.volume_image_name.value = fullDiskName;
-  }
-}
-</script>
-
-
 
 <div class="panel-header panel-header-sm"></div>
 <div class="content">
@@ -95,7 +71,7 @@ function newExtenstion(f) {
               <ul>
                 <li class="nav-item">
                   <a class="nav-link" href="#network" data-toggle="tab">
-                    <i class="fas fa-database"></i>
+                    <i class="fas fa-sitemap"></i>
                         Network
                   </a>
                 </li>
@@ -105,15 +81,15 @@ function newExtenstion(f) {
 
           <div class="card-body">
             <div class="tab-content">
-              <!--    Storage Tab     -->
+              <!--    Network Tab     -->
               <div class="tab-pane fade" id="network">
                 <h5 class="info-text"> New Network Connection </h5>
                 <div class="row justify-content-center">
 
                   <div class="col-sm-10">
                     <div class="form-group">
-                      <label>Network Connection Name</label>
-                      <input type="text" value="network1" placeholder="Enter name for new network connection" class="form-control" name="network_name" />
+                      <label>Network Name</label>
+                      <input type="text" value="newNETWORK" placeholder="Enter name for new network connection" class="form-control" name="network_name" />
                     </div>
                   </div>
 
@@ -128,7 +104,7 @@ function newExtenstion(f) {
 
                   <div class="col-sm-5">
                     <div class="form-group">
-                      <label>MAC address</label>
+                      <label>MAC Address</label>
                       <input type="text" class="form-control" name="mac_address" value="<?php echo $random_mac; ?>">
                     </div>
                   </div>
@@ -144,8 +120,13 @@ function newExtenstion(f) {
                     <div class="form-group">
                       <label>Subnet Mask</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" title="Subnet Mask" name="subnet_mask">
-                        <option value="255.255.255.0" selected>/24 255.255.255.0</option>
-                        <option value="255.255.255.128">/25 255.255.255.128</option>
+                        <option value="255.255.255.0" selected>/24 -> 255.255.255.0</option>
+                        <option value="255.255.255.128">/25 -> 255.255.255.128</option>
+                        <option value="255.255.255.128">/26 -> 255.255.255.192</option>
+                        <option value="255.255.255.128">/27 -> 255.255.255.224</option>
+                        <option value="255.255.255.128">/28 -> 255.255.255.240</option>
+                        <option value="255.255.255.128">/29 -> 255.255.255.248</option>
+                        <option value="255.255.255.128">/30 -> 255.255.255.252</option>
                       </select>
                     </div>
                   </div>
@@ -164,27 +145,17 @@ function newExtenstion(f) {
                     </div>
                   </div>
 
-
-
-
-
-
-                  <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="original_page"/>
-                  <input type="hidden" value="<?php echo $_GET['pool']; ?>" name="pool"/>
-
                 </div>
               </div>
             </div>
           </div>
-
 
         <div class="card-footer">
           <div class="pull-right">
             <input type='submit' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' />
           </div>
 
-          <div class="pull-left">
-          </div>
+          <div class="pull-left"></div>
 
           <div class="clearfix"></div>
         </div>

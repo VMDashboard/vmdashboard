@@ -4,34 +4,38 @@ require('header.php');
 $ret = false; //starts false, later if set will display alert
 $action = $_GET['action']; //used to determine if network action has been selected
 
+$name = $_GET['name'];
+
 if ($action == 'network-delete') {
   $network = $_GET['network'];
   $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
 
-//need to change these to actions rather than subactions
-if ($subaction) {
-  $name = $_GET['name'];
-  if ($subaction == 'start') {
-    $ret = $lv->set_network_active($name, true) ? "Network has been started successfully" : 'Error while starting network: '.$lv->get_last_error();
-  } else if ($subaction == 'stop') {
-    $ret = $lv->set_network_active($name, false) ? "Network has been stopped successfully" : 'Error while stopping network: '.$lv->get_last_error();
-  } else if (($subaction == 'dumpxml') || ($subaction == 'edit')) {
-    $xml = $lv->network_get_xml($name, false);
-    if ($subaction == 'edit') {
-      if (@$_POST['xmldesc']) {
-        $ret = $lv->network_change_xml($name, $_POST['xmldesc']) ? "Network definition has been changed" :
-          'Error changing network definition: '.$lv->get_last_error();
-      } else {
-        $ret = 'Editing network XML description: <br/><br/><form method="POST"><table><tr><td>Network XML description: </td>'.
-          '<td><textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea></td></tr><tr align="center"><td colspan="2">'.
-          '<input type="submit" value=" Edit domain XML description "></tr></form>';
-      }
+if ($action == 'start') {
+  $ret = $lv->set_network_active($name, true) ? "Network has been started successfully" : 'Error while starting network: '.$lv->get_last_error();
+}
+
+if ($action == 'stop') {
+  $ret = $lv->set_network_active($name, false) ? "Network has been stopped successfully" : 'Error while stopping network: '.$lv->get_last_error();
+}
+
+if (($action == 'dumpxml') || ($action == 'edit')) {
+  $xml = $lv->network_get_xml($name, false);
+  if ($action == 'edit') {
+    if (@$_POST['xmldesc']) {
+      $ret = $lv->network_change_xml($name, $_POST['xmldesc']) ? "Network definition has been changed" :
+        'Error changing network definition: '.$lv->get_last_error();
     } else {
-      $ret = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
+      $ret = 'Editing network XML description: <br/><br/><form method="POST"><table><tr><td>Network XML description: </td>'.
+        '<td><textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea></td></tr><tr align="center"><td colspan="2">'.
+        '<input type="submit" value=" Edit domain XML description "></tr></form>';
     }
+  } else {
+    $ret = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
   }
 }
+
+
 
 require('navbar.php'); //bring in the sidebar and menu
 ?>
@@ -113,13 +117,13 @@ function networkDeleteWarning(linkURL) {
               if (array_key_exists('ip_range', $tmp2))
                 $ip_range = $tmp2['ip_range'];
 
-              $act = "<a href=\"?action={$_GET['action']}&amp;subaction=" . ($tmp2['active'] ? "stop" : "start");
+              $act = "<a href=\"?action=" . ($tmp2['active'] ? "stop" : "start");
               $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
               $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
-              $act .= " | <a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
+              $act .= " | <a href=\"?action=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
 
               if (!$tmp2['active']) {
-                $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
+                $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
                 $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
               }
 
@@ -155,10 +159,10 @@ echo "<h2>Network filters</h2>";
 echo "Here you can see all the network filters defined";
 $ret = false;
 
-if (array_key_exists('subaction', $_GET)) {
+if (array_key_exists('action', $_GET)) {
   $uuid = $_GET['uuid'];
   $name = $_GET['name'];
-  if ($_GET['subaction'] == 'dumpxml')
+  if ($_GET['action'] == 'dumpxml')
     $ret = "XML dump of nwfilter <i>$name</i>:<br/><br/>" . htmlentities($lv->get_nwfilter_xml($uuid));
 }
 
@@ -176,7 +180,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   echo "<tr>" .
     "<td>" . $name . "</td>" .
     "<td>" . $uuid . "</td>" .
-    "<td><a href=\"?action=$action&amp;subaction=dumpxml&amp;name=$name&amp;uuid={$uuid}\">Dump configuration</a></td>" .
+    "<td><a href=\"?action=dumpxml&amp;name=$name&amp;uuid={$uuid}\">Dump configuration</a></td>" .
     "</tr>\n";
 }
 
