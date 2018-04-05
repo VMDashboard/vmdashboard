@@ -15,23 +15,28 @@ function clean_name_input($data) {
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
 
-  //network_name = "network1"
-  //network_id = "192.168.1.0"
-  //subnet_mask = "255.255.255.0"
+  $network_name = clean_name_input($_POST['network_name']);
+  $forward_mode = $_POST['forward_mode'];
+  $mac_address = $_POST['mac_address'];
+  $ip_address = $_POST['ip_address'];
+  $subnet_mask = $_POST['subnet_mask'];
+  $dhcp_start_address = $_POST['dhcp_start_address'];
+  $dhcp_end_address = $_POST['dhcp_end_address'];
+
 
   $xml = "
   <network>
-    <name>test2</name>
-    <forward mode='nat'/>
-    <mac address='52:54:00:00:11:22'/>
-    <ip address='192.168.12.1' netmask='255.255.255.0'>
+    <name>$network_name</name>
+    <forward mode='$forward_mode'/>
+    <mac address='$mac_address'/>
+    <ip address='$ip_address' netmask='$subnet_mask'>
       <dhcp>
-        <range start='192.168.12.2' end='192.168.12.254'/>
+        <range start='$dhcp_start_address' end='$dhcp_end_address'/>
       </dhcp>
     </ip>
   </network>";
 
-  $lv->network_define_xml($xml);
+  $ret = $lv->network_define_xml($xml);
 
 
 
@@ -52,6 +57,18 @@ if (isset($_POST['finish'])) {
 }
 
 require('navbar.php');
+$random_mac = $lv->generate_random_mac_addr();
+?>
+
+<?php
+if ($ret != "") {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
 ?>
 
 <script>
@@ -106,6 +123,7 @@ function newExtenstion(f) {
               <div class="tab-pane fade" id="network">
                 <h5 class="info-text"> New Network Connection </h5>
                 <div class="row justify-content-center">
+
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Network Connection Name</label>
@@ -113,16 +131,41 @@ function newExtenstion(f) {
                     </div>
                   </div>
 
-                  <div class="col-sm-6">
+                  <div class="col-sm-5">
                     <div class="form-group">
-                      <label>Volume size</label>
-                      <input type="number" class="form-control" name="network_id" min="1" value="192.168.1.0" />
+                      <label>Forward Mode</label>
+                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select forward type" name="forward_mode">
+                        <option value="nat" selected>nat</option>
+                      </select>
                     </div>
                   </div>
 
-                  <div class="col-sm-4">
+                  <div class="col-sm-5">
                     <div class="form-group">
-                      <label>Unit size</label>
+                      <label>MAC address</label>
+                      <input type="text" class="form-control" name="mac_address" value="<?php echo $random_mac; ?>">
+                    </div>
+                  </div>
+
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label>Network type</label>
+                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select forward type" name="forward_mode">
+                        <option value="nat" selected>nat</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>IP Address</label>
+                      <input type="number" class="form-control" name="ip_address" min="1" value="192.168.1.1" />
+                    </div>
+                  </div>
+
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>Subnet Mask</label>
                       <select class="selectpicker" data-style="btn btn-plain btn-round" title="Subnet Mask" name="subnet_mask">
                         <option value="255.255.255.0" selected>/24 255.255.255.0</option>
                         <option value="255.255.255.128">/25 255.255.255.128</option>
@@ -130,15 +173,21 @@ function newExtenstion(f) {
                     </div>
                   </div>
 
-                  <div class="col-sm-10">
+                  <div class="col-sm-5">
                     <div class="form-group">
-                      <label>Driver type</label>
-                      <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
-                        <option value="qcow2" selected>qcow2</option>
-                        <option value="raw">raw</option>
-                      </select>
+                      <label>DHCP Starting Address</label>
+                      <input type="number" class="form-control" name="dhcp_start_address" min="1" value="192.168.1.2" />
                     </div>
                   </div>
+
+                  <div class="col-sm-5">
+                    <div class="form-group">
+                      <label>DHCP Ending Address</label>
+                      <input type="number" class="form-control" name="dhcp_end_address" min="1" value="192.168.1.254" />
+                    </div>
+                  </div>
+
+
 
 
 
