@@ -1,7 +1,7 @@
 <?php
 require('header.php');
 
-$ret = false;
+//$ret = false;
 
 if ($action == "delete-network") {
   $netname = $_GET['netname'];
