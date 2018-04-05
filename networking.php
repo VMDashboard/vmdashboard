@@ -53,7 +53,7 @@ swal(alertRet);
 function networkDeleteWarning(linkURL) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete the virtual machine configuration',
+    text: 'This will delete the network configuration',
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
