@@ -64,8 +64,6 @@ swal(alertRet);
 
 <?php
 
-
-
 //echo "Add new private network";
 $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
 echo "<table class='table'>" .
@@ -123,8 +121,6 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
     "</tr>";
   }
   echo "</table>";
-  if ($ret)
-    echo "<pre>$ret</pre>";
 ?>
 
 
@@ -173,8 +169,6 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 }
 
 echo "</table>\n";
-if ($ret)
-  echo "<pre>$ret</pre>";
 ?>
 
           </div>
