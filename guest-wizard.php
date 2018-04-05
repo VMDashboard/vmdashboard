@@ -467,6 +467,7 @@ function changeOptions(selectEl) {
                       for ($i = 0; $i < sizeof($tmp); $i++) {
                         $tmp2 = $lv->get_network_information($tmp[$i]);
                         echo "<option value=\"$tmp2['name']\">$tmp2['name']</option>";
+                      }
                       ?>
                     </div>
                   </div>
