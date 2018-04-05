@@ -461,7 +461,7 @@ function changeOptions(selectEl) {
                   <div class="col-sm-10 netChange" id="network">
                     <div class="form-group">
                       <label>Source network</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Private Network" name="source_network">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="source_network">
                       <?php
                       $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
                       for ($i = 0; $i < sizeof($tmp); $i++) {
