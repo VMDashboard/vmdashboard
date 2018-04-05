@@ -84,7 +84,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action='.$_GET['action'].'&amp;subaction=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= ' | <a href="?action=delete-network">Delete</a>;
+    $act .= ' | <a href="?action=delete-network">Delete</a>';
   }
   echo "<tr>" .
     "<td>{$tmp2['name']}</td>" .
