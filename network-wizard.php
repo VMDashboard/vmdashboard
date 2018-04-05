@@ -37,7 +37,8 @@ if (isset($_POST['finish'])) {
   </network>";
 
   $ret = $lv->network_define_xml($xml);
-
+  header('Location: networking.php');
+  exit;
 
 
 
