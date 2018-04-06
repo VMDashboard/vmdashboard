@@ -20,7 +20,7 @@ if (isset($_POST['finish'])) {
   $network = "";
   $model = "";
 
-  $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
+  //$ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
 
 
   //Return back to the orignal web page
