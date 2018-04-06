@@ -315,7 +315,7 @@ class Libvirt {
             $tmp = libvirt_domain_get_network_info($dom, $macs[$i]);
             if ($tmp)
                 //$ret[] = $tmp;
-                //added by me
+                //added by me because it is not working correctly
                 $ret[] = array(
                 							'mac' => $macs[$i],
                 							'network' => $tmp[$i],

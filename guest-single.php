@@ -51,7 +51,8 @@ if ($action == 'domain-disk-remove') {
 
 //Network Actions
 if ($action == 'domain-nic-remove') {
-  $ret = domain_nic_remove($domain, $mac);
+  $mac = $_POST['mac'];
+  $ret = domain_nic_remove($domName, $mac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
 }
 
 //Snapshot Actions
@@ -314,7 +315,7 @@ $list = file_put_contents($listfile, $liststring);
                 "<td>{$tmp[$i]['network']}</td>" .
                 "<td>$netUp</td>" .
                 "<td>" .
-                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;&amp;mac={$tmp[$i]['mac']}\">" .
+                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac={$tmp[$i]['mac']}\">" .
                   "Remove network card</a>" .
                 "</td>" .
                 "</tr>";
