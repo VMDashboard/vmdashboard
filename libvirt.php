@@ -321,8 +321,6 @@ class Libvirt {
                 							'network' => $tmp[$i],
                 							'nic_type' => $tmp[$nic_type]
                 							);
-
-
             else
                 $this->_set_last_error();
         }
