@@ -316,13 +316,14 @@ class Libvirt {
             $tmp = libvirt_domain_get_network_info($dom, $macs[$i]);
             if ($tmp)
                 $ret[] = $tmp;
-            else
+            else {
                 $this->_set_last_error();
                 //added the following to at least give out MAC address
                 $ret[] = array(
                   'mac' => $macs[$i],
                   'network' => '-',
                   'nic_type' => '-'
+                  }
                 );
         }
 
