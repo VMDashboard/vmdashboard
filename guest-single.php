@@ -293,7 +293,7 @@ $list = file_put_contents($listfile, $liststring);
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-            var_dump($anets);
+            var_dump($tmp);
             echo "<div class='table-responsive'>" .
               "<table class='table'>" .
               "<tr>" .
