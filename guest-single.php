@@ -305,7 +305,7 @@ $list = file_put_contents($listfile, $liststring);
               "</tr>" .
               "<tbody>";
             for ($i = 0; $i < sizeof($tmp); $i++) {
-              $mac_encoded = base64_encode($tmp[i]['mac]']); //used to send via $_GET
+              $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
               if (in_array($tmp[$i]['network'], $anets))
                 $netUp = 'Yes';
               else
