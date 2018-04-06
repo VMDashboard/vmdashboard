@@ -26,12 +26,12 @@ if (($action == 'dumpxml') || ($action == 'edit')) {
       $ret = $lv->network_change_xml($name, $_POST['xmldesc']) ? "Network definition has been changed" :
         'Error changing network definition: '.$lv->get_last_error();
     } else {
-      $ret = 'Editing network XML description: <br/><br/><form method="POST"><table><tr><td>Network XML description: </td>'.
+      $network_xml = 'Editing network XML description: <br/><br/><form method="POST"><table><tr><td>Network XML description: </td>'.
         '<td><textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea></td></tr><tr align="center"><td colspan="2">'.
         '<input type="submit" value=" Edit domain XML description "></tr></form>';
     }
   } else {
-    $ret = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
+    $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
   }
 }
 
@@ -78,6 +78,9 @@ function networkDeleteWarning(linkURL) {
           <a href="network-wizard.php"><i class="fas fa-plus"></i> Create new network </a>
         </div>
         <div class="card-body">
+
+<?php echo $network_xml; ?>
+
           <div class="table-responsive">
 
             <?php
