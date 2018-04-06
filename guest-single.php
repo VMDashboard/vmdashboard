@@ -51,8 +51,8 @@ if ($action == 'domain-disk-remove') {
 
 //Network Actions
 if ($action == 'domain-nic-remove') {
-  $mac = $_POST['mac'];
-  $ret = domain_nic_remove($domName, $mac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
+  $mac = base64_decode($_POST['mac']);
+  $ret = $lv->domain_nic_remove($domName, $mac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
 }
 
 //Snapshot Actions
