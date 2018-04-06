@@ -303,10 +303,11 @@ class Libvirt {
         return $ret;
     }
 
+
     function get_nic_info($domain) {
         $dom = $this->get_domain_object($domain);
-
-        $macs =  $this->get_xpath($dom, '//domain/devices/interface[@type="network"]/mac/@address', false);
+        $macs =  $this->get_xpath($dom, '//domain/devices/interface/mac/@address', false); //changed by me
+        //$macs =  $this->get_xpath($dom, '//domain/devices/interface[@type="network"]/mac/@address', false);
         if (!$macs)
             return $this->_set_last_error();
 
@@ -317,6 +318,11 @@ class Libvirt {
                 $ret[] = $tmp;
             else
                 $this->_set_last_error();
+                $ret[] = array( //added by me
+                  'mac' => $macs[$i], //added by me
+                  'network' => '-', //added by me
+                  'nic_type' => '-' //added by me
+                ); //added by me
         }
 
         return $ret;
