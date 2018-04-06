@@ -314,7 +314,15 @@ class Libvirt {
         for ($i = 0; $i < $macs['num']; $i++) {
             $tmp = libvirt_domain_get_network_info($dom, $macs[$i]);
             if ($tmp)
-                $ret[] = $tmp;
+                //$ret[] = $tmp;
+                //added by me
+                $ret[] = array(
+                							'mac' => $macs[$i],
+                							'network' => $tmp[$i],
+                							'nic_type' => $tmp[$nic_type]
+                							);
+
+
             else
                 $this->_set_last_error();
         }
