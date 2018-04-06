@@ -16,9 +16,9 @@ function clean_name_input($data) {
 
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
-  $mac =
-  $network =
-  $model =
+  $mac = "";
+  $network = "";
+  $model = "";
 
   $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
 
