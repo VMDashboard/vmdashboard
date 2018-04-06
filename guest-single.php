@@ -51,7 +51,7 @@ if ($action == 'domain-disk-remove') {
 
 //Network Actions
 if ($action == 'domain-nic-remove') {
-
+  $ret = domain_nic_remove($domain, $mac);
 }
 
 //Snapshot Actions
@@ -293,6 +293,7 @@ $list = file_put_contents($listfile, $liststring);
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+            var_dump($anets);
             echo "<div class='table-responsive'>" .
               "<table class='table'>" .
               "<tr>" .
@@ -314,7 +315,7 @@ $list = file_put_contents($listfile, $liststring);
                 "<td>{$tmp[$i]['network']}</td>" .
                 "<td>$netUp</td>" .
                 "<td>" .
-                  "<a href=\"?action=$action&amp;uuid={$_GET['uuid']}&amp;subaction=nic-remove&amp;mac={$tmp[$i]['mac']}\">" .
+                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;&amp;mac={$tmp[$i]['mac']}\">" .
                   "Remove network card</a>" .
                 "</td>" .
                 "</tr>";
