@@ -32,6 +32,19 @@ if (isset($_POST['finish'])) {
 require('navbar.php');
 ?>
 
+<?php
+if ($ret != "") {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
+
+
+
 <script>
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
