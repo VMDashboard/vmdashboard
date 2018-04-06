@@ -90,6 +90,20 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <label>Model</label>
+                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="model">
+                        <?php
+                        $models = $lv->get_nic_models();
+                        for ($i = 0; $i < sizeof($models); $i++) {
+                          echo "<option value=\"$models[$i]\"> $models[$i] </option>";
+                        }
+                        ?>
+                      </select>
+                    </div>
+                  </div>
+
                   <div class="col-sm-10 diskChange" id="new" style="display:none;">
                     <div class="form-group">
                       <label>Disk Image Name</label>
