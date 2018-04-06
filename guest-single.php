@@ -42,13 +42,17 @@ if ($action == 'domain-delete') {
 }
 
 
-//Disk actions
+//Disk Actions
 if ($action == 'domain-disk-remove') {
   $dev = $_GET['dev'];
   $ret = $lv->domain_disk_remove($domName, $dev, "--live --config") ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
   //shell_exec("virsh detach-disk $domName $dev --live --config");
 }
 
+//Network Actions
+if ($action == 'domain-nic-remove') {
+
+}
 
 //Snapshot Actions
 if ($action == 'domain-snapshot-create') {
