@@ -20,19 +20,16 @@ if (isset($_POST['finish'])) {
   $network = $_POST['network'];
   $model = $_POST['model'];
 
-  $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+  $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
 
-if ($ret == "success") {
+
   //Return back to the orignal web page
   header('Location: ' . "guest-single.php?uuid=$uuid");
   exit;
 }
 
-
 require('navbar.php');
 ?>
-
-
 
 <script>
 function diskChangeOptions(selectEl) {
