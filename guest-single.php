@@ -239,7 +239,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Disk information */
           echo "<h3>Storage</h3>";
-          echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-database'></i> Add new disk</a><br />";
+          echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk</a><br />";
           $tmp = $lv->get_disk_stats($domName);
           if (!empty($tmp)) {
             echo "<div class='table-responsive'>" .
@@ -289,7 +289,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Network interface information */
           echo "<h3>Network devices</h3>";
-          echo "<a href=\"guest-network-wizard.php?uuid=$uuid\">Add new network interface</a>";
+          echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fas fa-plus\"></i>Add new network</a>";
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
@@ -336,7 +336,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Snapshot information */
           echo "<h3>Snapshots</h3>";
-          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-camera-retro'></i> Create new snapshot</a><br />";
+          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-plus'></i> Create new snapshot</a><br />";
           $tmp = $lv->list_domain_snapshots($dom);
           if (!empty($tmp)) {
             echo "<div class='table-responsive'>" .
