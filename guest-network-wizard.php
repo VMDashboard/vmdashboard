@@ -93,7 +93,7 @@ function diskChangeOptions(selectEl) {
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Network</label>
-                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="network">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="network">
                         <?php
                         $networks = $lv->get_networks();
                         for ($i = 0; $i < sizeof($networks); $i++) {
@@ -107,7 +107,7 @@ function diskChangeOptions(selectEl) {
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Model</label>
-                      <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="model">
+                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="model">
                         <?php
                         $models = $lv->get_nic_models();
                         for ($i = 0; $i < sizeof($models); $i++) {
@@ -118,7 +118,7 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
-                  <div class="col-sm-10 diskChange">
+                  <div class="col-sm-10">
                     <div class="form-group">
                       <label>Mac Address</label>
                       <?php $random_mac = $lv->generate_random_mac_addr();?>
