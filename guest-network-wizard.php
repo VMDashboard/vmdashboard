@@ -81,10 +81,11 @@ function diskChangeOptions(selectEl) {
                       <label>Network</label>
                       <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="network">
                         <?php
-                        //$networks = $lv->get_networks();
-                        //for ($i = 0; $i < sizeof($networks; $i++))
-                        //  echo "<option value=\"$networks[$i]\"> $networks[$i] </option>";
-                        //?>
+                        $networks = $lv->get_networks();
+                        for ($i = 0; $i < sizeof($networks); $i++) {
+                          echo "<option value=\"$networks[$i]\"> $networks[$i] </option>";
+                        }
+                        ?>
                       </select>
                     </div>
                   </div>
