@@ -289,7 +289,7 @@ $list = file_put_contents($listfile, $liststring);
           <?php
           /* Network interface information */
           echo "<h3>Network devices</h3>";
-          echo "<a href=\"guest-network-wizard?uuid=$uuid\">Add new network interface</a>";
+          echo "<a href=\"guest-network-wizard.php?uuid=$uuid\">Add new network interface</a>";
           $tmp = $lv->get_nic_info($domName);
           if (!empty($tmp)) {
             $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
