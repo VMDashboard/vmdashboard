@@ -318,11 +318,12 @@ class Libvirt {
                 $ret[] = $tmp;
             else
                 $this->_set_last_error();
-                $ret[] = array( //added by me
-                  'mac' => $macs[$i], //added by me
-                  'network' => '-', //added by me
-                  'nic_type' => '-' //added by me
-                ); //added by me
+                //added the following to at least give out MAC address
+                $ret[] = array(
+                  'mac' => $macs[$i],
+                  'network' => '-',
+                  'nic_type' => '-'
+                );
         }
 
         return $ret;
