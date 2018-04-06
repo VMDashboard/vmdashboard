@@ -104,7 +104,7 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
-                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                  <div class="col-sm-10 diskChange">
                     <div class="form-group">
                       <label>Mac Address</label>
                       <?php $random_mac = $lv->generate_random_mac_addr();?>
@@ -112,7 +112,7 @@ function diskChangeOptions(selectEl) {
                     </div>
                   </div>
 
-                
+
 
                 </div>
               </div>
