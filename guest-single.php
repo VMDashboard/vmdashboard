@@ -305,6 +305,7 @@ $list = file_put_contents($listfile, $liststring);
               "</tr>" .
               "<tbody>";
             for ($i = 0; $i < sizeof($tmp); $i++) {
+              $mac_encoded = base64_encode($tmp[i]['mac]']); //used to send via $_GET
               if (in_array($tmp[$i]['network'], $anets))
                 $netUp = 'Yes';
               else
@@ -315,7 +316,7 @@ $list = file_put_contents($listfile, $liststring);
                 "<td>{$tmp[$i]['network']}</td>" .
                 "<td>$netUp</td>" .
                 "<td>" .
-                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac={$tmp[$i]['mac']}\">" .
+                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
                   "Remove network card</a>" .
                 "</td>" .
                 "</tr>";
