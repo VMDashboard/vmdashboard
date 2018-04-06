@@ -323,8 +323,9 @@ class Libvirt {
                   'mac' => $macs[$i],
                   'network' => '-',
                   'nic_type' => '-'
-                  }
+
                 );
+              }
         }
 
         return $ret;
