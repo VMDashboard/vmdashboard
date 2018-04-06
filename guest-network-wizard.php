@@ -41,7 +41,7 @@ swal(alertRet);
 </script>
 <?php
 }
-
+?>
 
 <script>
 function diskChangeOptions(selectEl) {
