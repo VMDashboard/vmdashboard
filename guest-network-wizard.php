@@ -22,26 +22,17 @@ if (isset($_POST['finish'])) {
 
   $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
-//if ($ret == "success") {
+if ($ret == "success") {
   //Return back to the orignal web page
   header('Location: ' . "guest-single.php?uuid=$uuid");
   exit;
-//}
+}
 
 
 require('navbar.php');
 ?>
 
-<?php
-if ($ret != "") {
-?>
-<script>
-var alertRet = "<?php echo $ret; ?>";
-swal(alertRet);
-</script>
-<?php
-}
-?>
+
 
 <script>
 function diskChangeOptions(selectEl) {
