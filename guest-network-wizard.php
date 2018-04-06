@@ -16,11 +16,11 @@ function clean_name_input($data) {
 
 //Grab post infomation and add new drive
 if (isset($_POST['finish'])) {
-  $mac = "";
-  $network = "";
-  $model = "";
+  $mac = $_POST['mac'];
+  $network = $_POST['network'];
+  $model = $_POST['model'];
 
-  //$ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
+  $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "Network has been successfully added to the guest" : "Cannot add network to the guest: ".$lv->get_last_error();
 
 
   //Return back to the orignal web page
@@ -106,67 +106,14 @@ function diskChangeOptions(selectEl) {
 
                   <div class="col-sm-10 diskChange" id="new" style="display:none;">
                     <div class="form-group">
-                      <label>Disk Image Name</label>
-                      <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_volume_name"/>
+                      <label>Mac Address</label>
+                      <?php $random_mac = $lv->generate_random_mac_addr();?>
+                      <input type="text" value="<?php echo $random_mac; ?>" placeholder="Enter Mac Address" class="form-control" name="mac"/>
                     </div>
                   </div>
 
-                  <div class="col-sm-6 diskChange" id="new" style="display:none;">
-                    <div class="form-group">
-                      <label>Volume size</label>
-                      <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
-                    </div>
-                  </div>
+                
 
-                  <div class="col-sm-4 diskChange" id="new" style="display:none;">
-                    <div class="form-group">
-                      <label>Unit size</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
-                        <option value="M">MB</option>
-                        <option value="G" selected>GB</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                    <div class="form-group">
-                      <label>Driver type</label>
-                      <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
-                        <option value="qcow2" selected="selected">qcow2</option>
-                        <option value="raw" >raw</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                    <div class="form-group">
-                      <label>Target bus</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="new_target_bus">
-                        <option value="virtio" selected="selected">virtio</option>
-                        <option value="ide">ide</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
-                    <div class="form-group">
-                      <label>Driver type</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_driver_type">
-                        <option value="qcow2" selected="selected">qcow2</option>
-                        <option value="raw">raw</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col-sm-5 diskChange" id="existing" style="display:none;">
-                    <div class="form-group">
-                      <label>Target bus</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" name="existing_target_bus">
-                        <option value="virtio" selected="selected">virtio</option>
-                        <option value="ide">ide</option>
-                      </select>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
