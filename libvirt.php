@@ -455,6 +455,8 @@ class Libvirt {
         if (!($res = $this->get_storagepool_res($name)))
             return false;
 
+            $xml = libvirt_storagepool_get_xml_desc($res);
+
         $path = libvirt_storagepool_get_xml_desc($res, '/pool/target/path');
         if (!$path)
             return $this->_set_last_error();
@@ -468,6 +470,7 @@ class Libvirt {
         if (!is_string($otmp2))
             return $this->_set_last_error();
         $tmp = libvirt_storagepool_get_info($res);
+        $tmp['xml'] = $xml;
         $tmp['active'] = libvirt_storagepool_is_active($res);
         $tmp['path'] = $path;
         $tmp['permissions'] = $perms;
