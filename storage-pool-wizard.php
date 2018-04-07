@@ -15,7 +15,38 @@ $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
 
+$xml_default = "
+<pool type='dir'>
+  <name>defaulttest</name>
+  <uuid>590c3fdc-a6bb-48c7-aad4-aa39802fba8d</uuid>
+  <capacity unit='bytes'>538628128768</capacity>
+  <allocation unit='bytes'>124266442752</allocation>
+  <available unit='bytes'>414361686016</available>
+  <source>
+  </source>
+  <target>
+    <path>/var/lib/libvirt/images</path>
+    <permissions>
+    <mode>0711</mode>
+    <owner>0</owner>
+    <group>0</group>
+    </permissions>
+  </target>
+</pool>";
+
+$xml = "
+<pool type='dir'>
+  <name>defaulttest</name>
+  <target>
+    <path>/tmp</path>
+    <permissions>
+    </permissions>
+  </target>
+</pool>";
+
 }
+
+storagepool_define_xml($xml);
 
 require('navbar.php');
 ?>
@@ -50,7 +81,7 @@ require('navbar.php');
 
 
 
-                        
+
                   </a>
                 </li>
               </ul>
