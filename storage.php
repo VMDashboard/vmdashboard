@@ -86,10 +86,10 @@ function volumeDeleteWarning(linkURL) {
             <hr>
             <div class="row">
               <div class="col-md-3">
-                <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
-                <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i> Create new volume </a>
-                <br /><br/>
+                <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font>
                 <?php $act = $info['active'] ? 'Active' : 'Inactive';
+                if ($act == "Active")
+                  <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i> Create new volume </a> <br/> <br />
                 echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
                 echo "<strong>Activity:</strong> " . $act . "<br />";
                 echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
@@ -131,7 +131,7 @@ function volumeDeleteWarning(linkURL) {
                   for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                     $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
                       if ($capacity == 0)
-                        continue;
+                        continue; //used to not display directories
                     $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
                     echo "<tr>" .
                       "<td>{$tmp_keys[$ii]}</td>" .
