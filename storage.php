@@ -79,6 +79,7 @@ function volumeDeleteWarning(linkURL) {
           echo "<strong>Allocation:</strong> " . $lv->format_size($info['allocation'], 2) . "<br />";
           echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
           echo "<strong>Path:</strong> " . $info['path'] . "<br />";
+          echo "<a href=\"?action=pool-delete&amp;pool_name=$pools[$i]\">Delete Pool</a>"
           ?>
             </div>
 
