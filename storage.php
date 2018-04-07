@@ -21,7 +21,7 @@ if ($action == 'pool-start') {
   $pool = $_GET['pool'];
   $res = $lv->get_storagepool_res($pool);
   $msg = '';
-  $msg = $lv->storagepool_set_autostart($res) ? 'Pool has been started successfully' : 'Cannot start pool';
+  $msg = $lv->storagepool_set_autostart($res, 0) ? 'Pool has been started successfully' : 'Cannot start pool';
 }
 
 //pool-xml not yet configured
