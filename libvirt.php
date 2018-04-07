@@ -505,6 +505,14 @@ class Libvirt {
         return $out;
     }
 
+
+    //added by me
+    function storagepool_define_xml($xml) {
+      $lv->libvirt_storagepool_define_xml($this->conn, $xml);
+    }
+
+
+
     function storagevolume_delete($path) {
         $vol = libvirt_storagevolume_lookup_by_path($this->conn, $path);
         if (!libvirt_storagevolume_delete($vol))
