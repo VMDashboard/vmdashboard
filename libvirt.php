@@ -519,7 +519,7 @@ class Libvirt {
     }
 
     //added by me
-    function storagepool_set_autostart($res, $flags = 1) {
+    function storagepool_set_autostart($res, $flags=1) {
     $ret = libvirt_storagepool_set_autostart($res, $flags)
     return ($ret) ? $ret : $this->_set_last_error();
     }
