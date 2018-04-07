@@ -14,7 +14,7 @@ if ($action == 'pool-delete') {
   $pool = $_GET['pool'];
   $res = $lv->get_storagepool_res($pool);
   $msg = '';
-  $msg = $lv->storagepool_undefine($res) ? 'Pool has been deleted successfully' : 'Cannot delete pool';
+  $msg = $lv->storagepool_undefine($res) ? 'Pool has been removed successfully' : 'Cannot remove pool';
 }
 
 if ($action == 'pool-destroy') {
