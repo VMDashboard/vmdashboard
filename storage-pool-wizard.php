@@ -28,12 +28,28 @@ if (isset($_POST['finish'])) {
       </target>
     </pool>";
 
-  $ret = $lv->storagepool_define_xml($xml);
+  $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+
+  if ($ret == "success"){
+  //Return back to the orignal web page
+  header('Location: ' . "storage.php");
+  exit;
+  }
+
 }
 
-
-
 require('navbar.php');
+?>
+
+<?php
+if ($ret != "") {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
 ?>
 
 
@@ -81,7 +97,7 @@ require('navbar.php');
                       <input type="text" value="/var/lib/libvirt/images" placeholder="Enter full filepath" class="form-control" name="pool_path" />
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
