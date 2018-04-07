@@ -129,11 +129,14 @@ function volumeDeleteWarning(linkURL) {
                   $tmp = $lv->storagepool_get_volume_information($pools[$i]);
                   $tmp_keys = array_keys($tmp);
                   for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                    $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
+                      if ($capacity == 0)
+                        continue;
                     $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
                     echo "<tr>" .
                       "<td>{$tmp_keys[$ii]}</td>" .
                       "<td>{$lv->translate_volume_type($tmp[$tmp_keys[$ii]]['type'])}</td>" .
-                      "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2)}</td>" .
+                      "<td>$capacity</td>" .
                       "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                      "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
                      "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete volume</a></td>" .
