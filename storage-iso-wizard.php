@@ -145,24 +145,6 @@ function newExtenstion(f) {
 
 
 
-
-
-
-
-
-
-
-                  <div class="col-sm-10">
-                    <div class="form-group">
-                      <div class="custom-file">
-                        <input type="file" name="fileToUpload" class="custom-file-input" id="validatedCustomFile" required>
-                        <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                        <div class="invalid-feedback">Example invalid custom file feedback</div>
-                      </div>
-                    </div>
-                  </div>
-
-
                   <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="original_page"/>
                   <input type="hidden" value="<?php echo $_GET['pool']; ?>" name="pool"/>
 
