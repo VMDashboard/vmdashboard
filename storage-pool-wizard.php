@@ -15,38 +15,23 @@ $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
 
-$xml_default = "
-<pool type='dir'>
-  <name>defaulttest</name>
-  <uuid>590c3fdc-a6bb-48c7-aad4-aa39802fba8d</uuid>
-  <capacity unit='bytes'>538628128768</capacity>
-  <allocation unit='bytes'>124266442752</allocation>
-  <available unit='bytes'>414361686016</available>
-  <source>
-  </source>
-  <target>
-    <path>/var/lib/libvirt/images</path>
-    <permissions>
-    <mode>0711</mode>
-    <owner>0</owner>
-    <group>0</group>
-    </permissions>
-  </target>
-</pool>";
+  $pool_name = clean_name_input($_POST['pool_name']);
+  $pool_path = $_POST['pool_path'];
 
-$xml = "
-<pool type='dir'>
-  <name>defaulttest</name>
-  <target>
-    <path>/tmp</path>
-    <permissions>
-    </permissions>
-  </target>
-</pool>";
+  $xml = "
+    <pool type='dir'>
+      <name>$pool_name</name>
+      <target>
+        <path>$pool_path</path>
+        <permissions>
+        </permissions>
+      </target>
+    </pool>";
 
+  $ret = $lv->storagepool_define_xml($xml);
 }
 
-$ret = $lv->storagepool_define_xml($xml);
+
 
 require('navbar.php');
 ?>
@@ -69,33 +54,7 @@ require('navbar.php');
                 <li class="nav-item">
                   <a class="nav-link" href="#storage" data-toggle="tab">
                     <i class="fas fa-database"></i>
-                        Storage <br>
-
-
-
-                        <?php
-                        $pools = $lv->get_storagepools();
-                        var_dump($pools);
-                        ?>
-                        <br>
-                        <br>
-
-                        <?php
-                        $info = $lv->get_storagepool_info("default");
-                        ?>
-                        <textarea>
-                        <?php echo $info['xml']; ?>
-                        </textarea>
-                        <br>
-                        <?php
-                        $info = $lv->get_storagepool_info("defaulttest");
-                        ?>
-                        <textarea>
-                        <?php echo $info['xml']; ?>
-                        </textarea>
-
-
-
+                        Storage
                   </a>
                 </li>
               </ul>
@@ -111,24 +70,18 @@ require('navbar.php');
 
                   <div class="col-sm-10">
                     <div class="form-group">
-                      <label>Volume image name</label>
-                      <input type="text" value="newVolume.qcow2" placeholder="Enter name for new volume image" class="form-control" name="volume_image_name" />
+                      <label>Pool name</label>
+                      <input type="text" value="newPool" placeholder="Enter name for storage pool" class="form-control" name="pool_name" />
                     </div>
                   </div>
 
-
-                  <div class="col-sm-4">
+                  <div class="col-sm-10">
                     <div class="form-group">
-                      <label>Unit size</label>
-                      <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="unit">
-                        <option value="M">MB</option>
-                        <option value="G" selected>GB</option>
-                      </select>
+                      <label>Pool path</label>
+                      <input type="text" value="/var/lib/libvirt/images" placeholder="Enter full filepath" class="form-control" name="pool_path" />
                     </div>
                   </div>
-
-
-
+                  
                 </div>
               </div>
             </div>

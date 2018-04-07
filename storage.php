@@ -9,6 +9,16 @@ if ($action == 'volume-delete') {
   $msg = '';
   $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
 }
+
+//pool-xml not yet configured
+if ($actin == "pool-xml") {
+  $poolname = "default";
+  $info = $lv->get_storagepool_info($poolname);
+  echo "<textarea>";
+  echo $info['xml'];
+  echo "</textarea>";
+}
+
 if ($msg != "") {
 ?>
 <script>
