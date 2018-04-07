@@ -75,7 +75,7 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="index.php" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="now-ui-icons location_world"></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Some Actions</span>
@@ -88,7 +88,7 @@
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#pablo">
+                                <a class="nav-link" href="#">
                                     <i class="now-ui-icons users_single-02"></i>
                                     <p>
                                         <span class="d-lg-none d-md-block">Account</span>
