@@ -111,6 +111,47 @@ function newExtenstion(f) {
                 <h5 class="info-text"> New Volume Image </h5>
                 <div class="row justify-content-center">
 
+
+                  <div class="col-sm-10">
+                    <div class="form-group">
+                      <div class="custom-file">
+
+                  <input id="fileupload" type="file" name="files[]" data-url="server/php/" multiple>
+                  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                  <script src="jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+                  <script src="jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+                  <script src="jQuery-File-Upload/js/jquery.fileupload.js"></script>
+                  <script>
+                  $(function () {
+                      $('#fileupload').fileupload({
+                          dataType: 'json',
+                          done: function (e, data) {
+                              $.each(data.result.files, function (index, file) {
+                                  $('<p/>').text(file.name).appendTo(document.body);
+                              });
+                          }
+                      });
+                  });
+                  </script>
+                  <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                  <div class="invalid-feedback">Example invalid custom file feedback</div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   <div class="col-sm-10">
                     <div class="form-group">
                       <div class="custom-file">
