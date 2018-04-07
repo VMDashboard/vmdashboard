@@ -27,19 +27,24 @@ shell_exec("./noVNC/utils/websockify/run --web $fileDir/noVNC/ --target-config .
 ?>
 
 <?php
+//bring in the libvirt class and methods
 require('libvirt.php');
 $lv = new Libvirt();
 
 if ($lv->connect("qemu:///system") == false)
   die('<html><body>Cannot open connection to hypervisor</body></html>');
 
+//attempt to learn the server's hostname
 $hn = $lv->get_hostname();
 
 if ($hn == false)
   die('<html><body>Cannot get hostname</body></html>');
 
+
+//Grab GET variables
 $action = array_key_exists('action', $_GET) ? $_GET['action'] : false;
 $subaction = array_key_exists('subaction', $_GET) ? $_GET['subaction'] : false;
 ?>
+
 <!--  Plugin for Sweet Alert -->
 <script src="assets/js/plugins/sweetalert2.min.js"></script>
