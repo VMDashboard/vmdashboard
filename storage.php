@@ -99,11 +99,11 @@ function volumeDeleteWarning(linkURL) {
                 echo "<strong>Path:</strong> " . $info['path'] . "<br />";
                 echo "<strong>Actions:</strong> ";
                 if ($lv->translate_storagepool_state($info['state']) == "Running") {
-                  echo "<a href=\"?action=pool-destroy&amp;pool=$pools[$i]\">Stop pool</a>";
+                  echo "<a href=\"?action=pool-destroy&amp;pool=$pools[$i]\">Stop</a>";
                 }
                 if ($lv->translate_storagepool_state($info['state']) != "Running") {
-                  echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start pool</a>";
-                  echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Delete pool</a>";
+                  echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start</a>";
+                  echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Remove</a>";
                 }
             ?>
               </div>
