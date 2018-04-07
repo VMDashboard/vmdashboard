@@ -16,6 +16,13 @@ if ($action == 'pool-delete') {
   $msg = '';
   $msg = $lv->storagepool_undefine($res) ? 'Pool has been deleted successfully' : 'Cannot delete pool';
 }
+//not yet configured correctly
+if ($action == 'pool-start') {
+  $pool = $_GET['pool'];
+  $res = $lv->get_storagepool_res($pool);
+  $msg = '';
+  $msg = $lv->storagepool_set_autostart($res) ? 'Pool has been started successfully' : 'Cannot start pool';
+}
 
 //pool-xml not yet configured
 if ($actin == "pool-xml") {
@@ -86,7 +93,10 @@ function volumeDeleteWarning(linkURL) {
           echo "<strong>Allocation:</strong> " . $lv->format_size($info['allocation'], 2) . "<br />";
           echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
           echo "<strong>Path:</strong> " . $info['path'] . "<br />";
-          echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">Delete Pool</a>"
+          echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">Delete Pool</a>";
+          if ($lv->translate_storagepool_state($info['state']) != "Running") {
+            echo "<br> <a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start Pool</a>";
+          }
           ?>
             </div>
 
