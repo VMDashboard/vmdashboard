@@ -10,6 +10,13 @@ if ($action == 'volume-delete') {
   $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
 }
 
+if ($action == 'pool-delete') {
+  $pool_name = $_GET['pool_name'];
+  $pool_resource = $lv->get_storagepool_res($pool_name);
+  $msg = '';
+  $msg = $lv->storagepool_undefine($pool_resource) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+}
+
 //pool-xml not yet configured
 if ($actin == "pool-xml") {
   $poolname = "default";
