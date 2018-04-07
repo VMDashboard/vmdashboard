@@ -42,13 +42,15 @@ require('navbar.php');
 
                         <?php
                         $info = $lv->get_storagepool_info("default");
-
-                        echo $info['xml'];
-
-
-
-
                         ?>
+                        <textarea>
+                        <?php echo $info['xml']; ?>
+                      </textarea>
+
+
+
+
+                        
                   </a>
                 </li>
               </ul>
