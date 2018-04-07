@@ -518,11 +518,6 @@ class Libvirt {
       return ($ret) ? $ret : $this->_set_last_error();
     }
 
-    //added by me
-    function storagepool_set_autostart($res, $flags = 1) {
-    $ret = libvirt_storagepool_set_autostart($res, $flags);
-    return ($ret) ? $ret : $this->_set_last_error();
-    }
 
     function storagevolume_delete($path) {
         $vol = libvirt_storagevolume_lookup_by_path($this->conn, $path);
