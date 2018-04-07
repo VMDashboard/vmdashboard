@@ -508,7 +508,7 @@ class Libvirt {
 
     //added by me
     function storagepool_define_xml($xml) {
-      $lv->libvirt_storagepool_define_xml($this->conn, $xml);
+      $ret = libvirt_storagepool_define_xml($this->conn, $xml);
     }
 
 

@@ -46,7 +46,7 @@ $xml = "
 
 }
 
-//storagepool_define_xml($xml);
+$ret = $lv->storagepool_define_xml($xml);
 
 require('navbar.php');
 ?>
