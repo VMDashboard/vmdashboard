@@ -46,7 +46,7 @@ $xml = "
 
 }
 
-storagepool_define_xml($xml);
+//storagepool_define_xml($xml);
 
 require('navbar.php');
 ?>
@@ -72,8 +72,20 @@ require('navbar.php');
                         Storage <br>
 
 
-                        
 
+                        <?php
+                        $pools = $lv->get_storagepools();
+                        var_dump($pools);
+                        ?>
+                        <br>
+                        <br>
+
+                        <?php
+                        $info = $lv->get_storagepool_info("default");
+                        ?>
+                        <textarea>
+                        <?php echo $info['xml']; ?>
+                        </textarea>
 
 
 
