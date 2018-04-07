@@ -72,19 +72,7 @@ require('navbar.php');
                         Storage <br>
 
 
-                        <?php
-                        $pools = $lv->get_storagepools();
-                        var_dump($pools);
-                        ?>
-                        <br>
-                        <br>
-
-                        <?php
-                        $info = $lv->get_storagepool_info("default");
-                        ?>
-                        <textarea>
-                        <?php echo $info['xml']; ?>
-                      </textarea>
+                        
 
 
 
