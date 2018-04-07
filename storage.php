@@ -43,6 +43,7 @@ function volumeDeleteWarning(linkURL) {
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Storage Pools</h4>
+          <a href="storage-pool-wizard.php"><i class="fas fa-plus"></i> Create new storage pool </a>
         </div>
         <div class="card-body">
 
@@ -106,7 +107,7 @@ function volumeDeleteWarning(linkURL) {
             }
         }
 		?>
-                  
+
 
 
 
