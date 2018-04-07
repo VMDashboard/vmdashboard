@@ -86,7 +86,13 @@ require('navbar.php');
                         <textarea>
                         <?php echo $info['xml']; ?>
                         </textarea>
-
+                        <br>
+                        <?php
+                        $info = $lv->get_storagepool_info("defaulttest");
+                        ?>
+                        <textarea>
+                        <?php echo $info['xml']; ?>
+                        </textarea>
 
 
 

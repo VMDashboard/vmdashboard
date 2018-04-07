@@ -108,12 +108,11 @@ function volumeDeleteWarning(linkURL) {
 
 		?>
 
-
-
-
             </div>
-          </div> 
-        <?php } ?>
+          </div>
+
+        <?php } //ends the for loop for each storage pool ?>
+
         </div>
       </div>
     </div>
