@@ -24,6 +24,13 @@ if ($action == 'pool-destroy') {
   $msg = $lv->storagepool_destroy($res) ? 'Pool has been stopped successfully' : 'Cannot stop pool';
 }
 
+if ($action == 'pool-start') {
+  $pool = $_GET['pool'];
+  $res = $lv->get_storagepool_res($pool);
+  $msg = '';
+  $msg = $lv->storagepool_create($res) ? 'Pool has been started successfully' : 'Cannot start pool';
+}
+
 if ($action == 'new-pool') {
   $msg = "You must restart the libvirt service to use your new storage pool";
 }
@@ -75,78 +82,76 @@ function volumeDeleteWarning(linkURL) {
         </div>
         <div class="card-body">
 
-
-
-
           <?php
           $pools = $lv->get_storagepools();
           for ($i = 0; $i < sizeof($pools); $i++) {
             $info = $lv->get_storagepool_info($pools[$i]);
-          ?>
-          <hr>
-          <div class="row">
-            <div class="col-md-3">
-            <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
-            <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i> Create new volume </a>
-            <br /><br/>
-          <?php $act = $info['active'] ? 'Active' : 'Inactive';
-          echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
-          echo "<strong>Activity:</strong> " . $act . "<br />";
-          echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
-          echo "<strong>Capacity:</strong> " . $lv->format_size($info['capacity'], 2) . "<br />";
-          echo "<strong>Allocation:</strong> " . $lv->format_size($info['allocation'], 2) . "<br />";
-          echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
-          echo "<strong>Path:</strong> " . $info['path'] . "<br />";
-          echo "<strong>Actions:</strong> ";
-          if ($lv->translate_storagepool_state($info['state']) == "Running") {
-            echo "<a href=\"?action=pool-destroy&amp;pool=$pools[$i]\">Stop Pool</a>";
-          }
-          if ($lv->translate_storagepool_state($info['state']) != "Running") {
-            echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">Delete Pool</a>";
-          }
-          ?>
-            </div>
+            ?>
+            <hr>
+            <div class="row">
+              <div class="col-md-3">
+                <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
+                <a href="storage-volume-wizard.php?action=storage-pools&amp;pool=<?php echo $pools[$i]; ?>&amp;subaction=volume-create"><i class="fas fa-plus"></i> Create new volume </a>
+                <br /><br/>
+                <?php $act = $info['active'] ? 'Active' : 'Inactive';
+                echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
+                echo "<strong>Activity:</strong> " . $act . "<br />";
+                echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
+                echo "<strong>Capacity:</strong> " . $lv->format_size($info['capacity'], 2) . "<br />";
+                echo "<strong>Allocation:</strong> " . $lv->format_size($info['allocation'], 2) . "<br />";
+                echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
+                echo "<strong>Path:</strong> " . $info['path'] . "<br />";
+                echo "<strong>Actions:</strong> ";
+                if ($lv->translate_storagepool_state($info['state']) == "Running") {
+                  echo "<a href=\"?action=pool-destroy&amp;pool=$pools[$i]\">Stop pool</a>";
+                }
+                if ($lv->translate_storagepool_state($info['state']) != "Running") {
+                  echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start pool</a>";
+                  echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">| Delete pool</a>";
+                }
+            ?>
+              </div>
 
 
-<div class="col-md-9">
-  <?php
-//sub table
-            if ($info['volume_count'] > 0) {
-                echo "<div class=\"table-responsive\">" .
-                  "<table class=\"table\">" .
-                  "<thead>" .
-                  "<tr>" .
-                  "<th>File Name</th>" .
-                  "<th>Type</th>" .
-                  "<th>Capacity</th>" .
-                  "<th>Allocation</th>" .
-                  "<th>Path</th>" .
-                  "<th>Actions</th>" .
-                  "</tr>" .
-                  "</thead>" .
-                  "</tbody>";
-                $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                $tmp_keys = array_keys($tmp);
-                for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+              <div class="col-md-9">
+                <?php
+                //sub table
+                if ($info['volume_count'] > 0) {
+                  echo "<div class=\"table-responsive\">" .
+                    "<table class=\"table\">" .
+                    "<thead>" .
+                    "<tr>" .
+                    "<th>File Name</th>" .
+                    "<th>Type</th>" .
+                    "<th>Capacity</th>" .
+                    "<th>Allocation</th>" .
+                    "<th>Path</th>" .
+                    "<th>Actions</th>" .
+                    "</tr>" .
+                    "</thead>" .
+                    "</tbody>";
+                  $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                  $tmp_keys = array_keys($tmp);
+                  for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                     $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
                     echo "<tr>" .
-                         "<td>{$tmp_keys[$ii]}</td>" .
-                         "<td>{$lv->translate_volume_type($tmp[$tmp_keys[$ii]]['type'])}</td>" .
-                         "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2)}</td>" .
-                         "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
-                         "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
-                         "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete volume</a></td>" .
-                         "</tr>";
-                }
-                echo "</tbody></table></div>";
-            }
+                      "<td>{$tmp_keys[$ii]}</td>" .
+                      "<td>{$lv->translate_volume_type($tmp[$tmp_keys[$ii]]['type'])}</td>" .
+                      "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2)}</td>" .
+                      "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
+                     "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
+                     "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete volume</a></td>" .
+                     "</tr>";
+                   }
+                   echo "</tbody></table></div>";
+                 }
 
-		?>
+		             ?>
 
+              </div>
             </div>
-          </div>
 
-        <?php } //ends the for loop for each storage pool ?>
+          <?php } //ends the for loop for each storage pool ?>
 
         </div>
       </div>
