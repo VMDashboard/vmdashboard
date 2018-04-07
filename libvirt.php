@@ -509,6 +509,7 @@ class Libvirt {
     //added by me
     function storagepool_define_xml($xml) {
       $ret = libvirt_storagepool_define_xml($this->conn, $xml);
+      return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
 
