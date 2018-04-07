@@ -5,7 +5,7 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="index.php" class="simple-text logo-normal">
           <img src="assets/img/logoWhiteLetters.png" width="100%">
         </a>
       </div>
