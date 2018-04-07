@@ -17,6 +17,13 @@ if ($action == 'pool-delete') {
   $msg = $lv->storagepool_undefine($res) ? 'Pool has been deleted successfully' : 'Cannot delete pool';
 }
 
+if ($action == 'pool-destroy') {
+  $pool = $_GET['pool'];
+  $res = $lv->get_storagepool_res($pool);
+  $msg = '';
+  $msg = $lv->storagepool_destroy($res) ? 'Pool has been stopped successfully' : 'Cannot stop pool';
+}
+
 if ($action == 'new-pool') {
   $msg = "You must restart the libvirt service to use your new storage pool";
 }
@@ -91,8 +98,8 @@ function volumeDeleteWarning(linkURL) {
           echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
           echo "<strong>Path:</strong> " . $info['path'] . "<br />";
           echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">Delete Pool</a>";
-          if ($lv->translate_storagepool_state($info['state']) != "Running") {
-            echo "<br> <a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start Pool</a>";
+          if ($lv->translate_storagepool_state($info['state']) == "Running") {
+            echo "<br> <a href=\"?action=pool-destroy&amp;pool=$pools[$i]\">Stop Pool</a>";
           }
           ?>
             </div>
