@@ -31,14 +31,8 @@ if (isset($_POST['finish'])) {
   $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
   if ($ret == "success"){
-    ?>
-    <script>
-    var alertRet = "The libvirt service must be restarted to use new storage pool";
-    swal(alertRet);
-    </script>
-    <?php
   //Return back to the orignal web page
-  header('Location: ' . "storage.php");
+  header('Location: ' . "storage.php?action=new-pool");
   exit;
   }
 

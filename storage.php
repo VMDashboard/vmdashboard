@@ -17,6 +17,9 @@ if ($action == 'pool-delete') {
   $msg = $lv->storagepool_undefine($res) ? 'Pool has been deleted successfully' : 'Cannot delete pool';
 }
 
+if ($action == 'new-pool') {
+  $msg = "You must restart the libvirt service to use your new storage pool";
+}
 
 //pool-xml not yet configured
 if ($actin == "pool-xml") {
