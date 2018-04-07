@@ -59,7 +59,7 @@ swal(alertRet);
     <!--      Wizard container        -->
     <div class="wizard-container">
       <div class="card card-wizard" data-color="primary" id="wizardProfile">
-        <form action="<?php echo $_SERVER['PHP_SELF'] . '?uuid=' . $uuid;?>" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
         <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
 
           <div class="card-header text-center" data-background-color="orange">
@@ -87,7 +87,7 @@ swal(alertRet);
                   <div class="col-sm-10">
                     <div class="form-group">
                       <label>Pool name</label>
-                      <input type="text" value="newPool" placeholder="Enter name for storage pool" class="form-control" name="pool_name" />
+                      <input type="text" value="default" placeholder="Enter name for storage pool" class="form-control" name="pool_name" />
                     </div>
                   </div>
 
