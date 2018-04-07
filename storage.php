@@ -105,14 +105,15 @@ function volumeDeleteWarning(linkURL) {
                 }
                 echo "</tbody></table></div>";
             }
-        }
+
 		?>
 
 
 
 
             </div>
-          </div>
+          </div> 
+        <?php } ?>
         </div>
       </div>
     </div>
