@@ -512,6 +512,11 @@ class Libvirt {
       return ($ret) ? $ret : $this->_set_last_error();
     }
 
+    //added by me
+    function storagepool_undefine($res) {
+      $ret = libvirt_storagepool_undefine($res);
+      return ($ret) ? $ret : $this->_set_last_error();
+    }
 
 
     function storagevolume_delete($path) {

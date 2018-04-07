@@ -11,10 +11,10 @@ if ($action == 'volume-delete') {
 }
 
 if ($action == 'pool-delete') {
-  $pool_name = $_GET['pool_name'];
-  $pool_resource = $lv->get_storagepool_res($pool_name);
+  $pool = $_GET['pool'];
+  $res = $lv->get_storagepool_res($pool);
   $msg = '';
-  $msg = $lv->storagepool_undefine($pool_resource) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+  $msg = $lv->storagepool_undefine($res) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
 }
 
 //pool-xml not yet configured
@@ -86,7 +86,7 @@ function volumeDeleteWarning(linkURL) {
           echo "<strong>Allocation:</strong> " . $lv->format_size($info['allocation'], 2) . "<br />";
           echo "<strong>Available:</strong> " . $lv->format_size($info['available'], 2) . "<br />";
           echo "<strong>Path:</strong> " . $info['path'] . "<br />";
-          echo "<a href=\"?action=pool-delete&amp;pool_name=$pools[$i]\">Delete Pool</a>"
+          echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\">Delete Pool</a>"
           ?>
             </div>
 
