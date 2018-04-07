@@ -71,6 +71,14 @@ require('navbar.php');
                     <i class="fas fa-database"></i>
                         Storage <br>
 
+
+                        <?php
+                        $pools = $lv->get_storagepools();
+                        var_dump($pools);
+                        ?>
+                        <br>
+                        <br>
+
                         <?php
                         $info = $lv->get_storagepool_info("default");
                         ?>
