@@ -77,7 +77,7 @@ function diskChangeOptions(selectEl) {
             <div class="wizard-navigation">
               <ul>
                 <li class="nav-item">
-                  <a class="nav-link" href="#network" data-toggle="tab"><i class="fas fa-database"></i>Storage</a>
+                  <a class="nav-link" href="#network" data-toggle="tab"><i class="fas fa-sitemap"></i>Network</a>
                 </li>
               </ul>
             </div>
@@ -87,7 +87,7 @@ function diskChangeOptions(selectEl) {
             <div class="tab-content">
               <!--    Storage Tab     -->
               <div class="tab-pane fade" id="network">
-                <h5 class="info-text"> Hard Drive Storage </h5>
+                <h5 class="info-text"> Networking </h5>
                 <div class="row justify-content-center">
 
                   <div class="col-sm-10">
