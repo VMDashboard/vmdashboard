@@ -31,10 +31,6 @@ if ($action == 'pool-start') {
   $msg = $lv->storagepool_create($res) ? 'Pool has been started successfully' : 'Cannot start pool';
 }
 
-if ($action == 'new-pool') {
-  $msg = "You must restart the libvirt service to use your new storage pool";
-}
-
 //pool-xml not yet configured
 if ($actin == "pool-xml") {
   $poolname = "default";

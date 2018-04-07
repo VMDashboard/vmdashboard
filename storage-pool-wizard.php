@@ -32,7 +32,7 @@ if (isset($_POST['finish'])) {
 
   if ($ret == "success"){
   //Return back to the orignal web page
-  header('Location: ' . "storage.php?action=new-pool");
+  header('Location: ' . "storage.php");
   exit;
   }
 
