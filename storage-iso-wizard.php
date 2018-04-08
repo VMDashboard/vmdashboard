@@ -1,83 +1,12 @@
 <?php
 require('header.php');
-?>
-
-<?php
-$uuid = $_GET['uuid'];
-$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
-//will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
-if (isset($_POST['finish'])) {
-  $pool = $_POST['pool'];
-  //$volume_image_name = $_POST['volume_image_name'];
-  //Just in case someone entered in a volume name with spaces, lets remove them
-  //$volume_image_name = str_replace(' ','',$volume_image_name);
-  //$volume_capacity = $_POST['volume_size'];
-  //$volume_size = $_POST['volume_size'];
-  //$unit = $_POST['unit'];
-  //$driver_type = $_POST['driver_type'];
-  $original_page = $_POST['original_page'];
-
-
-
-  //Location where uploaded images go
-  $target_dir = "/var/lib/libvirt/images";
-  //Filepath for uploaded image
-  $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-  //Determine the file extension
-  $target_file_extension = pathinfo($target_file,PATHINFO_EXTENSION);
-  //Check for file type
-  $finfo = finfo_open(FILEINFO_MIME_TYPE);
-  $file_type = finfo_file($finfo, $_FILES["fileToUpload"]["tmp_name"]);
-
-  //Check for duplicate file names
-  if (file_exists($target_file)){
-  	$msg = "A file by that name already exists";
-  }
-  //Check file size restriction
-  if ($_FILES["fileToUpload"]["size"] > 2000000){
-  	$msg = "You file was too big";
-  }
-  //Time to do the uploading
-  $ret = move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file) ? "success" : "failed";
-
-  //header('Location: ' . $original_page);
-  //exit;
-}
-
 
 require('navbar.php');
 
-//if ($ret != "") {
-echo "
-<script>
-var alertRet = '$ret $file_type'
-swal(alertRet);
-</script>";
-//}
-
-
 
 ?>
 
-<script>
-function newExtenstion(f) {
-  var diskName = f.volume_image_name.value;
-  diskName = diskName.replace(/\s+/g, '');
-  var n = diskName.lastIndexOf(".");
-  var noExt = n > -1 ? diskName.substr(0, n) : diskName;
-  var driverType = f.driver_type.value;
-  if (driverType === "qcow2"){
-    var ext = ".qcow2";
-    var fullDiskName = noExt.concat(ext);
-    f.volume_image_name.value = fullDiskName;
-  }
-  if (driverType === "raw"){
-    var ext = ".img";
-    var fullDiskName = noExt.concat(ext);
-    f.volume_image_name.value = fullDiskName;
-  }
-}
-</script>
+
 
 
 <div class="panel-header panel-header-sm"></div>
