@@ -151,7 +151,8 @@ $(function () {
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
         maxFileSize: 999000,
-        maxChunkSize: 200000 // 10 MB
+        maxChunkSize: 200000, // 10 MB
+        multipart: false,
         // Enable image resizing, except for Android and Opera,
         // which actually support image resizing, but fail to
         // send Blob objects via XHR requests:
