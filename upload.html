@@ -154,7 +154,7 @@ $(function () {
         maxChunkSize: 1000000 // 1 MB
 
     }).on('fileuploadadd', function (e, data) {
-        data.context = $('<div/>').appendTo('#');
+        data.context = $('<div/>').appendTo('#files');
         $.each(data.files, function (index, file) {
             var node = $('<p/>')
                     .append($('<span/>').text(file.name));
