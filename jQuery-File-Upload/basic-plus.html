@@ -151,8 +151,7 @@ $(function () {
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png|iso)$/i,
         maxFileSize: 999000000,
-        maxChunkSize: 200000, // 10 MB
-        multipart: false
+        maxChunkSize: 1000000 // 1 MB
 
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
