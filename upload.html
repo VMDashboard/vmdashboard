@@ -126,7 +126,7 @@ $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
     var url = window.location.hostname === 'blueimp.github.io' ?
-                '//jquery-file-upload.appspot.com/' : 'jQuery-File-Upload/server/php/',
+                '//jquery-file-upload.appspot.com/' : 'assets/',
         uploadButton = $('<button/>')
             .addClass('btn btn-primary')
             .prop('disabled', true)
@@ -146,7 +146,7 @@ $(function () {
                 });
             });
     $('#fileupload').fileupload({
-        url: initial_url,
+        url: url,
         dataType: 'json',
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png|iso)$/i,
