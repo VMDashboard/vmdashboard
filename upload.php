@@ -10,7 +10,7 @@ include('navbar.php');
 <link rel="stylesheet" href="jQuery-File-Upload/css/jquery.fileupload.css">
 
 
-
+<div class="panel-header panel-header-sm"></div>
 
 
 <div class="container">
