@@ -3,17 +3,13 @@ include('header.php');
 include('navbar.php');
 ?>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Generic page styles -->
-<link rel="stylesheet" href="jQuery-File-Upload/css/style.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="jQuery-File-Upload/css/jquery.fileupload.css">
+
 
 
 <div class="panel-header panel-header-sm"></div>
 
 
-<div class="conent">
+<div class="container">
     <h1>jQuery File Upload Demo</h1>
     <h2 class="lead">Basic Plus version</h2>
 
