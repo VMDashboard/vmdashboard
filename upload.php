@@ -13,7 +13,7 @@ include('navbar.php');
 <div class="panel-header panel-header-sm"></div>
 
 
-<div class="container">
+<div class="conent">
     <h1>jQuery File Upload Demo</h1>
     <h2 class="lead">Basic Plus version</h2>
 
