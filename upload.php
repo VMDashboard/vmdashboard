@@ -1,5 +1,7 @@
 <?php
-include('header.php'); ?>
+include('header.php');
+include('navbar.php');
+?>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Generic page styles -->
