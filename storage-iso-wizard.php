@@ -127,7 +127,7 @@ function newExtenstion(f) {
 
 
                         <div class="container">
-                            
+
                             <!-- The fileinput-button span is used to style the file input field as button -->
                             <span class="btn btn-success fileinput-button">
                                 <i class="glyphicon glyphicon-plus"></i>
@@ -304,6 +304,7 @@ function newExtenstion(f) {
       </form>
     </div>
   </div> <!-- wizard container -->
+</div>
 </div>
 
 <?php
