@@ -21,8 +21,7 @@
 
   <!-- ISO Uploads -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Generic page styles -->
-    <link rel="stylesheet" href="jQuery-File-Upload/css/style.css">
+    
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
     <link rel="stylesheet" href="jQuery-File-Upload/css/jquery.fileupload.css">
 
