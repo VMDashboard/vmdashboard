@@ -12,7 +12,7 @@ include('navbar.php');
     <h4>ISO Image Upload</h4>
 
     <!-- The fileinput-button span is used to style the file input field as button -->
-    <span class="btn btn-success fileinput-button">
+    <span class="btn btn-plain fileinput-button">
         <i class="glyphicon glyphicon-plus"></i>
         <span>Add files...</span>
         <!-- The file input field used as target for the file upload widget -->
