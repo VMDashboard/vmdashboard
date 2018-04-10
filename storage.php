@@ -49,8 +49,9 @@ if (count(glob($filename)) > 0) {
 //get filepath for uploads/iso_uploads direcotry
 $iso_path = realpath('uploads/iso_uploads');
 
+?>
 <script>
-var alertRet = "<?php echo $msg; ?>";
+var alertRet = "<?php echo $iso_path; ?>";
 swal(alertRet);
 </script>
 <?php
