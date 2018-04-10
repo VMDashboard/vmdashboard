@@ -40,6 +40,40 @@ if ($actin == "pool-xml") {
   echo "</textarea>";
 }
 
+
+$filename = 'uploads/iso_uploads/*.iso';
+if (count(glob($filename)) > 0) {
+  $iso_exists = true;
+}
+
+//get filepath for uploads/iso_uploads direcotry
+$iso_path = realpath('uploads/iso_uploads');
+
+
+?>
+<script>
+var alertRet = "<?php echo $iso_path; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+
+
+
+$pools = $lv->get_storagepools();
+
+
+for ($i = 0; $i < sizeof($pools); $i++) {
+  $info = $lv->get_storagepool_info($pools[$i]);
+$info['path']
+}
+
+
+
+
+
+
+
 if ($msg != "") {
 ?>
 <script>
