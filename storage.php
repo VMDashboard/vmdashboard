@@ -32,13 +32,16 @@ if ($action == 'pool-start') {
 }
 
 //pool-xml not yet configured
-if ($actin == "pool-xml") {
+if ($action == "pool-xml") {
   $poolname = "default";
   $info = $lv->get_storagepool_info($poolname);
   echo "<textarea>";
   echo $info['xml'];
   echo "</textarea>";
 }
+
+$msg = realpath('uploads');
+
 
 if ($msg != "") {
 ?>
