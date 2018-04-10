@@ -70,7 +70,7 @@ if (file_exists('uploads/iso_uploads')) {
           </target>
         </pool>";
 
-      $msg = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
+      $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
     }
   }
 }
