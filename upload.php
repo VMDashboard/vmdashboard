@@ -8,10 +8,7 @@ include('navbar.php');
 
 <div class="panel-header panel-header-sm"></div>
 
-<div class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
+
 
 <div class="container">
     <h4>ISO Image Upload</h4>
@@ -37,10 +34,7 @@ include('navbar.php');
     </div>
 </div>
 
-</div>
-</div>
-</div>
-</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
