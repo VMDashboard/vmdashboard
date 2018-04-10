@@ -49,8 +49,7 @@ if (file_exists('uploads/iso_uploads/*.iso')) {
   $upload_path = realpath('uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
   $filename = 'uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
 
-  $directory = "uploads/iso_uploads/";
-  $filecount = 0;
+  $directory = $upload_path; //"uploads/iso_uploads/";
   $files = glob($directory . "*.iso");
   if ($files) {
 
