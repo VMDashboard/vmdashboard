@@ -48,7 +48,6 @@ if (count(glob($filename)) > 0) {
 
 //get filepath for uploads/iso_uploads direcotry
 $iso_path = realpath(uploads/iso_uploads);
-$pools = $lv->get_storagepools();
 
 
 ?>
@@ -60,6 +59,8 @@ swal(alertRet);
 }
 
 
+
+$pools = $lv->get_storagepools();
 
 
 for ($i = 0; $i < sizeof($pools); $i++) {
