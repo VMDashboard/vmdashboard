@@ -41,31 +41,37 @@ if ($action == "pool-xml") {
 }
 
 
+//Check to see if the iso_uploads directory exists. If it does and ISO has been uploaded
 if (file_exists('uploads/iso_uploads/*.iso')) {
-  $upload_path = realpath('uploads/iso_uploads');
 
-  $pools = $lv->get_storagepools();
-  for ($i = 0; $i < sizeof($pools); $i++) {
-    $info = $lv->get_storagepool_info($pools[$i]);
-    if ($upload_path == $info['path']) {
-      $iso_pool_exists = true;
+  $upload_path = realpath('uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
+  $filename = 'uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
+  // If any files exist with .iso move forward
+  if (count(glob($filename)) > 0) {
+
+    $pools = $lv->get_storagepools();
+    for ($i = 0; $i < sizeof($pools); $i++) {
+      $info = $lv->get_storagepool_info($pools[$i]);
+      if ($upload_path == $info['path']) {
+        $iso_pool_exists = true;
+      }
+    }
+
+    if (!$iso_pool_exists) {
+      $xml = "
+        <pool type='dir'>
+          <name>iso_uploads</name>
+          <target>
+            <path>$upload_path</path>
+            <permissions>
+            </permissions>
+          </target>
+        </pool>";
+
+      $msg = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
     }
   }
-  if (!$iso_pool_exists){
-    $xml = "
-      <pool type='dir'>
-        <name>iso_uploads</name>
-        <target>
-          <path>$upload_path</path>
-          <permissions>
-          </permissions>
-        </target>
-      </pool>";
-
-    $msg = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
-  }
 }
-
 
 if ($msg != "") {
 ?>
