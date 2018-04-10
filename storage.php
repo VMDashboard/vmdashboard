@@ -50,7 +50,7 @@ if (count(glob($filename)) > 0) {
 $iso_path = realpath('uploads/iso_uploads');
 
 <script>
-var alertRet = "<?php echo $iso_path; ?>";
+var alertRet = "<?php echo $msg; ?>";
 swal(alertRet);
 </script>
 <?php
