@@ -152,7 +152,3 @@ $(function () {
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 });
 </script>
-
-<?php
-require('footer.php');
- ?>
