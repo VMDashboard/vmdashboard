@@ -40,7 +40,9 @@ if ($action == "pool-xml") {
   echo "</textarea>";
 }
 
-$msg = realpath('uploads');
+if (file_exists('uploads/iso_uploads')) {
+$msg = realpath('uploads/iso_uploads');
+}
 
 
 if ($msg != "") {
