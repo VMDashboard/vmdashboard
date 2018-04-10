@@ -50,19 +50,11 @@ if (count(glob($filename)) > 0) {
 $iso_path = realpath('uploads/iso_uploads');
 
 
-?>
-<script>
-var alertRet2 = "<?php echo $iso_path; ?>";
-swal(alertRet2);
-</script>
-<?php
-}
+
 
 
 
 $pools = $lv->get_storagepools();
-
-
 for ($i = 0; $i < sizeof($pools); $i++) {
   $info = $lv->get_storagepool_info($pools[$i]);
 $info['path']
