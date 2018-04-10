@@ -51,8 +51,8 @@ $iso_path = realpath('uploads/iso_uploads');
 
 ?>
 <script>
-var alertRet = "<?php echo $iso_path; ?>";
-swal(alertRet);
+var alertISO = "<?php echo $iso_path; ?>";
+swal(alertISO);
 </script>
 <?php
 }
