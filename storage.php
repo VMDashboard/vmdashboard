@@ -48,7 +48,7 @@ if (file_exists('uploads/iso_uploads')) {
   $filename = 'uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
 
   $directory = "uploads/iso_uploads/";
-  $files = glob($directory . "*.iso");
+  $files = glob($directory . "*.iso"); //check to see if any files with .iso exist
   if ($files) {
 
     $pools = $lv->get_storagepools();
@@ -74,6 +74,8 @@ if (file_exists('uploads/iso_uploads')) {
     }
   }
 }
+
+
 
 if ($msg != "") {
 ?>
