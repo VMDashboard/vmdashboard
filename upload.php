@@ -4,8 +4,6 @@ include('navbar.php');
 ?>
 
 
-
-
 <div class="panel-header panel-header-sm"></div>
 
 
