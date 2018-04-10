@@ -42,7 +42,7 @@ if ($action == "pool-xml") {
 
 
 //Check to see if the iso_uploads directory exists. If it does and ISO has been uploaded
-if (file_exists('uploads/iso_uploads/*.iso')) {
+if (file_exists('uploads/iso_uploads/')) {
 
 
 
