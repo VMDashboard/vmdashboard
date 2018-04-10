@@ -42,14 +42,12 @@ if ($action == "pool-xml") {
 
 
 //Check to see if the iso_uploads directory exists. If it does and ISO has been uploaded
-if (file_exists('uploads/iso_uploads/')) {
-
-
+if (file_exists('uploads/iso_uploads')) {
 
   $upload_path = realpath('uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
   $filename = 'uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
 
-  $directory = $upload_path; //"uploads/iso_uploads/";
+  $directory = "uploads/iso_uploads/";
   $files = glob($directory . "*.iso");
   if ($files) {
 
