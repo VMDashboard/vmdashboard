@@ -60,17 +60,6 @@ swal(alertRet);
 
 
 
-$pools = $lv->get_storagepools();
-
-
-for ($i = 0; $i < sizeof($pools); $i++) {
-  $info = $lv->get_storagepool_info($pools[$i]);
-$info['path']
-}
-
-
-
-
 
 
 
