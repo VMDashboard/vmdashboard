@@ -14,8 +14,7 @@ include('navbar.php');
       <div class="card">
 
 <div class="container">
-    <h1>jQuery File Upload Demo</h1>
-    <h2 class="lead">Basic Plus version</h2>
+    <h4>ISO Image Upload</h4>
 
     <!-- The fileinput-button span is used to style the file input field as button -->
     <span class="btn btn-plain fileinput-button">
