@@ -46,6 +46,9 @@ if (count(glob($filename)) > 0) {
   $iso_exists = true;
 }
 
+//get filepath for uploads/iso_uploads direcotry
+$iso_path = realpath('uploads/iso_uploads');
+
 
 
 
