@@ -41,7 +41,7 @@ if ($action == "pool-xml") {
 }
 
 
-if (file_exists('uploads/iso_uploads')) {
+if (file_exists('uploads/iso_uploads/*.iso')) {
   $upload_path = realpath('uploads/iso_uploads');
 
   $pools = $lv->get_storagepools();
