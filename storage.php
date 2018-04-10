@@ -74,7 +74,8 @@ function volumeDeleteWarning(linkURL) {
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Storage Pools</h4>
-          <a href="storage-pool-wizard.php"><i class="fas fa-plus"></i> Create new storage pool </a>
+          <a href="storage-pool-wizard.php"><i class="fas fa-plus"></i> Create new storage pool </a> <br />
+          <a href="iso-upload.php"><i class="fas fa-plus"></i> Upload new ISO image </a>
         </div>
         <div class="card-body">
 
