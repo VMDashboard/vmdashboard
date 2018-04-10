@@ -51,7 +51,7 @@ if (file_exists('uploads/iso_uploads')) {
     }
   }
   if (!$iso_pool_exists){
-    $msg = "You need to create a storage pool for iso"
+    $msg = "You need to create a storage pool for iso";
   }
 }
 
