@@ -41,7 +41,18 @@ if ($action == "pool-xml") {
 }
 
 if (file_exists('uploads/iso_uploads')) {
-$msg = realpath('uploads/iso_uploads');
+  $upload_path = realpath('uploads/iso_uploads');
+
+  $pools = $lv->get_storagepools();
+  for ($i = 0; $i < sizeof($pools); $i++) {
+    $info = $lv->get_storagepool_info($pools[$i]);
+    if ($upload_path == $info['path']) {
+      $iso_pool_exists = true;
+    }
+  }
+  if (!$iso_pool_exists){
+    $msg = "You need to create a storage pool for iso"
+  }
 }
 
 
