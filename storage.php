@@ -40,6 +40,7 @@ if ($action == "pool-xml") {
   echo "</textarea>";
 }
 
+
 if (file_exists('uploads/iso_uploads')) {
   $upload_path = realpath('uploads/iso_uploads');
 
@@ -51,7 +52,17 @@ if (file_exists('uploads/iso_uploads')) {
     }
   }
   if (!$iso_pool_exists){
-    $msg = "You need to create a storage pool for iso";
+    $xml = "
+      <pool type='dir'>
+        <name>iso_uploads</name>
+        <target>
+          <path>$upload_path</path>
+          <permissions>
+          </permissions>
+        </target>
+      </pool>";
+
+    $msg = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
   }
 }
 

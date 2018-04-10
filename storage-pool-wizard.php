@@ -28,7 +28,7 @@ if (isset($_POST['finish'])) {
       </target>
     </pool>";
 
-  $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+  $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
 
   if ($ret == "success"){
   //Return back to the orignal web page
