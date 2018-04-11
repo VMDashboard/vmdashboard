@@ -135,7 +135,7 @@ if ($action == 'domain-destroy') {
                     } else if ($lv->domain_is_paused($name)){
                      echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
                     } else {
-                     echo "<a href=\"?action=domain-start&amp;uuid=$uuid\" class=\"btn btn-primary btn-xs\"><i class=\"fas fa-power-off\"></i> Power on</a>";
+                     echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class=\"fas fa-power-off\"></i> Power on</a>";
                     }
                     echo "</td>";
   	                echo "</tr>";
