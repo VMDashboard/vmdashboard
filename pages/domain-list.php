@@ -74,7 +74,7 @@ if ($action == 'domain-destroy') {
           </div>
           <div class="x_content">
 
-            <p><a href="guest-wizard.php"><i class="fas fa-plus"></i> Create new guest </a></p>
+            <p><a href="guest-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
 
             <!-- start project list -->
             <table class="table table-striped projects">
@@ -135,7 +135,7 @@ if ($action == 'domain-destroy') {
                     } else if ($lv->domain_is_paused($name)){
                      echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
                     } else {
-                     echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class=\"fas fa-power-off\"></i> Power on</a>";
+                     echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class=\"fa fa-power-off\"></i> Power on</a>";
                     }
                     echo "</td>";
   	                echo "</tr>";
