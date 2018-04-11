@@ -44,7 +44,7 @@ if ($action == 'domain-destroy') {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Virtual Guests: <small>domain list</small></h3>
+        <h3>Domains: <small>virtual guest list</small></h3>
       </div>
     </div>
 
@@ -121,7 +121,7 @@ if ($action == 'domain-destroy') {
   	                echo "<tr>" .
                       "<td>#</td>" .
                       "<td>" .
-                        "<a href=\"guest-single.php?uuid=$uuid\">$name</a>" .
+                        "<a href=\"guest-single.php?uuid=$uuid\">$name</a><br />" .
                         "<small>State:$state</small>" .
                       "</td>" .
                       "<td>$cpu</td>" .
