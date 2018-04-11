@@ -1,6 +1,6 @@
 <?php
 require('header.php');
-require('navbar.php');
+require('navigation.php');
 
 $uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_GET['action']; //grab the $action variable from $_GET
