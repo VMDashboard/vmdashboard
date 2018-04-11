@@ -44,7 +44,7 @@ if ($action == 'domain-destroy') {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Domains: <small>virtual guest list</small></h3>
+        <h3>Domain List</h3>
       </div>
     </div>
 
