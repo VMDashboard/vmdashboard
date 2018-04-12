@@ -160,7 +160,7 @@ if ($source_file_vda == "new") {
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
-header('Location: guests.php');
+header('Location: domain-list.php');
 exit;
 }
 
@@ -334,12 +334,21 @@ function changeOptions(selectEl) {
 
 
                           <div class="col-md-6">
-                            <h5 class="info-text"> Hard Drive Storage </h5>
+                            <h4 class="info-text"> Hard Drive Storage </h4>
                             <div class="row justify-content-center">
 
-                              <div class="col-sm-10">
+
+                              <div class="form-group">
+                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                                </div>
+                              </div>
+
+
                                 <div class="form-group">
-                                  <label>Disk drive source file location</label>
+                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Disk drive source file location</label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
                                   <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
                                     <option value="none"> Select Disk </option>
                                     <option value="new"> Create New Disk Image </option>
@@ -361,7 +370,8 @@ function changeOptions(selectEl) {
                                     ?>
                                   </select>
                                 </div>
-                              </div>
+                                </div>
+
 
                               <div class="col-sm-10 diskChange" id="new" style="display:none;">
                                 <div class="form-group">
@@ -407,19 +417,11 @@ function changeOptions(selectEl) {
 
 
 
-
-
-
-
-
-                          <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                            </div>
-                          </div>
                         </div>
                       </div>
+
+
+
                       <div id="step-3">
                         <div class="form-horizontal form-label-left">
                           <div class="form-group">
