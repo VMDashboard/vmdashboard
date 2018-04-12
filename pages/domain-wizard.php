@@ -290,7 +290,7 @@ function changeOptions(selectEl) {
                 </ul>
 
                       <div id="step-1">
-                        <div class="form-horizontal form-label-left">
+                        <div class="form-horizontal form-label-left" style="min-height: 300px;">
 
                           <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain_name">Domain Name <span class="required">*</span>
@@ -330,7 +330,7 @@ function changeOptions(selectEl) {
 
                       </div>
                       <div id="step-2">
-                        <div class="form-horizontal form-label-left" style="min-height: 250px;">
+                        <div class="form-horizontal form-label-left" style="min-height: 300px;">
 
 
                           <div class="col-md-6">
@@ -484,7 +484,7 @@ function changeOptions(selectEl) {
 
 
                       <div id="step-3">
-                        <div class="form-horizontal form-label-left">
+                        <div class="form-horizontal form-label-left" style="min-height: 300px;">
                           <div class="form-group">
                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
