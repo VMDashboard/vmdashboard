@@ -271,8 +271,7 @@ function changeOptions(selectEl) {
                           <a href="#step-1">
                             <span class="step_no">1</span>
                             <span class="step_descr">
-                                              Step 1<br />
-                                              <small>General Information</small>
+                                              General<br />
                                           </span>
                           </a>
                         </li>
@@ -280,8 +279,7 @@ function changeOptions(selectEl) {
                           <a href="#step-2">
                             <span class="step_no">2</span>
                             <span class="step_descr">
-                                              Step 2<br />
-                                              <small>Storage Information</small>
+                                              Storage<br />
                                           </span>
                           </a>
                         </li>
@@ -289,8 +287,7 @@ function changeOptions(selectEl) {
                           <a href="#step-3">
                             <span class="step_no">3</span>
                             <span class="step_descr">
-                                              Step 3<br />
-                                              <small>Networking Information</small>
+                                              Networking<br />
                                           </span>
                           </a>
                         </li>
@@ -364,151 +361,10 @@ function changeOptions(selectEl) {
                           in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         </p>
                       </div>
-                      <div id="step-4">
-                        <h2 class="StepTitle">Step 4 Content</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                      </div>
 
                     </div>
                     <!-- End SmartWizard Content -->
 
-
-
-
-
-                    <h2>Example: Vertical Style</h2>
-                    <!-- Tabs -->
-                    <div id="wizard_verticle" class="form_wizard wizard_verticle">
-                      <ul class="list-unstyled wizard_steps">
-                        <li>
-                          <a href="#step-11">
-                            <span class="step_no">1</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-22">
-                            <span class="step_no">2</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-33">
-                            <span class="step_no">3</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-44">
-                            <span class="step_no">4</span>
-                          </a>
-                        </li>
-                      </ul>
-
-                      <div id="step-11">
-                        <h2 class="StepTitle">Step 1 Content</h2>
-                        <form class="form-horizontal form-label-left">
-
-                          <span class="section">Personal Info</span>
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3" for="first-name">First Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                              <input type="text" id="first-name2" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3" for="last-name">Last Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                              <input type="text" id="last-name2" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3">Middle Name / Initial</label>
-                            <div class="col-md-6 col-sm-6">
-                              <input id="middle-name2" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3">Gender</label>
-                            <div class="col-md-6 col-sm-6">
-                              <div id="gender2" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="gender" value="female" checked=""> Female
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3">Date Of Birth <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6">
-                              <input id="birthday2" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-                            </div>
-                          </div>
-
-                        </form>
-                      </div>
-                      <div id="step-22">
-                        <h2 class="StepTitle">Step 2 Content</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                      </div>
-                      <div id="step-33">
-                        <h2 class="StepTitle">Step 3 Content</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                      </div>
-                      <div id="step-44">
-                        <h2 class="StepTitle">Step 4 Content</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <p>
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                          in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                      </div>
-                    </div>
-                    <!-- End SmartWizard Content -->
                   </div>
                 </div>
               </div>
@@ -517,30 +373,6 @@ function changeOptions(selectEl) {
         </div>
         <!-- /page content -->
 
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- jQuery Smart Wizard -->
-    <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-
-
-  </body>
-</html>
+<?php
+require('footer.php');
+?>
