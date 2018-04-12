@@ -339,11 +339,11 @@ function changeOptions(selectEl) {
 
 
 
-          
+
 
                                 <div class="form-group">
-                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Disk drive source file location</label>
-                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
+
                                   <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
                                     <option value="none"> Select Disk </option>
                                     <option value="new"> Create New Disk Image </option>
@@ -364,7 +364,7 @@ function changeOptions(selectEl) {
                                     }
                                     ?>
                                   </select>
-                                </div>
+                                
                                 </div>
 
 
