@@ -463,7 +463,7 @@ function changeOptions(selectEl) {
                           </div>
 
                           <div class="form-group netChange" id="direct" style="display:none;">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source Device</label>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Host interface</label>
                             <div class="col-md-9 col-sm-9 col-xs-12">
                               <select class="form-control" name="source_dev">
                                 <?php
