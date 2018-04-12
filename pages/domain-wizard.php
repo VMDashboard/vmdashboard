@@ -259,7 +259,7 @@ function changeOptions(selectEl) {
 
             <div class="x_content">
               <!-- Smart Wizard -->
-              <form>
+              <form action="POST" method="index.php">
               <p>This wizard will guide you through the steps to create a new guest virtual machine.</p>
               <div id="wizard" class="form_wizard wizard_horizontal">
                 <ul class="wizard_steps">
