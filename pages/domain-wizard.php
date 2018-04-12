@@ -320,7 +320,7 @@ function changeOptions(selectEl) {
                                   <input type="radio" name="memory_unit" value="MiB"> &nbsp; MB &nbsp;
                                 </label>
                                 <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="memory_unit" value="GiB"> GB
+                                  <input type="radio" name="memory_unit" value="GiB" selected="selected"> GB
                                 </label>
                               </div>
                             </div>
