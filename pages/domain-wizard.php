@@ -331,6 +331,87 @@ function changeOptions(selectEl) {
                       </div>
                       <div id="step-2">
                         <div class="form-horizontal form-label-left">
+
+
+                          <div class="col-md-6">
+                            <h5 class="info-text"> Hard Drive Storage </h5>
+                            <div class="row justify-content-center">
+
+                              <div class="col-sm-10">
+                                <div class="form-group">
+                                  <label>Disk drive source file location</label>
+                                  <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
+                                    <option value="none"> Select Disk </option>
+                                    <option value="new"> Create New Disk Image </option>
+                                    <?php
+                                    $pools = $lv->get_storagepools();
+                                    for ($i = 0; $i < sizeof($pools); $i++) {
+                                      $info = $lv->get_storagepool_info($pools[$i]);
+                                      if ($info['volume_count'] > 0) {
+                                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                        $tmp_keys = array_keys($tmp);
+                                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                          if (strtolower($ext) != "iso")
+                                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                        }
+                                      }
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Disk Image Name</label>
+                                  <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_volume_name"/>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-6 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Volume size</label>
+                                  <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
+                                </div>
+                              </div>
+
+                              <div class="col-sm-4 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Unit size</label>
+                                  <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
+                                    <option value="M">MB</option>
+                                    <option value="G" selected>GB</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
+                                <div class="form-group">
+                                  <label>Driver type</label>
+                                  <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
+                                    <option value="qcow2" selected="selected"> qcow2 </option>
+                                    <option value="raw" > raw </option>
+                                  </select>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
                           <div class="form-group">
                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">

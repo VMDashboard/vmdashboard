@@ -1,7 +1,7 @@
 <!-- footer content -->
 <footer>
   <div class="pull-right">
-    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+    openVM - Open Source Virtualization Management Software by <a href="https://openVM.tech">openVM.tech</a>
   </div>
   <div class="clearfix"></div>
 </footer>
