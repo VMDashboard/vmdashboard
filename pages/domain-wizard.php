@@ -10,7 +10,6 @@ function clean_name_input($data) {
   return $data;
 }
 
-//if (isset($_POST['finish'])) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $domain_type = "kvm"; //set to "kvm"
   $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
@@ -161,8 +160,8 @@ if ($source_file_vda == "new") {
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
 
-//header('Location: domain-list.php');
-//exit;
+header('Location: domain-list.php');
+exit;
 }
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
