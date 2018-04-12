@@ -26,7 +26,7 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>Navigation</h3>
+              <h3><?php echo $hn; ?></h3>
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Host <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
@@ -35,13 +35,13 @@
                     <li><a href="index3.html">Dashboard3</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Domains <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-list"></i> Domains <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="domain-list.php">Domain List</a></li>
                     <li><a href="domain-wizard.php">Create new domain</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> Storage <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-database"></i> Storage <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="general_elements.html">Storage Pools</a></li>
                     <li><a href="media_gallery.html">Create new storage pool</a></li>
@@ -49,13 +49,13 @@
                     <li><a href="media_gallery.html">Upload new ISO image</a></li>
                   </ul>
                 </li>
-                <li><a><i class="fa fa-table"></i> Networking <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-sitemap"></i> Networking <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="tables.html">Private Networks</a></li>
                     <li><a href="tables_dynamic.html">Create new network</a></li>
                   </ul>
                 </li>
-                
+
               </ul>
             </div>
             <div class="menu_section">
