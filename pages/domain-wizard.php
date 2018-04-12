@@ -343,7 +343,7 @@ function changeOptions(selectEl) {
 
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
-
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
                                   <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
                                     <option value="none"> Select Disk </option>
                                     <option value="new"> Create New Disk Image </option>
@@ -364,16 +364,18 @@ function changeOptions(selectEl) {
                                     }
                                     ?>
                                   </select>
-                                
+                                </div>
+                                </div>
+
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Volume Name</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
+                                  </div>
                                 </div>
 
 
-                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Disk Image Name</label>
-                                  <input type="text" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" class="form-control" name="new_volume_name"/>
-                                </div>
-                              </div>
+                              
 
                               <div class="col-sm-6 diskChange" id="new" style="display:none;">
                                 <div class="form-group">
