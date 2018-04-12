@@ -338,18 +338,13 @@ function changeOptions(selectEl) {
                             <div class="row justify-content-center">
 
 
-                              <div class="form-group">
-                                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
-                                </div>
-                              </div>
 
+          
 
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Disk drive source file location</label>
-
-                                  <select onchange="diskChangeOptions(this)"  name="source_file_vda">
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                  <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
                                     <option value="none"> Select Disk </option>
                                     <option value="new"> Create New Disk Image </option>
                                     <?php
@@ -369,7 +364,7 @@ function changeOptions(selectEl) {
                                     }
                                     ?>
                                   </select>
-
+                                </div>
                                 </div>
 
 
