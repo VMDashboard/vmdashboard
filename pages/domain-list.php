@@ -10,6 +10,16 @@ $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 //This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
 if ($action == 'domain-start') {
   $msg = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+  if($msg) {
+    echo "<script>
+    new PNotify({
+      title: 'Regular Success',
+      text: 'Domain may have started!',
+      type: 'success',
+      styling: 'bootstrap3'
+    });
+    </script>";
+  }
 }
 
 //This will pause a virtual machine and temporaily save it's state
