@@ -444,12 +444,90 @@ function changeOptions(selectEl) {
 
                       <div id="step-3">
                         <div class="form-horizontal form-label-left" style="min-height: 275px;">
+
                           <div class="form-group">
-                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Interface type</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <select class="form-control" onchange="changeOptions(this)" name="interface_type">
+                                <option value="network" selected="selected">nat</option>
+                                <option value="direct">bridge</option>
+                              </select>
                             </div>
                           </div>
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">MAC Address</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <input type="text" class="form-control" placeholder="Enter MAC address: 11:22:33:44:55:66" name="mac_address" value="<?php echo $random_mac; ?>">
+                            </div>
+                          </div>
+
+                          <div class="form-group netChange" id="direct" style="display:none;">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source Device</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <select class="form-control" name="source_dev">
+                                <?php
+                                $tmp = $lv->get_node_device_cap_options();
+                                for ($i = 0; $i < sizeof($tmp); $i++) {
+                                  $tmp1 = $lv->get_node_devices($tmp[$i]);
+                                  for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                                    $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                                    if ($tmp2['capability'] == 'net') {
+                                      $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
+                                      echo "<option value='$ident'> $ident </option>";
+                                    }
+                                  }
+                                }
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+
+
+                          <div class="form-group netChange" id="direct" style="display:none;">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
+                            </div>
+                          </div>
+
+
+
+                          <div class="form-group netChange" id="network">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Source Network</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <select class="form-control" name="source_network">
+                                <?php
+                                $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
+                                for ($i = 0; $i < sizeof($tmp); $i++) {
+                                  $tmp2 = $lv->get_network_information($tmp[$i]);
+                                  echo "<option value='" . $tmp2['name'] . "'>" . $tmp2['name'] . "</option>";
+                                }
+                                ?>
+                              </select>
+                            </div>
+                          </div>
+
+
+
+
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Model type</label>
+                            <div class="col-md-9 col-sm-9 col-xs-12">
+                              <select class="form-control" title="Select Model" name="model_type">
+                                <option value="virtio" selected="selected"> virtio </option>
+                                <option value="default" disabled> default </option>
+                                <option value="rtl8139"> rtl8139 </option>
+                                <option value="e1000"> e1000 </option>
+                                <option value="pcnet" disabled> pcnet </option>
+                                <option value="ne2k_pci" disabled> ne2k_pci </option>
+                              </select>
+                            </div>
+                          </div>
+
+
+
+
                         </div>
                       </div>
 
