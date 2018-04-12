@@ -330,7 +330,7 @@ function changeOptions(selectEl) {
 
                       </div>
                       <div id="step-2">
-                        <div class="form-horizontal form-label-left">
+                        <div class="form-horizontal form-label-left" style="min-height: 250px;">
 
 
                           <div class="col-md-6">
@@ -472,7 +472,7 @@ function changeOptions(selectEl) {
                                     </select>
                                   </div>
                                 </div>
-                                
+
                             </div>
                           </div>
 
