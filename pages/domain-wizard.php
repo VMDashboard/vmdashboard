@@ -318,7 +318,7 @@ function changeOptions(selectEl) {
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <div id="memory_unit" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="memory_unit" value="MiB">MB
+                                  <input type="radio" name="memory_unit" value="MiB"> MB
                                 </label>
                                 <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
                                   <input type="radio" name="memory_unit" value="GiB" checked="checked"> GB
@@ -382,7 +382,7 @@ function changeOptions(selectEl) {
                                   <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div id="new_unit" class="btn-group" data-toggle="buttons">
                                       <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                        <input type="radio" name="new_unit" value="M">MB
+                                        <input type="radio" name="new_unit" value="M"> MB
                                       </label>
                                       <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
                                         <input type="radio" name="new_unit" value="G" checked="checked"> GB
@@ -401,10 +401,81 @@ function changeOptions(selectEl) {
                                   </div>
                                 </div>
 
-
-
                             </div>
                           </div>
+
+
+                          <div class="col-md-6">
+                            <h4 class="info-text"> Hard Drive Storage </h4>
+                            <div class="row justify-content-center">
+
+                                <div class="form-group">
+                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                  <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
+                                    <option value="none"> Select Disk </option>
+                                    <option value="new"> Create New Disk Image </option>
+                                    <?php
+                                    $pools = $lv->get_storagepools();
+                                    for ($i = 0; $i < sizeof($pools); $i++) {
+                                      $info = $lv->get_storagepool_info($pools[$i]);
+                                      if ($info['volume_count'] > 0) {
+                                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                        $tmp_keys = array_keys($tmp);
+                                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                          if (strtolower($ext) != "iso")
+                                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                        }
+                                      }
+                                    }
+                                    ?>
+                                  </select>
+                                </div>
+                                </div>
+
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Volume Name</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
+                                  </div>
+                                </div>
+
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label for="new_volume_size" class="control-label col-md-3 col-sm-3 col-xs-12">Volume Size</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
+                                  </div>
+                                </div>
+
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Memory Unit</label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div id="new_unit" class="btn-group" data-toggle="buttons">
+                                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="new_unit" value="M"> MB
+                                      </label>
+                                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
+                                        <input type="radio" name="new_unit" value="G" checked="checked"> GB
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Driver Type</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
+                                      <option value="qcow2" selected="selected">qcow2</option>
+                                      <option value="raw">raw</option>
+                                    </select>
+                                  </div>
+                                </div>
+                                
+                            </div>
+                          </div>
+
 
 
                         </div>
