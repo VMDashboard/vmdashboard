@@ -349,7 +349,7 @@ function changeOptions(selectEl) {
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Disk drive source file location</label>
 
-                                  <select onchange="diskChangeOptions(this)" class="selectpicker" data-style="btn btn-plain btn-round" name="source_file_vda">
+                                  <select onchange="diskChangeOptions(this)"  name="source_file_vda">
                                     <option value="none"> Select Disk </option>
                                     <option value="new"> Create New Disk Image </option>
                                     <?php
@@ -369,7 +369,7 @@ function changeOptions(selectEl) {
                                     }
                                     ?>
                                   </select>
-                                
+
                                 </div>
 
 
