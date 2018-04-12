@@ -337,10 +337,6 @@ function changeOptions(selectEl) {
                             <h4 class="info-text"> Hard Drive Storage </h4>
                             <div class="row justify-content-center">
 
-
-
-
-
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
@@ -374,44 +370,41 @@ function changeOptions(selectEl) {
                                   </div>
                                 </div>
 
-
-                              
-
-                              <div class="col-sm-6 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Volume size</label>
-                                  <input type="number" value="40" class="form-control" name="new_volume_size" min="1" />
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label for="new_volume_size" class="control-label col-md-3 col-sm-3 col-xs-12">Volume Size</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
+                                  </div>
                                 </div>
-                              </div>
 
-                              <div class="col-sm-4 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Unit size</label>
-                                  <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="new_unit">
-                                    <option value="M">MB</option>
-                                    <option value="G" selected>GB</option>
-                                  </select>
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Memory Unit</label>
+                                  <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div id="new_unit" class="btn-group" data-toggle="buttons">
+                                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                        <input type="radio" name="new_unit" value="M">MB
+                                      </label>
+                                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
+                                        <input type="radio" name="new_unit" value="G" checked="checked"> GB
+                                      </label>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
 
-                              <div class="col-sm-10 diskChange" id="new" style="display:none;">
-                                <div class="form-group">
-                                  <label>Driver type</label>
-                                  <select onchange="newExtenstion(this.form)" class="selectpicker" data-style="btn btn-plain btn-round" name="new_driver_type">
-                                    <option value="qcow2" selected="selected"> qcow2 </option>
-                                    <option value="raw" > raw </option>
-                                  </select>
+                                <div class="form-group diskChange" id="new" style="display:none;">
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Driver Type</label>
+                                  <div class="col-md-9 col-sm-9 col-xs-12">
+                                    <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
+                                      <option value="qcow2" selected="selected">qcow2</option>
+                                      <option value="raw">raw</option>
+                                    </select>
+                                  </div>
                                 </div>
-                              </div>
+
+
 
                             </div>
                           </div>
-
-
-
-
-
-
 
 
                         </div>
