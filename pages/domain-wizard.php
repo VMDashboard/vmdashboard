@@ -10,7 +10,8 @@ function clean_name_input($data) {
   return $data;
 }
 
-if (isset($_POST['finish'])) {
+//if (isset($_POST['finish'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $domain_type = "kvm"; //set to "kvm"
   $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
   $memory_unit = $_POST['memory_unit']; //choice of "MiB" or "GiB"
