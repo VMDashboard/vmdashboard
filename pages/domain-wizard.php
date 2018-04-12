@@ -335,7 +335,7 @@ function changeOptions(selectEl) {
 
                           <div class="col-md-6">
                             <h4 class="info-text"> Hard Drive Storage </h4>
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-left">
 
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
@@ -405,9 +405,9 @@ function changeOptions(selectEl) {
                           </div>
 
 
-                          <div class="col-md-6" style="padding-right: 50px;">
+                          <div class="col-md-6">
                             <h4 class="info-text"> Hard Drive Storage </h4>
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-left">
 
                                 <div class="form-group">
                                   <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
