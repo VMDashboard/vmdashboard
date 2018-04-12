@@ -317,9 +317,9 @@ function changeOptions(selectEl) {
                             <div class="col-md-6 col-sm-6 col-xs-12">
                               <div id="memory_unit" class="btn-group" data-toggle="buttons">
                                 <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="memory_unit" value="MiB"> &nbsp; MB &nbsp;
+                                  <input type="radio" name="memory_unit" value="MiB">MB
                                 </label>
-                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                <label class="btn btn-default" data-toggle-class="btn-primary">
                                   <input type="radio" name="memory_unit" value="GiB" selected="selected"> GB
                                 </label>
                               </div>
