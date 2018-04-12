@@ -226,72 +226,68 @@ function changeOptions(selectEl) {
 </script>
 
 
-        <!-- page content -->
-        <div class="right_col" role="main">
-          <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Domain Wizard</h3>
-              </div>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Domain Wizard</h3>
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+      <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="x_panel">
+            <div class="x_title">
+              <h2>Create new virtual machine</h2>
+              <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Settings 1</a></li>
+                    <li><a href="#">Settings 2</a></li>
+                  </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+              </ul>
+              <div class="clearfix"></div>
             </div>
 
-            <div class="clearfix"></div>
+            <div class="x_content">
+              <!-- Smart Wizard -->
+              <p>This wizard will guide you through the steps to create a new guest virtual machine.</p>
+              <div id="wizard" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-1">
+                      <span class="step_no">1</span>
+                      <span class="step_descr">
+                        General<br />
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-2">
+                      <span class="step_no">2</span>
+                      <span class="step_descr">
+                        Storage<br />
+                      </span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#step-3">
+                      <span class="step_no">3</span>
+                      <span class="step_descr">
+                        Networking<br />
+                      </span>
+                    </a>
+                  </li>
+                </ul>
 
-            <div class="row">
-
-              <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="x_panel">
-                  <div class="x_title">
-                    <h2>Create new virtual machine</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-                      <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                        <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
-                          </li>
-                          <li><a href="#">Settings 2</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
-                    </ul>
-                    <div class="clearfix"></div>
-                  </div>
-                  <div class="x_content">
-
-
-                    <!-- Smart Wizard -->
-                    <p>This wizard will guide you through the steps to create a new guest virtual machine.</p>
-                    <div id="wizard" class="form_wizard wizard_horizontal">
-                      <ul class="wizard_steps">
-                        <li>
-                          <a href="#step-1">
-                            <span class="step_no">1</span>
-                            <span class="step_descr">
-                                              General<br />
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-2">
-                            <span class="step_no">2</span>
-                            <span class="step_descr">
-                                              Storage<br />
-                                          </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#step-3">
-                            <span class="step_no">3</span>
-                            <span class="step_descr">
-                                              Networking<br />
-                                          </span>
-                          </a>
-                        </li>
-                      </ul>
                       <div id="step-1">
                         <form class="form-horizontal form-label-left">
 
@@ -309,6 +305,30 @@ function changeOptions(selectEl) {
                               <input type="number" id="vcpu" name="vcpu" required="required" class="form-control col-md-7 col-xs-12" min="1" value="1">
                             </div>
                           </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="memory">Memory <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="number" id="vcpu" name="memory" required="required" class="form-control col-md-7 col-xs-12" min="1" value="2">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Memory Unit</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                              <div id="memory_unit" class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                  <input type="radio" name="memory_unit" value="MiB"> &nbsp; MB &nbsp;
+                                </label>
+                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                  <input type="radio" name="memory_unit" value="GiB"> GB
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+
+
+
+
                           <div class="form-group">
                             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -373,6 +393,30 @@ function changeOptions(selectEl) {
         </div>
         <!-- /page content -->
 
-<?php
-require('footer.php');
-?>
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery Smart Wizard -->
+    <script src="../vendors/jQuery-Smart-Wizard/js/jquery.smartWizard.js"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+
+  </body>
+</html>
