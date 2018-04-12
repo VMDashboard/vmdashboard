@@ -37,8 +37,8 @@
                 </li>
                 <li><a><i class="fa fa-edit"></i> Domains <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="pages/domain-list.php">Domain List</a></li>
-                    <li><a href="pages/domain-wizard.php">Create new domain</a></li>
+                    <li><a href="domain-list.php">Domain List</a></li>
+                    <li><a href="domain-wizard.php">Create new domain</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
