@@ -333,7 +333,7 @@ function changeOptions(selectEl) {
                         <div class="form-horizontal form-label-left" style="min-height: 300px;">
 
 
-                          <div class="col-md-6">
+                          <div class="col-md-5">
                             <h4 class="info-text"> Hard Drive Storage </h4>
                             <div class="row justify-content-center">
 
@@ -405,7 +405,7 @@ function changeOptions(selectEl) {
                           </div>
 
 
-                          <div class="col-md-6">
+                          <div class="col-md-5">
                             <h4 class="info-text"> Hard Drive Storage </h4>
                             <div class="row justify-content-center">
 
