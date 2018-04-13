@@ -237,7 +237,7 @@ $list = file_put_contents($listfile, $liststring);
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
                   </li>
-                  <li role="presentation" class="active"><a href="#tab_content2" id="storage-tab" role="tab" data-toggle="tab" aria-expanded="true">Storage Info</a>
+                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="storage-tab"  data-toggle="tab" aria-expanded="false">Storage Info</a>
                   </li>
                   <li role="presentation" class=""><a href="#tab_content3" role="tab" id="networking-tab" data-toggle="tab" aria-expanded="false">Networking Info</a>
                   </li>
