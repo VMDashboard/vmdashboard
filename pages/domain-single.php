@@ -181,28 +181,6 @@ $list = file_put_contents($listfile, $liststring);
               <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
                 </div>
               </div>
-              <h4>General Information</h4>
-
-              <ul class="list-unstyled user_data">
-
-                <?php
-                /* General information */
-                echo "<li><strong>Domain type: </strong>".$lv->get_domain_type($domName)."</li>";
-                echo "<li><strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."</li>";
-                echo "<li><strong>Domain memory: </strong>$mem</li>";
-                echo "<li><strong>Number of vCPUs: </strong>$cpu</li>";
-                echo "<li><strong>Domain state: </b>$state</li>";
-                echo "<li><strong>Domain architecture: </strong>$arch</li>";
-                echo "<li><strong>Domain ID: </strong>$id</li>";
-                echo "<li><strong>VNC Port: </strong>$vnc</li>";
-                echo '<br/>';
-                if ($die)
-                  die('</body></html');
-                echo "<br />";
-                ?>
-
-              </ul>
-
 
               <!-- start actions -->
               <h4>Actions</h4>
@@ -257,17 +235,37 @@ $list = file_put_contents($listfile, $liststring);
 
               <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                  <li role="presentation" class="active"><a href="#tab_content1" id="storage-tab" role="tab" data-toggle="tab" aria-expanded="true">Storage</a>
+                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
                   </li>
-                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="networking-tab" data-toggle="tab" aria-expanded="false">Networking</a>
+                  <li role="presentation" class="active"><a href="#tab_content2" id="storage-tab" role="tab" data-toggle="tab" aria-expanded="true">Storage Info</a>
                   </li>
-                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="snapshots-tab" data-toggle="tab" aria-expanded="false">Snapshots</a>
+                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="networking-tab" data-toggle="tab" aria-expanded="false">Networking Info</a>
                   </li>
-                  <li role="presentation" class=""><a href="#tab_content4" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML</a>
+                  <li role="presentation" class=""><a href="#tab_content4" role="tab" id="snapshots-tab" data-toggle="tab" aria-expanded="false">Snapshot Info</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content5" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML Info</a>
                   </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
-                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="storage-tab">
+                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="general-tab">
+                    <?php
+                    /* General information */
+                    echo "<li><strong>Domain type: </strong>".$lv->get_domain_type($domName)."</li>";
+                    echo "<li><strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."</li>";
+                    echo "<li><strong>Domain memory: </strong>$mem</li>";
+                    echo "<li><strong>Number of vCPUs: </strong>$cpu</li>";
+                    echo "<li><strong>Domain state: </b>$state</li>";
+                    echo "<li><strong>Domain architecture: </strong>$arch</li>";
+                    echo "<li><strong>Domain ID: </strong>$id</li>";
+                    echo "<li><strong>VNC Port: </strong>$vnc</li>";
+                    echo '<br/>';
+                    if ($die)
+                      die('</body></html');
+                    echo "<br />";
+                    ?>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="storage-tab">
                     <?php
                     /* Disk information */
                     echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk </a><br />";
@@ -310,7 +308,7 @@ $list = file_put_contents($listfile, $liststring);
                   </div>
 
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="networking-tab">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="networking-tab">
                     <?php
                     /* Network interface information */
                     echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fas fa-plus\"> </i> Add new network </a>";
@@ -352,7 +350,7 @@ $list = file_put_contents($listfile, $liststring);
                   </div>
 
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="snapshots-tab">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="snapshots-tab">
                     <?php
                     /* Snapshot information */
                     echo "<h3>Snapshots</h3>";
@@ -403,7 +401,7 @@ $list = file_put_contents($listfile, $liststring);
                      ?>
                   </div>
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="xml-tab">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="xml-tab">
                     <?php
                     /* XML information */
                     $inactive = (!$lv->domain_is_running($domName)) ? true : false;
