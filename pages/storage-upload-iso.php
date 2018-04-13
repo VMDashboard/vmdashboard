@@ -37,9 +37,10 @@ include('navigation.php');
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="min-height:300px;">
-            <p>This upload form will break a large ISO file into small chunks to upload to your server, attempting to bypass common upload size limits</p>
-
-
+            <p>This upload form will break a large ISO file into small chunks to upload to your server.<br>
+              This attempts to bypass upload size limits, commonly found on web-based servers.</p>
+            <br />
+            <br />
 
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
