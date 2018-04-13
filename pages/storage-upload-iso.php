@@ -45,7 +45,23 @@ include('navigation.php');
             <br />
           </div>
 
-        
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <span class="btn btn-plain fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <input id="fileupload" type="file" name="files[]">
+          </span>
+          <br>
+          <br>
+          <!-- The global progress bar -->
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+          </div>
+          <!-- The container for the uploaded files -->
+          <div id="files" class="files"></div>
+          <br>
+          <div class="panel panel-default"></div>
 
 
 
@@ -69,30 +85,6 @@ include('navigation.php');
 </div>
 
 
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="../apps/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="https://blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-<!-- The Canvas to Blob plugin is included for image resizing functionality -->
-<script src="https://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
-<!-- Bootstrap JS is not required, but included for the responsive demo navigation -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="../apps/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
-<!-- The File Upload image preview & resize plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-image.js"></script>
-<!-- The File Upload audio preview plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-audio.js"></script>
-<!-- The File Upload video preview plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-video.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
