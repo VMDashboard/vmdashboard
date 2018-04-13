@@ -36,23 +36,12 @@ require('navigation.php');
 
           <div class="x_content">
             <p>Drag ISO files to the box below or click to select files.</p>
-            <form action="<?php echo $_SERVER['PHP_SELF'];?>" class="dropzone"></form>
+            
             <br />
             <br />
             <br />
             <br />
-            <form action="<?php echo $_SERVER['PHP_SELF'];?>" class="dropzone">
-              <input id="fileupload" type="file" name="files[]">
-            </form>
-            <br />
-            <br />
-            <br />
-            <br />
-
-
-
-
-
+  </div>
 
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
@@ -75,7 +64,7 @@ require('navigation.php');
 
 
 
-</div>
+
 
 
         </div>
