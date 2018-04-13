@@ -189,40 +189,40 @@ $list = file_put_contents($listfile, $liststring);
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fa fa-desktop"></i> VNC Connection<br />
+                    <i class="fa fa-desktop"></i> Connect to Domain using VNC<br />
                   </a></li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Power guest on<br />
+                    <i class="fa fa-power-off"></i> Power guest domain on<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Power guest off<br />
+                  <i class="fa fa-power-off"></i> Power guest domain off gracefully<br />
                 </a></li>
                   <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i> Pause guest<br />
+                    <i class="fa fa-pause"></i> Pause domain guest<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
                   <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i> Resume guest<br />
+                    <i class="fa fa-play"></i> Resume domain guest<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
                   <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i> Turn off<br />
+                    <i class="fa fa-plug"></i> Turn off domain guest forcefully<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
                   <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
-                    <i class="fa fa-trash"></i> Delete guest<br />
+                    <i class="fa fa-trash"></i> Delete domain guest<br />
                   </a></li>
                 <?php } ?>
               </ul>
