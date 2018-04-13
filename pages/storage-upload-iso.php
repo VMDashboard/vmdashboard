@@ -50,7 +50,6 @@ include('navigation.php');
             <input id="fileupload" type="file" name="files[]">
           </span>
           <br>
-          <br>
           <!-- The global progress bar -->
           <div id="progress" class="progress">
             <div class="progress-bar progress-bar-success"></div>
