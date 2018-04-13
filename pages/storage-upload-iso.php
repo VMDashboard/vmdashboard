@@ -18,7 +18,7 @@ include('navigation.php');
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Dropzone multiple file uploader</h2>
+            <h2>ISO Image Uploader</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -36,14 +36,7 @@ include('navigation.php');
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
-            <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
-            <form action="form_upload.html" class="dropzone"></form>
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
+          
 
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
