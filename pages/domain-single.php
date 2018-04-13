@@ -174,9 +174,9 @@ $list = file_put_contents($listfile, $liststring);
                     </a>
                     <?php
                   } else if ($state == "paused") {
-                    echo "<img src='assets/img/paused.png' width='300px' >";
+                    echo "<img src='../assets/img/paused.png' width='300px' >";
                   } else {
-                    echo "<img src='assets/img/shutdown.png' width='300px' >";
+                    echo "<img src='../assets/img/shutdown.png' width='300px' >";
                   }
                   ?>
               <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
