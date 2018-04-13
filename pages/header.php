@@ -44,3 +44,6 @@
   if ($hn == false)
     die('<html><body>Cannot get hostname</body></html>');
   ?>
+
+  <!--  Plugin for Sweet Alert -->
+  <script src="../assets/js/plugins/sweetalert2.min.js"></script>
