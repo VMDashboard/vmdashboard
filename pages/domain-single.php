@@ -265,7 +265,7 @@ $list = file_put_contents($listfile, $liststring);
                     ?>
                   </div>
 
-                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="storage-tab">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="storage-tab">
                     <?php
                     /* Disk information */
                     echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk </a><br />";
