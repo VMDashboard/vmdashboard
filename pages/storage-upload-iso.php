@@ -65,10 +65,9 @@ include('navigation.php');
 $directory = "../uploads/iso_uploads/";
 $files = glob($directory . "*.iso");
 var_dump($files);
-if ($files) {
   for ($i = 0; $i < sizeof($files); $i++) {
-    echo basename($files['i']) . "<br>";
-  }
+    echo basename($files[i]) . "<br>";
+
 }
 ?>
 
