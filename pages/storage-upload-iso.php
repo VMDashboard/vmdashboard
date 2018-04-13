@@ -59,6 +59,17 @@ include('navigation.php');
           <div id="files" class="files"></div>
           <br>
           <div class="panel panel-default"></div>
+<br>
+<br>
+<?php
+$directory = "..//uploads/iso_uploads/";
+$files = glob($directory . "*.iso");
+if ($files) {
+  for ($i = 0; $i < sizeof($files); $i++) {
+    echo $files['i'] . "<br>";
+  }
+?>
+
 
   </div>
 
