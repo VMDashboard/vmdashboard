@@ -273,9 +273,9 @@ $list = file_put_contents($listfile, $liststring);
                       echo "<div class='table-responsive'>" .
                         "<table class='table'>" .
                         "<tr>" .
-                        "<th>Disk storage</th>" .
-                        "<th>Storage driver type</th>" .
-                        "<th>Domain device</th>" .
+                        "<th>Volume</th>" .
+                        "<th>Driver</th>" .
+                        "<th>Device</th>" .
                         "<th>Disk capacity</th>" .
                         "<th>Disk allocation</th>" .
                         "<th>Physical disk size</th>" .
@@ -382,7 +382,7 @@ $list = file_put_contents($listfile, $liststring);
                         echo "<td>" . $snapstate . "</td>";
                         echo "<td>
                           <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fa fa-trash'></i></a>
-                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange-alt'></i></a>
+                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
                           <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
                           </td>";
                         echo "</tr>";
@@ -414,8 +414,8 @@ $list = file_put_contents($listfile, $liststring);
                         "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
                       echo $ret;
                     } else {
-                      echo "Editing XML is performed when virtual guest is shutoff <br />";
-                      echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
+                      echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
+                      echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
                     }
                     ?>
                   </div>
