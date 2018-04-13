@@ -7,6 +7,7 @@ $dom = $lv->get_domain_object($domName);
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
+$action = $_GET['action'];
 
 
 // Domain Actions
