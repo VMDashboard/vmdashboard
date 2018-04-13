@@ -235,7 +235,7 @@ $list = file_put_contents($listfile, $liststring);
 
               <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="false">General Info</a>
+                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
                   </li>
                   <li role="presentation" class=""><a href="#tab_content2" role="tab" id="storage-tab"  data-toggle="tab" aria-expanded="false">Storage Info</a>
                   </li>
@@ -248,19 +248,7 @@ $list = file_put_contents($listfile, $liststring);
                 </ul>
                 <div id="myTabContent" class="tab-content">
                   <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="general-tab">
-                    <?php
-                    /* General information */
-                    echo "<li><strong>Domain type: </strong>".$lv->get_domain_type($domName)."</li>";
-                    echo "<li><strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."</li>";
-                    echo "<li><strong>Domain memory: </strong>$mem</li>";
-                    echo "<li><strong>Number of vCPUs: </strong>$cpu</li>";
-                    echo "<li><strong>Domain state: </b>$state</li>";
-                    echo "<li><strong>Domain architecture: </strong>$arch</li>";
-                    echo "<li><strong>Domain ID: </strong>$id</li>";
-                    echo "<li><strong>VNC Port: </strong>$vnc</li>";
-                    if ($die)
-                      die('</body></html');
-                    ?>
+                  
                   </div>
 
                   <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="storage-tab">
