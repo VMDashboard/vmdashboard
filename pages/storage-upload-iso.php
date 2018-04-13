@@ -68,6 +68,7 @@ if ($files) {
   for ($i = 0; $i < sizeof($files); $i++) {
     echo $files['i'] . "<br>";
   }
+}
 ?>
 
 
