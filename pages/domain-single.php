@@ -182,7 +182,7 @@ $list = file_put_contents($listfile, $liststring);
               <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
                 </div>
               </div>
-<h4>Domain Information</h4>
+<h3><em>Domain Information</em></h3>
 <ul class="list-unstyled user-data">
   <?php
   /* General information */
