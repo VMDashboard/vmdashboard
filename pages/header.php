@@ -28,6 +28,11 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+    <!-- ISO Uploads -->
+      <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+      <link rel="stylesheet" href="../apps/jQuery-File-Upload/css/jquery.fileupload.css">
+
   </head>
 
   <?php
