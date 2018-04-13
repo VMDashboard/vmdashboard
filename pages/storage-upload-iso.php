@@ -1,90 +1,40 @@
 <?php
-require('header.php');
-require('navigation.php');
+include('header.php');
+include('navigation.php');
 ?>
 
-<!-- page content -->
-<div class="right_col" role="main">
-  <div class="">
-    <div class="page-title">
-      <div class="title_left">
-        <h3>ISO Image Upload </h3>
-      </div>
-    </div>
+<div class="panel-header panel-header-sm"></div>
 
-    <div class="clearfix"></div>
+<div class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
 
-    <div class="row">
-      <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
+        <div class="container">
+          <h4>ISO Image Upload</h4>
 
-          <div class="x_title">
-            <h2>Upload form for operating system ISOs</h2>
-            <ul class="nav navbar-right panel_toolbox">
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Settings 1</a></li>
-                  <li><a href="#">Settings 2</a></li>
-                </ul>
-              </li>
-              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-            </ul>
-            <div class="clearfix"></div>
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <span class="btn btn-plain fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <input id="fileupload" type="file" name="files[]">
+          </span>
+          <br>
+          <br>
+          <!-- The global progress bar -->
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
           </div>
-
-          <div class="x_content">
-            <p>Drag ISO files to the box below or click to select files.</p>
-            <form  class="dropzone fileinput-button"></form>
-            <br />
-            <br />
-            <br />
-            <br />
-
-
-
-            <!-- The fileinput-button span is used to style the file input field as button -->
-            <span class="btn btn-plain fileinput-button">
-              <i class="glyphicon glyphicon-plus"></i>
-              <span>Add files...</span>
-              <!-- The file input field used as target for the file upload widget -->
-              <input id="fileupload" type="file" name="files[]">
-            </span>
-            <br>
-            <br>
-            
-            <!-- The container for the uploaded files -->
-            <div id="files" class="files"></div>
-            <br>
-            <div class="panel panel-default"></div>
-
-
-
-
-
-
-
-
-
-          </div>
-
-
-
-
-
-
-
-
+          <!-- The container for the uploaded files -->
+          <div id="files" class="files"></div>
+          <br>
+          <div class="panel panel-default"></div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -205,48 +155,3 @@ $(function () {
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- /page content -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
-      </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="../vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="../vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="../vendors/nprogress/nprogress.js"></script>
-    <!-- Dropzone.js -->
-    <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
-
-    <!-- Custom Theme Scripts -->
-    <script src="../build/js/custom.min.js"></script>
-  </body>
-</html>
