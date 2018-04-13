@@ -157,7 +157,7 @@ $list = file_put_contents($listfile, $liststring);
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+            <div class="col-md-4 col-sm-4 col-xs-12 profile_left">
               <div class="profile_img">
                 <div id="crop-avatar">
                   <!-- Current avatar -->
@@ -169,13 +169,13 @@ $list = file_put_contents($listfile, $liststring);
                     $screen64 = base64_encode($screenshot['data']);
                     ?>
                     <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                    <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
+                    <img src="data:image/png;base64,<?php echo $screen64 ?>" width="300px"/>
                     </a>
                     <?php
                   } else if ($state == "paused") {
-                    echo "<img src='assets/img/paused.png' width='400px' >";
+                    echo "<img src='assets/img/paused.png' width='300px' >";
                   } else {
-                    echo "<img src='assets/img/shutdown.png' width='400px' >";
+                    echo "<img src='assets/img/shutdown.png' width='300px' >";
                   }
                   ?>
               <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
