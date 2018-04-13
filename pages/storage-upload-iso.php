@@ -64,10 +64,12 @@ include('navigation.php');
 <?php
 $directory = "../uploads/iso_uploads/";
 $files = glob($directory . "*.iso");
+if ($files){
+  echo "<h4>Existing ISO Images</h4>";
+}
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
-echo "<h4>Existing ISO Images</h4>
-    <div class=\"col-md-55\" style=\"text-align:center;\">
+echo "<div class=\"col-md-55\" style=\"text-align:center;\">
       <center>
         <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
       </center>
