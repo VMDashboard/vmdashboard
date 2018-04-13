@@ -68,9 +68,9 @@ for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
 echo "<div class=\"col-md-55\">
         <div class=\"thumbnail\">
-          <div class=\"image view view-first\">
+
             <img style=\"width: 50%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
-          </div>
+          
           <div class=\"caption\">
             <p>$iso_name</p>
           </div>
