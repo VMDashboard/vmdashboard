@@ -36,7 +36,7 @@ require('navigation.php');
 
           <div class="x_content">
             <p>Drag ISO files to the box below or click to select files.</p>
-            
+            <form  class="dropzone fileinput-button"></form>
             <br />
             <br />
             <br />
