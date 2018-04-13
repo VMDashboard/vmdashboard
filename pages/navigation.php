@@ -41,10 +41,10 @@
                 </li>
                 <li><a><i class="fa fa-database"></i> Storage <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="general_elements.html">Storage Pools</a></li>
-                    <li><a href="media_gallery.html">Create new storage pool</a></li>
-                    <li><a href="media_gallery.html">Create new storage volume</a></li>
-                    <li><a href="media_gallery.html">Upload new ISO image</a></li>
+                    <li><a href="storage-pools.php">Storage Pools</a></li>
+                    <li><a href="storage-wizard-pools.php">Create new storage pool</a></li>
+                    <li><a href="storage-wizard-volumes.php">Create new storage volume</a></li>
+                    <li><a href="storage-upload-iso.php">Upload new ISO image</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-sitemap"></i> Networking <span class="fa fa-chevron-down"></span></a>
