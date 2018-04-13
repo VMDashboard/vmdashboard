@@ -121,319 +121,309 @@ $list = file_put_contents($listfile, $liststring);
 ?>
 
 
-<div class="panel-header panel-header-sm"></div>
-<div class="content">
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h2 class="title"><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
-          <hr>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-4">
-              <?php
-              /* General information */
-              echo "<h3>General Information</h3>";
-              echo "<b>Domain type: </b>".$lv->get_domain_type($domName).'<br/>';
-              echo "<b>Domain emulator: </b>".$lv->get_domain_emulator($domName).'<br/>';
-              echo "<b>Domain memory: </b>$mem<br/>";
-              echo "<b>Number of vCPUs: </b>$cpu<br/>";
-              echo "<b>Domain state: </b>$state<br/>";
-              echo "<b>Domain architecture: </b>$arch<br/>";
-              echo "<b>Domain ID: </b>$id<br/>";
-              echo "<b>VNC Port: </b>$vnc<br/>";
-              echo '<br/>';
-              if ($die)
-                die('</body></html');
-              echo "<br />";
-              ?>
-            </div>
 
-            <div class="col-md-3">
-              <h3>Actions</h3>
-              <?php  if ($state == "running") { ?>
-                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                  <i class="fas fa-desktop"></i> VNC Connection<br />
-                </a>
-              <?php } ?>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Domain Information</h3>
+      </div>
+    </div>
 
-              <?php if ($state == "shutoff") { ?>
-                <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-power-off"></i> Power guest on<br />
-                </a>
-              <?php } ?>
+    <div class="clearfix"></div>
 
-              <?php  if ($state == "running") { ?>
-                <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="fas fa-power-off"></i> Power guest off<br />
-                </a>
-                <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-pause"></i> Pause guest<br />
-                </a>
-              <?php } ?>
-
-              <?php  if ($state == "paused") { ?>
-                <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-play"></i> Resume guest<br />
-                </a>
-              <?php } ?>
-
-              <?php  if ($state != "shutoff") { ?>
-                <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-plug"></i> Turn off<br />
-                </a>
-              <?php } ?>
-
-              <?php  if ($state == "shutoff") { ?>
-                <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
-                  <i class="fas fa-trash"></i> Delete guest<br />
-                </a>
-              <?php } ?>
-
-            </div>
-
-            <div class="col-md-4">
-              <?php
-              if ($state == "running") {
-                //screenshot will get raw png data at 300 pixels wide
-                $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
-                //the raw png data needs to be encoded to use with html img tag
-                $screen64 = base64_encode($screenshot['data']);
-                ?>
-                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
-                </a>
-                <?php
-              } else if ($state == "paused") {
-                echo "<img src='assets/img/paused.png' width='400px' >";
-              } else {
-                echo "<img src='assets/img/shutdown.png' width='400px' >";
-              }
-              ?>
-            </div>
-
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <?php
-          /* Disk information */
-          echo "<h3>Storage</h3>";
-          echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk </a><br />";
-          $tmp = $lv->get_disk_stats($domName);
-          if (!empty($tmp)) {
-            echo "<div class='table-responsive'>" .
-              "<table class='table'>" .
-              "<tr>" .
-              "<th>Disk storage</th>" .
-              "<th>Storage driver type</th>" .
-              "<th>Domain device</th>" .
-              "<th>Disk capacity</th>" .
-              "<th>Disk allocation</th>" .
-              "<th>Physical disk size</th>" .
-              "<th>Actions</th>" .
-              "</tr>" .
-              "<tbody>";
-            for ($i = 0; $i < sizeof($tmp); $i++) {
-              $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
-              $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
-              $physical = $lv->format_size($tmp[$i]['physical'], 2);
-              $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
-              echo "<tr>" .
-                "<td>".basename($dev)."</td>" .
-                "<td>{$tmp[$i]['type']}</td>" .
-                "<td>{$tmp[$i]['device']}</td>" .
-                "<td>$capacity</td>" .
-                "<td>$allocation</td>" .
-                "<td>$physical</td>" .
-                "<td>" .
-                  "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
-                "</td>" .
-                "</tr>";
-            }
-            echo "</tbody></table></div>";
-          } else {
-            echo "Domain doesn't have any disk devices";
-          }
-          ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <?php
-          /* Network interface information */
-          echo "<h3>Network devices</h3>";
-          echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fas fa-plus\"> </i> Add new network </a>";
-          $tmp = $lv->get_nic_info($domName);
-          if (!empty($tmp)) {
-            $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-            echo "<div class='table-responsive'>" .
-              "<table class='table'>" .
-              "<tr>" .
-              "<th>MAC Address</th>" .
-              "<th>NIC Type</th>" .
-              "<th>Network</th>" .
-              "<th>Network active</th>" .
-              "<th>Actions</th>" .
-              "</tr>" .
-              "<tbody>";
-            for ($i = 0; $i < sizeof($tmp); $i++) {
-              $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-              if (in_array($tmp[$i]['network'], $anets))
-                $netUp = 'Yes';
-              else
-                $netUp = 'No <a href="">[Start]</a>';
-              echo "<tr>" .
-                "<td>{$tmp[$i]['mac']}</td>" .
-                "<td>{$tmp[$i]['nic_type']}</td>" .
-                "<td>{$tmp[$i]['network']}</td>" .
-                "<td>$netUp</td>" .
-                "<td>" .
-                  "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
-                  "Remove network card</a>" .
-                "</td>" .
-                "</tr>";
-            }
-            echo "</tbody></table></div>";
-          } else {
-            echo '<p>Domain doesn\'t have any network devices</p>';
-          }
-          ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <?php
-          /* Snapshot information */
-          echo "<h3>Snapshots</h3>";
-          echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-plus'></i> Create new snapshot</a><br />";
-          $tmp = $lv->list_domain_snapshots($dom);
-          if (!empty($tmp)) {
-            echo "<div class='table-responsive'>" .
-              "<table class='table'>" .
-              //"<thead class='text-primary'>" .
-              "<tr>" .
-              "<th>Name</th>" .
-              "<th>Creation Time</th>" .
-              "<th>State</th>" .
-              "<th>Actions</th>" .
-              "</tr>" .
-              //"</thead>" .
-              "<tbody>";
-
-            foreach ($tmp as $key => $value) {
-              //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-              $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-              $tmpxml = simplexml_load_string($tmpsnapshotxml);
-              $name = $tmpxml->name[0];
-              $creationTime = $tmpxml->creationTime[0];
-              $snapstate = $tmpxml->state[0];
-              echo "<tr>";
-              echo "<td>" . $name . "</td>";
-              echo "<td>" . date("D d M Y", $value) . " - ";
-              echo date("H:i:s", $value) . "</td>";
-              echo "<td>" . $snapstate . "</td>";
-              echo "<td>
-                <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
-                <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
-                <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
-                </td>";
-              echo "</tr>";
-            }
-            echo "</tbody></table></div>";
-          } else {
-            echo "Domain does not have any snapshots";
-          }
-
-          if ($snapshotxml != null) {
-            echo "<hr>";
-            echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-            echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
-          }
-           ?>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-body">
-          <h3>XML Information (Advanced)</h3>
-          <div class="row">
-            <div class="col-lg-3 col-md-8">
-            <!--
-              color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
-            -->
-              <ul class="nav nav-pills nav-pills-primary nav-pills-icons flex-column" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#linkxml" role="tablist">
-                    <i class="now-ui-icons text_caps-small"></i>
-                    Info
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#linkxmlview" role="tablist">
-                    <i class="now-ui-icons education_paper"></i>
-                    View XML
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#linkxmledit" role="tablist">
-                    <i class="now-ui-icons ui-2_settings-90"></i>
-                    Edit XML
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-8">
-              <div class="tab-content">
-                <div class="tab-pane active" id="linkxml">
-                  The virtual machine guest information is stored in XML format. Viewing the XML information will display all configured settings. Editing the XML can be performed when a guest is shutdown.
-                </div>
-                <div class="tab-pane" id="linkxmlview">
+          <div class="x_content">
+            <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+              <div class="profile_img">
+                <div id="crop-avatar">
+                  <!-- Current avatar -->
                   <?php
-                  /* XML information */
-                  $inactive = (!$lv->domain_is_running($domName)) ? true : false;
-                  $xml = $lv->domain_get_xml($domName, $inactive);
-                  $ret = htmlentities($xml);
-                  echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
-                  ?>
-                </div>
-                <div class="tab-pane" id="linkxmledit">
-                  <?php
-                  if ($state == "shutoff"){
-                    $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
-                      "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
-                      "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
-                    echo $ret;
+                  if ($state == "running") {
+                    //screenshot will get raw png data at 300 pixels wide
+                    $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
+                    //the raw png data needs to be encoded to use with html img tag
+                    $screen64 = base64_encode($screenshot['data']);
+                    ?>
+                    <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                    <img src="data:image/png;base64,<?php echo $screen64 ?>" width="400px"/>
+                    </a>
+                    <?php
+                  } else if ($state == "paused") {
+                    echo "<img src='assets/img/paused.png' width='400px' >";
                   } else {
-                    echo "Virtual machine must be shutdown before editing XML";
+                    echo "<img src='assets/img/shutdown.png' width='400px' >";
                   }
                   ?>
+              <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
                 </div>
+              </div>
+              <h4>General Information</h4>
+
+              <ul class="list-unstyled user_data">
+
+                <?php
+                /* General information */
+                echo "<li><strong>Domain type: </strong>".$lv->get_domain_type($domName)."</li>";
+                echo "<li><strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."</li>";
+                echo "<li><strong>Domain memory: </strong>$mem</li>";
+                echo "<li><strong>Number of vCPUs: </strong>$cpu</li>";
+                echo "<li><strong>Domain state: </b>$state</li>";
+                echo "<li><strong>Domain architecture: </strong>$arch</li>";
+                echo "<li><strong>Domain ID: </strong>$id</li>";
+                echo "<li><strong>VNC Port: </strong>$vnc</li>";
+                echo '<br/>';
+                if ($die)
+                  die('</body></html');
+                echo "<br />";
+                ?>
+
+              </ul>
+
+
+              <!-- start actions -->
+              <h4>Actions</h4>
+              <ul class="list-unstyled user_data">
+
+                <?php  if ($state == "running") { ?>
+                  <li><a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                    <i class="fas fa-desktop"></i> VNC Connection<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php if ($state == "shutoff") { ?>
+                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fas fa-power-off"></i> Power guest on<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "running") { ?>
+                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fas fa-power-off"></i> Power guest off<br />
+                </a></li>
+                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fas fa-pause"></i> Pause guest<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "paused") { ?>
+                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fas fa-play"></i> Resume guest<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state != "shutoff") { ?>
+                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fas fa-plug"></i> Turn off<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "shutoff") { ?>
+                  <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
+                    <i class="fas fa-trash"></i> Delete guest<br />
+                  </a></li>
+                <?php } ?>
+              </ul>
+              <!-- end of actions -->
+
+            </div>
+
+            <!-- next column -->
+            <div class="col-md-9 col-sm-9 col-xs-12">
+
+
+              <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#tab_content1" id="storage-tab" role="tab" data-toggle="tab" aria-expanded="true">Storage</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="networking-tab" data-toggle="tab" aria-expanded="false">Networking</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="snapshots-tab" data-toggle="tab" aria-expanded="false">Snapshots</a>
+                  </li>
+                  <li role="presentation" class=""><a href="#tab_content4" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML</a>
+                  </li>
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="storage-tab">
+                    <?php
+                    /* Disk information */
+                    echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk </a><br />";
+                    $tmp = $lv->get_disk_stats($domName);
+                    if (!empty($tmp)) {
+                      echo "<div class='table-responsive'>" .
+                        "<table class='table'>" .
+                        "<tr>" .
+                        "<th>Disk storage</th>" .
+                        "<th>Storage driver type</th>" .
+                        "<th>Domain device</th>" .
+                        "<th>Disk capacity</th>" .
+                        "<th>Disk allocation</th>" .
+                        "<th>Physical disk size</th>" .
+                        "<th>Actions</th>" .
+                        "</tr>" .
+                        "<tbody>";
+                      for ($i = 0; $i < sizeof($tmp); $i++) {
+                        $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+                        $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+                        $physical = $lv->format_size($tmp[$i]['physical'], 2);
+                        $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                        echo "<tr>" .
+                          "<td>".basename($dev)."</td>" .
+                          "<td>{$tmp[$i]['type']}</td>" .
+                          "<td>{$tmp[$i]['device']}</td>" .
+                          "<td>$capacity</td>" .
+                          "<td>$allocation</td>" .
+                          "<td>$physical</td>" .
+                          "<td>" .
+                            "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
+                          "</td>" .
+                          "</tr>";
+                      }
+                      echo "</tbody></table></div>";
+                    } else {
+                      echo "Domain doesn't have any disk devices";
+                    }
+                    ?>
+                  </div>
+
+
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="networking-tab">
+                    <?php
+                    /* Network interface information */
+                    echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fas fa-plus\"> </i> Add new network </a>";
+                    $tmp = $lv->get_nic_info($domName);
+                    if (!empty($tmp)) {
+                      $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+                      echo "<div class='table-responsive'>" .
+                        "<table class='table'>" .
+                        "<tr>" .
+                        "<th>MAC Address</th>" .
+                        "<th>NIC Type</th>" .
+                        "<th>Network</th>" .
+                        "<th>Network active</th>" .
+                        "<th>Actions</th>" .
+                        "</tr>" .
+                        "<tbody>";
+                      for ($i = 0; $i < sizeof($tmp); $i++) {
+                        $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+                        if (in_array($tmp[$i]['network'], $anets))
+                          $netUp = 'Yes';
+                        else
+                          $netUp = 'No <a href="">[Start]</a>';
+                        echo "<tr>" .
+                          "<td>{$tmp[$i]['mac']}</td>" .
+                          "<td>{$tmp[$i]['nic_type']}</td>" .
+                          "<td>{$tmp[$i]['network']}</td>" .
+                          "<td>$netUp</td>" .
+                          "<td>" .
+                            "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
+                            "Remove network card</a>" .
+                          "</td>" .
+                          "</tr>";
+                      }
+                      echo "</tbody></table></div>";
+                    } else {
+                      echo '<p>Domain doesn\'t have any network devices</p>';
+                    }
+                    ?>
+                  </div>
+
+
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="snapshots-tab">
+                    <?php
+                    /* Snapshot information */
+                    echo "<h3>Snapshots</h3>";
+                    echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-plus'></i> Create new snapshot</a><br />";
+                    $tmp = $lv->list_domain_snapshots($dom);
+                    if (!empty($tmp)) {
+                      echo "<div class='table-responsive'>" .
+                        "<table class='table'>" .
+                        //"<thead class='text-primary'>" .
+                        "<tr>" .
+                        "<th>Name</th>" .
+                        "<th>Creation Time</th>" .
+                        "<th>State</th>" .
+                        "<th>Actions</th>" .
+                        "</tr>" .
+                        //"</thead>" .
+                        "<tbody>";
+
+                      foreach ($tmp as $key => $value) {
+                        //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+                        $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+                        $tmpxml = simplexml_load_string($tmpsnapshotxml);
+                        $name = $tmpxml->name[0];
+                        $creationTime = $tmpxml->creationTime[0];
+                        $snapstate = $tmpxml->state[0];
+                        echo "<tr>";
+                        echo "<td>" . $name . "</td>";
+                        echo "<td>" . date("D d M Y", $value) . " - ";
+                        echo date("H:i:s", $value) . "</td>";
+                        echo "<td>" . $snapstate . "</td>";
+                        echo "<td>
+                          <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
+                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
+                          <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
+                          </td>";
+                        echo "</tr>";
+                      }
+                      echo "</tbody></table></div>";
+                    } else {
+                      echo "Domain does not have any snapshots";
+                    }
+
+                    if ($snapshotxml != null) {
+                      echo "<hr>";
+                      echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+                      echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+                    }
+                     ?>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="xml-tab">
+                    <?php
+                    /* XML information */
+                    $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+                    $xml = $lv->domain_get_xml($domName, $inactive);
+                    $ret = htmlentities($xml);
+
+
+                    if ($state == "shutoff"){
+                      $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
+                        "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
+                        "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
+                      echo $ret;
+                    } else {
+                      echo "Editing XML is performed when virtual guest is shutoff <br />";
+                      echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0;\" readonly>" . $ret . "</textarea>";
+                    }
+                    ?>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -441,8 +431,16 @@ $list = file_put_contents($listfile, $liststring);
       </div>
     </div>
   </div>
-
 </div>
+<!-- /page content -->
+
+
+
+
+
+
+
+
 
 <?php
 require('footer.php');
