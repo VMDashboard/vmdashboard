@@ -66,15 +66,14 @@ $directory = "../uploads/iso_uploads/";
 $files = glob($directory . "*.iso");
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
-echo "<div class=\"col-md-55\" style=\"text-align:center;\">
-
-<center>
-            <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
-</center>
-          <div class=\"caption\">
-            <p>$iso_name</p>
-          </div>
-
+echo "<h4>Existing ISO Images</h4>
+    <div class=\"col-md-40\" style=\"text-align:center;\">
+      <center>
+        <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
+      </center>
+        <div class=\"caption\">
+          <p>$iso_name</p>
+        </div>
       </div>";
 }
 ?>
