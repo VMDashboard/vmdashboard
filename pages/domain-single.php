@@ -295,7 +295,7 @@ $list = file_put_contents($listfile, $liststring);
                           "<td>$allocation</td>" .
                           "<td>$physical</td>" .
                           "<td>" .
-                            "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fa fa-trash'></i></a>" .
+                            "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$tmp[$i]['device']&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
                           "</td>" .
                           "</tr>";
                       }
