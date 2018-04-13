@@ -69,12 +69,12 @@ for ($i = 0; $i < sizeof($files); $i++) {
 echo "<div class=\"col-md-55\">
 
 
-            <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
+            <img style=\"width: 75%; align:center; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
 
           <div class=\"caption\">
             <p>$iso_name</p>
           </div>
-      
+
       </div>";
 }
 ?>
