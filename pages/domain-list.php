@@ -84,7 +84,7 @@ if ($action == 'domain-destroy') {
           </div>
           <div class="x_content">
 
-            <p><a href="guest-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
+            <p><a href="domain-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
 
             <!-- start project list -->
             <table class="table table-striped projects">
