@@ -188,40 +188,40 @@ $list = file_put_contents($listfile, $liststring);
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fas fa-desktop"></i> VNC Connection<br />
+                    <i class="fa fa-desktop"></i> VNC Connection<br />
                   </a></li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fas fa-power-off"></i> Power guest on<br />
+                    <i class="fa fa-power-off"></i> Power guest on<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fas fa-power-off"></i> Power guest off<br />
+                  <i class="fa fa-power-off"></i> Power guest off<br />
                 </a></li>
                   <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fas fa-pause"></i> Pause guest<br />
+                    <i class="fa fa-pause"></i> Pause guest<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
                   <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fas fa-play"></i> Resume guest<br />
+                    <i class="fa fa-play"></i> Resume guest<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
                   <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fas fa-plug"></i> Turn off<br />
+                    <i class="fa fa-plug"></i> Turn off<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
                   <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
-                    <i class="fas fa-trash"></i> Delete guest<br />
+                    <i class="fa fa-trash"></i> Delete guest<br />
                   </a></li>
                 <?php } ?>
               </ul>
@@ -248,13 +248,25 @@ $list = file_put_contents($listfile, $liststring);
                 </ul>
                 <div id="myTabContent" class="tab-content">
                   <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="general-tab">
-                  
+                    <?php
+                    /* General information */
+                    echo "<strong>Domain type: </strong>".$lv->get_domain_type($domName)."<br />";
+                    echo "<strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."<br />";
+                    echo "<strong>Domain memory: </strong>$mem<br />";
+                    echo "<strong>Number of vCPUs: </strong>$cpu<br />";
+                    echo "<strong>Domain state: </strong>$state<br />";
+                    echo "<strong>Domain architecture: </strong>$arch<br />";
+                    echo "<strong>Domain ID: </strong>$id<br />";
+                    echo "<strong>VNC Port: </strong>$vnc<br />";
+                    if ($die)
+                      die('</body></html');
+                    ?>
                   </div>
 
                   <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="storage-tab">
                     <?php
                     /* Disk information */
-                    echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fas fa-plus'></i> Add new disk </a><br />";
+                    echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
                     $tmp = $lv->get_disk_stats($domName);
                     if (!empty($tmp)) {
                       echo "<div class='table-responsive'>" .
@@ -282,7 +294,7 @@ $list = file_put_contents($listfile, $liststring);
                           "<td>$allocation</td>" .
                           "<td>$physical</td>" .
                           "<td>" .
-                            "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>" .
+                            "<a title='Remove disk device' onclick=\"diskRemoveWarning('?action=domain-disk-remove&amp;dev=" . $tmp[$i]['device'] . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fa fa-trash-alt'></i></a>" .
                           "</td>" .
                           "</tr>";
                       }
@@ -297,7 +309,7 @@ $list = file_put_contents($listfile, $liststring);
                   <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="networking-tab">
                     <?php
                     /* Network interface information */
-                    echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fas fa-plus\"> </i> Add new network </a>";
+                    echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fa fa-plus\"> </i> Add new network </a>";
                     $tmp = $lv->get_nic_info($domName);
                     if (!empty($tmp)) {
                       $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
@@ -340,7 +352,7 @@ $list = file_put_contents($listfile, $liststring);
                     <?php
                     /* Snapshot information */
                     echo "<h3>Snapshots</h3>";
-                    echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fas fa-plus'></i> Create new snapshot</a><br />";
+                    echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fa fa-plus'></i> Create new snapshot</a><br />";
                     $tmp = $lv->list_domain_snapshots($dom);
                     if (!empty($tmp)) {
                       echo "<div class='table-responsive'>" .
@@ -368,9 +380,9 @@ $list = file_put_contents($listfile, $liststring);
                         echo date("H:i:s", $value) . "</td>";
                         echo "<td>" . $snapstate . "</td>";
                         echo "<td>
-                          <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fas fa-trash-alt'></i></a>
-                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-exchange-alt'></i></a>
-                          <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fas fa-code'></i></a>
+                          <a title='Delete snapshot' onclick=\"snapshotDeleteWarning('?action=domain-snapshot-delete&amp;snapshot=" . $value . "&amp;uuid=" . $_GET['uuid'] . "')\" href='#'><i class='fa fa-trash-alt'></i></a>
+                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange-alt'></i></a>
+                          <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
                           </td>";
                         echo "</tr>";
                       }
