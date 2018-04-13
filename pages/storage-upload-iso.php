@@ -67,14 +67,14 @@ $files = glob($directory . "*.iso");
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
 echo "<div class=\"col-md-55\">
-        <div class=\"thumbnail\">
 
-            <img style=\"width: 50%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
-          
+
+            <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
+
           <div class=\"caption\">
             <p>$iso_name</p>
           </div>
-        </div>
+      
       </div>";
 }
 ?>
