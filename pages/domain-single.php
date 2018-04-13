@@ -235,7 +235,7 @@ $list = file_put_contents($listfile, $liststring);
 
               <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
+                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="false">General Info</a>
                   </li>
                   <li role="presentation" class=""><a href="#tab_content2" role="tab" id="storage-tab"  data-toggle="tab" aria-expanded="false">Storage Info</a>
                   </li>
@@ -258,10 +258,8 @@ $list = file_put_contents($listfile, $liststring);
                     echo "<li><strong>Domain architecture: </strong>$arch</li>";
                     echo "<li><strong>Domain ID: </strong>$id</li>";
                     echo "<li><strong>VNC Port: </strong>$vnc</li>";
-                    echo '<br/>';
                     if ($die)
                       die('</body></html');
-                    echo "<br />";
                     ?>
                   </div>
 
