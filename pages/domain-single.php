@@ -184,7 +184,7 @@ $list = file_put_contents($listfile, $liststring);
               </div>
 
               <!-- start actions -->
-              <h4><ul>Actions</ul></h4>
+              <h4>Actions</h4>
               <ul class="list-unstyled user_data">
 
                 <?php  if ($state == "running") { ?>
