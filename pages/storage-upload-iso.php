@@ -3,15 +3,50 @@ include('header.php');
 include('navigation.php');
 ?>
 
-<div class="panel-header panel-header-sm"></div>
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Form Upload </h3>
+      </div>
+    </div>
 
-<div class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
+    <div class="clearfix"></div>
 
-        <div class="container">
-          <h4>ISO Image Upload</h4>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Dropzone multiple file uploader</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <p>Drag multiple files to the box below for multi upload or click to select files. This is for demonstration purposes only, the files are not uploaded to any server.</p>
+            <form action="form_upload.html" class="dropzone"></form>
+            <br />
+            <br />
+            <br />
+            <br />
+          </div>
+
+
+
 
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
@@ -30,11 +65,32 @@ include('navigation.php');
           <div id="files" class="files"></div>
           <br>
           <div class="panel panel-default"></div>
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- /page content -->
+
+
+
+
+
+
+
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -156,4 +212,4 @@ $(function () {
 });
 </script>
 
-<?php require('footer.php'); ?>
+<?php include('footer.php'); ?>
