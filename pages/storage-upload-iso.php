@@ -40,7 +40,7 @@ require('navigation.php');
             <br />
             <br />
             <br />
-            <form action="form_upload.html" class="dropzone">
+            <form action="#" class="dropzone">
               <input id="fileupload" type="file" name="files[]">
             </form>
             <br />
