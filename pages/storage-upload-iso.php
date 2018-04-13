@@ -66,7 +66,7 @@ $directory = "../uploads/iso_uploads/";
 $files = glob($directory . "*.iso");
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
-echo "<div class=\"col-md-55'">
+echo "<div class=\"col-md-55\">
         <div class=\"thumbnail\">
           <div class=\"image view view-first\">
             <img style=\"width: 100%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
