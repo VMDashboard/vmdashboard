@@ -287,6 +287,7 @@ $list = file_put_contents($listfile, $liststring);
                         $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
                         $physical = $lv->format_size($tmp[$i]['physical'], 2);
                         $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                        $device = $tmp[$i]['device'];
                         echo "<tr>" .
                           "<td>".basename($dev)."</td>" .
                           "<td>{$tmp[$i]['type']}</td>" .
@@ -295,7 +296,7 @@ $list = file_put_contents($listfile, $liststring);
                           "<td>$allocation</td>" .
                           "<td>$physical</td>" .
                           "<td>" .
-                            "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$tmp[$i]['device']&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
+                            "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
                           "</td>" .
                           "</tr>";
                       }
