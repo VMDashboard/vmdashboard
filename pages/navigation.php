@@ -30,9 +30,7 @@
               <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i> Host <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="index.html">Host Information</a></li>
-                    <li><a href="index2.html">Dashboard2</a></li>
-                    <li><a href="index3.html">Dashboard3</a></li>
+                    <li><a href="host.php">Host Information</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-list"></i> Domains <span class="fa fa-chevron-down"></span></a>
