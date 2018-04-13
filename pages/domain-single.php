@@ -182,25 +182,9 @@ $list = file_put_contents($listfile, $liststring);
               <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
                 </div>
               </div>
-<h3><em>Domain Information</em></h3>
-<ul class="list-unstyled user-data">
-  <?php
-  /* General information */
-  echo "<strong>Type: </strong>".$lv->get_domain_type($domName)."<br />";
-  echo "<strong>Emulator: </strong>".$lv->get_domain_emulator($domName)."<br />";
-  echo "<strong>Memory: </strong>$mem<br />";
-  echo "<strong>CPUs: </strong>$cpu<br />";
-  echo "<strong>State: </strong>$state<br />";
-  echo "<strong>Architecture: </strong>$arch<br />";
-  echo "<strong>ID: </strong>$id<br />";
-  echo "<strong>VNC Port: </strong>$vnc<br />";
-  if ($die)
-    die('</body></html');
-  ?>
-</ul>
 
               <!-- start actions -->
-              <h4>Actions</h4>
+              <h4><ul>Actions</ul></h4>
               <ul class="list-unstyled user_data">
 
                 <?php  if ($state == "running") { ?>
