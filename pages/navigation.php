@@ -4,7 +4,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><img src="../assets/img/logo2.png"> <span>openVM</span></a>
+            <a href="index.html" class="site_title"><img src="../assets/img/logo2.png" width="100px"> <span>openVM</span></a>
           </div>
 
           <div class="clearfix"></div>
