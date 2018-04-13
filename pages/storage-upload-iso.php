@@ -65,7 +65,7 @@ include('navigation.php');
 $directory = "../uploads/iso_uploads/";
 $files = glob($directory . "*.iso");
 if ($files){
-  echo "<h4>Existing ISO Images</h4>";
+  echo "<h2>Existing ISO Images</h2>";
 }
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]);
