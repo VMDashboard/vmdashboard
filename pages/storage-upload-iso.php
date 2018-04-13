@@ -36,14 +36,10 @@ include('navigation.php');
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
+          <div class="x_content" style="min-height:300px;">
             <p>This upload form will break a large ISO file into small chunks to upload to your server, attempting to bypass common upload size limits</p>
 
-            <br />
-            <br />
-            <br />
-            <br />
-          </div>
+
 
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
@@ -63,7 +59,7 @@ include('navigation.php');
           <br>
           <div class="panel panel-default"></div>
 
-
+  </div>
 
         </div>
       </div>
@@ -196,10 +192,8 @@ $(function () {
 </script>
 
 
-
 <!-- DateJS !!USED IN NAVBAR!!-->
 <script src="../vendors/DateJS/build/date.js"></script>
-
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
