@@ -131,7 +131,7 @@ if ($action == 'domain-destroy') {
   	                echo "<tr>" .
                       "<td>#</td>" .
                       "<td>" .
-                        "<a href=\"guest-single.php?uuid=$uuid\">$name</a><br />" .
+                        "<a href=\"domain-single.php?uuid=$uuid\">$name</a><br />" .
                         "<small>State:$state</small>" .
                       "</td>" .
                       "<td>$cpu</td>" .
