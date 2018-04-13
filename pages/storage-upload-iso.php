@@ -3,18 +3,7 @@ include('header.php');
 include('navigation.php');
 ?>
 
-<div class="panel-header panel-header-sm"></div>
 
-<div class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-
-        
-      </div>
-    </div>
-  </div>
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
