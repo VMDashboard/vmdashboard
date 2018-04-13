@@ -48,7 +48,7 @@ require('navigation.php');
                           $ci  = $lv->get_connect_information();
                           $info = '';
                           if ($ci['uri'])
-                              $info .= 'connected to <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+                              $info .= ' connected to <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
                           if ($ci['encrypted'] == 'Yes')
                               $info .= 'encrypted, ';
                           if ($ci['secure'] == 'Yes')
