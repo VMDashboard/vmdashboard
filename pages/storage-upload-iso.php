@@ -73,6 +73,17 @@ include('navigation.php');
 <!-- /page content -->
 
 
+<!-- footer content -->
+<footer>
+  <div class="pull-right">
+    openVM - Open Source Virtualization Management Software by <a href="https://openVM.tech">openVM.tech</a>
+  </div>
+  <div class="clearfix"></div>
+</footer>
+<!-- /footer content -->
+  </div>
+</div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -195,4 +206,5 @@ $(function () {
 });
 </script>
 
-<?php include('footer.php'); ?>
+</body>
+</html>
