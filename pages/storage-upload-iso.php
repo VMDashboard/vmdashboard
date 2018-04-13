@@ -45,9 +45,6 @@ include('navigation.php');
             <br />
           </div>
 
-
-
-
           <!-- The fileinput-button span is used to style the file input field as button -->
           <span class="btn btn-plain fileinput-button">
             <i class="glyphicon glyphicon-plus"></i>
@@ -68,26 +65,12 @@ include('navigation.php');
 
 
 
-
-
-
-
-
-
-
-
         </div>
       </div>
     </div>
   </div>
 </div>
 <!-- /page content -->
-
-
-
-
-
-
 
 
 
@@ -121,7 +104,7 @@ include('navigation.php');
 $(function () {
     'use strict';
     // Change this to the location of your server-side upload handler:
-    var url = '../uploads/',
+    var url = 'uploads/',
         uploadButton = $('<button/>')
             .addClass('btn btn-primary')
             .prop('disabled', true)
