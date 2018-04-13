@@ -113,7 +113,7 @@ include('navigation.php');
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
 $(function () {
-    //'use strict';
+    'use strict';
     // Change this to the location of your server-side upload handler:
     var url = '../uploads/',
         uploadButton = $('<button/>')
