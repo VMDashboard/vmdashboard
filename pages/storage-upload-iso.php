@@ -229,9 +229,7 @@ $(function () {
 <script src="../vendors/jqvmap/dist/jquery.vmap.js"></script>
 <script src="../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
 <script src="../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-<!-- bootstrap-daterangepicker -->
-<script src="../vendors/moment/min/moment.min.js"></script>
-<script src="../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 
 
 <!-- Custom Theme Scripts -->
