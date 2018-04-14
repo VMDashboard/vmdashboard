@@ -53,8 +53,8 @@ include('navigation.php');
           </span>
           <br>
           <!-- The global progress bar -->
-          <div id="iso-progress" class="progress">
-            <div class="progress-bar iso-progress-bar-success"></div>
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
           </div>
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
@@ -117,7 +117,6 @@ echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
 <script src="../apps/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload validation plugin -->
 <script src="../apps/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
-
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
@@ -184,7 +183,7 @@ $(function () {
         }
     }).on('fileuploadprogressall', function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#iso-progress .iso-progress-bar').css(
+        $('#progress .progress-bar').css(
             'width',
             progress + '%'
         );
@@ -215,6 +214,8 @@ $(function () {
 });
 </script>
 
+<!-- jQuery -->
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- FastClick -->
