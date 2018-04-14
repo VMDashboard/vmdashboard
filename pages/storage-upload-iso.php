@@ -68,7 +68,7 @@ if ($files){
 }
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
-echo "<div class=\"col-md-1 col-sm-1 col-xs-1\" style=\"text-align:center;\">
+echo "<div class=\"col-md-1.5 col-sm-1 col-xs-1\" style=\"text-align:center;\">
       <center>
         <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
       </center>
