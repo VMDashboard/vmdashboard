@@ -104,7 +104,14 @@ echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
   </div>
 </div>
 
-
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="../apps/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="../apps/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
 
 <script>
 /*jslint unparam: true, regexp: true */
