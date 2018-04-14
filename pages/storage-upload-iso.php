@@ -146,7 +146,7 @@ $(function () {
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(iso)$/i,
         maxFileSize: 9990000000,
-        maxChunkSize: 1000000 // 1 MB
+        maxChunkSize: 2000000 // 1 MB
 
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
