@@ -53,6 +53,10 @@ include('navigation.php');
           </span>
           <br>
           
+          <!-- The container for the uploaded files -->
+          <div id="files" class="files"></div>
+          <br>
+          <div class="panel panel-default"></div>
 <br>
 <br>
 <?php
