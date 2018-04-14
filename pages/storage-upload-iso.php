@@ -145,7 +145,7 @@ $(function () {
         dataType: 'json',
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(iso)$/i,
-        maxFileSize: 999000000,
+        maxFileSize: 9990000000,
         maxChunkSize: 1000000 // 1 MB
 
     }).on('fileuploadadd', function (e, data) {
