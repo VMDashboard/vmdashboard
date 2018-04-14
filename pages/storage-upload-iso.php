@@ -52,17 +52,27 @@ include('navigation.php');
             <input id="fileupload" type="file" name="files[]">
           </span>
           <br>
-          <!-- The global progress bar -->
-          <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-          </div>
-          <!-- The container for the uploaded files -->
-          <div id="files" class="files"></div>
-          <br>
-          <div class="panel panel-default"></div>
+          
 <br>
 <br>
-
+<?php
+$directory = "../uploads/iso_uploads/"; //assigned directory for uploading ISO images
+$files = glob($directory . "*.[iI][sS][oO]"); //check for iso or ISO extension
+if ($files){
+  echo "<h2>Existing ISO Images</h2>";
+}
+for ($i = 0; $i < sizeof($files); $i++) {
+  $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
+echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
+      <center>
+        <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
+      </center>
+        <div class=\"caption\">
+          <p>$iso_name</p>
+        </div>
+      </div>";
+}
+?>
 
 
   </div>
