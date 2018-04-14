@@ -38,6 +38,36 @@ include('navigation.php');
           </div>
 
 
+          <div class="x_content" style="min-height:300px;">
+            <p>This upload form will divide a large ISO file into 2MB chunks as it uploads to the server.<br>
+              This attempts to bypass common upload size limits. Uploads are located in the uploads/iso_uploads/ directory.</p>
+            <br />
+            <br />
+
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <span class="btn btn-plain fileinput-button">
+            <i class="glyphicon glyphicon-plus"></i>
+            <span>Add files...</span>
+            <!-- The file input field used as target for the file upload widget -->
+            <input id="fileupload" type="file" name="files[]">
+          </span>
+          <br>
+          <!-- The global progress bar -->
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+          </div>
+          <!-- The container for the uploaded files -->
+          <div id="files" class="files"></div>
+          <br>
+          <div class="panel panel-default"></div>
+<br>
+<br>
+
+
+
+  </div>
+
+
         </div>
       </div>
     </div>
