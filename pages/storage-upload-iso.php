@@ -37,10 +37,6 @@ include('navigation.php');
             <div class="clearfix"></div>
           </div>
 
-          <!-- The global progress bar -->
-          <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-          </div>
 
           <div class="x_content" style="min-height:300px;">
             <p>This upload form will divide a large ISO file into 2MB chunks as it uploads to the server.<br>
@@ -56,7 +52,10 @@ include('navigation.php');
             <input id="fileupload" type="file" name="files[]">
           </span>
           <br>
-
+          <!-- The global progress bar -->
+          <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+          </div>
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
           <br>
@@ -105,7 +104,8 @@ echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
   </div>
 </div>
 
-
+<!-- bootstrap-progressbar -->
+<script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
