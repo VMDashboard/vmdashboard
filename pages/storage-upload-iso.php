@@ -36,51 +36,7 @@ include('navigation.php');
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content" style="min-height:300px;">
-            <p>This upload form will divide a large ISO file into 2MB chunks as it uploads to the server.<br>
-              This attempts to bypass common upload size limits. Uploads are located in the uploads/iso_uploads/ directory.</p>
-            <br />
-            <br />
 
-          <!-- The fileinput-button span is used to style the file input field as button -->
-          <span class="btn btn-plain fileinput-button">
-            <i class="glyphicon glyphicon-plus"></i>
-            <span>Add files...</span>
-            <!-- The file input field used as target for the file upload widget -->
-            <input id="fileupload" type="file" name="files[]">
-          </span>
-          <br>
-          <!-- The global progress bar -->
-          <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-          </div>
-          <!-- The container for the uploaded files -->
-          <div id="files" class="files"></div>
-          <br>
-          <div class="panel panel-default"></div>
-<br>
-<br>
-<?php
-$directory = "../uploads/iso_uploads/"; //assigned directory for uploading ISO images
-$files = glob($directory . "*.[iI][sS][oO]"); //check for iso or ISO extension
-if ($files){
-  echo "<h2>Existing ISO Images</h2>";
-}
-for ($i = 0; $i < sizeof($files); $i++) {
-  $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
-echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
-      <center>
-        <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
-      </center>
-        <div class=\"caption\">
-          <p>$iso_name</p>
-        </div>
-      </div>";
-}
-?>
-
-
-  </div>
 
         </div>
       </div>
@@ -115,7 +71,102 @@ echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
 <script src="../apps/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload validation plugin -->
 <script src="../apps/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
+<script>
+/*jslint unparam: true, regexp: true */
+/*global window, $ */
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url = '../uploads/',
+        uploadButton = $('<button/>')
+            .addClass('btn btn-primary')
+            .prop('disabled', true)
+            .text('Processing...')
+            .on('click', function () {
+                var $this = $(this),
+                    data = $this.data();
+                $this
+                    .off('click')
+                    .text('Abort')
+                    .on('click', function () {
+                        $this.remove();
+                        data.abort();
+                    });
+                data.submit().always(function () {
+                    $this.remove();
+                });
+            });
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        autoUpload: false,
+        acceptFileTypes: /(\.|\/)(iso)$/i,
+        maxFileSize: 9990000000,
+        maxChunkSize: 2000000 // 2 MB
 
+    }).on('fileuploadadd', function (e, data) {
+        data.context = $('<div/>').appendTo('#files');
+        $.each(data.files, function (index, file) {
+            var node = $('<p/>')
+                    .append($('<span/>').text(file.name));
+            if (!index) {
+                node
+                    .append('<br>')
+                    .append(uploadButton.clone(true).data(data));
+            }
+            node.appendTo(data.context);
+        });
+    }).on('fileuploadprocessalways', function (e, data) {
+        var index = data.index,
+            file = data.files[index],
+            node = $(data.context.children()[index]);
+        if (file.preview) {
+            node
+                .prepend('<br>')
+                .prepend(file.preview);
+        }
+        if (file.error) {
+            node
+                .append('<br>')
+                .append($('<span class="text-danger"/>').text(file.error));
+        }
+        if (index + 1 === data.files.length) {
+            data.context.find('button')
+                .text('Upload')
+                .prop('disabled', !!data.files.error);
+        }
+    }).on('fileuploadprogressall', function (e, data) {
+        var progress = parseInt(data.loaded / data.total * 100, 10);
+        $('#progress .progress-bar').css(
+            'width',
+            progress + '%'
+        );
+    }).on('fileuploaddone', function (e, data) {
+        $.each(data.result.files, function (index, file) {
+            if (file.url) {
+                var link = $('<a>')
+                    .attr('target', '_blank')
+                    .prop('href', file.url);
+                $(data.context.children()[index])
+                    .wrap(link);
+            } else if (file.error) {
+                var error = $('<span class="text-danger"/>').text(file.error);
+                $(data.context.children()[index])
+                    .append('<br>')
+                    .append(error);
+            }
+        });
+    }).on('fileuploadfail', function (e, data) {
+        $.each(data.files, function (index) {
+            var error = $('<span class="text-danger"/>').text('File upload failed.');
+            $(data.context.children()[index])
+                .append('<br>')
+                .append(error);
+        });
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>
 
 
 
