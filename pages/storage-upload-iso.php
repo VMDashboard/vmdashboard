@@ -37,8 +37,8 @@ include('navigation.php');
             <div class="clearfix"></div>
           </div>
           <div class="x_content" style="min-height:300px;">
-            <p>This upload form will break a large ISO file into small chunks to upload to your server.<br>
-              This attempts to bypass upload size limits, commonly found on web-based servers.</p>
+            <p>This upload form will divide a large ISO file into 2MB chunks as it uploads to the server.<br>
+              This attempts to bypass common upload size limits. Uploads are located in the uploads/iso_uploads/ directory.</p>
             <br />
             <br />
 
@@ -61,13 +61,13 @@ include('navigation.php');
 <br>
 <br>
 <?php
-$directory = "../uploads/iso_uploads/";
-$files = glob($directory . "*.iso");
+$directory = "../uploads/iso_uploads/"; //assigned directory for uploading ISO images
+$files = glob($directory . "*.[iI][sS][oO]"); //check for iso or ISO extension
 if ($files){
   echo "<h2>Existing ISO Images</h2>";
 }
 for ($i = 0; $i < sizeof($files); $i++) {
-  $iso_name = basename($files[$i]);
+  $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
 echo "<div style=\"text-align:center; width:10%;\">
       <center>
         <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
@@ -146,7 +146,7 @@ $(function () {
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(iso)$/i,
         maxFileSize: 9990000000,
-        maxChunkSize: 2000000 // 1 MB
+        maxChunkSize: 2000000 // 2 MB
 
     }).on('fileuploadadd', function (e, data) {
         data.context = $('<div/>').appendTo('#files');
