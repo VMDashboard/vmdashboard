@@ -56,6 +56,9 @@ include('navigation.php');
           <div id="iso-progress" class="iso-progress">
             <div class="iso-progress-bar iso-progress-bar-success"></div>
           </div>
+          <div class="progress">
+            <div class="progress-bar progress-bar-success" data-transitiongoal="95"></div>
+          </div>
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
           <br>
