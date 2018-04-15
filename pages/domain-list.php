@@ -171,6 +171,12 @@ if ($action == 'domain-destroy') {
 </div>
 <!-- /page content -->
 
+<script>
+   $(document).ready(function (){
+           $('.ui-pnotify').remove();
+   });
+</script>
+
 <?php
 require('footer.php');
 ?>
