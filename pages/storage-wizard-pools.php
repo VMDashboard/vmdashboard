@@ -95,9 +95,9 @@ require('navigation.php');
                               </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="actionBar">
                               <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="submit" name="submit" />
+                              <input type="submit" name="submit" class="buttonFinish btn btn-default" />
                               </div>
                             </div>
 
