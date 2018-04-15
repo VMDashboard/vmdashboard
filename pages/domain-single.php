@@ -267,7 +267,7 @@ $list = file_put_contents($listfile, $liststring);
                   <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="storage-tab">
                     <?php
                     /* Disk information */
-                    echo "<a title='Add new disk' href=guest-disk-wizard.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
+                    echo "<a title='Add new disk' href=storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
                     $tmp = $lv->get_disk_stats($domName);
                     if (!empty($tmp)) {
                       echo "<div class='table-responsive'>" .
