@@ -79,6 +79,17 @@ require('navigation.php');
               <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
               <div id="wizard" class="form_wizard wizard_horizontal">
 
+                <ul class="wizard_steps">
+                  <li>
+                    <a href="#step-1">
+                      <span class="step_no">1</span>
+                      <span class="step_descr">
+                        General<br />
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+
                       <div id="step-1">
                         <div class="form-horizontal form-label-left" style="min-height: 250px;">
 
