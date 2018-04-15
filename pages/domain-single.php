@@ -141,7 +141,7 @@ swal(alertRet);
         <h3>Domain Information</h3>
       </div>
     </div>
-<script>swal("Hello world!");</script>
+
     <div class="clearfix"></div>
 
     <div class="row">
