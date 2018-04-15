@@ -1,10 +1,9 @@
 <?php
 require('header.php');
 require('navigation.php');
-?>
 
+$action = $_GET['action'];
 
-<?php
 if ($action == 'volume-delete') {
   $msg = '';
   $msg = $lv->storagevolume_delete( base64_decode($_GET['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
@@ -103,18 +102,42 @@ function volumeDeleteWarning(linkURL) {
 </script>
 
 
+<!-- page content -->
+<div class="right_col" role="main">
+  <div class="">
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Domain List</h3>
+      </div>
+    </div>
 
-<div class="panel-header panel-header-sm"></div>
-<div class="content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Storage Pools</h4>
-          <a href="storage-pool-wizard.php"><i class="fas fa-plus"></i> Create new storage pool </a> <br />
-          <a href="upload.php"><i class="fas fa-plus"></i> Upload new ISO image </a>
-        </div>
-        <div class="card-body">
+    <div class="clearfix"></div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Guests</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                  </li>
+                  <li><a href="#">Settings 2</a>
+                  </li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+
 
           <?php
           $pools = $lv->get_storagepools();
@@ -195,6 +218,8 @@ function volumeDeleteWarning(linkURL) {
     </div>
   </div>
 </div>
+</div>
+<!-- /page content -->
 
 <?php
 require('footer.php');
