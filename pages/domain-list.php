@@ -87,7 +87,7 @@ if ($action == 'domain-destroy') {
             <p><a href="domain-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
 
             <script>
-            msg = new PNotify({
+            PNotify({
                                   title: 'Regular Notice',
                                   text: 'Check me out! I\'m a notice.',
                                   styling: 'bootstrap3'
