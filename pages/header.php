@@ -51,4 +51,4 @@
   ?>
 
   <!--  Plugin for Sweet Alert -->
-  <script src="../assets/js/plugins/sweetalert2.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
