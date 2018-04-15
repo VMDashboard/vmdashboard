@@ -10,16 +10,6 @@ $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 //This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
 if ($action == 'domain-start') {
   $msg = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
-  if($msg) {
-    echo "<script>
-    new PNotify({
-      title: 'Regular Success',
-      text: 'Domain may have started!',
-      type: 'success',
-      styling: 'bootstrap3'
-    });
-    </script>";
-  }
 }
 
 //This will pause a virtual machine and temporaily save it's state
@@ -47,7 +37,8 @@ if ($action == 'domain-stop') {
 if ($action == 'domain-destroy') {
   $msg = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
 }
- ?>
+
+?>
 
 <!-- page content -->
 <div class="right_col" role="main">
@@ -85,15 +76,6 @@ if ($action == 'domain-destroy') {
           <div class="x_content">
 
             <p><a href="domain-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
-
-            <script>
-            PNotify({
-                                  title: 'Regular Notice',
-                                  text: 'Check me out! I\'m a notice.',
-                                  styling: 'bootstrap3'
-                              });
-            </script>
-
 
             <!-- start project list -->
             <table class="table table-striped projects">
@@ -178,8 +160,3 @@ if ($action == 'domain-destroy') {
 <?php
 require('footer.php');
 ?>
-<script>
-   $(document).ready(function (){
-           $('.ui-pnotify').remove();
-   });
-</script>
