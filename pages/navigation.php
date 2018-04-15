@@ -4,13 +4,13 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><img src="../assets/img/logo4.png" width="45px"> <span>openVM</span></a>
+            <a href="index.html" class="site_title"><img src="../assets/img/logo4.png" width="45px"> <span>open<font style="color:orange;">VM</font></span></a>
           </div>
 
           <div class="clearfix"></div>
 
 
-          <br />   <br />   <br /> 
+          <br />   <br />   <br />
 
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
