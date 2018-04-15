@@ -221,7 +221,7 @@ $list = file_put_contents($listfile, $liststring);
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
-                  <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $_GET['uuid'] ?>')" href="#">
+                  <li><a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                     <i class="fa fa-trash"></i> Delete domain guest<br />
                   </a></li>
                 <?php } ?>
@@ -433,57 +433,6 @@ $list = file_put_contents($listfile, $liststring);
 <!-- /page content -->
 
 
-
-
-
-
-
-
-
 <?php
 require('footer.php');
 ?>
-
-
-<script>
-
-function domainDeleteWarning(linkURL) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete the virtual machine configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-
-function diskRemoveWarning(linkURL) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will remove the disk from the configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, remove it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-
-function snapshotDeleteWarning(linkURL) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete the snapshot',
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-
-</script>
