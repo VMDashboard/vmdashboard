@@ -102,34 +102,28 @@ function newExtenstion(f) {
                   </div>
                 </div>
 
-                <div class="col-sm-4">
-                  <div class="form-group">
-                    <label>Unit size</label>
-                    <select class="selectpicker" data-style="btn btn-plain btn-round" title="Select Unit Size" name="unit">
+                <div class="form-group">
+                  <label for="unit" class="control-label col-md-3 col-sm-3 col-xs-12">Unit Size</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select  class="form-control" name="unit">
                       <option value="M">MB</option>
                       <option value="G" selected>GB</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="col-sm-10">
-                  <div class="form-group">
-                    <label>Driver type</label>
-                    <select class="selectpicker" onchange="newExtenstion(this.form)" data-style="btn btn-plain btn-round" title="Select volume type" name="driver_type">
+                <div class="form-group">
+                  <label for="driver_type" class="control-label col-md-3 col-sm-3 col-xs-12">Driver Type</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select  class="form-control" name="driver_type" onchange="newExtenstion(this.form)">
                       <option value="qcow2" selected>qcow2</option>
                       <option value="raw">raw</option>
                     </select>
                   </div>
                 </div>
 
-
                 <input type="hidden" value="<?php echo $_SERVER['HTTP_REFERER']; ?>" name="original_page"/>
                 <input type="hidden" value="<?php echo $_GET['pool']; ?>" name="pool"/>
-
-
-
-
-
 
               </div>
 
