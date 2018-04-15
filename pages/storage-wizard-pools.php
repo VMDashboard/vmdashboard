@@ -95,12 +95,12 @@ require('navigation.php');
                               </div>
                             </div>
 
-                            <div class="actionBar">
-                              <div class="msgBox">
-                              <input type="submit" name="submit" class="buttonFinish btn btn-default" value="submit" />
-                            </div>
-                            </div>
 
+
+                        </div>
+
+                        <div class="actionBar">
+                          <input type="submit" name="submit" class="buttonFinish btn btn-default" value="Finish" />
                         </div>
 
 
