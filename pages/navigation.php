@@ -43,7 +43,6 @@
                   <ul class="nav child_menu">
                     <li><a href="storage-pools.php">Storage Pools</a></li>
                     <li><a href="storage-wizard-pools.php">Create new storage pool</a></li>
-                    <li><a href="storage-wizard-volumes.php">Create new storage volume</a></li>
                     <li><a href="storage-upload-iso.php">Upload new ISO image</a></li>
                   </ul>
                 </li>
