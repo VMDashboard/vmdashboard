@@ -141,7 +141,7 @@ function volumeDeleteWarning(linkURL) {
                 <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
                 <?php $act = $info['active'] ? 'Active' : 'Inactive';
                 if ($act == "Active")
-                  echo "<a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool=$pools[$i]&amp;subaction=volume-create\"><i class=\"fa fa-plus\"></i> Create new volume </a> <br/> <br />";
+                  echo "<a href=\"storage-wizard-volumes.php?action=storage-pools&amp;pool=$pools[$i]&amp;subaction=volume-create\"><i class=\"fa fa-plus\"></i> Create new volume </a> <br/> <br />";
                 echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
                 echo "<strong>Activity:</strong> " . $act . "<br />";
                 echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
