@@ -87,7 +87,7 @@ if ($action == 'domain-destroy') {
             <p><a href="domain-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
 
             <script>
-            PNotify({
+            new PNotify({
               title: 'Regular Success',
               text: 'Domain may have started!',
               type: 'success',
