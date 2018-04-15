@@ -86,14 +86,12 @@ if ($action == 'domain-destroy') {
 
             <p><a href="domain-wizard.php"><i class="fa fa-plus"></i> Create new guest </a></p>
 
-            <script>
-            new PNotify({
-              title: 'Regular Success',
-              text: 'Domain may have started!',
-              type: 'success',
-              styling: 'bootstrap3'
-            });
-            </script>"
+            <button class="btn btn-default source" onclick="new PNotify({
+                                  title: 'Regular Notice',
+                                  text: 'Check me out! I\'m a notice.',
+                                  styling: 'bootstrap3'
+                              });">Notice</button>
+
 
             <!-- start project list -->
             <table class="table table-striped projects">
