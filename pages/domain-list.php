@@ -171,12 +171,13 @@ if ($action == 'domain-destroy') {
 </div>
 <!-- /page content -->
 
+
+
+<?php
+require('footer.php');
+?>
 <script>
    $(document).ready(function (){
            $('.ui-pnotify').remove();
    });
 </script>
-
-<?php
-require('footer.php');
-?>
