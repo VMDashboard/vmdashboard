@@ -96,9 +96,9 @@ require('navigation.php');
                             </div>
 
                             <div class="actionBar">
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="submit" name="submit" class="buttonFinish btn btn-default" />
-                              </div>
+                              <div class="msgBox">
+                              <input type="submit" name="submit" class="buttonFinish btn btn-default" value="submit" />
+                            </div>
                             </div>
 
                         </div>
