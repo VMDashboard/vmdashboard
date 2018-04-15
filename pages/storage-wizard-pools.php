@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if ($ret == "success"){
   //Return back to the orignal web page
-  header('Location: ' . "storage.php");
+  header('Location: ' . "storage-pools.php");
   exit;
   }
 } //end if statement for $_POST data
