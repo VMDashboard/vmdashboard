@@ -75,15 +75,6 @@ if (file_exists('../uploads/iso_uploads')) {
 }
 
 
-
-if ($msg != "") {
-?>
-<script>
-var alertRet = "<?php echo $msg; ?>";
-swal(alertRet);
-</script>
-<?php
-}
 ?>
 
 <script>
