@@ -121,7 +121,16 @@ $listfile = "../tokens.list";
 $list = file_put_contents($listfile, $liststring);
 ?>
 
-
+<?php
+if ($ret) {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
 
 
 <!-- page content -->
