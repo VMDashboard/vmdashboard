@@ -41,12 +41,12 @@ if ($action == "pool-xml") {
 
 
 //Check to see if the iso_uploads directory exists. If it does and ISO has been uploaded
-if (file_exists('uploads/iso_uploads')) {
+if (file_exists('../uploads/iso_uploads')) {
 
-  $upload_path = realpath('uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
-  $filename = 'uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
+  $upload_path = realpath('../uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
+  $filename = '../uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
 
-  $directory = "uploads/iso_uploads/";
+  $directory = "../uploads/iso_uploads/";
   $files = glob($directory . "*.iso"); //check to see if any files with .iso exist
   if ($files) {
 
@@ -150,7 +150,7 @@ function volumeDeleteWarning(linkURL) {
                 <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
                 <?php $act = $info['active'] ? 'Active' : 'Inactive';
                 if ($act == "Active")
-                  echo "<a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool=$pools[$i]&amp;subaction=volume-create\"><i class=\"fas fa-plus\"></i> Create new volume </a> <br/> <br />";
+                  echo "<a href=\"storage-volume-wizard.php?action=storage-pools&amp;pool=$pools[$i]&amp;subaction=volume-create\"><i class=\"fa fa-plus\"></i> Create new volume </a> <br/> <br />";
                 echo "<strong>Pool Name:</strong> " . $pools[$i] . "<br />";
                 echo "<strong>Activity:</strong> " . $act . "<br />";
                 echo "<strong>State:</strong> " . $lv->translate_storagepool_state($info['state']) . "<br />";
