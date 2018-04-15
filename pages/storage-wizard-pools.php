@@ -13,7 +13,7 @@ function clean_name_input($data) {
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
-if (isset($_POST['finish'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $pool_name = clean_name_input($_POST['pool_name']);
   $pool_path = $_POST['pool_path'];
   $xml = "
