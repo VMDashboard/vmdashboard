@@ -14,10 +14,8 @@ $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 //will redirect to guests.php. header() needs to be before navbar.php. Uses libvirst so has to be after header.php
 if (isset($_POST['finish'])) {
-
   $pool_name = clean_name_input($_POST['pool_name']);
   $pool_path = $_POST['pool_path'];
-
   $xml = "
     <pool type='dir'>
       <name>$pool_name</name>
@@ -27,7 +25,6 @@ if (isset($_POST['finish'])) {
         </permissions>
       </target>
     </pool>";
-
   $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
 
   if ($ret == "success"){
@@ -35,12 +32,10 @@ if (isset($_POST['finish'])) {
   header('Location: ' . "storage.php");
   exit;
   }
-
-}
+} //end if statement for $_POST data
 
 require('navigation.php');
 ?>
-
 
 
 <!-- page content -->
@@ -63,59 +58,50 @@ require('navigation.php');
               <ul class="nav navbar-right panel_toolbox">
                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Settings 1</a></li>
-                    <li><a href="#">Settings 2</a></li>
-                  </ul>
-                </li>
-                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-              </ul>
-              <div class="clearfix"></div>
-            </div>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a></li>
+                  <li><a href="#">Settings 2</a></li>
+                </ul>
+              </li>
+              <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
 
-            <div class="x_content">
-              <!-- Smart Wizard -->
-              <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+          <div class="x_content">
+            <!-- Smart Wizard -->
+            <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+              <div class="form-horizontal form-label-left" style="min-height: 250px;">
 
-
-                        <div class="form-horizontal form-label-left" style="min-height: 250px;">
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pool_name">Pool name <span class="required">*</span></label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" value="default" required="required" placeholder="Enter name for storage pool" class="form-control col-md-7 col-xs-12" name="pool_name" />
-                              </div>
-                            </div>
-
-                            <div class="form-group">
-                              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pool_path">Pool path<span class="required">*</span></label>
-                              <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control col-md-7 col-xs-12" name="pool_path" />
-                              </div>
-                            </div>
-
-
-
-                        </div>
-
-                        <div class="actionBar">
-                          <input type="submit" name="submit" class="buttonFinish btn btn-default" value="Finish" />
-                        </div>
-
-
-                    </div>
-                  </form>
-
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pool_name">Pool name <span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" value="default" required="required" placeholder="Enter name for storage pool" class="form-control col-md-7 col-xs-12" name="pool_name" />
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pool_path">Pool path<span class="required">*</span></label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control col-md-7 col-xs-12" name="pool_path" />
+                  </div>
+                </div>
+
               </div>
-            </div>
+
+              <div class="actionBar">
+                <input type="submit" name="submit" class="buttonFinish btn btn-default" value="Finish" />
+              </div>
+
+            </form>
           </div>
         </div>
-        <!-- /page content -->
-
-
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /page content -->
 
 
 <?php
