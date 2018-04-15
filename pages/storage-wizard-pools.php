@@ -95,12 +95,18 @@ require('navigation.php');
                               </div>
                             </div>
 
+                            <div class="form-group">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                              <input type="submit" name="submit" />
+                              </div>
+                            </div>
+
                         </div>
 
 
                     </div>
                   </form>
-                    
+
                   </div>
                 </div>
               </div>
