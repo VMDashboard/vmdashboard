@@ -57,8 +57,11 @@ function networkDeleteWarning(linkURL) {
   swal("Are you sure you want to do this?", {
     buttons: ["Cancel", "Aww yiss!"],
   }).then(function($result) {
+    if (result == true){
     // Redirect the user
     window.location = linkURL;
+  }
+
   });
 }
 </script>
