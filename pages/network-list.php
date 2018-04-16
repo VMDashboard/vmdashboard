@@ -53,12 +53,9 @@ swal(alertRet);
 
 <script>
 function networkDeleteWarning(linkURL) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete the network configuration',
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
+
+  swal("Are you sure you want to do this?", {
+    buttons: ["Cancel", "Aww yiss!"],
   }).then(function($result) {
     // Redirect the user
     window.location = linkURL;
