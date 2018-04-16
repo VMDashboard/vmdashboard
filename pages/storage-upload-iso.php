@@ -183,7 +183,7 @@ $(function () {
         }
     }).on('fileuploadprogressall', function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar').css(
+        $('#progress .progress-bar-success').css(
             'width',
             progress + '%'
         );
