@@ -1,3 +1,3 @@
 <?php
-header('Location: guests.php');
+header('Location: pages/domain-list.php');
  ?>
