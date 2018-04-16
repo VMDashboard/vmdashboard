@@ -36,7 +36,6 @@ if (($action == 'dumpxml') || ($action == 'edit')) {
 }
 
 
-
 require('navigation.php'); //bring in the sidebar and menu
 ?>
 
@@ -102,7 +101,7 @@ function networkDeleteWarning(linkURL) {
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-<p><a href="network-wizard.php"><i class="fas fa-plus"></i> Create new network </a></p>
+<p><a href="network-wizard.php"><i class="fa fa-plus"></i> Create new network </a></p>
 <?php echo $network_xml; ?>
 
 <!-- start project list -->
