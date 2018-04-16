@@ -52,10 +52,7 @@ include('navigation.php');
             <input id="fileupload" type="file" name="files[]">
           </span>
           <br>
-          <!-- The global progress bar -->
-          <div id="upload_progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
-          </div>
+          
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
           <br>
