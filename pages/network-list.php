@@ -55,7 +55,7 @@ swal(alertRet);
 function networkDeleteWarning(linkURL) {
 
   swal("Are you sure you want to do this?", {
-    buttons: ["Cancel", "Aww yiss!"],
+    buttons: ["Cancel", true],
   }).then(function($result) {
     if (result == true){
     // Redirect the user
