@@ -100,7 +100,7 @@ swal(alertRet);
 
                 <div class="form-group">
                   <label for="forward_mode" class="control-label col-md-3 col-sm-3 col-xs-12">Forward Mode</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="forward_mode">
                       <option value="nat" selected>nat</option>
                     </select>
@@ -123,7 +123,7 @@ swal(alertRet);
 
                 <div class="form-group">
                   <label for="subnet_mask" class="control-label col-md-3 col-sm-3 col-xs-12">Subnet Mask</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="subnet_mask">
                       <option value="255.255.255.0" selected>/24 -> 255.255.255.0</option>
                       <option value="255.255.255.128">/25 -> 255.255.255.128</option>
@@ -166,7 +166,7 @@ swal(alertRet);
 <!-- /page content -->
 
 
-              
+
 
 <?php
 require('footer.php');
