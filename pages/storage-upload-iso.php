@@ -54,7 +54,7 @@ include('navigation.php');
           <br>
           <!-- The global progress bar -->
           <div id="progress" class="progress">
-            <div class="progress-bar"></div>
+            <div class=" progress-bar-success"></div>
           </div>
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
