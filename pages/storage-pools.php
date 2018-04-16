@@ -138,6 +138,10 @@ function volumeDeleteWarning(linkURL) {
           <?php
           $pools = $lv->get_storagepools();
           for ($i = 0; $i < sizeof($pools); $i++) {
+
+            $res = $lv->get_storagepool_res($pools[$i]);
+            $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
+            
             $info = $lv->get_storagepool_info($pools[$i]);
             ?>
             <hr>
