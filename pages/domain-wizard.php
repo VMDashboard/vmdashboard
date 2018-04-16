@@ -1,4 +1,4 @@
-<<?php
+<?php
 require('header.php');
 
 function clean_name_input($data) {
