@@ -56,7 +56,7 @@ function networkDeleteWarning(linkURL) {
 
   swal("Are you sure you want to do this?", {
     buttons: ["Cancel", true],
-  })..then((value) => {
+  }).then((value) => {
     if (value == true){
     // Redirect the user
     window.location = linkURL;
