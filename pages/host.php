@@ -2,7 +2,10 @@
 require('header.php');
 require('navigation.php');
 ?>
-
+<!-- The global progress bar -->
+<div id="progress" class="progress">
+  <div class="progress-bar progress-bar-success"></div>
+</div>
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
