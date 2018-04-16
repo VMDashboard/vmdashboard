@@ -105,18 +105,7 @@ echo "<div class=\"col-md-1 col-sm-2 col-xs-4\" style=\"text-align:center;\">
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="../apps/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="../apps/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
-<!-- The basic File Upload plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload.js"></script>
-<!-- The File Upload processing plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-process.js"></script>
-<!-- The File Upload validation plugin -->
-<script src="../apps/jQuery-File-Upload/js/jquery.fileupload-validate.js"></script>
+
 <script>
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
