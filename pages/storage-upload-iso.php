@@ -54,7 +54,7 @@ include('navigation.php');
           <br>
           <!-- The global progress bar -->
           <div id="progress" class="progress">
-            <div class=" progress-bar-success"></div>
+            <div class="progress-bar progress-bar-success"></div>
           </div>
           <!-- The container for the uploaded files -->
           <div id="files" class="files"></div>
@@ -183,7 +183,7 @@ $(function () {
         }
     }).on('fileuploadprogressall', function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .progress-bar-success').css(
+        $('#progress .progress-bar').css(
             'width',
             progress + '%'
         );
