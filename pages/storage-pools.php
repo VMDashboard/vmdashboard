@@ -71,11 +71,6 @@ if (file_exists('../uploads/iso_uploads')) {
 
       $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
     }
-
-    $pool = "iso_uploads";
-    $res = $lv->get_storagepool_res($pool);
-    $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
-
   }
 }
 
@@ -138,10 +133,11 @@ function volumeDeleteWarning(linkURL) {
           <?php
           $pools = $lv->get_storagepools();
           for ($i = 0; $i < sizeof($pools); $i++) {
-
+            //get the pool resource to use with refreshing the pool data
             $res = $lv->get_storagepool_res($pools[$i]);
+            //refreshing the data before displaying because ISOs were not refreshing automatically and also the Available data was not correct after adding volumes
             $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
-            
+            //getting the pool information to display the data in a table
             $info = $lv->get_storagepool_info($pools[$i]);
             ?>
             <hr>
