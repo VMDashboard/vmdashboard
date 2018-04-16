@@ -288,79 +288,82 @@ function changeOptions(selectEl) {
                   </li>
                 </ul>
 
-                      <div id="step-1">
-                        <div class="form-horizontal form-label-left" style="min-height: 250px;">
+                <div id="step-1">
+                  <div class="form-horizontal form-label-left" style="min-height: 250px;">
 
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain_name">Domain Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="text" id="domain_name" required="required" class="form-control col-md-7 col-xs-12" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="vcpu">Virtual CPUs <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="number" id="vcpu" name="vcpu" required="required" class="form-control col-md-7 col-xs-12" min="1" value="1">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="memory">Memory <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <input type="number" id="vcpu" name="memory" required="required" class="form-control col-md-7 col-xs-12" min="1" value="2">
-                            </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Memory Unit</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                              <div id="memory_unit" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                  <input type="radio" name="memory_unit" value="MiB"> MB
-                                </label>
-                                <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
-                                  <input type="radio" name="memory_unit" value="GiB" checked="checked"> GB
-                                </label>
-                              </div>
-                            </div>
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain_name">Domain Name <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="domain_name" required="required" class="form-control col-md-7 col-xs-12" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="vcpu">Virtual CPUs <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="vcpu" name="vcpu" required="required" class="form-control col-md-7 col-xs-12" min="1" value="1">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="memory">Memory <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="number" id="vcpu" name="memory" required="required" class="form-control col-md-7 col-xs-12" min="1" value="2">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Memory Unit</label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div id="memory_unit" class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                            <input type="radio" name="memory_unit" value="MiB"> MB
+                          </label>
+                          <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
+                            <input type="radio" name="memory_unit" value="GiB" checked="checked"> GB
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div id="step-2">
+                  <div class="form-horizontal form-label-left" style="min-height: 250px;">
+
+                    <div class="col-md-6">
+                      <h4 class="info-text"> Hard Drive Storage </h4>
+                      <div class="row justify-content-center">
+
+                        <div class="form-group">
+                          <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
+                          <div class="col-md-9 col-sm-9 col-xs-12">
+                            <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
+                              <option value="none"> Select Disk </option>
+                              <option value="new"> Create New Disk Image </option>
+                              <?php
+                              $pools = $lv->get_storagepools();
+                              for ($i = 0; $i < sizeof($pools); $i++) {
+                                $info = $lv->get_storagepool_info($pools[$i]);
+                                if ($info['volume_count'] > 0) {
+                                  $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                                  $tmp_keys = array_keys($tmp);
+                                  for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                                    $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                                    $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                                    if (strtolower($ext) != "iso")
+                                      echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                                  }
+                                }
+                              }
+                              ?>
+                            </select>
                           </div>
                         </div>
-
-                      </div>
-                      <div id="step-2">
-                        <div class="form-horizontal form-label-left" style="min-height: 250px;">
-
-
-                          <div class="col-md-6">
-                            <h4 class="info-text"> Hard Drive Storage </h4>
-                            <div class="row justify-content-center">
-
-                                <div class="form-group">
-                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
-                                  <div class="col-md-9 col-sm-9 col-xs-12">
-                                  <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
-                                    <option value="none"> Select Disk </option>
-                                    <option value="new"> Create New Disk Image </option>
-                                    <?php
-                                    $pools = $lv->get_storagepools();
-                                    for ($i = 0; $i < sizeof($pools); $i++) {
-                                      $info = $lv->get_storagepool_info($pools[$i]);
-                                      if ($info['volume_count'] > 0) {
-                                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                                        $tmp_keys = array_keys($tmp);
-                                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                                          if (strtolower($ext) != "iso")
-                                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                                        }
-                                      }
-                                    }
-                                    ?>
-                                  </select>
-                                </div>
-                                </div>
 
                                 <div class="form-group diskChange" id="new" style="display:none;">
                                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Volume Name</label>
