@@ -71,6 +71,11 @@ if (file_exists('../uploads/iso_uploads')) {
 
       $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
     }
+
+    $pool = "iso_uploads";
+    $res = $lv->get_storagepool_res($pool);
+    $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
+
   }
 }
 
