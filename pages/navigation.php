@@ -38,7 +38,7 @@
                 <li><a><i class="fa fa-sitemap"></i> Networking <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="network-list.php">Private Networks</a></li>
-                    <li><a href="tables_dynamic.html">Create new network</a></li>
+                    <li><a href="network-wizard.php">Create new network</a></li>
                   </ul>
                 </li>
 
