@@ -10,7 +10,7 @@ function clean_name_input($data) {
   return $data;
 }
 
-if (isset($_POST['finish'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $network_name = clean_name_input($_POST['network_name']);
   $forward_mode = $_POST['forward_mode'];
   $mac_address = $_POST['mac_address'];
@@ -33,7 +33,7 @@ if (isset($_POST['finish'])) {
 
   $ret = $lv->network_define_xml($xml)? 'success' : 'Error while creating network: '.$lv->get_last_error();
   if ($ret == 'success') {
-    header('Location: networking.php');
+    header('Location: network-list.php');
     exit;
   }
 }
