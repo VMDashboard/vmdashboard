@@ -482,7 +482,6 @@ if (!empty($tmp)) {
 <h4>Network Information</h4>
 <?php
 /* Network interface information */
-echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fa fa-plus\"> </i> Add new network </a>";
 $tmp = $lv->get_nic_info($domName);
 if (!empty($tmp)) {
   $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
