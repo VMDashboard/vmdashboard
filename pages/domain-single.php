@@ -81,7 +81,8 @@ if ($action == 'domain-snapshot-xml') {
 
 if ($action == 'domain-edit') {
   //if (@$_POST['xmldesc']) {
-    $ret = $lv->domain_change_xml($domName, $_POST['xmldesc']) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
+  $xml = $_POST['xmldesc'];
+    $ret = $lv->domain_change_xml($domName, $xml) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
   //}
   header("Location: $page?uuid=$uuid");
 }
