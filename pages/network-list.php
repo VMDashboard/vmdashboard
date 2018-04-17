@@ -52,13 +52,15 @@ swal(alertRet);
 ?>
 
 <script>
-function networkDeleteWarning(linkURL) {
+function networkDeleteWarning(linkURL,currentURL) {
   swal("Delete network?", {
     buttons: ["Cancel", true],
   }).then((value) => {
     if (value == true){
     // Redirect the user
     window.location = linkURL;
+  }else {
+    window.location = currentURL;
   }
 
   });
@@ -149,9 +151,10 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   if (!$tmp2['active']) {
     $networkName = $tmp2['name'];
     $deleteURL = "?action=network-delete&amp;network=$networkName";
+    $currentURL = $_SERVER['PHP_SELF'];
     $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
     //$act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
-    $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL')\" href=\"#\">Delete</a>";
+    $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL','$currentURL')\" href=\"#\">Delete</a>";
   }
 
   echo "<tr>" .
