@@ -350,12 +350,12 @@ if (!empty($tmp)) {
   }
   echo "</tbody></table></div>";
 } else {
-  echo "<hr>Domain doesn't have any disk devices";
+  echo "<hr><p>Domain doesn't have any disk devices</p>";
 }
 ?>
 
 
-<br/><br/>
+<br/><br/><br/>
 <!-- add network here -->
 <h4>Network Information</h4>
 <?php
@@ -392,12 +392,12 @@ if (!empty($tmp)) {
   }
   echo "</tbody></table></div>";
 } else {
-  echo '<hr>Domain doesn\'t have any network devices';
+  echo '<hr><p>Domain doesn\'t have any network devices</p>';
 }
 ?>
 
 
-<br/><br/>
+<br/><br/><br/>
 <!-- add snapshot here -->
 <h4>Snapshot Information</h4>
 <?php
@@ -437,7 +437,7 @@ if (!empty($tmp)) {
   }
   echo "</tbody></table></div>";
 } else {
-  echo "<hr>Domain does not have any snapshots";
+  echo "<hr><p>Domain does not have any snapshots</p>";
 }
 
 if ($snapshotxml != null) {
