@@ -432,6 +432,50 @@ swal(alertRet);
                 </div>
 
               </div>
+
+<!-- add storage here -->
+<h3>Disk Information</h3>
+<?php
+/* Disk information */
+echo "<a title='Add new disk' href=storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
+$tmp = $lv->get_disk_stats($domName);
+if (!empty($tmp)) {
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    "<tr>" .
+    "<th>Volume</th>" .
+    "<th>Driver</th>" .
+    "<th>Device</th>" .
+    "<th>Disk capacity</th>" .
+    "<th>Disk allocation</th>" .
+    "<th>Physical disk size</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    "<tbody>";
+  for ($i = 0; $i < sizeof($tmp); $i++) {
+    $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+    $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+    $physical = $lv->format_size($tmp[$i]['physical'], 2);
+    $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+    $device = $tmp[$i]['device'];
+    echo "<tr>" .
+      "<td>".basename($dev)."</td>" .
+      "<td>{$tmp[$i]['type']}</td>" .
+      "<td>{$tmp[$i]['device']}</td>" .
+      "<td>$capacity</td>" .
+      "<td>$allocation</td>" .
+      "<td>$physical</td>" .
+      "<td>" .
+        "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
+      "</td>" .
+      "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo "Domain doesn't have any disk devices";
+}
+?>
+
             </div>
           </div>
         </div>
