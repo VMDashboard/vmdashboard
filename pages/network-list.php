@@ -151,7 +151,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
     $deleteURL = "?action=network-delete&amp;network=$networkName";
     $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
     //$act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
-    $act .= " | <a onclick=\"networkDeleteWarning($deleteURL)\" href=\"#\">Delete</a>";
+    $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL')\" href=\"#\">Delete</a>";
   }
 
   echo "<tr>" .
