@@ -80,11 +80,8 @@ if ($action == 'domain-snapshot-xml') {
 }
 
 if ($action == 'domain-edit') {
-  //if (@$_POST['xmldesc']) {
   $xml = $_POST['xmldesc'];
     $ret = $lv->domain_change_xml($domName, $xml) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
-  //}
-  //header("Location: $page?uuid=$uuid");
 }
 
 //get info, mem, cpu, state, id, arch, and vnc after actions to reflect any changes to domain
