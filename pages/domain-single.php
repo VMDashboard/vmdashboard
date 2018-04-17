@@ -433,7 +433,7 @@ swal(alertRet);
 
               </div>
 
-<br/>
+<br/><br/>
 <!-- add storage here -->
 <h4>Disk Information</h4>
 <?php
