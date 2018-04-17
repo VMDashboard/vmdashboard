@@ -57,17 +57,17 @@ if ($action == 'domain-nic-remove') {
 
 //Snapshot Actions
 if ($action == 'domain-snapshot-create') {
-  $msg = $lv->domain_snapshot_create($domName) ? "Snapshot for $domName successfully created" : 'Error while taking snapshot of domain: '.$lv->get_last_error();
+  $ret = $lv->domain_snapshot_create($domName) ? "Snapshot for $domName successfully created" : 'Error while taking snapshot of domain: '.$lv->get_last_error();
 }
 
 if ($action == 'domain-snapshot-delete') {
   $snapshot = $_GET['snapshot'];
-  $msg = $lv->domain_snapshot_delete($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully deleted" : 'Error while deleting snapshot of domain: '.$lv->get_last_error();
+  $ret = $lv->domain_snapshot_delete($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully deleted" : 'Error while deleting snapshot of domain: '.$lv->get_last_error();
 }
 
 if ($action == 'domain-snapshot-revert') {
   $snapshot = $_GET['snapshot'];
-  $msg = $lv->domain_snapshot_revert($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully applied" : 'Error while reverting snapshot of domain: '.$lv->get_last_error();
+  $ret = $lv->domain_snapshot_revert($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully applied" : 'Error while reverting snapshot of domain: '.$lv->get_last_error();
 }
 
 if ($action == 'domain-snapshot-xml') {
@@ -132,6 +132,16 @@ swal(alertRet);
 }
 ?>
 
+<?php
+if ($ret) {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
 
 <!-- page content -->
 <div class="right_col" role="main">
