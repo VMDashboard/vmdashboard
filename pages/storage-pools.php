@@ -79,17 +79,16 @@ if (file_exists('../uploads/iso_uploads')) {
 
 <script>
 function volumeDeleteWarning(linkURL) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete the storage volume',
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
-  }).then(function($result) {
+  swal("Delete volume?", {
+    buttons: ["Cancel", true],
+  }).then((value) => {
+    if (value == true){
     // Redirect the user
     window.location = linkURL;
+  }
+
   });
-}
+  }
 </script>
 
 
@@ -206,7 +205,7 @@ function volumeDeleteWarning(linkURL) {
 
               </div>
             </div>
-<hr>
+            <hr>
           <?php } //ends the for loop for each storage pool ?>
 
         </div>

@@ -53,7 +53,7 @@ swal(alertRet);
 
 <script>
 function networkDeleteWarning(linkURL) {
-  swal("Delete network <?php echo $name; ?>", {
+  swal("Delete network?", {
     buttons: ["Cancel", true],
   }).then((value) => {
     if (value == true){
