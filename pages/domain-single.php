@@ -439,7 +439,7 @@ swal(alertRet);
 <h4>Disk Information</h4>
 <?php
 /* Disk information */
-echo "<a title='Add new disk' href=storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
+
 $tmp = $lv->get_disk_stats($domName);
 if (!empty($tmp)) {
   echo "<div class='table-responsive'>" .
