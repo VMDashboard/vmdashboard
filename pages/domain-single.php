@@ -234,7 +234,15 @@ swal(alertRet);
                     <i class="fa fa-trash"></i> Delete domain guest<br />
                   </a></li>
                 <?php } ?>
+
+                <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Create new snapshot<br />
+                </a></li>
+
+                
+
               </ul>
+
               <!-- end of actions -->
 
             </div>
