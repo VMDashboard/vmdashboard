@@ -235,11 +235,17 @@ swal(alertRet);
                   </a></li>
                 <?php } ?>
 
+                <li><a href="network-wizard.php?uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new network<br />
+                </a></li>
+
                 <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fa fa-plus"></i> Create new snapshot<br />
                 </a></li>
 
-                
+
+
+
 
               </ul>
 
