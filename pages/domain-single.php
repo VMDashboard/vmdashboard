@@ -132,16 +132,6 @@ swal(alertRet);
 }
 ?>
 
-<?php
-if ($ret) {
-?>
-<script>
-var alertRet = "<?php echo $ret; ?>";
-swal(alertRet);
-</script>
-<?php
-}
-?>
 
 <!-- page content -->
 <div class="right_col" role="main">
