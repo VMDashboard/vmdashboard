@@ -37,6 +37,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 require('navigation.php');
 ?>
 
+<?php
+//alert
+if ($ret) {
+?>
+<script>
+var alertRet = "<?php echo $ret; ?>";
+swal(alertRet);
+</script>
+<?php
+}
+?>
+
 
 <!-- page content -->
 <div class="right_col" role="main">
