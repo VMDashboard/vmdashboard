@@ -41,7 +41,7 @@ require('navigation.php'); //bring in the sidebar and menu
 
 <?php
 //alert
-if ($ret != "") {
+if ($ret) {
 ?>
 <script>
 var alertRet = "<?php echo $ret; ?>";
@@ -54,7 +54,7 @@ swal(alertRet);
 <script>
 function networkDeleteWarning(linkURL) {
 
-  swal("Are you sure you want to do this?", {
+  swal("Delete network <?php echo $name; ?>", {
     buttons: ["Cancel", true],
   }).then((value) => {
     if (value == true){
