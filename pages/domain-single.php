@@ -438,7 +438,6 @@ swal(alertRet);
 <h4>Disk Information</h4>
 <?php
 /* Disk information */
-
 $tmp = $lv->get_disk_stats($domName);
 if (!empty($tmp)) {
   echo "<div class='table-responsive'>" .
@@ -476,6 +475,65 @@ if (!empty($tmp)) {
   echo "Domain doesn't have any disk devices";
 }
 ?>
+
+<br/><br/>
+<!-- add snapshot here -->
+<h4>Snapshot Information</h4>
+<?php
+/* Snapshot information */
+echo "<h3>Snapshots</h3>";
+echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fa fa-plus'></i> Create new snapshot</a><br />";
+$tmp = $lv->list_domain_snapshots($dom);
+if (!empty($tmp)) {
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    //"<thead class='text-primary'>" .
+    "<tr>" .
+    "<th>Name</th>" .
+    "<th>Creation Time</th>" .
+    "<th>State</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    //"</thead>" .
+    "<tbody>";
+
+  foreach ($tmp as $key => $value) {
+    //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+    $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+    $tmpxml = simplexml_load_string($tmpsnapshotxml);
+    $name = $tmpxml->name[0];
+    $creationTime = $tmpxml->creationTime[0];
+    $snapstate = $tmpxml->state[0];
+    echo "<tr>";
+    echo "<td>" . $name . "</td>";
+    echo "<td>" . date("D d M Y", $value) . " - ";
+    echo date("H:i:s", $value) . "</td>";
+    echo "<td>" . $snapstate . "</td>";
+    echo "<td>
+      <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\"><i class='fa fa-trash'></i></a>
+      <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
+      <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
+      </td>";
+    echo "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo "Domain does not have any snapshots";
+}
+
+if ($snapshotxml != null) {
+  echo "<hr>";
+  echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+  echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+}
+ ?>
+
+
+
+
+
+
+
 
             </div>
           </div>
