@@ -45,7 +45,8 @@ swal(alertRet);
 <?php
 echo $domName;
 echo $mac;
-echo $network $model;
+echo $network; 
+echo $model;
 ?>
 
 <!-- page content -->
