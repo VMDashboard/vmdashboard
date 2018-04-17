@@ -236,7 +236,7 @@ swal(alertRet);
                 <?php } ?>
 
 
-                <li><a href="storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                <li><a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fa fa-plus"></i> Add new disk<br />
                 </a></li>
 
