@@ -28,7 +28,7 @@ if (($action == 'dumpxml') || ($action == 'edit')) {
     } else {
       $network_xml = 'Editing <strong>'.$name.'</strong> network XML description: <br/><br/><form method="POST">'.
         '<textarea name="xmldesc" rows="17" cols="2" style="width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;" >'.$xml.'</textarea><br/><br/>'.
-        '<input type="submit" value=" Edit domain XML description "></form>';
+        '<input type="submit" value=" Edit domain XML description "></form><br/><br/>';
     }
   } else {
     $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
