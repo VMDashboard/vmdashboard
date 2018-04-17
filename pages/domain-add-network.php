@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if ($ret == "success"){
   //Return back to the orignal web page
-  header('Location: ' . "domain-single.php?uuid=$uuid");
-  exit;
+  //header('Location: ' . "domain-single.php?uuid=$uuid");
+  //exit;
   }
 }
 
@@ -43,26 +43,7 @@ swal(alertRet);
 }
 ?>
 
-
-
-<script>
-function diskChangeOptions(selectEl) {
-  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-    if (selectedValue.charAt(0) === "/") {
-      selectedValue = "existing";
-    }
-  let subForms = document.getElementsByClassName('diskChange')
-  for (let i = 0; i < subForms.length; i += 1) {
-    if (selectedValue === subForms[i].id) {
-      subForms[i].setAttribute('style', 'display:block')
-    } else {
-      subForms[i].setAttribute('style', 'display:none')
-    }
-  }
-}
-</script>
-
-
+<?php echo $domName $mac $network $model; ?>
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
