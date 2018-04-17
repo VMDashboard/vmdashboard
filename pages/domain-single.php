@@ -240,7 +240,7 @@ swal(alertRet);
                   <i class="fa fa-plus"></i> Add new disk<br />
                 </a></li>
 
-                <li><a href="domain-network-wizard.php?uuid=<?php echo $uuid; ?>" target="_self" >
+                <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fa fa-plus"></i> Add new network<br />
                 </a></li>
 
