@@ -235,7 +235,12 @@ swal(alertRet);
                   </a></li>
                 <?php } ?>
 
-                <li><a href="network-wizard.php?uuid=<?php echo $uuid; ?>" target="_self" >
+
+                <li><a href="storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new disk<br />
+                </a></li>
+
+                <li><a href="domain-network-wizard.php?uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fa fa-plus"></i> Add new network<br />
                 </a></li>
 
@@ -261,13 +266,7 @@ swal(alertRet);
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
                   </li>
-                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="storage-tab"  data-toggle="tab" aria-expanded="false">Storage Info</a>
-                  </li>
-                  <li role="presentation" class=""><a href="#tab_content3" role="tab" id="networking-tab" data-toggle="tab" aria-expanded="false">Networking Info</a>
-                  </li>
-                  <li role="presentation" class=""><a href="#tab_content4" role="tab" id="snapshots-tab" data-toggle="tab" aria-expanded="false">Snapshot Info</a>
-                  </li>
-                  <li role="presentation" class=""><a href="#tab_content5" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML Info</a>
+                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML Info</a>
                   </li>
                 </ul>
                 <div id="myTabContent" class="tab-content">
@@ -287,144 +286,9 @@ swal(alertRet);
                     ?>
                   </div>
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="storage-tab">
-                    <?php
-                    /* Disk information */
-                    echo "<a title='Add new disk' href=storage-wizard-volumes.php?action=domain-disk-add&amp;uuid=" . $uuid . "><i class='fa fa-plus'></i> Add new disk </a><br />";
-                    $tmp = $lv->get_disk_stats($domName);
-                    if (!empty($tmp)) {
-                      echo "<div class='table-responsive'>" .
-                        "<table class='table'>" .
-                        "<tr>" .
-                        "<th>Volume</th>" .
-                        "<th>Driver</th>" .
-                        "<th>Device</th>" .
-                        "<th>Disk capacity</th>" .
-                        "<th>Disk allocation</th>" .
-                        "<th>Physical disk size</th>" .
-                        "<th>Actions</th>" .
-                        "</tr>" .
-                        "<tbody>";
-                      for ($i = 0; $i < sizeof($tmp); $i++) {
-                        $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
-                        $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
-                        $physical = $lv->format_size($tmp[$i]['physical'], 2);
-                        $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
-                        $device = $tmp[$i]['device'];
-                        echo "<tr>" .
-                          "<td>".basename($dev)."</td>" .
-                          "<td>{$tmp[$i]['type']}</td>" .
-                          "<td>{$tmp[$i]['device']}</td>" .
-                          "<td>$capacity</td>" .
-                          "<td>$allocation</td>" .
-                          "<td>$physical</td>" .
-                          "<td>" .
-                            "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
-                          "</td>" .
-                          "</tr>";
-                      }
-                      echo "</tbody></table></div>";
-                    } else {
-                      echo "Domain doesn't have any disk devices";
-                    }
-                    ?>
-                  </div>
 
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="networking-tab">
-                    <?php
-                    /* Network interface information */
-                    echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fa fa-plus\"> </i> Add new network </a>";
-                    $tmp = $lv->get_nic_info($domName);
-                    if (!empty($tmp)) {
-                      $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-                      echo "<div class='table-responsive'>" .
-                        "<table class='table'>" .
-                        "<tr>" .
-                        "<th>MAC Address</th>" .
-                        "<th>NIC Type</th>" .
-                        "<th>Network</th>" .
-                        "<th>Network active</th>" .
-                        "<th>Actions</th>" .
-                        "</tr>" .
-                        "<tbody>";
-                      for ($i = 0; $i < sizeof($tmp); $i++) {
-                        $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-                        if (in_array($tmp[$i]['network'], $anets))
-                          $netUp = 'Yes';
-                        else
-                          $netUp = 'No <a href="">[Start]</a>';
-                        echo "<tr>" .
-                          "<td>{$tmp[$i]['mac']}</td>" .
-                          "<td>{$tmp[$i]['nic_type']}</td>" .
-                          "<td>{$tmp[$i]['network']}</td>" .
-                          "<td>$netUp</td>" .
-                          "<td>" .
-                            "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
-                            "Remove network card</a>" .
-                          "</td>" .
-                          "</tr>";
-                      }
-                      echo "</tbody></table></div>";
-                    } else {
-                      echo '<p>Domain doesn\'t have any network devices</p>';
-                    }
-                    ?>
-                  </div>
-
-
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="snapshots-tab">
-                    <?php
-                    /* Snapshot information */
-                    echo "<h3>Snapshots</h3>";
-                    echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fa fa-plus'></i> Create new snapshot</a><br />";
-                    $tmp = $lv->list_domain_snapshots($dom);
-                    if (!empty($tmp)) {
-                      echo "<div class='table-responsive'>" .
-                        "<table class='table'>" .
-                        //"<thead class='text-primary'>" .
-                        "<tr>" .
-                        "<th>Name</th>" .
-                        "<th>Creation Time</th>" .
-                        "<th>State</th>" .
-                        "<th>Actions</th>" .
-                        "</tr>" .
-                        //"</thead>" .
-                        "<tbody>";
-
-                      foreach ($tmp as $key => $value) {
-                        //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-                        $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-                        $tmpxml = simplexml_load_string($tmpsnapshotxml);
-                        $name = $tmpxml->name[0];
-                        $creationTime = $tmpxml->creationTime[0];
-                        $snapstate = $tmpxml->state[0];
-                        echo "<tr>";
-                        echo "<td>" . $name . "</td>";
-                        echo "<td>" . date("D d M Y", $value) . " - ";
-                        echo date("H:i:s", $value) . "</td>";
-                        echo "<td>" . $snapstate . "</td>";
-                        echo "<td>
-                          <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\"><i class='fa fa-trash'></i></a>
-                          <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
-                          <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
-                          </td>";
-                        echo "</tr>";
-                      }
-                      echo "</tbody></table></div>";
-                    } else {
-                      echo "Domain does not have any snapshots";
-                    }
-
-                    if ($snapshotxml != null) {
-                      echo "<hr>";
-                      echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-                      echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
-                    }
-                     ?>
-                  </div>
-
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content5" aria-labelledby="xml-tab">
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="xml-tab">
                     <?php
                     /* XML information */
                     $inactive = (!$lv->domain_is_running($domName)) ? true : false;
