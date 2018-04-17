@@ -199,13 +199,12 @@ function volumeDeleteWarning(linkURL) {
                      "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete</a></td>" .
                      "</tr>";
                    }
-                   echo "</tbody></table></div>";
+                   echo "</tbody></table></div> <hr>";
                  }
 
 		             ?>
 
               </div>
-              <hr>
             </div>
 
           <?php } //ends the for loop for each storage pool ?>
