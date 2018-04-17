@@ -52,7 +52,7 @@ if ($action == 'domain-disk-remove') {
 //Network Actions
 if ($action == 'domain-nic-remove') {
   $mac = base64_decode($_GET['mac']);
-  $testmac= "525400bc57aa";
+  $testmac= "52-54-00-bc-57-aa";
   $ret = $lv->domain_nic_remove($domName, $testmac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
   $testMac= "525400bc57aa";
   libvirt_domain_nic_remove($dom, $mac);
