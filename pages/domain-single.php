@@ -478,6 +478,49 @@ if (!empty($tmp)) {
 
 
 <br/><br/>
+<!-- add network here -->
+<h4>Network Information</h4>
+<?php
+/* Network interface information */
+echo "<a href=\"guest-network-wizard.php?uuid=$uuid\"><i class=\"fa fa-plus\"> </i> Add new network </a>";
+$tmp = $lv->get_nic_info($domName);
+if (!empty($tmp)) {
+  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    "<tr>" .
+    "<th>MAC Address</th>" .
+    "<th>NIC Type</th>" .
+    "<th>Network</th>" .
+    "<th>Network active</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    "<tbody>";
+  for ($i = 0; $i < sizeof($tmp); $i++) {
+    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+    if (in_array($tmp[$i]['network'], $anets))
+      $netUp = 'Yes';
+    else
+      $netUp = 'No <a href="">[Start]</a>';
+    echo "<tr>" .
+      "<td>{$tmp[$i]['mac']}</td>" .
+      "<td>{$tmp[$i]['nic_type']}</td>" .
+      "<td>{$tmp[$i]['network']}</td>" .
+      "<td>$netUp</td>" .
+      "<td>" .
+        "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
+        "Remove network card</a>" .
+      "</td>" .
+      "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo '<p>Domain doesn\'t have any network devices</p>';
+}
+?>
+
+
+<br/><br/>
 <!-- add snapshot here -->
 <h4>Snapshot Information</h4>
 <?php
