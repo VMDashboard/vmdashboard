@@ -248,19 +248,12 @@ swal(alertRet);
                   <i class="fa fa-plus"></i> Create new snapshot<br />
                 </a></li>
 
-
-
-
-
               </ul>
-
               <!-- end of actions -->
-
             </div>
 
             <!-- next column -->
             <div class="col-md-8 col-sm-8 col-xs-12">
-
 
               <div class="" role="tabpanel" data-example-id="togglable-tabs">
                 <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -287,7 +280,6 @@ swal(alertRet);
                   </div>
 
 
-
                   <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="xml-tab">
                     <?php
                     /* XML information */
@@ -311,148 +303,140 @@ swal(alertRet);
 
               </div>
 
-<br/><br/>
-<!-- add storage here -->
-<h4>Disk Information</h4>
-<?php
-/* Disk information */
-$tmp = $lv->get_disk_stats($domName);
-if (!empty($tmp)) {
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    "<tr>" .
-    "<th>Volume</th>" .
-    "<th>Driver</th>" .
-    "<th>Device</th>" .
-    "<th>Disk capacity</th>" .
-    "<th>Disk allocation</th>" .
-    "<th>Physical disk size</th>" .
-    "<th>Actions</th>" .
-    "</tr>" .
-    "<tbody>";
-  for ($i = 0; $i < sizeof($tmp); $i++) {
-    $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
-    $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
-    $physical = $lv->format_size($tmp[$i]['physical'], 2);
-    $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
-    $device = $tmp[$i]['device'];
-    echo "<tr>" .
-      "<td>".basename($dev)."</td>" .
-      "<td>{$tmp[$i]['type']}</td>" .
-      "<td>{$tmp[$i]['device']}</td>" .
-      "<td>$capacity</td>" .
-      "<td>$allocation</td>" .
-      "<td>$physical</td>" .
-      "<td>" .
-        "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
-      "</td>" .
-      "</tr>";
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo "<hr><p>Domain doesn't have any disk devices</p>";
-}
-?>
+              <br/><br/>
+              <!-- add storage here -->
+              <h4>Disk Information</h4>
+              <?php
+              /* Disk information */
+              $tmp = $lv->get_disk_stats($domName);
+              if (!empty($tmp)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>Volume</th>" .
+                  "<th>Driver</th>" .
+                  "<th>Device</th>" .
+                  "<th>Disk capacity</th>" .
+                  "<th>Disk allocation</th>" .
+                  "<th>Physical disk size</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
+                for ($i = 0; $i < sizeof($tmp); $i++) {
+                  $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+                  $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+                  $physical = $lv->format_size($tmp[$i]['physical'], 2);
+                  $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                  $device = $tmp[$i]['device'];
+                  echo "<tr>" .
+                    "<td>".basename($dev)."</td>" .
+                      "<td>{$tmp[$i]['type']}</td>" .
+                      "<td>{$tmp[$i]['device']}</td>" .
+                      "<td>$capacity</td>" .
+                      "<td>$allocation</td>" .
+                      "<td>$physical</td>" .
+                      "<td>" .
+                      "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
+                      "</td>" .
+                      "</tr>";
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo "<hr><p>Domain doesn't have any disk devices</p>";
+              }
+              ?>
 
 
-<br/><br/><br/>
-<!-- add network here -->
-<h4>Network Information</h4>
-<?php
-/* Network interface information */
-$tmp = $lv->get_nic_info($domName);
-if (!empty($tmp)) {
-  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    "<tr>" .
-    "<th>MAC Address</th>" .
-    "<th>NIC Type</th>" .
-    "<th>Network</th>" .
-    "<th>Network active</th>" .
-    "<th>Actions</th>" .
-    "</tr>" .
-    "<tbody>";
-  for ($i = 0; $i < sizeof($tmp); $i++) {
-    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-    if (in_array($tmp[$i]['network'], $anets))
-      $netUp = 'Yes';
-    else
-      $netUp = 'No <a href="">[Start]</a>';
-    echo "<tr>" .
-      "<td>{$tmp[$i]['mac']}</td>" .
-      "<td>{$tmp[$i]['nic_type']}</td>" .
-      "<td>{$tmp[$i]['network']}</td>" .
-      "<td>$netUp</td>" .
-      "<td>" .
-        "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
-        "Remove network card</a>" .
-      "</td>" .
-      "</tr>";
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo '<hr><p>Domain doesn\'t have any network devices</p>';
-}
-?>
+              <br/><br/><br/>
+              <!-- add network here -->
+              <h4>Network Information</h4>
+              <?php
+              /* Network interface information */
+              $tmp = $lv->get_nic_info($domName);
+              if (!empty($tmp)) {
+                $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>MAC Address</th>" .
+                  "<th>NIC Type</th>" .
+                  "<th>Network</th>" .
+                  "<th>Network active</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
+                for ($i = 0; $i < sizeof($tmp); $i++) {
+                  $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+                  if (in_array($tmp[$i]['network'], $anets))
+                    $netUp = 'Yes';
+                  else
+                    $netUp = 'No <a href="">[Start]</a>';
+
+                  echo "<tr>" .
+                    "<td>{$tmp[$i]['mac']}</td>" .
+                    "<td>{$tmp[$i]['nic_type']}</td>" .
+                    "<td>{$tmp[$i]['network']}</td>" .
+                    "<td>$netUp</td>" .
+                    "<td>" .
+                    "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
+                    "Remove network card</a>" .
+                    "</td>" .
+                    "</tr>";
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo '<hr><p>Domain doesn\'t have any network devices</p>';
+              }
+              ?>
 
 
-<br/><br/><br/>
-<!-- add snapshot here -->
-<h4>Snapshot Information</h4>
-<?php
-/* Snapshot information */
-$tmp = $lv->list_domain_snapshots($dom);
-if (!empty($tmp)) {
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    //"<thead class='text-primary'>" .
-    "<tr>" .
-    "<th>Name</th>" .
-    "<th>Creation Time</th>" .
-    "<th>State</th>" .
-    "<th>Actions</th>" .
-    "</tr>" .
-    //"</thead>" .
-    "<tbody>";
+              <br/><br/><br/>
+              <!-- add snapshot here -->
+              <h4>Snapshot Information</h4>
+              <?php
+              /* Snapshot information */
+              $tmp = $lv->list_domain_snapshots($dom);
+              if (!empty($tmp)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>Name</th>" .
+                  "<th>Creation Time</th>" .
+                  "<th>State</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
 
-  foreach ($tmp as $key => $value) {
-    //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-    $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-    $tmpxml = simplexml_load_string($tmpsnapshotxml);
-    $name = $tmpxml->name[0];
-    $creationTime = $tmpxml->creationTime[0];
-    $snapstate = $tmpxml->state[0];
-    echo "<tr>";
-    echo "<td>" . $name . "</td>";
-    echo "<td>" . date("D d M Y", $value) . " - ";
-    echo date("H:i:s", $value) . "</td>";
-    echo "<td>" . $snapstate . "</td>";
-    echo "<td>
-      <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\"><i class='fa fa-trash'></i></a>
-      <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
-      <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
-      </td>";
-    echo "</tr>";
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo "<hr><p>Domain does not have any snapshots</p>";
-}
+                foreach ($tmp as $key => $value) {
+                  //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+                  $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+                  $tmpxml = simplexml_load_string($tmpsnapshotxml);
+                  $name = $tmpxml->name[0];
+                  $creationTime = $tmpxml->creationTime[0];
+                  $snapstate = $tmpxml->state[0];
+                  echo "<tr>";
+                  echo "<td>" . $name . "</td>";
+                  echo "<td>" . date("D d M Y", $value) . " - ";
+                  echo date("H:i:s", $value) . "</td>";
+                  echo "<td>" . $snapstate . "</td>";
+                  echo "<td>
+                    <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\"><i class='fa fa-trash'></i></a>
+                    <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
+                    <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
+                    </td>";
+                  echo "</tr>";
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo "<hr><p>Domain does not have any snapshots</p>";
+              }
 
-if ($snapshotxml != null) {
-  echo "<hr>";
-  echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-  echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
-}
- ?>
-
-
-
-
-
-
-
+              if ($snapshotxml != null) {
+                echo "<hr>";
+                echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+                echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+              }
+              ?>
 
             </div>
           </div>
