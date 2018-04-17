@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   if ($ret == "success"){
   //Return back to the orignal web page
-  //header('Location: ' . "domain-single.php?uuid=$uuid");
-  //exit;
+  header('Location: ' . "domain-single.php?uuid=$uuid");
+  exit;
   }
 }
 
@@ -50,12 +50,6 @@ swal(alertRet);
     <div class="page-title">
       <div class="title_left">
         <h3>Network Wizard</h3>
-        <?php
-        echo $domName;
-        echo $mac;
-        echo $network;
-        echo $model;
-        ?>
       </div>
     </div>
 
