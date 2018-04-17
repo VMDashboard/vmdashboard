@@ -476,13 +476,12 @@ if (!empty($tmp)) {
 }
 ?>
 
+
 <br/><br/>
 <!-- add snapshot here -->
 <h4>Snapshot Information</h4>
 <?php
 /* Snapshot information */
-echo "<h3>Snapshots</h3>";
-echo "<a title='Create snapshot' href=?action=domain-snapshot-create&amp;uuid=" . $_GET['uuid'] . "><i class='fa fa-plus'></i> Create new snapshot</a><br />";
 $tmp = $lv->list_domain_snapshots($dom);
 if (!empty($tmp)) {
   echo "<div class='table-responsive'>" .
