@@ -148,7 +148,7 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
 
   if (!$tmp2['active']) {
     $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
-    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"network-list.php\">Delete</a>";
+    $act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
   }
 
   echo "<tr>" .
