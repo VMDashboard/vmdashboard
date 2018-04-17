@@ -18,7 +18,7 @@ function clean_name_input($data) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mac = $_POST['mac'];
   $network = $_POST['network'];
-  $model = false; //$_POST['model'];
+  $model = $_POST['model'];
 
   $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
