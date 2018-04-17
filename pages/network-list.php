@@ -26,9 +26,9 @@ if (($action == 'dumpxml') || ($action == 'edit')) {
       $ret = $lv->network_change_xml($name, $_POST['xmldesc']) ? "Network definition has been changed" :
         'Error changing network definition: '.$lv->get_last_error();
     } else {
-      $network_xml = 'Editing network XML description: <br/><br/><form method="POST"><table><tr><td>Network XML description: </td>'.
-        '<td><textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea></td></tr><tr align="center"><td colspan="2">'.
-        '<input type="submit" value=" Edit domain XML description "></tr></form>';
+      $network_xml = 'Editing network XML description: <br/><br/><form method="POST">'.
+        '<textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea>'.
+        '<input type="submit" value=" Edit domain XML description "></form>';
     }
   } else {
     $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
