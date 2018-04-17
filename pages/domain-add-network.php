@@ -42,12 +42,7 @@ swal(alertRet);
 <?php
 }
 ?>
-<?php
-echo $domName;
-echo $mac;
-echo $network; 
-echo $model;
-?>
+
 
 <!-- page content -->
 <div class="right_col" role="main">
@@ -55,6 +50,12 @@ echo $model;
     <div class="page-title">
       <div class="title_left">
         <h3>Network Wizard</h3>
+        <?php
+        echo $domName;
+        echo $mac;
+        echo $network;
+        echo $model;
+        ?>
       </div>
     </div>
 
