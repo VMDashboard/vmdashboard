@@ -140,7 +140,7 @@ function volumeDeleteWarning(linkURL) {
             //getting the pool information to display the data in a table
             $info = $lv->get_storagepool_info($pools[$i]);
             ?>
-            <hr>
+
             <div class="row">
               <div class="col-md-3">
                 <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
@@ -205,6 +205,7 @@ function volumeDeleteWarning(linkURL) {
 		             ?>
 
               </div>
+              <hr>
             </div>
 
           <?php } //ends the for loop for each storage pool ?>
