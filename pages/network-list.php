@@ -27,7 +27,7 @@ if (($action == 'dumpxml') || ($action == 'edit')) {
         'Error changing network definition: '.$lv->get_last_error();
     } else {
       $network_xml = 'Editing network XML description: <br/><br/><form method="POST">'.
-        '<textarea name="xmldesc" rows="25" cols="90%">'.$xml.'</textarea>'.
+        '<textarea name="xmldesc" rows="17" cols="2" style="width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;" >'.$xml.'</textarea><br/><br/>'.
         '<input type="submit" value=" Edit domain XML description "></form>';
     }
   } else {
