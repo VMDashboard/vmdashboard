@@ -13,8 +13,7 @@ To use VNC to connect into your virtual machines, you will need to edit the <str
 
 The web server user account on Ubuntu is called www-data. This account will need to have permissions to work with libvirt. To do this, open the <strong>/etc/libvirt/libvirtd.conf</strong> file and change the <strong>unix_sock_rw_perms</strong> option to read <strong>0777</strong>.
 
-Restart the libvirt server using the command:
-<code>sudo service libvirt-bin restart</code>
+Restart the server
 
 Download the openVM software to the root directory of your web server. The default location is /var/www/html/ in Ubuntu.
 <code>cd /var/www/html</code>
