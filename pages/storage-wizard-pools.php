@@ -55,7 +55,7 @@ swal(alertRet);
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Pool Wizard</h3>
+        <h3>Storage</h3>
       </div>
     </div>
 
