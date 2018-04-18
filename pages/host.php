@@ -8,7 +8,7 @@ require('navigation.php');
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Host Server Information</h3>
+                <h3>Host</h3>
               </div>
 
               </div>
@@ -20,7 +20,7 @@ require('navigation.php');
               <div class="col-md-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2><?php echo $hn; ?></h2>
+                    <h2>Host Information: <?php echo $hn; ?></h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
