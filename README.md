@@ -40,5 +40,5 @@ Features for future releases:
  	<li>Converting volumes from one type to another. For example, raw to qcow2</li>
  	<li>Changing boot order from interface. Can now be accomplished by editing the domain XML.</li>
  	<li>Use session variables and database to control login and registration pages</li>
- 	<li>Include domain stats such as memory, disk , cpu, etc</li>
+ 	<li>Include domain stats such as memory, disk, cpu, etc</li>
 </ul>
