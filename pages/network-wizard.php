@@ -150,14 +150,14 @@ swal(alertRet);
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_start_address">DHCP Starting Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" name="dhcp_start_address" value="192.168.1.2" />
+                    <input type="text" class="form-control" name="dhcp_start_address" value="192.168.1.2" placeholder="Enter starting IP address or none"/>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_end_address">DHCP Ending Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" class="form-control" name="dhcp_end_address" value="192.168.1.254" />
+                    <input type="text" class="form-control" name="dhcp_end_address" value="192.168.1.254" placeholder="Enter ending IP address or none"/>
                   </div>
                 </div>
 
