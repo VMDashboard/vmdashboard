@@ -1,6 +1,6 @@
-openVM is currently tested on the Ubuntu 18.04 operating systems. Once openVM has reached a stable version it will be tested on other Linux systems. Below are the instructions for downloading and setting up openVM.
+openVM is currently tested on the Ubuntu 16.04 and 18.04 operating systems. Once openVM has reached a stable version it will be tested on other Linux systems. Below are the instructions for downloading and setting up openVM.
 
-On Ubuntu 18.04 server, install the QEMU + KVM hypervisor  using the following command:
+On the Ubuntu server, install the QEMU + KVM hypervisor  using the following command:
 <code>sudo apt install qemu-kvm libvirt-bin</code>
 
 Install the LAMP package to use the Apache web server, MySQL database, and PHP programming language. Use the following command:
@@ -9,7 +9,7 @@ Install the LAMP package to use the Apache web server, MySQL database, and PHP p
 There are a few additional PHP packages needed to run openVM. PHP will need to control the VMs using libvirt. Use the following command to install the packages:
 <code>sudo apt install php7.0-xml php-libvirt-php</code>
 
-If you are using Ubuntu 16.04 you will also need to install the php imagick package. It will be already installed on Ubuntu 18.04:
+If you are using Ubuntu 16.04 you will also need to install the php imagick package. It will be already installed with PHP on Ubuntu 18.04:
 <code>sudo apt install php-imagick</code>
 
 The built-in vnc connection requires python. To install it use the following command:
@@ -49,5 +49,5 @@ Features for future releases:
  	<li>Converting volumes from one type to another. For example, raw to qcow2</li>
  	<li>Changing boot order from interface. Can now be accomplished by editing the domain XML.</li>
  	<li>Use session variables and database to control login and registration pages</li>
- 	<li>Include domain stats such as memory, disk , cpu, etc</li>
+ 	<li>Include domain stats such as memory, disk, cpu, etc</li>
 </ul>
