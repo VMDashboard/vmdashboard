@@ -16,7 +16,6 @@ The web server user account on Ubuntu is called www-data. This account will need
 Restart the server
 
 Download the openVM software to the root directory of your web server. The default location is /var/www/html/ in Ubuntu.
-<code>cd /var/www/html</code>
 <code>sudo git clone https://github.com/PenningDevelopment/openVM.git</code>
 
 Use a web browser to navigate to your server's IP address or domain name.
