@@ -29,6 +29,7 @@ Known issues:
  	<li>Network devices will not delete from domain through interface. Can still be accomplished by editing the domain XML.</li>
  	<li>Network devices do not display correctly in domain-single.php.</li>
 </ul>
+
 Features for future releases:
 <ul>
  	<li>Include creating storage pools that use NFS, SMB, and iSCSI.</li>
