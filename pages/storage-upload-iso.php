@@ -8,7 +8,7 @@ include('navigation.php');
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Form Upload </h3>
+        <h3>Storage </h3>
       </div>
     </div>
 
