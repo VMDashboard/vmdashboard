@@ -26,17 +26,19 @@ Use a web browser to navigate to your server's IP address or domain name.
 
 
 Known issues:
-•	Disk volumes will not delete from domain through interface. Can still be accomplished by editing the domain XML.
-•	Network devices will not delete from domain through interface. Can still be accomplished by editing the domain XML.
-•	Network devices do not display correctly in domain-single.php.
+<ul>
+  <li>Disk volumes will not delete from domain through interface. Can still be accomplished by editing the domain XML.</li>
+  <li>Network devices will not delete from domain through interface. Can still be accomplished by editing the domain XML.</li>
+  <li>Network devices do not display correctly in domain-single.php.</li>
+  </ul>
 
 Features for future releases:
-•	Include creating storage pools that use NFS, SMB, and iSCSI.
-•	Allow for domain migration to another server
-•	Allow for multiple connections to other hosts, including ESX
-•	Allow for resizing of disk volumes
-•	Allow for autostarting of guests
-•	Coverting volumes from one type to another. For example, raw to qcow2
-•	Changing boot order from interface. Can now be accomplished by editing the domain XML.
-•	Use session variables and database to control login and registration pages
-•	Include domain stats such as memory, disk , cpu, etc
+  Include creating storage pools that use NFS, SMB, and iSCSI.
+  Allow for domain migration to another server
+  Allow for multiple connections to other hosts, including ESX
+  Allow for resizing of disk volumes
+  Allow for autostarting of guests
+  Coverting volumes from one type to another. For example, raw to qcow2
+  Changing boot order from interface. Can now be accomplished by editing the domain XML.
+  Use session variables and database to control login and registration pages
+  Include domain stats such as memory, disk , cpu, etc
