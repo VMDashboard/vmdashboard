@@ -31,6 +31,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </ip>
   </network>";
 
+  if ($dhcp_start_address == "none"){
+    $xml = "
+    <network>
+      <name>$network_name</name>
+      <forward mode='$forward_mode'/>
+      <mac address='$mac_address'/>
+      <ip address='$ip_address' netmask='$subnet_mask'>
+      </ip>
+    </network>";
+  }
+
   $ret = $lv->network_define_xml($xml)? 'success' : 'Error while creating network: '.$lv->get_last_error();
   if ($ret == 'success') {
     header('Location: network-list.php');
