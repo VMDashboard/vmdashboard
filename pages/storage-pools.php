@@ -97,7 +97,7 @@ function volumeDeleteWarning(linkURL) {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Domain List</h3>
+        <h3>Storage</h3>
       </div>
     </div>
 
@@ -107,7 +107,7 @@ function volumeDeleteWarning(linkURL) {
       <div class="col-md-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Guests</h2>
+            <h2>Storage Pools</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
