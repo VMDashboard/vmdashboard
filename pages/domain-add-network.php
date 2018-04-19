@@ -24,8 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   if ($network_type == "network")
     $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
-    if ($network_type == "direct")
+    if ($network_type == "direct"){
       $ret = "Unfortunately adding a direct netowrk connection is not yet supported";
+        $xml = $lv->domain_get_xml($domName); //second param is xpath
+        $xml2 = "
+          <interface type='direct'>
+          <mac address='52:54:00:6d:a3:60'/>
+          <source dev='eno3' mode='bridge'/>
+          <model type='virtio'/>
+          </interface>";
+        $ret2 = $lv->domain_update_device($domName, $xml2); //third param is flags
+    }
 
   if ($ret == "success"){
   //Return back to the orignal web page
