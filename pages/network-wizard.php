@@ -155,7 +155,7 @@ function dhcpChangeOptions(selectEl) {
                   <label for="subnet_mask" class="control-label col-md-3 col-sm-3 col-xs-12">Subnet Mask</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="subnet_mask">
-                      <option value="255.255.255.0" selected>/24 -> 255.255.255.0</option>
+                      <option value="255.255.255.0" selected>/24 --> 255.255.255.0</option>
                       <option value="255.255.255.128">/25 --> 255.255.255.128</option>
                       <option value="255.255.255.128">/26 --> 255.255.255.192</option>
                       <option value="255.255.255.128">/27 --> 255.255.255.224</option>
