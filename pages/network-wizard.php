@@ -71,6 +71,9 @@ swal(alertRet);
 <script>
 function dhcpChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    if (selectedValue.charAt(0) === "/") {
+      selectedValue = "enabled";
+    }
   let subForms = document.getElementsByClassName('dhcpChange')
   for (let i = 0; i < subForms.length; i += 1) {
     if (selectedValue === subForms[i].id) {
@@ -173,14 +176,14 @@ function dhcpChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group dhcpChange">
+                <div class="form-group dhcpChange" id="enabled">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_start_address">DHCP Starting Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" name="dhcp_start_address" value="192.168.1.2" placeholder="Enter starting IP address or none"/>
                   </div>
                 </div>
 
-                <div class="form-group dhcpChange">
+                <div class="form-group dhcpChange" id="enabled">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_end_address">DHCP Ending Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" name="dhcp_end_address" value="192.168.1.254" placeholder="Enter ending IP address or none"/>
