@@ -1,6 +1,6 @@
 <?php
-require('pages/header.php');
-require('pages/navigation.php'); ?>
+require('./pages/header.php');
+require('./pages/navigation.php'); ?>
 
 <?php
 $xmlstr = "
@@ -94,5 +94,5 @@ $xmlstr = "
 
 
 <?php
-require('pages/footer.php');
+require('./pages/footer.php');
 ?>
