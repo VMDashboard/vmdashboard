@@ -141,7 +141,7 @@ function networkChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group netChange" id="direct" style="display:none;">
+                <div class="form-group networkChange" id="direct" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Host interface</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <select class="form-control" name="source_dev">
@@ -163,7 +163,7 @@ function networkChangeOptions(selectEl) {
                 </div>
 
 
-                <div class="form-group netChange" id="direct" style="display:none;">
+                <div class="form-group networkChange" id="direct" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
