@@ -950,6 +950,19 @@ class Libvirt {
         return ($tmp) ? $tmp : $this->_set_last_error();
     } //added by me
 
+
+    function domain_update_device($domain, $xml, $flags=false) {
+        $dom = $this->get_domain_object($domain);
+        if (!$dom)
+            return false;
+
+        $tmp = libvirt_domain_update_device($res, $xml);
+        return ($tmp) ? $tmp : $this->_set_last_error();
+    } //added by me
+
+
+
+
     function domain_get_name_by_uuid($uuid) {
         $dom = libvirt_domain_lookup_by_uuid_string($this->conn, $uuid);
         if (!$dom)
