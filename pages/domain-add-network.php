@@ -16,11 +16,16 @@ function clean_name_input($data) {
 
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $network_type = $_POST['network_type'];
   $mac = $_POST['mac'];
   $network = $_POST['network'];
   $model = $_POST['model'];
 
-  $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+  if ($network_type == "network")
+    $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+
+    if ($network_type == "direct")
+      $ret = "Unfortunately adding a direct netowrk connection is not yet supported";
 
   if ($ret == "success"){
   //Return back to the orignal web page
@@ -42,6 +47,24 @@ swal(alertRet);
 <?php
 }
 ?>
+
+
+<script>
+function networkChangeOptions(selectEl) {
+  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    if (selectedValue.charAt(0) === "/") {
+      selectedValue = "direct";
+    }
+  let subForms = document.getElementsByClassName('networkChange')
+  for (let i = 0; i < subForms.length; i += 1) {
+    if (selectedValue === subForms[i].id) {
+      subForms[i].setAttribute('style', 'display:block')
+    } else {
+      subForms[i].setAttribute('style', 'display:none')
+    }
+  }
+}
+</script>
 
 
 <!-- page content -->
@@ -81,7 +104,17 @@ swal(alertRet);
               <div class="form-horizontal form-label-left" style="min-height: 250px;">
 
                 <div class="form-group">
-                  <label for="network" class="control-label col-md-3 col-sm-3 col-xs-12">Network</label>
+                  <label for="dhcp_service" class="control-label col-md-3 col-sm-3 col-xs-12">Network Type</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control" name="network_type" onchange="networkChangeOptions(this)">
+                      <option value="network" selected>nat</option>
+                      <option value="direct">bridged</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group networkChange">
+                  <label for="network" class="control-label col-md-3 col-sm-3 col-xs-12">Private Network</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <select class="form-control" name="network">
                       <?php
@@ -94,7 +127,7 @@ swal(alertRet);
                   </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group networkChange">
                   <label for="model" class="control-label col-md-3 col-sm-3 col-xs-12">Model</label>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <select class="form-control" name="model">
@@ -107,6 +140,36 @@ swal(alertRet);
                     </select>
                   </div>
                 </div>
+
+                <div class="form-group netChange" id="direct" style="display:none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Host interface</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <select class="form-control" name="source_dev">
+                      <?php
+                      $tmp = $lv->get_node_device_cap_options();
+                      for ($i = 0; $i < sizeof($tmp); $i++) {
+                        $tmp1 = $lv->get_node_devices($tmp[$i]);
+                        for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                          $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                          if ($tmp2['capability'] == 'net') {
+                            $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
+                            echo "<option value='$ident'> $ident </option>";
+                          }
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="form-group netChange" id="direct" style="display:none;">
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode</label>
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
+                  </div>
+                </div>
+
 
                 <div class="form-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mac">MAC Address <span class="required">*</span></label>
