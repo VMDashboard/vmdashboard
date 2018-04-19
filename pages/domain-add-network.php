@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
           <source dev='eno3' mode='bridge'/>
           <model type='virtio'/>
           </interface>";
-        $ret2 = $lv->domain_update_device($domName, $xml2); //third param is flags
+        $ret = $lv->domain_update_device($domName, $xml2); //third param is flags
     }
 
   if ($ret == "success"){
