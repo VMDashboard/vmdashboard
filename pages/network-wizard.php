@@ -71,9 +71,6 @@ swal(alertRet);
 <script>
 function dhcpChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-    if (selectedValue.charAt(0) === "/") {
-      selectedValue = "enabled";
-    }
   let subForms = document.getElementsByClassName('dhcpChange')
   for (let i = 0; i < subForms.length; i += 1) {
     if (selectedValue === subForms[i].id) {
