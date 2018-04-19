@@ -16,8 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mac_address = $_POST['mac_address'];
   $ip_address = clean_name_input($_POST['ip_address']);
   $subnet_mask = $_POST['subnet_mask'];
+  $dhcp_service = $_POST['dhcp_service'];
   $dhcp_start_address = clean_name_input($_POST['dhcp_start_address']);
   $dhcp_end_address = clean_name_input($_POST['dhcp_end_address']);
+
 
   $xml = "
   <network>
@@ -31,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     </ip>
   </network>";
 
-  if ($dhcp_start_address == "none"){
+  if ($dhcp_service == "disabled"){
     $xml = "
     <network>
       <name>$network_name</name>
@@ -65,6 +67,23 @@ swal(alertRet);
 <?php
 }
 ?>
+
+<script>
+function dhcpChangeOptions(selectEl) {
+  let selectedValue = selectEl.options[selectEl.selectedIndex].value;
+    if (selectedValue.charAt(0) === "/") {
+      selectedValue = "enabled";
+    }
+  let subForms = document.getElementsByClassName('dhcpChange')
+  for (let i = 0; i < subForms.length; i += 1) {
+    if (selectedValue === subForms[i].id) {
+      subForms[i].setAttribute('style', 'display:block')
+    } else {
+      subForms[i].setAttribute('style', 'display:none')
+    }
+  }
+}
+</script>
 
 <!-- page content -->
 <div class="right_col" role="main">
@@ -126,7 +145,7 @@ swal(alertRet);
                 </div>
 
                 <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ip_address">IP Address <span class="required">*</span></label>
+                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ip_address">Gateway IP Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                       <input type="text" class="form-control" name="ip_address" value="192.168.1.1" />
                   </div>
@@ -148,13 +167,23 @@ swal(alertRet);
                 </div>
 
                 <div class="form-group">
+                  <label for="dhcp_service" class="control-label col-md-3 col-sm-3 col-xs-12">DHCP Service</label>
+                  <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control" name="dhcp_service" onchange="dhcpChangeOptions(this)">
+                      <option value="enabled" selected>enabled</option>
+                      <option value="disabled">disabled</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group dhcpChange">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_start_address">DHCP Starting Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" name="dhcp_start_address" value="192.168.1.2" placeholder="Enter starting IP address or none"/>
                   </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group dhcpChange">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="dhcp_end_address">DHCP Ending Address <span class="required">*</span></label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" name="dhcp_end_address" value="192.168.1.254" placeholder="Enter ending IP address or none"/>
