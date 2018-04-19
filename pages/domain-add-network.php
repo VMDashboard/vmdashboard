@@ -52,7 +52,7 @@ swal(alertRet);
 <script>
 function networkChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-    
+
   let subForms = document.getElementsByClassName('networkChange')
   for (let i = 0; i < subForms.length; i += 1) {
     if (selectedValue === subForms[i].id) {
@@ -111,9 +111,9 @@ function networkChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group networkChange">
+                <div class="form-group networkChange" id="network">
                   <label for="network" class="control-label col-md-3 col-sm-3 col-xs-12">Private Network</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="network">
                       <?php
                       $networks = $lv->get_networks();
@@ -125,9 +125,9 @@ function networkChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group networkChange">
+                <div class="form-group networkChange" id="network">
                   <label for="model" class="control-label col-md-3 col-sm-3 col-xs-12">Model</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="model">
                       <?php
                       $models = $lv->get_nic_models();
@@ -141,7 +141,7 @@ function networkChangeOptions(selectEl) {
 
                 <div class="form-group networkChange" id="direct" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Host interface</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="source_dev">
                       <?php
                       $tmp = $lv->get_node_device_cap_options();
@@ -163,7 +163,7 @@ function networkChangeOptions(selectEl) {
 
                 <div class="form-group networkChange" id="direct" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Mode</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
                   </div>
                 </div>
