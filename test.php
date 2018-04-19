@@ -94,6 +94,10 @@ echo "Memory Unit: " . $unit;
 $second = $xml->os->boot[1]->[dev];
 echo "Second boot device: " . $second;
 
+//lets get second boot device
+$second = $xml->os->boot[1][dev];
+echo "Second boot device: " . $second;
+
 
 ?>
 
