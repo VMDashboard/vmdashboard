@@ -52,9 +52,7 @@ swal(alertRet);
 <script>
 function networkChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
-    if (selectedValue.charAt(0) === "/") {
-      selectedValue = "direct";
-    }
+    
   let subForms = document.getElementsByClassName('networkChange')
   for (let i = 0; i < subForms.length; i += 1) {
     if (selectedValue === subForms[i].id) {
