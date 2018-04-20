@@ -137,7 +137,7 @@ echo "Memory Unit: " . $unit . "<br>";
 $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
-
+//add a new interface
 $interface = $xml->devices->addChild('interface');
 $interface->addAttribute('type','direct');
 $mac = $interface->addChild('mac');
@@ -147,6 +147,10 @@ $source->addAttribute('dev','eno3');
 $source->addAttribute('mode','bridge');
 $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
+
+//get xpath of interface
+$path = $xml->xpath("interface");
+var_dump($path);
 
 
 echo "<textarea>";
