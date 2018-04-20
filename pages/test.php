@@ -123,15 +123,15 @@ $xml = new SimpleXMLElement($xmlstr);
 
 //lets get domain name
 $domain_name = $xml->name;
-echo "Domain Name: " . $domain_name;
+echo "Domain Name: " . $domain_name . "<br>";
 
 //lets get the memory unit
 $unit = $xml->memory['unit'];
-echo "Memory Unit: " . $unit;
+echo "Memory Unit: " . $unit . "<br>";
 
-//lets get second boot device
-//$second = $xml->os->boot[1]->[dev];
-//echo "Second boot device: " . $second;
+lets get second boot device
+$second = $xml->os->boot[1]->[dev];
+echo "Second boot device: " . $second . "<br>";
 
 //lets get second boot device
 //$second = $xml->os->boot[1][dev];
