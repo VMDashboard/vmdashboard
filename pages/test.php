@@ -142,9 +142,15 @@ $interface = $xml->devices->addChild('interface');
 $interface->addAttribute('type','direct');
 $mac = $interface->addChild('mac');
 $mac->addAttribute('address', '52:54:00:66:55:44');
+$source = $interface->addChild('source');
+$source->addAttribute('dev','eno3');
+$source->addAttribute('mode','bridge');
+$model = $interface->addChild('model');
+$source->addAttribute('type','virtio');
+
 
 echo "<textarea>";
-echo $xml->asXML();
+echo $xml;
 echo "</textarea>";
 ?>
 
