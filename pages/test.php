@@ -146,7 +146,7 @@ $source = $interface->addChild('source');
 $source->addAttribute('dev','eno3');
 $source->addAttribute('mode','bridge');
 $model = $interface->addChild('model');
-$source->addAttribute('type','virtio');
+$model->addAttribute('type','virtio');
 
 
 echo "<textarea>";
