@@ -149,10 +149,10 @@ $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
 
 //get xpath of interface
-$path = $xml->xpath("\\interface");
+$path = $xml->xpath('//interface');
 var_dump($path);
 
-
+// get_xpath($domain, '//domain/os/type/@arch', false);
 echo "<textarea>";
 echo $xml->asXML();
 echo "</textarea>";
