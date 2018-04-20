@@ -130,8 +130,8 @@ $unit = $xml->memory['unit'];
 echo "Memory Unit: " . $unit . "<br>";
 
 
-lets get second boot device
-$second = $xml->os->boot;
+//lets get second boot device
+$second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
 
