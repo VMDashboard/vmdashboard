@@ -136,7 +136,7 @@ echo "Second boot device: " . $second . "<br>";
 
 
 $interface = $xml->devices->addChild('interface type="direct"');
-$interface->addChild('mac address=52:54:00:66:55:44');
+$interface->addAttribute('mac address=52:54:00:66:55:44');
 
 echo "<textarea>";
 echo $xml->asXML();
