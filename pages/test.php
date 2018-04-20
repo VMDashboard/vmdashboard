@@ -126,8 +126,8 @@ $domain_name = $xml->name;
 echo "Domain Name: " . $domain_name;
 
 //lets get the memory unit
-//$unit = $xml->memory['unit'];
-//echo "Memory Unit: " . $unit;
+$unit = $xml->memory['unit'];
+echo "Memory Unit: " . $unit;
 
 //lets get second boot device
 //$second = $xml->os->boot[1]->[dev];
