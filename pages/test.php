@@ -121,6 +121,9 @@ $xmlstr = "
 
 $xml = new SimpleXMLElement($xmlstr);
 
+//add id="6" to <domain> tag
+$xml->addAttribute('id', '6');
+
 //lets get domain name
 $domain_name = $xml->name;
 echo "Domain Name: " . $domain_name . "<br>";
