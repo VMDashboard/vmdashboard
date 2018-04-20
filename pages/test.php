@@ -150,7 +150,7 @@ $source->addAttribute('type','virtio');
 
 
 echo "<textarea>";
-echo $xml;
+echo $xml->asXML();
 echo "</textarea>";
 ?>
 
