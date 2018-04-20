@@ -135,10 +135,10 @@ $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
 
-//$interface = $xml->devices[0]->addChild('interface[type]','direct');
-//$interface->addChild('mac[address]', '52:54:00:66:55:44');
+$interface = $xml->devices[0]->addChild('interface[type]','direct');
+$interface->addChild('mac[address]', '52:54:00:66:55:44');
 
-//echo $xml->asXML();
+echo $xml->asXML();
 
 ?>
 
