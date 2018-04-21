@@ -137,6 +137,9 @@ echo "Memory Unit: " . $unit . "<br>";
 $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
+$boot = $xml->os->boot;
+var_dump($boot);
+
 //add a new interface
 $interface = $xml->devices->addChild('interface');
 $interface->addAttribute('type','direct');
