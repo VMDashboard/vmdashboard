@@ -158,40 +158,6 @@ echo "</textarea>";
 echo "<hr>";
 
 
-//get xpath of interface, returns array of information
-$path = $xml->xpath('//interface');
-for ($i = 0; $i < sizeof($path); $i++) {
-$interface_type = $xml->devices->interface[$i][type];
-$interface_mac = $xml->devices->interface[$i]->mac[address];
-if ($interface_type == "network") {
-  $source_network = $xml->devices->interface[$i]->source[network];
-}
-if ($interface_type == "direct") {
-  $source_dev = $xml->devices->interface[$i]->source[dev];
-  $source_mode = $xml->devices->interface[$i]->source[mode];
-}
-$interface_model = $xml->devices->interface[$i]->model[type];
-
-
-echo "Interface type: " . $interface_type . "<br>";
-echo "Interface mac: " . $interface_mac . "<br>";
-if ($interface_type == "network") {
-  echo "Source network: " . $source_network . "<br>";
-}
-if ($interface_type == "direct") {
-  echo "Source device: " . $source_dev . "<br>";
-  echo "Source mode: " . $source_mode . "<br>";
-}
-echo "Interface model: " . $interface_model . "<br>";
-}
-
-
-// get_xpath($domain, '//domain/os/type/@arch', false);
-echo "<textarea>";
-echo $xml->asXML();
-echo "</textarea>";
-
-
 
 
 
