@@ -4,8 +4,7 @@ require('header.php');
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
-$domXML = $lv->domain_get_xml($domName);
-$domXML = new SimpleXMLElement($domXML);
+
 
 function clean_name_input($data) {
   $data = trim($data);
@@ -28,14 +27,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if ($network_type == "direct"){
       $ret = "Unfortunately adding a direct netowrk connection is not yet supported";
-        $xml = $lv->domain_get_xml($domName); //second param is xpath
-        $xml2 = "
-          <interface type='direct'>
-          <mac address='52:54:00:6d:a3:60'/>
-          <source dev='eno3' mode='bridge'/>
-          <model type='virtio'/>
-          </interface>";
-        $ret = $lv->domain_update_device($domName, $xml2); //third param is flags
+        $domXML = $lv->domain_get_xml($domName);
+        $domXML = new SimpleXMLElement($domXML);
+
+        //add a new interface
+        $interface = $domXML->devices->addChild('interface');
+        $interface->addAttribute('type','direct');
+        $mac = $interface->addChild('mac');
+        $mac->addAttribute('address', '52:54:00:66:55:44');
+        $source = $interface->addChild('source');
+        $source->addAttribute('dev','eno3');
+        $source->addAttribute('mode','bridge');
+        $model = $interface->addChild('model');
+        $model->addAttribute('type','virtio');
+
+        $newXML = $domXML->asXML();
+        $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
+
+        $ret = $lv->domain_update_device($domName, $newXML); //third param is flags
     }
 
   if ($ret == "success"){
