@@ -138,7 +138,7 @@ $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
 //get all boot devices
-foreach ($xml->os->boot() as $boot)
+foreach ($xml->os->childeren() as $boot)
   {
   echo "Boot Device: " . $boot . "<br>";
   }
