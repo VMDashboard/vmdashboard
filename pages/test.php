@@ -185,6 +185,11 @@ echo "Interface model: " . $interface_model . "<br>";
 echo "<textarea>";
 echo $xml->asXML();
 echo "</textarea>";
+
+$uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
+$domName = $lv->domain_get_name_by_uuid($uuid);
+$tmp = $lv->get_nic_info($domName);
+var_dump($tmp);
 ?>
 
 
