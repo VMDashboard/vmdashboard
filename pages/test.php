@@ -152,6 +152,7 @@ $model->addAttribute('type','virtio');
 $path = $xml->xpath('//interface');
 //var_dump($path);
 
+echo sizeof($path);
 for ($i = 0; $i < sizeof($path); $i++) {
   echo $path[$i];
 }
