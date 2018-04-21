@@ -197,6 +197,7 @@ echo "<hr>";
 $uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
 $domName = $lv->domain_get_name_by_uuid($uuid);
 $domXML = $lv->domain_get_xml($domName);
+$domXML = new SimpleXMLElement($domXML);
 var_dump($tmp);
 ?>
 
