@@ -354,7 +354,6 @@ swal(alertRet);
               <?php
               /* Network interface information */
               $path = $domXML->xpath('//interface');
-              var_dump($path);
               if (!empty($path)) {
                 echo "<div class='table-responsive'>" .
                   "<table class='table'>" .
@@ -369,6 +368,7 @@ swal(alertRet);
 
                 for ($i = 0; $i < sizeof($path); $i++) {
                   $interface_type = $xml->devices->interface[$i][type];
+                  var_dump($interface_type);
                   $interface_mac = $xml->devices->interface[$i]->mac[address];
                   if ($interface_type == "network") {
                     $source_network = $xml->devices->interface[$i]->source[network];
