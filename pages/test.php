@@ -153,12 +153,16 @@ $source->addAttribute('mode','bridge');
 $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
 
-//get xpath of interface
+//get xpath of interface, returns array of information
 $path = $xml->xpath('//interface');
-//var_dump($path);
-
+//loop through each iteration of interface
 for ($i = 0; $i < sizeof($path); $i++) {
-  echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
+  // create XML of xpath data
+  $inferfaceXML = $path[$i]->asXML();
+  $interface_type = $interfaceXML->type;
+  echo "Interface type: " . $interface_type . "<br>";
+
+  //echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
 }
 
 // get_xpath($domain, '//domain/os/type/@arch', false);
