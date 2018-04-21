@@ -378,7 +378,7 @@ swal(alertRet);
                   }
                   $interface_model = $xml->devices->interface[$i]->model[type];
 
-                  $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+                  //$mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
                   if ($interface_type == "network") {
                     echo "<tr>" .
                       "<td>$interface_type</td>" .
