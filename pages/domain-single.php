@@ -8,6 +8,7 @@ $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
 $action = $_GET['action'];
+$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
 
 
 // Domain Actions
@@ -350,42 +351,57 @@ swal(alertRet);
               <h4>Network Information</h4>
               <?php
               /* Network interface information */
-              $tmp = $lv->get_nic_info($domName);
-              if (!empty($tmp)) {
-                $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+              $path = $domXML->xpath('//interface');
+              if (!empty($path)) {
                 echo "<div class='table-responsive'>" .
                   "<table class='table'>" .
                   "<tr>" .
-                  "<th>MAC Address</th>" .
-                  "<th>NIC Type</th>" .
-                  "<th>Network</th>" .
-                  "<th>Network active</th>" .
-                  "<th>Actions</th>" .
+                  "<th>Type</th>" .
+                  "<th>MAC</th>" .
+                  "<th>Source</th>" .
+                  "<th>Mode</th>" .
+                  "<th>Model</th>" .
                   "</tr>" .
                   "<tbody>";
-                for ($i = 0; $i < sizeof($tmp); $i++) {
-                  $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-                  if (in_array($tmp[$i]['network'], $anets))
-                    $netUp = 'Yes';
-                  else
-                    $netUp = 'No <a href="">[Start]</a>';
 
-                  echo "<tr>" .
-                    "<td>{$tmp[$i]['mac']}</td>" .
-                    "<td>{$tmp[$i]['nic_type']}</td>" .
-                    "<td>{$tmp[$i]['network']}</td>" .
-                    "<td>$netUp</td>" .
-                    "<td>" .
-                    "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
-                    "Remove network card</a>" .
-                    "</td>" .
-                    "</tr>";
+                for ($i = 0; $i < sizeof($path); $i++) {
+                  $interface_type = $xml->devices->interface[$i][type];
+                  $interface_mac = $xml->devices->interface[$i]->mac[address];
+                  if ($interface_type == "network") {
+                    $source_network = $xml->devices->interface[$i]->source[network];
+                  }
+                  if ($interface_type == "direct") {
+                    $source_dev = $xml->devices->interface[$i]->source[dev];
+                    $source_mode = $xml->devices->interface[$i]->source[mode];
+                  }
+                  $interface_model = $xml->devices->interface[$i]->model[type];
+
+                  $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+                  if ($interface_type == "network") {
+                    echo "<tr>" .
+                      "<td>$interface_type</td>" .
+                      "<td>$interface_mac</td>" .
+                      "<td>$source_network</td>" .
+                      "<td></td>" .
+                      "<td>$interface_model</td>" .
+                      "</tr>";
+                  }
+                  if ($interface_type == "direct") {
+                    echo "<tr>" .
+                      "<td>$interface_type</td>" .
+                      "<td>$interface_mac</td>" .
+                      "<td>$source_dev</td>" .
+                      "<td>$source_mode</td>" .
+                      "<td>$interface_model</td>" .
+                      "</tr>";
+                  }
                 }
                 echo "</tbody></table></div>";
               } else {
                 echo '<hr><p>Domain doesn\'t have any network devices</p>';
               }
               ?>
+
 
 
               <br/><br/><br/>
