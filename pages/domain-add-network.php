@@ -26,27 +26,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   if ($network_type == "network")
     $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
-    if ($network_type == "direct"){
-      $ret = "Unfortunately adding a direct netowrk connection is not yet supported";
-        $domXML = $lv->domain_get_xml($domName);
-        $domXML = new SimpleXMLElement($domXML);
+  if ($network_type == "direct"){
+    $domXML = $lv->domain_get_xml($domName);
+    $domXML = new SimpleXMLElement($domXML);
 
-        //add a new interface
-        $interface = $domXML->devices->addChild('interface');
-        $interface->addAttribute('type','direct');
-        $mac = $interface->addChild('mac');
-        $mac->addAttribute('address', '52:54:00:c5:08:1e');
-        $source = $interface->addChild('source');
-        $source->addAttribute('dev', $source_dev);
-        $source->addAttribute('mode','bridge');
-        $model = $interface->addChild('model');
-        $model->addAttribute('type','virtio');
+    //add a new interface
+    $interface = $domXML->devices->addChild('interface');
+    $interface->addAttribute('type','direct');
+    $mac = $interface->addChild('mac');
+    $mac->addAttribute('address', '52:54:00:c5:08:1e');
+    $source = $interface->addChild('source');
+    $source->addAttribute('dev', $source_dev);
+    $source->addAttribute('mode','bridge');
+    $model = $interface->addChild('model');
+    $model->addAttribute('type','virtio');
 
-        $newXML = $domXML->asXML();
-        $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
+    $newXML = $domXML->asXML();
+    $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
 
-        $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
-    }
+    $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
+  }
 
   if ($ret == "success"){
   //Return back to the orignal web page
