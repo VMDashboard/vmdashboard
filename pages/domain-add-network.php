@@ -18,7 +18,7 @@ function clean_name_input($data) {
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $network_type = $_POST['network_type'];
-  $mac_address = $_POST['mac'];
+  $mac = $_POST['mac'];
   $network = $_POST['network'];
   $source_dev = $_POST['source_dev'];
   $model = $_POST['model'];
@@ -33,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     //add a new interface
     $interface = $domXML->devices->addChild('interface');
     $interface->addAttribute('type','direct');
-    $mac = $interface->addChild('mac');
-    $mac->addAttribute('address', $mac_address);
+    $mac_address = $interface->addChild('mac');
+    $mac_address->addAttribute('address', $mac);
     $source = $interface->addChild('source');
     $source->addAttribute('dev', $source_dev);
     $source->addAttribute('mode','bridge');
