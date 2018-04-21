@@ -4,6 +4,8 @@ require('header.php');
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
+$domXML = $lv->domain_get_xml($domName);
+$domXML = new SimpleXMLElement($domXML);
 
 function clean_name_input($data) {
   $data = trim($data);
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
           <source dev='eno3' mode='bridge'/>
           <model type='virtio'/>
           </interface>";
-        $ret2 = $lv->domain_update_device($domName, $xml2); //third param is flags
+        $ret = $lv->domain_update_device($domName, $xml2); //third param is flags
     }
 
   if ($ret == "success"){
