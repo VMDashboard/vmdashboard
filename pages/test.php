@@ -150,7 +150,7 @@ $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
 
 $xml = $xml->asXML();
-//$xml = str_replace(' version="1.0"', '', $xml);
+$xml = str_replace('<?xml version="1.0"?>', '', $xml);
 
 echo "<hr>";
 echo "<textarea>";
