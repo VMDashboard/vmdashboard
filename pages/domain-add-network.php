@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $newXML = $domXML->asXML();
         $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
 
-        $ret = $lv->domain_update_device($domName, $newXML); //third param is flags
+        $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
     }
 
   if ($ret == "success"){
