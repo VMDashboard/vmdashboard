@@ -35,9 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $interface = $domXML->devices->addChild('interface');
         $interface->addAttribute('type','direct');
         $mac = $interface->addChild('mac');
-        $mac->addAttribute('address', "$mac");
+        $mac->addAttribute('address', '52:54:00:c5:08:1e');
         $source = $interface->addChild('source');
-        $source->addAttribute('dev', "$host_int");
+        $source->addAttribute('dev', $source_dev);
         $source->addAttribute('mode','bridge');
         $model = $interface->addChild('model');
         $model->addAttribute('type','virtio');
