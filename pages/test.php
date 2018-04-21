@@ -198,7 +198,6 @@ $uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
 $domName = $lv->domain_get_name_by_uuid($uuid);
 $domXML = $lv->domain_get_xml($domName);
 $domXML = new SimpleXMLElement($domXML);
-var_dump($tmp);
 ?>
 
 <br/><br/><br/>
@@ -207,36 +206,49 @@ var_dump($tmp);
 <?php
 /* Network interface information */
 $path = $domXML->xpath('//interface');
-var_dump($path);
 if (!empty($path)) {
-  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
   echo "<div class='table-responsive'>" .
     "<table class='table'>" .
     "<tr>" .
-    "<th>MAC Address</th>" .
-    "<th>NIC Type</th>" .
-    "<th>Network</th>" .
-    "<th>Network active</th>" .
-    "<th>Actions</th>" .
+    "<th>Type</th>" .
+    "<th>MAC</th>" .
+    "<th>Source</th>" .
+    "<th>Mode</th>" .
+    "<th>Model</th>" .
     "</tr>" .
     "<tbody>";
-  for ($i = 0; $i < sizeof($tmp); $i++) {
-    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-    if (in_array($tmp[$i]['network'], $anets))
-      $netUp = 'Yes';
-    else
-      $netUp = 'No <a href="">[Start]</a>';
 
-    echo "<tr>" .
-      "<td>{$tmp[$i]['mac']}</td>" .
-      "<td>{$tmp[$i]['nic_type']}</td>" .
-      "<td>{$tmp[$i]['network']}</td>" .
-      "<td>$netUp</td>" .
-      "<td>" .
-      "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
-      "Remove network card</a>" .
-      "</td>" .
-      "</tr>";
+  for ($i = 0; $i < sizeof($path); $i++) {
+    $interface_type = $xml->devices->interface[$i][type];
+    $interface_mac = $xml->devices->interface[$i]->mac[address];
+    if ($interface_type == "network") {
+      $source_network = $xml->devices->interface[$i]->source[network];
+    }
+    if ($interface_type == "direct") {
+      $source_dev = $xml->devices->interface[$i]->source[dev];
+      $source_mode = $xml->devices->interface[$i]->source[mode];
+    }
+    $interface_model = $xml->devices->interface[$i]->model[type];
+
+    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+    if ($interface_type == "network") {
+      echo "<tr>" .
+        "<td>$interface_type</td>" .
+        "<td>$interface_mac</td>" .
+        "<td>$source_network</td>" .
+        "<td></td>" .
+        "<td>$interface_model</td>" .
+        "</tr>";
+    }
+    if ($interface_type == "direct") {
+      echo "<tr>" .
+        "<td>$interface_type</td>" .
+        "<td>$interface_mac</td>" .
+        "<td>$source_dev</td>" .
+        "<td>$source_mode</td>" .
+        "<td>$interface_model</td>" .
+        "</tr>";
+    }
   }
   echo "</tbody></table></div>";
 } else {
