@@ -158,7 +158,7 @@ $path = $xml->xpath('//interface');
 //loop through each iteration of interface
 for ($i = 0; $i < sizeof($path); $i++) {
   // create XML of xpath data
-  $interfaceXML = $path[$i]->asXML();
+  $interfaceXML = new SimpleXMLElement($path[$i]->asXML());
   $interface_type = $interfaceXML->type;
   var_dump($interface_type);
   echo "Interface type: " . $interface_type . "<br>";
