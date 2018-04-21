@@ -354,6 +354,7 @@ swal(alertRet);
               <?php
               /* Network interface information */
               $path = $domXML->xpath('//interface');
+              var_dump($path);
               if (!empty($path)) {
                 echo "<div class='table-responsive'>" .
                   "<table class='table'>" .
