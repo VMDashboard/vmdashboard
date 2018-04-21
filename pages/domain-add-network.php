@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $network_type = $_POST['network_type'];
   $mac = $_POST['mac'];
   $network = $_POST['network'];
-  $host_int = $_POST['host_int'];
+  $source_dev = $_POST['source_dev'];
   $model = $_POST['model'];
 
   if ($network_type == "network")
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $mac = $interface->addChild('mac');
         $mac->addAttribute('address', $mac);
         $source = $interface->addChild('source');
-        $source->addAttribute('dev',$host_int);
+        $source->addAttribute('dev', $host_int);
         $source->addAttribute('mode','bridge');
         $model = $interface->addChild('model');
         $model->addAttribute('type','virtio');
@@ -163,7 +163,7 @@ function networkChangeOptions(selectEl) {
                 <div class="form-group networkChange" id="direct" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12">Host interface</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
-                    <select class="form-control" name="host_int">
+                    <select class="form-control" name="source_dev">
                       <?php
                       $tmp = $lv->get_node_device_cap_options();
                       for ($i = 0; $i < sizeof($tmp); $i++) {
