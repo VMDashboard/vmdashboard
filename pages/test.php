@@ -160,7 +160,7 @@ for ($i = 0; $i < sizeof($path); $i++) {
   // create XML of xpath data
   $interfaceXML = $path[$i]->asXML();
   $interface_type = $interfaceXML->type;
-  var_dump($interfaceXML);
+  var_dump($interface_type);
   echo "Interface type: " . $interface_type . "<br>";
 
   echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
