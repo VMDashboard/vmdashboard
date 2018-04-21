@@ -186,12 +186,62 @@ echo "<textarea>";
 echo $xml->asXML();
 echo "</textarea>";
 
+
+
+
+
+
+
+
+echo "<hr>";
 $uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
 $domName = $lv->domain_get_name_by_uuid($uuid);
-$tmp = $lv->get_nic_info($domName);
+$domXML = $lv->domain_get_xml($domName);
 var_dump($tmp);
 ?>
 
+<br/><br/><br/>
+<!-- add network here -->
+<h4>Network Information</h4>
+<?php
+/* Network interface information */
+$path = $domXML->xpath('//interface');
+var_dump($path);
+if (!empty($path)) {
+  $anets = $lv->get_networks(VIR_NETWORKS_ACTIVE);
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    "<tr>" .
+    "<th>MAC Address</th>" .
+    "<th>NIC Type</th>" .
+    "<th>Network</th>" .
+    "<th>Network active</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    "<tbody>";
+  for ($i = 0; $i < sizeof($tmp); $i++) {
+    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+    if (in_array($tmp[$i]['network'], $anets))
+      $netUp = 'Yes';
+    else
+      $netUp = 'No <a href="">[Start]</a>';
+
+    echo "<tr>" .
+      "<td>{$tmp[$i]['mac']}</td>" .
+      "<td>{$tmp[$i]['nic_type']}</td>" .
+      "<td>{$tmp[$i]['network']}</td>" .
+      "<td>$netUp</td>" .
+      "<td>" .
+      "<a href=\"?action=domain-nic-remove&amp;uuid={$_GET['uuid']}&amp;mac=$mac_encoded\">" .
+      "Remove network card</a>" .
+      "</td>" .
+      "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo '<hr><p>Domain doesn\'t have any network devices</p>';
+}
+?>
 
 
 
