@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $network_type = $_POST['network_type'];
   $mac = $_POST['mac'];
   $network = $_POST['network'];
-  $host_int = $_POST[host_int]
+  $host_int = $_POST['host_int'];
   $model = $_POST['model'];
 
   if ($network_type == "network")
