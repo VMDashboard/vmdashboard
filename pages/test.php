@@ -138,13 +138,9 @@ $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
 //get all boot devices
-foreach ($xml->os->childeren() as $boot)
-  {
-  echo "Boot Device: " . $boot . "<br>";
-  }
+$boot = $xml->os->getChilderen();
+var_dump($boot);
 
-//$boot = $xml->os->boot();
-//var_dump($boot);
 
 //add a new interface
 $interface = $xml->devices->addChild('interface');
