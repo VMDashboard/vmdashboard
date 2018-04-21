@@ -155,16 +155,13 @@ $model->addAttribute('type','virtio');
 
 //get xpath of interface, returns array of information
 $path = $xml->xpath('//interface');
-//loop through each iteration of interface
 for ($i = 0; $i < sizeof($path); $i++) {
-  // create XML of xpath data
-  $interfaceXML = new SimpleXMLElement($path[$i]->asXML());
-  $interface_type = $interfaceXML->type;
-  var_dump($interface_type);
-  echo "Interface type: " . $interface_type . "<br>";
-
-  echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
+$interface_type = $xml->device->interface[$i][type];
+echo "Interface type" . $interface_type . "<br>";
 }
+
+
+
 
 // get_xpath($domain, '//domain/os/type/@arch', false);
 echo "<textarea>";
