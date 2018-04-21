@@ -137,10 +137,6 @@ echo "Memory Unit: " . $unit . "<br>";
 $second = $xml->os->boot[1][dev];
 echo "Second boot device: " . $second . "<br>";
 
-//get all boot devices
-//$boot = $xml->os->getChilderen();
-//var_dump($boot);
-
 
 //add a new interface
 $interface = $xml->devices->addChild('interface');
@@ -152,6 +148,11 @@ $source->addAttribute('dev','eno3');
 $source->addAttribute('mode','bridge');
 $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
+
+echo "<hr>";
+var_dump($xml);
+echo "<hr>";
+
 
 //get xpath of interface, returns array of information
 $path = $xml->xpath('//interface');
@@ -190,9 +191,6 @@ echo "</textarea>";
 
 
 
-
-
-
 echo "<hr>";
 $uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
 $domName = $lv->domain_get_name_by_uuid($uuid);
@@ -200,61 +198,7 @@ $domXML = $lv->domain_get_xml($domName);
 $domXML = new SimpleXMLElement($domXML);
 ?>
 
-<br/><br/><br/>
-<!-- add network here -->
-<h4>Network Information</h4>
-<?php
-/* Network interface information */
-$path = $domXML->xpath('//interface');
-if (!empty($path)) {
-  echo "<div class='table-responsive'>" .
-    "<table class='table'>" .
-    "<tr>" .
-    "<th>Type</th>" .
-    "<th>MAC</th>" .
-    "<th>Source</th>" .
-    "<th>Mode</th>" .
-    "<th>Model</th>" .
-    "</tr>" .
-    "<tbody>";
 
-  for ($i = 0; $i < sizeof($path); $i++) {
-    $interface_type = $xml->devices->interface[$i][type];
-    $interface_mac = $xml->devices->interface[$i]->mac[address];
-    if ($interface_type == "network") {
-      $source_network = $xml->devices->interface[$i]->source[network];
-    }
-    if ($interface_type == "direct") {
-      $source_dev = $xml->devices->interface[$i]->source[dev];
-      $source_mode = $xml->devices->interface[$i]->source[mode];
-    }
-    $interface_model = $xml->devices->interface[$i]->model[type];
-
-    $mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
-    if ($interface_type == "network") {
-      echo "<tr>" .
-        "<td>$interface_type</td>" .
-        "<td>$interface_mac</td>" .
-        "<td>$source_network</td>" .
-        "<td></td>" .
-        "<td>$interface_model</td>" .
-        "</tr>";
-    }
-    if ($interface_type == "direct") {
-      echo "<tr>" .
-        "<td>$interface_type</td>" .
-        "<td>$interface_mac</td>" .
-        "<td>$source_dev</td>" .
-        "<td>$source_mode</td>" .
-        "<td>$interface_model</td>" .
-        "</tr>";
-    }
-  }
-  echo "</tbody></table></div>";
-} else {
-  echo '<hr><p>Domain doesn\'t have any network devices</p>';
-}
-?>
 
 
 
