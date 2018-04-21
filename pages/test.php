@@ -150,7 +150,9 @@ $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
 
 echo "<hr>";
-var_dump($xml);
+echo "<textarea>";
+echo $xml;
+echo "</textarea>";
 echo "<hr>";
 
 
