@@ -162,7 +162,7 @@ for ($i = 0; $i < sizeof($path); $i++) {
   $interface_type = $interfaceXML->type;
   echo "Interface type: " . $interface_type . "<br>";
 
-  //echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
+  echo "<textarea>" . $path[$i]->asXML() . "</textarea>";
 }
 
 // get_xpath($domain, '//domain/os/type/@arch', false);
