@@ -384,7 +384,7 @@ swal(alertRet);
                       "<td>$interface_type</td>" .
                       "<td>$interface_mac</td>" .
                       "<td>$source_network</td>" .
-                      "<td> - </td>" .
+                      "<td style="text-align:center;"> - </td>" .
                       "<td>$interface_model</td>" .
                       "</tr>";
                   }
