@@ -153,7 +153,7 @@ $path = $xml->xpath('//interface');
 //var_dump($path);
 
 for ($i = 0; $i < sizeof($path); $i++) {
-  echo "<textarea>" . $path[$i]->asXML(); . "</textarea>";
+  echo "<textarea>" . $path['$i'] . "</textarea>";
 }
 
 // get_xpath($domain, '//domain/os/type/@arch', false);
