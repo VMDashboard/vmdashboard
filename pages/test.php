@@ -149,7 +149,7 @@ $source->addAttribute('mode','bridge');
 $model = $interface->addChild('model');
 $model->addAttribute('type','virtio');
 
-$xml = asXML($xml);
+$xml = $xml->asXML();
 
 echo "<hr>";
 echo "<textarea>";
