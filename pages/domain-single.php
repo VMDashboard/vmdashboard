@@ -367,16 +367,16 @@ swal(alertRet);
                   "<tbody>";
 
                 for ($i = 0; $i < sizeof($path); $i++) {
-                  $interface_type = $xml->devices->interface[$i][type];
-                  $interface_mac = $xml->devices->interface[$i]->mac[address];
+                  $interface_type = $domXML->devices->interface[$i][type];
+                  $interface_mac = $domXML->devices->interface[$i]->mac[address];
                   if ($interface_type == "network") {
-                    $source_network = $xml->devices->interface[$i]->source[network];
+                    $source_network = $domXML->devices->interface[$i]->source[network];
                   }
                   if ($interface_type == "direct") {
-                    $source_dev = $xml->devices->interface[$i]->source[dev];
-                    $source_mode = $xml->devices->interface[$i]->source[mode];
+                    $source_dev = $domXML->devices->interface[$i]->source[dev];
+                    $source_mode = $domXML->devices->interface[$i]->source[mode];
                   }
-                  $interface_model = $xml->devices->interface[$i]->model[type];
+                  $interface_model = $domXML->devices->interface[$i]->model[type];
 
                   //$mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
                   if ($interface_type == "network") {
