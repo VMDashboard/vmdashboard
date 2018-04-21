@@ -150,7 +150,7 @@ $model->addAttribute('type','virtio');
 
 //get xpath of interface
 $path = $xml->xpath('//interface');
-var_dump($path);
+//var_dump($path);
 
 for ($i = 0; $i < sizeof($path); $i++) {
   echo $path[$i];
