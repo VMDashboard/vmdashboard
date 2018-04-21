@@ -8,7 +8,9 @@ $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
 $action = $_GET['action'];
-$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
+$domXML = $lv->domain_get_xml($domName);
+$domXML = new SimpleXMLElement($domXML);
+//$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
 
 
 // Domain Actions
