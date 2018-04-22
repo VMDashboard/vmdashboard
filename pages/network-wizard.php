@@ -20,63 +20,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $dhcp_start_address = clean_name_input($_POST['dhcp_start_address']);
   $dhcp_end_address = clean_name_input($_POST['dhcp_end_address']);
 
-  if ($forward_mode == "nat") {
+
+  $xml = "
+  <network>
+    <name>$network_name</name>
+    <forward mode='$forward_mode'/>
+    <mac address='$mac_address'/>
+    <ip address='$ip_address' netmask='$subnet_mask'>
+      <dhcp>
+        <range start='$dhcp_start_address' end='$dhcp_end_address'/>
+      </dhcp>
+    </ip>
+  </network>";
+
+  if ($dhcp_service == "disabled"){
     $xml = "
     <network>
       <name>$network_name</name>
       <forward mode='$forward_mode'/>
       <mac address='$mac_address'/>
       <ip address='$ip_address' netmask='$subnet_mask'>
-        <dhcp>
-          <range start='$dhcp_start_address' end='$dhcp_end_address'/>
-        </dhcp>
       </ip>
     </network>";
-
-    if ($dhcp_service == "disabled"){
-      $xml = "
-      <network>
-        <name>$network_name</name>
-        <forward mode='$forward_mode'/>
-        <mac address='$mac_address'/>
-        <ip address='$ip_address' netmask='$subnet_mask'>
-        </ip>
-      </network>";
-    }
-  }
-
-  if ($forward_mode == "private") {
-    $xml = "
-    <network>
-      <name>$network_name</name>
-      <forward mode='$forward_mode'/>
-        <dhcp>
-          <range start='$dhcp_start_address' end='$dhcp_end_address'/>
-        </dhcp>
-      </ip>
-    </network>";
-
-    if ($dhcp_service == "disabled"){
-      $xml = "
-      <network>
-        <name>$network_name</name>
-        <forward mode='$forward_mode'/>
-        <mac address='$mac_address'/>
-        <ip address='$ip_address' netmask='$subnet_mask'>
-        </ip>
-      </network>";
-    }
-  }
-
-  if ($forward_mode == "bridge") {
-    $xml = "
-    <network>
-      <name>$network_name</name>
-      <forward mode='$forward_mode'/>
-      <mac address='$mac_address'/>
-      </ip>
-    </network>";
-
   }
 
   $ret = $lv->network_define_xml($xml)? 'success' : 'Error while creating network: '.$lv->get_last_error();
@@ -168,8 +133,6 @@ function dhcpChangeOptions(selectEl) {
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="forward_mode">
                       <option value="nat" selected>nat</option>
-                      <option value="bridge">bridge</option>
-                      <option value="private">private</option>
                     </select>
                   </div>
                 </div>
