@@ -20,12 +20,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $dhcp_start_address = clean_name_input($_POST['dhcp_start_address']);
   $dhcp_end_address = clean_name_input($_POST['dhcp_end_address']);
 
-  if ($forward_mode == "nat" || $forward_mode == "private") {
+  if ($forward_mode == "nat") {
     $xml = "
     <network>
       <name>$network_name</name>
       <forward mode='$forward_mode'/>
       <mac address='$mac_address'/>
+      <ip address='$ip_address' netmask='$subnet_mask'>
+        <dhcp>
+          <range start='$dhcp_start_address' end='$dhcp_end_address'/>
+        </dhcp>
+      </ip>
+    </network>";
+
+    if ($dhcp_service == "disabled"){
+      $xml = "
+      <network>
+        <name>$network_name</name>
+        <forward mode='$forward_mode'/>
+        <mac address='$mac_address'/>
+        <ip address='$ip_address' netmask='$subnet_mask'>
+        </ip>
+      </network>";
+    }
+  }
+
+  if ($forward_mode == "private") {
+    $xml = "
+    <network>
+      <name>$network_name</name>
+      <forward mode='$forward_mode'/>
       <ip address='$ip_address' netmask='$subnet_mask'>
         <dhcp>
           <range start='$dhcp_start_address' end='$dhcp_end_address'/>
