@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <network>
       <name>$network_name</name>
       <forward mode='$forward_mode'/>
-      <ip address='$ip_address' netmask='$subnet_mask'>
         <dhcp>
           <range start='$dhcp_start_address' end='$dhcp_end_address'/>
         </dhcp>
