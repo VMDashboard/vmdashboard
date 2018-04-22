@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $dhcp_start_address = clean_name_input($_POST['dhcp_start_address']);
   $dhcp_end_address = clean_name_input($_POST['dhcp_end_address']);
 
-  if ($forward_mode == "nat") {
+  if ($forward_mode == "nat" || $forward_mode == "private") {
     $xml = "
     <network>
       <name>$network_name</name>
