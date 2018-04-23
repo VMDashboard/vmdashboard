@@ -438,7 +438,7 @@ swal(alertRet);
                   "<tr>" .
                   "<th>Name</th>" .
                   "<th>Creation Time</th>" .
-                  "<th>State</th>" .
+                  "<th>Domain State</th>" .
                   "<th>Actions</th>" .
                   "</tr>" .
                   "<tbody>";
