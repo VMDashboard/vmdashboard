@@ -49,7 +49,18 @@ if ($action == 'domain-delete') {
 //Disk Actions
 if ($action == 'domain-disk-remove') {
   $dev = $_GET['dev'];
-  $ret = $lv->domain_disk_remove($domName, $dev) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
+  //My XML way
+  $path = $domXML->xpath('//disk');
+  for ($i = 0; $i < sizeof($path); $i++) {
+    if ($domXML->devices->disk[$i]->target[dev] == $dev)
+      unset($domXML->devices->disk[$i]);
+      $newXML = $domXML->asXML();
+      $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
+      $ret = $lv->domain_change_xml($domName, $newXML) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
+  }
+
+  //Suggested way, however not working
+  //$ret = $lv->domain_disk_remove($domName, $dev) ? 'Disk has been removed successfully' : 'Cannot remove disk: '.$lv->get_last_error();
 }
 
 //Network Actions
