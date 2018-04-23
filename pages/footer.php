@@ -53,11 +53,5 @@
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
 
-<script>
-    jQuery(window).load(function(){
-    jQuery('#overlay').fadeOut();
-    });
-</script>
-
 </body>
 </html>
