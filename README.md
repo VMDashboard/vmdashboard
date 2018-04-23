@@ -21,6 +21,9 @@ The web server user account on Ubuntu is called www-data. This account will need
 
 Restart the server
 
+Install the git package to download software from github.com.
+<code>sudo apt install git</code>
+
 Download the openVM software to the root directory of your web server. The default location is /var/www/html/ in Ubuntu.
 <code>cd /var/www/html</code><br>
 <code>sudo git clone https://github.com/PenningDevelopment/openVM.git</code>
@@ -32,12 +35,6 @@ Use a web browser to navigate to your server's IP address or domain name. Add /o
 
 <hr />
 
-Known issues:
-<ul>
- 	<li>Disk volumes will not delete from domain through interface. Can still be accomplished by editing the domain XML.</li>
- 	<li>Network devices will not delete from domain through interface. Can still be accomplished by editing the domain XML.</li>
- 	<li>Network devices do not display correctly in domain-single.php.</li>
-</ul>
 
 Features for future releases:
 <ul>
