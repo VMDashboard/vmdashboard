@@ -220,6 +220,7 @@ if (!empty($path)) {
         "<td>$source_network</td>" .
         "<td>nat</td>" .
         "<td>$interface_model</td>" .
+        "<td>remove</td>" .
         "</tr>";
     }
     if ($interface_type == "direct") {
