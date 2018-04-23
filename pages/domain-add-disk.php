@@ -185,7 +185,6 @@ function diskChangeOptions(selectEl) {
                   </div>
                 </div>
 
-
                 <div class="form-group diskChange" id="new" style="display:none;">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="new_volume_size">Volume size</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
@@ -232,7 +231,6 @@ function diskChangeOptions(selectEl) {
                     </select>
                   </div>
                 </div>
-
 
                 <div class="form-group diskChange" id="existing" style="display:none;">
                   <label for="existing_target_bus" class="control-label col-md-3 col-sm-3 col-xs-12">Target bus</label>
