@@ -456,9 +456,9 @@ swal(alertRet);
                   echo date("H:i:s", $value) . "</td>";
                   echo "<td>" . $snapstate . "</td>";
                   echo "<td>
-                    <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\"><i class='fa fa-trash'></i></a>
-                    <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-exchange'></i></a>
-                    <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . "><i class='fa fa-code'></i></a>
+                    <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete snapshot | </a>
+                    <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">Revert |</a>
+                    <a title='Snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">XML</a>
                     </td>";
                   echo "</tr>";
                 }
