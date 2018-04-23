@@ -55,7 +55,18 @@ if ($action == 'domain-disk-remove') {
 //Network Actions
 if ($action == 'domain-nic-remove') {
   $mac = base64_decode($_GET['mac']);
-  $ret = $lv->domain_nic_remove($domName, $mac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
+  //My XML way
+  $path = $domXML->xpath('//interface');
+  for ($i = 0; $i < sizeof($path); $i++) {
+    if ($domXML->devices->interface[$i]->mac[address] == $mac)
+      unset($domXML->devices->interface[$i]);
+      $newXML = $domXML->asXML();
+      $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
+      $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
+  }
+
+  //Suggested way, however not working
+  //$ret = $lv->domain_nic_remove($domName, $mac) ? "Network device successfully removed" : 'Error while removing network device: '.$lv->get_last_error();
 }
 
 //Snapshot Actions
@@ -363,12 +374,14 @@ swal(alertRet);
                   "<th>Source</th>" .
                   "<th>Mode</th>" .
                   "<th>Model</th>" .
+                  "<th>Actions</th>" .
                   "</tr>" .
                   "<tbody>";
 
                 for ($i = 0; $i < sizeof($path); $i++) {
                   $interface_type = $domXML->devices->interface[$i][type];
                   $interface_mac = $domXML->devices->interface[$i]->mac[address];
+                  $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
                   if ($interface_type == "network") {
                     $source_network = $domXML->devices->interface[$i]->source[network];
                   }
@@ -377,8 +390,7 @@ swal(alertRet);
                     $source_mode = $domXML->devices->interface[$i]->source[mode];
                   }
                   $interface_model = $domXML->devices->interface[$i]->model[type];
-
-                  //$mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+                  
                   if ($interface_type == "network") {
                     echo "<tr>" .
                       "<td>$interface_type</td>" .
@@ -386,6 +398,10 @@ swal(alertRet);
                       "<td>$source_network</td>" .
                       "<td>nat</td>" .
                       "<td>$interface_model</td>" .
+                      "<td>" .
+                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                        "Remove interface</a>" .
+                      "</td>" .
                       "</tr>";
                   }
                   if ($interface_type == "direct") {
@@ -395,6 +411,10 @@ swal(alertRet);
                       "<td>$source_dev</td>" .
                       "<td>$source_mode</td>" .
                       "<td>$interface_model</td>" .
+                      "<td>" .
+                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                        "Remove interface</a>" .
+                      "</td>" .
                       "</tr>";
                   }
                 }
