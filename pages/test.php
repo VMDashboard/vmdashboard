@@ -160,8 +160,6 @@ echo "<hr>";
 
 
 
-
-
 echo "<hr>";
 $uuid = "879b2676-b680-4517-9bcd-2c259abfd865";
 $domName = $lv->domain_get_name_by_uuid($uuid);
@@ -169,6 +167,77 @@ $domXML = $lv->domain_get_xml($domName);
 $domXML = new SimpleXMLElement($domXML);
 ?>
 
+
+<?php
+$path = $domXML->xpath('//interface');
+for ($i = 0; $i < sizeof($path); $i++) {
+  if ($domXML->devices->interface[$i]->mac[address]; == "52:54:00:6d:a3:56")
+    unset($domXML->devices->interface[$i])
+}
+?>
+
+
+
+
+
+
+<br/><br/><br/>
+<!-- add network here -->
+<h4>Network Information</h4>
+<?php
+/* Network interface information */
+$path = $domXML->xpath('//interface');
+if (!empty($path)) {
+  echo "<div class='table-responsive'>" .
+    "<table class='table'>" .
+    "<tr>" .
+    "<th>Type</th>" .
+    "<th>MAC</th>" .
+    "<th>Source</th>" .
+    "<th>Mode</th>" .
+    "<th>Model</th>" .
+    "<th>Actions</th>" .
+    "</tr>" .
+    "<tbody>";
+
+  for ($i = 0; $i < sizeof($path); $i++) {
+    $interface_type = $domXML->devices->interface[$i][type];
+    $interface_mac = $domXML->devices->interface[$i]->mac[address];
+    if ($interface_type == "network") {
+      $source_network = $domXML->devices->interface[$i]->source[network];
+    }
+    if ($interface_type == "direct") {
+      $source_dev = $domXML->devices->interface[$i]->source[dev];
+      $source_mode = $domXML->devices->interface[$i]->source[mode];
+    }
+    $interface_model = $domXML->devices->interface[$i]->model[type];
+
+    //$mac_encoded = base64_encode($tmp[$i]['mac']); //used to send via $_GET
+    if ($interface_type == "network") {
+      echo "<tr>" .
+        "<td>$interface_type</td>" .
+        "<td>$interface_mac</td>" .
+        "<td>$source_network</td>" .
+        "<td>nat</td>" .
+        "<td>$interface_model</td>" .
+        "</tr>";
+    }
+    if ($interface_type == "direct") {
+      echo "<tr>" .
+        "<td>$interface_type</td>" .
+        "<td>$interface_mac</td>" .
+        "<td>$source_dev</td>" .
+        "<td>$source_mode</td>" .
+        "<td>$interface_model</td>" .
+        "<td>remove</td>" .
+        "</tr>";
+    }
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo '<hr><p>Domain doesn\'t have any network devices</p>';
+}
+?>
 
 
 
