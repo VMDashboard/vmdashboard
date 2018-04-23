@@ -370,7 +370,7 @@ swal(alertRet);
                   "<table class='table'>" .
                   "<tr>" .
                   "<th>Type</th>" .
-                  "<th>MAC</th>" .
+                  "<th>MAC Address</th>" .
                   "<th>Source</th>" .
                   "<th>Mode</th>" .
                   "<th>Model</th>" .
