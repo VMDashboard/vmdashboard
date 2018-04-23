@@ -348,7 +348,7 @@ swal(alertRet);
                       "<td>$allocation</td>" .
                       "<td>$physical</td>" .
                       "<td>" .
-                      "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\"><i class=\"fa fa-trash\"></i></a>" .
+                      "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove disk</a>" .
                       "</td>" .
                       "</tr>";
                 }
