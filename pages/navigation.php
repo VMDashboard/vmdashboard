@@ -1,4 +1,24 @@
 <body class="nav-md">
+  <style>
+      #overlay {
+          background: #ffffff;
+          color: #666666;
+          position: fixed;
+          height: 100%;
+          width: 100%;
+          z-index: 5000;
+          top: 0;
+          left: 0;
+          float: left;
+          text-align: center;
+          padding-top: 25%;
+      }
+  </style>
+  <div id="overlay">
+      <img src="./assets/img/loader.gif" alt="Loading" /><br/>
+      Loading...
+  </div>
+
   <div class="container body">
     <div class="main_container">
       <div class="col-md-3 left_col">
