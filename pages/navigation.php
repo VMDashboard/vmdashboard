@@ -15,7 +15,7 @@
       }
   </style>
   <div id="overlay">
-      <img src="./assets/img/loader.gif" alt="Loading" /><br/>
+      <img src="../assets/img/loader.gif" alt="Loading" /><br/>
       Loading...
   </div>
 
