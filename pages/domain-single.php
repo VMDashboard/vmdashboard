@@ -62,7 +62,7 @@ if ($action == 'domain-nic-remove') {
       unset($domXML->devices->interface[$i]);
       $newXML = $domXML->asXML();
       $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
-      $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
+      $ret = $lv->domain_change_xml($domName, $newXML) ? 'Network interface has been removed successfully' : 'Cannot remove network interface: '.$lv->get_last_error();
   }
 
   //Suggested way, however not working
@@ -390,7 +390,7 @@ swal(alertRet);
                     $source_mode = $domXML->devices->interface[$i]->source[mode];
                   }
                   $interface_model = $domXML->devices->interface[$i]->model[type];
-                  
+
                   if ($interface_type == "network") {
                     echo "<tr>" .
                       "<td>$interface_type</td>" .
