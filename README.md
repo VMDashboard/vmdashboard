@@ -7,7 +7,7 @@ Install the LAMP package to use the Apache web server, MySQL database, and PHP p
 <code>sudo apt install lamp-server^</code>
 
 There are a few additional PHP packages needed to run openVM. PHP will need to control the VMs using libvirt. Use the following command to install the packages:
-<code>sudo apt install php7.0-xml php-libvirt-php</code>
+<code>sudo apt install php-xml php-libvirt-php</code>
 
 If you are using Ubuntu 16.04 you will also need to install the php imagick package. It will be already installed with PHP on Ubuntu 18.04:
 <code>sudo apt install php-imagick</code>
@@ -16,12 +16,15 @@ The built-in vnc connection requires python. To install it use the following com
 <code>sudo apt install python</code>
 
 To use VNC to connect into your virtual machines, you will need to edit the <strong>/etc/libvirt/qemu.conf</strong> file. Be sure to allow listening on IP address <strong>0.0.0.0</strong> by uncommenting the line #vnc_listen = "0.0.0.0".
+<code> sudo nano /etc/libvirt/qemu.conf</code>
 
-The web server user account on Ubuntu is called www-data. This account will need to have permissions to work with libvirt. To do this, open the <strong>/etc/libvirt/libvirtd.conf</strong> file and change the <strong>unix_sock_rw_perms</strong> option to read <strong>0777</strong>.
+The web server user account on Ubuntu is called www-data. This account will need to have permissions to work with libvirt. To do this, add the www-data user to the libvirtd group.
+<code>sudo adduser www-data libvirtd</code>
 
 Restart the server
+<code>sudo reboot</code>
 
-Install the git package to download software from github.com.
+The git software should be installed on your server. If it is not, you can use the following command to download git.
 <code>sudo apt install git</code>
 
 Download the openVM software to the root directory of your web server. The default location is /var/www/html/ in Ubuntu.
