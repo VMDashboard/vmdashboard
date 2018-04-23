@@ -171,7 +171,7 @@ $domXML = new SimpleXMLElement($domXML);
 <?php
 $path = $domXML->xpath('//interface');
 for ($i = 0; $i < sizeof($path); $i++) {
-  if ($domXML->devices->interface[$i]->mac[address]; == "52:54:00:6d:a3:56")
+  if ($domXML->devices->interface[$i]->mac[address] == "52:54:00:6d:a3:56")
     unset($domXML->devices->interface[$i]);
 }
 ?>
