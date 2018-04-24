@@ -1,7 +1,7 @@
 <?php
 require('header.php');
 require('navigation.php');
-
+?>
 <script>
 function on() {
    document.getElementById("overlay").style.display = "block";
@@ -11,7 +11,7 @@ function off() {
    document.getElementById("overlay").style.display = "none";
 }
 </script>
-
+<?php
 
 $uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_GET['action']; //grab the $action variable from $_GET
