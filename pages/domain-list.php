@@ -2,6 +2,17 @@
 require('header.php');
 require('navigation.php');
 
+<script>
+function on() {
+   document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+   document.getElementById("overlay").style.display = "none";
+}
+</script>
+
+
 $uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_GET['action']; //grab the $action variable from $_GET
 $domName = $lv->domain_get_name_by_uuid($uuid); //get the name of virtual machine with $uuid is present
@@ -57,15 +68,6 @@ swal(alertRet);
 <!-- page content -->
  <div id="overlay"></div>
 
- <script>
- function on() {
-    document.getElementById("overlay").style.display = "block";
-}
-
-function off() {
-    document.getElementById("overlay").style.display = "none";
-}
-</script>
 
 <!-- page content -->
 <div class="right_col" role="main">
