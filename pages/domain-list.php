@@ -2,6 +2,8 @@
 require('header.php');
 require('navigation.php');
 ?>
+<!-- page content -->
+ <div id="overlay"></div>
 <script>
 function on() {
    document.getElementById("overlay").style.display = "block";
@@ -65,8 +67,7 @@ swal(alertRet);
 }
 ?>
 
-<!-- page content -->
- <div id="overlay"></div>
+
 
 
 <!-- page content -->
