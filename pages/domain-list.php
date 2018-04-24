@@ -1,19 +1,6 @@
 <?php
 require('header.php');
 require('navigation.php');
-?>
-<!-- page content -->
- <div id="overlay"></div>
-<script>
-function on() {
-   document.getElementById("overlay").style.display = "block";
-}
-
-function off() {
-   document.getElementById("overlay").style.display = "none";
-}
-</script>
-<?php
 
 $uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_GET['action']; //grab the $action variable from $_GET
@@ -22,9 +9,7 @@ $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 
 //This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
 if ($action == 'domain-start') {
-  echo "<script>on()</script>";
   $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
-echo "<script>off()</script>";
 }
 
 //This will pause a virtual machine and temporaily save it's state
@@ -56,7 +41,7 @@ if ($action == 'domain-destroy') {
 ?>
 
 <?php
-//alert the user of any $ret messages
+//alert the user of any ret messages
 if ($ret) {
 ?>
 <script>
@@ -66,8 +51,6 @@ swal(alertRet);
 <?php
 }
 ?>
-
-
 
 
 <!-- page content -->
