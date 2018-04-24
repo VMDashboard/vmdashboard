@@ -9,9 +9,9 @@ $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 
 //This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
 if ($action == 'domain-start') {
-  echo "<script>document.getElementById(\"overlay\").style.display = \"block\";</script>";
+  echo "<script>on()</script>";
   $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
-  echo "<script>document.getElementById(\"overlay\").style.display = \"none\";</script>"; 
+echo "<script>off()</script>";
 }
 
 //This will pause a virtual machine and temporaily save it's state
@@ -54,8 +54,18 @@ swal(alertRet);
 }
 ?>
 
-<!-- page overlay -->
+<!-- page content -->
  <div id="overlay"></div>
+
+ <script>
+ function on() {
+    document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+    document.getElementById("overlay").style.display = "none";
+}
+</script>
 
 <!-- page content -->
 <div class="right_col" role="main">
