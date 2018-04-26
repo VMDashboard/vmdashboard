@@ -1,3 +1,35 @@
+
+<?php
+//Grab post infomation and add new drive
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  require('../config.php');
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  // Creating the SQL statement
+  $sql = "SELECT password FROM users WHERE username = '$username' LIMIT 1;";
+
+  // Executing the SQL statement
+  $result = $conn->query($sql);
+
+  // Extracting the record and storing the hash
+  while ($row = $result->fetch_assoc()){
+	   $hash = $row['password'];
+  }
+
+  //Verifying the password to the hash in the database
+  if(password_verify($password, $hash)){
+    session_start();
+    $_SESSION['username'] = $username;
+    header('Location: ../index.php');
+   } else {
+     echo "Credentials are incorrect";
+   }
+
+   $conn->close();
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
