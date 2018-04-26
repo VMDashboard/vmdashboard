@@ -50,7 +50,7 @@
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
               <div>
-                <input type=submit name=submit value=submit>
+                <input type="submit" name="submit" value="Submit" class="btn btn-default submit">
                 <a class="btn btn-default submit" href="setup.php#signin">Submit</a>
               </div>
 
