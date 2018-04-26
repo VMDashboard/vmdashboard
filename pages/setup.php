@@ -1,3 +1,33 @@
+<?php
+//check for post next, create config.php
+if (isset($_POST['database'])){
+  $db_name = $_POST['db_name'];
+  $db_user = $_POST['db_user'];
+  $db_password = $_POST['db_password'];
+  $db_host = $_POST['db_host'];
+  $db_prefix = $_POST['db_prefix'];
+
+  $config_string = "
+  <?php
+  // Setting up the Database Connection
+  \$db_host = \"$db_host\";
+  \$db_user = \"$db_user\";
+  \$db_password = \"$db_password\";
+  \$db_name = \"$db_name\";
+  \$conn = new mysqli(\$db_host, \$db_user, \$db_password, \$db_name);
+  if (\$conn->connect_error) {
+    die(\"Connection failed: \" . \$conn->connect_error);
+  }
+  ?>";
+  $config_file = "../config.php";
+  $list = file_put_contents($config_file, $config_string);
+
+}
+//check for post submit, use config.php to add user to database
+if (isset($_POST['account'])){
+
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -35,22 +65,22 @@
             <form method="post" action="setup.php#signup">
               <h1>Connect to Database</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Database Name" required="" />
+                <input type="text" name="db_name" class="form-control" placeholder="Database Name" required="" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Database Username" required="" />
+                <input type="text" name="db_user" class="form-control" placeholder="Database Username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Database Password" required="" />
+                <input type="password" name="db_password" class="form-control" placeholder="Database Password" required="" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Database Host" required="" />
+                <input type="text" name="db_host" class="form-control" placeholder="Database Host" required="" />
               </div>
               <div>
-                <input type="text" class="form-control" placeholder="Database Prefix" required="" />
+                <input type="text" name="db_prefix" class="form-control" placeholder="Database Prefix (optional)"/>
               </div>
               <div>
-                <input style="float:none;margin:0px;" type="submit" name="submit" value="Next" class="btn btn-default submit">
+                <input style="float:none;margin:0px;" type="submit" name="database" value="Next" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
@@ -86,7 +116,7 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <input type="submit" name="submit" value="Finish" class="btn btn-default submit">
+                <input type="submit" name="account" value="Finish" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
