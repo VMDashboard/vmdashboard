@@ -7,8 +7,7 @@ if (isset($_POST['database'])){
   $db_host = $_POST['db_host'];
   $db_prefix = $_POST['db_prefix'];
 
-  $config_string = "
-  <?php
+  $config_string = "<?php
   // Setting up the Database Connection
   \$db_host = \"$db_host\";
   \$db_user = \"$db_user\";
@@ -20,13 +19,43 @@ if (isset($_POST['database'])){
   }
   ?>";
   $config_file = "../config.php";
-  $list = file_put_contents($config_file, $config_string);
-
+  $config_create = file_put_contents($config_file, $config_string);
+  if($config_create)
+    header('Location: setup.php#signup');
 }
 //check for post submit, use config.php to add user to database
 if (isset($_POST['account'])){
+  require('../config.php');
 
-}
+  //Capturing the POST Data
+  $username = $_POST['username'];
+  $email = $_POST['email'];
+  $password = $_POST['password'];
+  // Checking for Duplicate usernames
+  $sql = "SELECT username FROM users WHERE username = '$username';";
+  $result = $conn->query($sql);
+  if (mysqli_num_rows($result) != 0 ) {
+	   die("Username already exists");
+   }
+   // Checking for Duplicate emails
+   $sql = "SELECT email FROM users WHERE email = '$email';";
+   $result = $conn->query($sql);
+   if (mysqli_num_rows($result) != 0 ) {
+	    die("Email already exists");
+    }
+    // Hash and salt password with bcrypt
+    $hash = password_hash($password, PASSWORD_BCRYPT);
+    // Creating the SQL statement
+    $sql = "INSERT INTO users (username, email, password)
+      VALUES ('$username', '$email', '$hash');";
+    // Executing the SQL statement
+    if ($conn->query($sql) === TRUE) {
+      header('Location: ../index.php');
+    } else {
+      echo "Error: " . $sql . " " . $conn->error;
+    }
+    $conn->close();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +91,7 @@ if (isset($_POST['account'])){
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" action="setup.php#signup">
+            <form method="post" action="setup.php">
               <h1>Connect to Database</h1>
               <div>
                 <input type="text" name="db_name" class="form-control" placeholder="Database Name" required="" />
@@ -107,13 +136,13 @@ if (isset($_POST['account'])){
             <form method="post" action="">
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" name="username" class="form-control" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input type="email" name="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
                 <input type="submit" name="account" value="Finish" class="btn btn-default submit">
