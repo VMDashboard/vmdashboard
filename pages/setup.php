@@ -18,14 +18,14 @@ if (isset($_POST['database'])){
     die(\"Connection failed: \" . \$conn->connect_error);
   }
   ?>";
-  $config_file = "../db_config.php";
+  $config_file = "../config.php";
   $config_create = file_put_contents($config_file, $config_string);
   if($config_create)
     header('Location: setup.php#signup');
 }
 //check for post submit, use config.php to add user to database
 if (isset($_POST['account'])){
-  require('../db_config.php');
+  require('../config.php');
 
   //Capturing the POST Data
   $username = $_POST['username'];
