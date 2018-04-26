@@ -18,14 +18,14 @@ if (isset($_POST['database'])){
     die(\"Connection failed: \" . \$conn->connect_error);
   }
   ?>";
-  $config_file = "../config.php";
+  $config_file = "../db_config.php";
   $config_create = file_put_contents($config_file, $config_string);
   if($config_create)
     header('Location: setup.php#signup');
 }
 //check for post submit, use config.php to add user to database
 if (isset($_POST['account'])){
-  require('../config.php');
+  require('../db_config.php');
 
   //Capturing the POST Data
   $username = $_POST['username'];
@@ -46,6 +46,11 @@ if (isset($_POST['account'])){
     // Hash and salt password with bcrypt
     $hash = password_hash($password, PASSWORD_BCRYPT);
     // Creating the SQL statement
+
+    //Creating the users tables
+    $sql = "CREATE TABLE users (username varchar(255), email varchar(255), password varchar(255));";
+    $conn->query($sql);
+    
     $sql = "INSERT INTO users (username, email, password)
       VALUES ('$username', '$email', '$hash');";
     // Executing the SQL statement
