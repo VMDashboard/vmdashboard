@@ -32,7 +32,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" action="">
+            <form method="post" action="setup.php#signin">
               <h1>Connect to Database</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Database Name" required="" />
@@ -50,6 +50,7 @@
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
               <div>
+                <input type=submit name=submit value=submit>
                 <a class="btn btn-default submit" href="setup.php#signin">Submit</a>
               </div>
 
