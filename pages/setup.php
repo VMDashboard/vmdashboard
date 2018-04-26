@@ -49,8 +49,8 @@
               <div>
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
-              <div style="text-align:center;">
-                <input type="submit" name="submit" value="Next" class="btn btn-default submit">
+              <div>
+                <input style="float:none;margin:0px;" type="submit" name="submit" value="Next" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
