@@ -11,7 +11,7 @@ if (isset($_POST['database'])){
   // Setting up the Database Connection
   \$db_host = \"$db_host\";
   \$db_user = \"$db_user\";
-  \$db_password = \"$db_password\";
+  \$db_password = \'$db_password\';
   \$db_name = \"$db_name\";
   \$conn = new mysqli(\$db_host, \$db_user, \$db_password, \$db_name);
   if (\$conn->connect_error) {
