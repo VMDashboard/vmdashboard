@@ -32,7 +32,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" action="setup.php#signin">
+            <form method="post" action="setup.php#signup">
               <h1>Connect to Database</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Database Name" required="" />
