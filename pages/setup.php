@@ -50,8 +50,7 @@
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
               <div>
-                <input type="submit" name="submit" value="Submit" class="btn btn-default submit">
-                <a class="btn btn-default submit" href="setup.php#signin">Submit</a>
+                <input type="submit" name="submit" value="Next" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
@@ -87,7 +86,7 @@
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#">Finish</a>
+                <input type="submit" name="submit" value="Finish" class="btn btn-default submit">
               </div>
 
               <div class="clearfix"></div>
