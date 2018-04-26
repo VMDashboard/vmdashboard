@@ -33,7 +33,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form>
-              <h1>Database Form</h1>
+              <h1>Connect to Database</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Database Name" required="" />
               </div>
@@ -68,13 +68,13 @@
                   <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
-            </form>
+            
           </section>
         </div>
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+
               <h1>Create Account</h1>
               <div>
                 <input type="text" class="form-control" placeholder="Username" required="" />
