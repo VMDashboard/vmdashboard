@@ -27,7 +27,7 @@
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="register"></a>
+      <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
@@ -51,14 +51,13 @@
               </div>
               <div>
                 <a class="btn btn-default submit" href="#signup">Next</a>
-                <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
               <div class="clearfix"></div>
 
               <div class="separator">
                 <p class="change_link">New to site?
-                  <a href="#signup" class="to_register"> Create Account </a>
+                  <a href="#" class="to_register"> View tutorials </a>
                 </p>
 
                 <div class="clearfix"></div>
@@ -93,8 +92,8 @@
               <div class="clearfix"></div>
 
               <div class="separator">
-                <p class="change_link">Already a member ?
-                  <a href="#signin" class="to_register"> Log in </a>
+                <p class="change_link">New to site?
+                  <a href="#" class="to_register"> View tutorials </a>
                 </p>
 
                 <div class="clearfix"></div>
