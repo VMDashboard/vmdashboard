@@ -27,7 +27,7 @@
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
+      <a class="hiddenanchor" id="register"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
@@ -65,8 +65,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <span style="font-size:35px;">open(<font style="color:#FF8C00;">VM</font>)</span>
+                  <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
             </form>
@@ -101,8 +101,8 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                  <span style="font-size:35px;">open(<font style="color:#FF8C00;">VM</font>)</span>
+                  <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
             </form>
