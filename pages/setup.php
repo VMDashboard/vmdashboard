@@ -48,13 +48,13 @@ if (isset($_POST['account'])){
     // Creating the SQL statement
 
     //Creating the users tables
-    $sql = "CREATE TABLE users (
+    $sql = "CREATE TABLE openvm_users (
       username varchar(255),
       email varchar(255),
       password varchar(255))";
     $conn->query($sql);
 
-    $sql = "INSERT INTO users (username, email, password)
+    $sql = "INSERT INTO openvm_users (username, email, password)
       VALUES ('$username', '$email', '$hash');";
     // Executing the SQL statement
     if ($conn->query($sql) === TRUE) {
