@@ -50,7 +50,7 @@
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
               <div>
-                <input type="submit" name="submit" value="Next" class="btn btn-default submit">
+                <input type="submit" name="submit" value="Next" class="btn btn-default submit form-control">
               </div>
 
               <div class="clearfix"></div>
