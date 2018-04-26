@@ -27,7 +27,7 @@
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="register"></a>
+      <a class="hiddenanchor" id="user"></a>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
@@ -50,7 +50,7 @@
                 <input type="text" class="form-control" placeholder="Database Prefix" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#register">Submit</a>
+                <a class="btn btn-default submit" href="#user">Submit</a>
               </div>
 
               <div class="clearfix"></div>
