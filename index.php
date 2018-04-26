@@ -9,7 +9,13 @@
 $fileDir = dirname(__FILE__);
 shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --target-config ./tokens.list 6080 > logs/novnc.log 2>&1 &");
 
+if($_SESSION['username'])
+  header('Location: pages/domain-list.php');
+
+if(file_exists(config.php))
+  header('Location: pages/login.php');
+
+header('Location: pages/setup.php');
 
 
-header('Location: pages/domain-list.php');
  ?>
