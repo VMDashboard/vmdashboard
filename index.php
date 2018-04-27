@@ -10,11 +10,8 @@ session_start();
 $fileDir = dirname(__FILE__);
 shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --target-config ./tokens.list 6080 > logs/novnc.log 2>&1 &");
 
-echo $_SESSION['username'];
-
 if (isset($_SESSION['username'])) {
-  echo "<br> HEY <br>";
-  //header('Location: pages/domain-list.php');
+  header('Location: pages/domain-list.php');
 }
 
 $path = dirname(__FILE__) . "/config.php";
