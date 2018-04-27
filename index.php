@@ -14,7 +14,7 @@ session_start();
 if($_SESSION['username'])
   header('Location: pages/domain-list.php');
 
-$path = $path = dirname(__FILE__) . "config.php";
+$path = dirname(__FILE__) . "config.php";
 if (file_exists($path))
   header('Location: pages/login.php');
 
