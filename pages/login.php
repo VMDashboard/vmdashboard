@@ -13,12 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $result = $conn->query($sql);
 
   // Extracting the record and storing the hash
-  while ($row = $result->fetch_assoc()){
+  while ($row = $result->fetch_assoc()) {
 	   $hash = $row['password'];
   }
 
   //Verifying the password to the hash in the database
-  if(password_verify($password, $hash)){
+  if (password_verify($password, $hash)) {
     session_start();
     $_SESSION['username'] = $username;
     header('Location: ../index.php');
