@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <input type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="#">Log in</a>
+                  <input style="float:none;margin:0px;" type="submit" name="login" value="Login" class="btn btn-default submit">
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
