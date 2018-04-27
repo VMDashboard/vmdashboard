@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     session_start();
     $_SESSION['username'] = $username;
-    header('Location: ../config.php');
+    header('Location: ../index.php');
    } else {
      echo "Credentials are incorrect";
    }

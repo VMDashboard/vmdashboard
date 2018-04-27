@@ -11,8 +11,9 @@ shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --targe
 
 session_start();
 
-if($_SESSION['username'])
+if (isset($_SESSION['username'])) {
   header('Location: pages/domain-list.php');
+}
 
 $path = dirname(__FILE__) . "/config.php";
 echo $path;
