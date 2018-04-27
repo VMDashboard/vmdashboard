@@ -10,6 +10,12 @@ session_start();
 $fileDir = dirname(__FILE__);
 shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --target-config ./tokens.list 6080 > logs/novnc.log 2>&1 &");
 
+
+$action = $_GET['action'];
+if ($action == "logout") {
+  unset($_SESSION['username']);
+}
+
 if (isset($_SESSION['username'])) {
   header('Location: pages/domain-list.php');
 }
