@@ -1,13 +1,13 @@
 
 <?php
 //Grab post infomation and add new drive
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require('../config.php');
   $username = $_POST['username'];
   $password = $_POST['password'];
 
   // Creating the SQL statement
-  $sql = "SELECT password FROM users WHERE username = '$username' LIMIT 1;";
+  $sql = "SELECT password FROM openvm_users WHERE username = '$username' LIMIT 1";
 
   // Executing the SQL statement
   $result = $conn->query($sql);
