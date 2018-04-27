@@ -15,10 +15,12 @@ if($_SESSION['username'])
   header('Location: pages/domain-list.php');
 
 $path = dirname(__FILE__) . "/config.php";
+echo $path;
 if (file_exists($path))
+  echo "yes";
   header('Location: pages/login.php');
 
-header('Location: pages/setup.php');
+//header('Location: pages/setup.php');
 
 
  ?>
