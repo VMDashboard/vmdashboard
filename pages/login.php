@@ -1,5 +1,6 @@
 
 <?php
+session_start();
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require('../config.php');
@@ -18,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
-    session_start();
     $_SESSION['username'] = $username;
     header('Location: ../index.php');
    } else {
