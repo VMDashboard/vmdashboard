@@ -1,5 +1,6 @@
 <?php
 session_start();
+$path = dirname(__FILE__) . "/config.php";
 
 //create an initial setup page. Have it configure database, username, password,
 //default storage pool and default network (may already be created by default).
@@ -18,10 +19,7 @@ if ($action == "logout") {
 
 if (isset($_SESSION['username'])) {
   header('Location: pages/domain-list.php');
-}
-
-$path = dirname(__FILE__) . "/config.php";
-if (file_exists($path)) {
+} elseif (file_exists($path)) {
   header('Location: pages/login.php');
 } else {
 header('Location: pages/setup.php');
