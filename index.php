@@ -11,15 +11,14 @@ shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --targe
 
 session_start();
 
-//if($_SESSION['username'])
-  //header('Location: pages/domain-list.php');
+if($_SESSION['username'])
+  header('Location: pages/domain-list.php');
 
-$path = dirname(__FILE__) . "config.php";
-echo $path;
-//if (file_exists($path))
-  //header('Location: pages/login.php');
+$path = dirname(__FILE__) . "/config.php";
+if (file_exists($path))
+  header('Location: pages/login.php');
 
-//header('Location: pages/setup.php');
+header('Location: pages/setup.php');
 
 
  ?>
