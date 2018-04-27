@@ -16,11 +16,10 @@ if($_SESSION['username'])
 
 $path = dirname(__FILE__) . "/config.php";
 echo $path;
-if (file_exists($path))
-  echo "yes";
-  //header('Location: pages/login.php');
-
-//header('Location: pages/setup.php');
-
+if (file_exists($path)) {
+  header('Location: pages/login.php');
+} else {
+header('Location: pages/setup.php');
+}
 
  ?>
