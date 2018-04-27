@@ -5,7 +5,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require('../config.php');
   $username = $_POST['username'];
   $password = $_POST['password'];
-echo "$username - $password <br>";
   // Creating the SQL statement
   $sql = "SELECT password FROM openvm_users WHERE username = '$username' LIMIT 1;";
 
@@ -19,10 +18,9 @@ echo "$username - $password <br>";
 
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
-    echo "yes";
     session_start();
     $_SESSION['username'] = $username;
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
    } else {
      echo "Credentials are incorrect";
    }
