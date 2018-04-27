@@ -32,13 +32,13 @@ if (isset($_POST['account'])){
   $email = $_POST['email'];
   $password = $_POST['password'];
   // Checking for Duplicate usernames
-  $sql = "SELECT username FROM users WHERE username = '$username';";
+  $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
   $result = $conn->query($sql);
   if (mysqli_num_rows($result) != 0 ) {
 	   die("Username already exists");
    }
    // Checking for Duplicate emails
-   $sql = "SELECT email FROM users WHERE email = '$email';";
+   $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
    $result = $conn->query($sql);
    if (mysqli_num_rows($result) != 0 ) {
 	    die("Email already exists");
