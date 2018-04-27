@@ -13,6 +13,7 @@ shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --targe
 echo $_SESSION['username'];
 
 if (isset($_SESSION['username'])) {
+  echo "<br> HEY <br>";
   //header('Location: pages/domain-list.php');
 }
 
