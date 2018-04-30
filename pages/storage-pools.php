@@ -135,7 +135,7 @@ function volumeDeleteWarning(linkURL) {
 
           <?php
           $pools = $lv->get_storagepools();
-          if (!$pool){
+          if (sizeof($pool) == 0) {
             //need to close out the rest of the page if no pools exist. also indicate that
             echo "No storage pools have been created.";
             ?>
