@@ -49,6 +49,7 @@ if (isset($_POST['account'])){
 
     //Creating the users tables
     $sql = "CREATE TABLE openvm_users (
+      userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
       username varchar(255),
       email varchar(255),
       password varchar(255))";
