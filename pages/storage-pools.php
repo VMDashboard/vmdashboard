@@ -142,6 +142,7 @@ function volumeDeleteWarning(linkURL) {
             </div></div></div></div></div></div>
             <?php
             require('footer.php');
+            die();
           }
 
           for ($i = 0; $i < sizeof($pools); $i++) {
