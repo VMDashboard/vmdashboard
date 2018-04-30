@@ -135,7 +135,15 @@ function volumeDeleteWarning(linkURL) {
 
           <?php
           $pools = $lv->get_storagepools();
-          var_dump($pools);
+          if (!$pool){
+            //need to close out the rest of the page if no pools exist. also indicate that
+            No storage pools have been created.
+            ?>
+            </div></div></div></div></div></div>
+            <?php
+            require('footer.php');
+          }
+
           for ($i = 0; $i < sizeof($pools); $i++) {
             //get the pool resource to use with refreshing the pool data
             $res = $lv->get_storagepool_res($pools[$i]);
