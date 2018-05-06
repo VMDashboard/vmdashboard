@@ -19,28 +19,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $os_arch = "x86_64"; //set to x86_64, need to change to host type as well as provide options
   $os_type = "hvm"; //hvm is standard operating system VM
   $clock_offset = "localtime"; //set to localtime
+  $os_platform = $_POST['os_platform'];
+
+  //OS Information
+  if ($os_platform == "windows") {
+    //BIOS Featurs
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <pae/>
+    </features>";
+
+    //Volume type and bus needed for Windows
+    $target_dev_volume = "hda";
+    $target_bus_volume = "ide";
+
+    //need to set network mode as something else as well as ide for harddrive
+  } else {
+    //Features not necessary for Linux or Unix domains
+    $features = "";
+    //Linux or Unix domains can use vda and virtio
+    $target_dev_volume = "vda";
+    $target_bus_volume = "virtio";
+  }
 
   //Hard drive information
-  $disk_type_vda = "file";
-  $disk_device_vda = "disk";
-  $driver_name_vda = "qemu";
-  $source_file_vda = $_POST['source_file_vda']; //This will be the volume image that the user selects
-  $target_dev_vda = "vda";
-  $target_bus_vda = "virtio";
+  $disk_type_volume = "file";
+  $disk_device_volume = "disk";
+  $driver_name_volume = "qemu";
+  $source_file_volume = $_POST['source_file_volume']; //This will be the volume image that the user selects
 
   //determine disk file extension to determine driver type
-  $dot_array = explode('.', $source_file_vda);
+  $dot_array = explode('.', $source_file_volume);
   $extension = end($dot_array);
   if ($extension == "qcow2") {
-    $driver_type_vda = "qcow2";
+    $driver_type_volume = "qcow2";
   } else {
-    $driver_type_vda = "raw";
+    $driver_type_volume = "raw";
   }
 
   //determine what the hard drive xml will be
-  switch ($source_file_vda) {
+  switch ($source_file_volume) {
     case "none":
-      $vda_xml = "";
+      $volume_xml = "";
       break;
 
     case "new":
@@ -55,15 +77,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       $volume_size = $_POST['new_volume_size'];
       $driver_type = $_POST['new_driver_type'];
       $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-      $vda_xml = "";
+      $volume_xml = "";
       break;
 
     default:
-      $vda_xml = "
-      <disk type='" . $disk_type_vda . "' device='" . $disk_device_vda . "'>
-      <driver name='" . $driver_name_vda . "' type='" . $driver_type_vda . "'/>
-      <source file='" . $source_file_vda . "'/>
-      <target dev='" . $target_dev_vda . "' bus='" . $target_bus_vda . "'/>
+      $volume_xml = "
+      <disk type='" . $disk_type_volume . "' device='" . $disk_device_volume . "'>
+      <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
+      <source file='" . $source_file_volume . "'/>
+      <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
       </disk>";
   }
 
@@ -74,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $driver_name_cd = "qemu";
   $driver_type_cd = "raw";
   $source_file_cd = $_POST['source_file_cd'];
-  $target_dev_cd = "hda";
+  $target_dev_volume == "vda" ? $target_dev_cd = "hda" : $target_dev_cd = "hdb";
   $target_bus_cd = "ide";
 
   if ($source_file_cd == "none") {
@@ -137,10 +159,12 @@ $network_interface_xml = "
       <boot dev='network'/>
     </os>
 
+    " . $features . "
+
     <clock offset='" . $clock_offset . "'/>
 
     <devices>
-      " . $vda_xml . "
+      " . $volume_xml . "
       " . $cd_xml . "
       " . $network_interface_xml . "
       <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
@@ -151,11 +175,11 @@ $network_interface_xml = "
   $new_domain = $lv->domain_define($xml);
 
 //need to check to make sure $new_domain is not false befoe this code exectues
-if ($source_file_vda == "new") {
+if ($source_file_volume == "new") {
   $res = $new_domain;
   $img = libvirt_storagevolume_get_path($new_disk);
-  $dev = "vda"; //because it is virtio type, will choose the "v" and this should be first disk so "vda"
-  $typ = "virtio";
+  $dev = $target_dev_volume;
+  $typ = $target_bus_volume;
   $driver = $driver_type;
   $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
 }
@@ -300,6 +324,18 @@ function changeOptions(selectEl) {
                     </div>
 
                     <div class="form-group">
+                      <label for="os_platform" class="control-label col-md-3 col-sm-3 col-xs-12">OS Platform</label>
+                      <div class="col-md-9 col-sm-9 col-xs-12">
+                        <select class="form-control" name="os_platform">
+                          <option value="linux">Linux</option>
+                          <option value="unix">Unix</option>
+                          <option value="windows">Windows</option>
+                          <option value="other">Other</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="vcpu">Virtual CPUs <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -340,9 +376,9 @@ function changeOptions(selectEl) {
                       <div class="row justify-content-center">
 
                         <div class="form-group">
-                          <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
+                          <label for="source_file_volume" class="control-label col-md-3 col-sm-3 col-xs-12">Source File</label>
                           <div class="col-md-9 col-sm-9 col-xs-12">
-                            <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_vda">
+                            <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_volume">
                               <option value="none"> Select Disk </option>
                               <option value="new"> Create New Disk Image </option>
                               <?php
@@ -412,7 +448,7 @@ function changeOptions(selectEl) {
                             <div class="row justify-content-center">
 
                                 <div class="form-group">
-                                  <label for="source_file_vda" class="control-label col-md-3 col-sm-3 col-xs-12">ISO File</label>
+                                  <label for="source_file_volume" class="control-label col-md-3 col-sm-3 col-xs-12">ISO File</label>
                                   <div class="col-md-9 col-sm-9 col-xs-12">
                                   <select class="form-control" name="source_file_cd">
                                     <option value="none">Select File</option>
