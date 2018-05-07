@@ -238,8 +238,8 @@ function diskChangeOptions(selectEl) {
                     <select  class="form-control" name="existing_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
-                    </select>
-                  </div> * Use IDE for Windows OS
+                    </select> * Use IDE for Windows OS
+                  </div>
                 </div>
 
               </div>
