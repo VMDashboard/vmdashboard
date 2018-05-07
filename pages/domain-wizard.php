@@ -28,20 +28,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <features>
       <acpi/>
       <apic/>
-      <pae/>
+      <hyperv>
+        <relaxed state='on'/>
+        <vapic state='on'/>
+        <spinlocks state='on' retries='8191'/>
+      </hyperv>
+      <vmport state='off'/>
     </features>";
 
     //Volume type and bus needed for Windows
     $target_dev_volume = "hda";
     $target_bus_volume = "ide";
 
-    //need to set network mode as something else as well as ide for harddrive
+    //Networking model for Windows
+    $model_type = "rtl8139";
   } else {
     //Features not necessary for Linux or Unix domains
-    $features = "";
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <vmport state='off'/>
+    </features>";
+
     //Linux or Unix domains can use vda and virtio
     $target_dev_volume = "vda";
     $target_bus_volume = "virtio";
+
+    //Networking model for Linux
+    $model_type = "virtio";
   }
 
   //Hard drive information
@@ -117,7 +132,6 @@ $interface_type = $_POST['interface_type'];
 $mac_address = $_POST['mac_address'];
 $source_dev = $_POST['source_dev'];
 $source_mode = $_POST['source_mode'];
-$model_type = $_POST['model_type'];
 $source_network = $_POST['source_network'];
 
 if ($interface_type == "network") {
@@ -160,6 +174,10 @@ $network_interface_xml = "
     </os>
 
     " . $features . "
+
+    <cpu mode='custom' match='exact'>
+      <model fallback='allow'>Nehalem</model>
+    </cpu>
 
     <clock offset='" . $clock_offset . "'/>
 
@@ -325,7 +343,7 @@ function changeOptions(selectEl) {
 
                     <div class="form-group">
                       <label for="os_platform" class="control-label col-md-3 col-sm-3 col-xs-12">OS Platform</label>
-                      <div class="col-md-9 col-sm-9 col-xs-12">
+                      <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" name="os_platform">
                           <option value="linux">Linux</option>
                           <option value="unix">Unix</option>
@@ -339,7 +357,7 @@ function changeOptions(selectEl) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="vcpu">Virtual CPUs <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="vcpu" name="vcpu" required="required" class="form-control col-md-7 col-xs-12" min="1" value="1">
+                        <input type="number" id="vcpu" name="vcpu" required="required" class="form-control col-md-7 col-xs-12" min="1" value="2">
                       </div>
                     </div>
 
@@ -347,7 +365,7 @@ function changeOptions(selectEl) {
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="memory">Memory <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                        <input type="number" id="vcpu" name="memory" required="required" class="form-control col-md-7 col-xs-12" min="1" value="2">
+                        <input type="number" id="vcpu" name="memory" required="required" class="form-control col-md-7 col-xs-12" min="1" value="4">
                       </div>
                     </div>
 
@@ -545,26 +563,6 @@ function changeOptions(selectEl) {
                               </select>
                             </div>
                           </div>
-
-
-
-
-                          <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Model type</label>
-                            <div class="col-md-9 col-sm-9 col-xs-12">
-                              <select class="form-control" title="Select Model" name="model_type">
-                                <option value="virtio" selected="selected"> virtio </option>
-                                <option value="default" disabled> default </option>
-                                <option value="rtl8139"> rtl8139 </option>
-                                <option value="e1000"> e1000 </option>
-                                <option value="pcnet" disabled> pcnet </option>
-                                <option value="ne2k_pci" disabled> ne2k_pci </option>
-                              </select>
-                            </div>
-                          </div>
-
-
-
 
                         </div>
                       </div>
