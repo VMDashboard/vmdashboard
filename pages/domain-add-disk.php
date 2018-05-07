@@ -218,7 +218,7 @@ function diskChangeOptions(selectEl) {
                     <select  class="form-control" name="new_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
-                    </select>
+                    </select> * Use IDE for Windows OS
                   </div>
                 </div>
 
