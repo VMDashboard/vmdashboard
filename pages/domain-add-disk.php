@@ -154,7 +154,7 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group">
                   <label for="source_file" class="control-label col-md-3 col-sm-3 col-xs-12">Disk source file</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select onchange="diskChangeOptions(this)" class="form-control" name="source_file">
                       <option value="none"> Select Disk </option>
                       <option value="new"> Create New Disk Image </option>
@@ -194,7 +194,7 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group diskChange" id="new" style="display:none;">
                   <label for="new_unit" class="control-label col-md-3 col-sm-3 col-xs-12">Unit Size</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select  class="form-control" name="new_unit">
                       <option value="M">MB</option>
                       <option value="G" selected>GB</option>
@@ -204,7 +204,7 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group diskChange" id="new" style="display:none;">
                   <label for="new_driver_type" class="control-label col-md-3 col-sm-3 col-xs-12">Driver type</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select  class="form-control" name="new_driver_type" onchange="newExtenstion(this.form)">
                       <option value="qcow2" selected="selected">qcow2</option>
                       <option value="raw" >raw</option>
@@ -214,7 +214,7 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group diskChange" id="new" style="display:none;">
                   <label for="new_target_bus" class="control-label col-md-3 col-sm-3 col-xs-12">Target bus</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select  class="form-control" name="new_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
@@ -224,7 +224,7 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group diskChange" id="existing" style="display:none;">
                   <label for="existing_driver_type" class="control-label col-md-3 col-sm-3 col-xs-12">Driver type</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select  class="form-control" name="existing_driver_type" >
                       <option value="qcow2" selected="selected">qcow2</option>
                       <option value="raw">raw</option>
@@ -234,12 +234,12 @@ function diskChangeOptions(selectEl) {
 
                 <div class="form-group diskChange" id="existing" style="display:none;">
                   <label for="existing_target_bus" class="control-label col-md-3 col-sm-3 col-xs-12">Target bus</label>
-                  <div class="col-md-9 col-sm-9 col-xs-12">
+                  <div class="col-md-6 col-sm-6 col-xs-12">
                     <select  class="form-control" name="existing_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
                     </select>
-                  </div>
+                  </div> * Use IDE for Windows OS
                 </div>
 
               </div>
