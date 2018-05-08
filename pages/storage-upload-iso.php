@@ -71,8 +71,7 @@ if ($files){
 echo "<div class=\"col-md-4 col-sm-6 col-xs-12\">";
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
-
-    echo "<img style=\"width: 50px; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" /> $iso_name<br />";
+  echo "<img style=\"width: 50px;\" src=\"../assets/img/cddvd.png\" alt=\"image\" /> $iso_name<br />";
 }
 echo "</div>";
 ?>
