@@ -68,15 +68,16 @@ $files = glob($directory . "*.[iI][sS][oO]"); //check for iso or ISO extension
 if ($files){
   echo "<h2>Existing ISO Images</h2>";
 }
+echo "<div class=\"col-md-4 col-sm-6 col-xs-12\">";
 for ($i = 0; $i < sizeof($files); $i++) {
   $iso_name = basename($files[$i]); //strips off the relative filepath and returns just filename
-echo "<div class=\"col-md-4 col-sm-6 col-xs-12\">
-        <img style=\"width: 75%; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
+
+    echo "<img style=\"width: 50px; display: block;\" src=\"../assets/img/cddvd.png\" alt=\"image\" />
         <div class=\"caption\">
         $iso_name<br />
-        </div>
-      </div>";
+        </div>";
 }
+echo " </div>";
 ?>
 
 
