@@ -51,17 +51,17 @@
 
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Domains" href="/pages/domain-list.php">
+            <a data-toggle="tooltip" data-placement="top" title="Domains" href="domain-list.php">
               <span class="fa fa-list" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Storage" href="/pages/storage-pools.php">
-              <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Networking" href="/pages/network-list.php">
+            <a data-toggle="tooltip" data-placement="top" title="Storage" href="storage-pools.php">
               <span class="fa fa-database" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="../index.php?action=logout">
+            <a data-toggle="tooltip" data-placement="top" title="Networking" href="network-list.php">
               <span class="fa fa-sitemap" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="../index.php?action=logout">
+              <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
           </div>
           <!-- /menu footer buttons -->
