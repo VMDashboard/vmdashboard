@@ -66,6 +66,22 @@ if (isset($_POST['account'])){
     $conn->close();
   }
 ?>
+<script>
+function checkPasswordMatch() {
+    var password = $("#txtNewPassword").val();
+    var confirmPassword = $("#txtConfirmPassword").val();
+
+    if (password != confirmPassword)
+        $("#divCheckPasswordMatch").html("Passwords do not match!");
+    else
+        $("#divCheckPasswordMatch").html("Passwords match.");
+}
+
+$(document).ready(function () {
+   $("#txtNewPassword, #txtConfirmPassword").keyup(checkPasswordMatch);
+});
+</script>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -148,7 +164,12 @@ if (isset($_POST['account'])){
                 <input type="email" name="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <input type="password" name="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" name="password" class="form-control" placeholder="Password" required="" id="txtNewPassword"/>
+              </div>
+              <div>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="txtConfirmPassword"/>
+              </div>
+              <div class="registrationFormAlert" id="divCheckPasswordMatch">
               </div>
               <div>
                 <input style="float:none;margin:0px;" type="submit" name="account" value="Finish" class="btn btn-default submit">
