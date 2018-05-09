@@ -167,7 +167,7 @@ $(document).ready(function () {
                 <input type="password" name="password" class="form-control" placeholder="Password" required="" id="txtNewPassword"/>
               </div>
               <div>
-                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="txtConfirmPassword"/>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="txtConfirmPassword" onChange="checkPasswordMatch();"/>
               </div>
               <div class="registrationFormAlert" id="divCheckPasswordMatch">
               </div>
