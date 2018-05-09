@@ -20,11 +20,14 @@ if (isset($_POST['database'])){
   ?>";
   $config_file = "../config.php";
   $config_create = file_put_contents($config_file, $config_string);
-  if($config_create)
+  if($config_create){
+    session_start();
+    $_SESSION['initial_setup'] = true;
     header('Location: setup.php#signup');
+  }
 }
 //check for post submit, use config.php to add user to database
-if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
+if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password'] && ($_SESSION['initial_setup'] == true || isset($_SESSION['username']))){
   require('../config.php');
 
   //Capturing the POST Data
