@@ -1,7 +1,7 @@
 <?php
 $path = realpath(__DIR__ . "/..") . "/config.php";
 if (file_exists($path)){
-  header('Location: setup.php#signup');
+  header('Location: ../index.php');
 }
 
 //check for post next, create config.php
