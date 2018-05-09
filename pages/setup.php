@@ -28,7 +28,9 @@ if (isset($_POST['database'])){
   }
 }
 //check for post submit, use config.php to add user to database
-if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password'] && ($_SESSION['initial_setup'] == true || isset($_SESSION['username']))){
+//if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password'] && ($_SESSION['initial_setup'] == true || isset($_SESSION['username']))){
+if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
+
   require('../config.php');
 
   //Capturing the POST Data
