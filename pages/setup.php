@@ -1,6 +1,5 @@
 <?php
 $path = realpath(__DIR__ . "/..") . "/config.php";
-echo $path;
 if (file_exists($path)){
   header('Location: setup.php#signup');
 }
