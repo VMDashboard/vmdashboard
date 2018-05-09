@@ -67,18 +67,12 @@ if (isset($_POST['account'])){
   }
 ?>
 <script>
-function checkPasswordMatch() {
-    var password = $("#txtNewPassword").val();
-    var confirmPassword = $("#txtConfirmPassword").val();
+$(function() {
+    $("#txtConfirmPassword").keyup(function() {
+        var password = $("#txtNewPassword").val();
+        $("#divCheckPasswordMatch").html(password == $(this).val() ? "Passwords match." : "Passwords do not match!");
+    });
 
-    if (password != confirmPassword)
-        $("#divCheckPasswordMatch").html("Passwords do not match!");
-    else
-        $("#divCheckPasswordMatch").html("Passwords match.");
-}
-
-$(document).ready(function () {
-   $("#txtNewPassword, #txtConfirmPassword").keyup(checkPasswordMatch);
 });
 </script>
 
