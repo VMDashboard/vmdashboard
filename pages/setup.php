@@ -85,7 +85,7 @@ function checkPassword()
         //the user that they have entered the correct password
         pass2.style.backgroundColor = goodColor;
         message.style.color = goodColor;
-        message.innerHTML = "Passwords Match! <br />"
+        message.innerHTML = "<p>Passwords Match!</p>"
     }else{
         //The passwords do not match.
         //Set the color to the bad color and
