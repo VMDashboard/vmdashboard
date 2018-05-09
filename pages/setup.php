@@ -24,7 +24,7 @@ if (isset($_POST['database'])){
     header('Location: setup.php#signup');
 }
 //check for post submit, use config.php to add user to database
-if (isset($_POST['account'])){
+if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
   require('../config.php');
 
   //Capturing the POST Data
@@ -83,7 +83,7 @@ function checkPassword()
         //The passwords match.
         //Set the color to the good color and inform
         //the user that they have entered the correct password
-        pass2.style.backgroundColor = "#000000";
+        pass2.style.backgroundColor = "#ffffff";
         message.style.color = goodColor;
         message.innerHTML = "<p>Passwords Match!</p>"
     }else{
