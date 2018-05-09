@@ -1,4 +1,9 @@
 <?php
+$path = dirname(__FILE__) . "/config.php";
+if (file_exists($path)){
+  header('Location: setup.php#signup');
+}
+
 //check for post next, create config.php
 if (isset($_POST['database'])){
   $db_name = $_POST['db_name'];
