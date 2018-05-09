@@ -83,7 +83,7 @@ function checkPassword()
         //The passwords match.
         //Set the color to the good color and inform
         //the user that they have entered the correct password
-        pass2.style.backgroundColor = goodColor;
+        pass2.style.backgroundColor = "#000000";
         message.style.color = goodColor;
         message.innerHTML = "<p>Passwords Match!</p>"
     }else{
@@ -92,7 +92,7 @@ function checkPassword()
         //notify the user.
         pass2.style.backgroundColor = badColor;
         message.style.color = badColor;
-        message.innerHTML = "Passwords Do Not Match! <br />"
+        message.innerHTML = "<p>Passwords Do Not Match!</p>"
     }
 }
 </script>
