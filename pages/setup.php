@@ -1,5 +1,8 @@
 <?php
-
+$path = realpath(__DIR__ . "/..") . "/config.php";
+if (file_exists($path)){
+  header('Location: ../index.php');
+}
 //check for post next, create config.php
 if (isset($_POST['database'])){
   $db_name = $_POST['db_name'];
@@ -206,7 +209,7 @@ function checkPassword()
                 <br />
 
                 <div>
-                  <span style="font-size:35px;">open(<font style="color:#FF8C00;">VM</font>)</span>
+                  <span style="font-size:35px;">open<strong><font style="color:#FF8C00;">VM</font></strong></span>
                   <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
