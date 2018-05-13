@@ -1,8 +1,9 @@
 <?php
-$path = realpath(__DIR__ . "/..") . "/config.php";
-if (file_exists($path)){
-  header('Location: ../index.php');
-}
+//$path = realpath(__DIR__ . "/..") . "/config.php";
+//if (file_exists($path)){
+//  header('Location: ../index.php');
+//}
+
 //check for post next, create config.php
 if (isset($_POST['database'])){
   $db_name = $_POST['db_name'];
