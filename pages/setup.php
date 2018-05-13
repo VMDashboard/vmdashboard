@@ -170,7 +170,7 @@ function checkPassword()
                 <br />
 
                 <div>
-                  <span style="font-size:35px;">open(<font style="color:#FF8C00;">VM</font>)</span>
+                  <span style="font-size:35px;">open<strong><font style="color:#FF8C00;">VM</font></strong></span>
                   <p>©2018 All Rights Reserved.</p>
                 </div>
               </div>
