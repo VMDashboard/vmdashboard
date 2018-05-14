@@ -1,80 +1,54 @@
 <?php
-//$path = realpath(__DIR__ . "/..") . "/config.php";
-//if (file_exists($path)){
-//  header('Location: ../index.php');
-//}
+require('../config.php');
+session_start();
 
-//check for post next, create config.php
-if (isset($_POST['database'])){
-  $db_name = $_POST['db_name'];
-  $db_user = $_POST['db_user'];
-  $db_password = $_POST['db_password'];
-  $db_host = $_POST['db_host'];
-  $db_prefix = $_POST['db_prefix'];
+if (isset($_SESSION['username'] || $_SESSION['initial_setup'] == true)) {
 
-  $config_string = "<?php
-  // Setting up the Database Connection
-  \$db_host = '$db_host';
-  \$db_user = '$db_user';
-  \$db_password = '$db_password';
-  \$db_name = '$db_name';
-  \$conn = new mysqli(\$db_host, \$db_user, \$db_password, \$db_name);
-  if (\$conn->connect_error) {
-    die(\"Connection failed: \" . \$conn->connect_error);
-  }
-  ?>";
-  $config_file = "../config.php";
-  $config_create = file_put_contents($config_file, $config_string);
-  if($config_create){
-    //session_start();
-    //$_SESSION['initial_setup'] = true;
-    header('Location: setup.php#signup');
+  if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
+
+    //Capturing the POST Data
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Checking for Duplicate usernames
+    $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result) != 0 ) {
+	     die("Username already exists");
+     }
+
+     // Checking for Duplicate emails
+     $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
+     $result = $conn->query($sql);
+     if (mysqli_num_rows($result) != 0 ) {
+	      die("Email already exists");
+      }
+
+      // Hash and salt password with bcrypt
+      $hash = password_hash($password, PASSWORD_BCRYPT);
+
+      //Creating the users tables
+      $sql = "CREATE TABLE openvm_users (
+        userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username varchar(255),
+        email varchar(255),
+        password varchar(255))";
+      $conn->query($sql);
+
+      // Adding the user
+      $sql = "INSERT INTO openvm_users (username, email, password)
+        VALUES ('$username', '$email', '$hash');";
+        // Executing the SQL statement
+        if ($conn->query($sql) === TRUE) {
+          header('Location: ../index.php');
+        } else {
+          echo "Error: " . $sql . " " . $conn->error;
+        }
+
+        $conn->close();
   }
 }
-//check for post submit, use config.php to add user to database
-//if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password'] && ($_SESSION['initial_setup'] == true || isset($_SESSION['username']))){
-if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
-
-  require('../config.php');
-
-  //Capturing the POST Data
-  $username = $_POST['username'];
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-  // Checking for Duplicate usernames
-  $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
-  $result = $conn->query($sql);
-  if (mysqli_num_rows($result) != 0 ) {
-	   die("Username already exists");
-   }
-   // Checking for Duplicate emails
-   $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
-   $result = $conn->query($sql);
-   if (mysqli_num_rows($result) != 0 ) {
-	    die("Email already exists");
-    }
-    // Hash and salt password with bcrypt
-    $hash = password_hash($password, PASSWORD_BCRYPT);
-    // Creating the SQL statement
-
-    //Creating the users tables
-    $sql = "CREATE TABLE openvm_users (
-      userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-      username varchar(255),
-      email varchar(255),
-      password varchar(255))";
-    $conn->query($sql);
-
-    $sql = "INSERT INTO openvm_users (username, email, password)
-      VALUES ('$username', '$email', '$hash');";
-    // Executing the SQL statement
-    if ($conn->query($sql) === TRUE) {
-      header('Location: ../index.php');
-    } else {
-      echo "Error: " . $sql . " " . $conn->error;
-    }
-    $conn->close();
-  }
 ?>
 <script>
 function checkPassword()
@@ -135,52 +109,12 @@ function checkPassword()
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
 
       <div class="login_wrapper">
-        <div class="animate form login_form">
+
+        <div class="animate form">
           <section class="login_content">
-            <form method="post" action="setup.php">
-              <h1>Connect to Database</h1>
-              <div>
-                <input type="text" name="db_name" class="form-control" placeholder="Database Name" required="" />
-              </div>
-              <div>
-                <input type="text" name="db_user" class="form-control" placeholder="Database Username" required="" />
-              </div>
-              <div>
-                <input type="password" name="db_password" class="form-control" placeholder="Database Password" required="" />
-              </div>
-              <div>
-                <input type="text" name="db_host" class="form-control" placeholder="Database Host" required="" />
-              </div>
-              <div>
-                <input style="float:none;margin:0px;" type="submit" name="database" value="Next" class="btn btn-default submit">
-              </div>
-
-              <div class="clearfix"></div>
-
-              <div class="separator">
-                <p class="change_link">New to site?
-                  <a href="#" class="to_register"> View tutorials </a>
-                </p>
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <span style="font-size:35px;">open<font style="color:#FF8C00;">VM</font></span>
-                  <p>©2018 All Rights Reserved.</p>
-                </div>
-              </div>
-            </form>
-          </section>
-        </div>
-
-        <div id="register" class="animate form registration_form">
-          <section class="login_content">
-            <form method="post" action="">
+            <form method="post" action="setup-user.php">
               <h1>Create Account</h1>
               <div>
                 <input type="text" name="username" class="form-control" placeholder="Username" required="" />
