@@ -5,6 +5,9 @@ $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
 
+$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
+$os_platform = $domXML->description;
+
 
 function clean_name_input($data) {
   $data = trim($data);
@@ -90,7 +93,7 @@ function networkChangeOptions(selectEl) {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Network Wizard</h3>
+        <h3>Network Wizard - <?php echo $os_platform; ?></h3>
       </div>
     </div>
 
