@@ -2,7 +2,7 @@
 require('../config.php');
 session_start();
 
-if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true)) {
+if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
 
   if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
 
