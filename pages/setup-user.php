@@ -109,9 +109,7 @@ function checkPassword()
 
   <body class="login">
     <div>
-
       <div class="login_wrapper">
-
         <div class="animate form">
           <section class="login_content">
             <form method="post" action="setup-user.php">
