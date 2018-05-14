@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $os_platform = $_POST['os_platform'];
 
   //OS Information
-  if ($os_platform == "windows") {
+  if ($os_platform == "Windows") {
     //BIOS Featurs
     $features = "
     <features>
@@ -164,7 +164,7 @@ $network_interface_xml = "
     <domain type='" . $domain_type . "'>
     <name>" . $domain_name . "</name>
     <description>
-      Domain guest using a  " . $os_platform . " platform
+      " . $os_platform . " platform
     </description>
     <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
     <vcpu>" . $vcpu . "</vcpu>
@@ -348,10 +348,10 @@ function changeOptions(selectEl) {
                       <label for="os_platform" class="control-label col-md-3 col-sm-3 col-xs-12">OS Platform</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" name="os_platform">
-                          <option value="linux">Linux</option>
-                          <option value="unix">Unix</option>
-                          <option value="windows">Windows</option>
-                          <option value="other">Other</option>
+                          <option value="Linux">Linux</option>
+                          <option value="Unix">Unix</option>
+                          <option value="Windows">Windows</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                     </div>
