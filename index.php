@@ -24,7 +24,7 @@ if (isset($_SESSION['username'])) {
 } elseif (file_exists($path)) {
   header('Location: pages/login.php');
 } else {
-header('Location: pages/setup.php');
+header('Location: pages/setup-database.php');
 }
 
  ?>
