@@ -153,9 +153,13 @@ function networkChangeOptions(selectEl) {
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="model">
                       <?php
-                      $models = $lv->get_nic_models();
-                      for ($i = 0; $i < sizeof($models); $i++) {
-                        echo "<option value=\"$models[$i]\"> $models[$i] </option>";
+                      if ($os_platform == "Windows platform"){
+                        echo "<option value=\"rtl8139\">rtl8139</option>";
+                      } else {
+                        $models = $lv->get_nic_models();
+                        for ($i = 0; $i < sizeof($models); $i++) {
+                          echo "<option value=\"$models[$i]\"> $models[$i] </option>";
+                        }
                       }
                       ?>
                     </select>
