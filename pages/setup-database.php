@@ -23,12 +23,15 @@ if (isset($_POST['database'])){
     die(\"Connection failed: \" . \$conn->connect_error);
   }
   ?>";
-  $config_file = "../config.php";
-  $config_create = file_put_contents($config_file, $config_string);
-  if($config_create){
-    session_start();
-    $_SESSION['initial_setup'] = true;
-    header('Location: setup-user.php');
+  $conn = new mysqli("$db_host", "$db_user", "$db_password", "$db_name");
+  if ($conn){
+    $config_file = "../config.php";
+    $config_create = file_put_contents($config_file, $config_string);
+    if($config_create){
+      session_start();
+      $_SESSION['initial_setup'] = true;
+      header('Location: setup-user.php');
+    }
   }
 }
 ?>
