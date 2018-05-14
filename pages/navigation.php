@@ -6,7 +6,7 @@
       <div class="col-md-3 left_col">
         <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
-            <a href="../index.php" class="site_title"><img src="../assets/img/logo4.png" width="50px"> <span style="font-size:35px;">open<font style="color:#FF8C00;">VM</font></span></a>
+            <a href="../index.php" class="site_title"><img src="../assets/img/squarelogo.png" width="50px"> <span style="font-size:35px;">open<font style="color:#FF8C00;">VM</font></span></a>
           </div>
 
           <div class="clearfix"></div>
