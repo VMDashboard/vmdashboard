@@ -21,10 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $mac = $_POST['mac'];
   $network = $_POST['network'];
   $source_dev = $_POST['source_dev'];
-  $model = $_POST['model'];
+  $model_type = $_POST['model'];
 
   if ($network_type == "network")
-    $ret = $lv->domain_nic_add($domName, $mac, $network, $model) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
+    $ret = $lv->domain_nic_add($domName, $mac, $network, $model_type) ? "success" : "Cannot add network to the guest: ".$lv->get_last_error();
 
   if ($network_type == "direct"){
     $domXML = $lv->domain_get_xml($domName);
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $source->addAttribute('dev', $source_dev);
     $source->addAttribute('mode','bridge');
     $model = $interface->addChild('model');
-    $model->addAttribute('type','virtio');
+    $model->addAttribute('type',$model_type);
 
     $newXML = $domXML->asXML();
     $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
@@ -145,7 +145,7 @@ function networkChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group>
+                <div class="form-group">
                   <label for="model" class="control-label col-md-3 col-sm-3 col-xs-12">Model</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="model">
