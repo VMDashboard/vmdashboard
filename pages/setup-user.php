@@ -1,5 +1,5 @@
 <?php
-require('../config.php');
+
 session_start();
 
 if (isset($_SESSION['username'] || $_SESSION['initial_setup'] == true)) {
