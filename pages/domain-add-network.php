@@ -145,7 +145,7 @@ function networkChangeOptions(selectEl) {
                   </div>
                 </div>
 
-                <div class="form-group networkChange" id="network">
+                <div class="form-group>
                   <label for="model" class="control-label col-md-3 col-sm-3 col-xs-12">Model</label>
                   <div class="col-md-6 col-sm-6 col-xs-12">
                     <select class="form-control" name="model">
