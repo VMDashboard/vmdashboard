@@ -32,6 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   if ($network_type == "direct"){
     $domXML = $lv->domain_get_xml($domName);
     $domXML = new SimpleXMLElement($domXML);
+    if ($model_type == "default") {
+      $model_type = "virtio";
+    }
 
     //add a new interface
     $interface = $domXML->devices->addChild('interface');
