@@ -64,11 +64,8 @@ if (isset($_POST['database'])){
 
   <body class="login">
     <div>
-      <a class="hiddenanchor" id="signup"></a>
-      <a class="hiddenanchor" id="signin"></a>
-
       <div class="login_wrapper">
-        <div class="animate form login_form">
+        <div class="animate form">
           <section class="login_content">
             <form method="post" action="setup-database.php">
               <h1>Connect to Database</h1>
