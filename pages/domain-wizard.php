@@ -164,7 +164,7 @@ $network_interface_xml = "
     <domain type='" . $domain_type . "'>
     <name>" . $domain_name . "</name>
     <metadata>
-      <guest platform='" . $os_platform . "'/>
+      <template> " . $os_platform . " </template>
     </metadata>
     <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
     <vcpu>" . $vcpu . "</vcpu>
