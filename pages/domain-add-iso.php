@@ -5,6 +5,8 @@ $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
 
+$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
+$os_platform = $domXML->description;
 
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -50,12 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   }
 
 
-  $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "ISO has been successfully added to the guest" : "Cannot add ISO to the guest: ".$lv->get_last_error();
+  //add a new cdrom XML
+  $disk = $domXML->devices->addChild('disk');
+  $disk->addAttribute('type','file');
+  $disk->addAttribute('device','cdrom');
+  $driver = $disk->addChild('driver');
+  $driver->addAttribute('name', 'qemu');
+  $driver->addAttribute('type', 'raw');
+  $source = $disk->addChild('source');
+  $source->addAttribute('file', $source_file);
+  $target = $disk->addChild('target');
+  $target->addAttribute('dev',$target_dev);
+  $target->addAttribute('bus',$target_bus;
 
+  $newXML = $domXML->asXML();
+  $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
 
+  $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
+
+  if ($ret == "success"){
   //Return back to the orignal web page
   header('Location: ' . "domain-single.php?uuid=$uuid");
   exit;
+  }
+
 }
 
 require('navigation.php');
