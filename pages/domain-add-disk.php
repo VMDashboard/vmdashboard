@@ -30,13 +30,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $driver_type = $_POST['new_driver_type']; //qcow2 or raw
     //Create the new disk now
     $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-    $target_bus = $_POST['new_target_bus']; //virtio or ide, used when adding disk to domain
+    $target_bus = $_POST['new_target_bus']; //virtio, ide, sata, or scsi - used when adding disk to domain
 
   } elseif ($source_file == "none") {
     //
   } else {
     $driver_type = $_POST['existing_driver_type']; //qcow2 or raw
-    $target_bus = $_POST['existing_target_bus']; //virtio or ide
+    $target_bus = $_POST['existing_target_bus']; //virtio, ide, sata, or scsi
   }
 
   $target_dev = ""; //changed to an autoincremting option below.
@@ -73,6 +73,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
   }
 
+  //If $target_bus type is scsi or sata then we need to determine highest assigned value of drive, ex. sda, sdb, sdc...
+  if ($target_bus == "sata" || $target_bus == "scsi"){
+    $sd_array = array();
+    for ($i = 'a'; $i < 'z'; $i++)
+      $sd_array[] = "sd" . $i;
+
+    $tmp = libvirt_domain_get_disk_devices($dom);
+    $result = array_intersect($sd_array,$tmp);
+    if (count($result) > 0 ) {
+      $highestresult = max($result);
+      $target_dev = ++$highestresult;
+    } else {
+      $target_dev = "sda";
+    }
+  }
 
   //add the new disk to domain if selected
   if ($source_file == "new") {
@@ -237,6 +252,8 @@ function newExtenstion(f) {
                     <select  class="form-control" name="new_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
+                      <option value="sata">sata</option>
+                      <option value="scsi">scsi</option>
                     </select> * Use IDE for Windows OS
                   </div>
                 </div>
@@ -257,6 +274,8 @@ function newExtenstion(f) {
                     <select  class="form-control" name="existing_target_bus" >
                       <option value="virtio" selected="selected">virtio</option>
                       <option value="ide">ide</option>
+                      <option value="sata">sata</option>
+                      <option value="scsi">scsi</option>
                     </select> * Use IDE for Windows OS
                   </div>
                 </div>
