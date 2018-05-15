@@ -263,6 +263,10 @@ swal(alertRet);
                   <i class="fa fa-plus"></i> Add new disk<br />
                 </a></li>
 
+                <li><a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new iso image<br />
+                </a></li>
+
                 <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
                   <i class="fa fa-plus"></i> Add new network<br />
                 </a></li>

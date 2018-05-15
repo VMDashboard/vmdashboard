@@ -491,7 +491,7 @@ function changeOptions(selectEl) {
                                     ?>
                                   </select>
                                 </div>
-                                </div>
+                              </div>
 
                             </div>
                           </div>
