@@ -60,7 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $driver->addAttribute('name','qemu');
   $driver->addAttribute('type','raw');
 
-  
+  $source = $disk->addChild('source');
+  $source->addAttribute('file',$source_file);
+
+  $target = $disk->addChild('target');
+  $target->addAttribute('dev',$target_dev);
+  $target->addAttribute('bus',$target_bus);
 
   $newXML = $domXML->asXML();
   $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
