@@ -51,8 +51,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
   }
 
+  //add a new cdrom XML
+  $disk = $domXML->devices->addChild('disk');
+  $disk->addAttribute('type','file');
+  $disk->addAttribute('device','cdrom');
+  $driver = $disk->addChild('driver');
+  $driver->addAttribute('name','qemu');
+  $driver->addAttribute('type','raw');
+  $source = $disk->addChild('source');
+  $source->addAttribute('file', $source_file);
+  $target = $disk->addChild('target');
+  $target->addAttribute('dev', $target_dev);
+  $target->addAttribute('bus', $target_bus;
 
-  
+
+
+  $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
 
   if ($ret == "success"){
   //Return back to the orignal web page
