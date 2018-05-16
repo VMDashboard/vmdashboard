@@ -399,7 +399,7 @@ swal(alertRet);
                   //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
                   $disk_source_file = $domXML->devices->disk[$i]->source[file];
                   if (isempty($disk_source_file)) {
-                    $disk_source_file = "empty"
+                    $disk_source_file = "empty";
                   }
                   $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
                   $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
