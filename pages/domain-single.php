@@ -376,6 +376,52 @@ swal(alertRet);
 
               <br/><br/><br/>
               <!-- add network here -->
+              <h4>ISO Information</h4>
+              <?php
+              /* ISO image information */
+              $path = $domXML->xpath('//disk');
+              if (!empty($path)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>ISO file</th>" .
+                  "<th>Driver</th>" .
+                  "<th>Device</th>" .
+                  "<th>Bus</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
+
+                for ($i = 0; $i < sizeof($path); $i++) {
+                  //$disk_type = $domXML->devices->disk[$i][type];
+                  $disk_device = $domXML->devices->disk[$i][device];
+                  $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                  //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                  $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                  $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                  $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                  if ($disk_device == "cdrom") {
+                    echo "<tr>" .
+                      "<td>$disk_source_file</td>" .
+                      "<td>$disk_driver_name</td>" .
+                      "<td>$disk_target_dev</td>" .
+                      "<td>$disk_target_bus</td>" .
+                      "<td>" .
+                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove ISO</a>" .
+                      "</td>" .
+                      "</tr>";
+                  }
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo '<hr><p>Domain doesn\'t have any ISO images</p>';
+              }
+              ?>
+
+
+              <br/><br/><br/>
+              <!-- add network here -->
               <h4>Network Information</h4>
               <?php
               /* Network interface information */
