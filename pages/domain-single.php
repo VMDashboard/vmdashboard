@@ -408,7 +408,7 @@ swal(alertRet);
                       "<td>$disk_target_dev</td>" .
                       "<td>$disk_target_bus</td>" .
                       "<td>" .
-                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove ISO</a>" .
+                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove ISO</a>" .
                       "</td>" .
                       "</tr>";
                   }
