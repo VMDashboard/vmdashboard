@@ -376,7 +376,7 @@ swal(alertRet);
 
               <br/><br/><br/>
               <!-- add network here -->
-              <h4>ISO Information</h4>
+              <h4>Optical Drive Information</h4>
               <?php
               /* ISO image information */
               $path = $domXML->xpath('//disk');
@@ -408,7 +408,7 @@ swal(alertRet);
                       "<td>$disk_target_dev</td>" .
                       "<td>$disk_target_bus</td>" .
                       "<td>" .
-                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove ISO</a>" .
+                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
                       "</td>" .
                       "</tr>";
                   }
