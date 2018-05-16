@@ -201,7 +201,7 @@ swal(alertRet);
                     //the raw png data needs to be encoded to use with html img tag
                     $screen64 = base64_encode($screenshot['data']);
                     ?>
-                    <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                    <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid ?>" target="_blank">
                     <img src="data:image/png;base64,<?php echo $screen64 ?>" width="300px"/>
                     </a>
                     <?php
@@ -220,7 +220,7 @@ swal(alertRet);
               <ul class="list-unstyled user_data">
 
                 <?php  if ($state == "running") { ?>
-                  <li><a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                  <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
                     <i class="fa fa-desktop"></i> Connect to Domain using VNC<br />
                   </a></li>
                 <?php } ?>
@@ -376,9 +376,9 @@ swal(alertRet);
 
               <br/><br/><br/>
               <!-- add network here -->
-              <h4>Optical Drive Information</h4>
+              <h4>Optical Device Information</h4>
               <?php
-              /* ISO image information */
+              /* Optical device information */
               $path = $domXML->xpath('//disk');
               if (!empty($path)) {
                 echo "<div class='table-responsive'>" .
@@ -398,6 +398,9 @@ swal(alertRet);
                   $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
                   //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
                   $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                  if (isempty($disk_source_file)) {
+                    $disk_source_file = "empty"
+                  }
                   $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
                   $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
 
@@ -415,7 +418,7 @@ swal(alertRet);
                 }
                 echo "</tbody></table></div>";
               } else {
-                echo '<hr><p>Domain doesn\'t have any ISO images</p>';
+                echo '<hr><p>Domain doesn\'t have any optical devices</p>';
               }
               ?>
 
