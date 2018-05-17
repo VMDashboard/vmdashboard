@@ -48,7 +48,7 @@ require('navigation.php');
 
             $tmp = $lv->get_node_device_cap_options();
             for ($i = 0; $i < sizeof($tmp); $i++) {
-              if ($tmp[$i] == "storage"){
+              if ($tmp[$i] == "net"){
                 echo "<h4>{$tmp[$i]}</h4>";
                 $tmp1 = $lv->get_node_devices($tmp[$i]);
                 echo "<div class='table-responsive'>" .
@@ -67,14 +67,10 @@ require('navigation.php');
                   $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;action=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
                     "<a href=\"?action=dumpxml&amp;cap={$_GET['cap']}&amp;name={$tmp2['name']}\">Dump configuration</a>";
 
-                  $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
-                  $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
-                  $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
-
-                  if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
-                    $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
-                  else
-                    $ident = '-';
+                  $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
+                  $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
+                  $vendor = 'Unknown';
+                  $product = 'Unknown';
 
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
