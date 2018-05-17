@@ -63,8 +63,8 @@ require('navigation.php');
             if (strlen($info) > 2)
                 $info[ strlen($info) - 2 ] = ' ';
             echo "<h2> Host Information </h2> <br>";
-            echo "Hypervisor: $ci['hypervisor_string'] <br>";
-            
+            echo "Hypervisor: {$ci['hypervisor_string']} <br>";
+
             echo "<h2>Host information</h2>" .
                  "<table>" .
                  "<tr>" .
