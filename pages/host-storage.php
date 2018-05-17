@@ -30,57 +30,45 @@ require('navigation.php');
 
         <div class="x_content">
 
-                    <div class="col-md-9 col-sm-9 col-xs-12">
-                      <?php
+          <div class="col-md-9 col-sm-9 col-xs-12">
+            <?php
+            $tmp = $lv->host_get_node_info();
+            $ret = false;
 
-                          $tmp = $lv->host_get_node_info();
-                          $ci  = $lv->get_connect_information();
-                          $info = '';
-                          if ($ci['uri'])
-                              $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
-                          if ($ci['encrypted'] == 'Yes')
-                              $info .= 'encrypted, ';
-                          if ($ci['secure'] == 'Yes')
-                              $info .= 'secure, ';
-                          if ($ci['hypervisor_maxvcpus'])
-                              $info .= 'maximum '.$ci['hypervisor_maxvcpus'].' vcpus per guest, ';
-                          if (strlen($info) > 2)
-                              $info[ strlen($info) - 2 ] = ' ';
+            if (array_key_exists('subaction', $_GET)) {
+              $name = $_GET['name'];
+              if ($_GET['action'] == 'dumpxml')
+                $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+            }
 
-                          $ret = false;
-                          if (array_key_exists('subaction', $_GET)) {
-                            $name = $_GET['name'];
-                            if ($_GET['subaction'] == 'dumpxml')
-                               $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-                          }
+            if ($ret){
+              echo "<pre>$ret</pre>";
+              echo "<br /><br />";
+            }
 
-                          if ($ret){
-                            echo "<pre>$ret</pre>";
-                            echo "<br /><br />";
-                          }
+            $tmp = $lv->get_node_device_cap_options();
+            for ($i = 0; $i < sizeof($tmp); $i++) {
+              if ($tmp[$i] == "storage"){
+                echo "<h3>{$tmp[$i]}</h3>";
+                $tmp1 = $lv->get_node_devices($tmp[$i]);
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th> Device name </th>" .
+                  "<th>Identification </th>" .
+                  "<th> Driver name </th>" .
+                  "<th> Vendor </th>" .
+                  "<th> Product </th>" .
+                  "<th> Action </th>" .
+                  "</tr>";
 
-                          $tmp = $lv->get_node_device_cap_options();
-                          for ($i = 0; $i < sizeof($tmp); $i++) {
-                            if ($tmp[$i] == "storage"){
-                            echo "<h3>{$tmp[$i]}</h3>";
+                for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                  $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                  $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
+                    "<a href=\"?action=dumpxml&amp;cap={$_GET['cap']}&amp;name={$tmp2['name']}\">Dump configuration</a>";
 
-                            $tmp1 = $lv->get_node_devices($tmp[$i]);
-                              echo "<div class='table-responsive'>" .
-                                "<table class='table'>" .
-                                "<tr>" .
-                                "<th> Device name </th>" .
-                                "<th>Identification </th>" .
-                                "<th> Driver name </th>" .
-                                "<th> Vendor </th>" .
-                                "<th> Product </th>" .
-                                "<th> Action </th>" .
-                                "</tr>";
-                              for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
-                                $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                                $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
-                                   "<a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;cap={$_GET['cap']}&amp;name={$tmp2['name']}\">Dump configuration</a>";
-                                if ($tmp2['capability'] == 'storage') {
-                                  $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
+                  //if ($tmp2['capability'] == 'storage') {
+                    $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                                   $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                                   $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
                                   if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
@@ -97,7 +85,7 @@ require('navigation.php');
                                          "<td>$act</td>" .
                                          "</tr>";
 
-                                }
+                              //  }
 
                                        }
 
