@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('header.php');
 
 
-if ($_SESSION['action'] == 'Change') {
+if ($_SESSION['action'] == 'change') {
   $username = $_SESSION['username'];
   $password = $_SESSION['password'];
 
