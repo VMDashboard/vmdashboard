@@ -36,12 +36,8 @@ if ($_SESSION['action'] == 'Change') {
         //Unset the SESSION variables
         unset($_SESSION['password']);
         unset($_SESSION['action']);
-        //Redirect page
-        //header('Location: ../index.php');
-      } else {
-        echo "Error: " . $sql . " " . $conn->error;
+        $_SESSION['reset_status'] = true;
       }
-
       $conn->close();
 
 }
@@ -108,6 +104,12 @@ function checkPassword()
 
           <div class="col-md-9 col-sm-9 col-xs-12">
 
+            <?php
+            if ($_SESSION['reset_status'] == true) {
+              echo "<h2>Password Reset Successful!</h2>";
+              unset($_SESSION['reset_status']);
+            }
+            ?>
 
               <form action="" method="post">
                 <div class="form-horizontal form-label-left" style="min-height: 250px;">
@@ -125,9 +127,9 @@ function checkPassword()
                       <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="pass2" onkeyup="checkPassword();" />
                     </div>
                   </div>
-
+<div class="col-md-9 col-sm-9 col-xs-12">
                   <span id="confirmMessage" class="confirmMessage"></span>
-
+</div>
                 </div>
 
                 <div class="actionBar">
