@@ -88,13 +88,13 @@ require('navigation.php');
                 echo "Hypervisor: {$ci['hypervisor_string']} <br>";
                 echo "Connection: $info <br>";
                 echo "Architecture: {$tmp['model']} <br>";
-              //  echo "Total memory installed: number_format(($tmp['memory'] / 1048576), 2, '.', ' ') GB <br>";
+                echo "Total memory installed: " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
                 echo "Total processor count: {$tmp['cpus']} <br>";
                 echo "Processor speed: {$tmp['mhz']} MHz <br>";
                 echo "Processor nodes: {$tmp['nodes']} <br>";
                 echo "Processor sockets: {$tmp['sockets']} <br>";
                 echo "Processor cores: {$tmp['cores']} <br>";
-                echo "Processor threads: {$tmp['threads']} <br>";
+                echo "Processor threads: {$tmp['threads']} <br> <br> <br>";
 
 
 
