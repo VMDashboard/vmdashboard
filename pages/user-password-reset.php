@@ -105,14 +105,9 @@ function checkPassword()
         <div class="x_content">
 
           <div class="col-md-9 col-sm-9 col-xs-12">
-            <?php
 
 
-
-
-
-
-              <form method="post" action="setup-user.php">
+              <form method="post" action="">
                 <h1>Create Account</h1>
                 <div>
                   <input type="text" name="username" class="form-control" placeholder="Username" required="" />
@@ -149,7 +144,7 @@ function checkPassword()
               </form>
 
 
-            ?>
+
 
           </div>
         </div>
