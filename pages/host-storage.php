@@ -76,6 +76,7 @@ require('navigation.php');
 
                           $tmp = $lv->get_node_device_cap_options();
                           for ($i = 0; $i < sizeof($tmp); $i++) {
+                            if ($tmp[$i] == "storage"){
                             echo "<h3>{$tmp[$i]}</h3>";
 
                             $tmp1 = $lv->get_node_devices($tmp[$i]);
@@ -119,6 +120,7 @@ require('navigation.php');
 
 
                                }
+                             }
 
 
                       ?>
