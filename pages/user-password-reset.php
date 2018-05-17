@@ -127,9 +127,11 @@ function checkPassword()
                       <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="pass2" onkeyup="checkPassword();" />
                     </div>
                   </div>
-<div class="col-md-9 col-sm-9 col-xs-12">
-                  <span id="confirmMessage" class="confirmMessage"></span>
-</div>
+
+                  <div class="col-md-9 col-sm-9 col-xs-12">
+                    <span style="text-align: center;" id="confirmMessage" class="confirmMessage"></span>
+                  </div>
+
                 </div>
 
                 <div class="actionBar">
