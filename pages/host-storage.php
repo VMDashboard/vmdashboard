@@ -35,7 +35,7 @@ require('navigation.php');
             $tmp = $lv->host_get_node_info();
             $ret = false;
 
-            if (array_key_exists('subaction', $_GET)) {
+            if (array_key_exists('action', $_GET)) {
               $name = $_GET['name'];
               if ($_GET['action'] == 'dumpxml')
                 $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
@@ -64,7 +64,7 @@ require('navigation.php');
 
                 for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                   $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                  $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;subaction=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
+                  $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;action=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
                     "<a href=\"?action=dumpxml&amp;cap={$_GET['cap']}&amp;name={$tmp2['name']}\">Dump configuration</a>";
 
                   //if ($tmp2['capability'] == 'storage') {
