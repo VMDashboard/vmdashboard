@@ -28,7 +28,7 @@ if ($_SESSION['action'] == 'Change') {
   $hash = password_hash($password, PASSWORD_BCRYPT);
 
     // Adding the user
-    $sql = "UPDATE openvm_users SET password='$hash' WHERE username='$username'";
+    $sql = "UPDATE openvm_users SET password=$hash WHERE username=$username";
       // Executing the SQL statement
       if ($conn->query($sql) === TRUE) {
         //Unset the SESSION variables
