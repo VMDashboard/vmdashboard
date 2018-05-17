@@ -106,7 +106,7 @@ function checkPassword()
 
             <?php
             if ($_SESSION['reset_status'] == true) {
-              echo "<h2>Password Reset Successful!</h2>";
+              echo "<h2>Password Reset Successful!</h2><br><br>";
               unset($_SESSION['reset_status']);
             }
             ?>
