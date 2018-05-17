@@ -39,6 +39,7 @@ require('navigation.php');
               $name = $_POST['name'];
               if ($_POST['action'] == 'dumpxml')
                 $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+                unset($_POST['action']);                
             }
 
             if ($ret){
