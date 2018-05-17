@@ -128,8 +128,8 @@ function checkPassword()
                     </div>
                   </div>
 
-                  <div class="col-md-9 col-sm-9 col-xs-12">
-                    <span style="text-align: center;" id="confirmMessage" class="confirmMessage"></span>
+                  <div class="col-md-9 col-sm-9 col-xs-12" style="text-align:center;">
+                    <span id="confirmMessage" class="confirmMessage"></span>
                   </div>
 
                 </div>
