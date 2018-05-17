@@ -25,6 +25,8 @@
                     <li><a href="host-storage.php">Host Storage Devices</a></li>
                     <li><a href="host-net.php">Host Network Devices</a></li>
                     <li><a href="host-pci.php">Host PCI Devices</a></li>
+                    <li><a href="host-scsi.php">Host SCSI Devices</a></li>
+                    <li><a href="host-usb.php">Host USB Devices</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-list"></i> Domains <span class="fa fa-chevron-down"></span></a>
