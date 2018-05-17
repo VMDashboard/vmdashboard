@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+// If the SESSION has not started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 
 <body class="nav-md">
   <div class="container body">
