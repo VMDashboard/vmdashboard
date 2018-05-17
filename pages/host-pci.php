@@ -65,7 +65,11 @@ require('navigation.php');
                 for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                   $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                   //$act = "<a href=\"?action={$_GET['action']}&amp;action=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>";
-                  
+                  $act = "<form method=\"post\" action=\"\">
+                    <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
+                    <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
+                    <input type=\"submit\" name=\"submit\" value=\"XML\">
+                    </form>";
                   $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                   $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                   $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
