@@ -20,12 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('header.php');
 
 
-if ($_SESSION['action'] == 'change') {
+if ($_SESSION['action'] == 'Change') {
   $username = $_SESSION['username'];
   $password = $_SESSION['password'];
 
   // Hash and salt password with bcrypt
   $hash = password_hash($password, PASSWORD_BCRYPT);
+
+  require('../config.php');
 
     // Adding the user
     $sql = "UPDATE openvm_users SET password=$hash WHERE username=$username";
