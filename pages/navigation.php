@@ -22,7 +22,8 @@
                 <li><a><i class="fa fa-home"></i> Host <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="host.php">Host Information</a></li>
-                    <li><a href="host-storage.php">Host Storage Info</a></li>
+                    <li><a href="host-storage.php">Host Storage Devices</a></li>
+                    <li><a href="host-net.php">Host Network Devices</a></li>
                   </ul>
                 </li>
                 <li><a><i class="fa fa-list"></i> Domains <span class="fa fa-chevron-down"></span></a>
