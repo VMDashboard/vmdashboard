@@ -106,9 +106,7 @@ function checkPassword()
 
           <div class="col-md-9 col-sm-9 col-xs-12">
 
-
               <form method="post" action="">
-                
                 <div>
                   <input type="password" name="password" class="form-control" placeholder="Password" required="" id="pass1"/>
                 </div>
@@ -119,12 +117,38 @@ function checkPassword()
                 <div>
                   <input style="float:none;margin:0px;" type="submit" name="account" value="Finish" class="btn btn-default submit">
                 </div>
-
                 <div class="clearfix"></div>
-
-
               </form>
 
+
+              <form action="" method="post">
+                <div class="form-horizontal form-label-left" style="min-height: 250px;">
+
+                  <div class="form-group">
+                    <label for="pass1" class="control-label col-md-3 col-sm-3 col-xs-12">New Password</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="password" name="password" class="form-control" placeholder="New Password" required="" id="pass1"/>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="pass2" class="control-label col-md-3 col-sm-3 col-xs-12">Confirm Password</label>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                      <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="pass2" onkeyup="checkPassword();" />
+                    </div>
+                  </div>
+
+                  <span id="confirmMessage" class="confirmMessage"></span>
+
+
+
+                </div>
+
+                <div class="actionBar">
+                  <input type="submit" name="submit" class="buttonFinish btn btn-default" value="Finish" />
+                </div>
+
+              </form>
 
 
 
