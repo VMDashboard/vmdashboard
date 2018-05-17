@@ -49,7 +49,7 @@ require('navigation.php');
             $tmp = $lv->get_node_device_cap_options();
             for ($i = 0; $i < sizeof($tmp); $i++) {
               if ($tmp[$i] == "storage"){
-                echo "<h3>{$tmp[$i]}</h3>";
+                echo "<h4>{$tmp[$i]}</h4>";
                 $tmp1 = $lv->get_node_devices($tmp[$i]);
                 echo "<div class='table-responsive'>" .
                   "<table class='table'>" .
