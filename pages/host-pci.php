@@ -5,6 +5,13 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['username'])){
   header('Location: ../index.php');
 }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $_SESSION['action'] = $_POST['action'];
+    $_SESSION['name'] = $_POST['name'];
+    unset($_POST);
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
 require('header.php');
 require('navigation.php');
 ?>
@@ -37,11 +44,12 @@ require('navigation.php');
             $tmp = $lv->host_get_node_info();
             $ret = false;
 
-            if (array_key_exists('action', $_POST)) {
-              $name = $_POST['name'];
-              if ($_POST['action'] == 'dumpxml')
+            if (array_key_exists('action', $_SESSION)) {
+              $name = $_SESSION['name'];
+              if ($_SESSION['action'] == 'dumpxml')
                 $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-                unset($_POST);                
+                unset($_SESSION['name']);
+                unset($_SESSION['action']);
             }
 
             if ($ret){
