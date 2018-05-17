@@ -11,12 +11,42 @@ if (!isset($_SESSION['username'])){
 // This will prevent and reloading the webpage to resubmit and action.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['password'] = $_POST['password'];
+    $_SESSION['action'] = $_POST['action'];
     unset($_POST);
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
-// Time to bring in the header, sidebar, and navigation menus
+// Time to bring in the header
 require('header.php');
+
+
+if ($_SESSION['action'] == 'reset') {
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
+
+  // Hash and salt password with bcrypt
+  $hash = password_hash($password, PASSWORD_BCRYPT);
+
+    // Adding the user
+    $sql = "UPDATE openvm_users SET password='$hash' WHERE username='$username'";
+      // Executing the SQL statement
+      if ($conn->query($sql) === TRUE) {
+        //Unset the SESSION variables
+        unset($_SESSION['password']);
+        unset($_SESSION['action']);
+        //Redirect page
+        //header('Location: ../index.php');
+      } else {
+        echo "Error: " . $sql . " " . $conn->error;
+      }
+
+      $conn->close();
+
+}
+
+
+
+
 require('navigation.php');
 ?>
 
@@ -78,32 +108,7 @@ function checkPassword()
             <?php
 
 
-            if (array_key_exists('password', $_SESSION)) {
-              $name = $_SESSION['name'];
-              if ($_SESSION['action'] == 'dumpxml')
-                $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-                //Unset the SESSION variables
-                unset($_SESSION['password']);
 
-            }
-
-            //If we have returned XML data, display it
-            if ($ret){
-              echo "<pre>$ret</pre>";
-              echo "<br /><br />";
-            }
-
-            // Adding the user
-            $sql = "INSERT INTO openvm_users (username, email, password)
-              VALUES ('$username', '$email', '$hash');";
-              // Executing the SQL statement
-              if ($conn->query($sql) === TRUE) {
-                header('Location: ../index.php');
-              } else {
-                echo "Error: " . $sql . " " . $conn->error;
-              }
-
-              $conn->close();
 
 
 
