@@ -75,12 +75,7 @@ require('navigation.php');
             $info = '';
             if ($ci['uri'])
                 $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
-            if ($ci['encrypted'] == 'Yes')
-                $info .= 'encrypted, ';
-            if ($ci['secure'] == 'Yes')
-                $info .= 'secure, ';
-            if ($ci['hypervisor_maxvcpus'])
-                $info .= 'maximum '.$ci['hypervisor_maxvcpus'].' vcpus per guest, ';
+      
             if (strlen($info) > 2)
                 $info[ strlen($info) - 2 ] = ' ';
 
