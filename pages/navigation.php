@@ -5,27 +5,6 @@ if (!isset($_SESSION)) {
 }
 ?>
 
-<script>
-$('document').ready(function(){
-  console.log('clicked - menu toggle');
-
-  if ($BODY.hasClass('nav-md')) {
-    $SIDEBAR_MENU.find('li.active ul').hide();
-    $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-  } else {
-    $SIDEBAR_MENU.find('li.active-sm ul').show();
-    $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
-  }
-
-$BODY.toggleClass('nav-md nav-sm');
-
-setContentHeight();
-
-$('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
-
-});
-</script>
-
 <body class="nav-md">
   <div class="container body">
     <div class="main_container">

@@ -1,4 +1,26 @@
 <!-- footer content -->
+<script>
+$('document').ready(function(){
+  console.log('clicked - menu toggle');
+
+  if ($BODY.hasClass('nav-md')) {
+    $SIDEBAR_MENU.find('li.active ul').hide();
+    $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
+  } else {
+    $SIDEBAR_MENU.find('li.active-sm ul').show();
+    $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
+  }
+
+$BODY.toggleClass('nav-md nav-sm');
+
+setContentHeight();
+
+$('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
+
+});
+</script>
+
+
 <footer>
   <div class="pull-right">
     openVM - Open Source Virtualization Management Software by <a href="https://openVM.tech">openVM.tech</a>
