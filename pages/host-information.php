@@ -50,70 +50,6 @@ require('navigation.php');
             // Time to get all information on the host
             $tmp = $lv->host_get_node_info();
 
-            $ci  = $lv->get_connect_information();
-            $info = '';
-            if ($ci['uri'])
-                $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
-            if ($ci['encrypted'] == 'Yes')
-                $info .= 'encrypted, ';
-            if ($ci['secure'] == 'Yes')
-                $info .= 'secure, ';
-            if ($ci['hypervisor_maxvcpus'])
-                $info .= 'maximum '.$ci['hypervisor_maxvcpus'].' vcpus per guest, ';
-            if (strlen($info) > 2)
-                $info[ strlen($info) - 2 ] = ' ';
-            echo "<h2> Host Information </h2> <br>";
-            echo "Hypervisor: {$ci['hypervisor_string']} <br>";
-
-            echo "<h2>Host information</h2>" .
-                 "<table>" .
-                 "<tr>" .
-                 "<td>Hypervisor: </td>" .
-                 "<td>{$ci['hypervisor_string']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Connection: </td>" .
-                 "<td>$info</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Architecture: </td>" .
-                 "<td>{$tmp['model']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Total memory installed: </td>" .
-                 "<td>".number_format(($tmp['memory'] / 1048576), 2, '.', ' ')." GB </td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Total processor count: </td>" .
-                 "<td>{$tmp['cpus']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Processor speed: </td>" .
-                 "<td>{$tmp['mhz']} MHz</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Processor nodes: </td>" .
-                 "<td>{$tmp['nodes']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Processor sockets: </td>" .
-                 "<td>{$tmp['sockets']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Processor cores: </td>" .
-                 "<td>{$tmp['cores']}</td>" .
-                 "</tr>" .
-                 "<tr>" .
-                 "<td>Processor threads: </td>" .
-                 "<td>{$tmp['threads']}</td>" .
-                 "</tr>" .
-                 "</table>";
-
-
-
-
-
-
             // Let's start the $ret without any data, it will be used to display returned XML info
             $ret = false;
 
@@ -133,12 +69,40 @@ require('navigation.php');
               echo "<br /><br />";
             }
 
+
+
+            $ci  = $lv->get_connect_information();
+            $info = '';
+            if ($ci['uri'])
+                $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+            if ($ci['encrypted'] == 'Yes')
+                $info .= 'encrypted, ';
+            if ($ci['secure'] == 'Yes')
+                $info .= 'secure, ';
+            if ($ci['hypervisor_maxvcpus'])
+                $info .= 'maximum '.$ci['hypervisor_maxvcpus'].' vcpus per guest, ';
+            if (strlen($info) > 2)
+                $info[ strlen($info) - 2 ] = ' ';
+            echo "<h2> Host Information </h2> <br>";
+            echo "Hypervisor: {$ci['hypervisor_string']} <br>";
+            echo "Connection: $info <br>";
+            echo "Architecture: {$tmp['model']} <br>";
+            echo "Total memory installed: number_format(($tmp['memory'] / 1048576), 2, '.', ' ') GB <br>";
+            echo "Total processor count: {$tmp['cpus']} <br>";
+            echo "Processor speed: {$tmp['mhz']} MHz <br>";
+            echo "Processor nodes: {$tmp['nodes']} <br>";
+            echo "Processor sockets: {$tmp['sockets']} <br>";
+            echo "Processor cores: {$tmp['cores']} <br>";
+            echo "Processor threads: {$tmp['threads']} <br>";
+
+
+
             //Time to retrieve the information about the host and place it in a table
             $tmp = $lv->get_node_device_cap_options();
             for ($i = 0; $i < sizeof($tmp); $i++) {
 
-              //Just pull out USB, USB_DEVICE data
-              if ($tmp[$i] == "usb" || $tmp[$i] == "usb_device"){
+              //Just pull out SYSTEM data
+              if ($tmp[$i] == "system"){
                 echo "<h4>{$tmp[$i]}</h4>";
                 $tmp1 = $lv->get_node_devices($tmp[$i]);
                 echo "<div class='table-responsive'>" .
@@ -160,14 +124,12 @@ require('navigation.php');
                     <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
                     <input type=\"submit\" name=\"submit\" value=\"XML\">
                     </form>";
-                  $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
-                  $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
-                  $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
 
-                  if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
-                    $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
-                  else
-                    $ident = '-';
+                    $driver = '-';
+                    $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : '';
+                    $serial = array_key_exists('hardware_version', $tmp2) ? $tmp2['hardware_version'] : '';
+                    $ident = $vendor.' '.$serial;
+                    $product = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
 
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
