@@ -10,11 +10,15 @@ if (!isset($_SESSION['username'])){
 // We are now going to grab any POST data and put in in SESSION data, then clear it.
 // This will prevent and reloading the webpage to resubmit and action.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_POST['password'] == $_POST['confirm_password']) {
     $_SESSION['password'] = $_POST['password'];
     $_SESSION['action'] = $_POST['action'];
     unset($_POST);
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
+  } else {
+    $_SESSION['reset_status'] = "<h2>Password was not reset!</h2><br><br>";
+  }
 }
 // Time to bring in the header
 require('header.php');
@@ -36,7 +40,7 @@ if ($_SESSION['action'] == 'Change') {
         //Unset the SESSION variables
         unset($_SESSION['password']);
         unset($_SESSION['action']);
-        $_SESSION['reset_status'] = true;
+        $_SESSION['reset_status'] = "<h2>Password Reset Successful!</h2><br><br>";
       }
       $conn->close();
 
@@ -105,8 +109,8 @@ function checkPassword()
           <div class="col-md-9 col-sm-9 col-xs-12">
 
             <?php
-            if ($_SESSION['reset_status'] == true) {
-              echo "<h2>Password Reset Successful!</h2><br><br>";
+            if (isset($_SESSION['reset_status'])) {
+              echo $_SESSION['reset_status'];
               unset($_SESSION['reset_status']);
             }
             ?>
