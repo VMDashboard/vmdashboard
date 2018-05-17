@@ -86,7 +86,7 @@ function checkPassword()
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Host</h3>
+        <h3>User</h3>
       </div>
     </div>
   </div>
@@ -97,7 +97,7 @@ function checkPassword()
     <div class="col-md-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Host: <?php echo $hn; ?></h2>
+          <h2>Reset Password:</h2>
 
           <div class="clearfix"></div>
         </div>
@@ -108,13 +108,7 @@ function checkPassword()
 
 
               <form method="post" action="">
-                <h1>Create Account</h1>
-                <div>
-                  <input type="text" name="username" class="form-control" placeholder="Username" required="" />
-                </div>
-                <div>
-                  <input type="email" name="email" class="form-control" placeholder="Email" required="" />
-                </div>
+                
                 <div>
                   <input type="password" name="password" class="form-control" placeholder="Password" required="" id="pass1"/>
                 </div>
@@ -128,19 +122,7 @@ function checkPassword()
 
                 <div class="clearfix"></div>
 
-                <div class="separator">
-                  <p class="change_link">New to site?
-                    <a href="#" class="to_register"> View tutorials </a>
-                  </p>
 
-                  <div class="clearfix"></div>
-                  <br />
-
-                  <div>
-                    <span style="font-size:35px;">open<font style="color:#FF8C00;">VM</font></span>
-                    <p>©2018 All Rights Reserved.</p>
-                  </div>
-                </div>
               </form>
 
 
