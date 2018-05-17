@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('header.php');
 
 
-if ($_SESSION['action'] == 'reset') {
+if ($_SESSION['action'] == 'Change') {
   $username = $_SESSION['username'];
   $password = $_SESSION['password'];
 
@@ -106,20 +106,6 @@ function checkPassword()
 
           <div class="col-md-9 col-sm-9 col-xs-12">
 
-              <form method="post" action="">
-                <div>
-                  <input type="password" name="password" class="form-control" placeholder="Password" required="" id="pass1"/>
-                </div>
-                <div>
-                  <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password" required="" id="pass2" onkeyup="checkPassword();"/>
-                </div>
-                <span id="confirmMessage" class="confirmMessage"></span>
-                <div>
-                  <input style="float:none;margin:0px;" type="submit" name="account" value="Finish" class="btn btn-default submit">
-                </div>
-                <div class="clearfix"></div>
-              </form>
-
 
               <form action="" method="post">
                 <div class="form-horizontal form-label-left" style="min-height: 250px;">
@@ -140,12 +126,10 @@ function checkPassword()
 
                   <span id="confirmMessage" class="confirmMessage"></span>
 
-
-
                 </div>
 
                 <div class="actionBar">
-                  <input type="submit" name="submit" class="buttonFinish btn btn-default" value="Finish" />
+                  <input type="submit" name="action" class="buttonFinish btn btn-default" value="Change" />
                 </div>
 
               </form>
