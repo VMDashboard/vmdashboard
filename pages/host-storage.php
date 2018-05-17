@@ -55,7 +55,7 @@ require('navigation.php');
                   "<table class='table'>" .
                   "<tr>" .
                   "<th> Device name </th>" .
-                  "<th>Identification </th>" .
+                  "<th> Identification </th>" .
                   "<th> Driver name </th>" .
                   "<th> Vendor </th>" .
                   "<th> Product </th>" .
@@ -67,44 +67,39 @@ require('navigation.php');
                   $act = !array_key_exists('cap', $_GET) ? "<a href=\"?action={$_GET['action']}&amp;action=dumpxml&amp;name={$tmp2['name']}\">Dump configuration</a>" :
                     "<a href=\"?action=dumpxml&amp;cap={$_GET['cap']}&amp;name={$tmp2['name']}\">Dump configuration</a>";
 
-                  //if ($tmp2['capability'] == 'storage') {
-                    $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
-                                  $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
-                                  $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
-                                  if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
-                                    $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
-                                  else
-                                    $ident = '-';
+                  $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
+                  $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
+                  $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
 
-                                    echo "<tr>" .
-                                         "<td>{$tmp2['name']}</td>" .
-                                         "<td>$ident</td>" .
-                                         "<td>$driver</td>" .
-                                         "<td>$vendor</td>" .
-                                         "<td>$product</td>" .
-                                         "<td>$act</td>" .
-                                         "</tr>";
+                  if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
+                    $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
+                  else
+                    $ident = '-';
 
-                              //  }
+                  echo "<tr>" .
+                    "<td>{$tmp2['name']}</td>" .
+                    "<td>$ident</td>" .
+                    "<td>$driver</td>" .
+                    "<td>$vendor</td>" .
+                    "<td>$product</td>" .
+                    "<td>$act</td>" .
+                    "</tr>";
 
-                                       }
+                }
 
-                                       echo "</table></div>";
+                echo "</table></div>";
 
+              }
+            }
 
-                               }
-                             }
+            ?>
 
-
-                      ?>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
         <!-- /page content -->
 
 <?php require('footer.php');?>
