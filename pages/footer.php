@@ -56,16 +56,6 @@
 
 
 
-<script>
-$('document').ready(function(){
-  console.log('clicked - menu toggle');
-    $SIDEBAR_MENU.find('li.active ul').hide();
-    $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
-setContentHeight();
-$('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
-});
-</script>
-
 
 </body>
 </html>
