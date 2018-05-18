@@ -69,7 +69,7 @@ var setContentHeight = function () {
 	$RIGHT_COL.css('min-height', contentHeight);
 };
 
-  $SIDEBAR_MENU.find('a').on('click', function(ev) {
+  $SIDEBAR_MENU.find('a').on('hover', function(ev) {
 	  console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
