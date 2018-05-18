@@ -52,6 +52,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="../build/js/custom.min.js"></script>
+<script src="../build/js/custom.js"></script>
 
 
 
