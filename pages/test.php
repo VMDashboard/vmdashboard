@@ -3,6 +3,7 @@ require('header.php');
 
 $uuid = "aaa9693e-79dd-4f14-9240-98b30c16b5b2";
 $uuid = "ce016179-af13-45a3-880e-b81316d78f4c";
+$uuid = "1cd47203-b1ff-449d-9df9-3d0818916407";
 $domName = $lv->domain_get_name_by_uuid($uuid);
 $dom = $lv->get_domain_object($domName);
 $ret = $lv->domain_get_memory_stats($domName);
@@ -69,7 +70,10 @@ require('navigation.php');
           echo $cputime1[1] . "<br>";
 
           $cpu_percentage = 100 * ($cputime1[1] - $cputime0[1]);
-          echo $cpu_percentage;
+          echo $cpu_percentage . "<br>";
+
+
+
           ?>
 
 
