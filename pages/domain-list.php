@@ -114,7 +114,7 @@ swal(alertRet);
                     $active = $lv->domain_is_active($dom);
                     $info = $lv->domain_get_info($dom);
                     $mem = number_format($info['memory'] / 1024, 0, '.', '').' MB';
-                    $mem_stats = $lv->domain_get_memory_stats($domName);
+                    $mem_stats = $lv->domain_get_memory_stats($name);
                     $mem_used = (1- $mem_stats[4]/$mem_stats[5])*100;
                     $cpu = $info['nrVirtCpu'];
                     $state = $lv->domain_state_translate($info['state']);
