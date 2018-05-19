@@ -61,15 +61,15 @@ require('navigation.php');
           $cpuexplode0 = explode(" ", $cpuinfo_0);
           echo $cpuexplode0[3] . "<br>";
           $cputime0 = explode("=", $cpuexplode0[3]);
-          echo $cputime0[1];
+          echo $cputime0[1] . "<br>";
 
           $cpuexplode1 = explode(" ", $cpuinfo_1);
           echo $cpuexplode1[3] . "<br>";
           $cputime1 = explode("=", $cpuexplode1[3]);
           echo $cputime1[1] . "<br>";
 
-          $cpu_percentage = 100 * ($cputime1 - $cputime0);
-          echo $cpu_percentage . "<br>";
+          $cpu_percentage = 100 * ($cputime1[1] - $cputime0[1]);
+          echo $cpu_percentage;
           ?>
 
 
