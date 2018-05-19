@@ -70,7 +70,7 @@ require('navigation.php');
           $cputime1 = explode("=", $cpuexplode1[3]);
           echo $cputime1[1] . "<br>";
 
-          $cpu_percentage = ($cputime1[1] - $cputime0[1])/2400000000;
+          $cpu_percentage = ($cputime1[1] - $cputime0[1])/2400000000*100;
           echo $cpu_percentage . "<br>";
 
 
