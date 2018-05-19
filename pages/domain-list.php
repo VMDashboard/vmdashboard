@@ -139,7 +139,11 @@ swal(alertRet);
                         "<small>State:$state</small>" .
                       "</td>" .
                       "<td>$cpu</td>" .
-                      "<td>$mem</td>" .
+                      "<td>$mem
+                      <div class="progress right">
+                        <div class="progress-bar progress-bar-info" data-transitiongoal="65"></div>
+                      </div>
+                      </td>" .
                       "<td title='$diskdesc'>$disks</td>" .
                       "<td>$state</td>" .
                       "<td>";
