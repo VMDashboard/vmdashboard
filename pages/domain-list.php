@@ -141,7 +141,6 @@ swal(alertRet);
                       "<td>#</td>" .
                       "<td>" .
                         "<a href=\"domain-single.php?uuid=$uuid\">$name</a><br />" .
-                        "<small>State:$state</small>" .
                       "</td>" .
                       "<td>$cpu</td>" .
                       "<td>Assigned: $mem <br />
