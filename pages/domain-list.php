@@ -97,8 +97,8 @@ swal(alertRet);
                   <th style="width: 1%">#</th>
                   <th style="width: 20%">Guest Name</th>
                   <th>Virtual CPUs</th>
-                  <th>Allocated Memory</th>
-                  <th>Used Memory</th>
+                  <th>Memory</th>
+                  <th>Memory Stats</th>
                   <th>Disks</th>
                   <th>State</th>
                   <th style="width: 20%">#Actions</th>
