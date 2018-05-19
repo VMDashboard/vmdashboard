@@ -189,6 +189,9 @@ $network_interface_xml = "
       " . $cd_xml . "
       " . $network_interface_xml . "
       <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
+      <memballoon model='virtio'>
+            <stats period='10'/>    
+      </memballoon>
     </devices>
     </domain> ";
 
@@ -606,7 +609,7 @@ function changeOptions(selectEl) {
     <!-- Custom Theme Scripts -->
     <script src="../build/js/custom.js"></script>
 
-    
+
 
   </body>
 </html>
