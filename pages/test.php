@@ -58,7 +58,9 @@ require('navigation.php');
           for ($i = 0; $i < 1; $i++) {
             $cpuinfo_1 = shell_exec("virsh domstats --cpu-total openstack");
           }
-          $cputime0 = explode(" ", $cpuinfo_0);
+          $cpuexplode0 = explode(" ", $cpuinfo_0);
+          $cputime0 = $cpuexplode0[3];
+          $cputime0 = explode("=", $cputime0);
           echo $cputime0[3];
 
           ?>
