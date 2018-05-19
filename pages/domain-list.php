@@ -140,7 +140,7 @@ swal(alertRet);
                       "</td>" .
                       "<td>$cpu</td>" .
                       "<td>$mem
-                      <div class=\"progress right\">
+                      <div class=\"progress left\">
                         <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"65\"></div>
                       </div>
                       </td>" .
