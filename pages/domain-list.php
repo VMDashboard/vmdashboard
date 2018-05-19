@@ -97,7 +97,8 @@ swal(alertRet);
                   <th style="width: 1%">#</th>
                   <th style="width: 20%">Guest Name</th>
                   <th>Virtual CPUs</th>
-                  <th>Memory</th>
+                  <th>Allocated Memory</th>
+                  <th>Used Memory</th>
                   <th>Disks</th>
                   <th>State</th>
                   <th style="width: 20%">#Actions</th>
@@ -138,15 +139,14 @@ swal(alertRet);
                     unset($dom);
 
   	                echo "<tr>" .
-                      "<td>#</td>" .
-                      "<td>" .
-                        "<a href=\"domain-single.php?uuid=$uuid\">$name</a><br />" .
-                      "</td>" .
-                      "<td>$cpu</td>" .
-                      "<td>Assigned: $mem <br />
-                      <div class=\"progress\">
-                        <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"$mem_used\"></div>
-                      </div>
+                      "<td> -> </td>" .
+                      "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
+                      "<td> $cpu </td>" .
+                      "<td> $mem </td>" .
+                      "<td>
+                        <div class=\"progress\">
+                          <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"$mem_used\"></div>
+                        </div>
                       </td>" .
                       "<td title='$diskdesc'>$disks</td>" .
                       "<td>$state</td>" .
