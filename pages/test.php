@@ -41,7 +41,7 @@ require('navigation.php');
             echo $key . ": " . $val . "<br>";
           }
           echo "<br><br><br><br>";
-          echo "Total memory: " . $ret[0] . "<br>";
+          echo "Total memory: " . $ret[6] . "<br>";
           ?>
 
           </div>
