@@ -50,7 +50,7 @@ require('navigation.php');
           echo "Usable memory for domain: " . $ret[5] . " KB<br>";
           echo "Assigned memory for domain: " . $ret[6] . " KB<br>";
 
-          $cpuinfo = shell_exec(virsh domstats --cpu-total openstack);
+          $cpuinfo = shell_exec("virsh domstats --cpu-total openstack");
           var_dump($cpuinfo);
 
 
