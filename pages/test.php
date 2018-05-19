@@ -2,6 +2,7 @@
 require('header.php');
 
 $uuid = "aaa9693e-79dd-4f14-9240-98b30c16b5b2";
+$uuid = "ce016179-af13-45a3-880e-b81316d78f4c";
 $domName = $lv->domain_get_name_by_uuid($uuid);
 $dom = $lv->get_domain_object($domName);
 $ret = $lv->domain_get_memory_stats($domName);
