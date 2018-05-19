@@ -46,9 +46,9 @@ require('navigation.php');
           echo "Used memory: " . $ret[4]/1024 . " MB<br>";
           echo "Free memory: " . ($ret[5] - $ret[4])/1024 . " MB<br>";
           echo "Percent used: " . ($ret[4]/$ret[5]) * 100 . "% <br>";
-          echo "Swap memory used: " . $ret[1] . "<br>";
-          echo $VIR_DOMAIN_MEMORY_STAT_USABLE;
+          echo "Swap memory used by domain: " . $ret[1] . " KB<br>";
           echo "Usable memory for domain: " . $ret[5] . " KB<br>";
+          echo "Assigned memory for domain: " . $ret[6] . " KB<br>";
           ?>
 
           </div>
