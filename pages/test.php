@@ -59,7 +59,7 @@ require('navigation.php');
             $cpuinfo_1 = shell_exec("virsh domstats --cpu-total openstack");
           }
           $cputime0 = explode(" ", $cpuinfo_0);
-          echo $cputime0[1];
+          echo $cputime0[2];
 
           ?>
 
