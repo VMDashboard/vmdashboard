@@ -37,8 +37,8 @@ require('navigation.php');
           <?php
           var_dump($ret);
           echo "<br><br><br><br>";
-          foreach ($ret as $val) {
-            echo $val;
+          foreach ($ret as $key => $val) {
+            echo $key . ": " . $val . "<br>";
           }
           ?>
 
