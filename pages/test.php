@@ -51,14 +51,14 @@ require('navigation.php');
           echo "Usable memory for domain: " . $ret[5] . " KB<br>";
           echo "Assigned memory for domain: " . $ret[6] . " KB<br>";
 
-          $cpuinfo = shell_exec("virsh domstats --cpu-total ubuntu-plex");
+          $cpuinfo = shell_exec("virsh domstats --cpu-total openstack");
           var_dump($cpuinfo);
           echo "<br><br><br><br>";
 
-          $cpuinfo_0 = shell_exec("virsh domstats --cpu-total ubuntu-plex");
+          $cpuinfo_0 = shell_exec("virsh domstats --cpu-total openstack");
           for ($i = 0; $i < 1; $i++) {
             sleep(1);
-            $cpuinfo_1 = shell_exec("virsh domstats --cpu-total ubuntu-plex");
+            $cpuinfo_1 = shell_exec("virsh domstats --cpu-total openstack");
           }
           $cpuexplode0 = explode(" ", $cpuinfo_0);
           echo $cpuexplode0[3] . "<br>";
