@@ -114,6 +114,8 @@ swal(alertRet);
                     $active = $lv->domain_is_active($dom);
                     $info = $lv->domain_get_info($dom);
                     $mem = number_format($info['memory'] / 1024, 0, '.', '').' MB';
+                    $mem_stats = $lv->domain_get_memory_stats($domName);
+                    $mem_used = (1- $mem_stats[4]/$mem_stats[5])*100;
                     $cpu = $info['nrVirtCpu'];
                     $state = $lv->domain_state_translate($info['state']);
                     $id = $lv->domain_get_id($dom);
@@ -139,9 +141,9 @@ swal(alertRet);
                         "<small>State:$state</small>" .
                       "</td>" .
                       "<td>$cpu</td>" .
-                      "<td>$mem
+                      "<td>Assigned: $mem <br />
                       <div class=\"progress\">
-                        <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"65\"></div>
+                        <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"$mem_used\"></div>
                       </div>
                       </td>" .
                       "<td title='$diskdesc'>$disks</td>" .
