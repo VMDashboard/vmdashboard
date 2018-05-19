@@ -62,7 +62,7 @@ require('navigation.php');
           echo $cpuexplode0[3] . "<br>";
           $cputime0 = $cpuexplode0[3];
           $cputime0 = explode("=", $cpuexplode0[3]);
-          echo $cputime0;
+          echo $cputime0[1];
 
           ?>
 
