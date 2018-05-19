@@ -37,7 +37,7 @@ require('navigation.php');
           <?php
           var_dump($ret);
           echo "<br><br><br><br>";
-          foreach ($ret as $key->$val) {
+          foreach ($ret as $val) {
             echo $val;
           }
           ?>
