@@ -36,6 +36,10 @@ require('navigation.php');
 
           <?php
           var_dump($ret);
+          echo "<br><br><br><br>";
+          foreach ($ret as $val) {
+            echo $val;
+          }
           ?>
 
           </div>
