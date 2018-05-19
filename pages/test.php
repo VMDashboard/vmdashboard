@@ -40,6 +40,8 @@ require('navigation.php');
           foreach ($ret as $key => $val) {
             echo $key . ": " . $val . "<br>";
           }
+          echo "<br><br><br><br>";
+          echo "Total memory: " . $ret[0] . "<br>";
           ?>
 
           </div>
