@@ -43,9 +43,8 @@ require('navigation.php');
           }
           echo "<br><br><br><br>";
           echo "Total memory: " . $ret[5]/1024 . " MB<br>";
-          echo "Used memory: " . $ret[4]/1024 . " MB<br>";
-          echo "Free memory: " . ($ret[5] - $ret[4])/1024 . " MB<br>";
-          echo "Percent used: " . ($ret[4]/$ret[5]) * 100 . "% <br>";
+          echo "Free memory: " . $ret[4]/1024 . " MB<br>";
+          echo "Percent used: " . (1- $ret[4]/$ret[5]) * 100 . "% <br>";
           echo "Swap memory used by domain: " . $ret[1] . " KB<br>";
           echo "Usable memory for domain: " . $ret[5] . " KB<br>";
           echo "Assigned memory for domain: " . $ret[6] . " KB<br>";
