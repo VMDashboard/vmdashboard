@@ -43,7 +43,7 @@ require('navigation.php');
           echo "<br><br><br><br>";
           echo "Total memory: " . $ret[6]/1024 . " MB<br>";
           echo "Used memory: " . $ret[4]/1024 . " MB<br>";
-          echo "Free memory: " . ()$ret[6] - $ret[4])/1024 . " MB<br>";
+          echo "Free memory: " . ($ret[6] - $ret[4])/1024 . " MB<br>";
           ?>
 
           </div>
