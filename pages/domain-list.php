@@ -126,7 +126,7 @@ swal(alertRet);
                     //Getting the first set of CPU stats
                     $cpu_info_0 = shell_exec("virsh domstats --cpu-total $name");
                     //Sleep for 1 second
-                    sleep(1);
+                    usleep(1000);
                     //Getting the second set of CPU stats, approximately 1 second later
                     $cpu_info_1 = shell_exec("virsh domstats --cpu-total $name");
                     //Need to seperate the string
@@ -138,7 +138,7 @@ swal(alertRet);
 
                     $cpu_time_1 = explode("=", $cpu_info_1_exploded[3]);
 
-                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/2400000000*100;
+                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/2400000*100;
 
 
                     $state = $lv->domain_state_translate($info['state']);
