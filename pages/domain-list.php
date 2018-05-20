@@ -109,7 +109,7 @@ swal(alertRet);
 
                 <tbody>
                   <?php
-                  $doms = $lv->get_domains;
+                  $doms = $lv->get_domains();
 
                   foreach ($doms as $name) {
                     $dom = $lv->get_domain_object($name);
