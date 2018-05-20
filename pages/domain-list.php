@@ -109,9 +109,22 @@ swal(alertRet);
 
                 <tbody>
                   <?php
-                  $doms = $lv->get_domains
+                  $doms = $lv->get_domains;
 
-                
+                  foreach ($doms as $name) {
+                    $dom = $lv->get_domain_object($name);
+                    //Getting the first set of CPU stats
+                    $cpu_info_0[$name] = shell_exec("virsh domstats --cpu-total $name");
+                  }
+
+                  //Sleep for 1 second
+                  sleep(1);
+
+                  foreach ($doms as $name) {
+                    $dom = $lv->get_domain_object($name);
+                    //Getting the first set of CPU stats
+                    $cpu_info_1[$name] = shell_exec("virsh domstats --cpu-total $name");
+                  }
 
                   foreach ($doms as $name) {
                     $dom = $lv->get_domain_object($name);
