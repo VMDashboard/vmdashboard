@@ -138,7 +138,7 @@ swal(alertRet);
 
                     $cpu_time_1 = explode("=", $cpu_info_1_exploded[3]);
 
-                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/2400000*100;
+                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/240000*100;
 
 
                     $state = $lv->domain_state_translate($info['state']);
