@@ -109,7 +109,23 @@ swal(alertRet);
 
                 <tbody>
                   <?php
-                  $doms = $lv->get_domains();
+                  $doms = $lv->get_domains
+
+                  foreach ($doms as $name) {
+                    $dom = $lv->get_domain_object($name);
+                    //Getting the first set of CPU stats
+                    $cpu_info_0[$name] = shell_exec("virsh domstats --cpu-total $name");
+                  }
+
+                  //Sleep for 1 second
+                  sleep(1);
+
+                  foreach ($doms as $name) {
+                    $dom = $lv->get_domain_object($name);
+                    //Getting the first set of CPU stats
+                    $cpu_info_1[$name] = shell_exec("virsh domstats --cpu-total $name");
+                  }
+
                   foreach ($doms as $name) {
                     $dom = $lv->get_domain_object($name);
                     $uuid = libvirt_domain_get_uuid_string($dom);
@@ -117,28 +133,23 @@ swal(alertRet);
                     $info = $lv->domain_get_info($dom);
                     $mem = number_format($info['memory'] / 1024, 0, '.', '').' MB';
                     $mem_stats = $lv->domain_get_memory_stats($name);
+
                     $mem_used = (1- $mem_stats[4]/$mem_stats[5])*100;
                     if ($mem_stats != false && !isset($mem_stats[4]) && !isset($mem_stats[5])){
                       $mem_used = 100;
                     }
                     $cpu = $info['nrVirtCpu'];
 
-                    //Getting the first set of CPU stats
-                    $cpu_info_0 = shell_exec("virsh domstats --cpu-total $name");
-                    //Sleep for 1 second
-                    usleep(1000);
-                    //Getting the second set of CPU stats, approximately 1 second later
-                    $cpu_info_1 = shell_exec("virsh domstats --cpu-total $name");
-                    //Need to seperate the string
-                    $cpu_info_0_exploded = explode(" ", $cpu_info_0);
+
+                    $cpu_info_0_exploded = explode(" ", $cpu_info_0[$name]);
                     //Getting the first CPU time
                     $cpu_time_0 = explode("=", $cpu_info_0_exploded[3]);
                     //Seperating the second string
-                    $cpu_info_1_exploded = explode(" ", $cpu_info_1);
+                    $cpu_info_1_exploded = explode(" ", $cpu_info_1[$name]);
 
                     $cpu_time_1 = explode("=", $cpu_info_1_exploded[3]);
 
-                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/24000000*100;
+                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/2400000000*100;
 
 
                     $state = $lv->domain_state_translate($info['state']);
