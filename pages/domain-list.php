@@ -97,9 +97,9 @@ swal(alertRet);
                   <th style="width: 1%">#</th>
                   <th style="width: 20%">Guest Name</th>
                   <th>Virtual CPUs</th>
-                  <th>CPU Stats</th>
+                  <th>CPU Usage</th>
                   <th>Memory</th>
-                  <th>Memory Stats</th>
+                  <th>Memory Usage</th>
                   <th>Disks</th>
                   <th>State</th>
                   <th style="width: 20%">#Actions</th>
@@ -173,7 +173,11 @@ swal(alertRet);
                       "<td> -> </td>" .
                       "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
                       "<td> $cpu </td>" .
-                      "<td> $cpu_percentage </td>" .
+                      "<td>
+                        <div class=\"progress\">
+                          <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"$cpu_percentage\"></div>
+                        </div>
+                      </td>" .
                       "<td> $mem </td>" .
                       "<td>
                         <div class=\"progress\">
