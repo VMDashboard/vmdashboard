@@ -212,9 +212,9 @@ swal(alertRet);
 
 
 
-      <div class="col-md-8 col-sm-8 col-xs-12" style="height: 100%; overflow-y: scroll;">
-        <div class="x_panel tile fixed_height_320">
-          <div class="x_title" >
+      <div class="col-md-8 col-sm-8 col-xs-12" style="overflow-y: scroll;">
+        <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
+          <div class="x_title" style="overflow-y: scroll;">
             <h2><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -233,8 +233,8 @@ swal(alertRet);
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
-            <div class="col-md-4 col-sm-4 col-xs-12 profile_left">
+          <div class="x_content" style="overflow-y: scroll;">
+            <div class="col-md-4 col-sm-4 col-xs-12 profile_left" style="overflow-y: scroll;">
               <div class="profile_img">
                 <div id="crop-avatar">
                   <!-- Current avatar -->
