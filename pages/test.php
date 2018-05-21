@@ -208,10 +208,6 @@ swal(alertRet);
 
 
 
-
-
-
-
       <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
@@ -219,96 +215,7 @@ swal(alertRet);
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div class="col-md-4 col-sm-4 col-xs-12 profile_left">
-              <div class="profile_img">
-                <div id="crop-avatar">
-                  <!-- Current avatar -->
-                  <?php
-                  if ($state == "running") {
-                    //screenshot will get raw png data at 300 pixels wide
-                    $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
-                    //the raw png data needs to be encoded to use with html img tag
-                    $screen64 = base64_encode($screenshot['data']);
-                    ?>
-                    <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                    <img src="data:image/png;base64,<?php echo $screen64 ?>" width="300px"/>
-                    </a>
-                    <?php
-                  } else if ($state == "paused") {
-                    echo "<img src='../assets/img/paused.png' width='300px' >";
-                  } else {
-                    echo "<img src='../assets/img/shutdown.png' width='300px' >";
-                  }
-                  ?>
-              <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
-                </div>
-              </div>
 
-              <!-- start actions -->
-              <h4>Actions</h4>
-              <ul class="list-unstyled user_data">
-
-                <?php  if ($state == "running") { ?>
-                  <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fa fa-desktop"></i> Connect to Domain using VNC<br />
-                  </a></li>
-                <?php } ?>
-
-                <?php if ($state == "shutoff") { ?>
-                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Power guest domain on<br />
-                  </a></li>
-                <?php } ?>
-
-                <?php  if ($state == "running") { ?>
-                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Power guest domain off gracefully<br />
-                </a></li>
-                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i> Pause domain guest<br />
-                  </a></li>
-                <?php } ?>
-
-                <?php  if ($state == "paused") { ?>
-                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i> Resume domain guest<br />
-                  </a></li>
-                <?php } ?>
-
-                <?php  if ($state != "shutoff") { ?>
-                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i> Turn off domain guest forcefully<br />
-                  </a></li>
-                <?php } ?>
-
-                <?php  if ($state == "shutoff") { ?>
-                  <li><a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-trash"></i> Delete domain guest<br />
-                  </a></li>
-                <?php } ?>
-
-
-                <li><a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new disk<br />
-                </a></li>
-
-                <li><a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new iso image<br />
-                </a></li>
-
-                <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new network<br />
-                </a></li>
-
-                <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Create new snapshot<br />
-                </a></li>
-
-              </ul>
-              <!-- end of actions -->
-            </div>
-
-            <!-- next column -->
             <div class="col-md-8 col-sm-8 col-xs-12">
 
               <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -590,15 +497,68 @@ swal(alertRet);
                 <li><i class="fa fa-area-chart"></i><a href="#">Logout</a></li>
               </ul>
 
-              <div class="sidebar-widget">
-                <h4>Profile Completion</h4>
-                <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
-                <div class="goal-wrapper">
-                  <span id="gauge-text" class="gauge-value pull-left">0</span>
-                  <span class="gauge-value pull-left">%</span>
-                  <span id="goal-text" class="goal-value pull-right">100%</span>
-                </div>
-              </div>
+              <!-- start actions -->
+              <h4>Actions</h4>
+              <ul class="list-unstyled user_data">
+
+                <?php  if ($state == "running") { ?>
+                  <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                    <i class="fa fa-desktop"></i> Connect to Domain using VNC<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php if ($state == "shutoff") { ?>
+                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-power-off"></i> Power guest domain on<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "running") { ?>
+                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-power-off"></i> Power guest domain off gracefully<br />
+                </a></li>
+                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-pause"></i> Pause domain guest<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "paused") { ?>
+                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-play"></i> Resume domain guest<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state != "shutoff") { ?>
+                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-plug"></i> Turn off domain guest forcefully<br />
+                  </a></li>
+                <?php } ?>
+
+                <?php  if ($state == "shutoff") { ?>
+                  <li><a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-trash"></i> Delete domain guest<br />
+                  </a></li>
+                <?php } ?>
+
+
+                <li><a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new disk<br />
+                </a></li>
+
+                <li><a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new iso image<br />
+                </a></li>
+
+                <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Add new network<br />
+                </a></li>
+
+                <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-plus"></i> Create new snapshot<br />
+                </a></li>
+
+              </ul>
+              <!-- end of actions -->
 
             </div>
           </div>
