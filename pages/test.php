@@ -233,7 +233,7 @@ swal(alertRet);
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content" style="overflow-y: scroll;">
+          <div class="x_content">
             <div class="col-md-4 col-sm-4 col-xs-12 profile_left" style="overflow-y: scroll;">
               <div class="profile_img">
                 <div id="crop-avatar">
