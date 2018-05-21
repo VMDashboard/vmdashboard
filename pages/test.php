@@ -627,6 +627,7 @@ swal(alertRet);
     </div>
   </div>
 </div>
+</div>
 <!-- /page content -->
 
 
