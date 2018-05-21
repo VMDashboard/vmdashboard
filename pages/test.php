@@ -75,7 +75,92 @@ require('navigation.php');
 
 
 
+
           ?>
+
+
+
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="x_panel tile fixed_height_320">
+    <div class="x_title">
+      <h2>Console</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="col-md-4 col-sm-4 col-xs-12 profile_left">
+        <div class="profile_img">
+          <div id="crop-avatar">
+            <!-- Current avatar -->
+            <?php
+            if ($state == "running") {
+              //screenshot will get raw png data at 300 pixels wide
+              $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
+              //the raw png data needs to be encoded to use with html img tag
+              $screen64 = base64_encode($screenshot['data']);
+              ?>
+              <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid ?>" target="_blank">
+              <img src="data:image/png;base64,<?php echo $screen64 ?>" width="300px"/>
+              </a>
+              <?php
+            } else if ($state == "paused") {
+              echo "<img src='../assets/img/paused.png' width='300px' >";
+            } else {
+              echo "<img src='../assets/img/shutdown.png' width='300px' >";
+            }
+            ?>
+        <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-4 col-sm-4 col-xs-12">
+  <div class="x_panel tile fixed_height_320">
+    <div class="x_title">
+      <h2>Console</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="dashboard-widget-content">
+        <ul class="quick-list">
+          <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a></li>
+          <li><i class="fa fa-bars"></i><a href="#">Subscription</a></li>
+          <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+          <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>
+          <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
+          <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>
+          <li><i class="fa fa-area-chart"></i><a href="#">Logout</a></li>
+        </ul>
+
+        <div class="sidebar-widget">
+          <h4>Profile Completion</h4>
+          <canvas width="150" height="80" id="chart_gauge_01" class="" style="width: 160px; height: 100px;"></canvas>
+          <div class="goal-wrapper">
+            <span id="gauge-text" class="gauge-value pull-left">0</span>
+            <span class="gauge-value pull-left">%</span>
+            <span id="goal-text" class="goal-value pull-right">100%</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
 
