@@ -487,7 +487,7 @@ swal(alertRet);
           </div>
           <div class="x_content">
             <div class="dashboard-widget-content">
-              <ul class="quick-list">
+              <ul class="list-unstyled project_files">
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
