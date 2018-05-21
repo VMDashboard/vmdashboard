@@ -97,7 +97,6 @@ swal(alertRet);
                   <th style="width: 1%">#</th>
                   <th style="width: 20%">Guest Name</th>
                   <th>Virtual CPUs</th>
-                  <th>CPU Usage</th>
                   <th>Memory</th>
                   <th>Memory Usage</th>
                   <th>Disks</th>
@@ -111,20 +110,7 @@ swal(alertRet);
                   <?php
                   $doms = $lv->get_domains();
 
-                  foreach ($doms as $name) {
-                    $dom = $lv->get_domain_object($name);
-                    //Getting the first set of CPU stats
-                    $cpu_info_0[$name] = shell_exec("virsh domstats --cpu-total $name");
-                  }
 
-                  //Sleep for 1 second
-                  sleep(1);
-
-                  foreach ($doms as $name) {
-                    $dom = $lv->get_domain_object($name);
-                    //Getting the first set of CPU stats
-                    $cpu_info_1[$name] = shell_exec("virsh domstats --cpu-total $name");
-                  }
 
                   foreach ($doms as $name) {
                     $dom = $lv->get_domain_object($name);
@@ -140,16 +126,6 @@ swal(alertRet);
                     }
                     $cpu = $info['nrVirtCpu'];
 
-
-                    $cpu_info_0_exploded = explode(" ", $cpu_info_0[$name]);
-                    //Getting the first CPU time
-                    $cpu_time_0 = explode("=", $cpu_info_0_exploded[3]);
-                    //Seperating the second string
-                    $cpu_info_1_exploded = explode(" ", $cpu_info_1[$name]);
-
-                    $cpu_time_1 = explode("=", $cpu_info_1_exploded[3]);
-
-                    $cpu_percentage = ($cpu_time_1[1] - $cpu_time_0[1])/2400000000*100;
 
 
                     $state = $lv->domain_state_translate($info['state']);
@@ -173,11 +149,6 @@ swal(alertRet);
                       "<td> -> </td>" .
                       "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
                       "<td> $cpu </td>" .
-                      "<td>
-                        <div class=\"progress\">
-                          <div class=\"progress-bar progress-bar-info\" data-transitiongoal=\"$cpu_percentage\"></div>
-                        </div>
-                      </td>" .
                       "<td> $mem </td>" .
                       "<td>
                         <div class=\"progress\">
