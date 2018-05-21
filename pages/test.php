@@ -212,9 +212,11 @@ swal(alertRet);
 
 
 
-      <div class="col-md-8 col-sm-8 col-xs-12">
+      <div class="-8 col-sm-8 col-xs-12">
         <div class="x_panel tile fixed_height_320 overflow_hidden">
-          <div class="x_title">
+          <div class="x_title" style="
+      height: 100%;
+      overflow: scroll;">
             <h2><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
