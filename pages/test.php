@@ -479,6 +479,8 @@ swal(alertRet);
         </div>
       </div>
 
+
+
       <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
           <div class="x_title">
@@ -553,6 +555,39 @@ swal(alertRet);
           </div>
         </div>
       </div>
+
+
+
+
+
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile">
+          <div class="x_title">
+            <h2>Actions</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+            /* XML information */
+            $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+            $xml = $lv->domain_get_xml($domName, $inactive);
+            $ret = htmlentities($xml);
+
+
+            if ($state == "shutoff"){
+              $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
+                "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
+                "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
+              echo $ret;
+            } else {
+              echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
+              echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+
 
 
 
