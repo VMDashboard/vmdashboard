@@ -212,8 +212,8 @@ swal(alertRet);
 
 
 
-      <div class="col-md-8 col-sm-8 col-xs-12" style="height: 100%; overflow: scroll;">
-        <div class="x_panel tile fixed_height_320 overflow_scroll">
+      <div class="col-md-8 col-sm-8 col-xs-12" style="height: 100%; overflow-y: scroll;">
+        <div class="x_panel tile fixed_height_320">
           <div class="x_title" >
             <h2><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
             <ul class="nav navbar-right panel_toolbox">
