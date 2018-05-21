@@ -482,24 +482,12 @@ swal(alertRet);
       <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
           <div class="x_title">
-            <h2>Console</h2>
+            <h2>Actions</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
             <div class="dashboard-widget-content">
               <ul class="quick-list">
-                <li><i class="fa fa-calendar-o"></i><a href="#">Settings</a></li>
-                <li><i class="fa fa-bars"></i><a href="#">Subscription</a></li>
-                <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>
-                <li><i class="fa fa-bar-chart"></i><a href="#">Auto Renewal</a> </li>
-                <li><i class="fa fa-line-chart"></i><a href="#">Achievements</a></li>
-                <li><i class="fa fa-area-chart"></i><a href="#">Logout</a></li>
-              </ul>
-
-              <!-- start actions -->
-              <h4>Actions</h4>
-              <ul class="list-unstyled user_data">
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
