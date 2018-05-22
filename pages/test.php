@@ -216,17 +216,6 @@ swal(alertRet);
           </div>
           <div class="x_content">
 
-            <div class="col-md-8 col-sm-8 col-xs-12">
-
-              <div class="" role="tabpanel" data-example-id="togglable-tabs">
-                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                  <li role="presentation" class="active"><a href="#tab_content1" id="general-tab" role="tab" data-toggle="tab" aria-expanded="true">General Info</a>
-                  </li>
-                  <li role="presentation" class=""><a href="#tab_content2" role="tab" id="xml-tab" data-toggle="tab" aria-expanded="false">XML Info</a>
-                  </li>
-                </ul>
-                <div id="myTabContent" class="tab-content">
-                  <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="general-tab">
                     <?php
                     /* General information */
                     echo "<strong>Domain type: </strong>".$lv->get_domain_type($domName)."<br />";
@@ -240,31 +229,9 @@ swal(alertRet);
                     if ($die)
                       die('</body></html');
                     ?>
-                  </div>
 
 
-                  <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="xml-tab">
-                    <?php
-                    /* XML information */
-                    $inactive = (!$lv->domain_is_running($domName)) ? true : false;
-                    $xml = $lv->domain_get_xml($domName, $inactive);
-                    $ret = htmlentities($xml);
 
-
-                    if ($state == "shutoff"){
-                      $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
-                        "<textarea name=\"xmldesc\" rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
-                        "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
-                      echo $ret;
-                    } else {
-                      echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
-                      echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
-                    }
-                    ?>
-                  </div>
-                </div>
-
-              </div>
 
               <br/><br/>
               <!-- add storage here -->
@@ -563,7 +530,45 @@ swal(alertRet);
       <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
-            <h2>Actions</h2>
+            <h2>Domain XML</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+            /* XML information */
+            $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+            $xml = $lv->domain_get_xml($domName, $inactive);
+            $ret = htmlentities($xml);
+
+
+            if ($state == "shutoff"){
+              $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
+                "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
+                "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
+              echo $ret;
+            } else {
+              echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
+              echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+            }
+            ?>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+      <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="x_panel tile">
+          <div class="x_title">
+            <h2>Domain XML</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
