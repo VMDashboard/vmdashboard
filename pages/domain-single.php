@@ -203,7 +203,7 @@ function domainDeleteWarning(linkURL) {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Domain Information</h3>
+        <h3><a href="?uuid=<?php echo $uuid; ?>">Domain: <?php echo $domName; ?></a></h3>
       </div>
     </div>
 
@@ -246,7 +246,7 @@ function domainDeleteWarning(linkURL) {
       <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile fixed_height_320">
           <div class="x_title">
-            <h2><a href="?uuid=<?php echo $uuid; ?>">Domain: <?php echo $domName; ?></a></h2>
+            <h2>General Information</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
