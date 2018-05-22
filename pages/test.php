@@ -235,7 +235,7 @@ swal(alertRet);
           </div>
           <div class="x_content">
 
-            <?php var_dump($_SESSION); ?>
+            <?php var_dump($_SEVER); ?>
 
             <?php
             /* General information */
