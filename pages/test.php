@@ -235,6 +235,8 @@ swal(alertRet);
           </div>
           <div class="x_content">
 
+            <?php var_dump($_SESSION); ?>
+
             <?php
             /* General information */
             echo "<strong>Domain type: </strong>".$lv->get_domain_type($domName)."<br />";
