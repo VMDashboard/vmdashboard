@@ -262,8 +262,8 @@ function domainDeleteWarning(linkURL) {
             /* General information */
             echo "<table class=\"table\">";
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; line-height:1; \"><strong>Type: </strong></td>";
-                echo "<td style=\"line-height:1; \">" . $lv->get_domain_type($domName) . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1; border-top:none;\"><strong>Type: </strong></td>";
+                echo "<td style=\"line-height:1; border-top:none;\">" . $lv->get_domain_type($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
