@@ -161,6 +161,13 @@ foreach ($listarray as $listname) {
 }
 $listfile = "../tokens.list";
 $list = file_put_contents($listfile, $liststring);
+
+unset($_SESSION['action']);
+unset($_SESSION['dev']);
+unset($_SESSION['mac']);
+unset($_SESSION['snapshot']);
+
+
 ?>
 
 <?php
@@ -201,7 +208,7 @@ swal(alertRet);
                 <?php
                 if ($state == "running") {
                   //screenshot will get raw png data at 300 pixels wide
-                  $screenshot = $lv->domain_get_screenshot_thumbnail($_GET['uuid'], 400);
+                  $screenshot = $lv->domain_get_screenshot_thumbnail($uuid, 400);
                   //the raw png data needs to be encoded to use with html img tag
                   $screen64 = base64_encode($screenshot['data']);
                   ?>
@@ -234,8 +241,6 @@ swal(alertRet);
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-
-            <?php var_dump($_SERVER); ?>
 
             <?php
             /* General information */
@@ -565,8 +570,8 @@ swal(alertRet);
                 echo "<td>" . $snapstate . "</td>";
                 echo "<td>
                   <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
-                  <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">Revert | </a>
-                  <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">XML</a>
+                  <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">Revert | </a>
+                  <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">XML</a>
                   </td>";
                 echo "</tr>";
               }
@@ -607,7 +612,7 @@ swal(alertRet);
 
 
             if ($state == "shutoff"){
-              $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
+              $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $uuid . " >" .
                 "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
                 "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
               echo $ret;
