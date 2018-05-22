@@ -38,11 +38,6 @@ if (!isset($_SESSION)) {
                   <ul class="nav child_menu">
                     <li><a href="domain-list.php">Domain List</a></li>
                     <li><a href="domain-wizard.php">Create new domain</a></li>
-                    <?php
-                    if(basename($_SERVER['PHP_SELF']) == "domain-single.php"){
-                    echo "<li><a href=\"$_SERVER['REQUEST_URI']\">Selected Domain</a></li>";
-                    ?>
-                  }
                   </ul>
                 </li>
                 <li><a><i class="fa fa-database"></i> Storage <span class="fa fa-chevron-down"></span></a>
@@ -99,7 +94,7 @@ if (!isset($_SESSION)) {
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="../index.php?action=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  <li><a href="user-password-reset.php"><i class="fa fa-key pull-right"></i> Change Password</a></li>
+                  <li><a href="user-password-reset.php"><i class="fa fa-key pull-right"></i> Reset Password</a></li>
                 </ul>
               </li>
 
