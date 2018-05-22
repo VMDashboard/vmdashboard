@@ -316,6 +316,87 @@ swal(alertRet);
 
 
 
+
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2><i class="fa fa-bars"></i> Devices <small>Float left</small></h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div class="col-xs-3">
+              <!-- required for floating -->
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs tabs-left">
+                <li class="active"><a href="#volumes" data-toggle="tab">Storage Volumes</a></li>
+                <li><a href="#optical" data-toggle="tab">Optical Storage</a></li>
+                <li><a href="#networking" data-toggle="tab">Networking Adapers</a></li>
+              </ul>
+            </div>
+
+            <div class="col-xs-9">
+              <!-- Tab panes -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="volumes">
+                  <?php
+                  /* Disk information */
+                  $tmp = $lv->get_disk_stats($domName);
+                  if (!empty($tmp)) {
+                    echo "<div class='table-responsive'>" .
+                      "<table class='table'>" .
+                      "<tr>" .
+                      "<th>Volume</th>" .
+                      "<th>Driver</th>" .
+                      "<th>Device</th>" .
+                      "<th>Disk capacity</th>" .
+                      "<th>Disk allocation</th>" .
+                      "<th>Physical disk size</th>" .
+                      "<th>Actions</th>" .
+                      "</tr>" .
+                      "<tbody>";
+                    for ($i = 0; $i < sizeof($tmp); $i++) {
+                      $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+                      $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+                      $physical = $lv->format_size($tmp[$i]['physical'], 2);
+                      $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                      $device = $tmp[$i]['device'];
+                      echo "<tr>" .
+                        "<td>".basename($dev)."</td>" .
+                          "<td>{$tmp[$i]['type']}</td>" .
+                          "<td>{$tmp[$i]['device']}</td>" .
+                          "<td>$capacity</td>" .
+                          "<td>$allocation</td>" .
+                          "<td>$physical</td>" .
+                          "<td>" .
+                          "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove disk</a>" .
+                          "</td>" .
+                          "</tr>";
+                    }
+                    echo "</tbody></table></div>";
+                  } else {
+                    echo "<hr><p>Domain doesn't have any disk devices</p>";
+                  }
+                  ?>
+                </div>
+
+                <div class="tab-pane" id="optical">Optical Tab.</div>
+                <div class="tab-pane" id="networking">Networking Tab.</div>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
