@@ -557,7 +557,7 @@ swal(alertRet);
             if ($snapshotxml != null) {
               echo "<hr>";
               echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-              echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+              echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
             }
             ?>
 
