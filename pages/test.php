@@ -272,27 +272,27 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 10px;\"><strong>Memory: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding: 5px;\"><strong>Memory: </strong></td>";
                 echo "<td>" . $mem . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 10px;\"><strong>vCPUs: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding: 5px;\"><strong>vCPUs: </strong></td>";
                 echo "<td>" . $cpu . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 10px;\"><strong>State: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding: 5px;\"><strong>State: </strong></td>";
                 echo "<td>" . $state . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 10px;\"><strong>Architecture: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding: 5px;\"><strong>Architecture: </strong></td>";
                 echo "<td>" . $arch . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 10px;\"><strong>ID: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding: 5px;\"><strong>ID: </strong></td>";
                 echo "<td>" . $id . "</td>";
               echo "</tr>";
 
