@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
   } else {
-    $_SESSION['reset_status'] = "<h2>Password was not reset!</h2><br><br>";
+    $_SESSION['reset_status'] = "<h2>Password was not changed!</h2><br><br>";
   }
 }
 // Time to bring in the header
@@ -40,7 +40,7 @@ if ($_SESSION['action'] == 'Change') {
         //Unset the SESSION variables
         unset($_SESSION['password']);
         unset($_SESSION['action']);
-        $_SESSION['reset_status'] = "<h2>Password Reset Successful!</h2><br><br>";
+        $_SESSION['reset_status'] = "<h2>Password Change Successful!</h2><br><br>";
       }
       $conn->close();
 
@@ -99,7 +99,7 @@ function checkPassword()
     <div class="col-md-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Reset Password:</h2>
+          <h2>Change Password:</h2>
 
           <div class="clearfix"></div>
         </div>
