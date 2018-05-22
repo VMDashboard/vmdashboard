@@ -1,4 +1,23 @@
 <?php
+
+// If the SESSION has not started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+// If there is no username, then we need to send them to the login
+if (!isset($_SESSION['username'])){
+  header('Location: login.php');
+}
+// We are now going to grab any POST data and put in in SESSION data, then clear it.
+// This will prevent and reloading the webpage to resubmit and action.
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    $_SESSION['action'] = $_POST['action'];
+    $_SESSION['name'] = $_POST['name'];
+    unset($_GET);
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
+
 require('header.php');
 
 $uuid = $_GET['uuid'];
@@ -289,15 +308,15 @@ swal(alertRet);
                 <hr>
 
                 <li><a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new disk<br />
+                  <i class="fa fa-plus"></i> Add storage volume<br />
                 </a></li>
 
                 <li><a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new iso image<br />
+                  <i class="fa fa-plus"></i> Add optical storage<br />
                 </a></li>
 
                 <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add new network<br />
+                  <i class="fa fa-plus"></i> Add network adapter<br />
                 </a></li>
 
                 <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
