@@ -287,7 +287,7 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"border-spacing: 5px;\"><strong>Architecture: </strong></td>";
+                echo "<td><strong>Architecture: </strong></td>";
                 echo "<td>" . $arch . "</td>";
               echo "</tr>";
 
