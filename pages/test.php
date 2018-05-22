@@ -267,38 +267,38 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>Emulator: </strong></td>";
-                echo "<td>" . $lv->get_domain_emulator($domName) . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Emulator: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $lv->get_domain_emulator($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>Memory: </strong></td>";
-                echo "<td>" . $mem . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Memory: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $mem . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>vCPUs: </strong></td>";
-                echo "<td>" . $cpu . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>vCPUs: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $cpu . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>State: </strong></td>";
-                echo "<td>" . $state . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>State: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $state . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>Architecture: </strong></td>";
-                echo "<td>" . $arch . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Architecture: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $arch . "</td>";
               echo "</tr>";
 
               echo "<tr style=\"line-height:1;\">";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>ID: </strong></td>";
-                echo "<td>" . $id . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>ID: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $id . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding:6px; line-height:1;\"><strong>VNC Port: </strong></td>";
-                echo "<td>" . $vnc . "</td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>VNC Port: </strong></td>";
+                echo "<td style=\"line-height:1; \">" . $vnc . "</td>";
               echo "</tr>";
 
             echo "</table>";
