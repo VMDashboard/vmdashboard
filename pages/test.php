@@ -297,7 +297,7 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding-right: 5px;\"><strong>VNC Port: </strong></td>";
+                echo "<td style=\"background: #f3f3f3;\"><strong>VNC Port: </strong></td>";
                 echo "<td>" . $vnc . "</td>";
               echo "</tr>";
 
