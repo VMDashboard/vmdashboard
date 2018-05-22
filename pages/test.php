@@ -162,6 +162,8 @@ foreach ($listarray as $listname) {
 $listfile = "../tokens.list";
 $list = file_put_contents($listfile, $liststring);
 
+
+//Remove session variables so that if page reloads it will not perform actions again
 unset($_SESSION['action']);
 unset($_SESSION['dev']);
 unset($_SESSION['mac']);
