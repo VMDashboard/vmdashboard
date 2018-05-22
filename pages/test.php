@@ -262,42 +262,42 @@ function domainDeleteWarning(linkURL) {
             /* General information */
             echo "<table>";
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>Type: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>Type: </strong></td>";
                 echo "<td>" . $lv->get_domain_type($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>Emulator: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>Emulator: </strong></td>";
                 echo "<td>" . $lv->get_domain_emulator($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>Memory: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>Memory: </strong></td>";
                 echo "<td>" . $mem . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>vCPUs: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>vCPUs: </strong></td>";
                 echo "<td>" . $cpu . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>State: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>State: </strong></td>";
                 echo "<td>" . $state . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>Architecture: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>Architecture: </strong></td>";
                 echo "<td>" . $arch . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>ID: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>ID: </strong></td>";
                 echo "<td>" . $id . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; padding: 8px;\"><strong>VNC Port: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; padding-right: 8px;\"><strong>VNC Port: </strong></td>";
                 echo "<td>" . $vnc . "</td>";
               echo "</tr>";
 
