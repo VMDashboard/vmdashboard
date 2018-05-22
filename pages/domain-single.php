@@ -230,9 +230,9 @@ function domainDeleteWarning(linkURL) {
                   </a>
                   <?php
                 } else if ($state == "paused") {
-                  echo "<img src='../assets/img/paused.png' width='300px' >";
+                  echo "<img src='../assets/img/paused.png' width='100%' >";
                 } else {
-                  echo "<img src='../assets/img/shutdown.png' width='300px' >";
+                  echo "<img src='../assets/img/shutdown.png' width='100%' >";
                 }
                 ?>
 
