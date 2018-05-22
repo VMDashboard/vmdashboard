@@ -260,7 +260,7 @@ function domainDeleteWarning(linkURL) {
 
             <?php
             /* General information */
-            echo "<table>";
+            echo "<table style=\"border-spacing: 5px;\">";
               echo "<tr>";
                 echo "<td><strong>Type: </strong></td>";
                 echo "<td>" . $lv->get_domain_type($domName) . "</td>";
