@@ -216,65 +216,25 @@ swal(alertRet);
           </div>
           <div class="x_content">
 
-                    <?php
-                    /* General information */
-                    echo "<strong>Domain type: </strong>".$lv->get_domain_type($domName)."<br />";
-                    echo "<strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."<br />";
-                    echo "<strong>Domain memory: </strong>$mem<br />";
-                    echo "<strong>Number of vCPUs: </strong>$cpu<br />";
-                    echo "<strong>Domain state: </strong>$state<br />";
-                    echo "<strong>Domain architecture: </strong>$arch<br />";
-                    echo "<strong>Domain ID: </strong>$id<br />";
-                    echo "<strong>VNC Port: </strong>$vnc<br />";
-                    if ($die)
-                      die('</body></html');
-                    ?>
-
-
-
-
-              <br/><br/>
-              <!-- add storage here -->
-              <h4>Disk Information</h4>
-              <?php
-              /* Disk information */
-              $tmp = $lv->get_disk_stats($domName);
-              if (!empty($tmp)) {
-                echo "<div class='table-responsive'>" .
-                  "<table class='table'>" .
-                  "<tr>" .
-                  "<th>Volume</th>" .
-                  "<th>Driver</th>" .
-                  "<th>Device</th>" .
-                  "<th>Disk capacity</th>" .
-                  "<th>Disk allocation</th>" .
-                  "<th>Physical disk size</th>" .
-                  "<th>Actions</th>" .
-                  "</tr>" .
-                  "<tbody>";
-                for ($i = 0; $i < sizeof($tmp); $i++) {
-                  $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
-                  $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
-                  $physical = $lv->format_size($tmp[$i]['physical'], 2);
-                  $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
-                  $device = $tmp[$i]['device'];
-                  echo "<tr>" .
-                    "<td>".basename($dev)."</td>" .
-                      "<td>{$tmp[$i]['type']}</td>" .
-                      "<td>{$tmp[$i]['device']}</td>" .
-                      "<td>$capacity</td>" .
-                      "<td>$allocation</td>" .
-                      "<td>$physical</td>" .
-                      "<td>" .
-                      "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove disk</a>" .
-                      "</td>" .
-                      "</tr>";
-                }
-                echo "</tbody></table></div>";
-              } else {
-                echo "<hr><p>Domain doesn't have any disk devices</p>";
-              }
+            <?php
+            /* General information */
+            echo "<strong>Domain type: </strong>".$lv->get_domain_type($domName)."<br />";
+            echo "<strong>Domain emulator: </strong>".$lv->get_domain_emulator($domName)."<br />";
+            echo "<strong>Domain memory: </strong>$mem<br />";
+            echo "<strong>Number of vCPUs: </strong>$cpu<br />";
+            echo "<strong>Domain state: </strong>$state<br />";
+            echo "<strong>Domain architecture: </strong>$arch<br />";
+            echo "<strong>Domain ID: </strong>$id<br />";
+            echo "<strong>VNC Port: </strong>$vnc<br />";
+            if ($die)
+              die('</body></html');
               ?>
+
+
+
+
+
+
 
 
               <br/><br/><br/>
@@ -530,25 +490,48 @@ swal(alertRet);
       <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
-            <h2>Domain XML</h2>
+            <h2>Storage Volumes</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
+            
             <?php
-            /* XML information */
-            $inactive = (!$lv->domain_is_running($domName)) ? true : false;
-            $xml = $lv->domain_get_xml($domName, $inactive);
-            $ret = htmlentities($xml);
-
-
-            if ($state == "shutoff"){
-              $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $_GET['uuid'] . " >" .
-                "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
-                "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
-              echo $ret;
+            /* Disk information */
+            $tmp = $lv->get_disk_stats($domName);
+            if (!empty($tmp)) {
+              echo "<div class='table-responsive'>" .
+                "<table class='table'>" .
+                "<tr>" .
+                "<th>Volume</th>" .
+                "<th>Driver</th>" .
+                "<th>Device</th>" .
+                "<th>Disk capacity</th>" .
+                "<th>Disk allocation</th>" .
+                "<th>Physical disk size</th>" .
+                "<th>Actions</th>" .
+                "</tr>" .
+                "<tbody>";
+              for ($i = 0; $i < sizeof($tmp); $i++) {
+                $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+                $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+                $physical = $lv->format_size($tmp[$i]['physical'], 2);
+                $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                $device = $tmp[$i]['device'];
+                echo "<tr>" .
+                  "<td>".basename($dev)."</td>" .
+                    "<td>{$tmp[$i]['type']}</td>" .
+                    "<td>{$tmp[$i]['device']}</td>" .
+                    "<td>$capacity</td>" .
+                    "<td>$allocation</td>" .
+                    "<td>$physical</td>" .
+                    "<td>" .
+                    "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove disk</a>" .
+                    "</td>" .
+                    "</tr>";
+              }
+              echo "</tbody></table></div>";
             } else {
-              echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
-              echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+              echo "<hr><p>Domain doesn't have any disk devices</p>";
             }
             ?>
           </div>
