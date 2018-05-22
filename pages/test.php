@@ -20,7 +20,7 @@ if (isset($_GET['uuid'])) {
 require('header.php');
 
 $uuid = $_SESSION['uuid'];
-$domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
+$domName = $lv->domain_get_name_by_uuid($_SESSION['uuid']);
 $dom = $lv->get_domain_object($domName);
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
