@@ -291,7 +291,7 @@ function domainDeleteWarning(linkURL) {
                 echo "<td>" . $arch . "</td>";
               echo "</tr>";
 
-              echo "<tr>";
+              echo "<tr style=\"line_height:1;\">";
                 echo "<td style=\"background: #f3f3f3; padding:6px; line_height:1;\"><strong>ID: </strong></td>";
                 echo "<td>" . $id . "</td>";
               echo "</tr>";
