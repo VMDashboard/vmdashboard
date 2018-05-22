@@ -226,7 +226,7 @@ function domainDeleteWarning(linkURL) {
                   $screen64 = base64_encode($screenshot['data']);
                   ?>
                   <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                  <img src="data:image/png;base64,<?php echo $screen64 ?>" width="100%"/>
+                  <img src="data:image/png;base64,<?php echo $screen64 ?>" width="90%"/>
                   </a>
                   <?php
                 } else if ($state == "paused") {
@@ -236,7 +236,7 @@ function domainDeleteWarning(linkURL) {
                 }
                 ?>
             <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
-            
+
 
         </div>
       </div>
