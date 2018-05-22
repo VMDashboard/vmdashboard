@@ -444,7 +444,7 @@ swal(alertRet);
 
 
       <div class="col-md-8 col-sm-8 col-xs-12">
-        <div class="x_panel tile">
+        <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
             <h2>Storage Volumes</h2>
             <div class="clearfix"></div>
@@ -495,7 +495,7 @@ swal(alertRet);
 
 
       <div class="col-md-8 col-sm-8 col-xs-12">
-        <div class="x_panel tile">
+        <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
             <h2>Optical Storage</h2>
             <div class="clearfix"></div>
