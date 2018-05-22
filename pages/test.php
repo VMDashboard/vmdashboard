@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])){
 }
 // We are now going to grab any POST data and put in in SESSION data, then clear it.
 // This will prevent and reloading the webpage to resubmit and action.
-if (isset($_GET['uuid']) {
+if (isset($_GET['uuid'])) {
     $_SESSION['uuid'] = $_GET['uuid']
     $_SESSION['action'] = $_GET['action'];
     $_SESSION['dev'] = $_GET['dev'];
