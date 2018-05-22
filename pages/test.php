@@ -262,7 +262,7 @@ function domainDeleteWarning(linkURL) {
             /* General information */
             echo "<table>";
               echo "<tr>";
-                echo "<td><strong>Type: </strong></td>";
+                echo "<td style=\"background: #f3f3f3;\"><strong>Type: </strong></td>";
                 echo "<td>" . $lv->get_domain_type($domName) . "</td>";
               echo "</tr>";
 
@@ -287,7 +287,7 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td><strong>Architecture: </strong></td>";
+                echo "<td style=\"border-spacing: 5px;\"><strong>Architecture: </strong></td>";
                 echo "<td>" . $arch . "</td>";
               echo "</tr>";
 
@@ -388,7 +388,6 @@ function domainDeleteWarning(linkURL) {
           </div>
         </div>
       </div>
-
 
 
 
@@ -580,12 +579,6 @@ function domainDeleteWarning(linkURL) {
 
 
 
-
-
-
-
-
-
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
@@ -642,7 +635,6 @@ function domainDeleteWarning(linkURL) {
           </div>
         </div>
       </div>
-
 
 
 
