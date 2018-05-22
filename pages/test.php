@@ -369,7 +369,7 @@ swal(alertRet);
                           "<td>$allocation</td>" .
                           "<td>$physical</td>" .
                           "<td>" .
-                          "<a title='Remove disk device' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove disk</a>" .
+                          "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove</a>" .
                           "</td>" .
                           "</tr>";
                     }
@@ -415,7 +415,7 @@ swal(alertRet);
                           "<td>$disk_target_dev</td>" .
                           "<td>$disk_target_bus</td>" .
                           "<td>" .
-                            "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                            "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
                           "</td>" .
                           "</tr>";
                       }
@@ -465,7 +465,7 @@ swal(alertRet);
                           "<td>$interface_model</td>" .
                           "<td>" .
                             "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                            "Remove interface</a>" .
+                            "Remove</a>" .
                           "</td>" .
                           "</tr>";
                       }
@@ -478,7 +478,7 @@ swal(alertRet);
                           "<td>$interface_model</td>" .
                           "<td>" .
                             "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                            "Remove interface</a>" .
+                            "Remove</a>" .
                           "</td>" .
                           "</tr>";
                       }
