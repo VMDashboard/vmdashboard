@@ -237,53 +237,9 @@ swal(alertRet);
 
 
 
-              <br/><br/><br/>
-              <!-- add network here -->
-              <h4>Optical Device Information</h4>
-              <?php
-              /* Optical device information */
-              $path = $domXML->xpath('//disk');
-              if (!empty($path)) {
-                echo "<div class='table-responsive'>" .
-                  "<table class='table'>" .
-                  "<tr>" .
-                  "<th>ISO file</th>" .
-                  "<th>Driver</th>" .
-                  "<th>Device</th>" .
-                  "<th>Bus</th>" .
-                  "<th>Actions</th>" .
-                  "</tr>" .
-                  "<tbody>";
 
-                for ($i = 0; $i < sizeof($path); $i++) {
-                  //$disk_type = $domXML->devices->disk[$i][type];
-                  $disk_device = $domXML->devices->disk[$i][device];
-                  $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
-                  //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
-                  $disk_source_file = $domXML->devices->disk[$i]->source[file];
-                  if (empty($disk_source_file)) {
-                    $disk_source_file = "empty";
-                  }
-                  $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
-                  $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
 
-                  if ($disk_device == "cdrom") {
-                    echo "<tr>" .
-                      "<td>$disk_source_file</td>" .
-                      "<td>$disk_driver_name</td>" .
-                      "<td>$disk_target_dev</td>" .
-                      "<td>$disk_target_bus</td>" .
-                      "<td>" .
-                        "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
-                      "</td>" .
-                      "</tr>";
-                  }
-                }
-                echo "</tbody></table></div>";
-              } else {
-                echo '<hr><p>Domain doesn\'t have any optical devices</p>';
-              }
-              ?>
+
 
 
               <br/><br/><br/>
@@ -494,7 +450,6 @@ swal(alertRet);
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-
             <?php
             /* Disk information */
             $tmp = $lv->get_disk_stats($domName);
@@ -538,6 +493,61 @@ swal(alertRet);
         </div>
       </div>
 
+
+      <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="x_panel tile">
+          <div class="x_title">
+            <h2>Optical Storage</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+            /* Optical device information */
+            $path = $domXML->xpath('//disk');
+            if (!empty($path)) {
+              echo "<div class='table-responsive'>" .
+                "<table class='table'>" .
+                "<tr>" .
+                "<th>ISO file</th>" .
+                "<th>Driver</th>" .
+                "<th>Device</th>" .
+                "<th>Bus</th>" .
+                "<th>Actions</th>" .
+                "</tr>" .
+                "<tbody>";
+
+              for ($i = 0; $i < sizeof($path); $i++) {
+                //$disk_type = $domXML->devices->disk[$i][type];
+                $disk_device = $domXML->devices->disk[$i][device];
+                $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                if (empty($disk_source_file)) {
+                  $disk_source_file = "empty";
+                }
+                $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                if ($disk_device == "cdrom") {
+                  echo "<tr>" .
+                    "<td>$disk_source_file</td>" .
+                    "<td>$disk_driver_name</td>" .
+                    "<td>$disk_target_dev</td>" .
+                    "<td>$disk_target_bus</td>" .
+                    "<td>" .
+                      "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                    "</td>" .
+                    "</tr>";
+                }
+              }
+              echo "</tbody></table></div>";
+            } else {
+              echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+            }
+            ?>
+          </div>
+        </div>
+      </div>
 
 
 
