@@ -186,7 +186,7 @@ swal(alertRet);
                   //the raw png data needs to be encoded to use with html img tag
                   $screen64 = base64_encode($screenshot['data']);
                   ?>
-                  <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                  <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
                   <img src="data:image/png;base64,<?php echo $screen64 ?>" width="300px"/>
                   </a>
                   <?php
@@ -249,40 +249,40 @@ swal(alertRet);
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fa fa-desktop"></i> Connect to Domain using VNC<br />
+                    <i class="fa fa-desktop"></i> Connect using noVNC<br />
                   </a></li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Power guest domain on<br />
+                    <i class="fa fa-power-off"></i> Power on<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Power guest domain off gracefully<br />
+                  <i class="fa fa-power-off"></i> Shutdown<br />
                 </a></li>
                   <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i> Pause domain guest<br />
+                    <i class="fa fa-pause"></i> Pause domain <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
                   <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i> Resume domain guest<br />
+                    <i class="fa fa-play"></i> Resume domain <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
                   <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i> Turn off domain guest forcefully<br />
+                    <i class="fa fa-plug"></i> Forcefully shutdown<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
                   <li><a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-trash"></i> Delete domain guest<br />
+                    <i class="fa fa-trash"></i> Delete domain <br />
                   </a></li>
                 <?php } ?>
 
