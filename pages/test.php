@@ -230,133 +230,6 @@ swal(alertRet);
               die('</body></html');
               ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-              <br/><br/><br/>
-              <!-- add network here -->
-              <h4>Network Information</h4>
-              <?php
-              /* Network interface information */
-              $path = $domXML->xpath('//interface');
-              if (!empty($path)) {
-                echo "<div class='table-responsive'>" .
-                  "<table class='table'>" .
-                  "<tr>" .
-                  "<th>Type</th>" .
-                  "<th>MAC Address</th>" .
-                  "<th>Source</th>" .
-                  "<th>Mode</th>" .
-                  "<th>Model</th>" .
-                  "<th>Actions</th>" .
-                  "</tr>" .
-                  "<tbody>";
-
-                for ($i = 0; $i < sizeof($path); $i++) {
-                  $interface_type = $domXML->devices->interface[$i][type];
-                  $interface_mac = $domXML->devices->interface[$i]->mac[address];
-                  $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
-                  if ($interface_type == "network") {
-                    $source_network = $domXML->devices->interface[$i]->source[network];
-                  }
-                  if ($interface_type == "direct") {
-                    $source_dev = $domXML->devices->interface[$i]->source[dev];
-                    $source_mode = $domXML->devices->interface[$i]->source[mode];
-                  }
-                  $interface_model = $domXML->devices->interface[$i]->model[type];
-
-                  if ($interface_type == "network") {
-                    echo "<tr>" .
-                      "<td>$interface_type</td>" .
-                      "<td>$interface_mac</td>" .
-                      "<td>$source_network</td>" .
-                      "<td>nat</td>" .
-                      "<td>$interface_model</td>" .
-                      "<td>" .
-                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                        "Remove interface</a>" .
-                      "</td>" .
-                      "</tr>";
-                  }
-                  if ($interface_type == "direct") {
-                    echo "<tr>" .
-                      "<td>$interface_type</td>" .
-                      "<td>$interface_mac</td>" .
-                      "<td>$source_dev</td>" .
-                      "<td>$source_mode</td>" .
-                      "<td>$interface_model</td>" .
-                      "<td>" .
-                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                        "Remove interface</a>" .
-                      "</td>" .
-                      "</tr>";
-                  }
-                }
-                echo "</tbody></table></div>";
-              } else {
-                echo '<hr><p>Domain doesn\'t have any network devices</p>';
-              }
-              ?>
-
-
-
-              <br/><br/><br/>
-              <!-- add snapshot here -->
-              <h4>Snapshot Information</h4>
-              <?php
-              /* Snapshot information */
-              $tmp = $lv->list_domain_snapshots($dom);
-              if (!empty($tmp)) {
-                echo "<div class='table-responsive'>" .
-                  "<table class='table'>" .
-                  "<tr>" .
-                  "<th>Name</th>" .
-                  "<th>Creation Time</th>" .
-                  "<th>Domain State</th>" .
-                  "<th>Actions</th>" .
-                  "</tr>" .
-                  "<tbody>";
-
-                foreach ($tmp as $key => $value) {
-                  //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-                  $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-                  $tmpxml = simplexml_load_string($tmpsnapshotxml);
-                  $name = $tmpxml->name[0];
-                  $creationTime = $tmpxml->creationTime[0];
-                  $snapstate = $tmpxml->state[0];
-                  echo "<tr>";
-                  echo "<td>" . $name . "</td>";
-                  echo "<td>" . date("D d M Y", $value) . " - ";
-                  echo date("H:i:s", $value) . "</td>";
-                  echo "<td>" . $snapstate . "</td>";
-                  echo "<td>
-                    <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
-                    <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">Revert | </a>
-                    <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">XML</a>
-                    </td>";
-                  echo "</tr>";
-                }
-                echo "</tbody></table></div>";
-              } else {
-                echo "<hr><p>Domain does not have any snapshots</p>";
-              }
-
-              if ($snapshotxml != null) {
-                echo "<hr>";
-                echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-                echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
-              }
-              ?>
-
             </div>
           </div>
         </div>
@@ -494,6 +367,78 @@ swal(alertRet);
       </div>
 
 
+
+
+
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
+          <div class="x_title">
+            <h2>Actions</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+            /* Snapshot information */
+            $tmp = $lv->list_domain_snapshots($dom);
+            if (!empty($tmp)) {
+              echo "<div class='table-responsive'>" .
+                "<table class='table'>" .
+                "<tr>" .
+                "<th>Name</th>" .
+                "<th>Creation Time</th>" .
+                "<th>Domain State</th>" .
+                "<th>Actions</th>" .
+                "</tr>" .
+                "<tbody>";
+
+              foreach ($tmp as $key => $value) {
+                //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+                $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+                $tmpxml = simplexml_load_string($tmpsnapshotxml);
+                $name = $tmpxml->name[0];
+                $creationTime = $tmpxml->creationTime[0];
+                $snapstate = $tmpxml->state[0];
+                echo "<tr>";
+                echo "<td>" . $name . "</td>";
+                echo "<td>" . date("D d M Y", $value) . " - ";
+                echo date("H:i:s", $value) . "</td>";
+                echo "<td>" . $snapstate . "</td>";
+                echo "<td>
+                  <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
+                  <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">Revert | </a>
+                  <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $_GET['uuid'] . "&amp;snapshot=" . $value . ">XML</a>
+                  </td>";
+                echo "</tr>";
+              }
+              echo "</tbody></table></div>";
+            } else {
+              echo "<hr><p>Domain does not have any snapshots</p>";
+            }
+
+            if ($snapshotxml != null) {
+              echo "<hr>";
+              echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+              echo  "<textarea rows=15 cols=50>" . $snapshotxml . "</textarea>";
+            }
+            ?>
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
           <div class="x_title">
@@ -551,6 +496,78 @@ swal(alertRet);
 
 
 
+      <div class="col-md-8 col-sm-8 col-xs-12">
+        <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
+          <div class="x_title">
+            <h2>Network Adapters</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+            /* Network interface information */
+            $path = $domXML->xpath('//interface');
+            if (!empty($path)) {
+              echo "<div class='table-responsive'>" .
+                "<table class='table'>" .
+                "<tr>" .
+                "<th>Type</th>" .
+                "<th>MAC Address</th>" .
+                "<th>Source</th>" .
+                "<th>Mode</th>" .
+                "<th>Model</th>" .
+                "<th>Actions</th>" .
+                "</tr>" .
+                "<tbody>";
+
+              for ($i = 0; $i < sizeof($path); $i++) {
+                $interface_type = $domXML->devices->interface[$i][type];
+                $interface_mac = $domXML->devices->interface[$i]->mac[address];
+                $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
+                if ($interface_type == "network") {
+                  $source_network = $domXML->devices->interface[$i]->source[network];
+                }
+                if ($interface_type == "direct") {
+                  $source_dev = $domXML->devices->interface[$i]->source[dev];
+                  $source_mode = $domXML->devices->interface[$i]->source[mode];
+                }
+                $interface_model = $domXML->devices->interface[$i]->model[type];
+
+                if ($interface_type == "network") {
+                  echo "<tr>" .
+                    "<td>$interface_type</td>" .
+                    "<td>$interface_mac</td>" .
+                    "<td>$source_network</td>" .
+                    "<td>nat</td>" .
+                    "<td>$interface_model</td>" .
+                    "<td>" .
+                      "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                      "Remove interface</a>" .
+                    "</td>" .
+                    "</tr>";
+                }
+                if ($interface_type == "direct") {
+                  echo "<tr>" .
+                    "<td>$interface_type</td>" .
+                    "<td>$interface_mac</td>" .
+                    "<td>$source_dev</td>" .
+                    "<td>$source_mode</td>" .
+                    "<td>$interface_model</td>" .
+                    "<td>" .
+                      "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                      "Remove interface</a>" .
+                    "</td>" .
+                    "</tr>";
+                }
+              }
+              echo "</tbody></table></div>";
+            } else {
+              echo '<hr><p>Domain doesn\'t have any network devices</p>';
+            }
+            ?>
+
+          </div>
+        </div>
+      </div>
 
 
 
