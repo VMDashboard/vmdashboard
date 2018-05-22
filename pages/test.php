@@ -1,15 +1,31 @@
 <?php
-
+// If the SESSION has not started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+// If there is no username, then we need to send them to the login
+if (!isset($_SESSION['username'])){
+  header('Location: login.php');
+}
+// We are now going to grab any POST data and put in in SESSION data, then clear it.
+// This will prevent and reloading the webpage to resubmit and action.
+if (isset($_GET['uuid']) {
+    $_SESSION['uuid'] = $_GET['uuid']
+    $_SESSION['action'] = $_GET['action'];
+    $_SESSION['dev'] = $_GET['dev'];
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
 
 require('header.php');
 
-$uuid = $_GET['uuid'];
+$uuid = $_SESSION['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
-$action = $_GET['action'];
+$action = $_SESSION['action'];
 $domXML = $lv->domain_get_xml($domName);
 $domXML = new SimpleXMLElement($domXML);
 //$domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
