@@ -320,7 +320,7 @@ swal(alertRet);
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2><i class="fa fa-bars"></i> Devices <small>Float left</small></h2>
+            <h2>Devices</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
@@ -380,8 +380,116 @@ swal(alertRet);
                   ?>
                 </div>
 
-                <div class="tab-pane" id="optical">Optical Tab.</div>
-                <div class="tab-pane" id="networking">Networking Tab.</div>
+                <div class="tab-pane" id="optical">
+                  <?php
+                  /* Optical device information */
+                  $path = $domXML->xpath('//disk');
+                  if (!empty($path)) {
+                    echo "<div class='table-responsive'>" .
+                      "<table class='table'>" .
+                      "<tr>" .
+                      "<th>ISO file</th>" .
+                      "<th>Driver</th>" .
+                      "<th>Device</th>" .
+                      "<th>Bus</th>" .
+                      "<th>Actions</th>" .
+                      "</tr>" .
+                      "<tbody>";
+
+                    for ($i = 0; $i < sizeof($path); $i++) {
+                      //$disk_type = $domXML->devices->disk[$i][type];
+                      $disk_device = $domXML->devices->disk[$i][device];
+                      $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                      //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                      $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                      if (empty($disk_source_file)) {
+                        $disk_source_file = "empty";
+                      }
+                      $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                      $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                      if ($disk_device == "cdrom") {
+                        echo "<tr>" .
+                          "<td>$disk_source_file</td>" .
+                          "<td>$disk_driver_name</td>" .
+                          "<td>$disk_target_dev</td>" .
+                          "<td>$disk_target_bus</td>" .
+                          "<td>" .
+                            "<a title='Remove cdrom device' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                          "</td>" .
+                          "</tr>";
+                      }
+                    }
+                    echo "</tbody></table></div>";
+                  } else {
+                    echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+                  }
+                  ?>
+                </div>
+                <div class="tab-pane" id="networking">
+                  <?php
+                  /* Network interface information */
+                  $path = $domXML->xpath('//interface');
+                  if (!empty($path)) {
+                    echo "<div class='table-responsive'>" .
+                      "<table class='table'>" .
+                      "<tr>" .
+                      "<th>Type</th>" .
+                      "<th>MAC Address</th>" .
+                      "<th>Source</th>" .
+                      "<th>Mode</th>" .
+                      "<th>Model</th>" .
+                      "<th>Actions</th>" .
+                      "</tr>" .
+                      "<tbody>";
+
+                    for ($i = 0; $i < sizeof($path); $i++) {
+                      $interface_type = $domXML->devices->interface[$i][type];
+                      $interface_mac = $domXML->devices->interface[$i]->mac[address];
+                      $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
+                      if ($interface_type == "network") {
+                        $source_network = $domXML->devices->interface[$i]->source[network];
+                      }
+                      if ($interface_type == "direct") {
+                        $source_dev = $domXML->devices->interface[$i]->source[dev];
+                        $source_mode = $domXML->devices->interface[$i]->source[mode];
+                      }
+                      $interface_model = $domXML->devices->interface[$i]->model[type];
+
+                      if ($interface_type == "network") {
+                        echo "<tr>" .
+                          "<td>$interface_type</td>" .
+                          "<td>$interface_mac</td>" .
+                          "<td>$source_network</td>" .
+                          "<td>nat</td>" .
+                          "<td>$interface_model</td>" .
+                          "<td>" .
+                            "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                            "Remove interface</a>" .
+                          "</td>" .
+                          "</tr>";
+                      }
+                      if ($interface_type == "direct") {
+                        echo "<tr>" .
+                          "<td>$interface_type</td>" .
+                          "<td>$interface_mac</td>" .
+                          "<td>$source_dev</td>" .
+                          "<td>$source_mode</td>" .
+                          "<td>$interface_model</td>" .
+                          "<td>" .
+                            "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                            "Remove interface</a>" .
+                          "</td>" .
+                          "</tr>";
+                      }
+                    }
+                    echo "</tbody></table></div>";
+                  } else {
+                    echo '<hr><p>Domain doesn\'t have any network devices</p>';
+                  }
+                  ?>
+
+                </div>
               </div>
             </div>
 
