@@ -404,7 +404,7 @@ swal(alertRet);
             </div>
           </div>
         </div>
-      </div>
+
 
 
 
@@ -482,7 +482,7 @@ swal(alertRet);
           </div>
         </div>
       </div>
-</div>
+
 
 
 
@@ -569,7 +569,7 @@ swal(alertRet);
               echo $ret;
             } else {
               echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
-              echo "<textarea rows=\"17\" cols=\"2\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+              echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
             }
             ?>
           </div>
@@ -577,7 +577,7 @@ swal(alertRet);
       </div>
 
 
-
+</div>
 
 
 
