@@ -574,7 +574,7 @@ swal(alertRet);
       <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
-            <h2>Domain XML</h2>
+            <h2>Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; ?>"</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
@@ -591,7 +591,6 @@ swal(alertRet);
                 "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
               echo $ret;
             } else {
-              echo "<p>*Editing XML is performed when virtual guest is shutoff</p>";
               echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
             }
             ?>
