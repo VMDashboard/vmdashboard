@@ -262,17 +262,17 @@ function domainDeleteWarning(linkURL) {
             /* General information */
             echo "<table>";
               echo "<tr>";
-                echo "<td><strong>Domain type: </strong></td>";
+                echo "<td><strong>Type: </strong></td>";
                 echo "<td>" . $lv->get_domain_type($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td><strong>Domain emulator: </strong></td>";
+                echo "<td><strong>Emulator: </strong></td>";
                 echo "<td>" . $lv->get_domain_emulator($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td><strong>Domain memory: </strong></td>";
+                echo "<td><strong>Memory: </strong></td>";
                 echo "<td>" . $mem . "</td>";
               echo "</tr>";
 
@@ -292,7 +292,7 @@ function domainDeleteWarning(linkURL) {
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td><strong>Domain ID: </strong></td>";
+                echo "<td><strong>ID: </strong></td>";
                 echo "<td>" . $id . "</td>";
               echo "</tr>";
 
@@ -300,7 +300,7 @@ function domainDeleteWarning(linkURL) {
                 echo "<td><strong>VNC Port: </strong></td>";
                 echo "<td>" . $vnc . "</td>";
               echo "</tr>";
-            
+
             echo "</table>";
 
             if ($die)
