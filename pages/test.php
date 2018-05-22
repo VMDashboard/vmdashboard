@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])){
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['action'] = $_POST['action'];
     $_SESSION['name'] = $_POST['name'];
-    unset($_GET);
+    //unset($_GET);
     //header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
@@ -235,7 +235,7 @@ swal(alertRet);
           </div>
           <div class="x_content">
 
-            <?php var_dump($_SEVER); ?>
+            <?php var_dump($_SERVER); ?>
 
             <?php
             /* General information */
