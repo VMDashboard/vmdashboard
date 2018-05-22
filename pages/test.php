@@ -482,7 +482,7 @@ swal(alertRet);
           </div>
         </div>
       </div>
-
+</div>
 
 
 
@@ -494,7 +494,7 @@ swal(alertRet);
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            
+
             <?php
             /* Disk information */
             $tmp = $lv->get_disk_stats($domName);
