@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $_SESSION['action'] = $_POST['action'];
     $_SESSION['name'] = $_POST['name'];
     unset($_GET);
-    header("Location: ".$_SERVER['PHP_SELF']);
+    //header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
 
