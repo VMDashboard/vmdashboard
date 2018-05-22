@@ -9,18 +9,19 @@ if (!isset($_SESSION['username'])){
 }
 // We are now going to grab any POST data and put in in SESSION data, then clear it.
 // This will prevent and reloading the webpage to resubmit and action.
-if (isset($_GET['uuid'])) {
-    $_SESSION['uuid'] = $_GET['uuid'];
+if (isset($_GET['action']) || isset($_GET['dev']) isset($_GET['mac']) isset($_GET['snapshot'])) {
     $_SESSION['action'] = $_GET['action'];
     $_SESSION['dev'] = $_GET['dev'];
-    header("Location: ".$_SERVER['PHP_SELF']);
+    $_SESSION['mac'] = $_GET['mac'];
+    $_SESSION['snapshot'] = $_GET['snapshot'];
+    header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
     exit;
 }
 
 require('header.php');
 
-$uuid = $_SESSION['uuid'];
-$domName = $lv->domain_get_name_by_uuid($_SESSION['uuid']);
+$uuid = $_GET['uuid'];
+$domName = $lv->domain_get_name_by_uuid($uuid);
 $dom = $lv->get_domain_object($domName);
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
 $url = $protocol . $_SERVER['HTTP_HOST'];
@@ -66,7 +67,7 @@ if ($action == 'domain-delete') {
 
 //Disk Actions
 if ($action == 'domain-disk-remove') {
-  $dev = $_GET['dev'];
+  $dev = $_SESSION['dev'];
   //My XML way
   $path = $domXML->xpath('//disk');
   for ($i = 0; $i < sizeof($path); $i++) {
@@ -83,7 +84,7 @@ if ($action == 'domain-disk-remove') {
 
 //Network Actions
 if ($action == 'domain-nic-remove') {
-  $mac = base64_decode($_GET['mac']);
+  $mac = base64_decode($_SESSION['mac']);
   //My XML way
   $path = $domXML->xpath('//interface');
   for ($i = 0; $i < sizeof($path); $i++) {
@@ -104,17 +105,17 @@ if ($action == 'domain-snapshot-create') {
 }
 
 if ($action == 'domain-snapshot-delete') {
-  $snapshot = $_GET['snapshot'];
+  $snapshot = $_SESSION['snapshot'];
   $ret = $lv->domain_snapshot_delete($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully deleted" : 'Error while deleting snapshot of domain: '.$lv->get_last_error();
 }
 
 if ($action == 'domain-snapshot-revert') {
-  $snapshot = $_GET['snapshot'];
+  $snapshot = $_SESSION['snapshot'];
   $ret = $lv->domain_snapshot_revert($domName, $snapshot) ? "Snapshot $snapshot for $domName successfully applied" : 'Error while reverting snapshot of domain: '.$lv->get_last_error();
 }
 
 if ($action == 'domain-snapshot-xml') {
-  $snapshot = $_GET['snapshot'];
+  $snapshot = $_SESSION['snapshot'];
   $snapshotxml = $lv->domain_snapshot_get_xml($domName, $snapshot);
   //Parsing the snapshot XML file - in Ubuntu requires the php-xml package
   $xml = simplexml_load_string($snapshotxml);
