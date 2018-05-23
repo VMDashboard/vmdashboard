@@ -45,6 +45,7 @@ if ($action == 'domain-resume') {
 //There are many reasons why a guest cannot gracefully shutdown so if it can't, let the user know that
 if ($action == 'domain-stop') {
   $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
+  sleep(1);
   $actioninfo = libvirt_domain_get_info($dom); //gets domain info, will use to see if it shutdown or not. Did not use $lv->domain_get_info($dom); because it used cached data
   $actionstate = $lv->domain_state_translate($actioninfo['state']); //get the action state from the info
   //If actionstate is running that means that the domain could not shutdown and will need to be forcefully powered off
