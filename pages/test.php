@@ -211,7 +211,7 @@ function domainDeleteWarning(linkURL) {
 
 <div class="row">
     <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="x_panel tile fixed_height_320" style="overflow-y: scroll;">
+      <div class="x_panel tile">
         <div class="x_title">
           <h2>Console</h2>
           <div class="clearfix"></div>
@@ -244,7 +244,7 @@ function domainDeleteWarning(linkURL) {
 
 
       <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2><a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h2>
             <div class="clearfix"></div>
@@ -308,7 +308,7 @@ function domainDeleteWarning(linkURL) {
 
 
       <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2>Actions</h2>
             <div class="clearfix"></div>
