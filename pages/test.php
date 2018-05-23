@@ -213,7 +213,7 @@ function domainDeleteWarning(linkURL) {
     <div class="col-md-4 col-sm-4 col-xs-12">
       <div class="x_panel tile">
         <div class="x_title">
-          <h2>Console</h2>
+          <h2>Console - URL:<?php echo $url; ?></h2>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -227,7 +227,7 @@ function domainDeleteWarning(linkURL) {
                   ?>
                   <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
                   <!--<img src="data:image/png;base64,<?php echo $screen64; ?>" width='100%'/> -->
-                  <iframe src=":6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" width="100%"></iframe> 
+                  <iframe src=":6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" width="100%"></iframe>
                   </a>
                   <?php
                 } else if ($state == "paused") {
