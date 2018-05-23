@@ -50,7 +50,7 @@ if ($action == 'domain-stop') {
   //If actionstate is running that means that the domain could not shutdown and will need to be forcefully powered off
   //if ($actionstate != "shutoff"){
     //$ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
-  }
+  //}
 }
 
 //This will forcefully shutdown the virtual machine guest
