@@ -224,7 +224,7 @@ function domainDeleteWarning(linkURL) {
                 <?php
                 if ($state == "running") {
                   //screenshot will get raw png data at 300 pixels wide
-                  $screenshot = $lv->domain_get_screenshot_thumbnail($uuid, 400);
+                  $screenshot = $lv->domain_get_screenshot($uuid);
                   //the raw png data needs to be encoded to use with html img tag
                   $screen64 = base64_encode($screenshot['data']);
                   ?>
