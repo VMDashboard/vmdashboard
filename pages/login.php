@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
 
-    if (isset($_SESSION['original_page'])){
+    if ($_SESSION['original_page'] != null ){
       $original_page = $_SESSION['original_page'];
       header('Location: ' . $original_page);
     }
