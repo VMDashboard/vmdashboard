@@ -224,7 +224,7 @@ function domainDeleteWarning(linkURL) {
                 //the raw png data needs to be encoded to use with html img tag
                 $screen64 = base64_encode($screenshot['data']);
                 ?>
-                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=&token=<?php echo $uuid ?>" target="_blank">
                 <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/>
                 </a>
                 <?php
