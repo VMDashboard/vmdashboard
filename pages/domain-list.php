@@ -6,6 +6,8 @@ if (!isset($_SESSION)) {
 
 // If there is no username, then we need to send them to the login
 if (!isset($_SESSION['username'])){
+  //setting current_page so that login will redirect the user back here after login
+  $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
   header('Location: login.php');
 }
 
@@ -17,6 +19,7 @@ if (isset($_GET['action'])) {
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
+
 require('header.php');
 require('navigation.php');
 
