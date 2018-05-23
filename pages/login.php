@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
     if (isset($_SESSION['current_page'])){
-      header("Location: " . $_SESSION['current_page']);
+      header('Location: ' . $_SESSION['current_page']);
     }
     header('Location: ../index.php');
    } else {
