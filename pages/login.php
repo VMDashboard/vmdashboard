@@ -1,6 +1,8 @@
-
 <?php
-session_start();
+// If the SESSION has not been started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require('../config.php');
@@ -20,9 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
+
     if (isset($_SESSION['current_page'])){
       header('Location: ' . $_SESSION['current_page']);
     }
+
     header('Location: ../index.php');
    } else {
      echo "Credentials are incorrect";

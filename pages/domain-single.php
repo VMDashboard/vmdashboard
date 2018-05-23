@@ -8,6 +8,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['username'])){
   //setting current_page so that login will redirect the user back here after login
   $_SESSION['current_page'] = $_SERVER['REQUEST_URI'];
+  //redirct to login page now
   header('Location: login.php');
 }
 
