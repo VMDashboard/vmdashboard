@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])){
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_GET['action'])) {
     $_SESSION['action'] = $_GET['action'];
-    header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
+    header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
 require('header.php');
