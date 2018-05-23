@@ -6,8 +6,6 @@ if (!isset($_SESSION)) {
 
 // If there is no username, then we need to send them to the login
 if (!isset($_SESSION['username'])){
-  //setting current_page so that login will redirect the user back here after login
-  $_SESSION['original_page'] = $_SERVER['REQUEST_URI'];
   //redirct to login page now
   header('Location: login.php');
 }

@@ -22,13 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
-
-    if ($_SESSION['original_page'] != null ){
-      $original_page = $_SESSION['original_page'];
-      $_SESSION['original_page'] = null;
-      header('Location: ' . $original_page);
-    }
-
     header('Location: ../index.php');
 
    } else {
