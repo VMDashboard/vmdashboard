@@ -217,10 +217,7 @@ function domainDeleteWarning(linkURL) {
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
-          <div class="col-md-4 col-sm-4 col-xs-12 profile_left">
-            <div class="profile_img">
-              <div id="crop-avatar">
-                <!-- Current avatar -->
+
                 <?php
                 if ($state == "running") {
                   //screenshot will get raw png data at 300 pixels wide
@@ -238,11 +235,7 @@ function domainDeleteWarning(linkURL) {
                   echo "<img src='../assets/img/shutdown.png' width='100%' >";
                 }
                 ?>
-            <!--    <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> -->
-              </div>
-            </div>
-          </div>
-
+      
         </div>
       </div>
     </div>
