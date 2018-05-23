@@ -12,6 +12,7 @@ if (!isset($_SESSION['username'])){
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_GET['action'])) {
+    $_SESSION['uuid'] = $_GET['uuid'];
     $_SESSION['action'] = $_GET['action'];
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
@@ -19,7 +20,7 @@ if (isset($_GET['action'])) {
 require('header.php');
 require('navigation.php');
 
-$uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
+$uuid = $_SESSION['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
 unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of action on page reload
 $domName = $lv->domain_get_name_by_uuid($uuid); //get the name of virtual machine with $uuid is present
