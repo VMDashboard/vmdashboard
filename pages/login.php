@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       header('Location: ' . $original_page);
     }
 
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
 
    } else {
      echo "Credentials are incorrect";
