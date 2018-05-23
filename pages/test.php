@@ -227,7 +227,7 @@ function domainDeleteWarning(linkURL) {
                   ?>
                   <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
                   <!--<img src="data:image/png;base64,<?php echo $screen64; ?>" width='100%'/> -->
-                  <iframe src="<?php echo $url; ?>:6080/vnc_lite.html?path=&resize=scale&view_only=1&token=<?php echo $uuid ?>" width="100%" height="300px"></iframe>
+                  <iframe src="<?php echo $url; ?>:6080/vnc_lite.html?path=&resize=scale&view_clip=0&view_only=1&token=<?php echo $uuid ?>" width="100%" height="300px"></iframe>
                   </a>
                   <?php
                 } else if ($state == "paused") {
