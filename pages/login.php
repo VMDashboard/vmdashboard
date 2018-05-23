@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($_SESSION['original_page'] != null ){
       $original_page = $_SESSION['original_page'];
+      $_SESSION['original_page'] = null;
       header('Location: ' . $original_page);
     }
 
