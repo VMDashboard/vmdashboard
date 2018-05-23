@@ -209,42 +209,41 @@ function domainDeleteWarning(linkURL) {
 
     <div class="clearfix"></div>
 
-<div class="row">
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="x_panel tile fixed_height_320">
-        <div class="x_title">
-          <h2>Console</h2>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-
-                <?php
-                if ($state == "running") {
-                  //screenshot will get raw png data at 300 pixels wide
-                  $screenshot = $lv->domain_get_screenshot_thumbnail($uuid, 600);
-                  //the raw png data needs to be encoded to use with html img tag
-                  $screen64 = base64_encode($screenshot['data']);
-                  ?>
-                  <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                  <img src="data:image/png;base64,<?php echo $screen64 ?>" width="100%"/>
-                  </a>
-                  <?php
-                } else if ($state == "paused") {
-                  echo "<img src='../assets/img/paused.png' width='100%' >";
-                } else {
-                  echo "<img src='../assets/img/shutdown.png' width='100%' >";
-                }
+    <div class="row">
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile">
+          <div class="x_title">
+            <h2>Console</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <?php
+              if ($state == "running") {
+                //Lets get the screenshot of the running domain
+                $screenshot = $lv->domain_get_screenshot($uuid);
+                //the raw png data needs to be encoded to use with html img tag
+                $screen64 = base64_encode($screenshot['data']);
                 ?>
+                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
+                <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/>
+                </a>
+                <?php
+              } else if ($state == "paused") {
+                echo "<img src='../assets/img/paused.png' width='100%' >";
+              } else {
+                echo "<img src='../assets/img/shutdown.png' width='100%' >";
+              }
+            ?>
 
+          </div>
         </div>
       </div>
-    </div>
 
 
 
 
-      <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile">
           <div class="x_title">
             <h2>General Information</h2>
             <div class="clearfix"></div>
@@ -308,7 +307,7 @@ function domainDeleteWarning(linkURL) {
 
 
       <div class="col-md-4 col-sm-4 col-xs-12">
-        <div class="x_panel tile fixed_height_320">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2>Actions</h2>
             <div class="clearfix"></div>
