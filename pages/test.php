@@ -226,7 +226,8 @@ function domainDeleteWarning(linkURL) {
                   $screen64 = base64_encode($screenshot['data']);
                   ?>
                   <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" target="_blank">
-                  <img src="data:image/png;base64,<?php echo $screen64; ?>" width='100%'/>
+                  <!--<img src="data:image/png;base64,<?php echo $screen64; ?>" width='100%'/> -->
+                  <iframe src=":6080/vnc_lite.html?path=?token=<?php echo $uuid ?>" width="100%"></iframe> 
                   </a>
                   <?php
                 } else if ($state == "paused") {
