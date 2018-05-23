@@ -24,9 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['username'] = $username;
 
     if (isset($_SESSION['original_page'])){
-      header('Location: ' . $_SESSION['original_page']);
+      $original_page = $_SESSION['original_page'];
+      header('Location: ' . $original_page);
     }
-    
+
     header('Location: ../index.php');
 
    } else {
