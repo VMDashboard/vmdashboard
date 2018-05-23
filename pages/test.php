@@ -6,8 +6,6 @@ if (!isset($_SESSION)) {
 
 // If there is no username, then we need to send them to the login
 if (!isset($_SESSION['username'])){
-  //setting current_page so that login will redirect the user back here after login
-  $_SESSION['original_page'] = $_SERVER['REQUEST_URI'];
   //redirct to login page now
   header('Location: login.php');
 }
@@ -242,40 +240,40 @@ function domainDeleteWarning(linkURL) {
 
               <?php  if ($state == "running") { ?>
                 <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                  <i class="fa fa-desktop"></i> Connect using noVNC | <br />
+                  <i class="fa fa-desktop"></i> Connect using noVNC |
                 </a>
               <?php } ?>
 
               <?php if ($state == "shutoff") { ?>
                 <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Power on | <br />
+                  <i class="fa fa-power-off"></i> Power on |
                 </a>
               <?php } ?>
 
               <?php  if ($state == "running") { ?>
                 <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="fa fa-power-off"></i> Shutdown | <br />
+                <i class="fa fa-power-off"></i> Shutdown |
               </a>
                 <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-pause"></i> Pause domain | <br />
+                  <i class="fa fa-pause"></i> Pause domain
                 </a>
               <?php } ?>
 
               <?php  if ($state == "paused") { ?>
                 <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-play"></i> Resume domain | <br />
+                  <i class="fa fa-play"></i> Resume domain
                 </a>
               <?php } ?>
 
               <?php  if ($state != "shutoff") { ?>
                 <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plug"></i> Forcefully shutdown | <br />
+                  <i class="fa fa-plug"></i> Forcefully shutdown |
                 </a>
               <?php } ?>
 
               <?php  if ($state == "shutoff") { ?>
                 <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                  <i class="fa fa-trash"></i> Delete domain <br />
+                  <i class="fa fa-trash"></i> Delete domain
                 </a>
               <?php } ?>
 
