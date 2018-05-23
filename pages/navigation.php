@@ -94,7 +94,7 @@ if (!isset($_SESSION)) {
                 </a>
                 <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li><a href="../index.php?action=logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                  <li><a href="user-password-reset.php"><i class="fa fa-key pull-right"></i> Reset Password</a></li>
+                  <li><a href="user-password-reset.php"><i class="fa fa-key pull-right"></i> Change Password</a></li>
                 </ul>
               </li>
 
