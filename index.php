@@ -1,5 +1,9 @@
 <?php
-session_start();
+// If the SESSION has not been started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 $path = dirname(__FILE__) . "/config.php";
 
 //create an initial setup page. Have it configure database, username, password,
@@ -28,4 +32,4 @@ if (isset($_SESSION['username'])) {
 header('Location: pages/setup-database.php');
 }
 
- ?>
+?>
