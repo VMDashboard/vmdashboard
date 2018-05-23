@@ -1,9 +1,28 @@
 <?php
+// If the SESSION has not been started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+// If there is no username, then we need to send them to the login
+if (!isset($_SESSION['username'])){
+  header('Location: login.php');
+}
+
+// We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
+// This will prevent duplicatig actions when page is reloaded.
+if (isset($_GET['action'])) {
+    $_SESSION['uuid'] = $_GET['uuid'];
+    $_SESSION['action'] = $_GET['action'];
+    header("Location: ".$_SERVER['PHP_SELF']);
+    exit;
+}
 require('header.php');
 require('navigation.php');
 
-$uuid = $_GET['uuid']; //grab the $uuid variable from $_GET, only used for actions below
-$action = $_GET['action']; //grab the $action variable from $_GET
+$uuid = $_SESSION['uuid']; //grab the $uuid variable from $_GET, only used for actions below
+$action = $_SESSION['action']; //grab the $action variable from $_SESSION
+unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of action on page reload
 $domName = $lv->domain_get_name_by_uuid($uuid); //get the name of virtual machine with $uuid is present
 $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 
@@ -25,13 +44,7 @@ if ($action == 'domain-resume') {
 //This is used to gracefully shutdown the guest.
 //There are many reasons why a guest cannot gracefully shutdown so if it can't, let the user know that
 if ($action == 'domain-stop') {
-  $ret = $lv->domain_shutdown($domName) ? "Domain has been stopped successfully" : 'Error while stopping domain: '.$lv->get_last_error();
-  $actioninfo = $lv->domain_get_info($dom); //gets domain info, will be used to get the running state
-  $actionstate = $lv->domain_state_translate($actioninfo['state']); //get the action state from the info
-  //If actionstate is running that means that the domain could not shutdown and will need to be forcefully powered off
-  if ($actionstate == "running"){
-    $ret = "Domain is unable to shutdown gracefully. It will need to be forcefully turned off";
-  }
+  $ret = $lv->domain_shutdown($domName) ? "Shutdown command has been sent" : 'Error while stopping domain: '.$lv->get_last_error();
 }
 
 //This will forcefully shutdown the virtual machine guest
@@ -43,13 +56,13 @@ if ($action == 'domain-destroy') {
 <?php
 //alert the user of any ret messages
 if ($ret) {
-?>
-<script>
-var alertRet = "<?php echo $ret; ?>";
-swal(alertRet);
-</script>
-<?php
-}
+  ?>
+  <script>
+    var alertRet = "<?php echo $ret; ?>";
+    swal(alertRet);
+  </script>
+  <?php
+  }
 ?>
 
 
