@@ -136,7 +136,7 @@ require('navigation.php');
                     "<td>$vendor</td>" .
                     "<td>$product_name</td>" .
                     "<td>$serial</td>" .
-                    "<td>{$firmware_vendor}</td>" .
+                    "<td>{$tmp2['firmware_vendor']}</td>" .
                     "<td>$firmware_version</td>" .
                     "<td>$firmware_release_date</td>" .
                     "<td>$act</td>" .
