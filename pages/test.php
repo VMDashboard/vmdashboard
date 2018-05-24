@@ -237,46 +237,50 @@ function domainDeleteWarning(linkURL) {
             ?>
 
             <div class="col-xs-12 bottom text-center">
+              <div class="bs-glyphicons">
+                <ul class="bs-glyphicons-list">
+                  <?php  if ($state == "running") { ?>
+                    <li>
+                      <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                      <span class="fa fa-desktop" aria-hidden="true"></span>
+                      <span class="glyphicon-class"> Connect using noVNC</span> </a>
+                    </li>
+                  <?php } ?>
 
-              <?php  if ($state == "running") { ?>
-                <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                  <i class="fa fa-desktop"></i> Connect using noVNC |
-                </a>
-              <?php } ?>
+                  <?php if ($state == "shutoff") { ?>
+                    <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                      <i class="fa fa-power-off"></i> Power on<br />
+                    </a></li>
+                  <?php } ?>
 
-              <?php if ($state == "shutoff") { ?>
-                <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"><br /></i> Power on |
-                </a>
-              <?php } ?>
+                  <?php  if ($state == "running") { ?>
+                    <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-power-off"></i> Shutdown<br />
+                  </a></li>
+                    <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                      <i class="fa fa-pause"></i> Pause domain <br />
+                    </a></li>
+                  <?php } ?>
 
-              <?php  if ($state == "running") { ?>
-                <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                <i class="fa fa-power-off"></i> Shutdown |
-              </a>
-                <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-pause"></i> Pause domain
-                </a>
-              <?php } ?>
+                  <?php  if ($state == "paused") { ?>
+                    <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                      <i class="fa fa-play"></i> Resume domain <br />
+                    </a></li>
+                  <?php } ?>
 
-              <?php  if ($state == "paused") { ?>
-                <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-play"></i> Resume domain
-                </a>
-              <?php } ?>
+                  <?php  if ($state != "shutoff") { ?>
+                    <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                      <i class="fa fa-plug"></i> Forcefully shutdown<br />
+                    </a></li>
+                  <?php } ?>
 
-              <?php  if ($state != "shutoff") { ?>
-                <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plug"></i> Forcefully shutdown |
-                </a>
-              <?php } ?>
-
-              <?php  if ($state == "shutoff") { ?>
-                <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                  <i class="fa fa-trash"></i> Delete domain
-                </a>
-              <?php } ?>
-
+                  <?php  if ($state == "shutoff") { ?>
+                    <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+                      <i class="fa fa-trash"></i> Delete domain <br />
+                    </a></li>
+                  <?php } ?>
+                </ul>
+              </div>
             </div>
 
           </div>
