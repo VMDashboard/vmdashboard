@@ -72,7 +72,7 @@ require('navigation.php');
             for ($i = 0; $i < sizeof($tmp); $i++) {
 
               //Just pull out USB, USB_DEVICE data
-              if ($tmp[$i] == "usb" || $tmp[$i] == "usb_device"){
+              if ($tmp[$i] == "usb_device"){
                 echo "<h4>{$tmp[$i]}</h4>";
                 $tmp1 = $lv->get_node_devices($tmp[$i]);
                 echo "<div class='table-responsive'>" .
