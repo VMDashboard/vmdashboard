@@ -109,6 +109,8 @@ require('navigation.php');
                     "<td>$act</td>" .
                     "</tr>";
 
+                    var_dump($tmp2);
+
                 }
 
                 echo "</table></div>";
