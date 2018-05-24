@@ -97,7 +97,7 @@ require('navigation.php');
 
                   $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                   $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
-                  $vendor = 'Unknown';
+                  $vendor = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
                   $product = 'Unknown';
 
                   echo "<tr>" .
