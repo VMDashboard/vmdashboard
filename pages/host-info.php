@@ -127,7 +127,7 @@ require('navigation.php');
                     $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : 'Unknown';
                     $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
                     $serial = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
-                    $firmware_vender = array_key_exists('firmware_vendor', $tmp2) ? $tmp2['firmware_vendor'] : 'Unknown';
+                    $firmware_vender = array_key_exists('firmware_vendor', $tmp2) ? {$tmp2['firmware_vendor']} : 'Unknown';
                     $firmware_version = array_key_exists('firmware_version', $tmp2) ? $tmp2['firmware_version'] : 'Unknown';
                     $firmware_release_date = array_key_exists('firmware_release_date', $tmp2) ? $tmp2['firmware_release_date'] : 'Unknown';
 
@@ -136,7 +136,7 @@ require('navigation.php');
                     "<td>$vendor</td>" .
                     "<td>$product_name</td>" .
                     "<td>$serial</td>" .
-                    "<td>{$tmp2['firmware_vendor']}</td>" .
+                    "<td>$firmware_vendor</td>" .
                     "<td>$firmware_version</td>" .
                     "<td>$firmware_release_date</td>" .
                     "<td>$act</td>" .
