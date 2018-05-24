@@ -79,9 +79,9 @@ require('navigation.php');
                   "<table class='table'>" .
                   "<tr>" .
                   "<th> Device name </th>" .
-                  "<th> Identification </th>" .
+                  "<th> Interface </th>" .
                   "<th> Driver name </th>" .
-                  "<th> Vendor </th>" .
+                  "<th> MAC Address </th>" .
                   "<th> Product </th>" .
                   "<th> Action </th>" .
                   "</tr>";
@@ -95,16 +95,16 @@ require('navigation.php');
                     <input type=\"submit\" name=\"submit\" value=\"XML\">
                     </form>";
 
-                  $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
+                  $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                   $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
-                  $vendor = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
+                  $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
                   $product = 'Unknown';
 
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
-                    "<td>$ident</td>" .
+                    "<td>$interface</td>" .
                     "<td>$driver</td>" .
-                    "<td>$vendor</td>" .
+                    "<td>$mac_address</td>" .
                     "<td>$product</td>" .
                     "<td>$act</td>" .
                     "</tr>";
