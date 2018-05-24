@@ -239,6 +239,11 @@ function domainDeleteWarning(linkURL) {
             <div class="bs-docs-section">
               <div class="bs-glyphicons">
                 <ul class="bs-glyphicons-list">
+                  <li>
+                            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+                            <span class="glyphicon-class">glyphicon glyphicon-asterisk</span>
+                          </li>
+                          
                   <?php  if ($state == "running") { ?>
                     <li>
                       <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
