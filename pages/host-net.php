@@ -98,7 +98,7 @@ require('navigation.php');
                   $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                   $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
                   $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
-                  $product = array_key_exists('speed', $tmp2) ? $tmp2['speed'] : '-';
+                  $product = array_key_exists('link', $tmp2) ? $tmp2['link'] : '-';
 
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
