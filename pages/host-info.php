@@ -132,10 +132,6 @@ require('navigation.php');
                     $firmware_release_date = array_key_exists('firmware_release_date', $tmp2) ? $tmp2['firmware_release_date'] : 'Unknown';
 
 
-   ["product_name"]=> string(14) "PowerEdge R710" }
-
-
-
                   echo "<tr>" .
                     "<td>$vendor</td>" .
                     "<td>$product_name</td>" .
