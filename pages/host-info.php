@@ -122,6 +122,7 @@ require('navigation.php');
                     <input type=\"submit\" name=\"submit\" value=\"XML\">
                     </form>";
 
+var_dump($tmp2);
 
                     $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : '';
                     $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
