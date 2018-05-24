@@ -104,11 +104,12 @@ require('navigation.php');
                 echo "<div class='table-responsive'>" .
                   "<table class='table'>" .
                   "<tr>" .
-                  "<th> Device name </th>" .
-                  "<th> Identification </th>" .
-                  "<th> Driver name </th>" .
-                  "<th> Vendor </th>" .
+                  "<th> Hardware Vendor </th>" .
                   "<th> Product </th>" .
+                  "<th> Serial</th>" .
+                  "<th> Firmware Vendor </th>" .
+                  "<th> Firmware Version </th>" .
+                  "<th> Firmware Release Date </th>" .
                   "<th> Action </th>" .
                   "</tr>";
 
@@ -121,17 +122,28 @@ require('navigation.php');
                     <input type=\"submit\" name=\"submit\" value=\"XML\">
                     </form>";
 
-                    $driver = '-';
+
                     $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : '';
-                    $serial = array_key_exists('hardware_version', $tmp2) ? $tmp2['hardware_version'] : '';
-                    $ident = $vendor.' '.$serial;
-                    $product = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
+                    $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
+                    $serial = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
+                    $firmware_vender = array_key_exists('firmware_vendor', $tmp2) ? $tmp2['firmware_vendor'] : 'Unknown';
+                    $firmware_version = array_key_exists('firmware_version', $tmp2) ? $tmp2['firmware_version'] : 'Unknown';
+                    $firmware_release = array_key_exists('firmware_release', $tmp2) ? $tmp2['firmware_release'] : 'Unknown';
+                    $firmware_release_date = array_key_exists('firmware_release_date', $tmp2) ? $tmp2['firmware_release_date'] : 'Unknown';
+
+
+   ["product_name"]=> string(14) "PowerEdge R710" }
+
+
+
                   echo "<tr>" .
-                    "<td>{$tmp2['name']}</td>" .
-                    "<td>$ident</td>" .
-                    "<td>$driver</td>" .
                     "<td>$vendor</td>" .
-                    "<td>$product</td>" .
+                    "<td>$product_name</td>" .
+                    "<td>$serial</td>" .
+                    "<td>$firmware_vendor</td>" .
+                    "<td>$firmware_version</td>" .
+                    "<td>$firmware_release</td>" .
+                    "<td>$firmware_release_date</td>" .
                     "<td>$act</td>" .
                     "</tr>";
 
