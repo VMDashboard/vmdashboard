@@ -246,7 +246,7 @@ function domainDeleteWarning(linkURL) {
 
               <?php if ($state == "shutoff") { ?>
                 <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Power on |
+                  <i class="fa fa-power-off"><br /></i> Power on |
                 </a>
               <?php } ?>
 

@@ -182,6 +182,7 @@ if ($ret) {
   <?php
 }
 
+//End PHP Section
 ?>
 
 <script>
@@ -219,38 +220,34 @@ function domainDeleteWarning(linkURL) {
           </div>
           <div class="x_content">
             <?php
-              if ($state == "running") {
-                //Lets get the screenshot of the running domain
-                $screenshot = $lv->domain_get_screenshot($uuid);
-                //the raw png data needs to be encoded to use with html img tag
-                $screen64 = base64_encode($screenshot['data']);
-                ?>
-                <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=&token=<?php echo $uuid ?>" target="_blank">
-                <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/>
-                </a>
-                <?php
-              } else if ($state == "paused") {
-                echo "<img src='../assets/img/paused.png' width='100%' >";
-              } else {
-                echo "<img src='../assets/img/shutdown.png' width='100%' >";
-              }
+            if ($state == "running") {
+              //Lets get the screenshot of the running domain
+              $screenshot = $lv->domain_get_screenshot($uuid);
+              //the raw png data needs to be encoded to use with html img tag
+              $screen64 = base64_encode($screenshot['data']);
+              ?>
+              <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=&token=<?php echo $uuid ?>" target="_blank">
+              <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/>
+              </a>
+              <?php
+            } else if ($state == "paused") {
+              echo "<img src='../assets/img/paused.png' width='100%' >";
+            } else {
+              echo "<img src='../assets/img/shutdown.png' width='100%' >";
+            }
             ?>
-
           </div>
         </div>
       </div>
 
 
-
-
-    <div class="col-md-4 col-sm-4 col-xs-12">
-      <div class="x_panel tile">
+      <div class="col-md-4 col-sm-4 col-xs-12">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2>General Information</h2>
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-
             <?php
             /* General information */
             echo "<table class=\"table\">";
@@ -298,13 +295,11 @@ function domainDeleteWarning(linkURL) {
 
             if ($die)
               die('</body></html');
-              ?>
+            ?>
 
-            </div>
           </div>
         </div>
-
-
+      </div>
 
 
       <div class="col-md-4 col-sm-4 col-xs-12">
@@ -316,7 +311,6 @@ function domainDeleteWarning(linkURL) {
           <div class="x_content">
             <div class="dashboard-widget-content">
               <ul class="list-unstyled project_files">
-
                 <?php  if ($state == "running") { ?>
                   <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
                     <i class="fa fa-desktop"></i> Connect using noVNC<br />
@@ -331,8 +325,8 @@ function domainDeleteWarning(linkURL) {
 
                 <?php  if ($state == "running") { ?>
                   <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Shutdown<br />
-                </a></li>
+                    <i class="fa fa-power-off"></i> Shutdown<br />
+                  </a></li>
                   <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                     <i class="fa fa-pause"></i> Pause domain <br />
                   </a></li>
@@ -381,8 +375,6 @@ function domainDeleteWarning(linkURL) {
           </div>
         </div>
       </div>
-
-
 
 
 
@@ -495,6 +487,7 @@ function domainDeleteWarning(linkURL) {
                   }
                   ?>
                 </div>
+
                 <div class="tab-pane" id="networking">
                   <?php
                   /* Network interface information */
@@ -557,18 +550,14 @@ function domainDeleteWarning(linkURL) {
                     echo '<hr><p>Domain doesn\'t have any network devices</p>';
                   }
                   ?>
-
                 </div>
+
               </div>
             </div>
-
             <div class="clearfix"></div>
-
           </div>
         </div>
       </div>
-
-
 
 
 
@@ -623,13 +612,9 @@ function domainDeleteWarning(linkURL) {
               echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
             }
             ?>
-
-
           </div>
         </div>
       </div>
-
-
 
 
 
@@ -646,7 +631,6 @@ function domainDeleteWarning(linkURL) {
             $xml = $lv->domain_get_xml($domName, $inactive);
             $ret = htmlentities($xml);
 
-
             if ($state == "shutoff"){
               $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $uuid . " >" .
                 "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
@@ -660,16 +644,9 @@ function domainDeleteWarning(linkURL) {
         </div>
       </div>
 
-
-</div>
-
-
-
-
     </div>
   </div>
 </div>
-
 <!-- /page content -->
 
 

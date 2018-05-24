@@ -1,18 +1,18 @@
 <?php
 require('header.php');
 
-function clean_name_input($data) {
-  $data = trim($data);
+function clean_input($data) {
+  $data = trim($data); //remove spaces at the beginning and end of string
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
-  $data = str_replace(' ','',$data);
+  $data = str_replace(' ','',$data); //remove any spaces within the string
   $data = filter_var($data, FILTER_SANITIZE_STRING);
   return $data;
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $domain_type = "kvm"; //set to "kvm"
-  $domain_name = clean_name_input($_POST['domain_name']); //removes spaces and sanitizes
+  $domain_type = "kvm"; //set to "kvm" as this is the only supported type at this time
+  $domain_name = clean_input($_POST['domain_name']); //removes spaces and sanitizes
   $memory_unit = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $memory = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $vcpu = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $os_platform = $_POST['os_platform'];
 
   //OS Information
-  if ($os_platform == "Windows") {
+  if ($os_platform == "windows") {
     //BIOS Featurs
     $features = "
     <features>
@@ -66,15 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $source_file_volume = $_POST['source_file_volume']; //This will be the volume image that the user selects
 
   //determine disk file extension to determine driver type
-  $dot_array = explode('.', $source_file_volume);
-  $extension = end($dot_array);
+  $dot_array = explode('.', $source_file_volume); //seperates string into array based on "."
+  $extension = end($dot_array); //end returns the last element in the array, which should be the extension
   if ($extension == "qcow2") {
     $driver_type_volume = "qcow2";
   } else {
     $driver_type_volume = "raw";
   }
 
-  //determine what the hard drive xml will be
+  //determine what the hard drive volume xml will be
   switch ($source_file_volume) {
     case "none":
       $volume_xml = "";
@@ -82,8 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     case "new":
       $pool = "default";
-      $volume_image_name = clean_name_input($_POST['new_volume_name']);
-      //Lets check for empty string
+      $volume_image_name = clean_input($_POST['new_volume_name']);
+      //Lets check for empty string, if it is empty will just append -volume-image to the domain name
       if ($volume_image_name == "") {
         $volume_image_name = $domain_name . "-volume-image";
       }
@@ -190,7 +190,7 @@ $network_interface_xml = "
       " . $network_interface_xml . "
       <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
       <memballoon model='virtio'>
-            <stats period='10'/>    
+            <stats period='10'/>
       </memballoon>
     </devices>
     </domain> ";
@@ -351,10 +351,10 @@ function changeOptions(selectEl) {
                       <label for="os_platform" class="control-label col-md-3 col-sm-3 col-xs-12">OS Platform</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" name="os_platform">
-                          <option value="Linux">Linux</option>
-                          <option value="Unix">Unix</option>
-                          <option value="Windows">Windows</option>
-                          <option value="Other">Other</option>
+                          <option value="linux">Linux</option>
+                          <option value="unix">Unix</option>
+                          <option value="windows">Windows</option>
+                          <option value="other">Other</option>
                         </select>
                       </div>
                     </div>
