@@ -82,7 +82,7 @@ require('navigation.php');
                   "<th> Interface </th>" .
                   "<th> Driver name </th>" .
                   "<th> MAC Address </th>" .
-                  "<th> Product </th>" .
+                  "<th> Network Speed </th>" .
                   "<th> Action </th>" .
                   "</tr>";
 
@@ -98,18 +98,16 @@ require('navigation.php');
                   $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                   $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
                   $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
-                  $product = array_key_exists('link', $tmp2) ? $tmp2['link'] : '-';
+                  $link_speed = "-"; //need to pull from XML file, not available from API
 
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
                     "<td>$interface</td>" .
                     "<td>$driver</td>" .
                     "<td>$mac_address</td>" .
-                    "<td>$product</td>" .
+                    "<td>$link_speed</td>" .
                     "<td>$act</td>" .
                     "</tr>";
-
-                    var_dump($tmp2);
 
                 }
 
