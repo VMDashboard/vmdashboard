@@ -236,7 +236,7 @@ function domainDeleteWarning(linkURL) {
               }
             ?>
 
-
+            <div class="bs-docs-section">
               <div class="bs-glyphicons">
                 <ul class="bs-glyphicons-list">
                   <?php  if ($state == "running") { ?>
@@ -281,7 +281,7 @@ function domainDeleteWarning(linkURL) {
                   <?php } ?>
                 </ul>
               </div>
-        
+            </div>
 
           </div>
         </div>
