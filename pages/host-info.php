@@ -126,7 +126,6 @@ require('navigation.php');
                     $serial = array_key_exists('hardware_version', $tmp2) ? $tmp2['hardware_version'] : '';
                     $ident = $vendor.' '.$serial;
                     $product = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
-var_dump($tmp2);
                   echo "<tr>" .
                     "<td>{$tmp2['name']}</td>" .
                     "<td>$ident</td>" .
