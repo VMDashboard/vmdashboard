@@ -237,7 +237,7 @@ function domainDeleteWarning(linkURL) {
               }
             ?>
 <hr>
-            <div class="bs-glyphicons">
+
               <ul class="bs-glyphicons-list">
                 <?php  if ($state == "running") { ?>
                   <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" ><li style="width:25%; height:75px;">
@@ -278,7 +278,7 @@ function domainDeleteWarning(linkURL) {
                   </li></a>
                 <?php } ?>
               </ul>
-            </div>
+            
           </div>
 
 
