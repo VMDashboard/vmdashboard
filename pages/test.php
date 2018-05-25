@@ -236,7 +236,7 @@ function domainDeleteWarning(linkURL) {
                 echo "<img src='../assets/img/shutdown.png' width='100%' >";
               }
             ?>
-
+<div class="clearfix"></div>
             <div class="bs-glyphicons">
               <ul class="bs-glyphicons-list">
                 <?php  if ($state == "running") { ?>
