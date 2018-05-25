@@ -237,12 +237,9 @@ function domainDeleteWarning(linkURL) {
               }
             ?>
 
+<div class="x_content">
             <div class="bs-docs-section">
-                      <h1 id="glyphicons" class="page-header">Glyphicons</h1>
 
-                      <h2 id="glyphicons-glyphs">Available glyphs</h2>
-                      <p>Includes 260 glyphs in font format from the Glyphicon Halflings set. <a href="https://glyphicons.com/">Glyphicons</a> Halflings are normally not available for free, but their creator has made them available for Bootstrap free of cost.
-                        As a thank you, we only ask that you include a link back to <a href="https://glyphicons.com/">Glyphicons</a> whenever possible.</p>
                       <div class="bs-glyphicons">
                         <ul class="bs-glyphicons-list">
 
@@ -263,7 +260,7 @@ function domainDeleteWarning(linkURL) {
                         </ul>
                       </div>
                     </div>
-
+</div>
 
 
           </div>
