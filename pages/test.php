@@ -243,7 +243,7 @@ function domainDeleteWarning(linkURL) {
                       <div class="bs-glyphicons">
                         <ul class="bs-glyphicons-list">
 
-                          <li width="25%">
+                          <li style="width:25%;">
                             <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                             <span class="glyphicon-class">glyphicon glyphicon-asterisk</span>
                           </li>
