@@ -237,8 +237,7 @@ function domainDeleteWarning(linkURL) {
               }
             ?>
 
-<div class="x_content">
-            <div class="bs-docs-section">
+
 
                       <div class="bs-glyphicons">
                         <ul class="bs-glyphicons-list">
@@ -260,10 +259,7 @@ function domainDeleteWarning(linkURL) {
                         </ul>
                       </div>
                     </div>
-</div>
 
-
-          </div>
         </div>
       </div>
 
