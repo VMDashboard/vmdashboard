@@ -240,8 +240,8 @@ function domainDeleteWarning(linkURL) {
             <div class="bs-glyphicons">
               <ul class="bs-glyphicons-list">
                 <?php  if ($state == "running") { ?>
-                  <li style="width:25%; height:50px;"><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fa fa-desktop" style="font-size:25px;"></i><br /> noVNC<br />
+                  <li style="width:25%; height:75px;"><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                    <i class="fa fa-desktop" style="font-size:20px;"></i><br /> noVNC<br />
                   </a></li>
                 <?php } ?>
 
