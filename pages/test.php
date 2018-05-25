@@ -241,40 +241,40 @@ function domainDeleteWarning(linkURL) {
               <ul class="bs-glyphicons-list">
                 <?php  if ($state == "running") { ?>
                   <li style="width:25%;"><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <br /><i class="fa fa-desktop"></i> Connect using noVNC<br />
+                    <br /><i class="fa fa-desktop"></i> noVNC<br />
                   </a></li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
-                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Power on<br />
+                  <li style="width:25%;"><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <br /><i class="fa fa-power-off"></i> Power on<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
-                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i> Shutdown<br />
+                  <li style="width:25%;"><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <br /><i class="fa fa-power-off"></i> Shutdown<br />
                 </a></li>
-                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i> Pause domain <br />
+                  <li style="width:25%;"><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <br /><i class="fa fa-pause"></i> Pause <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
-                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i> Resume domain <br />
+                  <li style="width:25%;"><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <br /><i class="fa fa-play"></i> Resume <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
-                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i> Forcefully shutdown<br />
+                  <li style="width:25%;"><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <br /><i class="fa fa-plug"></i> Power off<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
-                  <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                    <i class="fa fa-trash"></i> Delete domain <br />
+                  <li style="width:25%;"><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+                    <br /><i class="fa fa-trash"></i> Delete <br />
                   </a></li>
                 <?php } ?>
               </ul>
