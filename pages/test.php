@@ -246,35 +246,35 @@ function domainDeleteWarning(linkURL) {
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
-                  <li style="width:25%;"><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i><br /> Power on<br />
+                  <li style="width:25%;height:75px;"><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-power-off" style="font-size:20px;"></i><br /> Power on<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
-                  <li style="width:25%;"><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-power-off"></i><br /> Shutdown<br />
+                  <li style="width:25%;height:75px;"><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-power-off" style="font-size:20px;"></i><br /> Shutdown<br />
                 </a></li>
-                  <li style="width:25%;"><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i><br /> Pause <br />
+                  <li style="width:25%;height:75px;"><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-pause" style="font-size:20px;"></i><br /> Pause <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
-                  <li style="width:25%;"><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i><br /> Resume <br />
+                  <li style="width:25%;height:75px;"><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-play" style="font-size:20px;"></i><br /> Resume <br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
-                  <li style="width:25%;"><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i><br /> Power off<br />
+                  <li style="width:25%;height:75px;"><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-plug" style="font-size:20px;"></i><br /> Power off<br />
                   </a></li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
-                  <li style="width:25%;"><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                    <i class="fa fa-trash"></i><br /> Delete <br />
+                  <li style="width:25%;height:75px;"><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+                    <i class="fa fa-trash" style="font-size:20px;"></i><br /> Delete <br />
                   </a></li>
                 <?php } ?>
               </ul>
