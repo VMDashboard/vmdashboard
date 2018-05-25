@@ -211,6 +211,7 @@ function domainDeleteWarning(linkURL) {
     <div class="clearfix"></div>
 
     <div class="row">
+
       <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
@@ -237,56 +238,33 @@ function domainDeleteWarning(linkURL) {
             ?>
 
             <div class="bs-docs-section">
-              <div class="bs-glyphicons">
-                <ul class="bs-glyphicons-list">
-                  <li>
+                      <h1 id="glyphicons" class="page-header">Glyphicons</h1>
+
+                      <h2 id="glyphicons-glyphs">Available glyphs</h2>
+                      <p>Includes 260 glyphs in font format from the Glyphicon Halflings set. <a href="https://glyphicons.com/">Glyphicons</a> Halflings are normally not available for free, but their creator has made them available for Bootstrap free of cost.
+                        As a thank you, we only ask that you include a link back to <a href="https://glyphicons.com/">Glyphicons</a> whenever possible.</p>
+                      <div class="bs-glyphicons">
+                        <ul class="bs-glyphicons-list">
+
+                          <li>
                             <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
                             <span class="glyphicon-class">glyphicon glyphicon-asterisk</span>
                           </li>
-                          
-                  <?php  if ($state == "running") { ?>
-                    <li>
-                      <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                      <span class="fa fa-desktop" aria-hidden="true"></span>
-                      <span class="glyphicon-class"> Connect using noVNC</span> </a>
-                    </li>
-                  <?php } ?>
 
-                  <?php if ($state == "shutoff") { ?>
-                    <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                      <i class="fa fa-power-off"></i> Power on<br />
-                    </a></li>
-                  <?php } ?>
+                          <li>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon-class">glyphicon glyphicon-plus</span>
+                          </li>
 
-                  <?php  if ($state == "running") { ?>
-                    <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Shutdown<br />
-                  </a></li>
-                    <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                      <i class="fa fa-pause"></i> Pause domain <br />
-                    </a></li>
-                  <?php } ?>
+                          <li>
+                            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+                            <span class="glyphicon-class">glyphicon glyphicon-euro</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 
-                  <?php  if ($state == "paused") { ?>
-                    <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                      <i class="fa fa-play"></i> Resume domain <br />
-                    </a></li>
-                  <?php } ?>
 
-                  <?php  if ($state != "shutoff") { ?>
-                    <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                      <i class="fa fa-plug"></i> Forcefully shutdown<br />
-                    </a></li>
-                  <?php } ?>
-
-                  <?php  if ($state == "shutoff") { ?>
-                    <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                      <i class="fa fa-trash"></i> Delete domain <br />
-                    </a></li>
-                  <?php } ?>
-                </ul>
-              </div>
-            </div>
 
           </div>
         </div>
