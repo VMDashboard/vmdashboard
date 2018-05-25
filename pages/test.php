@@ -300,12 +300,12 @@ function domainDeleteWarning(linkURL) {
             /* General information */
             echo "<table class=\"table\">";
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; line-height:1; border-top:none;\"><strong>Type: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1.4; border-top:none;\"><strong>Type: </strong></td>";
                 echo "<td style=\"line-height:1; border-top:none;\">" . $lv->get_domain_type($domName) . "</td>";
               echo "</tr>";
 
               echo "<tr>";
-                echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Emulator: </strong></td>";
+                echo "<td style=\"background: #f3f3f3; line-height:1.4;\"><strong>Emulator: </strong></td>";
                 echo "<td style=\"line-height:1; \">" . $lv->get_domain_emulator($domName) . "</td>";
               echo "</tr>";
 
