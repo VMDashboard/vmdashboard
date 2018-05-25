@@ -237,28 +237,50 @@ function domainDeleteWarning(linkURL) {
               }
             ?>
 
+            <div class="bs-glyphicons">
+              <ul class="bs-glyphicons-list">
+                <?php  if ($state == "running") { ?>
+                  <li style="width:25%;"><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                    <br /><i class="fa fa-desktop"></i> Connect using noVNC<br />
+                  </a></li>
+                <?php } ?>
 
+                <?php if ($state == "shutoff") { ?>
+                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-power-off"></i> Power on<br />
+                  </a></li>
+                <?php } ?>
 
-                      <div class="bs-glyphicons">
-                        <ul class="bs-glyphicons-list">
+                <?php  if ($state == "running") { ?>
+                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  <i class="fa fa-power-off"></i> Shutdown<br />
+                </a></li>
+                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-pause"></i> Pause domain <br />
+                  </a></li>
+                <?php } ?>
 
-                          <li style="width:25%;">
-                            <span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
-                            <span class="glyphicon-class">glyphicon glyphicon-asterisk</span>
-                          </li>
+                <?php  if ($state == "paused") { ?>
+                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-play"></i> Resume domain <br />
+                  </a></li>
+                <?php } ?>
 
-                          <li>
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            <span class="glyphicon-class">glyphicon glyphicon-plus</span>
-                          </li>
+                <?php  if ($state != "shutoff") { ?>
+                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    <i class="fa fa-plug"></i> Forcefully shutdown<br />
+                  </a></li>
+                <?php } ?>
 
-                          <li>
-                            <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-                            <span class="glyphicon-class">glyphicon glyphicon-euro</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <?php  if ($state == "shutoff") { ?>
+                  <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+                    <i class="fa fa-trash"></i> Delete domain <br />
+                  </a></li>
+                <?php } ?>
+              </ul>
+            </div>
+          </div>
+
 
         </div>
       </div>
