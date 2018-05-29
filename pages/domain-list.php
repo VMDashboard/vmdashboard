@@ -108,14 +108,13 @@ if ($ret) {
             <table class="table table-striped projects">
               <thead>
                 <tr>
-                  <th style="width: 1%">#</th>
-                  <th style="width: 20%">Guest Name</th>
+                  <th>Guest Name</th>
                   <th>Virtual CPUs</th>
                   <th>Memory</th>
                   <th>Memory Usage</th>
                   <th>Disks</th>
                   <th>State</th>
-                  <th style="width: 20%">#Actions</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +159,6 @@ if ($ret) {
                     unset($dom);
 
   	                echo "<tr>" .
-                      "<td> -> </td>" .
                       "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
                       "<td> $cpu </td>" .
                       "<td> $mem </td>" .
