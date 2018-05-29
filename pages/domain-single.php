@@ -205,7 +205,7 @@ function domainDeleteWarning(linkURL) {
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3><a href="?uuid=<?php echo $uuid; ?>">Domain: <?php echo $domName; ?></a></h3>
+        <h3>Domain: <a href="?uuid=<?php echo $uuid; ?>"><?php echo $domName; ?></a></h3>
       </div>
     </div>
 
