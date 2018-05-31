@@ -328,11 +328,11 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &nbsp;&nbsp;&nbsp;Shutdown<br /></a>
+                    &ensp;&nbsp;Shutdown<br /></a>
                   </li>
                   <li><i class="fa fa-pause"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &nbsp;&nbsp;&nbsp;Pause domain <br /></a>
+                    &ensp;&nbsp;Pause domain <br /></a>
                   </li>
                 <?php } ?>
 
