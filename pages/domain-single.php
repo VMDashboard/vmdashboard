@@ -312,30 +312,35 @@ function domainDeleteWarning(linkURL) {
             <div class="dashboard-widget-content">
               <ul class="list-unstyled project_files">
                 <?php  if ($state == "running") { ?>
-                  <li><a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    <i class="fa fa-desktop"></i> Connect using noVNC<br />
-                  </a></li>
+                  <li><i class="fa fa-desktop"></i>
+                    <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                    Connect using noVNC<br /></a>
+                  </li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
-                  <li><a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Power on<br />
-                  </a></li>
+                  <li><i class="fa fa-power-off"></i>
+                    <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    Power on<br /></a>
+                  </li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
-                  <li><a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-power-off"></i> Shutdown<br />
-                  </a></li>
-                  <li><a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-pause"></i> Pause domain <br />
-                  </a></li>
+                  <li><i class="fa fa-power-off"></i>
+                    <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    Shutdown<br /></a>
+                  </li>
+                  <li><i class="fa fa-pause"></i>
+                    <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    Pause domain <br /></a>
+                  </li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
-                  <li><a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-play"></i> Resume domain <br />
-                  </a></li>
+                  <li><i class="fa fa-play"></i>
+                    <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    Resume domain <br /></a>
+                  </li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
