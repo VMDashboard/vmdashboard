@@ -314,32 +314,32 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-desktop"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                     &nbsp;Connect using noVNC<br /></a>
+                     &nbsp;&nbsp;Connect using noVNC<br /></a>
                   </li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    Power on<br /></a>
+                    &nbsp;&nbsp;Power on<br /></a>
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                     Shutdown<br /></a>
+                     &nbsp;&nbsp;Shutdown<br /></a>
                   </li>
                   <li><i class="fa fa-pause"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                     Pause domain <br /></a>
+                     &nbsp;&nbsp;Pause domain <br /></a>
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
                   <li><i class="fa fa-play"></i>
                     <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    Resume domain <br /></a>
+                    &nbsp;&nbsp;Resume domain <br /></a>
                   </li>
                 <?php } ?>
 
