@@ -321,18 +321,18 @@ function domainDeleteWarning(linkURL) {
                 <?php if ($state == "shutoff") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &ensp;Power on<br /></a>
+                    &emsp;Power on<br /></a>
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &ensp;&nbsp;Shutdown<br /></a>
+                    &emsp;Shutdown<br /></a>
                   </li>
                   <li><i class="fa fa-pause"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &ensp;&nbsp;Pause domain <br /></a>
+                    &emsp;Pause domain <br /></a>
                   </li>
                 <?php } ?>
 
