@@ -314,7 +314,7 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-desktop"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    &nbsp;&nbsp;&nbsp;Connect using noVNC<br /></a>
+                    &nbsp;&nbsp;Connect using noVNC<br /></a>
                   </li>
                 <?php } ?>
 
