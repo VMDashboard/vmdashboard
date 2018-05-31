@@ -314,7 +314,7 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-desktop"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    Connect using noVNC<br /></a>
+                     Connect using noVNC<br /></a>
                   </li>
                 <?php } ?>
 
@@ -328,11 +328,11 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    Shutdown<br /></a>
+                     Shutdown<br /></a>
                   </li>
                   <li><i class="fa fa-pause"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    Pause domain <br /></a>
+                     Pause domain <br /></a>
                   </li>
                 <?php } ?>
 
