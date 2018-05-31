@@ -314,14 +314,14 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-desktop"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    &nbsp;&nbsp;Connect using noVNC<br /></a>
+                    &emsp;Connect using noVNC<br /></a>
                   </li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &nbsp;&nbsp;&nbsp;Power on<br /></a>
+                    &ensp;Power on<br /></a>
                   </li>
                 <?php } ?>
 
