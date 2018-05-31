@@ -60,16 +60,16 @@ if (!isset($_SESSION)) {
 
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">
-            <a data-toggle="tooltip" data-placement="top" title="Domains" href="domain-list.php">
+            <a style="color: #5A738E;" data-toggle="tooltip" data-placement="top" title="Domains" href="domain-list.php">
               <span class="fa fa-list" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Storage" href="storage-pools.php">
+            <a style="color: #5A738E;" data-toggle="tooltip" data-placement="top" title="Storage" href="storage-pools.php">
               <span class="fa fa-database" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Networking" href="network-list.php">
+            <a style="color: #5A738E;" data-toggle="tooltip" data-placement="top" title="Networking" href="network-list.php">
               <span class="fa fa-sitemap" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Logout" href="../index.php?action=logout">
+            <a  style="color: #5A738E;"data-toggle="tooltip" data-placement="top" title="Logout" href="../index.php?action=logout">
               <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>
           </div>
