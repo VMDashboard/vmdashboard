@@ -314,64 +314,70 @@ function domainDeleteWarning(linkURL) {
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-desktop"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                    &emsp;Connect using noVNC<br /></a>
+                    &emsp;Connect using noVNC</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Power on<br /></a>
+                    &emsp;Power on</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
                   <li><i class="fa fa-power-off"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Shutdown<br /></a>
+                    &emsp;Shutdown</a> <br />
                   </li>
                   <li><i class="fa fa-pause"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Pause domain <br /></a>
+                    &emsp;Pause domain</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
                   <li><i class="fa fa-play"></i>
                     <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &nbsp;&nbsp;&nbsp;Resume domain <br /></a>
+                    &emsp;Resume domain</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
-                  <li><a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    <i class="fa fa-plug"></i> Forcefully shutdown<br />
-                  </a></li>
+                  <li><i class="fa fa-plug"></i>
+                    <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                    &emsp;Forcefully shutdown</a> <br />
+                  </li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
-                  <li><a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                    <i class="fa fa-trash"></i> Delete domain <br />
-                  </a></li>
+                  <li><i class="fa fa-trash"></i>
+                    <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+                    &emsp;Delete domain</a> <br />
+                  </li>
                 <?php } ?>
 
                 <hr>
 
-                <li><a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add storage volume<br />
-                </a></li>
+                <li><i class="fa fa-plus"></i>
+                  <a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  &emsp;Add storage volume</a> <br />
+                </li>
 
-                <li><a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add optical storage<br />
-                </a></li>
+                <li><i class="fa fa-plus"></i>
+                  <a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  &emsp;Add optical storage</a> <br />
+                 </li>
 
-                <li><a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Add network adapter<br />
-                </a></li>
+                <li><i class="fa fa-plus"></i>
+                  <a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
+                  &emsp;Add network adapter</a> <br />
+                </li>
 
-                <li><a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  <i class="fa fa-plus"></i> Create new snapshot<br />
-                </a></li>
+                <li><i class="fa fa-plus"></i>
+                  <a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                  &emsp;Create new snapshot</a> <br />
+                </li>
 
               </ul>
               <!-- end of actions -->
