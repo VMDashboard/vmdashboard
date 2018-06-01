@@ -312,7 +312,7 @@ function domainDeleteWarning(linkURL) {
             <div class="dashboard-widget-content">
               <ul class="list-unstyled project_files">
                 <?php  if ($state == "running") { ?>
-                  <li><i class="fa fa-desktop" style="padding-right:6px;"></i>
+                  <li><i class="fa fa-desktop" style="padding-right:5px;"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
                     Connect using noVNC</a> <br />
                   </li>
@@ -344,7 +344,7 @@ function domainDeleteWarning(linkURL) {
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
-                  <li><i class="fa fa-plug" style="padding-right:6px;"></i>
+                  <li><i class="fa fa-plug" style="padding-right:5px;"></i>
                     <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                     Forcefully shutdown</a> <br />
                   </li>
