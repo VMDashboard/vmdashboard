@@ -319,64 +319,64 @@ function domainDeleteWarning(linkURL) {
                 <?php } ?>
 
                 <?php if ($state == "shutoff") { ?>
-                  <li><i class="fa fa-power-off"></i>
+                  <li><i class="fa fa-power-off" style="padding-right:7px;"></i>
                     <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Power on</a> <br />
+                    Power on</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "running") { ?>
-                  <li><i class="fa fa-power-off"></i>
+                  <li><i class="fa fa-power-off" style="padding-right:7px;"></i>
                     <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Shutdown</a> <br />
+                    Shutdown</a> <br />
                   </li>
-                  <li><i class="fa fa-pause"></i>
+                  <li><i class="fa fa-pause" style="padding-right:7px;"></i>
                     <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Pause domain</a> <br />
+                    Pause domain</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "paused") { ?>
-                  <li><i class="fa fa-play"></i>
+                  <li><i class="fa fa-play" style="padding-right:7px;"></i>
                     <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Resume domain</a> <br />
+                    Resume domain</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state != "shutoff") { ?>
-                  <li><i class="fa fa-plug"></i>
+                  <li><i class="fa fa-plug" style="padding-right:7px;"></i>
                     <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                    &emsp;Forcefully shutdown</a> <br />
+                    Forcefully shutdown</a> <br />
                   </li>
                 <?php } ?>
 
                 <?php  if ($state == "shutoff") { ?>
-                  <li><i class="fa fa-trash"></i>
+                  <li><i class="fa fa-trash" style="padding-right:7px;"></i>
                     <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
-                    &emsp;Delete domain</a> <br />
+                    Delete domain</a> <br />
                   </li>
                 <?php } ?>
 
                 <hr>
 
-                <li><i class="fa fa-plus"></i>
+                <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                   <a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  &emsp;Add storage volume</a> <br />
+                  Add storage volume</a> <br />
                 </li>
 
-                <li><i class="fa fa-plus"></i>
+                <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                   <a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  &emsp;Add optical storage</a> <br />
+                  Add optical storage</a> <br />
                  </li>
 
-                <li><i class="fa fa-plus"></i>
+                <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                   <a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
-                  &emsp;Add network adapter</a> <br />
+                  Add network adapter</a> <br />
                 </li>
 
-                <li><i class="fa fa-plus"></i>
+                <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                   <a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                  &emsp;Create new snapshot</a> <br />
+                  Create new snapshot</a> <br />
                 </li>
 
               </ul>
