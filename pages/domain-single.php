@@ -401,9 +401,9 @@ function domainDeleteWarning(linkURL) {
               <!-- required for floating -->
               <!-- Nav tabs -->
               <ul class="nav nav-tabs tabs-left">
-                <li class="active"><a href="#volumes" data-toggle="tab">Storage Volumes</a></li>
-                <li><a href="#optical" data-toggle="tab">Optical Storage</a></li>
-                <li><a href="#networking" data-toggle="tab">Networking Adapers</a></li>
+                <li class="active"><a style="color: #5A738E;" href="#volumes" data-toggle="tab">Storage Volumes</a></li>
+                <li><a style="color: #5A738E;" href="#optical" data-toggle="tab">Optical Storage</a></li>
+                <li><a style="color: #5A738E;" href="#networking" data-toggle="tab">Networking Adapers</a></li>
               </ul>
             </div>
 
