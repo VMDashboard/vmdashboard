@@ -312,9 +312,9 @@ function domainDeleteWarning(linkURL) {
             <div class="dashboard-widget-content">
               <ul class="list-unstyled project_files">
                 <?php  if ($state == "running") { ?>
-                  <li><i class="fa fa-desktop"></i>
+                  <li><i class="fa fa-desktop" style="padding-right:5px;"></i>
                     <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
-                      &emsp;Connect using noVNC</a> <br />
+                    Connect using noVNC</a> <br />
                   </li>
                 <?php } ?>
 
