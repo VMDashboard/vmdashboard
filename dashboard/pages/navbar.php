@@ -49,7 +49,7 @@
           </div>
         </div>
         <ul class="nav">
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domains.php") ? '<li class="active">' : '<li>'; ?>
             <a href="../domain/domain-list.php">
               <i class="nc-icon nc-bank"></i>
               <p>Virtual Machines</p>
