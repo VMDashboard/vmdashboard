@@ -54,7 +54,7 @@ $url = $protocol . $_SERVER['HTTP_HOST'];
         </div>
         <ul class="nav">
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
-            <a href="<?php echo $url . "/domain/domain-list.html"; ?>">
+            <a href="../domain/domain-list.html">
               <i class="nc-icon nc-bank"></i>
               <p>Virtual Machines</p>
             </a>
