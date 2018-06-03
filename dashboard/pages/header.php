@@ -16,3 +16,18 @@
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   </head>
+
+  <?php
+  //bring in the libvirt class and methods
+  require('../libvirt.php');
+  $lv = new Libvirt();
+
+  //attempt to connect to system
+  if ($lv->connect("qemu:///system") == false)
+    die('<html><body>Cannot open connection to hypervisor</body></html>');
+
+  //attempt to learn the server's hostname
+  $hn = $lv->get_hostname();
+  if ($hn == false)
+    die('<html><body>Cannot get hostname</body></html>');
+  ?>
