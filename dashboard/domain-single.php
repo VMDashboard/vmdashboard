@@ -1,6 +1,6 @@
 <?php
-require (header.php);
-require (navbar.php);
+require('header.php');
+require('navbar.php');
 ?>
 
 <div class="content">
@@ -13,5 +13,5 @@ require (navbar.php);
 
 
 <?php
-require (footer.php);
+require('footer.php');
 ?>
