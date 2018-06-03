@@ -66,7 +66,7 @@
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav">
-                <li>
+                <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
                     <span class="sidebar-mini-icon">VM</span>
                     <span class="sidebar-normal"> Virtual Machines </span>
