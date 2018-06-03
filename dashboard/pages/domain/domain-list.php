@@ -52,15 +52,15 @@ if ($action == 'domain-destroy') {
   $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
 }
 
-//alert the user of any ret messages
-if ($ret) {
-  ?>
-  <script>
-    var alertRet = "<?php echo $ret; ?>";
-    swal(alertRet);
-  </script>
-  <?php
-  }
+
+//Will display a sweet alert if a return message exists
+if ($ret != "") {
+echo "
+<script>
+var alert_msg = '$ret'
+swal(alert_msg);
+</script>";
+}
 
 ?>
 
@@ -147,8 +147,6 @@ if ($ret) {
     </div>
   </div>
 </div>
-
-
 
 <?php
 require('../footer.php');
