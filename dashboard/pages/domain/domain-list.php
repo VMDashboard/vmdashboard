@@ -119,9 +119,9 @@ if ($ret) {
                 "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
                 "<td> $cpu </td>" .
                 "<td> $mem </td>" .
-                "<td>            
+                "<td>
                   <div class=\"progress\">
-                    <div class=\"progress-bar\" aria-valuenow=\"$mem_used\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>
+                  <div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"$mem_used\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>
                   </div>
                 </td>" .
                 "<td title='$diskdesc'>$disks</td>" .
