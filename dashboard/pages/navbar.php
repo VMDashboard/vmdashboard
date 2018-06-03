@@ -11,7 +11,7 @@
           </div>
         </a>
         <a href="#" class="simple-text logo-normal">
-          openVM - Dashboard
+          openVM
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -20,12 +20,12 @@
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            <img src="../assets/img/faces/ayo-ogunseinde-2.jpg" />
+            <img src="../assets/img/faces/defaultProfile.png" />
           </div>
           <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
               <span>
-                Chet Faker
+                <?php echo htmlentities($_SESSION['username']); ?>
                 <b class="caret"></b>
               </span>
             </a>
@@ -34,20 +34,14 @@
               <ul class="nav">
                 <li>
                   <a href="#">
-                    <span class="sidebar-mini-icon">MP</span>
-                    <span class="sidebar-normal">My Profile</span>
+                    <span class="sidebar-mini-icon">LO</span>
+                    <span class="sidebar-normal">LogOut</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <span class="sidebar-mini-icon">EP</span>
-                    <span class="sidebar-normal">Edit Profile</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <span class="sidebar-mini-icon">S</span>
-                    <span class="sidebar-normal">Settings</span>
+                    <span class="sidebar-mini-icon">CP</span>
+                    <span class="sidebar-normal">Change Password</span>
                   </a>
                 </li>
               </ul>
