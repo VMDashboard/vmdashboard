@@ -56,7 +56,7 @@
             </a>
           </li>
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domains.php") ? '<li class="active">' : '<li>'; ?>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesExamples">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
