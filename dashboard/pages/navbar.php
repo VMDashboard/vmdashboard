@@ -50,7 +50,7 @@
         </div>
         <ul class="nav">
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
-            <a href="../domain/domain-list.html">
+            <a href="../domain/domain-list.php">
               <i class="nc-icon nc-bank"></i>
               <p>Virtual Machines</p>
             </a>
@@ -60,16 +60,16 @@
             <a data-toggle="collapse" href="#pagesExamples">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
-                Pages
+                Domains
                 <b class="caret"></b>
               </p>
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav">
                 <li>
-                  <a href="../examples/pages/user.html">
-                    <span class="sidebar-mini-icon">UP</span>
-                    <span class="sidebar-normal"> User Profile </span>
+                  <a href="../domain/domain-list.php">
+                    <span class="sidebar-mini-icon">VM</span>
+                    <span class="sidebar-normal"> Virtual Machines </span>
                   </a>
                 </li>
               </ul>
