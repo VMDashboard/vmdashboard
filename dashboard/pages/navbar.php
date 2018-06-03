@@ -1,7 +1,3 @@
-<?php
-$protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
-$url = $protocol . $_SERVER['HTTP_HOST'];
-?>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
