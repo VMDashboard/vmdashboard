@@ -1,3 +1,7 @@
+<?php
+$protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
+$url = $protocol . $_SERVER['HTTP_HOST'];
+?>
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
@@ -49,10 +53,10 @@
           </div>
         </div>
         <ul class="nav">
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-single.php") ? '<li class="active">' : '<li>'; ?>
-            <a href="../examples/dashboard.html">
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="<?php echo $url . "/domain/domain-list.html"; ?>">
               <i class="nc-icon nc-bank"></i>
-              <p>Dashboard</p>
+              <p>Virtual Machines</p>
             </a>
           </li>
 
