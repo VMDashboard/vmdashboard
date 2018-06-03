@@ -65,7 +65,7 @@ swal(alert_msg);
 ?>
 
 <div class="content">
-  <div class="card card-plain">
+  <div class="card">
     <div class="card-header">
       <h4 class="card-title"> Virtual Machine List</h4>
     </div>
