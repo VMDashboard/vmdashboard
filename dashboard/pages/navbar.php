@@ -1,6 +1,6 @@
   <body>
     <div class="wrapper">
-      <div class="sidebar" data-color="brown">
+      <div class="sidebar">
       <!--
           Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
       -->
