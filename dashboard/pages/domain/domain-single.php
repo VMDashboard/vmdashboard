@@ -4,7 +4,7 @@ require('../navbar.php');
 ?>
 
 <div class="content">
-  <div class="card" card-plain>
+  <div class="card card-plain">
     <div class="card-header">
       <h4 class="card-title"> Simple Table</h4>
     </div>
