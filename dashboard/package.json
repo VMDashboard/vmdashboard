@@ -1,0 +1,17 @@
+{
+  "name": "paper-dashboard-2-pro",
+  "description": "Premium Bootstrap 4 Paper UI Design",
+  "version": "2.0.1",
+  "homepage": "https://creative-tim.com/product/paper-dashboard-2-pro",
+  "author": "Creative Tim",
+  "license": "Creative Tim License <www.creative-tim.com/license>",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-install": "^1.1.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-open": "^3.0.1"
+  }
+}
