@@ -49,13 +49,14 @@
           </div>
         </div>
         <ul class="nav">
-          <li class="active">
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-single.php") ? '<li class="active">' : '<li>'; ?>
             <a href="../examples/dashboard.html">
               <i class="nc-icon nc-bank"></i>
               <p>Dashboard</p>
             </a>
           </li>
-          <li>
+
+          <?php echo (basename($_SERVER['PHP_SELF']) == "hosts.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesExamples">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
