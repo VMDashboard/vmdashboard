@@ -7,20 +7,20 @@
       <div class="logo">
         <a href="#" class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="../assets/img/squarelogo.png">
+            <img src="../../assets/img/squarelogo.png">
           </div>
         </a>
         <a href="#" class="simple-text logo-normal">
           openVM
           <!-- <div class="logo-image-big">
-            <img src="../assets/img/logo-big.png">
+            <img src="../../assets/img/logo-big.png">
           </div> -->
         </a>
       </div>
       <div class="sidebar-wrapper">
         <div class="user">
           <div class="photo">
-            <img src="../assets/img/faces/defaultProfile.png" />
+            <img src="../../assets/img/faces/defaultProfile.png" />
           </div>
           <div class="info">
             <a data-toggle="collapse" href="#collapseExample" class="collapsed">
