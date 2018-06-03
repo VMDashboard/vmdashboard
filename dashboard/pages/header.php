@@ -31,3 +31,6 @@
   if ($hn == false)
     die('<html><body>Cannot get hostname</body></html>');
   ?>
+
+  <!--  Plugin for Sweet Alert. This line needs to be before swal() on pages that use the alerts -->
+  <script src="assets/js/plugins/sweetalert2.min.js"></script>
