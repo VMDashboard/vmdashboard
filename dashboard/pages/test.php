@@ -17,12 +17,12 @@
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  
+
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="brown" data-active-color="danger">
+    <div class="sidebar"  data-active-color="danger">
       <!--
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
