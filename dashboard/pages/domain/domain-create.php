@@ -125,80 +125,54 @@ if ($_SESSION['domain_type'] == "kvm"]) {
     $driver_type_volume = "raw";
   }
 
-  //determine what the hard drive volume xml will be
-  switch ($source_file_volume) {
-    case "none":
-      $volume_xml = "";
-      break;
+  //Final XML
+  $xml = "
+    <domain type='" . $domain_type . "'>
+    <name>" . $domain_name . "</name>
+    <description>
+      " . $os_platform . " platform
+    </description>
+    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
+    <vcpu>" . $vcpu . "</vcpu>
 
-    case "new":
-      $pool = "default";
-      //Lets check for empty string, if it is empty will just append -volume-image to the domain name
-      if ($volume_image_name == "") {
-        $volume_image_name = $domain_name . "-volume-image";
-      }
-      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-      $volume_xml = "";
-      break;
+    <os>
+      <type arch='" . $os_arch . "'>" . $os_type . "</type>
+      <boot dev='hd'/>
+      <boot dev='cdrom'/>
+      <boot dev='network'/>
+    </os>
 
-    default:
-      $volume_xml = "
-      <disk type='" . $disk_type_volume . "' device='" . $disk_device_volume . "'>
-      <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
-      <source file='" . $source_file_volume . "'/>
-      <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
-      </disk>";
+    " . $features . "
+
+    <cpu mode='custom' match='exact'>
+      <model fallback='allow'>Nehalem</model>
+    </cpu>
+
+    <clock offset='" . $clock_offset . "'/>
+
+    <devices>
+      " . $volume_xml . "
+      " . $cd_xml . "
+      " . $network_interface_xml . "
+      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
+      <memballoon model='virtio'>
+            <stats period='10'/>
+      </memballoon>
+    </devices>
+    </domain> ";
+
+  //Define the new guest domain based off the XML information
+  $new_domain = $lv->domain_define($xml);
+
+  //need to check to make sure $new_domain is not false befoe this code exectues
+  if ($source_file_volume == "new") {
+    $res = $new_domain;
+    $img = libvirt_storagevolume_get_path($new_disk);
+    $dev = $target_dev_volume;
+    $typ = $target_bus_volume;
+    $driver = $driver_type;
+    $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
   }
-
-
-  //CD-DVD ISO Information
-  $disk_type_cd = "file";
-  $disk_device_cd = "cdrom";
-  $driver_name_cd = "qemu";
-  $driver_type_cd = "raw";
-  $target_dev_volume == "vda" ? $target_dev_cd = "hda" : $target_dev_cd = "hdb";
-  $target_bus_cd = "ide";
-
-  if ($source_file_cd == "none") {
-    $cd_xml = "";
-  } else {
-    $cd_xml = "
-      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
-      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
-      <source file='" . $source_file_cd . "'/>
-      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
-      <readonly/>
-      </disk>";
-  }
-
-
-  //Network Information
-  if ($interface_type == "network") {
-    $network_interface_xml = "
-      <interface type='" . $interface_type . "'>
-        <mac address='" . $mac_address . "'/>
-        <source network='" . $source_network . "'/>
-        <model type='" . $model_type . "'/>
-      </interface>";
-  }
-
-  if ($interface_type == "direct") {
-    $network_interface_xml = "
-      <interface type='" . $interface_type . "'>
-        <mac address='" . $mac_address . "'/>
-        <source dev='" . $source_dev . "' mode='" . $source_mode . "'/>
-        <model type='" . $model_type . "'/>
-      </interface>";
-  }
-
-
-  //Graphics Information
-  $graphics_type = "vnc";
-  $graphics_port = "-1";
-  $autoport = "yes";
-
-
-
 
   //Will display a sweet alert if a return message exists
   if ($ret != "") {
