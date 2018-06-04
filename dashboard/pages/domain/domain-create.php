@@ -359,7 +359,7 @@ function changeOptions(selectEl) {
                   <a class="nav-link active" href="#general" role="tab" data-toggle="tab">General</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#description" role="tab" data-toggle="tab">Description</a>
+                  <a class="nav-link" href="#storge" role="tab" data-toggle="tab">Storage Volume</a>
                 </li>
               </ul>
             </div>
@@ -430,14 +430,43 @@ function changeOptions(selectEl) {
               </div>
 
 
-
-            
-
-
             </div>
-            <div class="tab-pane" id="description">
-              <p>The first thing you notice when you hold the phone is how great it feels in your hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified design. </p>
-              <p>There are no distinct edges. No gaps. Just a smooth, seamless bond of metal and glass that feels like one continuous surface.</p>
+            <div class="tab-pane" id="storge">
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Source File: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_volume">
+                      <option value="none"> Select Disk </option>
+                      <option value="new"> Create New Disk Image </option>
+                      <?php
+                      $pools = $lv->get_storagepools();
+                      for ($i = 0; $i < sizeof($pools); $i++) {
+                        $info = $lv->get_storagepool_info($pools[$i]);
+                        if ($info['volume_count'] > 0) {
+                          $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                          $tmp_keys = array_keys($tmp);
+                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                            $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                            $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                            if (strtolower($ext) != "iso")
+                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                          }
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
             </div>
 
           </div>
