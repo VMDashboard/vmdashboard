@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['source_mode'] = $_POST['source_mode'];
   $_SESSION['source_network'] = $_POST['source_network'];
 
-  header("Location: ".$_SERVER['PHP_SELF']);
-  exit;
+  //header("Location: ".$_SERVER['PHP_SELF']);
+  //exit;
 }
 
 
