@@ -73,57 +73,80 @@ if ($_SESSION['domain_type'] == "kvm"]) {
   $source_mode = $_SESSION['source_mode'];
   $source_network = $_SESSION['source_network'];
 
-  //OS Information
-  if ($os_platform == "windows") {
-    //BIOS Featurs
-    $features = "
-    <features>
-      <acpi/>
-      <apic/>
-      <hyperv>
-        <relaxed state='on'/>
-        <vapic state='on'/>
-        <spinlocks state='on' retries='8191'/>
-      </hyperv>
-      <vmport state='off'/>
-    </features>";
 
-    //Volume type and bus needed for Windows
-    $target_dev_volume = "sda";
-    $target_bus_volume = "sata";
 
-    //Networking model for Windows
-    $model_type = "rtl8139";
-  } else {
-    //Features not necessary for Linux or Unix domains
-    $features = "
-    <features>
-      <acpi/>
-      <apic/>
-      <vmport state='off'/>
-    </features>";
+  //determine what the hard drive volume xml will be
+  switch ($source_file_volume) {
+    case "none":
+      $volume_xml = "";
+      break;
 
-    //Linux or Unix domains can use vda and virtio
-    $target_dev_volume = "vda";
-    $target_bus_volume = "virtio";
+    case "new":
+      $pool = "default";
+      //Lets check for empty string, if it is empty will just append -volume-image to the domain name
+      if ($volume_image_name == "") {
+        $volume_image_name = $domain_name . "-volume-image";
+      }
+      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+      $volume_xml = "";
+      break;
 
-    //Networking model for Linux
-    $model_type = "virtio";
+    default:
+      $volume_xml = "
+      <disk type='" . $disk_type_volume . "' device='" . $disk_device_volume . "'>
+      <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
+      <source file='" . $source_file_volume . "'/>
+      <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
+      </disk>";
   }
 
-  //Hard drive information
-  $disk_type_volume = "file";
-  $disk_device_volume = "disk";
-  $driver_name_volume = "qemu";
 
-  //determine disk file extension to determine driver type
-  $dot_array = explode('.', $source_file_volume); //seperates string into array based on "."
-  $extension = end($dot_array); //end returns the last element in the array, which should be the extension
-  if ($extension == "qcow2") {
-    $driver_type_volume = "qcow2";
+  //CD-DVD ISO Information
+  $disk_type_cd = "file";
+  $disk_device_cd = "cdrom";
+  $driver_name_cd = "qemu";
+  $driver_type_cd = "raw";
+  $target_dev_volume == "vda" ? $target_dev_cd = "hda" : $target_dev_cd = "hdb";
+  $target_bus_cd = "ide";
+
+  if ($source_file_cd == "none") {
+    $cd_xml = "";
   } else {
-    $driver_type_volume = "raw";
+    $cd_xml = "
+      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
+      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
+      <source file='" . $source_file_cd . "'/>
+      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
+      <readonly/>
+      </disk>";
   }
+
+
+  //Network Information
+  if ($interface_type == "network") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source network='" . $source_network . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
+
+  if ($interface_type == "direct") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source dev='" . $source_dev . "' mode='" . $source_mode . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
+
+
+  //Graphics Information
+  $graphics_type = "vnc";
+  $graphics_port = "-1";
+  $autoport = "yes";
+
 
   //Final XML
   $xml = "
