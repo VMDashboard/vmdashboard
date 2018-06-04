@@ -64,7 +64,7 @@
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="pagesDomains">
+            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php") ? 'show' : ''; ?>" id="pagesDomains">
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
