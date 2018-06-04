@@ -371,13 +371,13 @@ function changeOptions(selectEl) {
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="info">
-              <div class="form-group">
+
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain_name">Domain Name <span class="required">*</span>
                 </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
+                
                   <input type="text" id="domain_name" required="required" class="form-control col-md-7 col-xs-12" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
-                </div>
-              </div>
+
+
             </div>
             <div class="tab-pane" id="description">
               <p>The first thing you notice when you hold the phone is how great it feels in your hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified design. </p>
