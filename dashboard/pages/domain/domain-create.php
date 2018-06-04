@@ -198,56 +198,41 @@ if ($_SESSION['domain_type'] == "kvm"]) {
   $autoport = "yes";
 
 
-  //Final XML
-  $xml = "
-    <domain type='" . $domain_type . "'>
-    <name>" . $domain_name . "</name>
-    <description>
-      " . $os_platform . " platform
-    </description>
-    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
-    <vcpu>" . $vcpu . "</vcpu>
 
-    <os>
-      <type arch='" . $os_arch . "'>" . $os_type . "</type>
-      <boot dev='hd'/>
-      <boot dev='cdrom'/>
-      <boot dev='network'/>
-    </os>
 
-    " . $features . "
-
-    <cpu mode='custom' match='exact'>
-      <model fallback='allow'>Nehalem</model>
-    </cpu>
-
-    <clock offset='" . $clock_offset . "'/>
-
-    <devices>
-      " . $volume_xml . "
-      " . $cd_xml . "
-      " . $network_interface_xml . "
-      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
-      <memballoon model='virtio'>
-            <stats period='10'/>
-      </memballoon>
-    </devices>
-    </domain> ";
-
-  //Define the new guest domain based off the XML information
-  $new_domain = $lv->domain_define($xml);
-
-  //need to check to make sure $new_domain is not false befoe this code exectues
-  if ($source_file_volume == "new") {
-    $res = $new_domain;
-    $img = libvirt_storagevolume_get_path($new_disk);
-    $dev = $target_dev_volume;
-    $typ = $target_bus_volume;
-    $driver = $driver_type;
-    $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+  //Will display a sweet alert if a return message exists
+  if ($ret != "") {
+    echo "
+      <script>
+        var alert_msg = '$ret'
+        swal(alert_msg);
+      </script>";
   }
 
-  
+  unset($_SESSION['domain_type']);
+  unset($_SESSION['domain_name']);
+  unset($_SESSION['memory_unit']);
+  unset($_SESSION['memory']);
+  unset($_SESSION['vcpu']);
+  unset($_SESSION['os_arch']);
+  unset($_SESSION['os_type']);
+  unset($_SESSION['clock_offset']);
+  unset($_SESSION['os_platform']);
+  unset($_SESSION['source_file_volume']);
+  unset($_SESSION['new_volume_name']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_unit']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_driver_type']);
+  unset($_SESSION['source_file_cd']);
+  unset($_SESSION['interface_type']);
+  unset($_SESSION['mac_address']);
+  unset($_SESSION['source_dev']);
+  unset($_SESSION['source_mode']);
+  unset($_SESSION['source_network']);
+
+  header('Location: domain-list.php');
+  exit;
 }
 
 
