@@ -57,14 +57,14 @@
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesExamples">
+            <a data-toggle="collapse" href="#pagesDomains">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
-                Domains
+                Virtual Machines
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse " id="pagesExamples">
+            <div class="collapse " id="pagesDomains">
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
