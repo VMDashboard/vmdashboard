@@ -470,19 +470,19 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
-              <div class="row diskChange" id="new" style="display:none;">
-                <label class="col-sm-2 col-form-label">Volume Size: </label>
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Volume Size: </label>
                 <div class="col-sm-7">
-                  <div class="form-group">
+                  <div class="form-group diskChange" id="new" style="display:none;">
                     <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
                   </div>
                 </div>
               </div>
 
-              <div class="row diskChange" id="new" style="display:none;">
-                <label class="col-sm-2 col-form-label">Memory Unit: </label>
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Memory Unit: </label>
                 <div class="col-sm-7">
-                  <div class="form-group">
+                  <div class="form-group diskChange" id="new" style="display:none;">
                     <div id="new_unit" class="btn-group" data-toggle="buttons">
                       <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                         <input type="radio" name="new_unit" value="M"> MB
@@ -496,10 +496,10 @@ function changeOptions(selectEl) {
               </div>
 
 
-              <div class="row diskChange" id="new" style="display:none;">
-                <label class="col-sm-2 col-form-label">Driver Type: </label>
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Driver Type: </label>
                 <div class="col-sm-7">
-                  <div class="form-group">
+                  <div class="form-group diskChange" id="new" style="display:none;">
                     <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
                       <option value="qcow2" selected="selected">qcow2</option>
                       <option value="raw">raw</option>
