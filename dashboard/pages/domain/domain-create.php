@@ -461,6 +461,54 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
+              <div class="row diskChange" id="new" style="display:none;">
+                <label class="col-sm-2 col-form-label">Volume Name: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row diskChange" id="new" style="display:none;">
+                <label class="col-sm-2 col-form-label">Volume Size: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row diskChange" id="new" style="display:none;">
+                <label class="col-sm-2 col-form-label">Memory Unit: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <div id="new_unit" class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                        <input type="radio" name="new_unit" value="M"> MB
+                      </label>
+                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
+                        <input type="radio" name="new_unit" value="G" checked="checked"> GB
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row diskChange" id="new" style="display:none;">
+                <label class="col-sm-2 col-form-label">Driver Type: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
+                      <option value="qcow2" selected="selected">qcow2</option>
+                      <option value="raw">raw</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
 
 
 
