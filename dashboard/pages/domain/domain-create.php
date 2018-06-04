@@ -41,10 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   //$_SESSION['driver_type'] = $_POST['new_driver_type'];
   //$_SESSION['source_file_cd'] = $_POST['source_file_cd'];
   //$_SESSION['interface_type'] = $_POST['interface_type'];
-  $_SESSION['mac_address'] = $_POST['mac_address'];
-  $_SESSION['source_dev'] = $_POST['source_dev'];
-  $_SESSION['source_mode'] = $_POST['source_mode'];
-  $_SESSION['source_network'] = $_POST['source_network'];
+  //$_SESSION['mac_address'] = $_POST['mac_address'];
+  //$_SESSION['source_dev'] = $_POST['source_dev'];
+  //$_SESSION['source_mode'] = $_POST['source_mode'];
+  //$_SESSION['source_network'] = $_POST['source_network'];
 
   //header("Location: ".$_SERVER['PHP_SELF']);
   //exit;
