@@ -204,9 +204,6 @@ function domainDeleteWarning(linkURL) {
   <div class="card">
     <div class="row">
       <div class="col-md-4">
-        <div class="card-header">
-          <h4 class="card-title">Console</h4>
-        </div>
         <div class="card-body">
           <?php
           if ($state == "running") {
@@ -330,9 +327,186 @@ function domainDeleteWarning(linkURL) {
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+    </div> <!-- end row -->
+  </div> <!-- end card -->
+
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
+          <h4 class="card-title">Devices</h4>
+          <div class="card card-plain">
+            <div class="card-header" role="tab" id="headingOne">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Storage Volumes
+                <i class="nc-icon nc-minimal-down"></i>
+              </a>
+            </div>
+            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
+              <div class="card-body">
+                <?php
+                /* Disk information */
+                $tmp = $lv->get_disk_stats($domName);
+                if (!empty($tmp)) {
+                  echo "<div class='table-responsive'>" .
+                    "<table class='table'>" .
+                    "<tr>" .
+                    "<th>Volume</th>" .
+                    "<th>Driver</th>" .
+                    "<th>Device</th>" .
+                    "<th>Disk capacity</th>" .
+                    "<th>Disk allocation</th>" .
+                    "<th>Physical disk size</th>" .
+                    "<th>Actions</th>" .
+                    "</tr>" .
+                    "<tbody>";
+                  for ($i = 0; $i < sizeof($tmp); $i++) {
+                    $capacity = $lv->format_size($tmp[$i]['capacity'], 2);
+                    $allocation = $lv->format_size($tmp[$i]['allocation'], 2);
+                    $physical = $lv->format_size($tmp[$i]['physical'], 2);
+                    $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
+                    $device = $tmp[$i]['device'];
+                    echo "<tr>" .
+                      "<td>".basename($dev)."</td>" .
+                        "<td>{$tmp[$i]['type']}</td>" .
+                        "<td>{$tmp[$i]['device']}</td>" .
+                        "<td>$capacity</td>" .
+                        "<td>$allocation</td>" .
+                        "<td>$physical</td>" .
+                        "<td>" .
+                        "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$device&amp;uuid=$uuid\">Remove</a>" .
+                        "</td>" .
+                        "</tr>";
+                  }
+                  echo "</tbody></table></div>";
+                } else {
+                  echo "<hr><p>Domain doesn't have any disk devices</p>";
+                }
+                ?>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-plain">
+            <div class="card-header" role="tab" id="headingTwo">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Optical Storage
+                <i class="nc-icon nc-minimal-down"></i>
+              </a>
+            </div>
+            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="card-body">
+                <?php
+                /* Optical device information */
+                $path = $domXML->xpath('//disk');
+                if (!empty($path)) {
+                  echo "<div class='table-responsive'>" .
+                    "<table class='table'>" .
+                    "<tr>" .
+                    "<th>ISO file</th>" .
+                    "<th>Driver</th>" .
+                    "<th>Device</th>" .
+                    "<th>Bus</th>" .
+                    "<th>Actions</th>" .
+                    "</tr>" .
+                    "<tbody>";
+
+                  for ($i = 0; $i < sizeof($path); $i++) {
+                    //$disk_type = $domXML->devices->disk[$i][type];
+                    $disk_device = $domXML->devices->disk[$i][device];
+                    $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                    //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                    $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                    if (empty($disk_source_file)) {
+                      $disk_source_file = "empty";
+                    }
+                    $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                    $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                    if ($disk_device == "cdrom") {
+                      echo "<tr>" .
+                        "<td>$disk_source_file</td>" .
+                        "<td>$disk_driver_name</td>" .
+                        "<td>$disk_target_dev</td>" .
+                        "<td>$disk_target_bus</td>" .
+                        "<td>" .
+                          "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                        "</td>" .
+                        "</tr>";
+                    }
+                  }
+                  echo "</tbody></table></div>";
+                } else {
+                  echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+                }
+                ?>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-plain">
+            <div class="card-header" role="tab" id="headingThree">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Network Adapters
+                <i class="nc-icon nc-minimal-down"></i>
+              </a>
+            </div>
+            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+              <div class="card-body">
+                <?php
+                /* Optical device information */
+                $path = $domXML->xpath('//disk');
+                if (!empty($path)) {
+                  echo "<div class='table-responsive'>" .
+                    "<table class='table'>" .
+                    "<tr>" .
+                    "<th>ISO file</th>" .
+                    "<th>Driver</th>" .
+                    "<th>Device</th>" .
+                    "<th>Bus</th>" .
+                    "<th>Actions</th>" .
+                    "</tr>" .
+                    "<tbody>";
+
+                  for ($i = 0; $i < sizeof($path); $i++) {
+                    //$disk_type = $domXML->devices->disk[$i][type];
+                    $disk_device = $domXML->devices->disk[$i][device];
+                    $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                    //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                    $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                    if (empty($disk_source_file)) {
+                      $disk_source_file = "empty";
+                    }
+                    $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                    $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                    if ($disk_device == "cdrom") {
+                      echo "<tr>" .
+                        "<td>$disk_source_file</td>" .
+                        "<td>$disk_driver_name</td>" .
+                        "<td>$disk_target_dev</td>" .
+                        "<td>$disk_target_bus</td>" .
+                        "<td>" .
+                          "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                        "</td>" .
+                        "</tr>";
+                    }
+                  }
+                  echo "</tbody></table></div>";
+                } else {
+                  echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+                }
+                ?>
+              </div>
+            </div>
+          </div>
+        </div> <!-- end accordion -->
+      </div> <!-- end card-body -->
+    </div> <!-- end card -->
+  </div> <!-- end col -->
+
+
+</div> <!-- end content -->
 
 <?php
 require('../footer.php');
