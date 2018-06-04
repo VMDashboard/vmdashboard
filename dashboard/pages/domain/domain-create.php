@@ -350,6 +350,8 @@ function changeOptions(selectEl) {
     </div>
     <div class="card-body">
       <div class="row">
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+
         <div class="col-lg-4 col-md-5 col-sm-4 col-6">
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
@@ -369,8 +371,13 @@ function changeOptions(selectEl) {
           <!-- Tab panes -->
           <div class="tab-content">
             <div class="tab-pane active" id="info">
-              <p>Larger, yet dramatically thinner. More powerful, but remarkably power efficient. With a smooth metal surface that seamlessly meets the new Retina HD display.</p>
-              <p>It’s one continuous form where hardware and software function in perfect unison, creating a new generation of phone that’s better by any measure.</p>
+              <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="domain_name">Domain Name <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                  <input type="text" id="domain_name" required="required" class="form-control col-md-7 col-xs-12" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                </div>
+              </div>
             </div>
             <div class="tab-pane" id="description">
               <p>The first thing you notice when you hold the phone is how great it feels in your hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified design. </p>
@@ -379,6 +386,8 @@ function changeOptions(selectEl) {
 
           </div>
         </div>
+
+      </form>
       </div>
 
 
