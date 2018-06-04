@@ -50,8 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   exit;
 }
 
+$domain_type = $_SESSION['domain_type'];
 
-if ($_SESSION['domain_type'] == "kvm"]) {
+if ($domain_type == "kvm"]) {
   $domain_type = $_SESSION['domain_type'];
   $domain_name = $_SESSION['domain_name'];
   $memory_unit = $_SESSION['memory_unit'];
