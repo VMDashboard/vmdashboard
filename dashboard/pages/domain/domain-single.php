@@ -391,7 +391,7 @@ function domainDeleteWarning(linkURL) {
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingTwo">
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <h3>Optical Storage</h3>
+                <h5>Optical Storage</h5>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
@@ -448,7 +448,7 @@ function domainDeleteWarning(linkURL) {
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingThree">
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <h4>Network Adapters</h4>
+                <h6>Network Adapters</h6>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
