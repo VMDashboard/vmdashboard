@@ -350,7 +350,7 @@ function changeOptions(selectEl) {
     </div>
     <div class="card-body">
       <div class="row">
-        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+        
 
         <div class="col-lg-4 col-md-5 col-sm-4 col-6">
           <div class="nav-tabs-navigation verical-navs">
