@@ -52,11 +52,11 @@
           <?php echo (basename($_SERVER['PHP_SELF']) == "domains.php") ? '<li class="active">' : '<li>'; ?>
             <a href="../domain/domain-list.php">
               <i class="nc-icon nc-bank"></i>
-              <p>Virtual Machines</p>
+              <p>Home</p>
             </a>
           </li>
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesDomains">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
@@ -68,8 +68,14 @@
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
-                    <span class="sidebar-mini-icon">VM</span>
-                    <span class="sidebar-normal"> Virtual Machines </span>
+                    <span class="sidebar-mini-icon">L</span>
+                    <span class="sidebar-normal"> List </span>
+                  </a>
+                </li>
+                <?php echo (basename($_SERVER['PHP_SELF']) == "domain-create.php") ? '<li class="active">' : '<li>'; ?>
+                  <a href="../domain/domain-create.php">
+                    <span class="sidebar-mini-icon">CN</span>
+                    <span class="sidebar-normal"> Create New </span>
                   </a>
                 </li>
               </ul>
