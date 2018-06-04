@@ -356,7 +356,7 @@ function changeOptions(selectEl) {
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#info" role="tab" data-toggle="tab">Info</a>
+                  <a class="nav-link active" href="#general" role="tab" data-toggle="tab">General</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#description" role="tab" data-toggle="tab">Description</a>
@@ -369,11 +369,11 @@ function changeOptions(selectEl) {
         <div class="col-lg-8 col-md-7 col-sm-8 col-6">
           <!-- Tab panes -->
           <div class="tab-content">
-            <div class="tab-pane active" id="info">
-
-                <label for="domain_name">Domain Name <span class="required">*</span></label>
-                <input type="text" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
-
+            <div class="tab-pane active" id="general">
+              <label>Domain Name: </label>
+              <div class="form-group">
+                <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+              </div>
 
             </div>
             <div class="tab-pane" id="description">
@@ -383,7 +383,7 @@ function changeOptions(selectEl) {
 
           </div>
         </div>
-        
+
       </div>
     </div>
     </form>
