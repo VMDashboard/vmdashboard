@@ -454,47 +454,64 @@ function domainDeleteWarning(linkURL) {
             <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
               <div class="card-body">
                 <?php
-                /* Optical device information */
-                $path = $domXML->xpath('//disk');
+                /* Network interface information */
+                $path = $domXML->xpath('//interface');
                 if (!empty($path)) {
                   echo "<div class='table-responsive'>" .
                     "<table class='table'>" .
                     "<tr>" .
-                    "<th>ISO file</th>" .
-                    "<th>Driver</th>" .
-                    "<th>Device</th>" .
-                    "<th>Bus</th>" .
+                    "<th>Type</th>" .
+                    "<th>MAC Address</th>" .
+                    "<th>Source</th>" .
+                    "<th>Mode</th>" .
+                    "<th>Model</th>" .
                     "<th>Actions</th>" .
                     "</tr>" .
                     "<tbody>";
 
                   for ($i = 0; $i < sizeof($path); $i++) {
-                    //$disk_type = $domXML->devices->disk[$i][type];
-                    $disk_device = $domXML->devices->disk[$i][device];
-                    $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
-                    //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
-                    $disk_source_file = $domXML->devices->disk[$i]->source[file];
-                    if (empty($disk_source_file)) {
-                      $disk_source_file = "empty";
+                    $interface_type = $domXML->devices->interface[$i][type];
+                    $interface_mac = $domXML->devices->interface[$i]->mac[address];
+                    $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
+                    if ($interface_type == "network") {
+                      $source_network = $domXML->devices->interface[$i]->source[network];
                     }
-                    $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
-                    $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+                    if ($interface_type == "direct") {
+                      $source_dev = $domXML->devices->interface[$i]->source[dev];
+                      $source_mode = $domXML->devices->interface[$i]->source[mode];
+                    }
+                    $interface_model = $domXML->devices->interface[$i]->model[type];
 
-                    if ($disk_device == "cdrom") {
+                    if ($interface_type == "network") {
                       echo "<tr>" .
-                        "<td>$disk_source_file</td>" .
-                        "<td>$disk_driver_name</td>" .
-                        "<td>$disk_target_dev</td>" .
-                        "<td>$disk_target_bus</td>" .
+                        "<td>$interface_type</td>" .
+                        "<td>$interface_mac</td>" .
+                        "<td>$source_network</td>" .
+                        "<td>nat</td>" .
+                        "<td>$interface_model</td>" .
                         "<td>" .
-                          "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                          "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                          "Remove</a>" .
+                        "</td>" .
+                        "</tr>";
+                    }
+                    if ($interface_type == "direct") {
+                      echo "<tr>" .
+                        "<td>$interface_type</td>" .
+                        "<td>$interface_mac</td>" .
+                        "<td>$source_dev</td>" .
+                        "<td>$source_mode</td>" .
+                        "<td>$interface_model</td>" .
+                        "<td>" .
+                          "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                          "Remove</a>" .
                         "</td>" .
                         "</tr>";
                     }
                   }
                   echo "</tbody></table></div>";
                 } else {
-                  echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+                  echo '<hr><p>Domain doesn\'t have any network devices</p>';
                 }
                 ?>
               </div>
@@ -504,6 +521,88 @@ function domainDeleteWarning(linkURL) {
       </div> <!-- end card-body -->
     </div> <!-- end card -->
   </div> <!-- end col -->
+
+
+  <div class="card">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card-header">
+          <h4 class="card-title"> Snapshots</h4>
+        </div>
+        <div class="card-body">
+          <?php
+          /* Snapshot information */
+          $tmp = $lv->list_domain_snapshots($dom);
+          if (!empty($tmp)) {
+            echo "<div class='table-responsive'>" .
+              "<table class='table'>" .
+              "<tr>" .
+              "<th>Name</th>" .
+              "<th>Creation Time</th>" .
+              "<th>Domain State</th>" .
+              "<th>Actions</th>" .
+              "</tr>" .
+              "<tbody>";
+
+            foreach ($tmp as $key => $value) {
+              //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+              $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+              $tmpxml = simplexml_load_string($tmpsnapshotxml);
+              $name = $tmpxml->name[0];
+              $creationTime = $tmpxml->creationTime[0];
+              $snapstate = $tmpxml->state[0];
+              echo "<tr>";
+              echo "<td>" . $name . "</td>";
+              echo "<td>" . date("D d M Y", $value) . " - ";
+              echo date("H:i:s", $value) . "</td>";
+              echo "<td>" . $snapstate . "</td>";
+              echo "<td>
+                <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
+                <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">Revert | </a>
+                <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">XML</a>
+                </td>";
+              echo "</tr>";
+            }
+            echo "</tbody></table></div>";
+          } else {
+            echo "<hr><p>Domain does not have any snapshots</p>";
+          }
+
+          if ($snapshotxml != null) {
+            echo "<hr>";
+            echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+            echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
+          }
+          ?>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card-header">
+          <h4 class="card-title"> Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?></h4>
+        </div>
+        <div class="card-body">
+          <?php
+          /* XML information */
+          $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+          $xml = $lv->domain_get_xml($domName, $inactive);
+          $ret = htmlentities($xml);
+
+          if ($state == "shutoff"){
+            $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $uuid . " >" .
+              "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
+              "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
+            echo $ret;
+          } else {
+            echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+          }
+          ?>
+        </div>
+      </div>
+
+    </div> <!-- end row -->
+  </div> <!-- end card -->
+
 
 
 </div> <!-- end content -->
