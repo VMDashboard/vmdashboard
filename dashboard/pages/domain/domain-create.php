@@ -394,9 +394,18 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Virtual CPUs: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="number" id="vcpu" name="vcpu" required="required" class="form-control" min="1" value="2">
+                  </div>
+                </div>
+              </div>
+
+
               
-
-
 
 
 
