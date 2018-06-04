@@ -51,29 +51,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if ($_SESSION['domain_type'] == "kvm"]) {
-  $domain_type = $_SESSION['domain_type'];
-  $domain_name = $_SESSION['domain_name'];
-  $memory_unit = $_SESSION['memory_unit'];
-  $memory = $_SESSION['memory'];
-  $vcpu = $_SESSION['vcpu'];
-  $os_arch = $_SESSION['os_arch'];
-  $os_type = $_SESSION['os_type'];
-  $clock_offset = $_SESSION['clock_offset'];
-  $os_platform = $_SESSION['os_platform'];
-  $source_file_volume = $_SESSION['source_file_volume'];
-  $volume_image_name = $_SESSION['new_volume_name'];
-  $volume_capacity = $_SESSION['new_volume_size'];
-  $unit = $_SESSION['new_unit'];
-  $volume_size = $_SESSION['new_volume_size'];
-  $driver_type = $_SESSION['new_driver_type'];
-  $source_file_cd = $_SESSION['source_file_cd'];
-  $interface_type = $_SESSION['interface_type'];
-  $mac_address = $_SESSION['mac_address'];
-  $source_dev = $_SESSION['source_dev'];
-  $source_mode = $_SESSION['source_mode'];
-  $source_network = $_SESSION['source_network'];
 
-  
+
+
+  //Network Information
+  if ($interface_type == "network") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source network='" . $source_network . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
+
+  if ($interface_type == "direct") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source dev='" . $source_dev . "' mode='" . $source_mode . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
+
+
+  //Graphics Information
+  $graphics_type = "vnc";
+  $graphics_port = "-1";
+  $autoport = "yes";
+
+
   //Final XML
   $xml = "
     <domain type='" . $domain_type . "'>
