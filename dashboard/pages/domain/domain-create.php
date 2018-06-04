@@ -371,10 +371,12 @@ function changeOptions(selectEl) {
           <div class="tab-content">
             <div class="tab-pane active" id="general">
 
-              <label class="col-sm-2 col-form-label">Domain Name: </label>
+              <div class="row">
+              <label>Domain Name: </label>
               <div class="form-group">
                 <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
               </div>
+            </div>
 
               <div class="row">
                     <label class="col-sm-2 col-form-label">Required Text</label>
