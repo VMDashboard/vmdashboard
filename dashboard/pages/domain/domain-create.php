@@ -23,133 +23,13 @@ function clean_input($data) {
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
-//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //$_SESSION['domain_type'] = "kvm"; //set to "kvm" as this is the only supported type at this time
-  //$_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
-  //$_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
-  //$_SESSION['memory'] = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
-  //$_SESSION['vcpu'] = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
-  //$_SESSION['os_arch'] = "x86_64"; //set to x86_64, need to change to host type as well as provide options
-  //$_SESSION['os_type'] = "hvm"; //hvm is standard operating system VM
-  //$_SESSION['clock_offset'] = "localtime"; //set to localtime
-  //$_SESSION['os_platform'] = $_POST['os_platform'];
-  //$_SESSION['source_file_volume'] = $_POST['source_file_volume']; //This will be the volume image that the user selects
-  //$_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
-  //$_SESSION['volume_capacity'] = $_POST['new_volume_size'];
-  //$_SESSION['unit'] = $_POST['new_unit'];
-  //$_SESSION['volume_size'] = $_POST['new_volume_size'];
-  //$_SESSION['driver_type'] = $_POST['new_driver_type'];
-  //$_SESSION['source_file_cd'] = $_POST['source_file_cd'];
-  //$_SESSION['interface_type'] = $_POST['interface_type'];
-  //$_SESSION['mac_address'] = $_POST['mac_address'];
-  //$_SESSION['source_dev'] = $_POST['source_dev'];
-  //$_SESSION['source_mode'] = $_POST['source_mode'];
-  //$_SESSION['source_network'] = $_POST['source_network'];
-
-  //header("Location: ".$_SERVER['PHP_SELF']);
-  //exit;
-//}
-
-
-
-
-
-
-  //Graphics Information
-  $graphics_type = "vnc";
-  $graphics_port = "-1";
-  $autoport = "yes";
-
-
-  //Final XML
-  $xml = "
-    <domain type='" . $domain_type . "'>
-    <name>" . $domain_name . "</name>
-    <description>
-      " . $os_platform . " platform
-    </description>
-    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
-    <vcpu>" . $vcpu . "</vcpu>
-
-    <os>
-      <type arch='" . $os_arch . "'>" . $os_type . "</type>
-      <boot dev='hd'/>
-      <boot dev='cdrom'/>
-      <boot dev='network'/>
-    </os>
-
-    " . $features . "
-
-    <cpu mode='custom' match='exact'>
-      <model fallback='allow'>Nehalem</model>
-    </cpu>
-
-    <clock offset='" . $clock_offset . "'/>
-
-    <devices>
-      " . $volume_xml . "
-      " . $cd_xml . "
-      " . $network_interface_xml . "
-      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
-      <memballoon model='virtio'>
-            <stats period='10'/>
-      </memballoon>
-    </devices>
-    </domain> ";
-
-  //Define the new guest domain based off the XML information
-  $new_domain = $lv->domain_define($xml);
-
-  //need to check to make sure $new_domain is not false befoe this code exectues
-  if ($source_file_volume == "new") {
-    $res = $new_domain;
-    $img = libvirt_storagevolume_get_path($new_disk);
-    $dev = $target_dev_volume;
-    $typ = $target_bus_volume;
-    $driver = $driver_type;
-    $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
-  }
-
-  //Will display a sweet alert if a return message exists
-  if ($ret != "") {
-    echo "
-      <script>
-        var alert_msg = '$ret'
-        swal(alert_msg);
-      </script>";
-  }
-
-  unset($_SESSION['domain_type']);
-  unset($_SESSION['domain_name']);
-  unset($_SESSION['memory_unit']);
-  unset($_SESSION['memory']);
-  unset($_SESSION['vcpu']);
-  unset($_SESSION['os_arch']);
-  unset($_SESSION['os_type']);
-  unset($_SESSION['clock_offset']);
-  unset($_SESSION['os_platform']);
-  unset($_SESSION['source_file_volume']);
-  unset($_SESSION['new_volume_name']);
-  unset($_SESSION['new_volume_size']);
-  unset($_SESSION['new_unit']);
-  unset($_SESSION['new_volume_size']);
-  unset($_SESSION['new_driver_type']);
-  unset($_SESSION['source_file_cd']);
-  unset($_SESSION['interface_type']);
-  unset($_SESSION['mac_address']);
-  unset($_SESSION['source_dev']);
-  unset($_SESSION['source_mode']);
-  unset($_SESSION['source_network']);
-
-  header('Location: domain-list.php');
-  exit;
-}
 
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
-require('../navbar.php');
-?>
 
+require('../navbar.php');
+
+?>
 <script>
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
