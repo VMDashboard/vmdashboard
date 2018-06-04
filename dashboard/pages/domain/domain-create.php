@@ -23,7 +23,7 @@ function clean_input($data) {
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   //$_SESSION['domain_type'] = "kvm"; //set to "kvm" as this is the only supported type at this time
   //$_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
   //$_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   //header("Location: ".$_SERVER['PHP_SELF']);
   //exit;
-}
+//}
 
 
 
