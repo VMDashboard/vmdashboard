@@ -461,10 +461,10 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
-              <div class="row diskChange" id="new" style="display:none;">
-                <label class="col-sm-2 col-form-label">Volume Name: </label>
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Volume Name: </label>
                 <div class="col-sm-7">
-                  <div class="form-group">
+                  <div class="form-group diskChange" id="new" style="display:none;">
                     <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
                   </div>
                 </div>
