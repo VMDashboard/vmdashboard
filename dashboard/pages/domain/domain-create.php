@@ -404,10 +404,34 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Memory: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="number" id="vcpu" name="memory" required="required" class="form-control" min="1" value="4">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Memory Unit: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <div id="memory_unit" class="btn-group" data-toggle="buttons">
+                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                        <input type="radio" name="memory_unit" value="MiB"> MB
+                      </label>
+                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
+                        <input type="radio" name="memory_unit" value="GiB" checked="checked"> GB
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
 
-
+            
 
 
             </div>
@@ -421,7 +445,7 @@ function changeOptions(selectEl) {
 
       </div>
     </div>
-    <input type="submit" name="submit" value="submit">
+    <input type="submit" class="form-control" name="submit" value="submit">
     </form>
   </div>
 </div>
