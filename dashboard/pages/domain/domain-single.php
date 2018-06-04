@@ -339,7 +339,7 @@ function domainDeleteWarning(linkURL) {
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingOne">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Storage Volumes
+                <h2>Storage Volumes</h2>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
@@ -391,7 +391,7 @@ function domainDeleteWarning(linkURL) {
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingTwo">
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Optical Storage
+                <h3>Optical Storage</h3>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
@@ -448,7 +448,7 @@ function domainDeleteWarning(linkURL) {
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingThree">
               <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Network Adapters
+                <h4>Network Adapters</h4>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
@@ -519,7 +519,7 @@ function domainDeleteWarning(linkURL) {
             </div>
           </div>
         </div> <!-- end accordion -->
-      </div> <!-- end card-body -->  
+      </div> <!-- end card-body -->
     </div> <!-- end col -->
   </div> <!-- end card -->
 
