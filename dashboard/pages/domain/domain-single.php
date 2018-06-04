@@ -205,7 +205,7 @@ function domainDeleteWarning(linkURL) {
     <div class="row">
       <div class="col-md-4">
         <div class="card-header">
-          <h4 class="card-title"> Virtual Machine: <?php echo $domName; ?></h4>
+          <h4 class="card-title">Console</h4>
         </div>
         <div class="card-body">
           <?php
@@ -230,7 +230,7 @@ function domainDeleteWarning(linkURL) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h4 class="card-title"> Virtual Machine: <?php echo $domName; ?></h4>
+          <h4 class="card-title"> <?php echo $domName; ?></h4>
         </div>
         <div class="card-body">
           <?php
@@ -286,10 +286,79 @@ function domainDeleteWarning(linkURL) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h4 class="card-title"> Virtual Machine: <?php echo $domName; ?></h4>
+          <h4 class="card-title"> Actions </h4>
         </div>
         <div class="card-body">
+          <?php  if ($state == "running") { ?>
+            <li><i class="fa fa-desktop" style="padding-right:5px;"></i>
+              <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+              Connect using noVNC</a> <br />
+            </li>
+          <?php } ?>
 
+          <?php if ($state == "shutoff") { ?>
+            <li><i class="fa fa-power-off" style="padding-right:7px;"></i>
+              <a href="?action=domain-start&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              Power on</a> <br />
+            </li>
+          <?php } ?>
+
+          <?php  if ($state == "running") { ?>
+            <li><i class="fa fa-power-off" style="padding-right:7px;"></i>
+              <a href="?action=domain-stop&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              Shutdown</a> <br />
+            </li>
+            <li><i class="fa fa-pause" style="padding-right:7px;"></i>
+              <a href="?action=domain-pause&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              Pause domain</a> <br />
+            </li>
+          <?php } ?>
+
+          <?php  if ($state == "paused") { ?>
+            <li><i class="fa fa-play" style="padding-right:7px;"></i>
+              <a href="?action=domain-resume&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              Resume domain</a> <br />
+            </li>
+          <?php } ?>
+
+          <?php  if ($state != "shutoff") { ?>
+            <li><i class="fa fa-plug" style="padding-right:5px;"></i>
+              <a href="?action=domain-destroy&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              Forcefully shutdown</a> <br />
+            </li>
+          <?php } ?>
+
+          <?php  if ($state == "shutoff") { ?>
+            <li><i class="fa fa-trash" style="padding-right:7px;"></i>
+              <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="#" >
+              Delete domain</a> <br />
+            </li>
+          <?php } ?>
+
+          <hr>
+
+          <li><i class="fa fa-plus" style="padding-right:7px;"></i>
+            <a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+            Add storage volume</a> <br />
+          </li>
+
+          <li><i class="fa fa-plus" style="padding-right:7px;"></i>
+            <a href="domain-add-iso.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+            Add optical storage</a> <br />
+           </li>
+
+          <li><i class="fa fa-plus" style="padding-right:7px;"></i>
+            <a href="domain-add-network.php?uuid=<?php echo $uuid; ?>" target="_self" >
+            Add network adapter</a> <br />
+          </li>
+
+          <li><i class="fa fa-plus" style="padding-right:7px;"></i>
+            <a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+            Create new snapshot</a> <br />
+          </li>
+
+          </ul>
+          <!-- end of actions -->
         </div>
       </div>
 
