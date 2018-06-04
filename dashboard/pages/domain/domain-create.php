@@ -375,6 +375,18 @@ function changeOptions(selectEl) {
                 <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
               </div>
 
+              <div class="row">
+                    <label class="col-sm-2 col-form-label">Required Text</label>
+                    <div class="col-sm-7">
+                      <div class="form-group">
+                        <input class="form-control" type="text" name="required" required="true" />
+                      </div>
+                    </div>
+                    <label class="col-sm-3 label-on-right">
+                      <code>required</code>
+                    </label>
+                  </div>
+
             </div>
             <div class="tab-pane" id="description">
               <p>The first thing you notice when you hold the phone is how great it feels in your hand. The cover glass curves down around the sides to meet the anodized aluminum enclosure in a remarkable, simplified design. </p>
