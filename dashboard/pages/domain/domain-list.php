@@ -121,7 +121,7 @@ swal(alert_msg);
                 "<td> $mem </td>" .
                 "<td>
                   <div class=\"progress\">
-                  <div class=\"progress-bar\" role=\"progressbar\" style=\"width: $mem_used%\" aria-valuenow=\"$mem_used\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>
+                  <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" style=\"width: $mem_used%\" aria-valuenow=\"$mem_used\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>
                   </div>
                 </td>" .
                 "<td title='$diskdesc'>$disks</td>" .
