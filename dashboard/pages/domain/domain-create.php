@@ -345,13 +345,12 @@ function changeOptions(selectEl) {
 
 <div class="content">
   <div class="card">
+    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
     <div class="card-header">
       <h4 class="card-title"> New Virtual Machine</h4>
     </div>
     <div class="card-body">
       <div class="row">
-        
-
         <div class="col-lg-4 col-md-5 col-sm-4 col-6">
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
