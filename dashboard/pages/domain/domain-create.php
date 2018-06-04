@@ -50,9 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   exit;
 }
 
-$domain_type = $_SESSION['domain_type'];
-
-if ($domain_type == "kvm"]) {
+if ($_SESSION['domain_type'] == "kvm") {
   $domain_type = $_SESSION['domain_type'];
   $domain_name = $_SESSION['domain_name'];
   $memory_unit = $_SESSION['memory_unit'];
@@ -75,15 +73,214 @@ if ($domain_type == "kvm"]) {
   $source_mode = $_SESSION['source_mode'];
   $source_network = $_SESSION['source_network'];
 
+  //OS Information
+  if ($os_platform == "windows") {
+    //BIOS Featurs
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <hyperv>
+        <relaxed state='on'/>
+        <vapic state='on'/>
+        <spinlocks state='on' retries='8191'/>
+      </hyperv>
+      <vmport state='off'/>
+    </features>";
+
+    //Volume type and bus needed for Windows
+    $target_dev_volume = "sda";
+    $target_bus_volume = "sata";
+
+    //Networking model for Windows
+    $model_type = "rtl8139";
+  } else {
+    //Features not necessary for Linux or Unix domains
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <vmport state='off'/>
+    </features>";
+
+    //Linux or Unix domains can use vda and virtio
+    $target_dev_volume = "vda";
+    $target_bus_volume = "virtio";
+
+    //Networking model for Linux
+    $model_type = "virtio";
+  }
+
+  //Hard drive information
+  $disk_type_volume = "file";
+  $disk_device_volume = "disk";
+  $driver_name_volume = "qemu";
+
+  //determine disk file extension to determine driver type
+  $dot_array = explode('.', $source_file_volume); //seperates string into array based on "."
+  $extension = end($dot_array); //end returns the last element in the array, which should be the extension
+  if ($extension == "qcow2") {
+    $driver_type_volume = "qcow2";
+  } else {
+    $driver_type_volume = "raw";
+  }
+
+  //determine what the hard drive volume xml will be
+  switch ($source_file_volume) {
+    case "none":
+      $volume_xml = "";
+      break;
+
+    case "new":
+      $pool = "default";
+      //Lets check for empty string, if it is empty will just append -volume-image to the domain name
+      if ($volume_image_name == "") {
+        $volume_image_name = $domain_name . "-volume-image";
+      }
+      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+      $volume_xml = "";
+      break;
+
+    default:
+      $volume_xml = "
+      <disk type='" . $disk_type_volume . "' device='" . $disk_device_volume . "'>
+      <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
+      <source file='" . $source_file_volume . "'/>
+      <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
+      </disk>";
+  }
 
 
+  //CD-DVD ISO Information
+  $disk_type_cd = "file";
+  $disk_device_cd = "cdrom";
+  $driver_name_cd = "qemu";
+  $driver_type_cd = "raw";
+  $target_dev_volume == "vda" ? $target_dev_cd = "hda" : $target_dev_cd = "hdb";
+  $target_bus_cd = "ide";
+
+  if ($source_file_cd == "none") {
+    $cd_xml = "";
+  } else {
+    $cd_xml = "
+      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
+      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
+      <source file='" . $source_file_cd . "'/>
+      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
+      <readonly/>
+      </disk>";
+  }
 
 
+  //Network Information
+  if ($interface_type == "network") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source network='" . $source_network . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
+
+  if ($interface_type == "direct") {
+    $network_interface_xml = "
+      <interface type='" . $interface_type . "'>
+        <mac address='" . $mac_address . "'/>
+        <source dev='" . $source_dev . "' mode='" . $source_mode . "'/>
+        <model type='" . $model_type . "'/>
+      </interface>";
+  }
 
 
+  //Graphics Information
+  $graphics_type = "vnc";
+  $graphics_port = "-1";
+  $autoport = "yes";
+
+
+  //Final XML
+  $xml = "
+    <domain type='" . $domain_type . "'>
+    <name>" . $domain_name . "</name>
+    <description>
+      " . $os_platform . " platform
+    </description>
+    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
+    <vcpu>" . $vcpu . "</vcpu>
+
+    <os>
+      <type arch='" . $os_arch . "'>" . $os_type . "</type>
+      <boot dev='hd'/>
+      <boot dev='cdrom'/>
+      <boot dev='network'/>
+    </os>
+
+    " . $features . "
+
+    <cpu mode='custom' match='exact'>
+      <model fallback='allow'>Nehalem</model>
+    </cpu>
+
+    <clock offset='" . $clock_offset . "'/>
+
+    <devices>
+      " . $volume_xml . "
+      " . $cd_xml . "
+      " . $network_interface_xml . "
+      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
+      <memballoon model='virtio'>
+            <stats period='10'/>
+      </memballoon>
+    </devices>
+    </domain> ";
+
+  //Define the new guest domain based off the XML information
+  $new_domain = $lv->domain_define($xml);
+
+  //need to check to make sure $new_domain is not false befoe this code exectues
+  if ($source_file_volume == "new") {
+    $res = $new_domain;
+    $img = libvirt_storagevolume_get_path($new_disk);
+    $dev = $target_dev_volume;
+    $typ = $target_bus_volume;
+    $driver = $driver_type;
+    $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+  }
+
+  //Will display a sweet alert if a return message exists
+  if ($ret != "") {
+    echo "
+      <script>
+        var alert_msg = '$ret'
+        swal(alert_msg);
+      </script>";
+  }
+
+  unset($_SESSION['domain_type']);
+  unset($_SESSION['domain_name']);
+  unset($_SESSION['memory_unit']);
+  unset($_SESSION['memory']);
+  unset($_SESSION['vcpu']);
+  unset($_SESSION['os_arch']);
+  unset($_SESSION['os_type']);
+  unset($_SESSION['clock_offset']);
+  unset($_SESSION['os_platform']);
+  unset($_SESSION['source_file_volume']);
+  unset($_SESSION['new_volume_name']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_unit']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_driver_type']);
+  unset($_SESSION['source_file_cd']);
+  unset($_SESSION['interface_type']);
+  unset($_SESSION['mac_address']);
+  unset($_SESSION['source_dev']);
+  unset($_SESSION['source_mode']);
+  unset($_SESSION['source_network']);
+
+  header('Location: domain-list.php');
+  exit;
 }
-
-
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
 
