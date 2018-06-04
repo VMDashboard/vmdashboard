@@ -236,14 +236,14 @@ function domainDeleteWarning(linkURL) {
           <?php
           /* General information */
 
-              echo "<p><strong>Type: </strong>" . $lv->get_domain_type($domName) . "</p>";
-              echo "<p><strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "</p>";
-              echo "<p><strong>Memory: </strong>" . $mem . "</p>";
-              echo "<p><strong>vCPUs: </strong>" . $cpu . "</p>";
-              echo "<p><strong>State: </strong>" . $state . "</p>";
-              echo "<p><strong>Architecture: </strong>" . $arch . "</p>";
-              echo "<p><strong>ID: </strong>" . $id . "</p>";
-              echo "<p><strong>VNC Port: </strong>" . $vnc . "</p>";            
+              echo "<strong>Type: </strong>" . $lv->get_domain_type($domName) . "<br />";
+              echo "<strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "<br />";
+              echo "<strong>Memory: </strong>" . $mem . "<b/ .>";
+              echo "<strong>vCPUs: </strong>" . $cpu . "<br />";
+              echo "<strong>State: </strong>" . $state . "<br />";
+              echo "<strong>Architecture: </strong>" . $arch . "<br />";
+              echo "<strong>ID: </strong>" . $id . "<br />";
+              echo "<strong>VNC Port: </strong>" . $vnc . "<br />";            
 
           if ($die)
             die('</body></html');
