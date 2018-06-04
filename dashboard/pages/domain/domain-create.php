@@ -25,7 +25,7 @@ function clean_input($data) {
 // This will prevent duplicatig actions when page is reloaded.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['domain_type'] = "kvm"; //set to "kvm" as this is the only supported type at this time
-  $_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
+  //$_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
   $_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $_SESSION['memory'] = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $_SESSION['vcpu'] = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['clock_offset'] = "localtime"; //set to localtime
   $_SESSION['os_platform'] = $_POST['os_platform'];
   $_SESSION['source_file_volume'] = $_POST['source_file_volume']; //This will be the volume image that the user selects
-  $_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
+  //$_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
   $_SESSION['volume_capacity'] = $_POST['new_volume_size'];
   $_SESSION['unit'] = $_POST['new_unit'];
   $_SESSION['volume_size'] = $_POST['new_volume_size'];
