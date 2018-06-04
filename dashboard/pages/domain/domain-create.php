@@ -51,29 +51,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if ($_SESSION['domain_type'] == "kvm"]) {
-  $domain_type = $_SESSION['domain_type'];
-  $domain_name = $_SESSION['domain_name'];
-  $memory_unit = $_SESSION['memory_unit'];
-  $memory = $_SESSION['memory'];
-  $vcpu = $_SESSION['vcpu'];
-  $os_arch = $_SESSION['os_arch'];
-  $os_type = $_SESSION['os_type'];
-  $clock_offset = $_SESSION['clock_offset'];
-  $os_platform = $_SESSION['os_platform'];
-  $source_file_volume = $_SESSION['source_file_volume'];
-  $volume_image_name = $_SESSION['new_volume_name'];
-  $volume_capacity = $_SESSION['new_volume_size'];
-  $unit = $_SESSION['new_unit'];
-  $volume_size = $_SESSION['new_volume_size'];
-  $driver_type = $_SESSION['new_driver_type'];
-  $source_file_cd = $_SESSION['source_file_cd'];
-  $interface_type = $_SESSION['interface_type'];
-  $mac_address = $_SESSION['mac_address'];
-  $source_dev = $_SESSION['source_dev'];
-  $source_mode = $_SESSION['source_mode'];
-  $source_network = $_SESSION['source_network'];
 
 
+  //OS Information
+  if ($os_platform == "windows") {
+    //BIOS Featurs
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <hyperv>
+        <relaxed state='on'/>
+        <vapic state='on'/>
+        <spinlocks state='on' retries='8191'/>
+      </hyperv>
+      <vmport state='off'/>
+    </features>";
+
+    //Volume type and bus needed for Windows
+    $target_dev_volume = "sda";
+    $target_bus_volume = "sata";
+
+    //Networking model for Windows
+    $model_type = "rtl8139";
+  } else {
+    //Features not necessary for Linux or Unix domains
+    $features = "
+    <features>
+      <acpi/>
+      <apic/>
+      <vmport state='off'/>
+    </features>";
+
+    //Linux or Unix domains can use vda and virtio
+    $target_dev_volume = "vda";
+    $target_bus_volume = "virtio";
+
+    //Networking model for Linux
+    $model_type = "virtio";
+  }
+
+  //Hard drive information
+  $disk_type_volume = "file";
+  $disk_device_volume = "disk";
+  $driver_name_volume = "qemu";
+
+  //determine disk file extension to determine driver type
+  $dot_array = explode('.', $source_file_volume); //seperates string into array based on "."
+  $extension = end($dot_array); //end returns the last element in the array, which should be the extension
+  if ($extension == "qcow2") {
+    $driver_type_volume = "qcow2";
+  } else {
+    $driver_type_volume = "raw";
+  }
 
   //determine what the hard drive volume xml will be
   switch ($source_file_volume) {
