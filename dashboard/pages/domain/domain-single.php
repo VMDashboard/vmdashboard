@@ -238,12 +238,12 @@ function domainDeleteWarning(linkURL) {
 
               echo "<strong>Type: </strong>" . $lv->get_domain_type($domName) . "<br />";
               echo "<strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "<br />";
-              echo "<strong>Memory: </strong>" . $mem . "<b/ .>";
+              echo "<strong>Memory: </strong>" . $mem . "<br />";
               echo "<strong>vCPUs: </strong>" . $cpu . "<br />";
               echo "<strong>State: </strong>" . $state . "<br />";
               echo "<strong>Architecture: </strong>" . $arch . "<br />";
               echo "<strong>ID: </strong>" . $id . "<br />";
-              echo "<strong>VNC Port: </strong>" . $vnc . "<br />";            
+              echo "<strong>VNC Port: </strong>" . $vnc . "<br />";
 
           if ($die)
             die('</body></html');
@@ -256,6 +256,7 @@ function domainDeleteWarning(linkURL) {
           <h4 class="card-title"> Actions </h4>
         </div>
         <div class="card-body">
+          <ul class="list-unstyled project_files">
           <?php  if ($state == "running") { ?>
             <li><i class="fa fa-desktop" style="padding-right:5px;"></i>
               <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
