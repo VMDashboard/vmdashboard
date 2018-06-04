@@ -235,48 +235,15 @@ function domainDeleteWarning(linkURL) {
         <div class="card-body">
           <?php
           /* General information */
-          echo "<table class=\"table\">";
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1; border-top:none;\"><strong>Type: </strong></td>";
-              echo "<td style=\"line-height:1; border-top:none;\">" . $lv->get_domain_type($domName) . "</td>";
-            echo "</tr>";
 
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Emulator: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $lv->get_domain_emulator($domName) . "</td>";
-            echo "</tr>";
-
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Memory: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $mem . "</td>";
-            echo "</tr>";
-
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>vCPUs: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $cpu . "</td>";
-            echo "</tr>";
-
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>State: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $state . "</td>";
-            echo "</tr>";
-
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>Architecture: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $arch . "</td>";
-            echo "</tr>";
-
-            echo "<tr style=\"line-height:1;\">";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>ID: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $id . "</td>";
-            echo "</tr>";
-
-            echo "<tr>";
-              echo "<td style=\"background: #f3f3f3; line-height:1;\"><strong>VNC Port: </strong></td>";
-              echo "<td style=\"line-height:1; \">" . $vnc . "</td>";
-            echo "</tr>";
-
-          echo "</table>";
+              echo "<p><strong>Type: </strong>" . $lv->get_domain_type($domName) . "</p>";
+              echo "<p><strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "</p>";
+              echo "<p><strong>Memory: </strong>" . $mem . "</p>";
+              echo "<p><strong>vCPUs: </strong>" . $cpu . "</p>";
+              echo "<p><strong>State: </strong>" . $state . "</p>";
+              echo "<p><strong>Architecture: </strong>" . $arch . "</p>";
+              echo "<p><strong>ID: </strong>" . $id . "</p>";
+              echo "<p><strong>VNC Port: </strong>" . $vnc . "</p>";            
 
           if ($die)
             die('</body></html');
