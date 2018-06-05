@@ -28,12 +28,25 @@ function clean_input($data) {
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  $_SESSION['source_file'] = $_POST['source_file']; //determines if none, new, or existing disk is added
+  $_SESSION['new_volume_name'] = clean_input($_POST['new_volume_name']); //the new name of the volume disk image
+  $_SESSION['new_volume_size'] = $_POST['new_volume_size']; //number used for volume size
+  $_SESSION['new_unit'] = $_POST['new_unit']; //determines MiB or GiB
+  $_SESSION['new_volume_size'] = $_POST['new_volume_size'];
+  $_SESSION['new_driver_type'] = $_POST['new_driver_type']; //qcow2 or raw
+  $_SESSION['new_target_bus'] = $_POST['new_target_bus']; //virtio, ide, sata, or scsi - used when adding disk to domain
+  $_SESSION['existing_driver_type'] = $_POST['existing_driver_type']; //qcow2 or raw
+  $_SESSION['existing_target_bus'] = $_POST['existing_target_bus']; //virtio, ide, sata, or scsi
 
+  header("Location: ".$_SERVER['PHP_SELF']);
+  exit;
+}
 
 
 if (isset($_SESSION['source_file']) {
   $disk_type = "file";
-  $disk_device= "disk";
+  $disk_device = "disk";
   $driver_name = "qemu"; //not used
   $source_file = $_SESSION['source_file']; //determines if none, new, or existing disk is added
 
