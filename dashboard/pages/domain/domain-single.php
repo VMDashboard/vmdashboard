@@ -193,7 +193,6 @@ function domainDeleteWarning(linkURL) {
     // Redirect the user
     window.location = linkURL;
   }
-
   });
   }
 </script>
