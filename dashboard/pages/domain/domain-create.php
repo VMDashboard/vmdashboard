@@ -24,6 +24,7 @@ function clean_input($data) {
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  //General Section
   $_SESSION['domain_type'] = "kvm"; //set to "kvm" as this is the only supported type at this time
   $_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
   $_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
@@ -33,13 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['os_type'] = "hvm"; //hvm is standard operating system VM
   $_SESSION['clock_offset'] = "localtime"; //set to localtime
   $_SESSION['os_platform'] = $_POST['os_platform'];
+  //Storage Volume Section
   $_SESSION['source_file_volume'] = $_POST['source_file_volume']; //This will be the volume image that the user selects
   $_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
   $_SESSION['volume_capacity'] = $_POST['new_volume_size'];
   $_SESSION['unit'] = $_POST['new_unit'];
   $_SESSION['volume_size'] = $_POST['new_volume_size'];
   $_SESSION['driver_type'] = $_POST['new_driver_type'];
+  //Optical Storage Section
   $_SESSION['source_file_cd'] = $_POST['source_file_cd'];
+  //Network Section
   $_SESSION['interface_type'] = $_POST['interface_type'];
   $_SESSION['mac_address'] = $_POST['mac_address'];
   $_SESSION['source_dev'] = $_POST['source_dev'];
@@ -51,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 if ($_SESSION['domain_type'] == "kvm") {
+  //General Section
   $domain_type = $_SESSION['domain_type'];
   $domain_name = $_SESSION['domain_name'];
   $memory_unit = $_SESSION['memory_unit'];
@@ -60,20 +65,24 @@ if ($_SESSION['domain_type'] == "kvm") {
   $os_type = $_SESSION['os_type'];
   $clock_offset = $_SESSION['clock_offset'];
   $os_platform = $_SESSION['os_platform'];
+  //Storage Volume Section
   $source_file_volume = $_SESSION['source_file_volume'];
   $volume_image_name = $_SESSION['volume_image_name'];
   $volume_capacity = $_SESSION['volume_capacity'];
   $unit = $_SESSION['unit'];
   $volume_size = $_SESSION['volume_size'];
   $driver_type = $_SESSION['driver_type'];
+  //Optical Storage Section
   $source_file_cd = $_SESSION['source_file_cd'];
+  //Network Section
   $interface_type = $_SESSION['interface_type'];
   $mac_address = $_SESSION['mac_address'];
   $source_dev = $_SESSION['source_dev'];
   $source_mode = $_SESSION['source_mode'];
   $source_network = $_SESSION['source_network'];
 
-  //OS Information
+
+  //OS XML Information
   if ($os_platform == "windows") {
     //BIOS Featurs
     $features = "
@@ -89,8 +98,8 @@ if ($_SESSION['domain_type'] == "kvm") {
     </features>";
 
     //Volume type and bus needed for Windows
-    $target_dev_volume = "hda";
-    $target_bus_volume = "ide";
+    $target_dev_volume = "sda";
+    $target_bus_volume = "sata";
 
     //Networking model for Windows
     $model_type = "rtl8139";
