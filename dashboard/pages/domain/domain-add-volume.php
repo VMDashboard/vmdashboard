@@ -214,6 +214,7 @@ function newExtenstion(f) {
           <div class="tab-content">
 
             <div class="tab-pane active" id="storage">
+
               <div class="row">
                 <label class="col-sm-2 col-form-label">Source File: </label>
                 <div class="col-sm-7">
@@ -288,20 +289,55 @@ function newExtenstion(f) {
                 </div>
               </div>
 
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Target bus: </label>
+                <div class="col-sm-7">
+                  <div class="form-group diskChange" id="new" style="display:none;">
+                    <select  class="form-control" name="new_target_bus" >
+                      <option value="virtio" selected="selected">virtio</option>
+                      <option value="ide">ide</option>
+                      <option value="sata">sata</option>
+                      <option value="scsi">scsi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="existing" style="display:none;">Driver type: </label>
+                <div class="col-sm-7">
+                  <div class="form-group diskChange" id="existing" style="display:none;">
+                    <select  class="form-control" name="existing_driver_type" >
+                      <option value="qcow2" selected="selected">qcow2</option>
+                      <option value="raw">raw</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="existing" style="display:none;">Target bus: </label>
+                <div class="col-sm-7">
+                  <div class="form-group diskChange" id="existing" style="display:none;">
+                    <select  class="form-control" name="existing_target_bus" >
+                      <option value="virtio" selected="selected">virtio</option>
+                      <option value="ide">ide</option>
+                      <option value="sata">sata</option>
+                      <option value="scsi">scsi</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
             </div>
-
-
-
-
-
-
           </div>
         </div>
 
       </div>
     </div>
     <div class="card-footer text-right">
-      <button type="submit" class="btn btn-danger">Create</button>
+      <button type="submit" class="btn btn-danger">Submit</button>
     </div>
     </form>
   </div>
