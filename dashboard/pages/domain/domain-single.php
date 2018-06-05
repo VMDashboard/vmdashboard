@@ -335,7 +335,7 @@ function domainDeleteWarning(linkURL) {
     <div class="col-md-12">
       <div class="card-body">
         <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-          <h4 class="card-title">Devices</h4>
+          <!-- <h4 class="card-title">Devices</h4> -->
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingOne">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -390,12 +390,12 @@ function domainDeleteWarning(linkURL) {
 
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingTwo">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <h6>Optical Storage</h6>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
-            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
               <div class="card-body">
                 <?php
                 /* Optical device information */
@@ -447,12 +447,12 @@ function domainDeleteWarning(linkURL) {
 
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingThree">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                 <h6>Network Adapters</h6>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
             </div>
-            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
               <div class="card-body">
                 <?php
                 /* Network interface information */
