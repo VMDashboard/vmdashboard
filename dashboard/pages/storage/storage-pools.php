@@ -133,7 +133,7 @@ function volumeDeleteWarning(linkURL) {
           <h4 class="card-title"> Storage Pools</h4>
         </div>
         <div class="card-body">
-          <font style="font-size:1.45em;line-height:2.5"><strong><?php echo $pools[$i]; ?></strong></font><br />
+          <?php echo $pools[$i]; ?><br />
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
           if ($act == "Active")
           echo "<a href=\"storage-wizard-volumes.php?action=storage-pools&amp;pool=$pools[$i]&amp;subaction=volume-create\"><i class=\"fa fa-plus\"></i> Create new volume </a> <br/> <br />";
