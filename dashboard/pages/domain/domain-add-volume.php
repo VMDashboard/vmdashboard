@@ -213,12 +213,12 @@ function newExtenstion(f) {
           <!-- Tab panes -->
           <div class="tab-content">
 
-            <div class="tab-pane" id="storage">
+            <div class="tab-pane active" id="storage">
               <div class="row">
                 <label class="col-sm-2 col-form-label">Source File: </label>
                 <div class="col-sm-7">
                   <div class="form-group">
-                    <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_volume">
+                    <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file">
                       <option value="none"> Select Disk </option>
                       <option value="new"> Create New Disk Image </option>
                       <?php
