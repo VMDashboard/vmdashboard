@@ -14,10 +14,8 @@ require('../header.php');
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
-
 $domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
 $os_platform = $domXML->description;
-
 
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
@@ -29,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['source_dev'] = $_POST['source_dev'];
   $_SESSION['model_type'] = $_POST['model_type'];
 
-  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
+  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$uuid);
   exit;
 }
 
