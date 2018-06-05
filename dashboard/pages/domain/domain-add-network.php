@@ -74,7 +74,8 @@ if (isset($_SESSION['network_type'])) {
   unset($_SESSION['model_type']);
 
   //Return back to the domain-single page
-  header("Location: domain-single.php?uuid=".$uuid);
+  //header("Location: domain-single.php?uuid=".$uuid);
+  header( "Location:domain-single.php? uuid = $uuid" );
   exit;
 }
 
@@ -101,7 +102,7 @@ function networkChangeOptions(selectEl) {
   <div class="card">
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
       <div class="card-header">
-        <h4 class="card-title"> Add network device to <?php echo $domName . $uuid; ?></h4>
+        <h4 class="card-title"> Add network device to <?php echo $domName; ?></h4>
       </div>
       <div class="card-body">
         <div class="row">
