@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['existing_driver_type'] = $_POST['existing_driver_type']; //qcow2 or raw
   $_SESSION['existing_target_bus'] = $_POST['existing_target_bus']; //virtio, ide, sata, or scsi
 
-  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
+  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$uuid);
   exit;
 }
 
