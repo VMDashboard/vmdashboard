@@ -52,7 +52,7 @@ if (isset($_SESSION['source_file']) {
 
   if ($source_file == "new") {
     $pool = "default"; //using the default storage pool to store images
-    $volume_image_name = clean_name_input($_SESSION['new_volume_name']); //the new name of the volume disk image
+    $volume_image_name = clean_input($_SESSION['new_volume_name']); //the new name of the volume disk image
     $volume_capacity = $_SESSION['new_volume_size']; //number used for volume size
     $unit = $_SESSION['new_unit']; //determines MiB or GiB
     $volume_size = $_SESSION['new_volume_size'];
