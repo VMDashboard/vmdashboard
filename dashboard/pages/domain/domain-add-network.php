@@ -101,7 +101,7 @@ function networkChangeOptions(selectEl) {
   <div class="card">
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
       <div class="card-header">
-        <h4 class="card-title"> Add network device to <?php echo $domName; ?></h4>
+        <h4 class="card-title"> Add network device to <?php echo $domName . $uuid; ?></h4>
       </div>
       <div class="card-body">
         <div class="row">
