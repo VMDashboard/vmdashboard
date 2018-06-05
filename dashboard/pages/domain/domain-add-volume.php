@@ -26,7 +26,127 @@ function clean_input($data) {
   return $data;
 }
 
+// We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
+// This will prevent duplicatig actions when page is reloaded.
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $_SESSION['source_file'] = $_POST['source_file']; //determines if none, new, or existing disk is added
+  $_SESSION['new_volume_name'] = clean_input($_POST['new_volume_name']); //the new name of the volume disk image
+  $_SESSION['new_volume_size'] = $_POST['new_volume_size']; //number used for volume size
+  $_SESSION['new_unit'] = $_POST['new_unit']; //determines MiB or GiB
+  $_SESSION['new_volume_size'] = $_POST['new_volume_size'];
+  $_SESSION['new_driver_type'] = $_POST['new_driver_type']; //qcow2 or raw
+  $_SESSION['new_target_bus'] = $_POST['new_target_bus']; //virtio, ide, sata, or scsi - used when adding disk to domain
+  $_SESSION['existing_driver_type'] = $_POST['existing_driver_type']; //qcow2 or raw
+  $_SESSION['existing_target_bus'] = $_POST['existing_target_bus']; //virtio, ide, sata, or scsi
 
+  header("Location: ".$_SERVER['PHP_SELF']);
+  exit;
+}
+
+
+if (isset($_SESSION['source_file']) {
+  $disk_type = "file";
+  $disk_device= "disk";
+  $driver_name = "qemu"; //not used
+  $source_file = $_SESSION['source_file']; //determines if none, new, or existing disk is added
+
+  if ($source_file == "new") {
+    $pool = "default"; //using the default storage pool to store images
+    $volume_image_name = clean_name_input($_SESSION['new_volume_name']); //the new name of the volume disk image
+    $volume_capacity = $_SESSION['new_volume_size']; //number used for volume size
+    $unit = $_SESSION['new_unit']; //determines MiB or GiB
+    $volume_size = $_SESSION['new_volume_size'];
+    $driver_type = $_SESSION['new_driver_type']; //qcow2 or raw
+    //Create the new disk now
+    $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+    $target_bus = $_SESSION['new_target_bus']; //virtio, ide, sata, or scsi - used when adding disk to domain
+
+  } elseif ($source_file == "none") {
+    //
+  } else {
+    $driver_type = $_SESSION['existing_driver_type']; //qcow2 or raw
+    $target_bus = $_SESSION['existing_target_bus']; //virtio, ide, sata, or scsi
+  }
+
+  $target_dev = ""; //changed to an autoincremting option below.
+
+  //If $target_bus type is virtio then we need to determine highest assigned value of drive, ex. vda, vdb, vdc...
+  if ($target_bus == "virtio"){
+    $virtio_array = array();
+    for ($i = 'a'; $i < 'z'; $i++)
+      $virtio_array[] = "vd" . $i;
+
+    $tmp = libvirt_domain_get_disk_devices($dom);
+    $result = array_intersect($virtio_array,$tmp);
+    if (count($result) > 0) {
+      $highestresult = max($result);
+      $target_dev = ++$highestresult;
+    } else {
+      $target_dev = "vda";
+    }
+  }
+
+  //If $target_bus type is ide then we need to determine highest assigned value of drive, ex. hda, hdb, hdc...
+  if ($target_bus == "ide"){
+    $ide_array = array();
+    for ($i = 'a'; $i < 'z'; $i++)
+      $ide_array[] = "hd" . $i;
+
+    $tmp = libvirt_domain_get_disk_devices($dom);
+    $result = array_intersect($ide_array,$tmp);
+    if (count($result) > 0 ) {
+      $highestresult = max($result);
+      $target_dev = ++$highestresult;
+    } else {
+      $target_dev = "hda";
+    }
+  }
+
+  //If $target_bus type is scsi or sata then we need to determine highest assigned value of drive, ex. sda, sdb, sdc...
+  if ($target_bus == "sata" || $target_bus == "scsi"){
+    $sd_array = array();
+    for ($i = 'a'; $i < 'z'; $i++)
+      $sd_array[] = "sd" . $i;
+
+    $tmp = libvirt_domain_get_disk_devices($dom);
+    $result = array_intersect($sd_array,$tmp);
+    if (count($result) > 0 ) {
+      $highestresult = max($result);
+      $target_dev = ++$highestresult;
+    } else {
+      $target_dev = "sda";
+    }
+  }
+
+  //add the new disk to domain if selected
+  if ($source_file == "new") {
+    $img = libvirt_storagevolume_get_path($new_disk);
+    $dev = $target_dev;
+    $typ = $target_bus;
+    $driver = $driver_type;
+    $ret = $lv->domain_disk_add($dom, $img, $dev, $typ, $driver);
+  }
+
+  //add an existing disk to domain if selected
+  if ($source_file != "new") {
+
+
+  $ret = $lv->domain_disk_add($dom, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
+  }
+
+  unset($_SESSION['source_file']);
+  unset($_SESSION['new_volume_name']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_unit']);
+  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['new_driver_type']);
+  unset($_SESSION['new_target_bus']);
+  unset($_SESSION['existing_target_bus']);
+
+  //Return back to the orignal web page
+  header('Location: ' . "domain-single.php?uuid=$uuid");
+  exit;
+}
 
 
 require('../navbar.php');
