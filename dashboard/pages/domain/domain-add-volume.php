@@ -191,7 +191,7 @@ function newExtenstion(f) {
 
 <div class="content">
   <div class="card">
-    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+    <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Add Storage Volume to <?php echo $domName; ?></h4>
       </div>

@@ -14,10 +14,8 @@ require('../header.php');
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($_GET['uuid']);
 $dom = $lv->get_domain_object($domName);
-
 $domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
 $os_platform = $domXML->description;
-
 
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
@@ -105,7 +103,7 @@ require('../navbar.php');
 
 <div class="content">
   <div class="card">
-    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+    <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Add ISO image to <?php echo $domName; ?></h4>
       </div>
