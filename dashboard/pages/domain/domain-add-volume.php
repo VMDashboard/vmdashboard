@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 
-if (isset($_SESSION['source_file']) {
+if (isset($_SESSION['source_file'])) {
   $disk_type = "file";
   $disk_device = "disk";
   $driver_name = "qemu"; //not used
