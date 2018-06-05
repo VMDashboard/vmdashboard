@@ -266,7 +266,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['clock_offset']);
   unset($_SESSION['os_platform']);
   unset($_SESSION['source_file_volume']);
-  unset($_SESSION['new_volume_name']);
+  unset($_SESSION['volume_image_name']);
   unset($_SESSION['new_volume_size']);
   unset($_SESSION['new_unit']);
   unset($_SESSION['new_volume_size']);
