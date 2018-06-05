@@ -517,25 +517,110 @@ function changeOptions(selectEl) {
 
             <div class="tab-pane" id="optical">
               <div class="row">
-                <label class="col-sm-2 col-form-label">Domain Name: </label>
+                <label class="col-sm-2 col-form-label">Select File: </label>
                 <div class="col-sm-7">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                    <select class="form-control" name="source_file_cd">
+                      <option value="none">Select File</option>
+                      <?php
+                      $pools = $lv->get_storagepools();
+                      for ($i = 0; $i < sizeof($pools); $i++) {
+                        $info = $lv->get_storagepool_info($pools[$i]);
+                        if ($info['volume_count'] > 0) {
+                          $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                          $tmp_keys = array_keys($tmp);
+                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                            $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                            $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                            if (strtolower($ext) == "iso")
+                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                          }
+                        }
+                      }
+                      ?>
+                    </select>
                   </div>
                 </div>
               </div>
+
             </div>
 
 
             <div class="tab-pane" id="network">
               <div class="row">
-                <label class="col-sm-2 col-form-label">Domain Name: </label>
+                <label class="col-sm-2 col-form-label">Interface type: </label>
                 <div class="col-sm-7">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                    <select class="form-control" onchange="changeOptions(this)" name="interface_type">
+                      <option value="network" selected="selected">nat</option>
+                      <option value="direct">bridge</option>
+                    </select>
                   </div>
                 </div>
               </div>
+
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label">MAC Address: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Enter MAC address: 11:22:33:44:55:66" name="mac_address" value="<?php echo $random_mac; ?>">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label netChange" id="direct" style="display:none;">Host Interface: </label>
+                <div class="col-sm-7">
+                  <div class="form-group netChange" id="direct" style="display:none;">
+                    <select class="form-control" name="source_dev">
+                      <?php
+                      $tmp = $lv->get_node_device_cap_options();
+                      for ($i = 0; $i < sizeof($tmp); $i++) {
+                        $tmp1 = $lv->get_node_devices($tmp[$i]);
+                        for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                          $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                          if ($tmp2['capability'] == 'net') {
+                            $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
+                            echo "<option value='$ident'> $ident </option>";
+                          }
+                        }
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label netChange" id="direct" style="display:none;">Model: </label>
+                <div class="col-sm-7">
+                  <div class="form-group netChange" id="direct" style="display:none;">
+                    <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label netChange" id="network" style="display:none;">Model: </label>
+                <div class="col-sm-7">
+                  <div class="form-group netChange" id="network" style="display:none;">
+                    <select class="form-control" name="source_network">
+                      <?php
+                      $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
+                      for ($i = 0; $i < sizeof($tmp); $i++) {
+                        $tmp2 = $lv->get_network_information($tmp[$i]);
+                        echo "<option value='" . $tmp2['name'] . "'>" . $tmp2['name'] . "</option>";
+                      }
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+
+
             </div>
 
 
