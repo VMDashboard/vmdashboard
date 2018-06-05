@@ -602,9 +602,9 @@ function changeOptions(selectEl) {
               </div>
 
               <div class="row">
-                <label class="col-sm-2 col-form-label netChange" id="network" style="display:none;">Model: </label>
+                <label class="col-sm-2 col-form-label netChange" id="network">Model: </label>
                 <div class="col-sm-7">
-                  <div class="form-group netChange" id="network" style="display:none;">
+                  <div class="form-group netChange" id="network">
                     <select class="form-control" name="source_network">
                       <?php
                       $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
@@ -630,7 +630,9 @@ function changeOptions(selectEl) {
 
       </div>
     </div>
-    <input type="submit" class="form-control" name="submit" value="submit">
+    <div class="card-footer ">
+      <button type="submit" class="btn btn-info btn-round">Submit</button>
+    </div>
     </form>
   </div>
 </div>
