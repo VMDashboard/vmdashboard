@@ -636,7 +636,7 @@ function changeOptions(selectEl) {
       </div>
     </div>
     <div class="card-footer text-right">
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-danger">Create</button>
     </div>
     </form>
   </div>
