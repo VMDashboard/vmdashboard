@@ -303,7 +303,7 @@ function domainDeleteWarning(linkURL) {
           <hr>
 
           <li><i class="fa fa-plus" style="padding-right:7px;"></i>
-            <a href="domain-add-disk.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+            <a href="domain-add-volume.php?action=domain-disk-add&amp;uuid=<?php echo $uuid; ?>" target="_self" >
             Add storage volume</a> <br />
           </li>
 
