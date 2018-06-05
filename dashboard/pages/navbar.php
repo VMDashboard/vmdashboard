@@ -15,7 +15,7 @@
           <div class="logo-image-big">
             <img src="../../assets/img/logo.png">
           </div>
-        </a>
+        <!-- </a> -->
       </div>
       <div class="sidebar-wrapper">
         <div class="user">
