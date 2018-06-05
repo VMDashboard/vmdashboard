@@ -17,7 +17,7 @@ function clean_name_input($data) {
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $disk_type = "file";
-  $disk_device= "disk";
+  $disk_device = "disk";
   $driver_name = "qemu"; //not used
   $source_file = $_POST['source_file']; //determines if none, new, or existing disk is added
 
