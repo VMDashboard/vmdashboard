@@ -130,7 +130,7 @@ function volumeDeleteWarning(linkURL) {
     <div class="row">
       <div class="col-md-3">
         <div class="card-header">
-          <h5 class="card-title"> Storage Pool: <?php echo $pools[$i]; ?> </h5>
+          <h5 class="card-title">Pool: <?php echo $pools[$i]; ?> </h5>
         </div>
         <div class="card-body">
           <?php $act = $info['active'] ? 'Active' : 'Inactive';
