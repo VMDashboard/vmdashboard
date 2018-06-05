@@ -390,7 +390,7 @@ function domainDeleteWarning(linkURL) {
 
           <div class="card card-plain">
             <div class="card-header" role="tab" id="headingTwo">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                 <h6>Optical Storage</h6>
                 <i class="nc-icon nc-minimal-down"></i>
               </a>
