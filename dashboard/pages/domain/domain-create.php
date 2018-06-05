@@ -61,7 +61,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   $clock_offset = $_SESSION['clock_offset'];
   $os_platform = $_SESSION['os_platform'];
   $source_file_volume = $_SESSION['source_file_volume'];
-  $volume_image_name = $_SESSION['new_volume_name'];
+  $volume_image_name = $_SESSION['volume_image_name'];
   $volume_capacity = $_SESSION['new_volume_size'];
   $unit = $_SESSION['new_unit'];
   $volume_size = $_SESSION['new_volume_size'];
@@ -133,10 +133,6 @@ if ($_SESSION['domain_type'] == "kvm") {
 
     case "new":
       $pool = "default";
-      //Lets check for empty string, if it is empty will just append -volume-image to the domain name
-      if ($volume_image_name == "") {
-        $volume_image_name = $domain_name . "-volume-image";
-      }
       $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
       $volume_xml = "";
       break;
