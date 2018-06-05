@@ -63,7 +63,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   $source_file_volume = $_SESSION['source_file_volume'];
   $volume_image_name = $_SESSION['volume_image_name'];
   $volume_capacity = $_SESSION['volume_capacity'];
-  $unit = $_SESSION['new_unit'];
+  $unit = $_SESSION['unit'];
   $volume_size = $_SESSION['volume_size'];
   $driver_type = $_SESSION['new_driver_type'];
   $source_file_cd = $_SESSION['source_file_cd'];
@@ -263,9 +263,9 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['os_platform']);
   unset($_SESSION['source_file_volume']);
   unset($_SESSION['volume_image_name']);
-  unset($_SESSION['new_volume_size']);
-  unset($_SESSION['new_unit']);
-  unset($_SESSION['new_volume_size']);
+  unset($_SESSION['volume_capacity']);
+  unset($_SESSION['unit']);
+  unset($_SESSION['volume_size']);
   unset($_SESSION['new_driver_type']);
   unset($_SESSION['source_file_cd']);
   unset($_SESSION['interface_type']);
