@@ -144,7 +144,8 @@ if (isset($_SESSION['source_file'])) {
   unset($_SESSION['existing_target_bus']);
 
   //Return back to the orignal web page
-  header('Location: ' . "domain-single.php?uuid=$uuid");
+
+  header("Location: domain-single.php?uuid=$uuid");
   exit;
 }
 
