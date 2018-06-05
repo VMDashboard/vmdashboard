@@ -65,7 +65,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   $volume_capacity = $_SESSION['volume_capacity'];
   $unit = $_SESSION['unit'];
   $volume_size = $_SESSION['volume_size'];
-  $driver_type = $_SESSION['new_driver_type'];
+  $driver_type = $_SESSION['driver_type'];
   $source_file_cd = $_SESSION['source_file_cd'];
   $interface_type = $_SESSION['interface_type'];
   $mac_address = $_SESSION['mac_address'];
@@ -89,8 +89,8 @@ if ($_SESSION['domain_type'] == "kvm") {
     </features>";
 
     //Volume type and bus needed for Windows
-    $target_dev_volume = "sda";
-    $target_bus_volume = "sata";
+    $target_dev_volume = "hda";
+    $target_bus_volume = "ide";
 
     //Networking model for Windows
     $model_type = "rtl8139";
