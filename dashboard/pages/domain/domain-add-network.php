@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['source_dev'] = $_POST['source_dev'];
   $_SESSION['model_type'] = $_POST['model_type'];
 
-  header("Location: ".$_SERVER['PHP_SELF']);
+  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
   exit;
 }
 
@@ -74,8 +74,7 @@ if (isset($_SESSION['network_type'])) {
   unset($_SESSION['model_type']);
 
   //Return back to the domain-single page
-  //header("Location: domain-single.php?uuid=".$uuid);
-  header( "Location:domain-single.php? uuid = $uuid" );
+  header("Location: domain-single.php?uuid=".$uuid);
   exit;
 }
 

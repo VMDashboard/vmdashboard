@@ -25,7 +25,7 @@ $os_platform = $domXML->description;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $_SESSION['source_file'] = $_POST['source_file']; //determines if none, new, or existing disk is added
 
-  header("Location: ".$_SERVER['PHP_SELF']);
+  header("Location: ".$_SERVER['PHP_SELF']."?uuid=".$_GET['uuid']);
   exit;
 }
 
@@ -153,7 +153,7 @@ require('../navbar.php');
                       </select>
                     </div>
                   </div>
-                </div>     
+                </div>
 
 
               </div> <!-- end tab pane -->
