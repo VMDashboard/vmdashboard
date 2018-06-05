@@ -130,7 +130,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     case "none":
       $volume_xml = "";
       break;
-
+$volume_size = 0;
     case "new":
       $pool = "default";
       $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
