@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['source_file_cd'] = $_POST['source_file_cd'];
   //Network Section
   $_SESSION['interface_type'] = $_POST['interface_type'];
-  $_SESSION['mac_address'] = $_POST['mac_address'];
+  $_SESSION['mac_address'] = clean_input($_POST['mac_address']);
   $_SESSION['source_dev'] = $_POST['source_dev'];
   $_SESSION['source_mode'] = $_POST['source_mode'];
   $_SESSION['source_network'] = $_POST['source_network'];
