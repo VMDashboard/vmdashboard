@@ -10,11 +10,11 @@
             <img src="../../assets/img/squarelogo.png">
           </div>
         </a>
-        <a href="#" class="simple-text logo-normal">
-          openVM
-          <!-- <div class="logo-image-big">
-            <img src="../../assets/img/logo-big.png">
-          </div> -->
+        <!--<a href="#" class="simple-text logo-normal">
+          openVM -->
+          <div class="logo-image-big">
+            <img src="../../assets/img/logo.png">
+          </div>
         </a>
       </div>
       <div class="sidebar-wrapper">
