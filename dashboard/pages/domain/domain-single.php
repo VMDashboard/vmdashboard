@@ -294,7 +294,7 @@ function domainDeleteWarning(linkURL) {
 
           <?php  if ($state == "shutoff") { ?>
             <li><i class="fa fa-trash" style="padding-right:7px;"></i>
-              <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="" >
+              <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')"  >
               Delete domain</a> <br />
             </li>
           <?php } ?>
