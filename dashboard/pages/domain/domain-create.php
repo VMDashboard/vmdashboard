@@ -359,7 +359,13 @@ function changeOptions(selectEl) {
                   <a class="nav-link active" href="#general" role="tab" data-toggle="tab">General</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#storge" role="tab" data-toggle="tab">Storage Volume</a>
+                  <a class="nav-link" href="#storage" role="tab" data-toggle="tab">Storage Volume</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#optical" role="tab" data-toggle="tab">Optical Storage</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#network" role="tab" data-toggle="tab">Network</a>
                 </li>
               </ul>
             </div>
@@ -429,10 +435,9 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
-
             </div>
-            <div class="tab-pane" id="storge">
 
+            <div class="tab-pane" id="storage">
               <div class="row">
                 <label class="col-sm-2 col-form-label">Source File: </label>
                 <div class="col-sm-7">
@@ -495,7 +500,6 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
-
               <div class="row">
                 <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Driver Type: </label>
                 <div class="col-sm-7">
@@ -508,14 +512,33 @@ function changeOptions(selectEl) {
                 </div>
               </div>
 
-
-
-
-
-
-
-
             </div>
+
+
+            <div class="tab-pane" id="optical">
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Domain Name: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="tab-pane" id="network">
+              <div class="row">
+                <label class="col-sm-2 col-form-label">Domain Name: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
 
           </div>
         </div>
