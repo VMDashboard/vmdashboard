@@ -63,7 +63,8 @@ include('navigation.php');
 <br>
 <br>
 <?php
-$directory = "../uploads/iso_uploads/"; //assigned directory for uploading ISO images
+//$directory = "../uploads/iso_uploads/"; //assigned directory for uploading ISO images
+$directory = "/var/lib/libvit/images/"; //assigned directory for uploading ISO images
 $files = glob($directory . "*.[iI][sS][oO]"); //check for iso or ISO extension
 if ($files){
   echo "<h2>Existing ISO Images</h2>";
