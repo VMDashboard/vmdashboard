@@ -58,7 +58,7 @@
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesDomains">
-              <i class="nc-icon nc-bullet-list"></i>
+              <i class="nc-icon nc-bullet-list-67"></i>
               <p>
                 Virtual Machines
                 <b class="caret"></b>
