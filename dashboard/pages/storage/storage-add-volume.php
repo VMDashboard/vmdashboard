@@ -52,7 +52,7 @@ if (isset($_SESSION['pool'])) {
   unset($_SESSION['driver_type']);
 
 
-  header('Location: ' . $original_page);
+  header('Location: storage-pools.php');
   exit;
 }
 
