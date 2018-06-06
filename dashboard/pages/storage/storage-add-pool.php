@@ -100,7 +100,7 @@ require('../navbar.php');
                   <div class="col-sm-7">
                     <div class="form-group">
                       <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control" name="pool_path" />
-                      <br /> Only paths that start with <strong>/var</strong>, <strong>/media</strong>, or <strong>/mnt</strong> will be allowed
+                      <br /> * Only paths that start with <strong>/var</strong>, <strong>/media</strong>, or <strong>/mnt</strong> will be allowed
                     </div>
                   </div>
                 </div>
