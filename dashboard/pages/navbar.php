@@ -68,14 +68,14 @@
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
-                    <span class="sidebar-mini-icon">L</span>
-                    <span class="sidebar-normal"> List </span>
+                    <span class="sidebar-mini-icon">LV</span>
+                    <span class="sidebar-normal"> List VMs</span>
                   </a>
                 </li>
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-create.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-create.php">
-                    <span class="sidebar-mini-icon">CN</span>
-                    <span class="sidebar-normal"> Create New </span>
+                    <span class="sidebar-mini-icon">CV</span>
+                    <span class="sidebar-normal"> Create New VM</span>
                   </a>
                 </li>
               </ul>
