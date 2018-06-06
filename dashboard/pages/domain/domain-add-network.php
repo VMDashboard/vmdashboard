@@ -118,7 +118,7 @@ function networkChangeOptions(selectEl) {
           <div class="col-lg-8 col-md-7 col-sm-8 col-6">
             <!-- Tab panes -->
             <div class="tab-content">
-              <div class="tab-pane active" id="optical">
+              <div class="tab-pane active" id="network">
 
                 <div class="row">
                   <label class="col-sm-2 col-form-label">Network Type: </label>

@@ -58,45 +58,6 @@ unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of ac
 unset($_SESSION['path']);
 unset($_SESSION['pool']);
 
-
-//Check to see if the iso_uploads directory exists. If it does and ISO has been uploaded
-if (file_exists('../uploads/iso_uploads')) {
-
-  $upload_path = realpath('../uploads/iso_uploads'); //determine the actual filepath of iso_uploads on the server
-  $filename = '../uploads/iso_uploads/*.iso'; //set filepath to use with glob to determine any filename that ends with .iso
-
-  $directory = "../uploads/iso_uploads/";
-  $files = glob($directory . "*.iso"); //check to see if any files with .iso exist
-  if ($files) {
-
-    $pools = $lv->get_storagepools();
-    for ($i = 0; $i < sizeof($pools); $i++) {
-      $info = $lv->get_storagepool_info($pools[$i]);
-      if ($upload_path == $info['path']) {
-        $iso_pool_exists = true;
-      }
-    }
-
-    if (!$iso_pool_exists) {
-      $xml = "
-        <pool type='dir'>
-          <name>iso_uploads</name>
-          <target>
-            <path>$upload_path</path>
-            <permissions>
-            </permissions>
-          </target>
-        </pool>";
-
-      $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
-      if ($ret == "success"){
-        $res = $lv->get_storagepool_res('iso_uploads');
-        $ret = $lv->storagepool_create($res) ? 'Pool has been started successfully' : 'Cannot start pool';
-      }
-    }
-  }
-}
-
 ?>
 
 <script>
@@ -112,7 +73,6 @@ function volumeDeleteWarning(linkURL) {
   });
   }
 </script>
-
 
 
 <div class="content">
@@ -200,8 +160,6 @@ function volumeDeleteWarning(linkURL) {
     <?php } //ends the for loop for each storage pool ?>
   </div>
 </div>
-
-
 
 
 <?php
