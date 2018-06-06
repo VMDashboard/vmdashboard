@@ -11,7 +11,7 @@
           </div>
         </a>
         <a href="#" class="simple-text logo-normal">
-          <img src="../../assets/img/logo.png">
+          OPENVM - DASHBOARD
           <!--<div class="logo-image-big">
             <img src="../../assets/img/logo.png">
           </div> -->
