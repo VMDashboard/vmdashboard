@@ -33,7 +33,7 @@ require('../header.php');
 if (isset($_SESSION['pool_name'])) {
   $pool_path = $_SESSION['pool_path'];
   unset($_SESSION['pool_path']);
-  if (substr($pool_path, 0, 4) == "/var" || substr($pool_path, 0, 4) == "/mnt" || substr($pool_path, 0, 6) == "/media") {
+  if (substr($pool_path, 0, 16) == "/var/lib/libvirt" || substr($pool_path, 0, 4) == "/mnt" || substr($pool_path, 0, 6) == "/media") {
     $pool_name = $_SESSION['pool_name'];
     unset($_SESSION['pool_name']);
     $xml = "
@@ -100,7 +100,7 @@ require('../navbar.php');
                   <div class="col-sm-7">
                     <div class="form-group">
                       <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control" name="pool_path" />
-                      <br /> * Only paths that start with <strong>/var</strong>, <strong>/media</strong>, or <strong>/mnt</strong> will be allowed
+                      <br /> * Only paths that start with <em>/var/lib/libvirt</em>, <strong>/media</strong>, or <strong>/mnt</strong> will be allowed
                     </div>
                   </div>
                 </div>
