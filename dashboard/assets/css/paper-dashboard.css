@@ -8698,7 +8698,6 @@ img {
     z-index: 4; }
     .sidebar .logo a.logo-mini,
     .off-canvas-sidebar .logo a.logo-mini {
-      opacity: 0;
       float: left;
       width: 34px;
       text-align: center;
