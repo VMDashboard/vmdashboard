@@ -31,27 +31,30 @@ if (isset($_POST['pool_name'])) {
 require('../header.php');
 
 if (isset($_SESSION['pool_name'])) {
-  $pool_name = $_SESSION['pool_name'];
   $pool_path = $_SESSION['pool_path'];
-  unset($_SESSION['pool_name']);
   unset($_SESSION['pool_path']);
+  if (substr($pool_path, 0, 4) == "/var" || substr($pool_path, 0, 4) == "/mnt" || substr($pool_path, 0, 6) == "/media") {
+    $pool_name = $_SESSION['pool_name'];
+    unset($_SESSION['pool_name']);
+    $xml = "
+      <pool type='dir'>
+        <name>$pool_name</name>
+        <target>
+          <path>$pool_path</path>
+          <permissions>
+          </permissions>
+        </target>
+      </pool>";
 
-  $xml = "
-    <pool type='dir'>
-      <name>$pool_name</name>
-      <target>
-        <path>$pool_path</path>
-        <permissions>
-        </permissions>
-      </target>
-    </pool>";
+    $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
 
-  $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
+    header('Location: storage-pools.php');
+    exit;
 
-
-  header('Location: storage-pools.php');
-  exit;
-
+  } else {
+    unset($_SESSION['pool_name']);
+  }
+  
 } //end if $_SESSION
 
 require('../navbar.php');
