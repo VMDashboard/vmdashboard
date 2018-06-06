@@ -58,7 +58,7 @@
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesDomains">
-              <i class="nc-icon nc-book-bookmark"></i>
+              <i class="nc-icon nc-laptop"></i>
               <p>
                 Virtual Machines
                 <b class="caret"></b>
@@ -84,7 +84,7 @@
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? '<li class="active">' : '<li>'; ?>
             <a data-toggle="collapse" href="#pagesStorage">
-              <i class="nc-icon nc-book-bookmark"></i>
+              <i class="nc-icon nc-box"></i>
               <p>
                 Storage
                 <b class="caret"></b>
