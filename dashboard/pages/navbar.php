@@ -108,6 +108,32 @@
             </div>
           </li>
 
+          <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
+            <a data-toggle="collapse" href="#pagesNetwork">
+              <i class="nc-icon nc-vector"></i>
+              <p>
+                Network
+                <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? 'show' : ''; ?>" id="pagesNetwork">
+              <ul class="nav">
+                <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php") ? '<li class="active">' : '<li>'; ?>
+                  <a href="../storage/storage-pools.php">
+                    <span class="sidebar-mini-icon">NL</span>
+                    <span class="sidebar-normal"> Network List </span>
+                  </a>
+                </li>
+                <?php echo (basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
+                  <a href="../storage/storage-add-pool.php">
+                    <span class="sidebar-mini-icon">CN</span>
+                    <span class="sidebar-normal"> Create New Network </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
 
 
         </ul>
