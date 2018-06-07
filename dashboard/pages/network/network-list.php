@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
   $_SESSION['action'] = $_GET['action'];
   $_SESSION['name'] = $_GET['name'];
   $_SESSION['network'] = $GET['network'];
-  $_SESSION['xmldesc'] = $_POST['xmldesc']
+  $_SESSION['xmldesc'] = $_POST['xmldesc'];
   header("Location: ".$_SERVER['PHP_SELF']);
   exit;
 }
@@ -105,7 +105,7 @@ function networkDeleteWarning(linkURL,currentURL) {
             <th>DHCP Range</th>
             <th>Actions</th>
           </thead>
-          <tbody>          
+          <tbody>
         <!-- start project list -->
         <?php
         $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
