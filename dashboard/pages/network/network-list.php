@@ -1,7 +1,7 @@
 <?php
 // If the SESSION has not been started, start it now
 if (!isset($_SESSION)) {
-    session_start();
+  session_start();
 }
 
 // If there is no username, then we need to send them to the login
@@ -12,46 +12,54 @@ if (!isset($_SESSION)) {
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_GET['action'])) {
-    $_SESSION['uuid'] = $_GET['uuid'];
-    $_SESSION['action'] = $_GET['action'];
-    header("Location: ".$_SERVER['PHP_SELF']);
-    exit;
+  $_SESSION['action'] = $_GET['action'];
+  $_SESSION['name'] = $_GET['name'];
+  $_SESSION['network'] = $GET['network'];
+  $_SESSION['xmldesc'] = $_POST['xmldesc']
+  header("Location: ".$_SERVER['PHP_SELF']);
+  exit;
 }
+
 require('../header.php');
 require('../navbar.php');
 
-$uuid = $_SESSION['uuid']; //grab the $uuid variable from $_GET, only used for actions below
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
+$name = $_SESSION['name'];
+$network = $_SESSION['network'];
 unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of action on page reload
-$domName = $lv->domain_get_name_by_uuid($uuid); //get the name of virtual machine with $uuid is present
-$dom = $lv->get_domain_object($domName); //gets the resource id for a domain
+unset($_SESSION['name']); //Unset the name in case of page reload
+unset($_SESSION['network']); //Unset the name in case of page reload
 
-//This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
-if ($action == 'domain-start') {
-  $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+if ($action == 'network-delete') {
+  $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
 }
 
-//This will pause a virtual machine and temporaily save it's state
-if ($action == 'domain-pause') {
-  $ret = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
+if ($action == 'start') {
+  $ret = $lv->set_network_active($name, true) ? "Network has been started successfully" : 'Error while starting network: '.$lv->get_last_error();
 }
 
-//This will resume a paused virtual machine. Option is given only if a machine is paused
-if ($action == 'domain-resume') {
-  $ret = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
+if ($action == 'stop') {
+  $ret = $lv->set_network_active($name, false) ? "Network has been stopped successfully" : 'Error while stopping network: '.$lv->get_last_error();
 }
 
-//This is used to gracefully shutdown the guest.
-//There are many reasons why a guest cannot gracefully shutdown so if it can't, let the user know that
-if ($action == 'domain-stop') {
-  $ret = $lv->domain_shutdown($domName) ? "Shutdown command has been sent" : 'Error while stopping domain: '.$lv->get_last_error();
+if ($action == 'edit') {
+  $xml = $lv->network_get_xml($name, false);
+  if (@$_SESSION['xmldesc']) {
+    $ret = $lv->network_change_xml($name, $_SESSION['xmldesc']) ? "Network definition has been changed" :
+      'Error changing network definition: '.$lv->get_last_error();
+  } else {
+    $network_xml = 'Editing <strong>'.$name.'</strong> network XML description: <br/><br/><form method="POST">'.
+      '<textarea name="xmldesc" rows="17" cols="2" style="width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;" >'.$xml.'</textarea><br/><br/>'.
+      '<input type="submit" value=" Edit domain XML description "></form><br/><br/>';
+  }
 }
 
-//This will forcefully shutdown the virtual machine guest
-if ($action == 'domain-destroy') {
-  $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
+if ($action == 'dumpxml') {
+  $xml = $lv->network_get_xml($name, false);
+  $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
 }
 
+unset($_SESSION['xmldesc']);
 
 //Will display a sweet alert if a return message exists
 if ($ret != "") {
@@ -64,85 +72,94 @@ swal(alert_msg);
 
 ?>
 
+<script>
+function networkDeleteWarning(linkURL,currentURL) {
+  swal("Delete network?", {
+    buttons: ["Cancel", true],
+  }).then((value) => {
+    if (value == true){
+    // Redirect the user
+    window.location = linkURL;
+  }else {
+    window.location = currentURL;
+  }
+
+  });
+}
+</script>
+
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title"> Virtual Machine List</h4>
+      <h4 class="card-title"> Virtual Networks</h4>
     </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-striped">
           <thead class="text-primary">
-            <th>Guest Name</th>
-            <th>Virtual CPUs</th>
-            <th>Memory</th>
-            <th>Memory Usage</th>
-            <th>Disks</th>
-            <th>State</th>
+            <th>Network name</th>
+            <th>Network state</th>
+            <th>Gateway IP Address</th>
+            <th>IP Address Range</th>
+            <th>Forwarding</th>
+            <th>DHCP Range</th>
             <th>Actions</th>
           </thead>
-          <tbody>
-            <?php
-            $doms = $lv->get_domains();
-            foreach ($doms as $name) {
-              $dom = $lv->get_domain_object($name);
-              $uuid = libvirt_domain_get_uuid_string($dom);
-              $active = $lv->domain_is_active($dom);
-              $info = $lv->domain_get_info($dom);
-              $mem = number_format($info['memory'] / 1024, 0, '.', '').' MB';
-              $mem_stats = $lv->domain_get_memory_stats($name);
+          <tbody>          
+        <!-- start project list -->
+        <?php
+        $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
 
-              $mem_used = (1- $mem_stats[4]/$mem_stats[5])*100;
-              if ($mem_stats != false && !isset($mem_stats[4]) && !isset($mem_stats[5])){
-                $mem_used = 100;
-              }
-              $cpu = $info['nrVirtCpu'];
+        for ($i = 0; $i < sizeof($tmp); $i++) {
+          $tmp2 = $lv->get_network_information($tmp[$i]);
+          $ip = '';
+          $ip_range = '';
+          $activity = $tmp2['active'] ? 'Active' : 'Inactive';
+          $dhcp = 'Disabled';
+          $forward = 'None';
 
-              $state = $lv->domain_state_translate($info['state']);
-              $id = $lv->domain_get_id($dom);
-              $arch = $lv->domain_get_arch($dom);
-              $vnc = $lv->domain_get_vnc_port($dom);
-              $nics = $lv->get_network_cards($dom);
+          if (array_key_exists('forwarding', $tmp2) && $tmp2['forwarding'] != 'None') {
+            if (array_key_exists('forward_dev', $tmp2))
+              $forward = $tmp2['forwarding'].' to '.$tmp2['forward_dev'];
+            else
+              $forward = $tmp2['forwarding'];
+          }
 
-              if (($diskcnt = $lv->get_disk_count($dom)) > 0) {
-                $disks = $diskcnt.' / '.$lv->get_disk_capacity($dom);
-                $diskdesc = 'Current physical size: '.$lv->get_disk_capacity($dom, true);
-              } else {
-                $disks = '-';
-                $diskdesc = '';
-              }
+          if (array_key_exists('dhcp_start', $tmp2) && array_key_exists('dhcp_end', $tmp2))
+            $dhcp = $tmp2['dhcp_start'].' - '.$tmp2['dhcp_end'];
 
-              unset($tmp);
-              unset($dom);
+          if (array_key_exists('ip', $tmp2))
+            $ip = $tmp2['ip'];
 
-              echo "<tr>" .
-                "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
-                "<td> $cpu </td>" .
-                "<td> $mem </td>" .
-                "<td>
-                  <div class=\"progress\">
-                  <div class=\"progress-bar progress-bar-danger\" role=\"progressbar\" style=\"width: $mem_used%\" aria-valuenow=\"$mem_used\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>
-                  </div>
-                </td>" .
-                "<td title='$diskdesc'>$disks</td>" .
-                "<td>$state</td>" .
-                "<td>";
+          if (array_key_exists('ip_range', $tmp2))
+            $ip_range = $tmp2['ip_range'];
 
-              if ($lv->domain_is_running($name)){
-               echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Turn off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
-              } else if ($lv->domain_is_paused($name)){
-               echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
-              } else {
-               echo "<a href=\"?action=domain-start&amp;uuid=$uuid\"><i class=\"fa fa-power-off\"></i> Power on</a>";
-              }
-              echo "</td>";
-              echo "</tr>";
-            }
-            ?>
-          </tr>
-        </tbody>
-      </table>
+          $act = "<a href=\"?action=" . ($tmp2['active'] ? "stop" : "start");
+          $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
+          $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
+          $act .= " | <a href=\"?action=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
 
+          if (!$tmp2['active']) {
+            $networkName = $tmp2['name'];
+            $deleteURL = "?action=network-delete&amp;network=$networkName";
+            $currentURL = $_SERVER['PHP_SELF'];
+            $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
+            //$act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
+            $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL','$currentURL')\" href=\"#\">Delete</a>";
+          }
+
+          echo "<tr>" .
+            "<td>{$tmp2['name']}</td>" .
+            "<td>$activity</td>" .
+            "<td>$ip</td>" .
+            "<td>$ip_range</td>" .
+            "<td>$forward</td>" .
+            "<td>$dhcp</td>" .
+            "<td>$act</td>" .
+            "</tr>";
+        }
+        echo "</tbody></table>";
+        ?>
       </div>
     </div>
   </div>
