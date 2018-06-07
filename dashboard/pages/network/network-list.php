@@ -94,6 +94,7 @@ function networkDeleteWarning(linkURL,currentURL) {
       <h4 class="card-title"> Virtual Networks</h4>
     </div>
     <div class="card-body">
+      <?php echo $network_xml; ?>
       <div class="table-responsive">
         <table class="table table-striped">
           <thead class="text-primary">
