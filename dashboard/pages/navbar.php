@@ -119,13 +119,13 @@
             <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? 'show' : ''; ?>" id="pagesNetwork">
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../storage/network-list.php">
+                  <a href="../network/network-list.php">
                     <span class="sidebar-mini-icon">NL</span>
                     <span class="sidebar-normal"> Network List </span>
                   </a>
                 </li>
                 <?php echo (basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../storage/network-add-lan.php">
+                  <a href="../network/network-add-lan.php">
                     <span class="sidebar-mini-icon">CN</span>
                     <span class="sidebar-normal"> Create New Network </span>
                   </a>
