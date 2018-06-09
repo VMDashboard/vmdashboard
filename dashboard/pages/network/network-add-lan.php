@@ -86,7 +86,7 @@ if (isset($_SESSION['network_name'])) {
 } //end if $_SESSION
 
 require('../navbar.php');
-
+$random_mac = $lv->generate_random_mac_addr();
 ?>
 
 <script>
