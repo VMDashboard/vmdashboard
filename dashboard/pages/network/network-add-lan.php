@@ -217,7 +217,6 @@ function dhcpChangeOptions(selectEl) {
                 </div>
 
 
-
               </div> <!-- end tab pane -->
             </div> <!-- end tab content -->
           </div>
