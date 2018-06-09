@@ -37,7 +37,7 @@ if (isset($_POST['network_name'])) {
 require('../header.php');
 
 if (isset($_SESSION['network_name'])) {
-  $network_name = $_SESSION['network_name']);
+  $network_name = $_SESSION['network_name'];
   $forward_mode = $_SESSION['forward_mode'];
   $mac_address = $_SESSION['mac_address'];
   $ip_address = $_SESSION['ip_address'];
