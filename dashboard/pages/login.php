@@ -34,7 +34,7 @@
       <div class="content">
         <div class="container">
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-            <form class="form" method="" action="">
+            <form class="form" method="post" action="">
               <div class="card card-login">
                 <div class="card-header ">
                   <div class="card-header ">
@@ -72,15 +72,7 @@
           <div class="row">
             <nav class="footer-nav">
               <ul>
-                <li>
-                  <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>
-                </li>
-                <li>
-                  <a href="http://blog.creative-tim.com/" target="_blank">Blog</a>
-                </li>
-                <li>
-                  <a href="https://www.creative-tim.com/license" target="_blank">Licenses</a>
-                </li>
+                  <li><a href="https://openvm.tech">openVM.tech</a></li>
               </ul>
             </nav>
             <div class="credits ml-auto">
