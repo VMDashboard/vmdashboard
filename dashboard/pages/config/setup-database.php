@@ -48,7 +48,6 @@ if (isset($_POST['database'])){
   $config_file = "config.php";
   $config_create = file_put_contents($config_file, $config_string);
   if($config_create){
-    session_start();
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
   }
