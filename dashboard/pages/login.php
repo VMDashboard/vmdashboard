@@ -1,3 +1,38 @@
+<?php
+// If the SESSION has not been started, start it now
+if (!isset($_SESSION)) {
+    session_start();
+}
+//Grab post infomation and add new drive
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  require('config.php');
+  $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+  $password = $_POST['password'];
+
+  // Creating the SQL statement
+  $sql = "SELECT password FROM openvm_users WHERE username = '$username' LIMIT 1;";
+
+  // Executing the SQL statement
+  $result = $conn->query($sql);
+
+  // Extracting the record and storing the hash
+  while ($row = $result->fetch_assoc()) {
+	   $hash = $row['password'];
+  }
+
+  //Verifying the password to the hash in the database
+  if (password_verify($password, $hash)) {
+    $_SESSION['username'] = $username;
+    header('Location: ../index.php');
+
+   } else {
+     echo "Credentials are incorrect";
+   }
+
+   $conn->close();
+ }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,7 +83,7 @@
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="User Name...">
+                    <input type="text" class="form-control" placeholder="User Name..." name="username">
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -56,7 +91,7 @@
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="password" placeholder="Password" class="form-control">
+                    <input type="password" placeholder="Password" class="form-control" name="password">
                   </div>
                 </div>
                 <div class="card-footer ">
