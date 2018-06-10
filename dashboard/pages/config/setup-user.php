@@ -5,55 +5,87 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-$path = realpath(__DIR__) . "/config.php";
-if (file_exists($path)){
-  header('Location: ../../index.php');
-}
+require('config.php');
 
-function clean_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  $data = str_replace(' ','',$data);
-  $data = filter_var($data, FILTER_SANITIZE_STRING);
-  return $data;
-}
+if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
 
-//check for post next, create config.php
-if (isset($_POST['database'])){
-  $db_name = clean_input($_POST['db_name']);
-  $db_user = clearn_input($_POST['db_user']);
-  $db_password = $_POST['db_password'];
-  $db_host = clean_input($_POST['db_host']);
-  $db_prefix = clean_input($_POST['db_prefix']);
+  if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
 
-  $config_string = "<?php
-  // Setting up the Database Connection
-  \$db_host = '$db_host';
-  \$db_user = '$db_user';
-  \$db_password = '$db_password';
-  \$db_name = '$db_name';
-  \$conn = new mysqli(\$db_host, \$db_user, \$db_password, \$db_name);
-  if (\$conn->connect_error) {
-    die(\"Connection failed: \" . \$conn->connect_error);
-  }
-  ?>";
-  // Create connection
-  $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-  // Check connection
-  if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
+    //Capturing the POST Data
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-  $config_file = "config.php";
-  $config_create = file_put_contents($config_file, $config_string);
-  if($config_create){
-    session_start();
-    $_SESSION['initial_setup'] = true;
-    header('Location: setup-user.php');
+    // Checking for Duplicate usernames
+    $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
+    $result = $conn->query($sql);
+    if (mysqli_num_rows($result) != 0 ) {
+	     die("Username already exists");
+     }
+
+     // Checking for Duplicate emails
+     $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
+     $result = $conn->query($sql);
+     if (mysqli_num_rows($result) != 0 ) {
+	      die("Email already exists");
+      }
+
+      // Hash and salt password with bcrypt
+      $hash = password_hash($password, PASSWORD_BCRYPT);
+
+      //Creating the users tables
+      $sql = "CREATE TABLE openvm_users (
+        userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        username varchar(255),
+        email varchar(255),
+        password varchar(255))";
+      $conn->query($sql);
+
+      // Adding the user
+      $sql = "INSERT INTO openvm_users (username, email, password)
+        VALUES ('$username', '$email', '$hash');";
+        // Executing the SQL statement
+        if ($conn->query($sql) === TRUE) {
+          header('Location: ../index.php');
+        } else {
+          echo "Error: " . $sql . " " . $conn->error;
+        }
+
+        $conn->close();
   }
 }
 ?>
+<script>
+function checkPassword()
+{
+    //Store the password field objects into variables ...
+    var pass1 = document.getElementById('pass1');
+    var pass2 = document.getElementById('pass2');
+    //Store the Confimation Message Object ...
+    var message = document.getElementById('confirmMessage');
+    //Set the colors we will be using ...
+    var goodColor = "#66cc66";
+    var badColor = "#ff6666";
+    //Compare the values in the password field
+    //and the confirmation field
+    if(pass1.value == pass2.value){
+        //The passwords match.
+        //Set the color to the good color and inform
+        //the user that they have entered the correct password
+        pass2.style.backgroundColor = "#ffffff";
+        message.style.color = goodColor;
+        message.innerHTML = "<p>Passwords Match!</p>"
+    }else{
+        //The passwords do not match.
+        //Set the color to the bad color and
+        //notify the user.
+        pass2.style.backgroundColor = badColor;
+        message.style.color = badColor;
+        message.innerHTML = "<p>Passwords Do Not Match!</p>"
+    }
+}
+</script>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,7 +127,7 @@ if (isset($_POST['database'])){
               <div class="card card-login">
                 <div class="card-header ">
                   <div class="card-header ">
-                    <h3 class="header text-center">Database Setup</h3>
+                    <h3 class="header text-center">User Setup</h3>
                   </div>
                 </div>
                 <div class="card-body ">
@@ -103,19 +135,19 @@ if (isset($_POST['database'])){
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="nc-icon nc-single-copy-04"></i>
+                        <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Database Name" name="db_name" required="" >
+                    <input type="text" class="form-control" placeholder="Username" name="username" required="" >
                   </div>
 
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="nc-icon nc-single-02"></i>
+                        <i class="nc-icon nc-email-85"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Database Username" name="db_user" required="" >
+                    <input type="email" class="form-control" placeholder="Email Address" name="email" required="" >
                   </div>
 
                   <div class="input-group">
@@ -124,17 +156,19 @@ if (isset($_POST['database'])){
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Database Password" name="db_password" required="" >
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="" id="pass1">
                   </div>
 
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="nc-icon nc-laptop"></i>
+                        <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Database Host" name="db_host" required="" >
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required="" id="pass2" onkeyup="checkPassword();">
+                    <span id="confirmMessage" class="confirmMessage"></span>
                   </div>
+
 
                 </div>
                 <div class="card-footer ">
