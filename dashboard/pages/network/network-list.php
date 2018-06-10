@@ -76,7 +76,7 @@ swal(alert_msg);
 function networkDeleteWarning(linkURL, networkName) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete the private network ' + networkName,
+    text: 'This will delete ' + networkName,
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
