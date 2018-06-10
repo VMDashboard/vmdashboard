@@ -5,9 +5,9 @@ if (!isset($_SESSION)) {
 }
 
 // If there is no username, then we need to send them to the login
-//if (!isset($_SESSION['username'])){
-//  header('Location: login.php');
-//}
+if (!isset($_SESSION['username'])){
+  header('Location: login.php');
+}
 
 require('../header.php');
 
