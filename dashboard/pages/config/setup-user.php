@@ -34,7 +34,7 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
       $hash = password_hash($password, PASSWORD_BCRYPT);
 
       //Creating the users tables
-      $sql = "CREATE TABLE openvm_users (
+      $sql = "CREATE TABLE IF NOT EXISTS openvm_users (
         userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         username varchar(255),
         email varchar(255),
