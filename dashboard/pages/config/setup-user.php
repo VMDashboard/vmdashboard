@@ -172,7 +172,7 @@ function checkPassword()
 
                 </div>
                 <div class="card-footer ">
-                  <a href="" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>
+                  <input type="submit" class="btn btn-warning btn-round btn-block mb-3" value="Get Started" >
                 </div>
               </div>
             </form>

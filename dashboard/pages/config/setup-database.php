@@ -11,17 +11,17 @@ if (file_exists($path)) {
 }
 
 function clean_input($data) {
-  //$data = trim($data);
-  //$data = stripslashes($data);
-  //$data = htmlspecialchars($data);
-  //$data = str_replace(' ','',$data);
-  //$data = filter_var($data, FILTER_SANITIZE_STRING);
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  $data = str_replace(' ','',$data);
+  $data = filter_var($data, FILTER_SANITIZE_STRING);
   return $data;
 }
 
 //check for post next, create config.php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  header('Location: test.php');
+
   $db_name = clean_input($_POST['db_name']);
   $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
