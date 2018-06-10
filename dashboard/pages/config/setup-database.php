@@ -127,7 +127,7 @@ if (isset($_POST['database'])){
                         <i class="nc-icon nc-laptop"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Database Host" name="db_host" required="" value="localhost" >
+                    <input type="text" class="form-control" placeholder="Database Host" name="db_host" required="" >
                   </div>
 
                 </div>
