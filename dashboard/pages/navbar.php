@@ -39,7 +39,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="../config/setup-password-change">
                     <span class="sidebar-mini-icon">CP</span>
                     <span class="sidebar-normal">Change Password</span>
                   </a>
