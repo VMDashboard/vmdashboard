@@ -166,10 +166,9 @@ function checkPassword()
                       </span>
                     </div>
                     <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password" required="" id="pass2" onkeyup="checkPassword();">
-                    <br />
-                    <span id="confirmMessage" class="confirmMessage"></span>
                   </div>
 
+                  <span id="confirmMessage" class="confirmMessage"></span>
 
                 </div>
                 <div class="card-footer ">
