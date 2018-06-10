@@ -61,10 +61,10 @@ unset($_SESSION['pool']);
 ?>
 
 <script>
-function volumeDeleteWarning(linkURL) {
+function volumeDeleteWarning(linkURL, fileName) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete the storage volume',
+    text: 'This will delete ' + fileName,
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
@@ -148,7 +148,7 @@ function volumeDeleteWarning(linkURL) {
                 "<td>$capacity</td>" .
                 "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
-               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete</a></td>" .
+               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path', '$filename')\" href=\"#\">Delete</a></td>" .
                //"<td><a href=\"?action=volume-delete&amp;path=$path\" >Delete</a></td>" .
                "</tr>";
              }
