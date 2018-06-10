@@ -14,7 +14,7 @@ if (!isset($_SESSION)) {
 if (isset($_GET['action'])) {
   $_SESSION['action'] = $_GET['action'];
   $_SESSION['name'] = $_GET['name'];
-  $_SESSION['network'] = $GET['network'];
+  $_SESSION['network'] = $_GET['network'];
   $_SESSION['xmldesc'] = $_POST['xmldesc'];
   header("Location: ".$_SERVER['PHP_SELF']);
   exit;
