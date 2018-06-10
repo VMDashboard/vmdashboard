@@ -145,7 +145,7 @@ function checkPassword()
         </div>
       </div> <!-- end card body -->
       <div class="card-footer text-right">
-        <button type="submit" class="btn btn-danger">Submit</button>
+        <input type="submit" class="btn btn-danger" value="Change" >
       </div>
     </form>
   </div> <!-- end card -->
