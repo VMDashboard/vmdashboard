@@ -47,9 +47,21 @@ if ($_SESSION['action'] == 'Change') {
 }
 
 
-
-
 require('../navbar.php');
+
+
+if (isset($_SESSION['reset_status'])) {
+  $ret = $_SESSION['reset_status'];
+  echo "
+  <script>
+  var alert_msg = '$ret'
+  swal(alert_msg);
+  </script>";
+  }
+  unset($_SESSION['reset_status']);
+  header('Location: ../../index.php');
+}
+
 ?>
 
 <script>
@@ -90,14 +102,6 @@ function checkPassword()
     <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Change password for  <?php echo $_SESSION['username']; ?></h4>
-
-        <?php
-        if (isset($_SESSION['reset_status'])) {
-          echo $_SESSION['reset_status'];
-          unset($_SESSION['reset_status']);
-        }
-        ?>
-
       </div>
       <div class="card-body">
         <div class="row">
