@@ -140,7 +140,7 @@ function volumeDeleteWarning(linkURL,filename) {
               $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
                 if ($capacity == 0)
                   continue; //used to not display directories
-              $filename = {$tmp_keys[$ii]};
+              $filename = $tmp_keys[$ii];
               $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
               echo "<tr>" .
                 "<td>$filename</td>" .
