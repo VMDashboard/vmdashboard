@@ -148,7 +148,7 @@ function volumeDeleteWarning(linkURL) {
                 "<td>$capacity</td>" .
                 "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
-               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"storage-pools.php\">Delete</a></td>" .
+               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete</a></td>" .
                //"<td><a href=\"?action=volume-delete&amp;path=$path\" >Delete</a></td>" .
                "</tr>";
              }
