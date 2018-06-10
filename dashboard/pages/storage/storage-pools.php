@@ -64,7 +64,7 @@ unset($_SESSION['pool']);
 function volumeDeleteWarning(linkURL, fileName) {
   swal({
     title: 'Are you sure?',
-    text: "This will delete the storage volume filename",
+    text: 'This will delete the storage volume',
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
