@@ -21,9 +21,7 @@ function clean_input($data) {
 
 //check for post next, create config.php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-echo "HELLO";
-
+  header('Location: test.php');
   $db_name = clean_input($_POST['db_name']);
   $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
@@ -100,7 +98,7 @@ echo "HELLO";
                     <h3 class="header text-center">Database Setup</h3>
                   </div>
                 </div>
-                <div class="card-body ">
+                <div class="card-body">
 
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -144,6 +142,7 @@ echo "HELLO";
                 </div>
               </div>
             </form>
+
           </div>
         </div>
       </div>
