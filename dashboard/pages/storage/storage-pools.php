@@ -77,9 +77,9 @@ function volumeDeleteWarning(linkURL, fileName) {
 function poolDeleteWarning(linkURL, poolName) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete ' + poolName,
+    text: 'This will remove ' + poolName,
     type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
+    confirmButtonText: 'Yes, remove it!',
     showCancelButton: true
   }).then(function($result) {
     // Redirect the user
