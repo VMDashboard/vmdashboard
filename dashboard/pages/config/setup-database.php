@@ -97,7 +97,7 @@ if (isset($_POST['database'])){
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="nc-icon nc-single-02"></i>
+                        <i class="nc-icon nc-single-copy-04"></i>
                       </span>
                     </div>
                     <input type="text" class="form-control" placeholder="Database Name" name="db_name" required="" >
@@ -124,7 +124,7 @@ if (isset($_POST['database'])){
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <i class="nc-icon nc-single-02"></i>
+                        <i class="nc-icon nc-laptop"></i>
                       </span>
                     </div>
                     <input type="text" class="form-control" placeholder="Database Host" name="db_host" required="" value="localhost" >
