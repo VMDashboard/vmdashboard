@@ -5,7 +5,7 @@ if (!isset($_SESSION)) {
 }
 //Grab post infomation and add new drive
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  require('config.php');
+  require('config/config.php');
   $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
   $password = $_POST['password'];
 
