@@ -61,10 +61,10 @@ unset($_SESSION['pool']);
 ?>
 
 <script>
-function volumeDeleteWarning(linkURL) {
+function volumeDeleteWarning(linkURL,filename) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete the storage volume',
+    text: 'This will delete the storage volume ' filename,
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
@@ -140,14 +140,15 @@ function volumeDeleteWarning(linkURL) {
               $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
                 if ($capacity == 0)
                   continue; //used to not display directories
+              $filename = {$tmp_keys[$ii]};
               $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
               echo "<tr>" .
-                "<td>{$tmp_keys[$ii]}</td>" .
+                "<td>$filename</td>" .
                 "<td>{$lv->translate_volume_type($tmp[$tmp_keys[$ii]]['type'])}</td>" .
                 "<td>$capacity</td>" .
                 "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
-               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path')\" href=\"#\">Delete</a></td>" .
+               "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path',$filename)\" href=\"#\">Delete</a></td>" .
                //"<td><a href=\"?action=volume-delete&amp;path=$path\" >Delete</a></td>" .
                "</tr>";
              }
