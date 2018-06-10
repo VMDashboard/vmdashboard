@@ -57,7 +57,7 @@ if (isset($_SESSION['reset_status'])) {
   var alert_msg = '$ret'
   swal(alert_msg);
   </script>";
-  }
+
   unset($_SESSION['reset_status']);
   header('Location: ../../index.php');
 }
