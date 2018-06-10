@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 }
 
 $path = realpath(__DIR__) . "/config.php";
-if (file_exists($path)){
+if (file_exists($path)) {
   header('Location: ../../index.php');
 }
 
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 </div>
                 <div class="card-footer ">
-                  <a href="" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>
+                  <input type="submit" class="btn btn-warning btn-round btn-block mb-3" value="Get Started" >
                 </div>
               </div>
             </form>
