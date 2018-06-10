@@ -47,9 +47,6 @@ if ($_SESSION['action'] == 'Change') {
 }
 
 
-require('../navbar.php');
-
-
 if (isset($_SESSION['reset_status'])) {
   $ret = $_SESSION['reset_status'];
   echo "
@@ -63,6 +60,8 @@ if (isset($_SESSION['reset_status'])) {
     header('Location: ../../index.php');
   }
 }
+
+require('../navbar.php');
 
 ?>
 
