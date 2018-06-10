@@ -20,7 +20,7 @@ function clean_input($data) {
 }
 
 //check for post next, create config.php
-if (isset($_POST['database'])){
+if (isset($_POST['db_name'])){
   $db_name = clean_input($_POST['db_name']);
   $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
