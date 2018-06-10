@@ -73,6 +73,19 @@ function volumeDeleteWarning(linkURL, fileName) {
     window.location = linkURL;
   });
 }
+
+function poolDeleteWarning(linkURL, poolName) {
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete ' + poolName,
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
+    // Redirect the user
+    window.location = linkURL;
+  });
+}
 </script>
 
 
@@ -110,7 +123,8 @@ function volumeDeleteWarning(linkURL, fileName) {
           }
           if ($lv->translate_storagepool_state($info['state']) != "Running") {
             echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start</a>";
-            echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Remove</a>";
+            //echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Remove</a>";
+            echo "<a onclick=\"poolDeleteWarning('?action=pool-delete&amp;pool=$pools[$i]', '$pools[$i]')\" href=\"#\"> | Remove</a>
           }
           ?>
         </div>
