@@ -21,6 +21,9 @@ function clean_input($data) {
 
 //check for post next, create config.php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+echo "HELLO";
+
   $db_name = clean_input($_POST['db_name']);
   $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
