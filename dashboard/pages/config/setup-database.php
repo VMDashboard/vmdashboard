@@ -11,11 +11,11 @@ if (file_exists($path)){
 }
 
 function clean_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  $data = str_replace(' ','',$data);
-  $data = filter_var($data, FILTER_SANITIZE_STRING);
+  //$data = trim($data);
+  //$data = stripslashes($data);
+  //$data = htmlspecialchars($data);
+  //$data = str_replace(' ','',$data);
+  //$data = filter_var($data, FILTER_SANITIZE_STRING);
   return $data;
 }
 
