@@ -185,16 +185,18 @@ swal(alert_msg);
 ?>
 
 <script>
-function domainDeleteWarning(linkURL) {
-  swal("Are you sure you want to delete the domain?", {
-    buttons: ["Cancel", true],
-  }).then((value) => {
-    if (value == true){
+function domainDeleteWarning(linkURL, domName) {
+  swal({
+    title: 'Are you sure?',
+    text: 'This will delete ' + domName,
+    type: 'warning',
+    confirmButtonText: 'Yes, delete it!',
+    showCancelButton: true
+  }).then(function($result) {
     // Redirect the user
     window.location = linkURL;
-  }
   });
-  }
+}
 </script>
 
 
@@ -294,8 +296,8 @@ function domainDeleteWarning(linkURL) {
 
           <?php  if ($state == "shutoff") { ?>
             <li><i class="fa fa-trash" style="padding-right:7px;"></i>
-              <!-- <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>')" href="" > -->
-              <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+              <a onclick="domainDeleteWarning('?action=domain-delete&amp;uuid=<?php echo $uuid; ?>', '<?php echo $domName; ?>')" href="#" >
+              <!-- <a href="?action=domain-delete&amp;uuid=<?php echo $uuid; ?>" target="_self" > -->
               Delete domain</a> <br />
             </li>
           <?php } ?>
