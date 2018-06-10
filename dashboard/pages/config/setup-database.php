@@ -53,8 +53,8 @@ if (isset($_POST['database'])){
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/sqaurelogo.png">
-    <link rel="icon" type="image/png" href="../assets/img/squarelogo.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/sqaurelogo.png">
+    <link rel="icon" type="image/png" href="../../assets/img/squarelogo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
       openVM
@@ -64,8 +64,8 @@ if (isset($_POST['database'])){
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <!-- CSS Files -->
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+    <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   </head>
 
 <body class="login-page">
@@ -73,7 +73,7 @@ if (isset($_POST['database'])){
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
     <div class="container">
       <div class="navbar-wrapper">
-        <img src="../assets/img/squarelogo.png" width="30px">
+        <img src="../../assets/img/squarelogo.png" width="30px">
         <a class="navbar-brand" href="#"> &nbsp OPENVM.TECH </a>
       </div>
     </div>
