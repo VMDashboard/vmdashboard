@@ -33,7 +33,7 @@
             <div class="collapse" id="collapseExample">
               <ul class="nav">
                 <li>
-                  <a href="#">
+                  <a href="../index.php?action=logout">
                     <span class="sidebar-mini-icon">LO</span>
                     <span class="sidebar-normal">LogOut</span>
                   </a>
