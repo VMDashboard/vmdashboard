@@ -23,7 +23,7 @@
     <div class="container">
       <div class="navbar-wrapper">
         <img src="../assets/img/squarelogo.png" width="30px">
-        <a class="navbar-brand" href="#"> OPENVM.TECH </a>
+        <a class="navbar-brand" href="#"> &nbsp OPENVM.TECH </a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-bar navbar-kebab"></span>
