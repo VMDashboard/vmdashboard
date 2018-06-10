@@ -55,6 +55,7 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
   }
 }
 ?>
+
 <script>
 function checkPassword()
 {
