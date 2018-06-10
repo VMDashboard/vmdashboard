@@ -22,10 +22,10 @@ function clean_input($data) {
 //check for post next, create config.php
 if (isset($_POST['database'])){
   $db_name = clean_input($_POST['db_name']);
-  $db_user = clearn_input($_POST['db_user']);
+  $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
   $db_host = clean_input($_POST['db_host']);
-  $db_prefix = clean_input($_POST['db_prefix']);
+
 
   $config_string = "<?php
   // Setting up the Database Connection
