@@ -124,7 +124,8 @@ function poolDeleteWarning(linkURL, poolName) {
           if ($lv->translate_storagepool_state($info['state']) != "Running") {
             echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start</a>";
             //echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Remove</a>";
-            //echo "<a onclick=\"poolDeleteWarning('?action=pool-delete&amp;pool=$pools[$i]', '$pools[$i]')\" href=\"#\"> | Remove</a>
+            $poolName = $pools[$i];
+            echo "<a onclick=\"poolDeleteWarning('?action=pool-delete&amp;pool=$poolName', '$poolName')\" href=\"#\"> | Remove</a>";
           }
           ?>
         </div>
