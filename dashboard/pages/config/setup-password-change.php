@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
   } else {
-    $_SESSION['reset_status'] = "<h2>Password was not changed!</h2><br><br>";
+    $_SESSION['reset_status'] = "Password was not changed!";
   }
 }
 // Time to bring in the header
@@ -40,7 +40,7 @@ if ($_SESSION['action'] == 'Change') {
         //Unset the SESSION variables
         unset($_SESSION['password']);
         unset($_SESSION['action']);
-        $_SESSION['reset_status'] = "<h2>Password Change Successful!</h2><br><br>";
+        $_SESSION['reset_status'] = "Password Change Successful!";
       }
       $conn->close();
 
@@ -59,7 +59,9 @@ if (isset($_SESSION['reset_status'])) {
   </script>";
 
   unset($_SESSION['reset_status']);
-  header('Location: ../../index.php');
+  if ($ret == "Password Change Successful!") {
+    header('Location: ../../index.php');
+  }
 }
 
 ?>
