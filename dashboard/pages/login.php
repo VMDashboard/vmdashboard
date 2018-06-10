@@ -25,11 +25,6 @@
         <img src="../assets/img/squarelogo.png" width="30px">
         <a class="navbar-brand" href="#"> &nbsp OPENVM.TECH </a>
       </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-      </button>
     </div>
   </nav>
   <!-- End Navbar -->
@@ -53,7 +48,7 @@
                         <i class="nc-icon nc-single-02"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="First Name...">
+                    <input type="text" class="form-control" placeholder="User Name...">
                   </div>
                   <div class="input-group">
                     <div class="input-group-prepend">
@@ -63,19 +58,9 @@
                     </div>
                     <input type="password" placeholder="Password" class="form-control">
                   </div>
-                  <br/>
-                  <div class="form-group">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" value="" checked="">
-                        <span class="form-check-sign"></span>
-                        Subscribe to newsletter
-                      </label>
-                    </div>
-                  </div>
                 </div>
                 <div class="card-footer ">
-                  <a href="#pablo" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>
+                  <a href="" class="btn btn-warning btn-round btn-block mb-3">Get Started</a>
                 </div>
               </div>
             </form>
