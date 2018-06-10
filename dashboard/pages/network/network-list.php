@@ -73,10 +73,10 @@ swal(alert_msg);
 ?>
 
 <script>
-function networkDeleteWarning(linkURL) {
+function networkDeleteWarning(linkURL, networkName) {
   swal({
     title: 'Are you sure?',
-    text: 'This will delete the private network',
+    text: 'This will delete the private network ' networkName,
     type: 'warning',
     confirmButtonText: 'Yes, delete it!',
     showCancelButton: true
@@ -148,7 +148,7 @@ function networkDeleteWarning(linkURL) {
             //$act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
             //$act .= " | <a onclick=\"networkDeleteWarning('$deleteURL','$currentURL')\" href=\"#\">Delete</a>";
             //$act .= " | <a href=\"?action=network-delete&amp;network=$networkName\">Delete</a>";
-            $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL')\" href=\"#\">Delete</a>";
+            $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL', '$networkName')\" href=\"#\">Delete</a>";
           }
 
           echo "<tr>" .
