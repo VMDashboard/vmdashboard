@@ -206,7 +206,7 @@ function domainDeleteWarning(linkURL, domName) {
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-3 col-5">
+        <div class="col-lg-2 col-md-3 col-sm-2 col-4">
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
@@ -233,7 +233,7 @@ function domainDeleteWarning(linkURL, domName) {
           </div>
         </div>
 
-        <div class="col-lg-9 col-md-8 col-sm-9 col-7">
+        <div class="col-lg-10 col-md-9 col-sm-10 col-8">
           <!-- Tab panes -->
           <div class="tab-content">
 
