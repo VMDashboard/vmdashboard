@@ -179,7 +179,6 @@ swal(alert_msg);
                     "<table class='table'>" .
                     "<tr>" .
                     "<th> Device name </th>" .
-                    "<th> Identification </th>" .
                     "<th> Driver name </th>" .
                     "<th> Vendor </th>" .
                     "<th> Product </th>" .
@@ -198,14 +197,8 @@ swal(alert_msg);
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                     $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
 
-                    if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
-                      $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
-                    else
-                      $ident = '-';
-
                     echo "<tr>" .
                       "<td>{$tmp2['name']}</td>" .
-                      "<td>$ident</td>" .
                       "<td>$driver</td>" .
                       "<td>$vendor</td>" .
                       "<td>$product</td>" .
