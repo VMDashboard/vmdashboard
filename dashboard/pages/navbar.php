@@ -49,10 +49,10 @@
           </div>
         </div>
         <ul class="nav">
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domains.php") ? '<li class="active">' : '<li>'; ?>
-            <a href="../domain/domain-list.php">
+          <?php echo (basename($_SERVER['PHP_SELF']) == "host-info.php") ? '<li class="active">' : '<li>'; ?>
+            <a href="../host/host-info.php">
               <i class="nc-icon nc-laptop"></i>
-              <p>Home</p>
+              <p>Host</p>
             </a>
           </li>
 
