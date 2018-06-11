@@ -228,7 +228,7 @@ function domainDeleteWarning(linkURL, domName) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h4 class="card-title"> <?php echo $domName; ?></h4>
+          <h6 class="card-title"> <?php echo $domName; ?></h6>
         </div>
         <div class="card-body">
           <?php
@@ -251,7 +251,7 @@ function domainDeleteWarning(linkURL, domName) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h4 class="card-title"> Actions </h4>
+          <h6 class="card-title"> Actions </h6>
         </div>
         <div class="card-body">
           <ul class="list-unstyled project_files">
@@ -330,7 +330,7 @@ function domainDeleteWarning(linkURL, domName) {
       </div>
 
     </div> <!-- end row -->
-  
+
     <div class="col-md-12">
       <div class="card-body">
         <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
@@ -527,7 +527,7 @@ function domainDeleteWarning(linkURL, domName) {
     <div class="row">
       <div class="col-md-6">
         <div class="card-header">
-          <h4 class="card-title"> Snapshots</h4>
+          <h6 class="card-title"> Snapshots</h6>
         </div>
         <div class="card-body">
           <?php
@@ -579,7 +579,7 @@ function domainDeleteWarning(linkURL, domName) {
 
       <div class="col-md-6">
         <div class="card-header">
-          <h4 class="card-title"> Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?></h4>
+          <h6 class="card-title"> Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?></h6>
         </div>
         <div class="card-body">
           <?php
