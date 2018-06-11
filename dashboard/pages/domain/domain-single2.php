@@ -459,7 +459,6 @@ function domainDeleteWarning(linkURL, domName) {
 
 
             <div class="tab-pane" id="network">
-              <div class="card-body">
                 <?php
                 /* Network interface information */
                 $path = $domXML->xpath('//interface');
@@ -521,7 +520,6 @@ function domainDeleteWarning(linkURL, domName) {
                   echo '<hr><p>Domain doesn\'t have any network devices</p>';
                 }
                 ?>
-
             </div>
 
 
@@ -570,7 +568,6 @@ function domainDeleteWarning(linkURL, domName) {
                 echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
               }
               ?>
-
             </div>
 
             <div class="tab-pane" id="xml">
@@ -589,7 +586,6 @@ function domainDeleteWarning(linkURL, domName) {
                 echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
               }
               ?>
-
             </div>
 
 
