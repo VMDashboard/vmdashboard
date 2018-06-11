@@ -240,6 +240,9 @@ function domainDeleteWarning(linkURL, domName) {
             <div class="tab-pane active" id="general">
               <div class="row">
                 <div class="col-md-4">
+                  <div class="card-header">
+                    <h6 class="card-title"> Console</h6>
+                  </div>
                   <div class="card-body">
                     <?php
                     if ($state == "running") {
