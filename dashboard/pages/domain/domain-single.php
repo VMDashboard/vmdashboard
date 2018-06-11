@@ -228,7 +228,7 @@ function domainDeleteWarning(linkURL, domName) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h6 class="card-title"> <?php echo $domName; ?></h6>
+          <h5 class="card-title"> <?php echo $domName; ?></h5>
         </div>
         <div class="card-body">
           <?php
