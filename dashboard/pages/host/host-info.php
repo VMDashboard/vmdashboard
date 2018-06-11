@@ -174,7 +174,6 @@ swal(alert_msg);
 
                 //Just pull out STORAGE data
                 if ($tmp[$i] == "storage"){
-                  echo "<h4>{$tmp[$i]}</h4>";
                   $tmp1 = $lv->get_node_devices($tmp[$i]);
                   echo "<div class='table-responsive'>" .
                     "<table class='table'>" .
@@ -224,7 +223,53 @@ swal(alert_msg);
 
 
             <div class="tab-pane" id="network">
+              <?php
+              for ($i = 0; $i < sizeof($tmp); $i++) {
 
+                //Just pull out NET data
+                if ($tmp[$i] == "net"){
+                  $tmp1 = $lv->get_node_devices($tmp[$i]);
+                  echo "<div class='table-responsive'>" .
+                    "<table class='table'>" .
+                    "<tr>" .
+                    "<th> Device name </th>" .
+                    "<th> Interface </th>" .
+                    "<th> Driver name </th>" .
+                    "<th> MAC Address </th>" .
+                    "<th> Network Speed </th>" .
+                    "<th> Action </th>" .
+                    "</tr>";
+
+                  for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                    $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                    //Actions will be a form button that will submit info using POST
+                    $act = "<form method=\"post\" action=\"\">
+                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
+                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
+                      <input type=\"submit\" name=\"submit\" value=\"XML\">
+                      </form>";
+
+                    $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
+                    $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
+                    $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
+                    $link_speed = "-"; //need to pull from XML file, not available from API
+
+                    echo "<tr>" .
+                      "<td>{$tmp2['name']}</td>" .
+                      "<td>$interface</td>" .
+                      "<td>$driver</td>" .
+                      "<td>$mac_address</td>" .
+                      "<td>$link_speed</td>" .
+                      "<td>$act</td>" .
+                      "</tr>";
+
+                  }
+
+                  echo "</table></div>";
+
+                }
+              }
+              ?>
             </div>
 
 
