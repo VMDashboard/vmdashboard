@@ -44,7 +44,7 @@ swal(alert_msg);
     </div>
     <div class="card-body">
       <div class="row">
-        <div class="col-lg-4 col-md-5 col-sm-4 col-6">
+        <div class="col-lg-3 col-md-4 col-sm-3 col-5">
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
@@ -68,7 +68,7 @@ swal(alert_msg);
           </div>
         </div>
 
-        <div class="col-lg-8 col-md-7 col-sm-8 col-6">
+        <div class="col-lg-9 col-md-8 col-sm-9 col-7">
           <!-- Tab panes -->
           <div class="tab-content">
             <?php
