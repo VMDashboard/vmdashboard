@@ -262,9 +262,6 @@ function domainDeleteWarning(linkURL, domName) {
                 </div>
 
                 <div class="col-md-4">
-                  <div class="card-header">
-
-                  </div>
                   <div class="card-body">
                     <?php
                     /* General information */
@@ -284,9 +281,6 @@ function domainDeleteWarning(linkURL, domName) {
                 </div>
 
                 <div class="col-md-4">
-                  <div class="card-header">
-                    
-                  </div>
                   <div class="card-body">
                     <ul class="list-unstyled project_files">
                     <?php  if ($state == "running") { ?>
