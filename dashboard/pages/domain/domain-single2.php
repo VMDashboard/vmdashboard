@@ -226,7 +226,7 @@ function domainDeleteWarning(linkURL, domName) {
                   <a class="nav-link" href="#snapshot" role="tab" data-toggle="tab">Snapshots</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#xml" role="tab" data-toggle="tab">XML Data</a>
+                  <a class="nav-link" href="#xml" role="tab" data-toggle="tab">XML Data <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?> </a>
                 </li>
               </ul>
             </div>
@@ -410,123 +410,55 @@ function domainDeleteWarning(linkURL, domName) {
             </div>
 
             <div class="tab-pane" id="optical">
+              <?php
+              /* Optical device information */
+              $path = $domXML->xpath('//disk');
+              if (!empty($path)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>ISO file</th>" .
+                  "<th>Driver</th>" .
+                  "<th>Device</th>" .
+                  "<th>Bus</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
+
+                for ($i = 0; $i < sizeof($path); $i++) {
+                  //$disk_type = $domXML->devices->disk[$i][type];
+                  $disk_device = $domXML->devices->disk[$i][device];
+                  $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
+                  //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
+                  $disk_source_file = $domXML->devices->disk[$i]->source[file];
+                  if (empty($disk_source_file)) {
+                    $disk_source_file = "empty";
+                  }
+                  $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
+                  $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
+
+                  if ($disk_device == "cdrom") {
+                    echo "<tr>" .
+                      "<td>$disk_source_file</td>" .
+                      "<td>$disk_driver_name</td>" .
+                      "<td>$disk_target_dev</td>" .
+                      "<td>$disk_target_bus</td>" .
+                      "<td>" .
+                        "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
+                      "</td>" .
+                      "</tr>";
+                  }
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo '<hr><p>Domain doesn\'t have any optical devices</p>';
+              }
+              ?>
 
             </div>
 
 
             <div class="tab-pane" id="network">
-
-            </div>
-
-
-            <div class="tab-pane" id="snapshot">
-
-            </div>
-
-            <div class="tab-pane" id="xml">
-
-            </div>
-
-
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-    </form>
-  </div>
-</div>
-
-
-
-
-<div class="content">
-  <div class="card">
-
-    <div class="col-md-12">
-      <div class="card-body">
-        <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
-          <!-- <h4 class="card-title">Devices</h4> -->
-          <div class="card card-plain">
-            <div class="card-header" role="tab" id="headingOne">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                <br /><h6>Storage Volumes</h6>
-                <i class="nc-icon nc-minimal-down"></i>
-              </a>
-            </div>
-            <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-              <div class="card-body">
-
-              </div>
-            </div>
-          </div>
-
-          <div class="card card-plain">
-            <div class="card-header" role="tab" id="headingTwo">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <h6>Optical Storage</h6>
-                <i class="nc-icon nc-minimal-down"></i>
-              </a>
-            </div>
-            <div id="collapseTwo" class="collapse show" role="tabpanel" aria-labelledby="headingTwo">
-              <div class="card-body">
-                <?php
-                /* Optical device information */
-                $path = $domXML->xpath('//disk');
-                if (!empty($path)) {
-                  echo "<div class='table-responsive'>" .
-                    "<table class='table'>" .
-                    "<tr>" .
-                    "<th>ISO file</th>" .
-                    "<th>Driver</th>" .
-                    "<th>Device</th>" .
-                    "<th>Bus</th>" .
-                    "<th>Actions</th>" .
-                    "</tr>" .
-                    "<tbody>";
-
-                  for ($i = 0; $i < sizeof($path); $i++) {
-                    //$disk_type = $domXML->devices->disk[$i][type];
-                    $disk_device = $domXML->devices->disk[$i][device];
-                    $disk_driver_name = $domXML->devices->disk[$i]->driver[name];
-                    //$disk_driver_type = $domXML->devices->disk[$i]->driver[type];
-                    $disk_source_file = $domXML->devices->disk[$i]->source[file];
-                    if (empty($disk_source_file)) {
-                      $disk_source_file = "empty";
-                    }
-                    $disk_target_dev = $domXML->devices->disk[$i]->target[dev];
-                    $disk_target_bus = $domXML->devices->disk[$i]->target[bus];
-
-                    if ($disk_device == "cdrom") {
-                      echo "<tr>" .
-                        "<td>$disk_source_file</td>" .
-                        "<td>$disk_driver_name</td>" .
-                        "<td>$disk_target_dev</td>" .
-                        "<td>$disk_target_bus</td>" .
-                        "<td>" .
-                          "<a title='Remove' href=\"?action=domain-disk-remove&amp;dev=$disk_target_dev&amp;uuid=$uuid\">Remove</a>" .
-                        "</td>" .
-                        "</tr>";
-                    }
-                  }
-                  echo "</tbody></table></div>";
-                } else {
-                  echo '<hr><p>Domain doesn\'t have any optical devices</p>';
-                }
-                ?>
-              </div>
-            </div>
-          </div>
-
-          <div class="card card-plain">
-            <div class="card-header" role="tab" id="headingThree">
-              <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                <h6>Network Adapters</h6>
-                <i class="nc-icon nc-minimal-down"></i>
-              </a>
-            </div>
-            <div id="collapseThree" class="collapse show" role="tabpanel" aria-labelledby="headingThree">
               <div class="card-body">
                 <?php
                 /* Network interface information */
@@ -589,100 +521,87 @@ function domainDeleteWarning(linkURL, domName) {
                   echo '<hr><p>Domain doesn\'t have any network devices</p>';
                 }
                 ?>
-              </div>
+
             </div>
+
+
+            <div class="tab-pane" id="snapshot">
+              <?php
+              /* Snapshot information */
+              $tmp = $lv->list_domain_snapshots($dom);
+              if (!empty($tmp)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>Name</th>" .
+                  "<th>Creation Time</th>" .
+                  "<th>Domain State</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
+
+                foreach ($tmp as $key => $value) {
+                  //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
+                  $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
+                  $tmpxml = simplexml_load_string($tmpsnapshotxml);
+                  $name = $tmpxml->name[0];
+                  $creationTime = $tmpxml->creationTime[0];
+                  $snapstate = $tmpxml->state[0];
+                  echo "<tr>";
+                  echo "<td>" . $name . "</td>";
+                  echo "<td>" . date("D d M Y", $value) . " - ";
+                  echo date("H:i:s", $value) . "</td>";
+                  echo "<td>" . $snapstate . "</td>";
+                  echo "<td>
+                    <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
+                    <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">Revert | </a>
+                    <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">XML</a>
+                    </td>";
+                  echo "</tr>";
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo "<hr><p>Domain does not have any snapshots</p>";
+              }
+
+              if ($snapshotxml != null) {
+                echo "<hr>";
+                echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
+                echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
+              }
+              ?>
+
+            </div>
+
+            <div class="tab-pane" id="xml">
+              <?php
+              /* XML information */
+              $inactive = (!$lv->domain_is_running($domName)) ? true : false;
+              $xml = $lv->domain_get_xml($domName, $inactive);
+              $ret = htmlentities($xml);
+
+              if ($state == "shutoff"){
+                $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $uuid . " >" .
+                  "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
+                  "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
+                echo $ret;
+              } else {
+                echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
+              }
+              ?>
+
+            </div>
+
+
+
           </div>
-        </div> <!-- end accordion -->
-      </div> <!-- end card-body -->
-    </div> <!-- end col -->
-  </div> <!-- end card -->
-
-
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h6 class="card-title"> Snapshots</h6>
         </div>
-        <div class="card-body">
-          <?php
-          /* Snapshot information */
-          $tmp = $lv->list_domain_snapshots($dom);
-          if (!empty($tmp)) {
-            echo "<div class='table-responsive'>" .
-              "<table class='table'>" .
-              "<tr>" .
-              "<th>Name</th>" .
-              "<th>Creation Time</th>" .
-              "<th>Domain State</th>" .
-              "<th>Actions</th>" .
-              "</tr>" .
-              "<tbody>";
 
-            foreach ($tmp as $key => $value) {
-              //Getting XML info on the snapshot. Using simpleXLM because libvirt xml functions don't seem to work for snapshots
-              $tmpsnapshotxml = $lv->domain_snapshot_get_xml($domName, $value);
-              $tmpxml = simplexml_load_string($tmpsnapshotxml);
-              $name = $tmpxml->name[0];
-              $creationTime = $tmpxml->creationTime[0];
-              $snapstate = $tmpxml->state[0];
-              echo "<tr>";
-              echo "<td>" . $name . "</td>";
-              echo "<td>" . date("D d M Y", $value) . " - ";
-              echo date("H:i:s", $value) . "</td>";
-              echo "<td>" . $snapstate . "</td>";
-              echo "<td>
-                <a title='Delete snapshot' href=\"?action=domain-snapshot-delete&amp;snapshot=$value&amp;uuid=$uuid\">Delete | </a>
-                <a title='Revert snapshot' href=?action=domain-snapshot-revert&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">Revert | </a>
-                <a title='View snapshot XML' href=?action=domain-snapshot-xml&amp;uuid=" . $uuid . "&amp;snapshot=" . $value . ">XML</a>
-                </td>";
-              echo "</tr>";
-            }
-            echo "</tbody></table></div>";
-          } else {
-            echo "<hr><p>Domain does not have any snapshots</p>";
-          }
-
-          if ($snapshotxml != null) {
-            echo "<hr>";
-            echo "<h3>Snapshot XML: " . $snapshot . "</h3>";
-            echo  "<textarea rows=15 style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\">" . $snapshotxml . "</textarea>";
-          }
-          ?>
-        </div>
-      </div> <!-- end card -->
-    </div> <!-- end col -->
-
-
-
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h6 class="card-title"> Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?></h6>
-        </div>
-        <div class="card-body">
-          <?php
-          /* XML information */
-          $inactive = (!$lv->domain_is_running($domName)) ? true : false;
-          $xml = $lv->domain_get_xml($domName, $inactive);
-          $ret = htmlentities($xml);
-
-          if ($state == "shutoff"){
-            $ret = "<form method=\"POST\" action=?action=domain-edit&amp;uuid=" . $uuid . " >" .
-              "<textarea name=\"xmldesc\" rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" >" . $xml . "</textarea>" .
-              "<br /> <br /> <input type=\"submit\" value=\"Save XML\"></form>";
-            echo $ret;
-          } else {
-            echo "<textarea rows=\"17\" style=\"width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;\" readonly>" . $ret . "</textarea>";
-          }
-          ?>
-        </div>
-      </div> <!-- end card -->
-    </div> <!-- end col -->
-  </div> <!-- end row -->
-
-
-</div> <!-- end content -->
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
 
 <?php
 require('../footer.php');
