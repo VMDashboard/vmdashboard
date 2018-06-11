@@ -263,7 +263,7 @@ function domainDeleteWarning(linkURL, domName) {
 
                 <div class="col-md-4">
                   <div class="card-header">
-                    <h6 class="card-title"> General Information</h6>
+
                   </div>
                   <div class="card-body">
                     <?php
@@ -285,7 +285,7 @@ function domainDeleteWarning(linkURL, domName) {
 
                 <div class="col-md-4">
                   <div class="card-header">
-                    <h6 class="card-title"> Actions </h6>
+                    
                   </div>
                   <div class="card-body">
                     <ul class="list-unstyled project_files">
