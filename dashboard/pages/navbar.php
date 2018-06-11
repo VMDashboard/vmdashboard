@@ -5,12 +5,12 @@
         Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     -->
       <div class="logo">
-        <a href="#" class="simple-text logo-mini">
+        <a href="../../index.php" class="simple-text logo-mini">
           <div class="logo-image-small">
             <img src="../../assets/img/squarelogo.png">
           </div>
         </a>
-        <a href="#" class="simple-text logo-normal">
+        <a href="../../index.php" class="simple-text logo-normal">
           OPENVM.TECH
           <!--<div class="logo-image-big">
             <img src="../../assets/img/logo.png">
