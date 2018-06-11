@@ -11,7 +11,7 @@
           </div>
         </a>
         <a href="../../index.php" class="simple-text logo-normal">
-          OPENVM.TECH
+          OPENVM
           <!--<div class="logo-image-big">
             <img src="../../assets/img/logo.png">
           </div> -->
