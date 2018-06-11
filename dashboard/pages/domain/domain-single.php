@@ -228,12 +228,12 @@ function domainDeleteWarning(linkURL, domName) {
 
       <div class="col-md-4">
         <div class="card-header">
-          <h5 class="card-title"> <?php echo $domName; ?></h5>
+          <h6 class="card-title"> General Information</h6>
         </div>
         <div class="card-body">
           <?php
           /* General information */
-
+              echo "<strong>VM Name: </strong>" . $domName . "<br />";
               echo "<strong>Type: </strong>" . $lv->get_domain_type($domName) . "<br />";
               echo "<strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "<br />";
               echo "<strong>Memory: </strong>" . $mem . "<br />";
