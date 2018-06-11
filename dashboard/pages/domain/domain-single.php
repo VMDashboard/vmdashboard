@@ -202,7 +202,7 @@ function domainDeleteWarning(linkURL, domName) {
 
 
 <div class="content">
-  <div class="card">
+  <div class="card card-plain">
     <div class="row">
       <div class="col-md-4">
         <div class="card-body">
