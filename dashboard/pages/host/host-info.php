@@ -77,15 +77,11 @@ swal(alert_msg);
               $tmp = $lv->host_get_node_info();
               // Let's start the $ret without any data, it will be used to display returned XML info
               $ret = false;
-              // Check for SESSION variables to see if we need to retieve XML data
-              if (array_key_exists('action', $_SESSION)) {
-                $name = $_SESSION['name'];
-                if ($_SESSION['action'] == 'dumpxml')
-                  $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-                  //Unset the SESSION variables
-                  unset($_SESSION['name']);
-                  unset($_SESSION['action']);
+
+              if ($action == 'dumpxml') {
+                $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
               }
+
               //If we have returned XML data, display it
               if ($ret){
                 echo "<pre>$ret</pre>";
@@ -100,7 +96,6 @@ swal(alert_msg);
               if (strlen($info) > 2)
                   $info[ strlen($info) - 2 ] = ' ';
 
-                  echo "<h2> Host Information </h2> <br>";
                   echo "<strong>Hypervisor:</strong> {$ci['hypervisor_string']} <br>";
                   echo "<strong>Connection:</strong> $info <br>";
                   echo "<strong>Architecture:</strong> {$tmp['model']} <br>";
