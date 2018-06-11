@@ -239,7 +239,7 @@ function domainDeleteWarning(linkURL, domName) {
 
             <div class="tab-pane active" id="general">
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-8">
                   <div class="card-body">
                     <?php
                     if ($state == "running") {
@@ -261,24 +261,7 @@ function domainDeleteWarning(linkURL, domName) {
                   </div>
                 </div>
 
-                <div class="col-md-4">
-                  <div class="card-body">
-                    <?php
-                    /* General information */
-                        echo "<strong>Type: </strong>" . $lv->get_domain_type($domName) . "<br />";
-                        echo "<strong>Emulator: </strong>" . $lv->get_domain_emulator($domName) . "<br />";
-                        echo "<strong>Memory: </strong>" . $mem . "<br />";
-                        echo "<strong>vCPUs: </strong>" . $cpu . "<br />";
-                        echo "<strong>State: </strong>" . $state . "<br />";
-                        echo "<strong>Architecture: </strong>" . $arch . "<br />";
-                        echo "<strong>ID: </strong>" . $id . "<br />";
-                        echo "<strong>VNC Port: </strong>" . $vnc . "<br />";
 
-                    if ($die)
-                      die('</body></html');
-                    ?>
-                  </div>
-                </div>
 
                 <div class="col-md-4">
                   <div class="card-body">
