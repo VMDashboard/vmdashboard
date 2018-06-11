@@ -239,7 +239,7 @@ function domainDeleteWarning(linkURL, domName) {
 
             <div class="tab-pane active" id="general">
               <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-7">
                   <div class="card-body">
                     <?php
                     if ($state == "running") {
@@ -263,7 +263,7 @@ function domainDeleteWarning(linkURL, domName) {
 
 
 
-                <div class="col-md-4">
+                <div class="col-md-5">
                   <div class="card-body">
                     <ul class="list-unstyled project_files">
                     <?php  if ($state == "running") { ?>
