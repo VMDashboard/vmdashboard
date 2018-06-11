@@ -523,9 +523,9 @@ function domainDeleteWarning(linkURL, domName) {
   </div> <!-- end card -->
 
 
-  <div class="card">
-    <div class="row">
-      <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
         <div class="card-header">
           <h6 class="card-title"> Snapshots</h6>
         </div>
@@ -575,14 +575,13 @@ function domainDeleteWarning(linkURL, domName) {
           }
           ?>
         </div>
-      </div>
-    </div> <!-- end row -->
-  </div> <!-- end card -->
+      </div> <!-- end card -->
+    </div> <!-- end col -->
 
-  <div class="card">
-    <div class="row">
 
-      <div class="col-md-6">
+
+    <div class="col-md-6">
+      <div class="card">
         <div class="card-header">
           <h6 class="card-title"> Domain XML <?php if ($state != "shutoff"){ echo "(Read Only)"; } ?></h6>
         </div>
@@ -603,11 +602,9 @@ function domainDeleteWarning(linkURL, domName) {
           }
           ?>
         </div>
-      </div>
-
-    </div> <!-- end row -->
-  </div> <!-- end card -->
-
+      </div> <!-- end card -->
+    </div> <!-- end col -->
+  </div> <!-- end row -->
 
 
 </div> <!-- end content -->
