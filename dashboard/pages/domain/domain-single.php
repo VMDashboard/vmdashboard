@@ -330,10 +330,7 @@ function domainDeleteWarning(linkURL, domName) {
       </div>
 
     </div> <!-- end row -->
-  </div> <!-- end card -->
-
-
-  <div class="card">
+  
     <div class="col-md-12">
       <div class="card-body">
         <div id="accordion" role="tablist" aria-multiselectable="true" class="card-collapse">
