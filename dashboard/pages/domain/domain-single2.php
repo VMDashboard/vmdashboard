@@ -362,9 +362,7 @@ function domainDeleteWarning(linkURL, domName) {
                     <!-- end of actions -->
                   </div>
                 </div>
-
               </div> <!-- end row -->
-
             </div>
 
             <div class="tab-pane" id="storage">
@@ -454,74 +452,71 @@ function domainDeleteWarning(linkURL, domName) {
                 echo '<hr><p>Domain doesn\'t have any optical devices</p>';
               }
               ?>
-
             </div>
-
 
             <div class="tab-pane" id="network">
-                <?php
-                /* Network interface information */
-                $path = $domXML->xpath('//interface');
-                if (!empty($path)) {
-                  echo "<div class='table-responsive'>" .
-                    "<table class='table'>" .
-                    "<tr>" .
-                    "<th>Type</th>" .
-                    "<th>MAC Address</th>" .
-                    "<th>Source</th>" .
-                    "<th>Mode</th>" .
-                    "<th>Model</th>" .
-                    "<th>Actions</th>" .
-                    "</tr>" .
-                    "<tbody>";
+              <?php
+              /* Network interface information */
+              $path = $domXML->xpath('//interface');
+              if (!empty($path)) {
+                echo "<div class='table-responsive'>" .
+                  "<table class='table'>" .
+                  "<tr>" .
+                  "<th>Type</th>" .
+                  "<th>MAC Address</th>" .
+                  "<th>Source</th>" .
+                  "<th>Mode</th>" .
+                  "<th>Model</th>" .
+                  "<th>Actions</th>" .
+                  "</tr>" .
+                  "<tbody>";
 
-                  for ($i = 0; $i < sizeof($path); $i++) {
-                    $interface_type = $domXML->devices->interface[$i][type];
-                    $interface_mac = $domXML->devices->interface[$i]->mac[address];
-                    $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
-                    if ($interface_type == "network") {
-                      $source_network = $domXML->devices->interface[$i]->source[network];
-                    }
-                    if ($interface_type == "direct") {
-                      $source_dev = $domXML->devices->interface[$i]->source[dev];
-                      $source_mode = $domXML->devices->interface[$i]->source[mode];
-                    }
-                    $interface_model = $domXML->devices->interface[$i]->model[type];
-
-                    if ($interface_type == "network") {
-                      echo "<tr>" .
-                        "<td>$interface_type</td>" .
-                        "<td>$interface_mac</td>" .
-                        "<td>$source_network</td>" .
-                        "<td>nat</td>" .
-                        "<td>$interface_model</td>" .
-                        "<td>" .
-                          "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                          "Remove</a>" .
-                        "</td>" .
-                        "</tr>";
-                    }
-                    if ($interface_type == "direct") {
-                      echo "<tr>" .
-                        "<td>$interface_type</td>" .
-                        "<td>$interface_mac</td>" .
-                        "<td>$source_dev</td>" .
-                        "<td>$source_mode</td>" .
-                        "<td>$interface_model</td>" .
-                        "<td>" .
-                          "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
-                          "Remove</a>" .
-                        "</td>" .
-                        "</tr>";
-                    }
+                for ($i = 0; $i < sizeof($path); $i++) {
+                  $interface_type = $domXML->devices->interface[$i][type];
+                  $interface_mac = $domXML->devices->interface[$i]->mac[address];
+                  $mac_encoded = base64_encode($interface_mac); //used to send via $_GET
+                  if ($interface_type == "network") {
+                    $source_network = $domXML->devices->interface[$i]->source[network];
                   }
-                  echo "</tbody></table></div>";
-                } else {
-                  echo '<hr><p>Domain doesn\'t have any network devices</p>';
-                }
-                ?>
-            </div>
+                  if ($interface_type == "direct") {
+                    $source_dev = $domXML->devices->interface[$i]->source[dev];
+                    $source_mode = $domXML->devices->interface[$i]->source[mode];
+                  }
+                  $interface_model = $domXML->devices->interface[$i]->model[type];
 
+                  if ($interface_type == "network") {
+                    echo "<tr>" .
+                      "<td>$interface_type</td>" .
+                      "<td>$interface_mac</td>" .
+                      "<td>$source_network</td>" .
+                      "<td>nat</td>" .
+                      "<td>$interface_model</td>" .
+                      "<td>" .
+                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                        "Remove</a>" .
+                      "</td>" .
+                      "</tr>";
+                  }
+                  if ($interface_type == "direct") {
+                    echo "<tr>" .
+                      "<td>$interface_type</td>" .
+                      "<td>$interface_mac</td>" .
+                      "<td>$source_dev</td>" .
+                      "<td>$source_mode</td>" .
+                      "<td>$interface_model</td>" .
+                      "<td>" .
+                        "<a href=\"?action=domain-nic-remove&amp;uuid=$uuid&amp;mac=$mac_encoded\">" .
+                        "Remove</a>" .
+                      "</td>" .
+                      "</tr>";
+                  }
+                }
+                echo "</tbody></table></div>";
+              } else {
+                echo '<hr><p>Domain doesn\'t have any network devices</p>';
+              }
+              ?>
+            </div>
 
             <div class="tab-pane" id="snapshot">
               <?php
@@ -588,14 +583,11 @@ function domainDeleteWarning(linkURL, domName) {
               ?>
             </div>
 
-
-
-          </div>
+          </div> <!-- end tab-content -->
         </div>
 
       </div>
     </div>
-    </form>
   </div>
 </div>
 
