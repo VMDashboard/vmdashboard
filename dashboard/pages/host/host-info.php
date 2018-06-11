@@ -105,7 +105,7 @@ swal(alert_msg);
                   echo "<strong>Processor nodes:</strong> {$tmp['nodes']} <br>";
                   echo "<strong>Processor sockets:</strong> {$tmp['sockets']} <br>";
                   echo "<strong>Processor cores:</strong> {$tmp['cores']} <br>";
-                  echo "<strong>Processor threads:</strong> {$tmp['threads']} <br> <br> <br>";
+                  echo "<strong>Processor threads:</strong> {$tmp['threads']} <br>";
 
               //Time to retrieve the information about the host and place it in a table
               $tmp = $lv->get_node_device_cap_options();
