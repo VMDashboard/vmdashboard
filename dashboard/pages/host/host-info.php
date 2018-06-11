@@ -45,31 +45,6 @@ swal(alert_msg);
     <div class="card-body">
       <div class="row">
         <div class="col-lg-4 col-md-5 col-sm-4 col-6">
-
-<?php
-          // Time to get all information on the host
-          $tmp = $lv->host_get_node_info();
-          // Let's start the $ret without any data, it will be used to display returned XML info
-          $ret = false;
-
-          if ($action == 'dumpxml') {
-            $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-          }
-
-          //If we have returned XML data, display it
-          if ($ret){
-            echo "<pre>$ret</pre>";
-            echo "<br /><br />";
-          }
-
-          $ci  = $lv->get_connect_information();
-          $info = '';
-          if ($ci['uri'])
-              $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
-?>
-
-
-
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
@@ -96,6 +71,29 @@ swal(alert_msg);
         <div class="col-lg-8 col-md-7 col-sm-8 col-6">
           <!-- Tab panes -->
           <div class="tab-content">
+            <?php
+                      // Time to get all information on the host
+                      $tmp = $lv->host_get_node_info();
+                      // Let's start the $ret without any data, it will be used to display returned XML info
+                      $ret = false;
+
+                      if ($action == 'dumpxml') {
+                        $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+                      }
+
+                      //If we have returned XML data, display it
+                      if ($ret){
+                        echo "<pre>$ret</pre>";
+                        echo "<br /><br />";
+                      }
+
+                      $ci  = $lv->get_connect_information();
+                      $info = '';
+                      if ($ci['uri'])
+                          $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+            ?>
+
+
             <div class="tab-pane active" id="general">
               <?php
 
