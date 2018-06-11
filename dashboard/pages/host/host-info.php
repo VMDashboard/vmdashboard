@@ -45,6 +45,31 @@ swal(alert_msg);
     <div class="card-body">
       <div class="row">
         <div class="col-lg-4 col-md-5 col-sm-4 col-6">
+
+<?php
+          // Time to get all information on the host
+          $tmp = $lv->host_get_node_info();
+          // Let's start the $ret without any data, it will be used to display returned XML info
+          $ret = false;
+
+          if ($action == 'dumpxml') {
+            $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+          }
+
+          //If we have returned XML data, display it
+          if ($ret){
+            echo "<pre>$ret</pre>";
+            echo "<br /><br />";
+          }
+
+          $ci  = $lv->get_connect_information();
+          $info = '';
+          if ($ci['uri'])
+              $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+?>
+
+
+
           <div class="nav-tabs-navigation verical-navs">
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
@@ -73,25 +98,6 @@ swal(alert_msg);
           <div class="tab-content">
             <div class="tab-pane active" id="general">
               <?php
-              // Time to get all information on the host
-              $tmp = $lv->host_get_node_info();
-              // Let's start the $ret without any data, it will be used to display returned XML info
-              $ret = false;
-
-              if ($action == 'dumpxml') {
-                $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-              }
-
-              //If we have returned XML data, display it
-              if ($ret){
-                echo "<pre>$ret</pre>";
-                echo "<br /><br />";
-              }
-
-              $ci  = $lv->get_connect_information();
-              $info = '';
-              if ($ci['uri'])
-                  $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
 
               if (strlen($info) > 2)
                   $info[ strlen($info) - 2 ] = ' ';
@@ -163,7 +169,57 @@ swal(alert_msg);
             </div>
 
             <div class="tab-pane" id="storage">
+              <?php
+              for ($i = 0; $i < sizeof($tmp); $i++) {
 
+                //Just pull out STORAGE data
+                if ($tmp[$i] == "storage"){
+                  echo "<h4>{$tmp[$i]}</h4>";
+                  $tmp1 = $lv->get_node_devices($tmp[$i]);
+                  echo "<div class='table-responsive'>" .
+                    "<table class='table'>" .
+                    "<tr>" .
+                    "<th> Device name </th>" .
+                    "<th> Identification </th>" .
+                    "<th> Driver name </th>" .
+                    "<th> Vendor </th>" .
+                    "<th> Product </th>" .
+                    "<th> Action </th>" .
+                    "</tr>";
+
+                  for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                    $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                    //Actions will be a form button that will submit info using POST
+                    $act = "<form method=\"post\" action=\"\">
+                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
+                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
+                      <input type=\"submit\" name=\"submit\" value=\"XML\">
+                      </form>";
+                    $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
+                    $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
+                    $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
+
+                    if (array_key_exists('vendor_id', $tmp2) && array_key_exists('product_id', $tmp2))
+                      $ident = $tmp2['vendor_id'].':'.$tmp2['product_id'];
+                    else
+                      $ident = '-';
+
+                    echo "<tr>" .
+                      "<td>{$tmp2['name']}</td>" .
+                      "<td>$ident</td>" .
+                      "<td>$driver</td>" .
+                      "<td>$vendor</td>" .
+                      "<td>$product</td>" .
+                      "<td>$act</td>" .
+                      "</tr>";
+
+                  }
+
+                  echo "</table></div>";
+
+                }
+              }
+              ?>
             </div>
 
 
