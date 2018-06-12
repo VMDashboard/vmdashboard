@@ -33,6 +33,7 @@ $url = $protocol . $_SERVER['HTTP_HOST'];
 $page = basename($_SERVER['PHP_SELF']);
 $action = $_SESSION['action'];
 $domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
+$autostart = ($lv->domain_get_autostart($dom)) ? "yes" : "no";
 
 
 // Domain Actions
@@ -128,7 +129,8 @@ if ($action == 'domain-edit') {
 }
 
 if ($action == 'domain-set-autostart') {
-    $ret = $lv->domain_set_autostart($dom, 1) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
+    $val = ($autostart == "yes") ? 1 : 0;
+    $ret = $lv->domain_set_autostart($dom, $val) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
 }
 
 
@@ -283,7 +285,7 @@ function domainDeleteWarning(linkURL, domName) {
                         echo "<strong>Architecture: </strong>" . $arch . "<br />";
                         echo "<strong>ID: </strong>" . $id . "<br />";
                         echo "<strong>VNC Port: </strong>" . $vnc . "<br />";
-                        echo "<strong>AutoStart: </strong>" . $lv->domain_get_autostart($dom) . "<br />";
+                        echo "<strong>AutoStart: </strong>" . $autostart . "<br />";
 
                     if ($die)
                       die('</body></html');
@@ -368,7 +370,7 @@ function domainDeleteWarning(linkURL, domName) {
 
                     <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                       <a href="?action=domain-set-autostart&amp;uuid=<?php echo $uuid; ?>" target="_self" >
-                      Set AutoStart</a> <br />
+                      Change AutoStart</a> <br />
                     </li>
 
                     </ul>
