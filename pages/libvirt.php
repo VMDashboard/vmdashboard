@@ -625,7 +625,7 @@ class Libvirt {
               continue; //used to not display directories
           $filename = $tmp_keys[$ii];
           if($filename == $name) {
-            $name = $original_filename . "-clone$int." . $original_extension;
+            $name = $original_filename . "-clone($int)." . $original_extension;
             $int++;
           }
         }
