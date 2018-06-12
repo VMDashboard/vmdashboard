@@ -30,7 +30,7 @@ $ret = "";
 
 
 if ($action == 'volume-delete') {
-  $ret = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+  $ret = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? '' : 'Cannot delete volume';
 }
 
 if ($action == 'volume-clone') {
