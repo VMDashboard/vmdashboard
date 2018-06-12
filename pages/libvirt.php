@@ -611,12 +611,29 @@ class Libvirt {
     function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name) {
         $pool = $this->get_storagepool_res($pool_name);
         $original_volume = libvirt_storagevolume_lookup_by_path($this->conn, $original_volume_path);
+
         $original_filename = pathinfo($original_volume_name, PATHINFO_FILENAME);
         $original_extension = pathinfo($original_volume_name, PATHINFO_EXTENSION);
-        $new_volume_name = $original_filename . "-clone." . $original_extension;
+        $name = $original_filename . "-clone." . $original_extension;
+        $int = 1;
+
+        $tmp = $lv->storagepool_get_volume_information($pool);
+        $tmp_keys = array_keys($tmp);
+        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+          $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
+            if ($capacity == 0)
+              continue; //used to not display directories
+          $filename = $tmp_keys[$ii];
+          if($filename == $name) {
+            $name = $original_filename . "-clone($int)." . $original_extension;
+            $int++;
+          }
+        }
+
+
 
         $xml = "<volume>\n".
-        "  <name>$new_volume_name</name>\n".
+        "  <name>$name</name>\n".
         "</volume>";
 
         $tmp = libvirt_storagevolume_create_xml_from($pool, $xml, $original_volume);
