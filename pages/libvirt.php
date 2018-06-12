@@ -611,8 +611,8 @@ class Libvirt {
     function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name) {
         $pool = $this->get_storagepool_res($pool_name);
         $original_volume = libvirt_storagevolume_lookup_by_path($this->conn, $original_volume_path);
-        $new_volume = $original_volume_name . "-clone";
-        $name = "test-clone";
+        //$new_volume = $original_volume_name . "-clone";
+        //$name = "test-clone";
         $xml = "<volume>\n".
         "  <name>clone</name>\n".
         "</volume>";
