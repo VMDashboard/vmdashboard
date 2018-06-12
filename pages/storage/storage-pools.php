@@ -15,6 +15,7 @@ if (isset($_GET['action'])) {
     $_SESSION['action'] = $_GET['action'];
     $_SESSION['path'] = $_GET['path'];
     $_SESSION['pool'] = $_GET['pool'];
+    $_SESSION['filename'] = $_GET['filename'];
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
@@ -24,6 +25,7 @@ require('../navbar.php');
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
 $pool = $_SESSION['pool'];
 $path = base64_decode($_SESSION['path']); //path was encoded for passing through URL
+$filename = $_SESSION['filename'];
 $ret = "";
 
 
@@ -33,7 +35,7 @@ if ($action == 'volume-delete') {
 
 if ($action == 'volume-clone') {
   $pool_res = $lv->get_storagepool_res($pool);
-  $ret = $lv->storagevolume_create_xml_from($pool_res, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume: '.$lv->get_last_error();
+  $ret = $lv->storagevolume_create_xml_from($pool_res, $path, $filename) ? 'Volume has been cloned successfully' : 'Cannot clone volume: '.$lv->get_last_error();
 }
 
 if ($action == 'pool-delete') {
@@ -63,6 +65,7 @@ if ($action == "pool-xml") {
 unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of action on page reload
 unset($_SESSION['path']);
 unset($_SESSION['pool']);
+unset($_SESSION['filename']);
 
 //Will display a sweet alert if a return message exists
 if ($ret != "") {
@@ -179,7 +182,7 @@ function poolDeleteWarning(linkURL, poolName) {
                 "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
                "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path', '$filename')\" href=\"#\">Delete</a>
-                  <a href=\"?action=volume-clone&amp;path=$path&amp;pool=$poolName\">&nbsp;| Clone</a></td>" .
+                  <a href=\"?action=volume-clone&amp;path=$path&amp;pool=$poolName\&amp;filename=$filename">&nbsp;| Clone</a></td>" .
                //"<td><a href=\"?action=volume-delete&amp;path=$path\" >Delete</a></td>" .
                "</tr>";
              }

@@ -608,12 +608,12 @@ class Libvirt {
     }
 
     //Used to clone the storage volumes
-    function storagevolume_create_xml_from($pool, $original_volume) {
-        $pool = $this->get_storagepool_res($pool);
-        $original_volume = libvirt_storagevolume_lookup_by_path($this->conn, $original_volume);
-
+    function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name) {
+        $pool = $this->get_storagepool_res($pool_name);
+        $original_volume = libvirt_storagevolume_lookup_by_path($this->conn, $original_volume_path);
+        $new_volume = $original_volume_name . "-clone";
         $xml = "<volume>\n".
-        "  <name>clone</name>\n".
+        "  <name>$new_volume</name>\n".
         "</volume>";
 
         $tmp = libvirt_storagevolume_create_xml_from($pool, $xml, $original_volume);
