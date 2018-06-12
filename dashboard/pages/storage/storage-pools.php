@@ -100,6 +100,7 @@ function poolDeleteWarning(linkURL, poolName) {
       $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
       //getting the pool information to display the data in a table
       $info = $lv->get_storagepool_info($pools[$i]);
+      $poolName = $pools[$i];
       ?>
     <div class="row">
       <div class="col-md-3">
@@ -124,7 +125,6 @@ function poolDeleteWarning(linkURL, poolName) {
           if ($lv->translate_storagepool_state($info['state']) != "Running") {
             echo "<a href=\"?action=pool-start&amp;pool=$pools[$i]\">Start</a>";
             //echo "<a href=\"?action=pool-delete&amp;pool=$pools[$i]\"> | Remove</a>";
-            $poolName = $pools[$i];
             echo "<a onclick=\"poolDeleteWarning('?action=pool-delete&amp;pool=$poolName', '$poolName')\" href=\"#\"> | Remove</a>";
           }
           ?>
