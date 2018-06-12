@@ -127,6 +127,10 @@ if ($action == 'domain-edit') {
     $ret = $lv->domain_change_xml($domName, $xml) ? "Domain definition has been changed" : 'Error changing domain definition: '.$lv->get_last_error();
 }
 
+if ($action == 'domain-set-autostart') {
+    $ret = $lv->domain_set_autostart($domName, 1) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
+}
+
 
 //get info, mem, cpu, state, id, arch, and vnc after actions to reflect any changes to domain
 //Didn't use $info = $lv->domain_get_info($dom); because of caches state.
@@ -360,6 +364,11 @@ function domainDeleteWarning(linkURL, domName) {
                     <li><i class="fa fa-plus" style="padding-right:7px;"></i>
                       <a href="?action=domain-snapshot-create&amp;uuid=<?php echo $uuid; ?>" target="_self" >
                       Create new snapshot</a> <br />
+                    </li>
+
+                    <li><i class="fa fa-plus" style="padding-right:7px;"></i>
+                      <a href="?action=domain-set-autostart&amp;uuid=<?php echo $uuid; ?>" target="_self" >
+                      Set AutoStart</a> <br />
                     </li>
 
                     </ul>
