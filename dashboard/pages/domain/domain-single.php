@@ -279,7 +279,9 @@ function domainDeleteWarning(linkURL, domName) {
                         echo "<strong>Architecture: </strong>" . $arch . "<br />";
                         echo "<strong>ID: </strong>" . $id . "<br />";
                         echo "<strong>VNC Port: </strong>" . $vnc . "<br />";
-                        echo "<strong>AutoStart: </strong>" . $lv->domain_get_autostart($domName) . "<br />";
+                        echo "<strong>AutoStart: </strong>" . $lv->domain_get_autostart($dom) . "<br />";
+                        $autostart = $lv->domain_get_autostart($domName);
+                        var_dump($autostart);
 
                     if ($die)
                       die('</body></html');
