@@ -24,30 +24,31 @@ require('../navbar.php');
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
 $pool = $_SESSION['pool'];
 $path = base64_decode($_SESSION['path']); //path was encoded for passing through URL
-$msg = "";
+$ret = "";
 
 
 if ($action == 'volume-delete') {
-  $msg = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+  $ret = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
 }
 
 if ($action == 'volume-clone') {
-  $msg = $lv->storagevolume_create_xml_from($pool, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume';
+  $pool_res = $lv->get_storagepool_res($pool);
+  $ret = $lv->storagevolume_create_xml_from($pool_res, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume';
 }
 
 if ($action == 'pool-delete') {
   $res = $lv->get_storagepool_res($pool);
-  $msg = $lv->storagepool_undefine($res) ? 'Pool has been removed successfully' : 'Cannot remove pool';
+  $ret = $lv->storagepool_undefine($res) ? 'Pool has been removed successfully' : 'Cannot remove pool';
 }
 
 if ($action == 'pool-destroy') {
   $res = $lv->get_storagepool_res($pool);
-  $msg = $lv->storagepool_destroy($res) ? 'Pool has been stopped successfully' : 'Cannot stop pool';
+  $ret = $lv->storagepool_destroy($res) ? 'Pool has been stopped successfully' : 'Cannot stop pool';
 }
 
 if ($action == 'pool-start') {
   $res = $lv->get_storagepool_res($pool);
-  $msg = $lv->storagepool_create($res) ? 'Pool has been started successfully' : 'Cannot start pool';
+  $ret = $lv->storagepool_create($res) ? 'Pool has been started successfully' : 'Cannot start pool';
 }
 
 //pool-xml not yet configured
