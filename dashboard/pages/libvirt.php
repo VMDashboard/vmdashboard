@@ -1341,7 +1341,7 @@ class Libvirt {
     }
 
     //get domain xml info
-    function domain_set_autostart($res, $int) {
+    function domain_set_autostart($res, $int = 0) {
       $tmp = libvirt_domain_set_autostart($res, $int);
     	return ($tmp) ? $tmp : $this->_set_last_error();
     }
