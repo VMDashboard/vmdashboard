@@ -179,7 +179,7 @@ function poolDeleteWarning(linkURL, poolName) {
                 "<td>{$lv->format_size($tmp[$tmp_keys[$ii]]['allocation'], 2)}</td>" .
                "<td>{$tmp[$tmp_keys[$ii]]['path']}</td>" .
                "<td><a onclick=\"volumeDeleteWarning('?action=volume-delete&amp;path=$path', '$filename')\" href=\"#\">Delete</a>
-                  <a href=\"?action=volume-clone&amp;path=$path&amp;pool=$poolName\">Clone</a></td>" .
+                  <a href=\"?action=volume-clone&amp;path=$path&amp;pool=$poolName\">&nbsp;| Clone</a></td>" .
                //"<td><a href=\"?action=volume-delete&amp;path=$path\" >Delete</a></td>" .
                "</tr>";
              }
