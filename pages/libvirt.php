@@ -617,15 +617,15 @@ class Libvirt {
         $name = $original_filename . "-clone." . $original_extension;
         $int = 1;
 
-        $tmp = $lv->storagepool_get_volume_information($pool);
+        $tmp = $this->storagepool_get_volume_information($pool);
         $tmp_keys = array_keys($tmp);
         for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-          $capacity = $lv->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
+          $capacity = $this->format_size($tmp[$tmp_keys[$ii]]['capacity'], 2);
             if ($capacity == 0)
               continue; //used to not display directories
           $filename = $tmp_keys[$ii];
           if($filename == $name) {
-            $name = $original_filename . "-clone($int)." . $original_extension;
+            $name = $original_filename . "-clone$int." . $original_extension;
             $int++;
           }
         }
