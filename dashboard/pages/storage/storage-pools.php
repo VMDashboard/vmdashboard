@@ -63,6 +63,15 @@ unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of ac
 unset($_SESSION['path']);
 unset($_SESSION['pool']);
 
+//Will display a sweet alert if a return message exists
+if ($ret != "") {
+echo "
+<script>
+var alert_msg = '$ret'
+swal(alert_msg);
+</script>";
+}
+
 ?>
 
 <script>
