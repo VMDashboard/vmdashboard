@@ -614,7 +614,7 @@ class Libvirt {
         $new_volume = $original_volume_name . "-clone";
         $name = "test-clone";
         $xml = "<volume>\n".
-        "  <name>$name</name>\n".
+        "  <name>clone</name>\n".
         "</volume>";
 
         $tmp = libvirt_storagevolume_create_xml_from($pool, $xml, $original_volume);
