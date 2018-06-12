@@ -614,8 +614,8 @@ class Libvirt {
 
         $original_filename = pathinfo($original_volume_name, PATHINFO_FILENAME);
         $original_extension = pathinfo($original_volume_name, PATHINFO_EXTENSION);
-        $df = new DateTime(DateTime::ATOM);
-        $name = $original_filename . "-clone($df)." . $original_extension;
+        $time = date('Y-m-d H:i:s');
+        $name = $original_filename . "-clone($time)." . $original_extension;
 
         $xml = "<volume>\n".
         "  <name>$name</name>\n".
