@@ -128,7 +128,7 @@ if ($action == 'domain-edit') {
 }
 
 if ($action == 'domain-set-autostart') {
-    $ret = $lv->domain_set_autostart($domName, 1) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
+    $ret = $lv->domain_set_autostart($dom, 1) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
 }
 
 
