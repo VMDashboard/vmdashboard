@@ -23,11 +23,16 @@ require('../navbar.php');
 
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
 $pool = $_SESSION['pool'];
+$path = base64_decode($_SESSION['path']); //path was encoded for passing through URL
 $msg = "";
 
 
 if ($action == 'volume-delete') {
   $msg = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? 'Volume has been deleted successfully' : 'Cannot delete volume';
+}
+
+if ($action == 'volume-clone') {
+  $msg = $lv->storagevolume_create_xml_from($pool, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume';
 }
 
 if ($action == 'pool-delete') {
