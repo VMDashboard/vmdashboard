@@ -1,4 +1,4 @@
-# openVM Changelog
+# openVM CHANGELOG
 
 ### Note
 
