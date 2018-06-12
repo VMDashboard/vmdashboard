@@ -129,9 +129,9 @@ if ($action == 'domain-edit') {
 }
 
 if ($action == 'domain-set-autostart') {
-    $val = ($autostart == "yes") ? null : 1;
+    $val = ($autostart == "yes") ? null : 1; // null disables autostart, 1 enables it
     $ret = $lv->domain_set_autostart($dom, $val) ? "Domain autostart has been changed" : 'Error changing domain autostart: '.$lv->get_last_error();
-    $autostart = ($lv->domain_get_autostart($dom)) ? "yes" : "no";
+    $autostart = ($lv->domain_get_autostart($dom)) ? "yes" : "no"; //Check status again to display status in general informaion
 }
 
 

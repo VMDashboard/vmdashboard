@@ -607,6 +607,18 @@ class Libvirt {
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
+    //Used to clone the storage volumes
+    function storagevolume_create_xml_from($pool, $original_volume) {
+        $pool = $this->get_storagepool_res($pool);
+
+        $xml = "<volume>\n".
+        "  <name>$name</name>\n".
+        "</volume>";
+
+        $tmp = libvirt_storagevolume_create_xml_from($pool, $xml, $original_volume);
+        return ($tmp) ? $tmp : $this->_set_last_error();
+    }
+
     function get_hypervisor_name() {
         $tmp = libvirt_connect_get_information($this->conn);
         $hv = $tmp['hypervisor'];
@@ -1334,13 +1346,13 @@ class Libvirt {
     	return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
-    //get domain xml info
+    //Returns 1 for enabled and false for disabled.
     function domain_get_autostart($res) {
       $tmp = libvirt_domain_get_autostart($res);
     	return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
-    //get domain xml info
+    //Setting the autostart essential places a shortcut of domain in /etc/libvirt/qemu/autostart/
     function domain_set_autostart($res, $int = 0) {
       $tmp = libvirt_domain_set_autostart($res, $int);
     	return ($tmp) ? $tmp : $this->_set_last_error();
