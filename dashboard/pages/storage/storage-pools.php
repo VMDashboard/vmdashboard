@@ -33,7 +33,7 @@ if ($action == 'volume-delete') {
 
 if ($action == 'volume-clone') {
   $pool_res = $lv->get_storagepool_res($pool);
-  $ret = $lv->storagevolume_create_xml_from($pool_res, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume';
+  $ret = $lv->storagevolume_create_xml_from($pool_res, $path) ? 'Volume has been cloned successfully' : 'Cannot clone volume: '.$lv->get_last_error();
 }
 
 if ($action == 'pool-delete') {
