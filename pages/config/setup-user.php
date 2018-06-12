@@ -46,7 +46,7 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
         VALUES ('$username', '$email', '$hash');";
         // Executing the SQL statement
         if ($conn->query($sql) === TRUE) {
-          header('Location: ../index.php');
+          header('Location: ../../index.php');
         } else {
           echo "Error: " . $sql . " " . $conn->error;
         }
