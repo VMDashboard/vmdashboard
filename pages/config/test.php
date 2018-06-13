@@ -24,8 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('../header.php');
 require('../navbar.php');
 
-$arrayVersion = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-
+$arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
+$arrayCurrent = file('../config/version.php');
+if ($arrayLatest[0] > $arrayCurrent[0])
+  echo "Hello";
 ?>
 
 <div class="content">
@@ -36,14 +38,9 @@ $arrayVersion = file('https://raw.githubusercontent.com/PenningDevelopment/openV
       </div>
       <div class="card-body">
         <?php
-        var_dump($arrayVersion);
-        echo "<br>";
-        echo "<br>";
-        echo $arrayVersion[0];
-        echo "<br>";
-        echo "<br>";
-        if ($arrayVersion[0] > "0.0.0")
-         echo "Version $arrayVersion[0] has been released";
+        var_dump($arrayLatest);
+        var_dump($arrayCurrent);
+
         ?>
       </div> <!-- end card body -->
       <div class="card-footer text-right">
