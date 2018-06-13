@@ -172,8 +172,10 @@
 <?php
 $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
 $arrayCurrent = file('../config/version.php');
+
 if ($arrayLatest[0] > $arrayCurrent[0])
   $noticiation_status = true;
+
 if ($notification_status == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
