@@ -178,7 +178,7 @@
                   <a class="dropdown-item" href="#">Action</a>
                 </div>
               </li>
-<?php } <?>
+<?php } ?>
 
               <li class="nav-item">
                 <a class="nav-link btn-rotate" href="#">
