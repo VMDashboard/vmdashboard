@@ -1293,7 +1293,7 @@ class Libvirt {
     }
 
     function host_get_node_cpu_stats_for_each_cpu() {
-        $tmp = libvirt_node_get_cpu_status_for_each_cpu($this->conn,1);
+        $tmp = libvirt_node_get_cpu_stats_for_each_cpu($this->conn,1);
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
