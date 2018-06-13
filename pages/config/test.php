@@ -32,14 +32,15 @@ require('../navbar.php');
         <h4 class="card-title"> Test Page</h4>
       </div>
       <div class="card-body">
+        
       <?php
       $cpu = $lv->host_get_node_cpu_stats();
       $multi_cpu = $lv->host_get_node_cpu_stats_for_each_cpu();
-      $mem = $lv->host_get_node_mem_status();
+      $mem = $lv->host_get_node_mem_stats();
       var_dump($cpu);
       var_dump($multi_cpu);
       var_dump($mem);
-?>
+      ?>
 
       </div> <!-- end card body -->
       <div class="card-footer text-right">
