@@ -9,17 +9,6 @@ if (!isset($_SESSION['username'])){
   header('Location: ../login.php');
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if ($_POST['password'] == $_POST['confirm_password']) {
-    $_SESSION['password'] = $_POST['password'];
-    $_SESSION['action'] = $_POST['action'];
-    unset($_POST);
-    header("Location: ".$_SERVER['PHP_SELF']);
-    exit;
-  } else {
-    $_SESSION['reset_status'] = "Password was not changed!";
-  }
-}
 
 require('../header.php');
 require('../navbar.php');
