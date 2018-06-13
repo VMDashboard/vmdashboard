@@ -1298,7 +1298,7 @@ class Libvirt {
     }
 
     function host_get_node_mem_status() {
-        $tmp = libvirt_node_get_mem_status($this->conn);
+        $tmp = libvirt_node_get_mem_stats($this->conn);
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
