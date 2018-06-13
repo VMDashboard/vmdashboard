@@ -23,8 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 require('../header.php');
 require('../navbar.php');
-
-
 ?>
 
 <div class="content">
@@ -35,16 +33,11 @@ require('../navbar.php');
       </div>
       <div class="card-body">
       <?php
-      $cpu = host_get_node_cpu_stats();
-      $multi_cpu = host_get_node_cpu_stats_for_each_cpu();
-      $mem = host_get_node_mem_status();
-      echo "CPU<br>";
+      $cpu = $lv->host_get_node_cpu_stats();
+      $multi_cpu = $lv->host_get_node_cpu_stats_for_each_cpu();
+      $mem = $lv->host_get_node_mem_status();
       var_dump($cpu);
-      echo "<br>";
-      echo "Multi<br>";
       var_dump($multi_cpu);
-      echo "<br>";
-      echo "Mem<br>";
       var_dump($mem);
 ?>
 
