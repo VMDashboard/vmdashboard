@@ -168,14 +168,20 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
 
-<?php if ($notification_status == true) { ?>
+
+<?php
+$arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
+$arrayCurrent = file('../config/version.php');
+if ($arrayLatest > $arrayCurrent)
+  $noticiation_status = true;
+if ($notification_status == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
-                  <span class="notification">5</span>
+                  <span class="notification">1</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item">New Update Available</a>
                 </div>
               </li>
 <?php } ?>
