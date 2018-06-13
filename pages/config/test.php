@@ -39,7 +39,7 @@ if ($arrayLatest[0] > $arrayCurrent[0])
       <div class="card-body">
         <?php
         var_dump($arrayLatest);
-        echo <br>;
+        echo "<br>";
         var_dump($arrayCurrent);
 
         ?>
