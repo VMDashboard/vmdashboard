@@ -21,16 +21,17 @@ require('../navbar.php');
         <h4 class="card-title"> Test Page</h4>
       </div>
       <div class="card-body">
-hello
       <?php
       $info = $lv->host_get_node_info();
       $cpu = $lv->host_get_node_cpu_stats();
       $multi_cpu = $lv->host_get_node_cpu_stats_for_each_cpu();
-      
-      echo "Info:" . $info;
+      $mem = $lv->host_get_node_mem_stats();
       var_dump($info);
+      echo "<br><br><br>";
       var_dump($cpu);
+      echo "<br><br><br>";
       var_dump($multi_cpu);
+      echo "<br><br><br>";
       var_dump($mem);
       ?>
 
