@@ -24,10 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('../header.php');
 require('../navbar.php');
 
-$arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-$arrayCurrent = file('../config/version.php');
-if ($arrayLatest[0] > $arrayCurrent[0])
-  echo "Hello";
+
 ?>
 
 <div class="content">
@@ -37,12 +34,18 @@ if ($arrayLatest[0] > $arrayCurrent[0])
         <h4 class="card-title"> Test Page</h4>
       </div>
       <div class="card-body">
-        <?php
-        var_dump($arrayLatest);
-        echo "<br>";
-        var_dump($arrayCurrent);
+      <?php
+      $cpu = host_get_node_cpu_stats();
+      $multi_cpu host_get_node_cpu_stats_for_each_cpu();
+      $mem host_get_node_mem_status();
 
-        ?>
+      var_dump($cpu);
+      echo "<br>";
+      var_dump($multi_cpu);
+      echo "<br>";
+      var_dump($mem);
+
+
       </div> <!-- end card body -->
       <div class="card-footer text-right">
         <input type="submit" class="btn btn-danger" name="action" value="Change" >

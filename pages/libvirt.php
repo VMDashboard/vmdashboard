@@ -1287,6 +1287,21 @@ class Libvirt {
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
+    function host_get_node_cpu_stats() {
+        $tmp = libvirt_node_get_cpu_stats($this->conn);
+        return ($tmp) ? $tmp : $this->_set_last_error();
+    }
+
+    function host_get_node_cpu_stats_for_each_cpu() {
+        $tmp = libvirt_node_get_cpu_status_for_each_cpu($this->conn);
+        return ($tmp) ? $tmp : $this->_set_last_error();
+    }
+
+    function host_get_node_mem_status() {
+        $tmp = libvirt_node_get_mem_status($this->conn);
+        return ($tmp) ? $tmp : $this->_set_last_error();
+    }
+
     function domain_is_active($domain) {
         $dom = $this->get_domain_object($domain);
         return libvirt_domain_is_active($dom);
