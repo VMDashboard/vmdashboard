@@ -168,6 +168,7 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
 
+<?php if ($notification_status == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
@@ -177,6 +178,7 @@
                   <a class="dropdown-item" href="#">Action</a>
                 </div>
               </li>
+<?php } <?>
 
               <li class="nav-item">
                 <a class="nav-link btn-rotate" href="#">
