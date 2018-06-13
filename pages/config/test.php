@@ -24,6 +24,7 @@ require('../navbar.php');
 hello
       <?php
       $info = $lv->host_get_node_info();
+      $cpu = $lv->host_get_node_cpu_stats();
       
       echo "Info:" . $info;
       var_dump($info);
