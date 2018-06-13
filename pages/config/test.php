@@ -37,6 +37,14 @@ $arrayVersion = file('https://raw.githubusercontent.com/PenningDevelopment/openV
       <div class="card-body">
         <?php
         var_dump($arrayVersion);
+        echo "<br>";
+        echo "<br>";
+        echo $arrayVersion[0];
+        echo "<br>";
+        echo "<br>";
+        if ($arrayVersion[0] > 0.0.0)
+          echo "Version $arrayVersion[0] has been released";
+
         ?>
       </div> <!-- end card body -->
       <div class="card-footer text-right">
