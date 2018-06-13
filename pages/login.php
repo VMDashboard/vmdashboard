@@ -23,8 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
-    header('Location: ../index.php');
 
+    if(isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: '.$_SERVER['HTTP_REFERER']);
+    } else {
+      header('Location: ../index.php');
+    }
    } else {
      echo "Credentials are incorrect";
    }
