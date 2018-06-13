@@ -46,7 +46,7 @@ require('../navbar.php');
       echo "<br>";
       echo "Mem<br>";
       var_dump($mem);
-
+?>
 
       </div> <!-- end card body -->
       <div class="card-footer text-right">
