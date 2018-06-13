@@ -32,7 +32,7 @@ require('../navbar.php');
         <h4 class="card-title"> Test Page</h4>
       </div>
       <div class="card-body">
-
+hello
       <?php
       $info = $lv->host_get_node_info();
       $cpu = $lv->host_get_node_cpu_stats();
