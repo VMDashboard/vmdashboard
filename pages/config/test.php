@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 require('../header.php');
 require('../navbar.php');
 
-$arrayVersion = file('https://github.com/PenningDevelopment/openVM/blob/master/pages/config/version.php');
+$arrayVersion = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
 
 ?>
 
