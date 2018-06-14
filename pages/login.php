@@ -24,16 +24,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
 
-    //if(isset($_SERVER['HTTP_REFERER'])) {
-    //    header('Location: '.$_SERVER['HTTP_REFERER']);
-    //} else {
+    if(isset($_SESSION['return_location'])) {
+      $return_url = $_SESSION['return_location'];
+      unset($_SESSION['return_location']);
+      header('Location: '.$return_url);
+    } else {
       header('Location: ../index.php');
-    //}
-   } else {
-     echo "Credentials are incorrect";
-   }
+    }
+  } else {
+    echo "Credentials are incorrect";
+  }
 
-   $conn->close();
+  $conn->close();
+
  }
 ?>
 
