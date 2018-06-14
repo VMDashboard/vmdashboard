@@ -93,7 +93,7 @@ myChart = new Chart(ctx, {
   options: {
     elements: {
       center: {
-        text: '<?php echo $percentage . "%"; ?>',
+        text: '10%',
         color: '#66615c', // Default is #000000
         fontStyle: 'Arial', // Default is Arial
         sidePadding: 60 // Defualt is 20 (as a percentage)
