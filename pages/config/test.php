@@ -33,17 +33,31 @@ require('../navbar.php');
       $usage1 = $cpu['1']['kernel'] + $cpu['1']['user'];
       $percentage = ($usage1 - $usage0) / ($processor_speed * $multiplier) * 100;
       echo "CPU Percentage = " . $percentage . "<br><br>";
-
-
-
-      var_dump($info);
-      echo "<br><br><br>";
-      var_dump($cpu);
-      echo "<br><br><br>";
-      var_dump($multi_cpu);
-      echo "<br><br><br>";
-      var_dump($mem);
       ?>
+
+      <div class="row">
+        <div class="col-md-3">
+          <div class="card ">
+            <div class="card-header ">
+              <h5 class="card-title">CPU Statistics</h5>
+              <p class="card-category">Lastest Usage</p>
+            </div>
+            <div class="card-body ">
+              <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+            </div>
+            <div class="card-footer ">
+              <div class="legend">
+                <i class="fa fa-circle text-info"></i> Open
+              </div>
+              <hr>
+              <div class="stats">
+                <i class="fa fa-calendar"></i> CPU Percentage
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
 
       </div> <!-- end card body -->
       <div class="card-footer text-right">
