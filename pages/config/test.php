@@ -27,6 +27,9 @@ require('../navbar.php');
       $multi_cpu = $lv->host_get_node_cpu_stats_for_each_cpu();
       $mem = $lv->host_get_node_mem_stats();
 
+      var_dump($mem);
+      echo "<br><br><br>";
+
       $processor_speed = $info['mhz'] * 1000000;
       $multiplier = $info['nodes'] * $info['cores'];
       $usage0 = $cpu['0']['kernel'] + $cpu['0']['user'];
@@ -39,6 +42,7 @@ require('../navbar.php');
       <div class="progress">
         <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $percentage . '%'; ?>" aria-valuenow="$mem_used" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
+
 
       </div> <!-- end card body -->
     </form>
