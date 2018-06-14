@@ -24,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
 
-    if(isset($_SERVER['HTTP_REFERER'])) {
-        header('Location: '.$_SERVER['HTTP_REFERER']);
-    } else {
+    //if(isset($_SERVER['HTTP_REFERER'])) {
+    //    header('Location: '.$_SERVER['HTTP_REFERER']);
+    //} else {
       header('Location: ../index.php');
-    }
+    //}
    } else {
      echo "Credentials are incorrect";
    }
