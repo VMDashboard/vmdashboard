@@ -31,8 +31,10 @@ require('../navbar.php');
       echo $processor_speed . "<br>";
       $multiplier = $info['nodes'] * $info['cores'];
       echo $multiplier . "<br>";
-      $usage0 = $cpu['0']['kernel'];
-      echo $usage0 . "<br>";
+      $usage0 = $cpu['0']['kernel'] + $cpu['0']['user'];
+      $usage1 = $cpu['1']['kernel'] + $cpu['1']['user'];
+      $percentage = ($usage1 - $usage0) / ($processor_speed * $multiplier) * 100;
+      echo "CPU Percentage" . $percentage . "<br>";
 
 
 
