@@ -36,13 +36,11 @@ require('../navbar.php');
       $percentage = number_format($percentage, 2, '.', ',' );
       echo "CPU Percentage = " . $percentage . "%<br><br>";
       ?>
-
-
+      <div class="progress">
+        <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $percentage . '%'; ?>" aria-valuenow="$mem_used" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
 
       </div> <!-- end card body -->
-      <div class="card-footer text-right">
-        <input type="submit" class="btn btn-danger" name="action" value="Change" >
-      </div>
     </form>
   </div> <!-- end card -->
 
