@@ -37,29 +37,26 @@ require('../navbar.php');
       echo "CPU Percentage = " . $percentage . "<br><br>";
       ?>
 
-      <div class="row">
-        <div class="col-md-3">
-          <div class="card ">
-            <div class="card-header ">
-              <h5 class="card-title">CPU Statistics</h5>
-              <p class="card-category">Lastest Usage</p>
-            </div>
-            <div class="card-body ">
-              <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
-            </div>
-            <div class="card-footer ">
-              <div class="legend">
-                <i class="fa fa-circle text-info"></i> Open
+      <div class="col-md-3">
+            <div class="card ">
+              <div class="card-header ">
+                <h5 class="card-title">Email Statistics</h5>
+                <p class="card-category">Last Campaign Performance</p>
               </div>
-              <hr>
-              <div class="stats">
-                <i class="fa fa-calendar"></i> CPU Percentage
+              <div class="card-body ">
+                <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+              </div>
+              <div class="card-footer ">
+                <div class="legend">
+                  <i class="fa fa-circle text-info"></i> Open
+                </div>
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-calendar"></i> Number of emails sent
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
 
       </div> <!-- end card body -->
       <div class="card-footer text-right">
