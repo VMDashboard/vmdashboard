@@ -26,6 +26,17 @@ require('../navbar.php');
       $cpu = $lv->host_get_node_cpu_stats();
       $multi_cpu = $lv->host_get_node_cpu_stats_for_each_cpu();
       $mem = $lv->host_get_node_mem_stats();
+
+      $processor_speed = $info['mhz'] * 1000000;
+      echo $processor_speed . "<br>";
+      $multiplier = $info['nodes'] * $info['cores'];
+      echo $multiplier . "<br>";
+      $usage0 = $cpu['0']['kernel'];
+      echo $usage0 . "<br>";
+
+
+
+
       var_dump($info);
       echo "<br><br><br>";
       var_dump($cpu);
