@@ -34,7 +34,7 @@ require('../navbar.php');
       $percentage = ($usage1 - $usage0) / ($processor_speed * $multiplier) * 100;
       // PHP: string number_format ( float $number [, int $decimals [, string $dec_point, string $thousands_sep]] )
       $percentage = number_format($percentage, 2, '.', ',' );
-      echo "CPU Percentage = " . $percentage . "<br><br>";
+      echo "CPU Percentage = " . $percentage . "%<br><br>";
       ?>
 
 
@@ -69,7 +69,7 @@ require('../navbar.php');
       </div>
 
 
-      
+
 </div> <!-- end content -->
 
 

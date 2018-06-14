@@ -170,6 +170,7 @@
 
 
 <?php
+/*
 $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
 $arrayCurrent = file('../config/version.php');
 if ($arrayLatest[0] > $arrayCurrent[0])
@@ -185,7 +186,7 @@ if ($notification_status == true) { ?>
                   <a class="dropdown-item">New Update Available</a>
                 </div>
               </li>
-<?php } ?>
+<?php } */?>
 
               <li class="nav-item">
                 <a class="nav-link btn-rotate" href="#">
