@@ -87,7 +87,7 @@ myChart = new Chart(ctx, {
       pointHoverRadius: 0,
       backgroundColor: ['#4acccd', '#f4f3ef'],
       borderWidth: 0,
-      data: [60, 40]
+      data: [10, 90]
     }]
   },
   options: {
