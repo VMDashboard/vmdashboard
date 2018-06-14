@@ -10,7 +10,6 @@ if (!isset($_SESSION['username'])){
   header('Location: ../login.php');
 }
 
-
 require('../header.php');
 require('../navbar.php');
 ?>
@@ -134,6 +133,11 @@ myChart = new Chart(ctx, {
   </div> <!-- end card -->
 </div> <!-- end content -->
 
+
+
+<?php
+require('../footer.php');
+?>
 <script>
 ctx = document.getElementById('chartDonut1').getContext("2d");
 
@@ -198,7 +202,3 @@ myChart = new Chart(ctx, {
   }
 });
 </script>
-
-<?php
-require('../footer.php');
-?>
