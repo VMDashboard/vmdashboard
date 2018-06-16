@@ -76,9 +76,7 @@ require('../navbar.php');
 
 
 
-<?php
-require('../footer.php');
-?>
+
 
 <script>
 ctx = document.getElementById('chartDonut1').getContext("2d");
@@ -144,3 +142,7 @@ ctx = document.getElementById('chartDonut1').getContext("2d");
       }
     });
 </script>
+
+<?php
+require('../footer.php');
+?>
