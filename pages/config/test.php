@@ -98,6 +98,7 @@ ctx = document.getElementById('chartDonut1').getContext("2d");
       },
       options: {
         elements: {
+          display: true
           center: {
             text: '60%',
             color: '#66615c', // Default is #000000
