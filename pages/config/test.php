@@ -42,7 +42,6 @@ $usage1 = $cpu_stats['1']['kernel'] + $cpu_stats['1']['user']; //Second reading 
 $cpu_percentage = ($usage1 - $usage0) / ($processor_speed * $multiplier) * 100;
 $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string number_format ( float $number [, int $decimals [, string $dec_point, string $thousands_sep]] )
 
-
 ?>
 
 <div class="content">
@@ -80,44 +79,38 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
           <!-- Tab panes -->
           <div class="tab-content">
             <?php
-                      // Time to get all information on the host
-                      $tmp = $lv->host_get_node_info();
-                      // Let's start the $ret without any data, it will be used to display returned XML info
-                      $ret = false;
+            $tmp = $lv->host_get_node_info(); // Get and array of information on the host
 
-                      if ($action == 'dumpxml') {
-                        $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
-                      }
+            // Used when the user clicks the XML link. Will display XML data
+            if ($action == 'dumpxml') {
+              $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+            }
 
-                      //If we have returned XML data, display it
-                      if ($ret){
-                        echo "<pre>$ret</pre>";
-                        echo "<br /><br />";
-                      }
+            //If we have returned XML data, display it
+            if ($ret) {
+              echo "<pre>$ret</pre>";
+              echo "<br /><br />";
+            }
 
-                      $ci  = $lv->get_connect_information();
-                      $info = '';
-                      if ($ci['uri'])
-                          $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+            $ci  = $lv->get_connect_information();
+            $info = '';
+            if ($ci['uri'])
+                $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
             ?>
-
 
             <div class="tab-pane active" id="general">
 
               <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
               <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="$mem_used" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
               </div> <br />
 
               <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
               <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="$mem_used" aria-valuemin="0" aria-valuemax="100"></div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
               </div> <br />
 
-
-
               <?php
-
               if (strlen($info) > 2)
                   $info[ strlen($info) - 2 ] = ' ';
 
@@ -179,7 +172,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                 }
               }
-
               ?>
             </div>
 
@@ -262,11 +254,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$link_speed</td>" .
                       "<td>$act</td>" .
                       "</tr>";
-
                   }
-
                   echo "</table></div>";
-
                 }
               }
               ?>
@@ -312,16 +301,11 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$product</td>" .
                       "<td>$act</td>" .
                       "</tr>";
-
                   }
-
                   echo "</table></div>";
-
                 }
               }
-
               ?>
-
             </div>
 
             <div class="tab-pane" id="usb">
@@ -363,15 +347,11 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$product</td>" .
                       "<td>$act</td>" .
                       "</tr>";
-
                   }
-
                   echo "</table></div>";
-
                 }
               }
               ?>
-
             </div>
 
           </div>
