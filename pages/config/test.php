@@ -107,7 +107,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
               <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
               <div class="progress">
                 <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="$mem_used" aria-valuemin="0" aria-valuemax="100"></div>
-              </div> <br /> <br />
+              </div> <br />
 
               <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
               <div class="progress">
