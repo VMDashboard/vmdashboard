@@ -11,6 +11,188 @@ if (!isset($_SESSION['username'])){
 }
 
 require('../header.php');
+<style>
+.tim-row {
+  margin-bottom: 20px;
+}
+
+.tim-white-buttons {
+  background-color: #777777;
+}
+
+.typography-line {
+  padding-left: 25%;
+  margin-bottom: 35px;
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.typography-line span {
+  bottom: 10px;
+  color: #c0c1c2;
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 13px;
+  left: 0;
+  position: absolute;
+  width: 260px;
+  text-transform: none;
+}
+
+.tim-row {
+  padding-top: 60px;
+}
+
+.tim-row h3 {
+  margin-top: 0;
+}
+
+.offline-doc .page-header {
+  display: flex;
+  align-items: center;
+}
+
+.offline-doc .footer {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  bottom: 0;
+  color: #fff;
+  z-index: 1;
+}
+
+#map {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.demo-iconshtml {
+  font-size: 62.5%;
+}
+
+.demo-icons body {
+  font-size: 1.6rem;
+  font-family: sans-serif;
+  color: #333333;
+  background: white;
+}
+
+.demo-icons a {
+  color: #608CEE;
+  text-decoration: none;
+}
+
+.demo-icons header {
+  text-align: center;
+  padding: 100px 0 0;
+}
+
+.demo-icons header h1 {
+  font-size: 2.8rem;
+}
+
+.demo-icons header p {
+  font-size: 1.4rem;
+  margin-top: 1em;
+}
+
+.demo-icons header a:hover {
+  text-decoration: underline;
+}
+
+.demo-icons .nc-icon {
+  font-size: 34px;
+}
+
+.demo-icons section h2 {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 0 0 1em .2em;
+  margin-bottom: 1em;
+}
+
+.demo-icons ul {
+  padding-left: 0;
+}
+
+.demo-icons ul::after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.demo-icons ul li {
+  width: 20%;
+  float: left;
+  padding: 16px 0;
+  text-align: center;
+  border-radius: .25em;
+  -webkit-transition: background 0.2s;
+  -moz-transition: background 0.2s;
+  transition: background 0.2s;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.demo-icons ul li:hover {
+  background: #f4f4f4;
+}
+
+.demo-icons ul p,
+.demo-icons ul em,
+.demo-icons ul input {
+  display: inline-block;
+  font-size: 1rem;
+  color: #999999;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.demo-icons ul p {
+  padding: 20px 0 0;
+  font-size: 12px;
+  margin: 0;
+}
+
+.demo-icons ul p::selection,
+.demo-icons ul em::selection {
+  background: #608CEE;
+  color: #efefef;
+}
+
+.demo-icons ul em {
+  font-size: 12px;
+}
+
+.demo-icons ul em::before {
+  content: '[';
+}
+
+.demo-icons ul em::after {
+  content: ']';
+}
+
+.demo-icons ul input {
+  text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  display: none;
+}
+</style>
 require('../navbar.php');
 ?>
 
@@ -75,64 +257,10 @@ require('../navbar.php');
 </div> <!-- end content -->
 
 
-<!--   Core JS Files   -->
-<script src="../../assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="../../assets/js/core/popper.min.js" type="text/javascript"></script>
-<script src="../../assets/js/core/bootstrap.min.js" type="text/javascript"></script>
-<script src="../../assets/js/plugins/perfect-scrollbar.jquery.min.js" type="text/javascript"></script>
-<script src="../../assets/js/plugins/moment.min.js"></script>
 
-<!--  Plugin for Sweet Alert -->
-<script src="../../assets/js/plugins/sweetalert2.min.js"></script>
-
-<!-- Forms Validations Plugin -->
-<script src="../../assets/js/plugins/jquery.validate.min.js"></script>
-
-<!--  Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-<script src="../../assets/js/plugins/jquery.bootstrap-wizard.js"></script>
-
-<!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-<script src="../../assets/js/plugins/bootstrap-selectpicker.js" type="text/javascript"></script>
-
-<!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-<script src="../../assets/js/plugins/bootstrap-switch.js"></script>
-
-<!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-<script src="../../assets/js/plugins/bootstrap-datetimepicker.js"></script>
-
-<!--  DataTables.net Plugin, full documentation here: https://datatables.net/    -->
-<script src="../../assets/js/plugins/jquery.dataTables.min.js"></script>
-
-<!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
-<script src="../../assets/js/plugins/bootstrap-tagsinput.js"></script>
-
-<!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
-<script src="../../assets/js/plugins/jasny-bootstrap.min.js"></script>
-
-<!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
-<script src="../../assets/js/plugins/fullcalendar.min.js"></script>
-
-<!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
-<script src="../../assets/js/plugins/jquery-jvectormap.js"></script>
-
-<!--  Plugin for the Bootstrap Table -->
-<script src="../../assets/js/plugins/bootstrap-table.js" ></script>
-
-<!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
-<script src="../../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
-
-<!--  Google Maps Plugin    -->
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-<!-- Chart JS -->
-<script src="../../assets/js/plugins/chartjs.min.js"></script>
-
-<!--  Notifications Plugin    -->
-<script src="../../assets/js/plugins/bootstrap-notify.js"></script>
-
-<!-- Control Center for Paper Dashboard -->
-<script src="../../assets/js/paper-dashboard.js?v=1.0.1" type="text/javascript"></script>
-
+<?php
+require('../footer.php');
+?>
 
 <script>
 ctx = document.getElementById('chartDonut1').getContext("2d");
@@ -198,7 +326,3 @@ ctx = document.getElementById('chartDonut1').getContext("2d");
       }
     });
 </script>
-
-<?php
-require('../footer.php');
-?>
