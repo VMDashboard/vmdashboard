@@ -167,9 +167,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$act</td>" .
                       "</tr>";
                   }
-
                   echo "</table></div>";
-
                 }
               }
               ?>
@@ -207,11 +205,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$product</td>" .
                       "<td>$act</td>" .
                       "</tr>";
-
                   }
-
                   echo "</table></div>";
-
                 }
               }
               ?>
