@@ -11,10 +11,9 @@ if (!isset($_SESSION['username'])){
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $_SESSION['action'] = $_POST['action'];
-    $_SESSION['name'] = $_POST['name'];
-    unset($_POST);
+if (isset($_GET['action'])) {
+    $_SESSION['action'] = $_GET['action'];
+    $_SESSION['name'] = $_GET['name'];
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
@@ -155,11 +154,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
-                    $act = "<form method=\"post\" action=\"\">
-                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
-                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
-                      <input type=\"submit\" name=\"submit\" value=\"XML\">
-                      </form>";
+                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
 
                       $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : 'Unknown';
                       $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
@@ -207,11 +202,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
-                    $act = "<form method=\"post\" action=\"\">
-                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
-                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
-                      <input type=\"submit\" name=\"submit\" value=\"XML\">
-                      </form>";
+                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                     $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
@@ -255,11 +246,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
-                    $act = "<form method=\"post\" action=\"\">
-                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
-                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
-                      <input type=\"submit\" name=\"submit\" value=\"XML\">
-                      </form>";
+                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
 
                     $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                     $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
@@ -306,11 +293,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
-                    $act = "<form method=\"post\" action=\"\">
-                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
-                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
-                      <input type=\"submit\" name=\"submit\" value=\"XML\">
-                      </form>";
+                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                     $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
@@ -361,11 +344,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
-                    $act = "<form method=\"post\" action=\"\">
-                      <input type=\"hidden\" name=\"action\" value=\"dumpxml\">
-                      <input type=\"hidden\" name=\"name\" value=\"{$tmp2['name']}\">
-                      <input type=\"submit\" name=\"submit\" value=\"XML\">
-                      </form>";
+                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
                     $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
