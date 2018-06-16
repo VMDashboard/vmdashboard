@@ -193,6 +193,7 @@ require('../header.php');
   display: none;
 }
 </style>
+
 require('../navbar.php');
 ?>
 
@@ -290,21 +291,21 @@ ctx = document.getElementById('chartDonut1').getContext("2d");
         cutoutPercentage: 90,
         legend: {
 
-          display: false
+          display: true
         },
 
         tooltips: {
-          enabled: false
+          enabled: true
         },
 
         scales: {
           yAxes: [{
 
             ticks: {
-              display: false
+              display: true
             },
             gridLines: {
-              drawBorder: false,
+              drawBorder: true,
               zeroLineColor: "transparent",
               color: 'rgba(255,255,255,0.05)'
             }
@@ -314,12 +315,12 @@ ctx = document.getElementById('chartDonut1').getContext("2d");
           xAxes: [{
             barPercentage: 1.6,
             gridLines: {
-              drawBorder: false,
+              drawBorder: true,
               color: 'rgba(255,255,255,0.1)',
               zeroLineColor: "transparent"
             },
             ticks: {
-              display: false,
+              display: true,
             }
           }]
         },
