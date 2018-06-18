@@ -155,7 +155,7 @@ require('../navbar.php');
 
 // Setting up VNC connection information. tokens.list needs to have www-data ownership or 777 permissions
 $liststring = "";
-$phpinfo = 'if (!isset($_SESSION[\'username\'])){header(\'Location: ../login.php\');}' . "\n";
+$phpinfo = '<?php if (!isset($_SESSION[\'username\'])){header(\'Location: ../login.php\');} ?>' . "\n";
 $listarray = $lv->get_domains();
 foreach ($listarray as $listname) {
   $listdom = $lv->get_domain_object($listname);
