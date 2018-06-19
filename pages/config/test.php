@@ -25,6 +25,10 @@ require('../navbar.php');
     <div class="card-body">
       <div class="row">
 
+        <div class="progress">
+          <div id="prog2" class="progress-bar progress-bar-danger" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
 
         <?php
         //output buffer
