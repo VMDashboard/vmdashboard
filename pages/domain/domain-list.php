@@ -116,7 +116,7 @@ swal(alert_msg);
               unset($dom);
 
               echo "<tr>" .
-                "<td> <a href=\"domain-single.php?uuid=$uuid\"> $name </a> </td>" .
+                "<td> <a href=\"domain-single.php?uuid=$uuid\"> htmlentities($name) </a> </td>" .
                 "<td> $cpu </td>" .
                 "<td> $mem </td>" .
                 "<td>
