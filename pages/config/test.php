@@ -30,7 +30,7 @@ require('../navbar.php');
         //output buffer
         ob_start();
         //create javascript progress bar
-        echo '<script type="text/javascript">
+        echo '<script>
         function updateProgress(percentage) {
             document.getElementById(\'progress\').value = percentage;
         }
