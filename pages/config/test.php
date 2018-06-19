@@ -27,34 +27,59 @@ require('../navbar.php');
 
 
         <?php
-file_put_contents( 'progress.txt', '' );
-$targetFile = fopen( 'testfile.iso', 'w' );
-$ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
-curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
-curl_setopt( $ch, CURLOPT_FILE, $targetFile );
-curl_exec( $ch );
-fclose( $targetFile );
-function progressCallback( $download_size, $downloaded_size, $upload_size, $uploaded_size )
-{
-    static $previousProgress = 0;
+        //output buffer
+        ob_start();
+        //create javascript progress bar
+        echo '<script type="text/javascript">
+        function updateProgress(percentage) {
+            document.getElementById(\'progress\').value = percentage;
+        }
+        </script>
+            <progress id="prog" value="0" max="100.0"></progress>
+        ';
+        //initilize progress bar
+        ob_flush();
+        flush();
+        //save progress to variable instead of a file
+        $temp_progress = '';
+        $targetFile = fopen( 'testfile.iso', 'w' );
+        $ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
+        curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
+        curl_setopt( $ch, CURLOPT_FILE, $targetFile );
+        curl_exec( $ch );
+        fclose( $targetFile );
+        //must add $resource to the function after a newer php version. Previous comments states php 5.5
+        function progressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
+        {
+            static $previousProgress = 0;
 
-    if ( $download_size == 0 )
-        $progress = 0;
-    else
-        $progress = round( $downloaded_size * 100 / $download_size );
+            if ( $download_size == 0 ) {
+                $progress = 0;
+            } else {
+                $progress = round( $downloaded_size * 100 / $download_size );
+        	}
 
-    if ( $progress > $previousProgress)
-    {
-        $previousProgress = $progress;
-        $fp = fopen( 'progress.txt', 'a' );
-        fputs( $fp, "$progress\n" );
-        fclose( $fp );
-    }
-}
-echo $progress;
-?>
+            if ( $progress > $previousProgress)
+            {
+                $previousProgress = $progress;
+                $temp_progress = $progress;
+            }
+            //update javacsript progress bar to show download progress
+        	echo '<script>document.getElementById(\'prog\').value = '.$progress.';</script>';
+
+        	ob_flush();
+            flush();
+            //sleep(1); // just to see effect
+        }
+        //if we get here, the download has completed
+        echo "Done";
+        //flush just to be sure
+        ob_flush();
+        flush();
+        ?>
+
 
       </div>
     </div>
