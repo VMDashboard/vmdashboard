@@ -211,7 +211,7 @@ function domainDeleteWarning(linkURL, domName) {
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title"> VM: <?php echo $domName; ?> </h4>
+      <h4 class="card-title"> VM: <?php echo htmlentities($domName); ?> </h4>
     </div>
     <div class="card-body">
       <div class="row">
@@ -407,7 +407,7 @@ function domainDeleteWarning(linkURL, domName) {
                   $dev = (array_key_exists('file', $tmp[$i])) ? $tmp[$i]['file'] : $tmp[$i]['partition'];
                   $device = $tmp[$i]['device'];
                   echo "<tr>" .
-                    "<td>".basename($dev)."</td>" .
+                    "<td>".htmlentities(basename($dev))."</td>" .
                       "<td>{$tmp[$i]['type']}</td>" .
                       "<td>{$tmp[$i]['device']}</td>" .
                       "<td>$capacity</td>" .
