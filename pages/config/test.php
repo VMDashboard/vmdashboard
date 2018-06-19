@@ -30,19 +30,21 @@ require('../navbar.php');
         //output buffer
         ob_start();
         //create javascript progress bar
-        ?>
-
-        <script>
+        echo '<script>
         function updateProgress(percentage) {
-            document.getElementById('progress').value = percentage;
+            document.getElementById(\'progress\').value = percentage;
         }
         </script>
+            <progress id="prog" value="0" max="100.0"></progress>
 
-        <div class="progress">
-          <div class="progress-bar progress-bar-danger" id="prog" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+            <div class="progress">
+              <div id="prog2" class="progress-bar progress-bar-danger" id="prog" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
 
-        <?php
+        ';
+
+
+
         //initilize progress bar
         ob_flush();
         flush();
@@ -74,6 +76,7 @@ require('../navbar.php');
             }
             //update javacsript progress bar to show download progress
         	echo '<script>document.getElementById(\'prog\').value = '.$progress.';</script>';
+          echo '<script>document.getElementById(\'prog2\').aria-valuenow = '.$progress.';</script>';
 
         	ob_flush();
             flush();
