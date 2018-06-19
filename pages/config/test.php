@@ -35,7 +35,7 @@ curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
 curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
 curl_setopt( $ch, CURLOPT_FILE, $targetFile );
 curl_exec( $ch );
-fclose( $ch );
+fclose( $targetFile );
 function progressCallback( $download_size, $downloaded_size, $upload_size, $uploaded_size )
 {
     static $previousProgress = 0;
@@ -53,6 +53,7 @@ function progressCallback( $download_size, $downloaded_size, $upload_size, $uplo
         fclose( $fp );
     }
 }
+echo $progress;
 ?>
 
       </div>
