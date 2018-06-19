@@ -1,4 +1,4 @@
-*** June 18 update - the tokens file for VNC connections has been changed to prevent outside users from discovering uuids and vnc ports of VMs. If you update from a prior version you will need to restart the server or the python service that is running noVNC. If you have a earlier verison of the software you may need to delete the tokens.list file in the root directory of your web server
+*** June 18 update - the tokens file for VNC connections has been changed to prevent outside users from discovering uuids and vnc ports of VMs. If you update from a prior version you will need to restart the server or the python service that is running noVNC. If you have a earlier version of the software you may need to delete the tokens.list file in the root directory of your web server
 
 
 
