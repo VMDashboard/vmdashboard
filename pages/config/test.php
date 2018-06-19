@@ -37,7 +37,7 @@ require('../navbar.php');
             document.getElementById('progress').value = percentage;
         }
         </script>
-            
+
         <div class="progress">
           <div class="progress-bar progress-bar-danger" id="prog" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -48,8 +48,8 @@ require('../navbar.php');
         flush();
         //save progress to variable instead of a file
         $temp_progress = '';
-        $targetFile = fopen( 'testfile.iso', 'w' );
-        $ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
+        $targetFile = fopen( 'centos.iso', 'w' );
+        $ch = curl_init( 'http://centos.mbni.med.umich.edu/mirror/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso' );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
         curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
