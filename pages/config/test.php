@@ -30,13 +30,19 @@ require('../navbar.php');
         //output buffer
         ob_start();
         //create javascript progress bar
-        echo '<script>
+        ?>
+
+        <script>
         function updateProgress(percentage) {
-            document.getElementById(\'progress\').value = percentage;
+            document.getElementById('progress').value = percentage;
         }
         </script>
-            <progress id="prog" value="0" max="100.0"></progress>
-        ';
+            
+        <div class="progress">
+          <div class="progress-bar progress-bar-danger" id="prog" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <?php
         //initilize progress bar
         ob_flush();
         flush();
