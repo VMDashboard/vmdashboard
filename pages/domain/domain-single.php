@@ -455,7 +455,7 @@ function domainDeleteWarning(linkURL, domName) {
 
                   if ($disk_device == "cdrom") {
                     echo "<tr>" .
-                      "<td>$disk_source_file</td>" .
+                      "<td>" . htmlentities($disk_source_file) . "</td>" .
                       "<td>$disk_driver_name</td>" .
                       "<td>$disk_target_dev</td>" .
                       "<td>$disk_target_bus</td>" .
@@ -506,7 +506,7 @@ function domainDeleteWarning(linkURL, domName) {
                     echo "<tr>" .
                       "<td>$interface_type</td>" .
                       "<td>$interface_mac</td>" .
-                      "<td>$source_network</td>" .
+                      "<td>" . htmlentities($source_network) . "</td>" .
                       "<td>nat</td>" .
                       "<td>$interface_model</td>" .
                       "<td>" .
