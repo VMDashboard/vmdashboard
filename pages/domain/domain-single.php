@@ -155,11 +155,12 @@ require('../navbar.php');
 
 // Setting up VNC connection information. tokens.list needs to have www-data ownership or 777 permissions
 $liststring = "";
+$phpinfo = '<?php header(\'Location: index.php\'); ?>' . "\n";
 $listarray = $lv->get_domains();
 foreach ($listarray as $listname) {
   $listdom = $lv->get_domain_object($listname);
   $listinfo = libvirt_domain_get_info($listdom);
-  //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delayed state status
+  //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delayed state s$
   $liststate = $lv->domain_state_translate($listinfo['state']);
   if ($liststate == "running") {
     $listdomuuid = libvirt_domain_get_uuid_string($listdom);
@@ -167,8 +168,9 @@ foreach ($listarray as $listname) {
     $liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
   }
 }
-$listfile = "../../tokens.list";
-$list = file_put_contents($listfile, $liststring);
+$filestring = $phpinfo . $liststring;
+$listfile = "../../tokens.php";
+$list = file_put_contents($listfile, $filestring);
 
 
 //Remove session variables so that if page reloads it will not perform actions again
