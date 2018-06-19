@@ -62,7 +62,6 @@ var alert_msg = '$ret'
 swal(alert_msg);
 </script>";
 }
-
 ?>
 
 <div class="content">
