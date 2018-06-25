@@ -28,7 +28,7 @@ require('../header.php');
 if (isset($_SESSION['update'])) {
   $path = exec("which git");
   $pwd = exec("cd .. && cd .. && pwd");
-  $tmp = exec("cd .. && cd .. && $path/git pull 2>&1");
+  $tmp = exec("cd .. && cd .. && $path/ pull 2>&1");
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
 }
