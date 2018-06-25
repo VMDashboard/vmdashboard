@@ -48,7 +48,6 @@ swal(alert_msg);
 //End PHP Section
 ?>
 
-
 <div class="content">
   <div class="card">
     <div class="card-header">
