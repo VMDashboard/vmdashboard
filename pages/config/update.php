@@ -82,7 +82,7 @@ swal(alert_msg);
           $changeLog = file('../../CHANGELOG.md');
           $length = count($changeLog);
           for ($i = 1; $i < $length - 1; $i++) {
-            echo "<pre> $changeLog[$i] </pre>";
+            echo "$changeLog[$i]";
           }
           ?>
 
