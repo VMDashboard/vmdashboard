@@ -29,7 +29,6 @@ $path = base64_decode($_SESSION['path']); //path was encoded for passing through
 $filename = $_SESSION['filename'];
 $ret = "";
 
-
 if ($action == 'volume-delete') {
   $ret = $lv->storagevolume_delete( base64_decode($_SESSION['path']) ) ? '' : 'Cannot delete volume';
 }
