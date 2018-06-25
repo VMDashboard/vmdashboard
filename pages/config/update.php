@@ -66,10 +66,11 @@ swal(alert_msg);
           if ($arrayLatest[1] > $arrayCurrent[1])
             $update_available = true;
 
-          echo "You are running OPENVM version $arrayCurrent[1].";
+          echo "You are running OPENVM version $arrayCurrent[1] <br />";
 
           if ($update_available == true) { ?>
-            There is an update available. The current version is <?php echo $arrayLatest[1]; ?>.
+            There is an update available! <br />
+            The current version is <?php echo $arrayLatest[1]; ?> <br />
             <input type="submit" name="update" value="Update Now">
           <?php } ?>
 
