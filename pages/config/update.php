@@ -65,16 +65,19 @@ swal(alert_msg);
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
 
-          echo "<h6>You are running OPENVM version $arrayCurrent[1] </h6>";
+
 
           if ($update_available == true) { ?>
-            There is an update available! <br />
-            The current version is <?php echo $arrayLatest[1]; ?> <br />
+            <h6>There is an update available! </h6>
+            <p>The current version is <?php echo $arrayLatest[1]; ?>. </p>
+            <p>Your version is <?php echo $arrayCurrent[1]; ?>.</p>
+
             <input type="submit" name="update" value="Update Now">
           <?php }
 
           if ($update_available == false) { ?>
-            You are currently running the lastest version! <br />
+            <h6>You are currently running the lastest version of OPENVM Dashboard.</h6>
+            <p>Your version is <?php echo $arrayCurrent[1]; ?>.</p>
           <?php } ?>
 
         </div>
