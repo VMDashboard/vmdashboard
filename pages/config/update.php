@@ -28,7 +28,7 @@ require('../header.php');
 if (isset($_SESSION['update'])) {
   $path = exec("which git"); //determine the absolute path to git
   ($path == "") ? $ret = "It does not appear as though git is installed" : $ret = "";
-  $tmp = exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Redirect STDOUT and STDERR to variable
+  $tmp = shell_exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Redirect STDOUT and STDERR to variable
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
 }
