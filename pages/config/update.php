@@ -26,9 +26,9 @@ require('../header.php');
 
 // Domain Actions
 if (isset($_SESSION['update'])) {
-  $path = exec("which git");
-  $pwd = exec("cd .. && cd .. && pwd");
-  $tmp = exec("cd .. && cd .. && $path pull 2>&1");
+  $path = exec("which git"); //determine the absolute path to git
+  ($path == "") ? $ret = "It does not appear as though git is installed" : $ret = "";
+  $tmp = exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Redirect STDOUT and STDERR to variable
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
 }
@@ -59,10 +59,6 @@ swal(alert_msg);
 
 
           <?php
-          var_dump($pwd);
-          echo "<br />";
-          var_dump($tmp);
-
 
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
@@ -83,6 +79,8 @@ swal(alert_msg);
             <h6>You are currently running the lastest version of OPENVM Dashboard.</h6>
             <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
           <?php } ?>
+
+          <pre><?php echo $tmp; ?></pre>
 
         </div>
       </div>
