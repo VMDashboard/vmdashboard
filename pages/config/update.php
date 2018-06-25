@@ -26,6 +26,7 @@ require('../header.php');
 
 // Domain Actions
 if (isset($_SESSION['update'])) {
+  $pwd = shell_exec("pwd");
   $tmp = shell_exec("git pull");
   $ret = shell_exec("git status");
   //Remove session variables so that if page reloads it will not perform actions again
@@ -59,10 +60,12 @@ swal(alert_msg);
 
 
           <?php
+          var_dump($pwd);
+          echo "<br />";
           var_dump($tmp);
           echo "<br />";
           var_dump($ret);
-          
+
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
