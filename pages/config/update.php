@@ -12,8 +12,9 @@ if (!isset($_SESSION['username'])){
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
-if (isset($_GET['action'])) {
-    $_SESSION['action'] = $_GET['action'];
+if (isset($_POST['update'])) {
+    $_SESSION['update'] = $_POST['update'];
+    unset($_POST);
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
@@ -24,16 +25,14 @@ require('../header.php');
 //Set variables
 
 // Domain Actions
-if ($action == 'update') {
-
+if (isset($_SESSION['update'])) {
+  $tmp = shell_exec("git pull");
+  $ret = shell_exec("git status");
+  //Remove session variables so that if page reloads it will not perform actions again
+  unset($_SESSION['update']);
 }
 
 require('../navbar.php');
-
-
-
-//Remove session variables so that if page reloads it will not perform actions again
-unset($_SESSION['action']);
 
 
 //Will display a sweet alert if a return message exists
@@ -68,16 +67,16 @@ swal(alert_msg);
 
 
           if ($update_available == true) { ?>
-            <h6>There is an update available! </h6>
-            <p>The current version is <?php echo $arrayLatest[1]; ?>. </p>
-            <p>Your version is <?php echo $arrayCurrent[1]; ?>.</p>
+            <h6>There is an update available!</h6>
+            <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
+            <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
 
             <input type="submit" name="update" value="Update Now">
           <?php }
 
           if ($update_available == false) { ?>
             <h6>You are currently running the lastest version of OPENVM Dashboard.</h6>
-            <p>Your version is <?php echo $arrayCurrent[1]; ?>.</p>
+            <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
           <?php } ?>
 
         </div>
