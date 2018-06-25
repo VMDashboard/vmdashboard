@@ -72,11 +72,20 @@ swal(alert_msg);
           <?php }
 
           if ($update_available == false) { ?>
-            <h6>You are currently running the lastest version of OPENVM Dashboard.</h6>
+            <h6>You are running the lastest version of OPENVM Dashboard.</h6>
             <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
           <?php } ?>
 
-          <br /><pre><?php echo $tmp; ?></pre>
+          <br /><pre><?php echo $tmp; ?></pre><br />
+
+          <?php
+          $changeLog = file('../../CHANGELOG.md');
+          $length = count($changeLog);
+          for ($i = 1; $i < $length - 1; $i++) {
+            print $changeLog[$i];
+          }
+          ?>
+
 
         </div>
       </div>
