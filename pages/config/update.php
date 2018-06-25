@@ -35,7 +35,6 @@ if (isset($_SESSION['update'])) {
 
 require('../navbar.php');
 
-
 //Will display a sweet alert if a return message exists
 if ($ret != "") {
 echo "
