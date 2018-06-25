@@ -106,7 +106,6 @@ function poolDeleteWarning(linkURL, poolName) {
 }
 </script>
 
-
 <div class="content">
   <div class="card">
     <?php
