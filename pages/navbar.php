@@ -191,6 +191,9 @@ if ($notification_status == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-settings-gear-65"></i>
+                  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
+                    <a class="dropdown-item">Logout</a>
+                  </div>
                   <p>
                     <span class="d-lg-none d-md-block">Logout</span>
                   </p>
