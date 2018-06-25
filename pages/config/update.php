@@ -57,13 +57,11 @@ swal(alert_msg);
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
-
           <?php
 
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
-
 
 
           if ($update_available == true) { ?>
@@ -80,7 +78,7 @@ swal(alert_msg);
             <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
           <?php } ?>
 
-          <pre><?php echo $tmp; ?></pre>
+          <br /><pre><?php echo $tmp; ?></pre>
 
         </div>
       </div>
