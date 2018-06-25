@@ -63,7 +63,6 @@ swal(alert_msg);
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
 
-
           if ($update_available == true) { ?>
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
