@@ -26,7 +26,7 @@ require('../header.php');
 
 // Domain Actions
 if (isset($_SESSION['update'])) {
-  $pwd = shell_exec("../../pwd");
+  $pwd = shell_exec("cd ..; cd..; pwd");
   $tmp = shell_exec("../../git pull");
   $ret = shell_exec("git status");
   //Remove session variables so that if page reloads it will not perform actions again
