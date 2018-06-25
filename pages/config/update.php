@@ -26,9 +26,8 @@ require('../header.php');
 
 // Domain Actions
 if (isset($_SESSION['update'])) {
-  $pwd = shell_exec("cd .. && cd .. && pwd");
-  $tmp = shell_exec("cd .. && cd .. && git pull");
-  $ret = shell_exec("git status");
+  $pwd = exec("cd .. && cd .. && pwd");
+  $tmp = exec("cd .. && cd .. && git pull");
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
 }
@@ -63,8 +62,7 @@ swal(alert_msg);
           var_dump($pwd);
           echo "<br />";
           var_dump($tmp);
-          echo "<br />";
-          var_dump($ret);
+
 
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
