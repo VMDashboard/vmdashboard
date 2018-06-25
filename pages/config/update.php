@@ -70,8 +70,9 @@ swal(alert_msg);
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
             <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
-
-            <input type="submit" name="update" value="Update Now">
+            <form action="" method="post">
+              <input type="submit" name="update" value="Update Now">
+            </form>
           <?php }
 
           if ($update_available == false) { ?>
