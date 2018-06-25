@@ -59,7 +59,10 @@ swal(alert_msg);
 
 
           <?php
-
+          var_dump($tmp);
+          echo "<br />";
+          var_dump($ret);
+          
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
