@@ -65,7 +65,7 @@ swal(alert_msg);
           $arrayCurrent = file('../config/version.php');
           ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
 
-          echo "<h5>You are running OPENVM version $arrayCurrent[1] </h5>";
+          echo "<h6>You are running OPENVM version $arrayCurrent[1] </h6>";
 
           if ($update_available == true) { ?>
             There is an update available! <br />
