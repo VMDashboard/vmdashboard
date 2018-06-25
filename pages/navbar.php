@@ -195,9 +195,6 @@ if ($notification_status == true) { ?>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
                   <a class="dropdown-item" href="../config/update.php">Update</a>
-                </div>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
                   <a class="dropdown-item" href="../../index.php?action=logout">Logout</a>
                 </div>
               </li>
