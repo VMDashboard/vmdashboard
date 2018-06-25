@@ -192,8 +192,13 @@ if ($notification_status == true) { ?>
                 <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-settings-gear-65"></i>
                 </a>
+
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
-                  <a class="dropdown-item">Logout</a>
+                  <a class="dropdown-item" href="../config/update.php">Update</a>
+                </div>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
+                  <a class="dropdown-item" href="../../index.php?action=logout">Logout</a>
                 </div>
               </li>
 
