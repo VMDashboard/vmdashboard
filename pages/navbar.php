@@ -188,8 +188,8 @@ if ($notification_status == true) { ?>
               </li>
 <?php } */?>
 
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="#">
+              <li class="nav-item btn-rotate dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-settings-gear-65"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Logout</span>
