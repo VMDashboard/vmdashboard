@@ -63,15 +63,18 @@ swal(alert_msg);
 
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
           $arrayCurrent = file('../config/version.php');
-          if ($arrayLatest[1] > $arrayCurrent[1])
-            $update_available = true;
+          ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
 
-          echo "You are running OPENVM version $arrayCurrent[1] <br />";
+          echo "<h5>You are running OPENVM version $arrayCurrent[1] </h5>";
 
           if ($update_available == true) { ?>
             There is an update available! <br />
             The current version is <?php echo $arrayLatest[1]; ?> <br />
             <input type="submit" name="update" value="Update Now">
+          <?php }
+
+          if ($update_available == false) { ?>
+            You are currently running the lastest version! <br />
           <?php } ?>
 
         </div>
