@@ -25,7 +25,7 @@ require('../header.php');
 
 // Domain Actions
 if ($action == 'update') {
-  $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+
 }
 
 require('../navbar.php');
@@ -52,7 +52,7 @@ swal(alert_msg);
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title"> Update ?> </h4>
+      <h4 class="card-title"> Update </h4>
     </div>
     <div class="card-body">
       <div class="row">
@@ -66,7 +66,7 @@ swal(alert_msg);
           if ($arrayLatest[1] > $arrayCurrent[1])
             $update_available = true;
 
-          echo "You are running OPENVM version $arrayCurrent[1]."
+          echo "You are running OPENVM version $arrayCurrent[1].";
 
           if ($update_available == true) { ?>
             There is an update available. The current version is <?php echo $arrayLatest[1]; ?>.
