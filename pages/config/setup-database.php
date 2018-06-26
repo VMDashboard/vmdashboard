@@ -46,21 +46,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
   // Check connection
   if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
-  }
-
-  //Create config.php
-  $config_file = "config.php";
-  $config_create = file_put_contents($config_file, $config_string);
-
-  //If config.php was created move to setup-user.php
-  if($config_create){
-    $_SESSION['initial_setup'] = true;
-    header('Location: setup-user.php');
+      $ret = $conn->connect_error;
   } else {
-    $config_create = "failed";
-  }
-} // End If statement for POST data
+    //Create config.php
+    $config_file = "config.php";
+    $config_create = file_put_contents($config_file, $config_string);
+
+    //If config.php was created move to setup-user.php
+    if($config_create){
+      $_SESSION['initial_setup'] = true;
+      header('Location: setup-user.php');
+    } else {
+      $config_create = "failed";
+      $ret = "Configuration was not saved, check folder permissions";
+    }
+
+  } //End else statement for database connection check
+} // End if statement for POST data
 
 ?>
 
@@ -96,11 +98,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- End Navbar -->
 
   <?php
-  if ($config_create == "failed"){
+  if (isset($ret)){
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
-    var alert_msg = 'Configuration was not saved, check folder permissions';
+    var alert_msg = '<?php echo $ret; ?>';
     swal(alert_msg);
     </script>
     <?php
