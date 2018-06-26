@@ -61,15 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 } // End If statement for POST data
 
-//Will display a sweet alert if a return message exists
-if ($ret != "") {
-  echo "
-  <script>
-    var alert_msg = '$ret'
-    swal(alert_msg);
-  </script>";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -91,6 +82,20 @@ if ($ret != "") {
     <link href="../../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   </head>
 
+<!--  Plugin for Sweet Alert. This line needs to be before swal() on pages that use the alerts -->
+<script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+
+<?php
+//Will display a sweet alert if a return message exists
+if ($ret != "") {
+  echo "
+  <script>
+    var alert_msg = '$ret'
+    swal(alert_msg);
+  </script>";
+}
+?>
+
 <body class="login-page">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -102,6 +107,7 @@ if ($ret != "") {
     </div>
   </nav>
   <!-- End Navbar -->
+
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
