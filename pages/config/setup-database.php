@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
   } else {
+    $ret = "Config file can't be created. Check folder permissions";
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
