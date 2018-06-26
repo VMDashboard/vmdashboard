@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- End Navbar -->
 
   <?php
-  if ($create_config == false){
+  if ($create_config == "failed"){
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
   }
   ?>
-  
+
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
