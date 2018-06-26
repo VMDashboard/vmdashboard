@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Attempt to make the database connection
   $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
+
   // Check connection
   if ($conn->connect_error) {
       $ret = $conn->connect_error;
@@ -60,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $config_create = "failed";
       $ret = "Configuration was not saved, check folder permissions";
     }
-
   } //End else statement for database connection check
 } // End if statement for POST data
 
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="icon" type="image/png" href="../../assets/img/squarelogo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-      openVM
+      OpenVM
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- End Navbar -->
 
   <?php
+  //If there is a returned error, display it in an alert.
   if (isset($ret)){
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
@@ -175,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <div class="row">
             <nav class="footer-nav">
               <ul>
-                  <li><a href="https://openvm.tech">openVM.tech</a></li>
+                  <li><a href="https://openvm.tech">OpenVM.tech</a></li>
               </ul>
             </nav>
             <div class="credits ml-auto">
@@ -226,12 +227,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
-
-  <script>
-    $(document).ready(function() {
-      demo.checkFullPageBackgroundImage();
-    });
-  </script>
 </body>
-
 </html>
