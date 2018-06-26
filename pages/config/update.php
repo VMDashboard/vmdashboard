@@ -64,9 +64,9 @@ swal(alert_msg);
           $existingExploded = explode('.', $arrayExisting[1]);
 
           if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2])){
-            $update_available = true
+            $update_available = true;
           } else {
-            $update_available = false
+            $update_available = false;
           }
 
           if ($update_available == true) { ?>
