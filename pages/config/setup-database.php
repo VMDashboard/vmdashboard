@@ -5,11 +5,13 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
+// If the database config.php file exists already redirect to index.php
 $path = realpath(__DIR__) . "/config.php";
 if (file_exists($path)) {
   header('Location: ../../index.php');
 }
 
+// Database names should be basic string characters without spaces or symbols
 function clean_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -19,15 +21,15 @@ function clean_input($data) {
   return $data;
 }
 
-//check for post next, create config.php
+// Check for POST data, then create config.php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+  // Getting the POST information
   $db_name = clean_input($_POST['db_name']);
   $db_user = clean_input($_POST['db_user']);
   $db_password = $_POST['db_password'];
   $db_host = clean_input($_POST['db_host']);
 
-
+  // Create the connection information for config.php
   $config_string = "<?php
   // Setting up the Database Connection
   \$db_host = '$db_host';
@@ -39,20 +41,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     die(\"Connection failed: \" . \$conn->connect_error);
   }
   ?>";
-  // Create connection
+
+  // Attempt to make the database connection
   $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
   // Check connection
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
   }
 
+  //Create config.php
   $config_file = "config.php";
-  $config_create = file_put_contents($config_file, $config_string);
-  if($config_create){
+  $ret = file_put_contents($config_file, $config_string);
+
+  //If config.php was created move to setup-user.php
+  if($ret){
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
   }
+
+} // End If statement for POST data
+
+//Will display a sweet alert if a return message exists
+if ($ret != "") {
+  echo "
+  <script>
+    var alert_msg = '$ret'
+    swal(alert_msg);
+  </script>";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -202,8 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="../../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
-  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../../assets/demo/demo.js"></script>
+
   <script>
     $(document).ready(function() {
       demo.checkFullPageBackgroundImage();
