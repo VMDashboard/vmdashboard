@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
-    var alert_msg = 'The config.php file was not created, check folder permissions';
+    var alert_msg = 'Configuration was not saved, check folder permissions';
     swal(alert_msg);
     </script>
     <?php
