@@ -1,7 +1,6 @@
-# openVM CHANGELOG
+<?php header('Location: index.php'); ?>
 
-### Note
-
+# Note
 The Changelog has been introduced starting from version 1.0.0. However, keep in mind that this is far from being first version as there have been hundreds of commits.
 
 ### [MAJOR.MINOR.PATCH] - DOM.MON.YEAR

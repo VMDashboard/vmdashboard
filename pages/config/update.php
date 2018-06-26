@@ -79,13 +79,12 @@ swal(alert_msg);
           <br /><pre><?php echo $tmp; ?></pre><br />
 
           <?php
-          $changeLog = file('../../CHANGELOG.md');
-          $length = count($changeLog);
-          for ($i = 1; $i < $length - 1; $i++) {
-            print $changeLog[$i] . "<br />";
+          $changelog = file('../../changelog.php');
+          $length = count($changelog);
+          for ($i = 1; $i < $length; $i++) { //starting at index 1, 0 index is a php line.
+            print $changelog[$i] . "<br />";
           }
           ?>
-
 
         </div>
       </div>
