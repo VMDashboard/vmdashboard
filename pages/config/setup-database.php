@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if($config_create){
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
+  } else {
+    $config_create = "failed";
   }
 } // End If statement for POST data
 
