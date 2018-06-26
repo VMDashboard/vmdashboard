@@ -12,47 +12,54 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
   if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
 
     //Capturing the POST Data
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $password = $_POST['password']; //do not need to sanitize because it will be hashed
 
     // Checking for Duplicate usernames
     $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result) != 0 ) {
-	     die("Username already exists");
-     }
+	    $ret = "Username is not available";
+    } else {
+      // Checking for Duplicate emails
+      $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
+      $result = $conn->query($sql);
+      if (mysqli_num_rows($result) != 0 ) {
+	      $ret = "Email address is already in use";
+      } else {
+        // Hash and salt password with bcrypt
+        $hash = password_hash($password, PASSWORD_BCRYPT);
 
-     // Checking for Duplicate emails
-     $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
-     $result = $conn->query($sql);
-     if (mysqli_num_rows($result) != 0 ) {
-	      die("Email already exists");
-      }
+        //Creating the users tables
+        $sql = "CREATE TABLE IF NOT EXISTS openvm_users (
+          userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+          username varchar(255),
+          email varchar(255),
+          password varchar(255))";
 
-      // Hash and salt password with bcrypt
-      $hash = password_hash($password, PASSWORD_BCRYPT);
+        $conn->query($sql);
 
-      //Creating the users tables
-      $sql = "CREATE TABLE IF NOT EXISTS openvm_users (
-        userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        username varchar(255),
-        email varchar(255),
-        password varchar(255))";
-      $conn->query($sql);
+        // Adding the user
+        $sql = "INSERT INTO openvm_users (username, email, password)
+          VALUES ('$username', '$email', '$hash');";
 
-      // Adding the user
-      $sql = "INSERT INTO openvm_users (username, email, password)
-        VALUES ('$username', '$email', '$hash');";
         // Executing the SQL statement
         if ($conn->query($sql) === TRUE) {
           header('Location: ../../index.php');
         } else {
-          echo "Error: " . $sql . " " . $conn->error;
+          $ret = $conn->error;
         }
 
         $conn->close();
-  }
+
+      } //End else statement for email check
+    } //End else statement for username check
+  } //End if statement for POST data check
+} //End if statement for SESSION data check
+
+if (isset($_POST['password']) && $_POST['password'] != $_POST['confirm_password']){
+ $ret = "Passwords did not match";
 }
 ?>
 
@@ -96,7 +103,7 @@ function checkPassword()
     <link rel="icon" type="image/png" href="../../assets/img/squarelogo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-      openVM
+      OpenVM
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -118,6 +125,20 @@ function checkPassword()
     </div>
   </nav>
   <!-- End Navbar -->
+
+  <?php
+  //If there is a returned error, display it in an alert.
+  if (isset($ret)){
+    ?>
+    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <script>
+    var alert_msg = '<?php echo $ret; ?>';
+    swal(alert_msg);
+    </script>
+    <?php
+  }
+  ?>
+
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
@@ -185,7 +206,7 @@ function checkPassword()
           <div class="row">
             <nav class="footer-nav">
               <ul>
-                  <li><a href="https://openvm.tech">openVM.tech</a></li>
+                  <li><a href="https://openvm.tech">OpenVM.tech</a></li>
               </ul>
             </nav>
             <div class="credits ml-auto">
