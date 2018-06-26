@@ -1,5 +1,6 @@
 <?php header('Location: index.php'); ?>
-
+<hr>
+<h4>Changelog</h4>
 # Note
 The Changelog has been introduced starting from version 1.0.0. However, keep in mind that this is far from being first version as there have been hundreds of commits.
 
