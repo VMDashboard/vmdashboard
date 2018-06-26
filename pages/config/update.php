@@ -59,13 +59,20 @@ swal(alert_msg);
           <?php
 
           $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-          $arrayCurrent = file('../config/version.php');
-          ($arrayLatest[1] > $arrayCurrent[1]) ? $update_available = true : $update_available = false;
+          $arrayExisting = file('../config/version.php');
+          $latestExploded = explode('.', $arrayLatest[1]);
+          $existingExploded = explode('.', $arrayExisting[1]);
+
+          if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2])){
+            $update_available = true
+          } else {
+            $update_available = false
+          }
 
           if ($update_available == true) { ?>
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
-            <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
+            <p>Your version is <?php echo $arrayExisting[1]; ?></p>
             <form action="" method="post">
               <input type="submit" name="update" value="Update Now">
             </form>
@@ -73,7 +80,7 @@ swal(alert_msg);
 
           if ($update_available == false) { ?>
             <h6>You are running the lastest version of OPENVM Dashboard.</h6>
-            <p>Your version is <?php echo $arrayCurrent[1]; ?></p>
+            <p>Your version is <?php echo $arrayExisting[1]; ?></p>
           <?php } ?>
 
           <br /><pre><?php echo $tmp; ?></pre><br />
