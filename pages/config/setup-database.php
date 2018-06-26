@@ -57,15 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if($config_create){
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
-  } else {
-    $ret = "Config file can't be created. Check folder permissions";
-    ?>
-    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
-    <script>
-    var alert_msg = '<?php echo $ret; ?>';
-    swal(alert_msg);
-    </script>
-    <?php
   }
 } // End If statement for POST data
 
@@ -101,6 +92,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </nav>
   <!-- End Navbar -->
+
+  <?php
+  if ($create_config == false){
+    ?>
+    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <script>
+    var alert_msg = 'The config.php file was not created, check folder permissions';
+    swal(alert_msg);
+    </script>
+    <?php
+  }
+  ?>
+  
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
