@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- End Navbar -->
 
   <?php
-  if ($create_config == "failed"){
+  if ($config_create == "failed"){
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
