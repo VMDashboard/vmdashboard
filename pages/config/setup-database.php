@@ -51,14 +51,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //Create config.php
   $config_file = "config.php";
-  $ret = file_put_contents($config_file, $config_string);
+  $config_create = file_put_contents($config_file, $config_string);
 
   //If config.php was created move to setup-user.php
-  if($ret){
+  if($config_create){
     $_SESSION['initial_setup'] = true;
     header('Location: setup-user.php');
+  } else {
+    ?>
+    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <script>
+    var alert_msg = '<?php echo $ret; ?>';
+    swal(alert_msg);
+    </script>
+    <?php
   }
-
 } // End If statement for POST data
 
 ?>
@@ -82,20 +89,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link href="../../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
   </head>
 
-<!--  Plugin for Sweet Alert. This line needs to be before swal() on pages that use the alerts -->
-<script src="../../assets/js/plugins/sweetalert2.min.js"></script>
-
-<?php
-//Will display a sweet alert if a return message exists
-if ($ret != "") {
-  echo "
-  <script>
-    var alert_msg = '$ret'
-    swal(alert_msg);
-  </script>";
-}
-?>
-
 <body class="login-page">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
@@ -107,7 +100,6 @@ if ($ret != "") {
     </div>
   </nav>
   <!-- End Navbar -->
-
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
