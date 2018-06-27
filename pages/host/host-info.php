@@ -95,7 +95,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
             $ci  = $lv->get_connect_information();
             $info = '';
             if ($ci['uri'])
-                $info .= ' <i>'.$ci['uri'].'</i> on <i>'.$ci['hostname'].'</i>, ';
+                $info .= ' <i>'.$ci['uri'].'</i>, ';
 
             //Get Host information
             $tmp = $lv->get_node_device_cap_options();
