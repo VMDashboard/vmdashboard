@@ -100,6 +100,13 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
             <div class="tab-pane active" id="general">
 
+              <div class="col-md-4">
+                <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> <br />
+              </div>
+
               <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
               <div class="progress">
                 <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
