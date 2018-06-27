@@ -178,7 +178,7 @@ function checkPassword()
                         <i class="nc-icon nc-key-25"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" required="" id="pass1">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required="" id="pass1" onfocusout="checkPassword();">
                   </div>
 
                   <div class="input-group">
