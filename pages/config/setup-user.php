@@ -140,7 +140,7 @@ function checkPassword()
   ?>
 
   <div class="wrapper wrapper-full-page ">
-    <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/uriel-soberanes.jpg">
+    <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/leonard-cotte.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
       <div class="content">
         <div class="container">
