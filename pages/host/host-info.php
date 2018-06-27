@@ -176,7 +176,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                         echo "<strong>Serial:</strong> $serial <br />";
                         echo "<strong>Firmware Vendor:</strong> {$tmp2['firmware_vendor']} <br />";
                         echo "<strong>Firmware Version:</strong> $firmware_vender </br />";
-                        echo "<strong>Firmware Release Date: <strong> $firmware_release_date <br />";
+                        echo "<strong>Firmware Release Date: </strong> $firmware_release_date <br />";
                         echo "<strong>Action:</strong>  <br />";
 
                       }
