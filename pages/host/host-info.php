@@ -105,17 +105,28 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 <div class="progress">
                   <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                 </div> <br />
+                <?php
+                echo "<strong>Total processor count:</strong> {$tmp['cpus']} <br>";
+                echo "<strong>Processor speed:</strong> {$tmp['mhz']} MHz <br>";
+                echo "<strong>Processor nodes:</strong> {$tmp['nodes']} <br>";
+                echo "<strong>Processor sockets:</strong> {$tmp['sockets']} <br>";
+                echo "<strong>Processor cores:</strong> {$tmp['cores']} <br>";
+                echo "<strong>Processor threads:</strong> {$tmp['threads']} <br>";
+                ?>
               </div>
 
-              <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
-              <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-              </div> <br />
 
-              <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
-              <div class="progress">
-                <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-              </div> <br />
+              <div class="col-md-4">
+                <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
+                <div class="progress">
+                  <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                </div> <br />
+
+              </div>
+
+
+
+
 
               <?php
               if (strlen($info) > 2)
