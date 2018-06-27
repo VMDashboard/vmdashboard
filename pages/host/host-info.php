@@ -185,60 +185,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 </div>
 
               </div>
-
-
-
-
-
-              <?php
-
-
-              //Time to retrieve the information about the host and place it in a table
-              $tmp = $lv->get_node_device_cap_options();
-              for ($i = 0; $i < sizeof($tmp); $i++) {
-
-                //Just pull out SYSTEM data
-                if ($tmp[$i] == "system"){
-                  echo "<h4>{$tmp[$i]}</h4>";
-                  $tmp1 = $lv->get_node_devices($tmp[$i]);
-                  echo "<div class='table-responsive'>" .
-                    "<table class='table'>" .
-                    "<tr>" .
-                    "<th> Hardware Vendor </th>" .
-                    "<th> Product </th>" .
-                    "<th> Serial </th>" .
-                    "<th> Firmware Vendor </th>" .
-                    "<th> Firmware Version </th>" .
-                    "<th> Firmware Release Date </th>" .
-                    "<th> Action </th>" .
-                    "</tr>";
-
-                  for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
-                    $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                    //Actions will be a form button that will submit info using POST
-                    $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
-
-                      $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : 'Unknown';
-                      $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
-                      $serial = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
-                      $firmware_vender = array_key_exists('firmware_vendor', $tmp2) ? $tmp2['firmware_vendor'] : 'Unknown';
-                      $firmware_version = array_key_exists('firmware_version', $tmp2) ? $tmp2['firmware_version'] : 'Unknown';
-                      $firmware_release_date = array_key_exists('firmware_release_date', $tmp2) ? $tmp2['firmware_release_date'] : 'Unknown';
-
-                    echo "<tr>" .
-                      "<td>$vendor</td>" .
-                      "<td>$product_name</td>" .
-                      "<td>$serial</td>" .
-                      "<td>{$tmp2['firmware_vendor']}</td>" .
-                      "<td>$firmware_version</td>" .
-                      "<td>$firmware_release_date</td>" .
-                      "<td>$act</td>" .
-                      "</tr>";
-                  }
-                  echo "</table></div>";
-                }
-              }
-              ?>
+    
             </div>
 
             <div class="tab-pane" id="storage">
