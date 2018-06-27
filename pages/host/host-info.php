@@ -99,7 +99,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
             ?>
 
             <div class="tab-pane active" id="general">
-
+              <div class="row">
               <div class="col-4">
                 <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
                 <div class="progress">
@@ -123,7 +123,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 </div> <br />
 
               </div>
-
+            </div>
 
 
 
