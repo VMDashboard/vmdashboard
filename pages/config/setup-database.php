@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
-    var alert_msg = '<?php echo $ret; ?>';
+    var alert_msg = "<?php echo $ret; ?>";
     swal(alert_msg);
     </script>
     <?php
