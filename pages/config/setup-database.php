@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="../../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
 
   <script>
-  checkFullPageBackgroundImage: function() {
+  function checkFullPageBackgroundImage() {
     $page = $('.full-page');
     image_src = $page.data('image');
 
@@ -242,6 +242,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     checkFullPageBackgroundImage();
   });
   </script>
-  
+
 </body>
 </html>
