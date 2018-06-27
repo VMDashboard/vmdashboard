@@ -49,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($conn->connect_error) {
       $ret = $conn->connect_error;
   } else {
+    $ret = "no error";
     //Create config.php
     $config_file = "config.php";
     $config_create = file_put_contents($config_file, $config_string);
