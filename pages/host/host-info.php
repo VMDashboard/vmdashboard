@@ -101,7 +101,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
             <div class="tab-pane active" id="general">
               <div class="row">
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                  <h5>CPU</h5>
                   <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
                   <div class="progress">
                     <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -116,7 +117,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   ?>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                  <h5>Memory</h5>
                   <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
                   <div class="progress">
                     <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
@@ -128,10 +130,13 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 </div>
               </div>
 
+              <br />
+              <br />
 
               <div class="row">
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                  <h5>Hypervisor</h5>
                   <?php
                   if (strlen($info) > 2)
                       $info[ strlen($info) - 2 ] = ' ';
@@ -142,7 +147,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   ?>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                  <h5>System</h5>
                   <?php
                   //Time to retrieve the information about the host and place it in a table
                   $tmp = $lv->get_node_device_cap_options();
