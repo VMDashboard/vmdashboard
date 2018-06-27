@@ -149,39 +149,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   ?>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                  <h5>System</h5>
-                  <?php            
-                  for ($i = 0; $i < sizeof($tmp); $i++) {
-                    //Just pull out SYSTEM data
-                    if ($tmp[$i] == "system"){
-                      $tmp1 = $lv->get_node_devices($tmp[$i]);
-
-                      for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
-                        $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                        //Actions will be a form button that will submit info using POST
-                        $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
-
-                        $vendor = array_key_exists('hardware_vendor', $tmp2) ? $tmp2['hardware_vendor'] : 'Unknown';
-                        $product_name = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
-                        $serial = array_key_exists('hardware_serial', $tmp2) ? $tmp2['hardware_serial'] : 'Unknown';
-                        $firmware_vender = array_key_exists('firmware_vendor', $tmp2) ? $tmp2['firmware_vendor'] : 'Unknown';
-                        $firmware_version = array_key_exists('firmware_version', $tmp2) ? $tmp2['firmware_version'] : 'Unknown';
-                        $firmware_release_date = array_key_exists('firmware_release_date', $tmp2) ? $tmp2['firmware_release_date'] : 'Unknown';
-
-                        echo "<strong>Hardware Vendor:</strong> $vendor <br />";
-                        echo "<strong>Product:</strong> $product_name <br />";
-                        echo "<strong>Serial:</strong> $serial <br />";
-                        echo "<strong>Firmware Vendor:</strong> {$tmp2['firmware_vendor']} <br />";
-                        echo "<strong>Firmware Version:</strong> $firmware_vender </br />";
-                        echo "<strong>Firmware Release Date: <strong> $firmware_release_date <br />";
-                        echo "<strong>Action:</strong> $act <br />";
-
-                      }
-                    }
-                  }
-                  ?>
-                </div>
+                
 
               </div>
 
