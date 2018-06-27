@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       header('Location: ../index.php');
     }
   } else {
-    echo "Credentials are incorrect";
+    $ret = "Credentials are incorrect";
   }
 
   $conn->close();
 
- }
+}
 ?>
 
 <!DOCTYPE html>
@@ -70,6 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
   </nav>
   <!-- End Navbar -->
+
+  <?php
+  //If there is a returned error, display it in an alert.
+  if (isset($ret)){
+    ?>
+    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <script>
+    var alert_msg = "<?php echo $ret; ?>";
+    swal(alert_msg);
+    </script>
+    <?php
+  }
+  ?>
+
   <div class="wrapper wrapper-full-page ">
     <div class="full-page section-image" filter-color="black" data-image="../assets/img/bg/pedro-lastra.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
@@ -165,13 +179,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <script src="../assets/js/plugins/bootstrap-notify.js"></script>
   <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
-  <!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-  <script src="../assets/demo/demo.js"></script>
-  <script>
-    $(document).ready(function() {
-      demo.checkFullPageBackgroundImage();
-    });
-  </script>
-</body>
 
+  <script>
+  function checkFullPageBackgroundImage() {
+    $page = $('.full-page');
+    image_src = $page.data('image');
+
+    if (image_src !== undefined) {
+      image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
+      $page.append(image_container);
+    }
+  }
+
+  $(document).ready(function() {
+    checkFullPageBackgroundImage();
+  });
+  </script>
+
+</body>
 </html>
