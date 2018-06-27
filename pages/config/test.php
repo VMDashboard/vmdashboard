@@ -128,7 +128,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   <?php
                   $free = $mem_stats['free'];
                   echo "<strong>Total memory installed:</strong> " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
-                  echo "<strong>Unused Memory:</strong> " . number_format(($free / 1048576), 2, '.', ' ') . " GB <br>";
+                  echo "<strong>Unused Memory:</strong> " . $free / 1048576 . " GB <br>";
                   echo "<strong>Buffered Memory:</strong> " . number_format(($mem_stats['buffers'] / 1048576), 2, '.', ' ') . " GB <br>";
                   echo "<strong>Cached Memory:</strong> " . number_format(($mem_stats['cached'] / 1048576), 2, '.', ' ') . " GB <br>";
                   var_dump($mem_stats);
