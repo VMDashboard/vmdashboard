@@ -75,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   //If there is a returned error, display it in an alert.
   if (isset($ret)){
     ?>
-    <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
+    <script src="../assets/js/plugins/sweetalert2.min.js"></script>
     <script>
     var alert_msg = "<?php echo $ret; ?>";
     swal(alert_msg);
