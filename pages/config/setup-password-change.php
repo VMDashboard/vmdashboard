@@ -126,7 +126,7 @@ function checkPassword()
                   <label class="col-sm-2 col-form-label">New Password: </label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input type="password" required="required" placeholder="New Password" class="form-control" name="password" id="pass1"/>
+                      <input type="password" required="required" placeholder="New Password" class="form-control" name="password" id="pass1" onfocusout="checkPassword();"/>
                     </div>
                   </div>
                 </div>
