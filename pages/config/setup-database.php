@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['initial_setup'] = true;
       header('Location: setup-user.php');
     } else {
-      $config_create = "failed";
       $ret = "Configuration was not saved, check folder permissions";
     }
   } //End else statement for database connection check
