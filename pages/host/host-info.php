@@ -97,9 +97,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
             if ($ci['uri'])
                 $info .= ' <i>'.$ci['uri'].'</i>, ';
 
-            //Get Host information
-            $tmp = $lv->get_node_device_cap_options();
-
             ?>
 
 
@@ -155,6 +152,9 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                   <h5>System</h5>
                   <?php
+                  //Get Host information
+                  $tmp = $lv->get_node_device_cap_options();
+                  
                   for ($i = 0; $i < sizeof($tmp); $i++) {
                     //Just pull out SYSTEM data
                     if ($tmp[$i] == "system") {
