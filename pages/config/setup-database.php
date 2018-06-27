@@ -44,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Attempt to make the database connection
   $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-  $err = $conn->connect_error;
 
   // Check connection
   if ($conn->connect_error) {
@@ -124,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   </div>
                 </div>
                 <div class="card-body">
-<?php var_dump($err); ?>
+                  
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
