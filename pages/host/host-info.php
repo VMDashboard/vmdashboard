@@ -100,30 +100,33 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
             <div class="tab-pane active" id="general">
               <div class="row">
-              <div class="col-4">
-                <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
-                <div class="progress">
-                  <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                </div> <br />
-                <?php
-                echo "<strong>Total processor count:</strong> {$tmp['cpus']} <br>";
-                echo "<strong>Processor speed:</strong> {$tmp['mhz']} MHz <br>";
-                echo "<strong>Processor nodes:</strong> {$tmp['nodes']} <br>";
-                echo "<strong>Processor sockets:</strong> {$tmp['sockets']} <br>";
-                echo "<strong>Processor cores:</strong> {$tmp['cores']} <br>";
-                echo "<strong>Processor threads:</strong> {$tmp['threads']} <br>";
-                ?>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> <br />
+                  <?php
+                  echo "<strong>Total processor count:</strong> {$tmp['cpus']} <br>";
+                  echo "<strong>Processor speed:</strong> {$tmp['mhz']} MHz <br>";
+                  echo "<strong>Processor nodes:</strong> {$tmp['nodes']} <br>";
+                  echo "<strong>Processor sockets:</strong> {$tmp['sockets']} <br>";
+                  echo "<strong>Processor cores:</strong> {$tmp['cores']} <br>";
+                  echo "<strong>Processor threads:</strong> {$tmp['threads']} <br>";
+                  ?>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                  <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
+                  <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div> <br />
+                  <?php
+                  echo "<strong>Total memory installed:</strong> " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
+                  ?>
+
+                </div>
               </div>
-
-
-              <div class="col-4">
-                <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
-                <div class="progress">
-                  <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                </div> <br />
-
-              </div>
-            </div>
 
 
 
@@ -135,13 +138,8 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                   echo "<strong>Hypervisor:</strong> {$ci['hypervisor_string']} <br>";
                   echo "<strong>Connection:</strong> $info <br>";
                   echo "<strong>Architecture:</strong> {$tmp['model']} <br>";
-                  echo "<strong>Total memory installed:</strong> " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
-                  echo "<strong>Total processor count:</strong> {$tmp['cpus']} <br>";
-                  echo "<strong>Processor speed:</strong> {$tmp['mhz']} MHz <br>";
-                  echo "<strong>Processor nodes:</strong> {$tmp['nodes']} <br>";
-                  echo "<strong>Processor sockets:</strong> {$tmp['sockets']} <br>";
-                  echo "<strong>Processor cores:</strong> {$tmp['cores']} <br>";
-                  echo "<strong>Processor threads:</strong> {$tmp['threads']} <br>";
+
+
 
               //Time to retrieve the information about the host and place it in a table
               $tmp = $lv->get_node_device_cap_options();
