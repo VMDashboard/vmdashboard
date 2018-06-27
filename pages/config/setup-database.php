@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Attempt to make the database connection
   $conn = new mysqli($db_host, $db_user, $db_password, $db_name);
-  $err = $conn;
+  $err = $conn->connect_error;
 
   // Check connection
   if ($conn->connect_error) {
