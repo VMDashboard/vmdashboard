@@ -104,6 +104,10 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
               <div class="row">
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
+                  <?php
+                  $test = $lv->get_node_device_xml();
+                  var_dump($test);
+                  ?>
                   <h5>CPU</h5>
                   <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
                   <div class="progress">
