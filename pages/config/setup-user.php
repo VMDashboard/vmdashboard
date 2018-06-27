@@ -99,7 +99,7 @@ function checkPassword()
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/sqaurelogo.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/squarelogo.png">
     <link rel="icon" type="image/png" href="../../assets/img/squarelogo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
@@ -140,7 +140,7 @@ function checkPassword()
   ?>
 
   <div class="wrapper wrapper-full-page ">
-    <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/fabio-mangione.jpg">
+    <div class="full-page section-image" filter-color="black" data-image="../../assets/img/bg/uriel-soberanes.jpg">
       <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
       <div class="content">
         <div class="container">
@@ -273,6 +273,6 @@ function checkPassword()
     checkFullPageBackgroundImage();
   });
   </script>
-  
+
 </body>
 </html>

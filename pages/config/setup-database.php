@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/sqaurelogo.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/squarelogo.png">
     <link rel="icon" type="image/png" href="../../assets/img/squarelogo.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
