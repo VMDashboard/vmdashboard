@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['initial_setup'] = true;
       header('Location: setup-user.php');
     } else {
-      $ret = "Configuration was not saved, check folder permissions";
+      $ret = "Unable to save configuration, check folder permissions";
     }
   } //End else statement for database connection check
 } // End if statement for POST data
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <!-- End Navbar -->
 
   <?php
-  //If there is a returned error, display it in an alert.
+  //If there is a returned error, display it in an alert. Use double quotes on alert_msg because connection error with wrong username/password results in string with single quotes
   if (isset($ret)){
     ?>
     <script src="../../assets/js/plugins/sweetalert2.min.js"></script>
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   </div>
                 </div>
                 <div class="card-body">
-                  
+
                   <div class="input-group">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
