@@ -104,10 +104,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
               <div class="row">
 
                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                  <?php
-                  $test = $lv->host_get_node_info();
-                  var_dump($test);
-                  ?>
                   <h5>CPU</h5>
                   <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
                   <div class="progress">
@@ -258,18 +254,24 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
                     //Actions will be a form button that will submit info using POST
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
-
+                    $node_device = $tmp2['name'];
                     $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                     $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
                     $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
                     $link_speed = "-"; //need to pull from XML file, not available from API
+
+                    $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
+                    $net_speed = $deviceXML->capability->link[speed];
+                    $net_state = $deviceXML->capability->link[state];
+
+                
 
                     echo "<tr>" .
                       "<td>{$tmp2['name']}</td>" .
                       "<td>$interface</td>" .
                       "<td>$driver</td>" .
                       "<td>$mac_address</td>" .
-                      "<td>$link_speed</td>" .
+                      "<td>$net_speed</td>" .
                       "<td>$act</td>" .
                       "</tr>";
                   }
