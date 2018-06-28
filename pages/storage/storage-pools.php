@@ -119,7 +119,7 @@ function poolDeleteWarning(linkURL, poolName) {
             <h5 class="card-title">Storage Pools: </h5>
           </div>
           <div class="card-body">
-            <p>There are no configured storage pools. Please create a new storage pool, then start it.</p>
+            <p>There are no configured storage pools. Please <a href="storage-add-pool.php">create</a> a new storage pool, then start it.</p>
             <p>Storage pools are used to contain the storage volumes (disk drives) and ISO files of your virtual machines</p>
           </div>
         </div>
