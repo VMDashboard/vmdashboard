@@ -176,10 +176,10 @@ $latestExploded = explode('.', $arrayLatest[1]);
 $existingExploded = explode('.', $arrayExisting[1]);
 
 if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
-  $notification_status = true;
+  $update_available = true;
 }
-  
-if ($notification_status == true) { ?>
+
+if ($update_available == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>

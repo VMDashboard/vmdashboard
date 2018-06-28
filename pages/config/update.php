@@ -57,18 +57,7 @@ swal(alert_msg);
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
           <?php
-
-          $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-          $arrayExisting = file('../config/version.php');
-          $latestExploded = explode('.', $arrayLatest[1]);
-          $existingExploded = explode('.', $arrayExisting[1]);
-
-          if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
-            $update_available = true;
-          } else {
-            $update_available = false;
-          }
-
+          //$update_available is set in navbar.php
           if ($update_available == true) { ?>
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
