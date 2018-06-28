@@ -170,12 +170,15 @@
 
 
 <?php
-/*
 $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-$arrayCurrent = file('../config/version.php');
-if ($arrayLatest[0] > $arrayCurrent[0])
-  $notification_status = true;
+$arrayExisting = file('../config/version.php');
+$latestExploded = explode('.', $arrayLatest[1]);
+$existingExploded = explode('.', $arrayExisting[1]);
 
+if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
+  $notification_status = true;
+}
+  
 if ($notification_status == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -186,7 +189,7 @@ if ($notification_status == true) { ?>
                   <a class="dropdown-item">New Update Available</a>
                 </div>
               </li>
-<?php } */?>
+<?php } ?>
 
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
