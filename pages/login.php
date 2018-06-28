@@ -22,8 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //Verifying the password to the hash in the database
   if (password_verify($password, $hash)) {
+    //Set the username session to keep logged in
     $_SESSION['username'] = $username;
 
+    //Check for a newer version of OpenVM
     $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
     $arrayExisting = file('config/version.php');
     $latestExploded = explode('.', $arrayLatest[1]);
@@ -34,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $_SESSION['update_version'] = $arrayLatest;
     }
 
+    //Send the user back to the page they came from or to index.php
     if(isset($_SESSION['return_location'])) {
       $return_url = $_SESSION['return_location'];
       unset($_SESSION['return_location']);
@@ -42,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       header('Location: ../index.php');
     }
   } else {
+    //If credentials were not a correct match
     $ret = "Credentials are incorrect";
   }
 
