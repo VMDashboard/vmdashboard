@@ -110,6 +110,22 @@ function poolDeleteWarning(linkURL, poolName) {
   <div class="card">
     <?php
     $pools = $lv->get_storagepools();
+
+    if (empty($pools)) {
+      ?>
+      <div class="row">
+        <div class="col-12">
+          <div class="card-header">
+            <h5 class="card-title">Storage Pools: </h5>
+          </div>
+          <div class="card-body">
+            <h6>No storage pools have been configured. Please create a new storage pool</h6>
+          </div>
+        </div>
+      </div>
+      <?php
+    }
+
     for ($i = 0; $i < sizeof($pools); $i++) {
       //get the pool resource to use with refreshing the pool data
       $res = $lv->get_storagepool_res($pools[$i]);
