@@ -253,6 +253,9 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 //Just pull out NET data
                 if ($tmp[$i] == "net"){
                   $tmp1 = $lv->get_node_devices($tmp[$i]);
+                  if (empty($tmp1)) {
+                    echo "<h5>No Network Information Available</h5>";
+                  }
                   echo "<div class='table-responsive'>" .
                     "<table class='table'>" .
                     "<tr>" .
