@@ -59,7 +59,7 @@ swal(alert_msg);
           <?php
           //$_SESSION['update'] and $_SESSION['update_version'] are set in login.php
           $arrayLatest = $_SESSION['update_version'];
-          $arrayExisting = file('config/version.php');
+          $arrayExisting = file('version.php');
           $existingExploded = explode('.', $arrayExisting[1]);
           if ($_SESSION['update'] == true) { ?>
             <h6>There is an update available!</h6>
