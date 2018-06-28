@@ -211,7 +211,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                    //Actions will be a form button that will submit info using POST
+
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
@@ -247,24 +247,27 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     "<th> Driver name </th>" .
                     "<th> MAC Address </th>" .
                     "<th> Network Speed </th>" .
+                    "<th> Network State </th>" .
                     "<th> Action </th>" .
                     "</tr>";
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                    //Actions will be a form button that will submit info using POST
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $node_device = $tmp2['name'];
                     $interface = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : '-';
                     $driver = array_key_exists('capabilities', $tmp2) ? $tmp2['capabilities'] : '-';
                     $mac_address = array_key_exists('address', $tmp2) ? $tmp2['address'] : '-';
-                    $link_speed = "-"; //need to pull from XML file, not available from API
 
+                    //Pulling XML data that is not available from libvirt API
                     $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
                     $net_speed = $deviceXML->capability->link[speed];
                     $net_state = $deviceXML->capability->link[state];
+                    if (empty($net_speed)) {
+                      $net_speed = "-"
+                    }
 
-                
+
 
                     echo "<tr>" .
                       "<td>{$tmp2['name']}</td>" .
@@ -272,6 +275,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                       "<td>$driver</td>" .
                       "<td>$mac_address</td>" .
                       "<td>$net_speed</td>" .
+                      "<td>$net_state</td>" .
                       "<td>$act</td>" .
                       "</tr>";
                   }
@@ -302,7 +306,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                    //Actions will be a form button that will submit info using POST
+
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
@@ -348,7 +352,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                    //Actions will be a form button that will submit info using POST
+
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
