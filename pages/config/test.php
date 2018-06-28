@@ -221,10 +221,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     $location = $deviceXML->capability->block;
                     $bus = $deviceXML->capability->bus;
                     $model = $deviceXML->capability->model;
-                    //$net_state = $deviceXML->capability->link[state];
-                    //if (!$net_speed) {
-                    //  $net_speed = "---- ";
-                    //}
 
                     echo "<tr>" .
                       "<td>{$tmp2['name']}</td>" .
@@ -316,7 +312,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
@@ -362,7 +357,6 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
                     $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
