@@ -226,7 +226,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                     //Pulling XML data that is not available from libvirt API
                     $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
-                    $location = $deviceXML->capability->block;
+                    $location = $deviceXML->devnode;
                     $bus = $deviceXML->capability->bus;
                     $model = $deviceXML->capability->model;
 
