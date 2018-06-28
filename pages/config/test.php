@@ -264,7 +264,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     $net_speed = $deviceXML->capability->link[speed];
                     $net_state = $deviceXML->capability->link[state];
                     if (!$net_speed) {
-                      $net_speed = "-";
+                      $net_speed = " - ";
                     }
 
 
