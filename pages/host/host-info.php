@@ -87,7 +87,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
           <div class="tab-content">
             <?php
             $tmp = $lv->host_get_node_info(); // Get and array of information on the host
-
+            $arch = $tmp['model'];
             // Used when the user clicks the XML link. Will display XML data
             if ($action == 'dumpxml') {
               $ret = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
@@ -192,7 +192,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
 
                   echo "<strong>Hypervisor:</strong> {$ci['hypervisor_string']} <br>";
                   echo "<strong>Connection:</strong> $info <br>";
-                  echo "<strong>Architecture:</strong> {$tmp['model']} <br>";
+                  echo "<strong>Architecture:</strong> $arch <br>";
                   ?>
                 </div>
 
