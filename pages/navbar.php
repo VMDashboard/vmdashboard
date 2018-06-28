@@ -170,16 +170,8 @@
 
 
 <?php
-$arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
-$arrayExisting = file('../config/version.php');
-$latestExploded = explode('.', $arrayLatest[1]);
-$existingExploded = explode('.', $arrayExisting[1]);
 
-if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
-  $update_available = true;
-}
-
-if ($update_available == true) { ?>
+if ($_SESSION['update'] == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>

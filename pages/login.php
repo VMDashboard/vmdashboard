@@ -24,6 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (password_verify($password, $hash)) {
     $_SESSION['username'] = $username;
 
+    $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
+    $arrayExisting = file('config/version.php');
+    $latestExploded = explode('.', $arrayLatest[1]);
+    $existingExploded = explode('.', $arrayExisting[1]);
+
+    if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
+      $_SESSION['update'] = true;
+      $_SESSION['update_version'] = $arrayLatest;
+    }
+
     if(isset($_SESSION['return_location'])) {
       $return_url = $_SESSION['return_location'];
       unset($_SESSION['return_location']);

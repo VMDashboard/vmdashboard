@@ -57,8 +57,11 @@ swal(alert_msg);
         <div class="col-lg-12 col-md-12 col-sm-12 col-12">
 
           <?php
-          //$update_available is set in navbar.php
-          if ($update_available == true) { ?>
+          //$_SESSION['update'] and $_SESSION['update_version'] are set in login.php
+          $arrayLatest = $_SESSION['update_version'];
+          $arrayExisting = file('config/version.php');
+          $existingExploded = explode('.', $arrayExisting[1]);
+          if ($_SESSION['update'] == true) { ?>
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
             <p>Your version is <?php echo $arrayExisting[1]; ?></p>
