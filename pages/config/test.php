@@ -203,25 +203,35 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     "<table class='table'>" .
                     "<tr>" .
                     "<th> Device name </th>" .
-                    "<th> Driver name </th>" .
+                    "<th> Location </th>" .
+                    "<th> Bus </th>" .
                     "<th> Vendor </th>" .
-                    "<th> Product </th>" .
+                    "<th> Model </th>" .
                     "<th> Action </th>" .
                     "</tr>";
 
                   for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
                     $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-
                     $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp2['name']}\">XML</a>";
-                    $driver  = array_key_exists('driver_name', $tmp2) ? $tmp2['driver_name'] : 'None';
+                    $node_device = $tmp2['name'];
                     $vendor  = array_key_exists('vendor_name', $tmp2) ? $tmp2['vendor_name'] : 'Unknown';
-                    $product = array_key_exists('product_name', $tmp2) ? $tmp2['product_name'] : 'Unknown';
+
+                    //Pulling XML data that is not available from libvirt API
+                    $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
+                    $location = $deviceXML->capability->block;
+                    $bus = $deviceXML->capability->bus;
+                    $model = $deviceXML->capability->model;
+                    //$net_state = $deviceXML->capability->link[state];
+                    //if (!$net_speed) {
+                    //  $net_speed = "---- ";
+                    //}
 
                     echo "<tr>" .
                       "<td>{$tmp2['name']}</td>" .
-                      "<td>$driver</td>" .
+                      "<td>$location</td>" .
+                      "<td>$bus</td>" .
                       "<td>$vendor</td>" .
-                      "<td>$product</td>" .
+                      "<td>$model</td>" .
                       "<td>$act</td>" .
                       "</tr>";
                   }
