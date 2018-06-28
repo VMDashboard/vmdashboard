@@ -97,7 +97,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
             if ($ret) {
               echo "<pre>$ret</pre>";
               echo "<br />";
-              echo "<form action=\"\" method=\"POST\"><input type=\"submit\" name=\"clear\" value=\"clear\"></form><br />"
+              echo "<form action=\"\" method=\"POST\"><input type=\"submit\" name=\"clear\" value=\"clear\"></form><br />";
               echo "<br /><br />";
             }
 
