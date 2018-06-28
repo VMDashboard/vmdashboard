@@ -263,7 +263,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
                     $net_speed = $deviceXML->capability->link[speed];
                     $net_state = $deviceXML->capability->link[state];
-                    if (empty($net_speed)) {
+                    if (!$net_speed) {
                       $net_speed = "-"
                     }
 
