@@ -70,7 +70,7 @@ swal(alert_msg);
             </form>
           <?php }
 
-          if ($update_available == false) { ?>
+          if ($_SESSION['update_available'] == false) { ?>
             <h6>You are running the lastest version of OPENVM Dashboard.</h6>
             <p>Your version is <?php echo $arrayExisting[1]; ?></p>
           <?php } ?>
