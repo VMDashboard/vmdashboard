@@ -134,8 +134,6 @@
             </div>
           </li>
 
-
-
         </ul>
       </div>
     </div>
@@ -168,9 +166,8 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
             <ul class="navbar-nav">
 
-
 <?php
-
+//Notification if software update is available
 if ($_SESSION['update_available'] == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -78,6 +78,7 @@ swal(alert_msg);
           <br /><pre><?php echo $tmp; ?></pre><br />
 
           <?php
+          //Display the changelog on the update page
           $changelog = file('../../changelog.php');
           $length = count($changelog);
           for ($i = 1; $i < $length; $i++) { //starting at index 1, 0 index is a php line.
