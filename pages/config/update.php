@@ -31,6 +31,7 @@ if (isset($_SESSION['update'])) {
   $tmp = shell_exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Use shell_exec to display all the output, not just last line. Redirect STDERR and STDOUT to variable
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
+  unset($_SESSION['update_available']);
 }
 
 require('../navbar.php');
