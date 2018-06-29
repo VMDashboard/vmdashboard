@@ -61,7 +61,7 @@ swal(alert_msg);
           $arrayLatest = $_SESSION['update_version'];
           $arrayExisting = file('version.php');
           $existingExploded = explode('.', $arrayExisting[1]);
-          if ($_SESSION['update'] == true) { ?>
+          if ($_SESSION['update_available'] == true) { ?>
             <h6>There is an update available!</h6>
             <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
             <p>Your version is <?php echo $arrayExisting[1]; ?></p>

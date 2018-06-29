@@ -171,7 +171,7 @@
 
 <?php
 
-if ($_SESSION['update'] == true) { ?>
+if ($_SESSION['update_available'] == true) { ?>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
