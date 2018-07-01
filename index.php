@@ -25,7 +25,14 @@ if ($action == "logout") {
 
 //Redirect based on login session or initial setup complete
 if (isset($_SESSION['username'])) {
-  header('Location: pages/domain/domain-list.php');
+  require('../libvirt.php');
+  $lv = new Libvirt();
+  $pools = $lv->get_storagepools();
+  if (empty($pools)) {
+    header('Location: pages/storage/storage-pools.php');
+  } else {
+    header('Location: pages/domain/domain-list.php');
+  }
 } elseif (file_exists($path)) {
   header('Location: pages/login.php');
 } else {
