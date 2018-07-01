@@ -25,8 +25,10 @@ if ($action == "logout") {
 
 //Redirect based on login session or initial setup complete
 if (isset($_SESSION['username'])) {
-  require('../libvirt.php');
+  require('pages/libvirt.php');
   $lv = new Libvirt();
+  if ($lv->connect("qemu:///system") == false)
+    die('<html><body>Cannot open connection to hypervisor</body></html>');
   $pools = $lv->get_storagepools();
   if (empty($pools)) {
     header('Location: pages/storage/storage-pools.php');
