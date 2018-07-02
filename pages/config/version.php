@@ -1,2 +1,2 @@
 <?php header('Location: index.php'); ?>
-0.4.6
+0.4.7

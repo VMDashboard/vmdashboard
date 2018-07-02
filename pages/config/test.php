@@ -13,14 +13,17 @@ if (!isset($_SESSION['username'])){
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_POST['os'])) {
   $_SESSION['os'] = $_POST['os'];
+  $_SESSION['ppol'] = $_POST['pool'];
 }
 
 require('../header.php');
 
 if (isset($_SESSION['os'])) {
   $os = $_SESSION['os'];
+  $pool = $_SESSION['pool'];
   unset($_SESSION['os']);
-  exec("wget -bqc http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
+  unset($_SESSION['pool']);
+  exec("wget -bqc http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso && mv ubuntu-18.04-live-server-amd64.iso $pool");
 }
 
 require('../navbar.php');
@@ -39,7 +42,7 @@ require('../navbar.php');
           <div class="col-12">
             <input type="radio" id="ubuntu" value="ubuntu" name="os" checked /> Ubuntu Server <br />
             <input type="radio" id="centos" value="centos" name="os" /> CentOS <br />
-
+            <br />
             <select  class="form-control" name="pool">
 
             <?php
