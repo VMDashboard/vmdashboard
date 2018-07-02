@@ -135,8 +135,9 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                     <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
                   </div> <br />
                   <?php
-                  echo "<strong>Total memory installed:</strong> " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
-                  echo "<strong>Unused Memory:</strong> " . number_format(($mem_stats['free'] / 1048576), 2, '.', ' ') . " GB <br>";
+                  echo "<strong>Total memory:</strong> " . number_format(($tmp['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
+                  echo "<strong>Used Memory:</strong> " . number_format((($tmp['memory'] - $mem_stats['free'] - $mem_stats['buffers'] - $mem_stats['cached']) / 1048576), 2, '.', ' ') . " GB <br>";
+                  echo "<strong>Free Memory:</strong> " . number_format(($mem_stats['free'] / 1048576), 2, '.', ' ') . " GB <br>";
                   echo "<strong>Buffered Memory:</strong> " . number_format(($mem_stats['buffers'] / 1048576), 2, '.', ' ') . " GB <br>";
                   echo "<strong>Cached Memory:</strong> " . number_format(($mem_stats['cached'] / 1048576), 2, '.', ' ') . " GB <br>";
                   ?>
@@ -253,7 +254,7 @@ $cpu_percentage = number_format($cpu_percentage, 2, '.', ',' ); // PHP: string n
                 //Just pull out NET data
                 if ($tmp[$i] == "net"){
                   $tmp1 = $lv->get_node_devices($tmp[$i]);
-    
+
                   echo "<div class='table-responsive'>" .
                     "<table class='table'>" .
                     "<tr>" .
