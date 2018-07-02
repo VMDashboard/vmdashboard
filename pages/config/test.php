@@ -23,7 +23,7 @@ if (isset($_SESSION['os'])) {
   $pool = $_SESSION['pool'];
   unset($_SESSION['os']);
   unset($_SESSION['pool']);
-  exec("wget -O /var/lib/libvirt/images/ubuntu.iso -bqc http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
+  $tmp = exec("wget http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso -O /var/lib/libvirt/images/ubuntu.iso");
 }
 
 require('../navbar.php');
