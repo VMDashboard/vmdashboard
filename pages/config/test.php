@@ -28,8 +28,6 @@ require('../navbar.php');
 ?>
 
 
-
-
 <div class="content">
   <div class="card">
     <form action="" method="POST">
@@ -57,17 +55,17 @@ require('../navbar.php');
                 $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
                 //getting the pool information to display the data in a table
                 $info = $lv->get_storagepool_info($pools[$i]);
+
                 $poolName = $pools[$i];
+                $poolPath = $info['path'];
 
                 $act = $info['active'] ? 'Active' : 'Inactive';
                 if ($act == "Active")
-                echo "<option value=\"$info['path']\">$pools[$i]</option>";
+                  echo "<option value=$poolPath\">$poolName</option>";
               } //ends the for loop for each storage pool
             } ?>
 
           </select>
-
-
 
 
 
