@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Check for a newer version of OpenVM
     $arrayLatest = file('https://openvm.tech/version.php');
     $arrayExisting = file('config/version.php');
-    $latestExploded = explode('.', $arrayLatest[0]);
+    $latestExploded = explode('.', $arrayLatest[1]);
     $existingExploded = explode('.', $arrayExisting[1]);
 
     if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
