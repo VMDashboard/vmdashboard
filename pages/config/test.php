@@ -22,7 +22,7 @@ if (isset($_SESSION['os'])) {
   $os = $_SESSION['os'];
   unset($_SESSION['os']);
 
-  exec("wget -bqc http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso")
+  exec("wget -bqc http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
 
 }
 
