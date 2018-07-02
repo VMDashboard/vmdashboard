@@ -64,7 +64,7 @@ swal(alert_msg);
           $existingExploded = explode('.', $arrayExisting[1]);
           if ($_SESSION['update_available'] == true) { ?>
             <h6>There is an update available!</h6>
-            <p>The current version is <?php echo $arrayLatest[1]; ?> </p>
+            <p>The current version is <?php echo $arrayLatest[0]; ?> </p>
             <p>Your version is <?php echo $arrayExisting[1]; ?></p>
             <form action="" method="post">
               <input type="submit" name="update" value="Update Now">
