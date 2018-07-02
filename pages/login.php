@@ -26,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['username'] = $username;
 
     //Check for a newer version of OpenVM
-    $arrayLatest = file('https://raw.githubusercontent.com/PenningDevelopment/openVM/master/pages/config/version.php');
+    $arrayLatest = file('https://openvm.tech/version.php');
     $arrayExisting = file('config/version.php');
-    $latestExploded = explode('.', $arrayLatest[1]);
+    $latestExploded = explode('.', $arrayLatest[0]);
     $existingExploded = explode('.', $arrayExisting[1]);
 
     if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
