@@ -48,7 +48,7 @@ require('../navbar.php');
             $pools = $lv->get_storagepools();
 
             if (empty($pools)) {
-              <option value="none">No Pool Available</option>
+              echo "<option value=\"none\">No Pool Available</option>";
             } else {
               for ($i = 0; $i < sizeof($pools); $i++) {
                 //get the pool resource to use with refreshing the pool data
@@ -61,7 +61,7 @@ require('../navbar.php');
 
                 $act = $info['active'] ? 'Active' : 'Inactive';
                 if ($act == "Active")
-                <option value="$info['path']">$pools[$i]</option>
+                echo "<option value=\"$info['path']\">$pools[$i]</option>";
               } //ends the for loop for each storage pool
             } ?>
 
