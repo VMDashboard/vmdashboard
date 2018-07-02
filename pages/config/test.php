@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])){
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_POST['os'])) {
   $_SESSION['os'] = $_POST['os'];
-  $_SESSION['ppol'] = $_POST['pool'];
+  $_SESSION['pool'] = $_POST['pool'];
 }
 
 require('../header.php');
