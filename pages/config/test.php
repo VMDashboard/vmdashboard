@@ -306,9 +306,6 @@ if ($new_domain != "") {
 
 ?>
 
-<script>
-alert(<?php echo $new_domain; ?>);
-</script>
 
 <script>
 function diskChangeOptions(selectEl) {
@@ -371,6 +368,7 @@ function changeOptions(selectEl) {
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
     <div class="card-header">
       <h4 class="card-title"> New Virtual Machine</h4>
+      <?php var_dump($new_domain); ?>
     </div>
     <div class="card-body">
       <div class="row">
