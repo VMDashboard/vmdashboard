@@ -291,7 +291,7 @@ $volume_size = 0;
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  header('Location: domain-list.php');
+  //header('Location: domain-list.php');
   exit;
 }
 
