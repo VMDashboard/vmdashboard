@@ -570,7 +570,7 @@ function changeOptions(selectEl) {
                         $act = $info['active'] ? 'Active' : 'Inactive';
                         if ($act == "Active") {
                           echo "<option value=\"$poolName\">$poolName</option>";
-                          $counter++;
+                          $counter++; //Increments only if a valid storage pool exist
                         }
                       }
                       if ($counter == 0) {
