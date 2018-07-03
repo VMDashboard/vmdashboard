@@ -93,7 +93,7 @@ $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
 $new_network_name = "network";
 
 for ($i = 0; $i < sizeof($tmp); $i++) {
-  $numbers_in_string = countEndingDigits( $network ); //Counts how many digits are at the end of the string
+  $numbers_in_string = countEndingDigits($new_network_name); //Counts how many digits are at the end of the string
   if ( $numbers_in_string > 0 ) :
 	   $base_portion = substr( $new_network_name, 0, -$numbers_in_string );
 	   $digits_portion = abs(substr( $new_network_name, -$numbers_in_string ));
@@ -103,8 +103,9 @@ for ($i = 0; $i < sizeof($tmp); $i++) {
   endif;
 
   $tmp2 = $lv->get_network_information($tmp[$i]);
-  if ($tmp2['name'] == $base_portionv . $digits_portion){
-    $new_network_name = $base_portion . ($digits_portion + 1);
+  if ($tmp2['name'] == $base_portion . $digits_portion) {
+    $digits_portion = $digits_portion + 1;
+    $new_network_name = $base_portion . $digits_portion;
   }
 }
 
