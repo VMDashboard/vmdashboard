@@ -280,8 +280,10 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  //header('Location: domain-list.php');
-  //exit;
+  if($new_domain) {
+  header('Location: ../domain/domain-list.php');
+  exit;
+  }
 }
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
@@ -360,7 +362,6 @@ function changeOptions(selectEl) {
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
     <div class="card-header">
       <h4 class="card-title"> New Virtual Machine</h4>
-      <?php echo $new_domain_error; ?>
     </div>
     <div class="card-body">
       <div class="row">
