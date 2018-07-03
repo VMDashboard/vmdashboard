@@ -54,11 +54,11 @@ if ($action == 'domain-destroy') {
 }
 
 
-//Will display a sweet alert if a return message exists
+//Will display a sweet alert if a return message exists. Using "" because $ret may contain single quotes.
 if ($ret != "") {
 echo "
 <script>
-var alert_msg = '$ret'
+var alert_msg = \"$ret\"
 swal(alert_msg);
 </script>";
 }

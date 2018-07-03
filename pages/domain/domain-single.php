@@ -185,7 +185,7 @@ unset($_SESSION['xmldesc']);
 if ($ret != "") {
 echo "
 <script>
-var alert_msg = '$ret'
+var alert_msg = \"$ret\"
 swal(alert_msg);
 </script>";
 }
