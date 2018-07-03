@@ -301,7 +301,7 @@ require('../navbar.php');
 if ($new_domain_error != "") {
   echo "
     <script>
-      var alert_msg = "$new_domain_error"
+      var alert_msg = \"$new_domain_error\"
       swal(alert_msg);
     </script>";
 }
