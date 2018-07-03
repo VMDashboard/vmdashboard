@@ -305,6 +305,11 @@ if ($new_domain != "") {
 }
 
 ?>
+
+<script>
+alert(<?php echo $new_domain; ?>);
+</script>
+
 <script>
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
