@@ -287,7 +287,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  if($new_domain) {
+  if(!$new_domain_error) {
   header('Location: ../domain/domain-list.php');
   exit;
   }
