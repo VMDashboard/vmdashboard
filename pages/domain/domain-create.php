@@ -139,10 +139,8 @@ if ($_SESSION['domain_type'] == "kvm") {
     case "none":
       $volume_xml = "";
       break;
-$volume_size = 0;
+
     case "new":
-      $pool = "default";
-      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
       $volume_xml = "";
       break;
 
@@ -242,8 +240,17 @@ $volume_size = 0;
   //Define the new guest domain based off the XML information
   $new_domain = $lv->domain_define($xml);
 
+  //Check for error on creating the domain
+  if (!$new_domain){
+    $new_domain_error = 'Error while creating domain: '.$lv->get_last_error();
+  }
+
   //need to check to make sure $new_domain is not false befoe this code exectues
-  if ($source_file_volume == "new") {
+  if ($source_file_volume == "new" && $new_domain != false) {
+    $pool = "default"; //need to give option on form to select available pools
+    $volume_size = 0;
+    $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+
     $res = $new_domain;
     $img = libvirt_storagevolume_get_path($new_disk);
     $dev = $target_dev_volume;
@@ -252,14 +259,6 @@ $volume_size = 0;
     $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
   }
 
-  //Will display a sweet alert if a return message exists
-  if ($ret != "") {
-    echo "
-      <script>
-        var alert_msg = '$ret'
-        swal(alert_msg);
-      </script>";
-  }
 
   unset($_SESSION['domain_type']);
   unset($_SESSION['domain_name']);
@@ -283,15 +282,28 @@ $volume_size = 0;
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  header('Location: domain-list.php');
+  if($new_domain) {
+  header('Location: ../domain/domain-list.php');
   exit;
+  }
 }
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
 
 require('../navbar.php');
 
+//If there was an error on creating the domain, alert user. The error uses single quotes
+if ($new_domain_error != "") {
+  echo "
+    <script>
+      var alert_msg = \"$new_domain_error\"
+      swal(alert_msg);
+    </script>";
+}
+
 ?>
+
+
 <script>
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
