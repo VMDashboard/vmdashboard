@@ -48,8 +48,10 @@ if (isset($_SESSION['pool_name'])) {
 
     $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
 
-    header('Location: storage-pools.php');
-    exit;
+    if ($ret == "success") {
+      header('Location: storage-pools.php');
+      exit;
+    }
 
   } else {
     unset($_SESSION['pool_name']);
@@ -58,6 +60,16 @@ if (isset($_SESSION['pool_name'])) {
 } //end if $_SESSION
 
 require('../navbar.php');
+
+
+//If there was an error on creating the pool, alert user.
+if ($ret != "") {
+  echo "
+    <script>
+      var alert_msg = \"$ret\"
+      swal(alert_msg);
+    </script>";
+}
 
 ?>
 
