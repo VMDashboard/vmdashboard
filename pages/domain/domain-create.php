@@ -250,13 +250,18 @@ if ($_SESSION['domain_type'] == "kvm") {
     $pool = "default"; //need to give option on form to select available pools
     $volume_size = 0;
     $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-
+    if (!$new_disk){
+      $new_domain_error = $new_domain_error . " Error creating disk: ".$lv->get_last_error();
+    }
     $res = $new_domain;
     $img = libvirt_storagevolume_get_path($new_disk);
     $dev = $target_dev_volume;
     $typ = $target_bus_volume;
     $driver = $driver_type;
-    $ret = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+    $new_disk_add = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+    if (!$new_disk_add){
+      $new_domain_error = $new_domain_error . " Error adding disk: ".$lv->get_last_error();
+    }
   }
 
 
