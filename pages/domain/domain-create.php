@@ -30,10 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $_SESSION['memory'] = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $_SESSION['vcpu'] = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
-  $_SESSION['os_arch'] = "x86_64"; //set to x86_64, need to change to host type as well as provide options
+  $_SESSION['os_arch'] = $_POST['os_arch']; //VMs will use the same Architecture as the host server
   $_SESSION['os_type'] = "hvm"; //hvm is standard operating system VM
   $_SESSION['clock_offset'] = "localtime"; //set to localtime
-  $_SESSION['os_platform'] = $_POST['os_platform'];
+  $_SESSION['os_platform'] = $_POST['os_platform']; //Used to determine what goes in XML. Ex. Windows VMs need extra options
   //Storage Volume Section
   $_SESSION['source_file_volume'] = $_POST['source_file_volume']; //This will be the volume image that the user selects
   $_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $_SESSION['unit'] = $_POST['new_unit'];
   $_SESSION['volume_size'] = $_POST['new_volume_size'];
   $_SESSION['driver_type'] = $_POST['new_driver_type'];
+  $_SESSION['storage_pool'] = $_POST['storage_pool'];
   //Optical Storage Section
   $_SESSION['source_file_cd'] = $_POST['source_file_cd'];
   //Network Section
@@ -72,6 +73,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   $unit = $_SESSION['unit'];
   $volume_size = $_SESSION['volume_size'];
   $driver_type = $_SESSION['driver_type'];
+  $storage_pool = $_SESSION['storage_pool'];
   //Optical Storage Section
   $source_file_cd = $_SESSION['source_file_cd'];
   //Network Section
@@ -134,14 +136,14 @@ if ($_SESSION['domain_type'] == "kvm") {
     $driver_type_volume = "raw";
   }
 
-  //determine what the hard drive volume xml will be
+  //determine what the hard drive volume xml will be.
   switch ($source_file_volume) {
     case "none":
-      $volume_xml = "";
+      $volume_xml = ""; //Will not add a storage volume is "None" is selected
       break;
 
     case "new":
-      $volume_xml = "";
+      $volume_xml = ""; //New storage volumes will be created & added only after successful creating of virtual machine domain
       break;
 
     default:
@@ -150,7 +152,7 @@ if ($_SESSION['domain_type'] == "kvm") {
       <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
       <source file='" . $source_file_volume . "'/>
       <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
-      </disk>";
+      </disk>"; //This option is for adding existing storage volumes to a new virtual machine domain
   }
 
 
@@ -242,16 +244,15 @@ if ($_SESSION['domain_type'] == "kvm") {
 
   //Check for error on creating the domain
   if (!$new_domain){
-    $new_domain_error = 'Error while creating domain: '.$lv->get_last_error();
+    $domain_error = 'Error creating domain: '.$lv->get_last_error();
   }
 
-  //need to check to make sure $new_domain is not false befoe this code exectues
+  //Create and add storage volume to newly created virtual machine
   if ($source_file_volume == "new" && $new_domain != false) {
-    $pool = "default"; //need to give option on form to select available pools
     $volume_size = 0;
-    $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+    $new_disk = $lv->storagevolume_create($storage_pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
     if (!$new_disk){
-      $new_domain_error = $new_domain_error . " Error creating disk: ".$lv->get_last_error();
+      $domain_error = $domain_error . " Error creating disk: ".$lv->get_last_error();
     }
     $res = $new_domain;
     $img = libvirt_storagevolume_get_path($new_disk);
@@ -260,7 +261,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     $driver = $driver_type;
     $new_disk_add = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
     if (!$new_disk_add){
-      $new_domain_error = $new_domain_error . " Error adding disk: ".$lv->get_last_error();
+      $domain_error = $domain_error . " Error adding disk: ".$lv->get_last_error();
     }
   }
 
@@ -280,6 +281,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['unit']);
   unset($_SESSION['volume_size']);
   unset($_SESSION['new_driver_type']);
+  unset($_SESSION['storage_pool']);
   unset($_SESSION['source_file_cd']);
   unset($_SESSION['interface_type']);
   unset($_SESSION['mac_address']);
@@ -287,7 +289,7 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  if(!$new_domain_error) {
+  if(!$domain_error) {
   header('Location: ../domain/domain-list.php');
   exit;
   }
@@ -297,17 +299,16 @@ $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address
 
 require('../navbar.php');
 
-//If there was an error on creating the domain, alert user. The error uses single quotes
-if ($new_domain_error != "") {
+//If there was an error on creating the domain, alert user. The error has single quotes
+if ($domain_error != "") {
   echo "
     <script>
-      var alert_msg = \"$new_domain_error\"
+      var alert_msg = \"$domain_error\"
       swal(alert_msg);
     </script>";
 }
 
 ?>
-
 
 <script>
 function diskChangeOptions(selectEl) {
@@ -424,6 +425,22 @@ function changeOptions(selectEl) {
 
 
               <div class="row">
+                <label class="col-sm-2 col-form-label">Architecture: </label>
+                <div class="col-sm-7">
+                  <div class="form-group">
+                    <select class="form-control" name="os_arch">
+                      <?php
+                      $tmp = $lv->host_get_node_info(); // Get and array of information on the host
+                      $arch = $tmp['model']; //Set the Architecture. Used in the General form. Ex., x86_64
+                      ?>
+                      <option value="<?php echo $arch; ?>"><?php echo $arch; ?></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="row">
                 <label class="col-sm-2 col-form-label">Virtual CPUs: </label>
                 <div class="col-sm-7">
                   <div class="form-group">
@@ -529,6 +546,32 @@ function changeOptions(selectEl) {
                     <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
                       <option value="qcow2" selected="selected">qcow2</option>
                       <option value="raw">raw</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Storage Pool: </label>
+                <div class="col-sm-7">
+                  <div class="form-group diskChange" id="new" style="display:none;">
+                    <select class="form-control" onchange="newExtenstion(this.form)" name="storage_pool">
+                      <?php
+                      for ($i = 0; $i < sizeof($pools); $i++) {
+                        //get the pool resource to use with refreshing the pool data
+                        $res = $lv->get_storagepool_res($pools[$i]);
+                        //refreshing the data before displaying because ISOs were not refreshing automatically and also the Available data was not correct after adding volumes
+                        $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
+                        //getting the pool information to display the data in a table
+                        $info = $lv->get_storagepool_info($pools[$i]);
+                        $poolName = $pools[$i];
+
+                        $act = $info['active'] ? 'Active' : 'Inactive';
+                        if ($act == "Active") {
+                          echo "<option value=\"$poolName\">$poolName</option>";
+                        }
+                      }
+                      ?>
                     </select>
                   </div>
                 </div>

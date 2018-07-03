@@ -19,16 +19,20 @@ shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --targe
 //currently using GET to at the index page to indicate logout, may switch to SESSION VARIABLE
 $action = $_GET['action'];
 if ($action == "logout") {
-  unset($_SESSION['username']);
+  session_destroy(); //Destory all $_SESSION data
+  //unset($_SESSION['username']);
 }
 
 
 //Redirect based on login session or initial setup complete
 if (isset($_SESSION['username'])) {
+
   require('pages/libvirt.php');
   $lv = new Libvirt();
   if ($lv->connect("qemu:///system") == false)
-    die('<html><body>Cannot open connection to hypervisor</body></html>');
+    die('<html><body>Cannot open connection to hypervisor. Please check to make sure that the Qemu service is running.</body></html>');
+
+  //Check if storage pools exist, if not send the user there. This is used mostly on new install
   $pools = $lv->get_storagepools();
   if (empty($pools)) {
     header('Location: pages/storage/storage-pools.php');
