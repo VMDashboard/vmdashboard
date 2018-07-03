@@ -7,3 +7,6 @@ openVM is currently tested on the Ubuntu 16.04 and 18.04 operating systems. Once
 At this moment it is being actively developed and may be different from the stable version coming soon. As of 14-Jun-2018 it is about 95% ready for the first release.
 
 To download and install the software, follow the guide at: https://openvm.tech/download/
+
+Screenshots:
+![image](https://openvm.tech/wp-content/uploads/2018/07/Screen-Shot-2018-07-02-at-6.17.22-PM.png)
