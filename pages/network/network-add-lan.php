@@ -94,13 +94,14 @@ $new_network_name = "network";
 
 for ($i = 0; $i < sizeof($tmp); $i++) {
   $numbers_in_string = countEndingDigits($new_network_name); //Counts how many digits are at the end of the string
-  if ( $numbers_in_string > 0 ) :
-	   $base_portion = substr( $new_network_name, 0, -$numbers_in_string );
-	   $digits_portion = abs(substr( $new_network_name, -$numbers_in_string ));
-  else :
+
+  if ($numbers_in_string > 0) {
+	   $base_portion = substr( $new_network_name, 0, $numbers_in_string );
+	   $digits_portion = abs(substr( $new_network_name, $numbers_in_string ));
+  } else {
 	   $base_portion = $new_network_name;
 	   $digits_portion = '';
-  endif;
+  }
 
   $tmp2 = $lv->get_network_information($tmp[$i]);
   if ($tmp2['name'] == $base_portion . $digits_portion) {
