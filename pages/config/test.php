@@ -298,13 +298,7 @@ $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address
 
 require('../navbar.php');
 
-if ($new_domain_error != "") {
-  echo "
-    <script>
-      var alert_msg = \"$new_domain_error\"
-      swal(alert_msg);
-    </script>";
-}
+
 
 ?>
 
