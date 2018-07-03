@@ -87,6 +87,16 @@ if (isset($_SESSION['network_name'])) {
 
 require('../navbar.php');
 $random_mac = $lv->generate_random_mac_addr();
+
+//Will display a sweet alert if a return message exists
+if ($ret != "") {
+echo "
+<script>
+var alert_msg = \"$ret\"
+swal(alert_msg);
+</script>";
+}
+
 ?>
 
 <script>
