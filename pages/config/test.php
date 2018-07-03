@@ -139,10 +139,8 @@ if ($_SESSION['domain_type'] == "kvm") {
     case "none":
       $volume_xml = "";
       break;
-$volume_size = 0;
+
     case "new":
-      $pool = "default";
-      $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
       $volume_xml = "";
       break;
 
@@ -242,11 +240,15 @@ $volume_size = 0;
   //Define the new guest domain based off the XML information
   $new_domain = $lv->domain_define($xml);
   if (!$new_domain){
-    $new_domain = 'Error while creating domain: '.$lv->get_last_error();
+    $new_domain_error = 'Error while creating domain: '.$lv->get_last_error();
   }
 
   //need to check to make sure $new_domain is not false befoe this code exectues
-  if ($source_file_volume == "new") {
+  if ($source_file_volume == "new" && $new_domain != false) {
+    $pool = "default";
+    $volume_size = 0;
+    $new_disk = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+
     $res = $new_domain;
     $img = libvirt_storagevolume_get_path($new_disk);
     $dev = $target_dev_volume;
