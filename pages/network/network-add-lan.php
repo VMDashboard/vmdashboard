@@ -156,7 +156,7 @@ function dhcpChangeOptions(selectEl) {
                   <label class="col-sm-2 col-form-label">Network Name: </label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input type="text" value="newNETWORK" required="required" placeholder="Enter name for new network connection " class="form-control" name="network_name" />
+                      <input type="text" value="<?php echo $new_network_name; ?>" required="required" placeholder="Enter name for new network connection " class="form-control" name="network_name" />
                     </div>
                   </div>
                 </div>
