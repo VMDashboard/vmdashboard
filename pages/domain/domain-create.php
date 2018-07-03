@@ -571,7 +571,7 @@ function changeOptions(selectEl) {
                           echo "<option value=\"$poolName\">$poolName</option>";
                         }
                       }
-                      if (sizeof{$pools} < 1) {
+                      if (sizeof($pools) < 1) {
                         echo "<option value=\"none\">No storage pools available</option>";
                       }
                       ?>
