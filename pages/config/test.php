@@ -261,13 +261,13 @@ $volume_size = 0;
       </script>";
   }
 
-  if ($new_domain != "") {
+
     echo "
       <script>
         var alert_msg = '$new_domain'
         swal(alert_msg);
       </script>";
-  }
+  
 
   unset($_SESSION['domain_type']);
   unset($_SESSION['domain_name']);
