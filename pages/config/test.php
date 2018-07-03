@@ -240,7 +240,7 @@ $volume_size = 0;
     </domain> ";
 
   //Define the new guest domain based off the XML information
-  $new_domain = $lv->domain_define($xml);
+  $new_domain = $lv->domain_define($xml) ? "Domain has been created successfully" : 'Error while creating domain: '.$lv->get_last_error();
 
   //need to check to make sure $new_domain is not false befoe this code exectues
   if ($source_file_volume == "new") {
