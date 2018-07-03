@@ -51,7 +51,7 @@ if (isset($_SESSION['reset_status'])) {
   $ret = $_SESSION['reset_status'];
   echo "
     <script>
-    var alert_msg = '$ret'
+    var alert_msg = \"$ret\"
     swal(alert_msg);
     </script>";
 
