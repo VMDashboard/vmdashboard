@@ -262,12 +262,6 @@ $volume_size = 0;
   }
 
 
-    echo "
-      <script>
-        var alert_msg = '$new_domain'
-        swal(alert_msg);
-      </script>";
-  
 
   unset($_SESSION['domain_type']);
   unset($_SESSION['domain_name']);
@@ -298,6 +292,14 @@ $volume_size = 0;
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
 
 require('../navbar.php');
+
+if ($new_domain != "") {
+  echo "
+    <script>
+      var alert_msg = '$new_domain'
+      swal(alert_msg);
+    </script>";
+}
 
 ?>
 <script>
