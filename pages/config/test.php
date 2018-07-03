@@ -264,7 +264,7 @@ $volume_size = 0;
   if ($new_domain != "") {
     echo "
       <script>
-        var alert_msg = '$ret'
+        var alert_msg = '$new_domain'
         swal(alert_msg);
       </script>";
   }
