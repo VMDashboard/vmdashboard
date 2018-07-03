@@ -258,10 +258,10 @@ if ($_SESSION['domain_type'] == "kvm") {
   }
 
   //Will display a sweet alert if a return message exists
-  if ($ret != "") {
+  if ($new_domain_error != "") {
     echo "
       <script>
-        var alert_msg = '$ret'
+        var alert_msg = '$new_domain_error'
         swal(alert_msg);
       </script>";
   }
