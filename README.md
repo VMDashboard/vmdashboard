@@ -9,4 +9,8 @@ At this moment it is being actively developed and may be different from the stab
 To download and install the software, follow the guide at: https://openvm.tech/download/
 
 Screenshots:
+<h2>Host Information</h2>
 ![image](https://openvm.tech/wp-content/uploads/2018/07/Screen-Shot-2018-07-02-at-6.17.22-PM.png)
+
+<h2>New Virtual Machine</h2>
+![image](https://openvm.tech/wp-content/uploads/2018/07/Screen-Shot-2018-07-02-at-6.22.30-PM.png)
