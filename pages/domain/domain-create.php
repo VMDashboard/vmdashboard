@@ -557,6 +557,7 @@ function changeOptions(selectEl) {
                   <div class="form-group diskChange" id="new" style="display:none;">
                     <select class="form-control" onchange="newExtenstion(this.form)" name="storage_pool">
                       <?php
+                      $counter = 0;
                       for ($i = 0; $i < sizeof($pools); $i++) {
                         //get the pool resource to use with refreshing the pool data
                         $res = $lv->get_storagepool_res($pools[$i]);
@@ -569,9 +570,10 @@ function changeOptions(selectEl) {
                         $act = $info['active'] ? 'Active' : 'Inactive';
                         if ($act == "Active") {
                           echo "<option value=\"$poolName\">$poolName</option>";
+                          $counter++;
                         }
                       }
-                      if (sizeof($pools) < 1) {
+                      if ($counter == 0) {
                         echo "<option value=\"none\">No storage pools available</option>";
                       }
                       ?>
