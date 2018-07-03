@@ -292,7 +292,7 @@ $volume_size = 0;
   unset($_SESSION['source_network']);
 
   //header('Location: domain-list.php');
-  exit;
+  //exit;
 }
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
