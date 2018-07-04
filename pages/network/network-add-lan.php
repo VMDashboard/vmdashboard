@@ -120,7 +120,7 @@ function dhcpChangeOptions(selectEl) {
   <div class="card">
     <form action="" method="POST">
       <div class="card-header">
-        <h4 class="card-title"> Add virtual network to <?php echo $hn; ?></h4>
+        <h4 class="card-title"> New Private Network </h4>
       </div>
       <div class="card-body">
         <div class="row">
