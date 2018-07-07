@@ -608,7 +608,7 @@ class Libvirt {
     }
 
     //Used to move/upload ISO file to storage volume
-    function storagevolume_upload($res, $stream, $offest = 0, $length, $flags) {
+    function storagevolume_upload($res, $stream, $offest = 0, $length) {
         $res = $this->get_storagepool_res($res); //gets the storage pool
         //Stream is original ISO file
         //Offset is position to start writing to (int)

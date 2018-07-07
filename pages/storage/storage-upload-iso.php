@@ -42,7 +42,7 @@ if (isset($_SESSION['pool'])) {
   $unit = $_SESSION['unit'];
   $driver_type = $_SESSION['driver_type'];
 
-$ret = $lv->storagevolume_upload($pool,"ubuntu.iso",0,500)  ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
+$ret = $lv->storagevolume_upload($pool,"ubuntu.iso",0,500) ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
 
   //$ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   //$msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
