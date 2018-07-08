@@ -36,48 +36,11 @@ if (isset($_SESSION['os'])) {
         break;
     default:
         $download_link = false;
-}
-
-$size = exec("stat -Lc%s {$os}"); //{} variable in exec command
-
-$volume_image_name = $os;
-$volume_capacity = $size;
-$unit = "B";
-$volume_size = $size;
-$driver_type = "raw";
-
-$tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-
-$ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
-unlink($os);
-
-/*
-
-  //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
-  $size = exec("stat -Lc%s ubuntu-18.04-live-server-amd64.iso");
-  //$tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
-
-  $pool = "default";
-  $volume_image_name = "ubuntu-18.04-live-server-amd64.iso";
-  $volume_capacity = $size;
-  $unit = "B";
-  $volume_size = $size;
-  $driver_type = "raw";
-
-  $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-
-
-  $ret = shell_exec("virsh -c qemu:///system vol-upload --pool default ubuntu-18.04-live-server-amd64.iso ubuntu-18.04-live-server-amd64.iso 2>&1");
-
-
-  //$ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
-  //$msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-
-  unset($_SESSION['pool']);
+  }
 
   //header('Location: storage-pools.php');
   //exit;
-  */
+
 }
 
 require('../navbar.php');
@@ -106,8 +69,6 @@ function updateProgress(percentage) {
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
         <progress id="prog" value="0" max="100.0"></progress>
-        <?php echo "<pre>" . $ret . "</pre>"; ?>
-        <?php var_dump($tmp); ?>
       </div>
       <div class="card-body">
         <div class="row">
@@ -163,79 +124,80 @@ function updateProgress(percentage) {
 </div> <!-- end content -->
 
 <?php
-require('../footer.php');
+//require('../footer.php');
 
 
 if ($download_link != false) {
 
+  //output buffer
+  ob_start();
+  //create javascript progress bar
+  echo '<html><head>
+  <script type="text/javascript">
+  function updateProgress(percentage) {
+      document.getElementById(\'progress\').value = percentage;
+  }
+  </script></head><body>
+      <progress id="prog" value="0" max="100.0"></progress>
+  ';
 
-//output buffer
-ob_start();
-//create javascript progress bar
+  //initilize progress bar
+  ob_flush();
+  flush();
+  //save progress to variable instead of a file
+  $temp_progress = '';
+  $targetFile = fopen( $os, 'w' );
+  $ch = curl_init( $download_link );
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
+  curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
+  curl_setopt( $ch, CURLOPT_FILE, $targetFile );
+  curl_exec( $ch );
+  fclose( $targetFile );
+  //must add $resource to the function after a newer php version. Previous comments states php 5.5
+  function progressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
+  {
+      static $previousProgress = 0;
 
-echo '<html><head>
-<script type="text/javascript">
-function updateProgress(percentage) {
-    document.getElementById(\'progress\').value = percentage;
-}
-</script></head><body>
-    <progress id="prog" value="0" max="100.0"></progress>
-';
+      if ( $download_size == 0 ) {
+          $progress = 0;
+      } else {
+          $progress = round( $downloaded_size * 100 / $download_size );
+  	}
 
-//initilize progress bar
-ob_flush();
-flush();
-//save progress to variable instead of a file
-$temp_progress = '';
-$targetFile = fopen( $os, 'w' );
-$ch = curl_init( $download_link );
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
-curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
-curl_setopt( $ch, CURLOPT_FILE, $targetFile );
-curl_exec( $ch );
-fclose( $targetFile );
-//must add $resource to the function after a newer php version. Previous comments states php 5.5
-function progressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
-{
-    static $previousProgress = 0;
+      if ( $progress > $previousProgress)
+      {
+          $previousProgress = $progress;
+          $temp_progress = $progress;
+      }
 
-    if ( $download_size == 0 ) {
-        $progress = 0;
-    } else {
-        $progress = round( $downloaded_size * 100 / $download_size );
-	}
-
-    if ( $progress > $previousProgress)
-    {
-        $previousProgress = $progress;
-        $temp_progress = $progress;
-    }
     //update javacsript progress bar to show download progress
-	echo '<script>document.getElementById(\'prog\').value = '.$progress.';</script>';
+  	echo '<script>document.getElementById(\'prog\').value = '.$progress.';</script>';
 
-	ob_flush();
-    flush();
-    //sleep(1); // just to see effect
+  	ob_flush();
+      flush();
+      //sleep(1); // just to see effect
+  }
+
+  //if we get here, the download has completed
+  echo "Done";
+  //flush just to be sure
+  ob_flush();
+  flush();
+
+  $size = exec("stat -Lc%s {$os}"); //{} variable in exec command
+
+  $volume_image_name = $os;
+  $volume_capacity = $size;
+  $unit = "B";
+  $volume_size = $size;
+  $driver_type = "raw";
+
+  $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
+  $ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
+  unlink($os);
+
 }
-//if we get here, the download has completed
-echo "Done";
-//flush just to be sure
-ob_flush();
-flush();
 
-$size = exec("stat -Lc%s {$os}"); //{} variable in exec command
-
-$volume_image_name = $os;
-$volume_capacity = $size;
-$unit = "B";
-$volume_size = $size;
-$driver_type = "raw";
-
-$tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
-
-$ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
-
-}
-
+require('../footer.php');
 ?>
