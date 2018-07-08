@@ -49,7 +49,7 @@ $driver_type = "raw";
 $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
 $ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
-
+unlink($os);
 
 /*
 
