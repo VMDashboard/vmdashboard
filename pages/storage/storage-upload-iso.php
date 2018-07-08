@@ -43,6 +43,7 @@ if (isset($_SESSION['pool'])) {
   //$driver_type = $_SESSION['driver_type'];
 
   $ret = shell_exec("ls -la");
+  $ret = var_dump($ret);
 
 //$ret = $lv->storagevolume_upload($pool,"/var/www/html/openvm/pages/storage/ubuntu.iso",0,500) ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
 
