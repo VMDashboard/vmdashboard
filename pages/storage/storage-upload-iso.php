@@ -20,7 +20,7 @@ if (isset($_POST['os'])) {
 }
 
 require('../header.php');
-/*
+
 if (isset($_SESSION['os'])) {
   $os = $_SESSION['os'];
   $pool = $_SESSION['pool'];
@@ -38,7 +38,7 @@ if (isset($_SESSION['os'])) {
         $download_link = false;
 }
 
-*/
+
 
 /*
 
@@ -154,6 +154,7 @@ function updateProgress(percentage) {
 <?php
 require('../footer.php');
 
+
 if ($download_link != false) {
 
 
@@ -214,7 +215,7 @@ flush();
 
 $size = exec("stat -Lc%s {$os}"); //{} variable in exec command
 
-$volume_image_name = $os
+$volume_image_name = $os;
 $volume_capacity = $size;
 $unit = "B";
 $volume_size = $size;
@@ -225,4 +226,5 @@ $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$un
 $ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
 
 }
+
 ?>
