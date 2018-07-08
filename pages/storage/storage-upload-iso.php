@@ -161,7 +161,7 @@ if ($download_link != false) {
 //output buffer
 ob_start();
 //create javascript progress bar
-/*
+
 echo '<html><head>
 <script type="text/javascript">
 function updateProgress(percentage) {
@@ -170,7 +170,7 @@ function updateProgress(percentage) {
 </script></head><body>
     <progress id="prog" value="0" max="100.0"></progress>
 ';
-*/
+
 //initilize progress bar
 ob_flush();
 flush();
