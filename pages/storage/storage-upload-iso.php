@@ -29,10 +29,10 @@ if (isset($_SESSION['os'])) {
 
   switch ($os) {
     case "ubuntu-18.04-live-server-amd64.iso":
-        //$download_link = "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso";
+        $download_link = "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso";
         break;
     case "ubuntu-16.04.4-server-amd64.iso":
-        //$download_link = "http://releases.ubuntu.com/16.04.4/ubuntu-16.04.4-server-amd64.iso";
+        $download_link = "http://releases.ubuntu.com/16.04.4/ubuntu-16.04.4-server-amd64.iso";
         break;
     default:
         $download_link = false;
@@ -146,8 +146,8 @@ if ($download_link != false) {
   flush();
   //save progress to variable instead of a file
   $temp_progress = '';
-  $targetFile = fopen( $os, 'w' );
-  $ch = curl_init( $download_link );
+  $targetFile = fopen( "$os", 'w' );
+  $ch = curl_init( "$download_link" );
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
   curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
