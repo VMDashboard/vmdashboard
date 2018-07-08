@@ -29,15 +29,26 @@ if (isset($_SESSION['os'])) {
 
   switch ($os) {
     case "ubuntu-18.04-live-server-amd64.iso":
-        $download_link = "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso";
+        //$download_link = "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso";
         break;
     case "ubuntu-16.04.4-server-amd64.iso":
-        $download_link = "http://releases.ubuntu.com/16.04.4/ubuntu-16.04.4-server-amd64.iso";
+        //$download_link = "http://releases.ubuntu.com/16.04.4/ubuntu-16.04.4-server-amd64.iso";
         break;
     default:
         $download_link = false;
 }
 
+$size = exec("stat -Lc%s {$os}"); //{} variable in exec command
+
+$volume_image_name = $os;
+$volume_capacity = $size;
+$unit = "B";
+$volume_size = $size;
+$driver_type = "raw";
+
+$tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
+
+$ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
 
 
 /*
