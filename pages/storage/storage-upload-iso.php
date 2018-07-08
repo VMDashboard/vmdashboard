@@ -11,20 +11,34 @@ if (!isset($_SESSION['username'])){
 
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
-if (isset($_POST['pool'])) {
+if (isset($_POST['os'])) {
+  $_SESSION['os'] = $_POST['os'];
   $_SESSION['pool'] = $_POST['pool'];
-
+  unset($_POST);
   header("Location: ".$_SERVER['PHP_SELF']);
   exit;
 }
 
 require('../header.php');
 
-if (isset($_SESSION['pool'])) {
-
+if (isset($_SESSION['os'])) {
+  $os = $_SESSION['os'];
   $pool = $_SESSION['pool'];
+  unset($_SESSION['os']);
+  unset($_SESSION['pool']);
+
+  switch ($os) {
+    case "ubuntu-18.04-live-server-amd64.iso":
+        $download_link = "http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso";
+        break;
+    case "ubuntu-16.04.4-server-amd64.iso":
+        $download_link = "http://releases.ubuntu.com/16.04.4/ubuntu-16.04.4-server-amd64.iso";
+        break;
+    default:
+        $download_link = false;
+}
+
 /*
-  //system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu-18.04-live-server-amd64.iso");
@@ -102,46 +116,25 @@ function updateProgress(percentage) {
               <div class="tab-pane active" id="storageVolume">
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">Volume Name: </label>
+                  <label class="col-sm-2 col-form-label">Operating System: </label>
                   <div class="col-sm-7">
                     <div class="form-group">
-                      <input type="text" value="newVolume.qcow2" required="required" placeholder="Enter name for new volume image" class="form-control" name="volume_image_name" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">Volume Size: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input type="number" class="form-control" name="volume_size" min="1" value="40" required="required" />
-                    </div>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">Unit Size: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <select  class="form-control" name="unit">
-                        <option value="M">MB</option>
-                        <option value="G" selected>GB</option>
+                      <select  class="form-control" name="os">
+                        <option value="ubuntu-18.04-live-server-amd64.iso">ubuntu-18.04-live-server-amd64.iso</option>
+                        <option value="ubuntu-16.04.4-server-amd64.iso">ubuntu-16.04.4-server-amd64.iso</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
                 <div class="row">
-                  <label class="col-sm-2 col-form-label">Driver Type: </label>
+                  <label class="col-sm-2 col-form-label">Pool: </label>
                   <div class="col-sm-7">
-                    <select  class="form-control" name="driver_type" onchange="newExtenstion(this.form)">
-                      <option value="qcow2" selected>qcow2</option>
-                      <option value="raw">raw</option>
+                    <select  class="form-control" name="pool">
+                      <option value="default" selected>default</option>
                     </select>
                   </div>
                 </div>
-
-                <input type="hidden" value="<?php echo $_GET['pool']; ?>" name="pool"/>
 
               </div> <!-- end tab pane -->
             </div> <!-- end tab content -->
@@ -163,6 +156,7 @@ require('../footer.php');
 //output buffer
 ob_start();
 //create javascript progress bar
+/*
 echo '<html><head>
 <script type="text/javascript">
 function updateProgress(percentage) {
@@ -171,6 +165,7 @@ function updateProgress(percentage) {
 </script></head><body>
     <progress id="prog" value="0" max="100.0"></progress>
 ';
+*/
 //initilize progress bar
 ob_flush();
 flush();
@@ -212,5 +207,18 @@ echo "Done";
 //flush just to be sure
 ob_flush();
 flush();
+
+$size = exec("stat -Lc%s {$os}"); //{} variable in exec command
+
+$volume_image_name = $os
+$volume_capacity = $size;
+$unit = "B";
+$volume_size = $size;
+$driver_type = "raw";
+
+$tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
+
+$ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
+
 
 ?>
