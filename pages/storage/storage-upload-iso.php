@@ -64,13 +64,13 @@ if (isset($_SESSION['pool'])) {
 require('../navbar.php');
 
 //Will display a sweet alert if a return message exists
-//if ($ret != "") {
+if ($ret != "") {
 echo "
 <script>
-var alert_msg = '$ret'
+var alert_msg = \"$ret\"
 swal(alert_msg);
 </script>";
-//}
+}
 
 ?>
 
@@ -80,7 +80,7 @@ swal(alert_msg);
     <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
-        <?php var_dump($ret); ?>
+        <?php echo $ret; ?>
       </div>
       <div class="card-body">
         <div class="row">
