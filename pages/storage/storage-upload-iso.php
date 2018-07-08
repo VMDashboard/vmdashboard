@@ -24,14 +24,14 @@ if (isset($_SESSION['pool'])) {
 
   $pool = $_SESSION['pool'];
 
-  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
+  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso, ubuntu-18.04-live-server-amd64.iso");
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
-  $size = exec("stat -Lc%s ubuntu.iso");
+  $size = exec("stat -Lc%s ubuntu-18.04-live-server-amd64.iso");
   //$tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
 
   $pool = "default";
-  $volume_image_name = "ubuntu-server.iso";
+  $volume_image_name = "ubuntu-18.04-live-server-amd64.iso";
   $volume_capacity = $size;
   $unit = "B";
   $volume_size = $size;
@@ -40,7 +40,7 @@ if (isset($_SESSION['pool'])) {
   $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
 
-  $ret = shell_exec("virsh -c qemu:///system vol-upload --pool default ubuntu-server.iso /var/www/html/openVM/pages/storage/ubuntu18.iso 2>&1");
+  $ret = shell_exec("virsh -c qemu:///system vol-upload --pool default ubuntu-18.04-live-server-amd64.iso ubuntu-18.04-live-server-amd64.iso 2>&1");
 
 
   //$ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
