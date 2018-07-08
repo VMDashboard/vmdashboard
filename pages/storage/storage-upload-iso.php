@@ -42,7 +42,10 @@ if (isset($_SESSION['pool'])) {
   //$unit = $_SESSION['unit'];
   //$driver_type = $_SESSION['driver_type'];
 
-  $ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
+  //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
+  $size = exec("stat -Lc%s ubuntu.iso");
+  $tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
+  $ret = exec("virsh -c qemu:///system vol-upload --pool default ubuntu_server.iso ubuntu.iso");
 
 
 //$ret = $lv->storagevolume_upload($pool,"/var/www/html/openvm/pages/storage/ubuntu.iso",0,500) ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
