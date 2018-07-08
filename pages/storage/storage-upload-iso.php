@@ -45,18 +45,15 @@ if (isset($_SESSION['pool'])) {
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu.iso");
   //$tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
-  //$tmp $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
   $pool = "default";
-  $type = "raw";
-  $xml = "<volume>\n".
-  "  <name>ubuntu-server.iso</name>\n".
-  "  <capacity>$size</capacity>\n".
-  "  <allocation>$size</allocation>\n".
-  "  <target><format type='" . $type . "' /></target>\n".
-  "</volume>";
+  $volume_image_name = "ubuntu-server.iso";
+  $volume_capacity = $size;
+  $unit = "B";
+  $volume_size = $size;
+  $driver_type = "raw";
 
-  $tmp = libvirt_storagevolume_create_xml($pool, $xml);
+  $tmp $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
 
   $ret = shell_exec("virsh -c qemu:///system vol-upload --pool default ubuntu-server.iso /var/www/html/openVM/pages/storage/ubuntu.iso 2>&1");
