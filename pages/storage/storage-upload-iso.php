@@ -171,7 +171,7 @@ ob_flush();
 flush();
 //save progress to variable instead of a file
 $temp_progress = '';
-$targetFile = fopen( 'testfile.iso', 'w' );
+$targetFile = fopen( "$os", 'w' );
 $ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
