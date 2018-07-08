@@ -152,6 +152,8 @@ function updateProgress(percentage) {
 <?php
 require('../footer.php');
 
+if ($download_link != false) {
+
 
 //output buffer
 ob_start();
@@ -171,8 +173,8 @@ ob_flush();
 flush();
 //save progress to variable instead of a file
 $temp_progress = '';
-$targetFile = fopen( "$os", 'w' );
-$ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
+$targetFile = fopen( $os, 'w' );
+$ch = curl_init( $download_link );
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
 curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
@@ -220,5 +222,5 @@ $tmp = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$un
 
 $ret = shell_exec("virsh -c qemu:///system vol-upload --pool {$pool} {$os} {$os} 2>&1");
 
-
+}
 ?>
