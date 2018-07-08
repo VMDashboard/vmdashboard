@@ -44,11 +44,23 @@ if (isset($_SESSION['pool'])) {
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu.iso");
-  $tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
+  //$tmp = exec("virsh -c qemu:///system vol-create-as default ubuntu_server.iso {$size} --format raw");
+  //$tmp $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
+
+  $pool = "default";
+  
+  $xml = "<volume>\n".
+  "  <name>ubuntu-server.iso</name>\n".
+  "  <capacity>$size</capacity>\n".
+  "  <allocation>0</allocation>\n".
+  "  <target><format type='raw' /></target>\n".
+  "</volume>";
+
+  $tmp = libvirt_storagevolume_create_xml($pool, $xml);
+
+
   $ret = shell_exec("virsh -c qemu:///system vol-upload --pool default ubuntu_server.iso /var/www/html/openVM/pages/storage/ubuntu.iso 2>&1");
 
-
-//$ret = $lv->storagevolume_upload($pool,"/var/www/html/openvm/pages/storage/ubuntu.iso",0,500) ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
 
   //$ret = $lv->domain_disk_add($domName, $source_file, $target_dev, $target_bus, $driver_type) ? "Disk has been successfully added to the guest" : "Cannot add disk to the guest: ".$lv->get_last_error();
   //$msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';

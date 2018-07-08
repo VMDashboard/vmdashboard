@@ -607,19 +607,6 @@ class Libvirt {
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
-    //Used to move/upload ISO file to storage volume
-    /*function storagevolume_upload($res, $stream) {
-        $res = $this->get_storagepool_res($res); //gets the storage pool
-        $stream = libvirt_stream_create($this->conn);
-        //Stream is original ISO file
-        //Offset is position to start writing to (int)
-        //Length is the limit on data upload (int)
-        //Flags are optional to the vol-upload
-
-        $tmp = libvirt_storagevolume_upload($res, $stream,0,500);
-        libvirt_stream_close($this->conn);
-        return ($tmp) ? $tmp : $this->_set_last_error();
-    } */
 
     //Used to clone the storage volumes
     function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name) {
