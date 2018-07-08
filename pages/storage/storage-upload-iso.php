@@ -43,7 +43,7 @@ if (isset($_SESSION['pool'])) {
   //$driver_type = $_SESSION['driver_type'];
 
   $ret = shell_exec("virsh -c qemu:///system virsh list --all 2>&1");
-  $ret = var_dump($ret);
+
 
 //$ret = $lv->storagevolume_upload($pool,"/var/www/html/openvm/pages/storage/ubuntu.iso",0,500) ? "ISO has been uploaded successfully" : "Cannot upload iso: ".$lv->get_last_error();
 
@@ -80,6 +80,7 @@ swal(alert_msg);
     <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
+        <?php var_dump($ret); ?>
       </div>
       <div class="card-body">
         <div class="row">
