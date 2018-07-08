@@ -9,23 +9,10 @@ if (!isset($_SESSION['username'])){
   header('Location: ../login.php');
 }
 
-function clean_input($data) {
-  $data = trim($data);
-  $data = stripslashes($data);
-  $data = htmlspecialchars($data);
-  $data = str_replace(' ','',$data);
-  $data = filter_var($data, FILTER_SANITIZE_STRING);
-  return $data;
-}
-
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_POST['pool'])) {
   $_SESSION['pool'] = $_POST['pool'];
-  //$_SESSION['volume_image_name'] = clean_input($_POST['volume_image_name']);
-  //$_SESSION['volume_size'] = $_POST['volume_size'];
-  //$_SESSION['unit'] = $_POST['unit'];
-  //$_SESSION['driver_type'] = $_POST['driver_type'];
 
   header("Location: ".$_SERVER['PHP_SELF']);
   exit;
@@ -36,11 +23,8 @@ require('../header.php');
 if (isset($_SESSION['pool'])) {
 
   $pool = $_SESSION['pool'];
-  //$volume_image_name = $_SESSION['volume_image_name'];
-  //$volume_capacity = $_SESSION['volume_size'];
-  //$volume_size = $_SESSION['volume_size'];
-  //$unit = $_SESSION['unit'];
-  //$driver_type = $_SESSION['driver_type'];
+
+  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu.iso");
