@@ -132,22 +132,14 @@ if ($download_link != false) {
   //output buffer
   ob_start();
   //create javascript progress bar
-  echo '<html><head>
-  <script type="text/javascript">
-  function updateProgress(percentage) {
-      document.getElementById(\'progress\').value = percentage;
-  }
-  </script></head><body>
-      <progress id="prog" value="0" max="100.0"></progress>
-  ';
 
   //initilize progress bar
   ob_flush();
   flush();
   //save progress to variable instead of a file
   $temp_progress = '';
-  $targetFile = fopen( "$os", 'w' );
-  $ch = curl_init( "$download_link" );
+  $targetFile = fopen( 'test.iso', 'w' );
+  $ch = curl_init( $download_link );
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
   curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
