@@ -48,12 +48,12 @@ if (isset($_SESSION['pool'])) {
   //$tmp $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
   $pool = "default";
-
+  $type = "raw";
   $xml = "<volume>\n".
   "  <name>ubuntu-server.iso</name>\n".
   "  <capacity>$size</capacity>\n".
-  "  <allocation>0</allocation>\n".
-  "  <target><format type='raw' /></target>\n".
+  "  <allocation>$size</allocation>\n".
+  "  <target><format type='" . $type . "' /></target>\n".
   "</volume>";
 
   $tmp = libvirt_storagevolume_create_xml($pool, $xml);
