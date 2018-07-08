@@ -96,6 +96,7 @@ swal(alert_msg);
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
         <?php echo "<pre>" . $ret . "</pre>"; ?>
+        <?php echo "<pre>" . $tmp . "</pre>"; ?>
       </div>
       <div class="card-body">
         <div class="row">
