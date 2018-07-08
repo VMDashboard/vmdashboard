@@ -63,13 +63,13 @@ if (isset($_SESSION['pool'])) {
 require('../navbar.php');
 
 //Will display a sweet alert if a return message exists
-if ($ret != "") {
+//if ($ret != "") {
 echo "
 <script>
 var alert_msg = \"$ret\"
 swal(alert_msg);
 </script>";
-}
+//}
 
 ?>
 
