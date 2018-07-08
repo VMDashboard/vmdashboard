@@ -80,7 +80,7 @@ swal(alert_msg);
     <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
-        <?php echo $ret; ?>
+        <?php print $ret; ?>
       </div>
       <div class="card-body">
         <div class="row">
