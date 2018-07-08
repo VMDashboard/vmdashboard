@@ -20,7 +20,7 @@ if (isset($_POST['os'])) {
 }
 
 require('../header.php');
-
+/*
 if (isset($_SESSION['os'])) {
   $os = $_SESSION['os'];
   $pool = $_SESSION['pool'];
@@ -37,6 +37,8 @@ if (isset($_SESSION['os'])) {
     default:
         $download_link = false;
 }
+
+*/
 
 /*
 
