@@ -23,8 +23,8 @@ require('../header.php');
 if (isset($_SESSION['pool'])) {
 
   $pool = $_SESSION['pool'];
-
-  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
+/*
+  //system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu-18.04-live-server-amd64.iso");
@@ -47,14 +47,10 @@ if (isset($_SESSION['pool'])) {
   //$msg = $lv->storagevolume_create($pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type) ? 'Volume has been created successfully' : 'Cannot create volume';
 
   unset($_SESSION['pool']);
-  //unset($_SESSION['volume_image_name']);
-  //unset($_SESSION['volume_size']);
-  //unset($_SESSION['unit']);
-  //unset($_SESSION['driver_type']);
-
 
   //header('Location: storage-pools.php');
   //exit;
+  */
 }
 
 require('../navbar.php');
@@ -70,12 +66,19 @@ swal(alert_msg);
 
 ?>
 
+<script>
+function updateProgress(percentage) {
+    document.getElementById("progress").value = percentage;
+}
+</script>
+
 
 <div class="content">
   <div class="card">
     <form action="" method="POST">
       <div class="card-header">
         <h4 class="card-title"> Upload ISO image</h4>
+        <progress id="prog" value="0" max="100.0"></progress>
         <?php echo "<pre>" . $ret . "</pre>"; ?>
         <?php var_dump($tmp); ?>
       </div>
@@ -155,4 +158,59 @@ swal(alert_msg);
 
 <?php
 require('../footer.php');
+
+
+//output buffer
+ob_start();
+//create javascript progress bar
+echo '<html><head>
+<script type="text/javascript">
+function updateProgress(percentage) {
+    document.getElementById(\'progress\').value = percentage;
+}
+</script></head><body>
+    <progress id="prog" value="0" max="100.0"></progress>
+';
+//initilize progress bar
+ob_flush();
+flush();
+//save progress to variable instead of a file
+$temp_progress = '';
+$targetFile = fopen( 'testfile.iso', 'w' );
+$ch = curl_init( 'http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso' );
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt( $ch, CURLOPT_NOPROGRESS, false );
+curl_setopt( $ch, CURLOPT_PROGRESSFUNCTION, 'progressCallback' );
+curl_setopt( $ch, CURLOPT_FILE, $targetFile );
+curl_exec( $ch );
+fclose( $targetFile );
+//must add $resource to the function after a newer php version. Previous comments states php 5.5
+function progressCallback( $resource, $download_size, $downloaded_size, $upload_size, $uploaded_size )
+{
+    static $previousProgress = 0;
+
+    if ( $download_size == 0 ) {
+        $progress = 0;
+    } else {
+        $progress = round( $downloaded_size * 100 / $download_size );
+	}
+
+    if ( $progress > $previousProgress)
+    {
+        $previousProgress = $progress;
+        $temp_progress = $progress;
+    }
+    //update javacsript progress bar to show download progress
+	echo '<script>document.getElementById(\'prog\').value = '.$progress.';</script>';
+
+	ob_flush();
+    flush();
+    //sleep(1); // just to see effect
+}
+//if we get here, the download has completed
+echo "Done";
+//flush just to be sure
+ob_flush();
+flush();
+
 ?>
