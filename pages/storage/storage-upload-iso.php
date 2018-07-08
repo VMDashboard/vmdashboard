@@ -24,7 +24,7 @@ if (isset($_SESSION['pool'])) {
 
   $pool = $_SESSION['pool'];
 
-  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso, ubuntu-18.04-live-server-amd64.iso");
+  system("http://releases.ubuntu.com/18.04/ubuntu-18.04-live-server-amd64.iso");
 
   //$ret = shell_exec("virsh -c qemu:///system list --all 2>&1");
   $size = exec("stat -Lc%s ubuntu-18.04-live-server-amd64.iso");
