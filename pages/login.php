@@ -25,12 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //Set the username session to keep logged in
     $_SESSION['username'] = $username;
 
-    //Check for a newer version of OpenVM
-    $arrayLatest = file('https://openvm.tech/version.php');
-    $arrayExisting = file('config/version.php');
-    $latestExploded = explode('.', $arrayLatest[1]);
-    $existingExploded = explode('.', $arrayExisting[1]);
+    $arrayLatest = file('https://openvm.tech/version.php'); //Check for a newer version of OpenVM
+    $arrayExisting = file('config/version.php'); //Check the existing version of OpenVM
+    $latestExploded = explode('.', $arrayLatest[1]); //Seperate Major.Minor.Patch
+    $existingExploded = explode('.', $arrayExisting[1]); //Seperate Major.Minor.Patch
 
+    //Compare each component Major, Minor, and Patch
     if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
       $_SESSION['update_available'] = true;
       $_SESSION['update_version'] = $arrayLatest;
