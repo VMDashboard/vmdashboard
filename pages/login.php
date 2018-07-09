@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="container">
       <div class="navbar-wrapper">
         <img src="../assets/img/squarelogo.png" width="30px">
-        <a class="navbar-brand" href="#"> &nbsp OPENVM.TECH </a>
+        <a class="navbar-brand" href="https://openvm.tech"> &nbsp OPENVM.TECH </a>
       </div>
     </div>
   </nav>
