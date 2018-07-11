@@ -3,7 +3,7 @@
             <div class="row">
               <nav class="footer-nav">
                   <ul>
-                      <li><a href="https://openvm.tech">openVM.tech</a></li>
+                      <li><a href="https://openvm.tech">OpenVM.tech</a></li>
                   </ul>
               </nav>
               <div class="credits ml-auto">
