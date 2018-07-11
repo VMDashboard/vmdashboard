@@ -29,9 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $arrayExisting = file('config/version.php'); //Check the existing version of OpenVM
     $latestExploded = explode('.', $arrayLatest[1]); //Seperate Major.Minor.Patch
     $existingExploded = explode('.', $arrayExisting[1]); //Seperate Major.Minor.Patch
+    $latest = $latestExploded[0] . $latestExploded[1] . $latestExploded [2];
+    $existing = $existingExploded[0] . $existingExploded[1] . $existingExploded[2];
 
     //Compare each component Major, Minor, and Patch
-    if ($latestExploded[0] > $existingExploded[0] || $latestExploded[1] > $existingExploded[1] || $latestExploded[2] > $existingExploded[2]){
+    if ($latest > $existing) {
       $_SESSION['update_available'] = true;
       $_SESSION['update_version'] = $arrayLatest;
     }
