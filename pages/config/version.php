@@ -1,2 +1,2 @@
 <?php header('Location: ../../index.php'); ?>
-1.0.1
+1.0.2
