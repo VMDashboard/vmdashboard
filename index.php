@@ -14,7 +14,7 @@ $path = dirname(__FILE__) . "/pages/config/config.php";
 //shell_exec("./noVNC/utils/websockify/run --web /var/www/html/openVM/noVNC/ --target-config ./tokens.list 192.168.2.10:6080 >/dev/null 2>&1 &");
 $fileDir = dirname(__FILE__);
 
-shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --target-config ./tokens.php 6080 > logs/novnc.log 2>&1 &");
+shell_exec("./apps/noVNC/utils/websockify/run --web $fileDir/apps/noVNC/ --cert /etc/ssl/self.pem --target-config ./tokens.php 6080 > logs/novnc.log 2>&1 &");
 
 //currently using GET to at the index page to indicate logout, may switch to SESSION VARIABLE
 $action = $_GET['action'];
