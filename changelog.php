@@ -2,7 +2,7 @@
 <hr>
 <h4>Changelog</h4>
 [1.0.3] - 24.JUL.2018
-*removed unnessary code from pages/footer.php
+*removed unnessary code from pages/footer.php Started adding support for mulitple languages.
 
 [1.0.2] - 13.JUL.2018
 *Changed the location of the noVNC default certificate to /etc/ssl/self.pem
