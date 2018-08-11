@@ -65,6 +65,9 @@ swal(alert_msg);
 ?>
 
 <div class="content">
+<div class="container-fluid">
+<div class="row">
+<div class ="col-md-12">
   <div class="card">
     <div class="card-header">
       <h4 class="card-title"> Virtual Machine List</h4>
@@ -146,6 +149,9 @@ swal(alert_msg);
       </div>
     </div>
   </div>
+</div>
+</div>
+</div>
 </div>
 
 <?php

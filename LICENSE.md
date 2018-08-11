@@ -1,3 +1,9 @@
+The OpenVM Dashboard is licensed using the GNU GENERAL PUBLIC LICENSE, listed below.
+OpenVM Dashboard uses an HTML/CSS theme that is licensed under the MIT License. See assets/css/paper-dashboard.css.
+Also the included apps may have there own license. For example the noVNC app is licensed under the MPL 2.0 (Mozilla
+Public License 2.0)
+
+
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

@@ -1,10 +1,10 @@
 /*!
 
  =========================================================
- * Paper Dashboard 2 PRO - v2.0.1
+ * Paper Dashboard 2 - v2.0.0
  =========================================================
 
- * Product Page: https://www.creative-tim.com/product/paper-dashboard-2-pro
+ * Product Page: https://www.creative-tim.com/product/paper-dashboard-2
  * Copyright 2018 Creative Tim (http://www.creative-tim.com)
 
  * Designed by www.invisionapp.com Coded by www.creative-tim.com
@@ -14,37 +14,6 @@
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
  */
-
-transparent = true;
-transparentDemo = true;
-fixedTop = false;
-
-navbar_initialized = false;
-backgroundOrange = false;
-sidebar_mini_active = false;
-toggle_initialized = false;
-
-seq = 0, delays = 80, durations = 500;
-seq2 = 0, delays2 = 80, durations2 = 500;
-
-// Returns a function, that, as long as it continues to be invoked, will not
-// be triggered. The function will be called after it stops being called for
-// N milliseconds. If `immediate` is passed, trigger the function on the
-// leading edge, instead of the trailing.
-
-function debounce(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this,
-      args = arguments;
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    }, wait);
-    if (immediate && !timeout) func.apply(context, args);
-  };
-};
 
 (function() {
   isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
@@ -59,38 +28,19 @@ function debounce(func, wait, immediate) {
   }
 })();
 
+transparent = true;
+transparentDemo = true;
+fixedTop = false;
+
+navbar_initialized = false;
+backgroundOrange = false;
+sidebar_mini_active = false;
+toggle_initialized = false;
+
+seq = 0, delays = 80, durations = 500;
+seq2 = 0, delays2 = 80, durations2 = 500;
+
 $(document).ready(function() {
-  //  Activate the Tooltips
-  $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
-
-  // Activate Popovers and set color for popovers
-  $('[data-toggle="popover"]').each(function() {
-    color_class = $(this).data('color');
-    $(this).popover({
-      template: '<div class="popover popover-' + color_class + '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>'
-    });
-  });
-
-  var tagClass = $('.tagsinput').data('color');
-
-  if ($(".tagsinput").length != 0) {
-    $('.tagsinput').tagsinput();
-  }
-
-  $('.bootstrap-tagsinput').addClass('' + tagClass + '-badge');
-
-  //    Activate bootstrap-select
-  if ($(".selectpicker").length != 0) {
-    $(".selectpicker").selectpicker({
-      iconBase: "nc-icon",
-      tickIcon: "nc-check-2"
-    });
-  }
-
-  //  Append modals to <body>
-  if ($(".modal").length != 0) {
-    $('.modal').appendTo('body');
-  }
 
   if ($('.full-screen-map').length == 0 && $('.bd-docs').length == 0) {
     // On click navbar-collapse the menu will be white not transparent
@@ -182,40 +132,22 @@ paperDashboard = {
     navbar_menu_visible: 0
   },
 
-  checkScrollForTransparentNavbar: debounce(function() {
-    if ($(document).scrollTop() > scroll_distance) {
-      if (transparent) {
-        transparent = false;
-        $('.navbar[color-on-scroll]').removeClass('navbar-transparent');
-      }
-    } else {
-      if (!transparent) {
-        transparent = true;
-        $('.navbar[color-on-scroll]').addClass('navbar-transparent');
-      }
-    }
-  }, 17),
-
-  checkSidebarImage: function() {
-    $sidebar = $('.sidebar');
-    image_src = $sidebar.data('image');
-
-    if (image_src !== undefined) {
-      sidebar_container = '<div class="sidebar-background" style="background-image: url(' + image_src + ') "/>'
-      $sidebar.append(sidebar_container);
-    }
-  },
-
   initMinimizeSidebar: function() {
+    if ($('.sidebar-mini').length != 0) {
+      sidebar_mini_active = true;
+    }
+
     $('#minimizeSidebar').click(function() {
       var $btn = $(this);
 
-      if (paperDashboard.misc.sidebar_mini_active == true) {
-        $('body').removeClass('sidebar-mini');
-        paperDashboard.misc.sidebar_mini_active = false;
-      } else {
+      if (sidebar_mini_active == true) {
         $('body').addClass('sidebar-mini');
-        paperDashboard.misc.sidebar_mini_active = true;
+        sidebar_mini_active = true;
+        paperDashboard.showSidebarMessage('Sidebar mini activated...');
+      } else {
+        $('body').removeClass('sidebar-mini');
+        sidebar_mini_active = false;
+        paperDashboard.showSidebarMessage('Sidebar mini deactivated...');
       }
 
       // we simulate the window Resize so the charts will get updated in realtime.
@@ -230,58 +162,10 @@ paperDashboard = {
     });
   },
 
-  startAnimationForLineChart: function(chart) {
-
-    chart.on('draw', function(data) {
-      if (data.type === 'line' || data.type === 'area') {
-        data.element.animate({
-          d: {
-            begin: 600,
-            dur: 700,
-            from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-            to: data.path.clone().stringify(),
-            easing: Chartist.Svg.Easing.easeOutQuint
-          }
-        });
-      } else if (data.type === 'point') {
-        seq++;
-        data.element.animate({
-          opacity: {
-            begin: seq * delays,
-            dur: durations,
-            from: 0,
-            to: 1,
-            easing: 'ease'
-          }
-        });
-      }
-    });
-
-    seq = 0;
-  },
-  startAnimationForBarChart: function(chart) {
-
-    chart.on('draw', function(data) {
-      if (data.type === 'bar') {
-        seq2++;
-        data.element.animate({
-          opacity: {
-            begin: seq2 * delays2,
-            dur: durations2,
-            from: 0,
-            to: 1,
-            easing: 'ease'
-          }
-        });
-      }
-    });
-
-    seq2 = 0;
-  },
   showSidebarMessage: function(message) {
     try {
       $.notify({
-        icon: "nc-icon nc-bell-55",
+        icon: "now-ui-icons ui-1_bell-53",
         message: message
       }, {
         type: 'info',
@@ -296,6 +180,7 @@ paperDashboard = {
     }
 
   }
+
 };
 
 function hexToRGB(hex, alpha) {

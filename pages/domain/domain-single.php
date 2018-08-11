@@ -24,7 +24,17 @@ if (isset($_GET['action']) || isset($_GET['dev']) || isset($_GET['mac']) || isse
 // Add the header information
 require('../header.php');
 
+function RandomString($length) {
+    $keys = array_merge(range(0,9), range('a', 'z'));
+    $key = "";
+    for($i=0; $i < $length; $i++) {
+        $key .= $keys[mt_rand(0, count($keys) - 1)];
+    }
+    return $key;
+}
+
 //Set variables
+$randomString = RandomString(100);
 $uuid = $_GET['uuid'];
 $domName = $lv->domain_get_name_by_uuid($uuid);
 $dom = $lv->get_domain_object($domName);
@@ -162,10 +172,12 @@ foreach ($listarray as $listname) {
   $listinfo = libvirt_domain_get_info($listdom);
   //Don't use $lv->domain_get_info($listdom) because the state is cached and caused delayed state s$
   $liststate = $lv->domain_state_translate($listinfo['state']);
-  if ($liststate == "running") {
-    $listdomuuid = libvirt_domain_get_uuid_string($listdom);
+  //Will only generate string for current VM
+  if ($liststate == "running" && $uuid == libvirt_domain_get_uuid_string($listdom)) {
+    //$listdomuuid = libvirt_domain_get_uuid_string($listdom);
     $listvnc = $lv->domain_get_vnc_port($listdom);
-    $liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
+    //$liststring = $liststring . $listdomuuid . ": " . "localhost:" . $listvnc . "\n";
+    $liststring = $randomString . ": " . "localhost:" . $listvnc . "\n";
   }
 }
 $filestring = $phpinfo . $liststring;
@@ -256,12 +268,13 @@ function domainDeleteWarning(linkURL, domName) {
                     <?php
                     if ($state == "running") {
                       //Lets get the screenshot of the running domain
-                      $screenshot = $lv->domain_get_screenshot($uuid);
+              //        $screenshot = $lv->domain_get_screenshot($uuid);
                       //the raw png data needs to be encoded to use with html img tag
-                      $screen64 = base64_encode($screenshot['data']);
+              //        $screen64 = base64_encode($screenshot['data']);
                       ?>
-                      <a href="<?php echo $url; ?>:6080/vnc_lite.html?path=&token=<?php echo $uuid ?>" target="_blank">
-                      <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/>
+                      <a href="../vnc.php?token=<?php echo $randomString; ?>" target="_blank">
+              <!--        <img src="data:image/png;base64,<?php echo $screen64; ?>" width="100%"/> -->
+                          <iframe src="<?php echo $url; ?>:6080/vnc_screen.html?view_only=true&path=&scale=true&token=<?php echo $randomString ?>" style="top:0px; bottom:0px; right:0px; width: 100%; border: none; margin:0; padding:0; overflow: hidden; pointer-events: none; display:block;"></iframe>
                       </a>
                       <?php
                     } else if ($state == "paused") {
@@ -304,7 +317,7 @@ function domainDeleteWarning(linkURL, domName) {
                     <ul class="list-unstyled project_files">
                     <?php  if ($state == "running") { ?>
                       <li><i class="fa fa-desktop" style="padding-right:5px;"></i>
-                        <a href="<?php echo $url; ?>:6080/vnc.html?path=?token=<?php echo $uuid; ?>" target="_blank" >
+                        <a href="../vnc.php?token=<?php echo $randomString; ?>" target="_blank">
                         Connect using noVNC</a> <br />
                       </li>
                     <?php } ?>

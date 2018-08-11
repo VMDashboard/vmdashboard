@@ -12,43 +12,13 @@
         </a>
         <a href="../../index.php" class="simple-text logo-normal">
           OPENVM
-          <!--<div class="logo-image-big">
-            <img src="../../assets/img/logo.png">
-          </div> -->
         </a>
       </div>
+
       <div class="sidebar-wrapper">
-        <div class="user">
-          <div class="photo">
-            <img src="../../assets/img/faces/defaultProfile.png" />
-          </div>
-          <div class="info">
-            <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-              <span>
-                <?php echo htmlentities($_SESSION['username']); ?>
-                <b class="caret"></b>
-              </span>
-            </a>
-            <div class="clearfix"></div>
-            <div class="collapse" id="collapseExample">
-              <ul class="nav">
-                <li>
-                  <a href="../../index.php?action=logout">
-                    <span class="sidebar-mini-icon">LO</span>
-                    <span class="sidebar-normal">LogOut</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="../config/setup-password-change.php">
-                    <span class="sidebar-mini-icon">CP</span>
-                    <span class="sidebar-normal">Change Password</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+
         <ul class="nav">
+
           <?php echo (basename($_SERVER['PHP_SELF']) == "host-info.php") ? '<li class="active">' : '<li>'; ?>
             <a href="../host/host-info.php">
               <i class="nc-icon nc-laptop"></i>
@@ -57,14 +27,14 @@
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesDomains">
+            <a data-toggle="collapse" href="#pagesDomains" <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
               <i class="nc-icon nc-bullet-list-67"></i>
               <p>
                 Virtual Machines
                 <b class="caret"></b>
               </p>
             </a>
-            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? 'show' : ''; ?>" id="pagesDomains">
+            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? 'show' : ''; ?>" style="" id="pagesDomains">
               <ul class="nav">
                 <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
                   <a href="../domain/domain-list.php">
@@ -83,7 +53,7 @@
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesStorage">
+            <a data-toggle="collapse" href="#pagesStorage" <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
               <i class="nc-icon nc-box"></i>
               <p>
                 Storage
@@ -109,7 +79,7 @@
           </li>
 
           <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesNetwork">
+            <a data-toggle="collapse" href="#pagesNetwork" <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
               <i class="nc-icon nc-vector"></i>
               <p>
                 Network
@@ -143,12 +113,7 @@
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <div class="navbar-minimize">
-              <button id="minimizeSidebar" class="btn btn-icon btn-round">
-                <i class="nc-icon nc-minimal-right text-center visible-on-sidebar-mini"></i>
-                <i class="nc-icon nc-minimal-left text-center visible-on-sidebar-regular"></i>
-              </button>
-            </div>
+
             <div class="navbar-toggle">
               <button type="button" class="navbar-toggler">
                 <span class="navbar-toggler-bar bar1"></span>
@@ -187,6 +152,15 @@ if ($_SESSION['update_available'] == true) { ?>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
                   <a class="dropdown-item" href="../config/update.php">Update</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <?php echo htmlentities($_SESSION['username']); ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
+                  <a class="dropdown-item" href="../config/setup-password-change.php">Change Password</a>
                   <a class="dropdown-item" href="../../index.php?action=logout">Logout</a>
                 </div>
               </li>
