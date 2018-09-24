@@ -22,83 +22,69 @@ if (isset($_GET['action'])) {
 }
 
 require('../header.php');
-require('../navbar.php');
 
 $action = $_SESSION['action']; //grab the $action variable from $_SESSION
-$name = $_SESSION['name'];
-$network = $_SESSION['network'];
+$name = $_SESSION['name']; //will be the name of the network to perform actions on
+$network = $_SESSION['network']; //used for delete confirmation
+$xmldesc = $_SESSION['xmldesc']; //used to hold changed XML data
 unset($_SESSION['action']); //Unset the Action Variable to prevent repeats of action on page reload
 unset($_SESSION['name']); //Unset the name in case of page reload
 unset($_SESSION['network']); //Unset the name in case of page reload
+unset($_SESSION['xmldesc']);
 
 if ($action == 'network-delete') {
-  $ret = $lv->network_undefine($network) ? 'Network removed successfully' : 'Error while removing network: '.$lv->get_last_error();
+  $notification = $lv->network_undefine($network) ? "" : 'Error while removing network: '.$lv->get_last_error();
 }
 
 if ($action == 'start') {
-  $ret = $lv->set_network_active($name, true) ? "Network has been started successfully" : 'Error while starting network: '.$lv->get_last_error();
+  $notification = $lv->set_network_active($name, true) ? "" : 'Error while starting network: '.$lv->get_last_error();
 }
 
 if ($action == 'stop') {
-  $ret = $lv->set_network_active($name, false) ? "Network has been stopped successfully" : 'Error while stopping network: '.$lv->get_last_error();
+  $notification = $lv->set_network_active($name, false) ? "" : 'Error while stopping network: '.$lv->get_last_error();
 }
 
 if ($action == 'edit') {
   $xml = $lv->network_get_xml($name, false);
-  if (@$_SESSION['xmldesc']) {
-    $ret = $lv->network_change_xml($name, $_SESSION['xmldesc']) ? "Network definition has been changed" :
-      'Error changing network definition: '.$lv->get_last_error();
+  if ($xmldesc != "") {
+    $notification = $lv->network_change_xml($name, $xmldesc) ? "" : 'Error changing network definition: '.$lv->get_last_error();
   } else {
-    $network_xml = 'Editing <strong>'.$name.'</strong> network XML description: <br/><br/><form method="POST">'.
+    $network_xml = 'Editing <strong>'.$name.'</strong> network XML description: <br/><br/><form action="?name='.$name.'&action=edit" method="POST">'.
       '<textarea name="xmldesc" rows="17" cols="2" style="width: 100%; margin: 0; padding: 0; border-width: 0; background-color:#ebecf1;" >'.$xml.'</textarea><br/><br/>'.
-      '<input type="submit" value=" Edit domain XML description "></form><br/><br/>';
+      '<input type="submit" value=" Save "></form><br/><br/>';
   }
 }
 
 if ($action == 'dumpxml') {
   $xml = $lv->network_get_xml($name, false);
-  $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_network_xml($name, false));
+  $network_xml = 'XML dump of network <i>'.$name.'</i>:<br/><br/><pre>' . htmlentities($lv->get_network_xml($name, false)) . '</pre>';
+
 }
 
-unset($_SESSION['xmldesc']);
 
-//Will display a sweet alert if a return message exists
-if ($ret != "") {
-echo "
-<script>
-var alert_msg = \"$ret\"
-swal(alert_msg);
-</script>";
-}
+
+require('../navbar.php');
 
 ?>
 
-<script>
-function networkDeleteWarning(linkURL, networkName) {
-  swal({
-    title: 'Are you sure?',
-    text: 'This will delete ' + networkName,
-    type: 'warning',
-    confirmButtonText: 'Yes, delete it!',
-    showCancelButton: true
-  }).then(function($result) {
-    // Redirect the user
-    window.location = linkURL;
-  });
-}
-</script>
-
-
 <div class="content">
-  <div class="card">
-    <div class="card-header">
-      <h4 class="card-title"> Virtual Networks</h4>
+
+  <div class="card card-stats-left">
+    <div class="card-header card-header-warning card-header-icon">
+      <div class="card-icon">
+        <i class="material-icons">device_hub</i>
+      </div>
+      <h3 class="card-title"> Virtual Networks</h3>
+      <p class="card-category"></p>
     </div>
     <div class="card-body">
+
+      <a href="network-add-lan.php"><i class="fa fa-plus"></i> Create new network</a> <br /> <br />
+
       <?php echo $network_xml; ?>
       <div class="table-responsive">
-        <table class="table table-striped">
-          <thead class="text-primary">
+        <table class="table table-hover">
+          <thead class="text-none">
             <th>Network name</th>
             <th>Network state</th>
             <th>Gateway IP Address</th>
@@ -138,18 +124,18 @@ function networkDeleteWarning(linkURL, networkName) {
 
           $act = "<a href=\"?action=" . ($tmp2['active'] ? "stop" : "start");
           $act .= "&amp;name=" . urlencode($tmp2['name']) . "\">";
-          $act .= ($tmp2['active'] ? "Stop" : "Start") . " network</a>";
-          $act .= " | <a href=\"?action=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\">Dump network XML</a>";
+          $act .= ($tmp2['active'] ? "Disable " : "Enable ") . "</a>";
+          $act .= " | <a href=\"?action=dumpxml&amp;name=" . urlencode($tmp2['name']) . "\"> XML </a>";
 
           if (!$tmp2['active']) {
             $networkName = $tmp2['name'];
             $deleteURL = "?action=network-delete&amp;network=$networkName";
             $currentURL = $_SERVER['PHP_SELF'];
-            $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '">Edit network</a>';
+            $act .= ' | <a href="?action=edit&amp;name='. urlencode($tmp2['name']) . '"> Edit </a>';
             //$act .= " | <a onclick=\"networkDeleteWarning('?action=network-delete&amp;network=".$tmp2['name']."')\" href=\"#\">Delete</a>";
             //$act .= " | <a onclick=\"networkDeleteWarning('$deleteURL','$currentURL')\" href=\"#\">Delete</a>";
             //$act .= " | <a href=\"?action=network-delete&amp;network=$networkName\">Delete</a>";
-            $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL', '$networkName')\" href=\"#\">Delete</a>";
+            $act .= " | <a onclick=\"networkDeleteWarning('$deleteURL', '$networkName')\" href=\"#\"> Delete </a>";
           }
 
           echo "<tr>" .
@@ -168,6 +154,38 @@ function networkDeleteWarning(linkURL, networkName) {
     </div>
   </div>
 </div>
+
+<script>
+window.onload =  function() {
+  <?php
+  if ($notification) {
+    echo "showNotification(\"top\",\"right\",\"$notification\");";
+  }
+  ?>
+}
+
+function showNotification(from, align, text){
+    color = 'warning';
+    $.notify({
+        icon: "",
+        message: text
+      },{
+          type: color,
+          timer: 500,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+}
+
+function networkDeleteWarning(linkURL, fileName) {
+    var r = confirm("Deleting network " + fileName + ".");
+    if (r == true) {
+      window.location = linkURL;
+    }
+}
+</script>
 
 <?php
 require('../footer.php');

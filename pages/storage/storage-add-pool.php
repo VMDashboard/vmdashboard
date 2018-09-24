@@ -46,9 +46,10 @@ if (isset($_SESSION['pool_name'])) {
         </target>
       </pool>";
 
-    $ret = $lv->storagepool_define_xml($xml) ? "success" : "Cannot add storagepool: ".$lv->get_last_error();
+    $notification = $lv->storagepool_define_xml($xml) ? "" : "Cannot add storagepool: ".$lv->get_last_error();
 
-    if ($ret == "success") {
+    //Return back to the storage-pools page if successful
+    if (!$notification){
       header('Location: storage-pools.php');
       exit;
     }
@@ -61,74 +62,78 @@ if (isset($_SESSION['pool_name'])) {
 
 require('../navbar.php');
 
-
-//If there was an error on creating the pool, alert user.
-if ($ret != "") {
-  echo "
-    <script>
-      var alert_msg = \"$ret\"
-      swal(alert_msg);
-    </script>";
-}
-
 ?>
 
 <div class="content">
-  <div class="card">
-    <form action="" method="POST">
-      <div class="card-header">
-        <h4 class="card-title"> Add storage pool to <?php echo $hn; ?></h4>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-4 col-md-5 col-sm-4 col-6">
-            <div class="nav-tabs-navigation verical-navs">
-              <div class="nav-tabs-wrapper">
-                <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#storagePool" role="tab" data-toggle="tab">Storage Pool</a>
-                  </li>
-                </ul>
+
+  <div class="row">
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card card-stats-center">
+        <form action="" method="POST">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">storage</i>
+            </div>
+            <h3 class="card-title">Register Storage Pool</h3>
+            <p class="card-category">Host: <?php echo $hn; ?> </p>
+          </div>
+          <div class="card-body">
+            <br />
+
+            <div class="row">
+              <label class="col-3 col-form-label">Pool Name: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <input type="text" value="default" required="required" placeholder="Enter name for storage pool" class="form-control" name="pool_name" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-8 col-md-7 col-sm-8 col-6">
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div class="tab-pane active" id="storagePool">
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">Pool Name: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input type="text" value="default" required="required" placeholder="Enter name for storage pool" class="form-control" name="pool_name" />
-                    </div>
-                  </div>
+            <div class="row">
+              <label class="col-3 col-form-label">Pool Path: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control" name="pool_path" />
+                  <br /> * Only paths that start with <em>/var/lib/libvirt</em>, <em>/media</em>, or <em>/mnt</em> will be allowed
                 </div>
+              </div>
+            </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">Pool Path: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input type="text" value="/var/lib/libvirt/images" required="required" placeholder="Enter full filepath" class="form-control" name="pool_path" />
-                      <br /> * Only paths that start with <em>/var/lib/libvirt</em>, <em>/media</em>, or <em>/mnt</em> will be allowed
-                    </div>
-                  </div>
-                </div>
-
-              </div> <!-- end tab pane -->
-            </div> <!-- end tab content -->
+          </div> <!-- end card body -->
+          <div class="card-footer justify-content-center">
+            <button type="submit" class="btn btn-warning">Submit</button>
           </div>
-
-        </div>
-      </div> <!-- end card body -->
-      <div class="card-footer text-right">
-        <button type="submit" class="btn btn-danger">Submit</button>
-      </div>
-    </form>
-  </div> <!-- end card -->
+        </form>
+      </div> <!-- end card -->
+    </div>
+  </div> <!-- end row -->
 </div> <!-- end content -->
+
+<script>
+window.onload =  function() {
+  <?php
+  if ($notification) {
+    echo "showNotification(\"top\",\"right\",\"$notification\");";
+  }
+  ?>
+}
+
+function showNotification(from, align, text){
+    color = 'warning';
+    $.notify({
+        icon: "",
+        message: text
+      },{
+          type: color,
+          timer: 500,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+}
+</script>
 
 <?php
 require('../footer.php');

@@ -18,6 +18,14 @@ if (isset($_GET['action'])) {
     header("Location: ".$_SERVER['PHP_SELF']);
     exit;
 }
+
+//if theme is dark change sidebar data-color
+if (isset($_SESSION[themeColor])){
+  $themeColor = $_SESSION['themeColor'];
+} else {
+  $themeColor = "white";
+}
+
 require('../header.php');
 require('../navbar.php');
 
@@ -29,55 +37,51 @@ $dom = $lv->get_domain_object($domName); //gets the resource id for a domain
 
 //This will turn a shutdown virtual machine on. This option in only given when a machine is shutdown
 if ($action == 'domain-start') {
-  $ret = $lv->domain_start($domName) ? "Domain has been started successfully" : 'Error while starting domain: '.$lv->get_last_error();
+  $notification = $lv->domain_start($domName) ? "" : 'Error while starting domain: '.$lv->get_last_error();
 }
 
 //This will pause a virtual machine and temporaily save it's state
 if ($action == 'domain-pause') {
-  $ret = $lv->domain_suspend($domName) ? "Domain has been paused successfully" : 'Error while pausing domain: '.$lv->get_last_error();
+  $notification = $lv->domain_suspend($domName) ? "" : 'Error while pausing domain: '.$lv->get_last_error();
 }
 
 //This will resume a paused virtual machine. Option is given only if a machine is paused
 if ($action == 'domain-resume') {
-  $ret = $lv->domain_resume($domName) ? "Domain has been resumed successfully" : 'Error while resuming domain: '.$lv->get_last_error();
+  $notification = $lv->domain_resume($domName) ? "" : 'Error while resuming domain: '.$lv->get_last_error();
 }
 
 //This is used to gracefully shutdown the guest.
 //There are many reasons why a guest cannot gracefully shutdown so if it can't, let the user know that
 if ($action == 'domain-stop') {
-  $ret = $lv->domain_shutdown($domName) ? "Shutdown command has been sent" : 'Error while stopping domain: '.$lv->get_last_error();
+  $notification = $lv->domain_shutdown($domName) ? "" : 'Error while stopping domain: '.$lv->get_last_error();
 }
 
 //This will forcefully shutdown the virtual machine guest
 if ($action == 'domain-destroy') {
-  $ret = $lv->domain_destroy($domName) ? "Domain has been destroyed successfully" : 'Error while destroying domain: '.$lv->get_last_error();
+  $notification = $lv->domain_destroy($domName) ? "" : 'Error while destroying domain: '.$lv->get_last_error();
 }
 
-
-//Will display a sweet alert if a return message exists. Using "" because $ret may contain single quotes.
-if ($ret != "") {
-echo "
-<script>
-var alert_msg = \"$ret\"
-swal(alert_msg);
-</script>";
-}
 ?>
 
 <div class="content">
-<div class="container-fluid">
-<div class="row">
-<div class ="col-md-12">
-  <div class="card">
-    <div class="card-header">
-      <h4 class="card-title"> Virtual Machine List</h4>
+
+  <div class="card card-stats-left">
+    <div class="card-header card-header-warning card-header-icon">
+      <div class="card-icon">
+        <i class="material-icons">list</i>
+      </div>
+      <h3 class="card-title">Virtual Machine List</h3>
+      <p class="card-category">Select guest for more options</p>
     </div>
     <div class="card-body">
+
+      <a href="domain-create.php"><i class="fa fa-plus"></i> Create virtual machine </a> <br /> <br />
+
       <div class="table-responsive">
-        <table class="table table-striped">
-          <thead class="text-primary">
+        <table class="table table-hover">
+          <thead class="text-none">
             <th>Guest Name</th>
-            <th>Virtual CPUs</th>
+            <th>CPUs</th>
             <th>Memory</th>
             <th>Memory Usage</th>
             <th>Disks</th>
@@ -132,7 +136,7 @@ swal(alert_msg);
                 "<td>";
 
               if ($lv->domain_is_running($name)){
-               echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Turn off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
+               echo "<a href=\"?action=domain-stop&amp;uuid=$uuid\">Shutdown</a> | <a href=\"?action=domain-destroy&amp;uuid=$uuid\">Power off</a> | <a href=\"?action=domain-pause&amp;uuid=$uuid\">Pause</a>";
               } else if ($lv->domain_is_paused($name)){
                echo "<a href=\"?action=domain-resume&amp;uuid=$uuid\">Resume</a>";
               } else {
@@ -142,17 +146,37 @@ swal(alert_msg);
               echo "</tr>";
             }
             ?>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div> <!-- End table -->
+    </div> <!-- End Card Body -->
+  </div> <!-- End Card -->
+</div> <!--End Content -->
 
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-</div>
-</div>
+<script>
+window.onload =  function() {
+  <?php
+  if ($notification) {
+    echo "showNotification(\"top\",\"right\",\"$notification\");";
+  }
+  ?>
+}
+
+function showNotification(from, align, text){
+    color = 'warning';
+    $.notify({
+        icon: "",
+        message: text
+      },{
+          type: color,
+          timer: 500,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+}
+</script>
 
 <?php
 require('../footer.php');

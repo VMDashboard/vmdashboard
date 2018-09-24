@@ -1,107 +1,54 @@
-<body class="">
+<?php
+//if theme is dark change sidebar data-color
+if (isset($_SESSION[themeColor])){
+  $themeColor = $_SESSION['themeColor'];
+} else {
+  $themeColor = "";
+}
+?>
+
+<body class="<?php echo $themeColor; ?>">
   <div class="wrapper ">
-    <div class="sidebar" data-color="white" data-active-color="danger">
+    <div class="sidebar" data-color="" data-background-color="black" data-image="../../assets/img/">
       <!--
-        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    -->
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+        Tip 2: you can also add an image using data-image tag
+      -->
       <div class="logo">
-        <a href="../../index.php" class="simple-text logo-mini">
-          <div class="logo-image-small">
-            <img src="../../assets/img/squarelogo.png">
-          </div>
-        </a>
-        <a href="../../index.php" class="simple-text logo-normal">
-          OPENVM
+        <a href="http://openvm.tech" class="simple-text logo-normal">
+          <img src="../../assets/img/squarelogo.png" width="24px"> &ensp; OpenVM
         </a>
       </div>
 
       <div class="sidebar-wrapper">
-
         <ul class="nav">
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "host-info.php") ? '<li class="active">' : '<li>'; ?>
-            <a href="../host/host-info.php">
-              <i class="nc-icon nc-laptop"></i>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "host-info.php") ? '<li class="nav-item active">' : '<li class="nav-item">'; ?>
+            <a class="nav-link" href="../host/host-info.php">
+              <i class="material-icons">home</i>
               <p>Host</p>
             </a>
           </li>
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesDomains" <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
-              <i class="nc-icon nc-bullet-list-67"></i>
-              <p>
-                Virtual Machines
-                <b class="caret"></b>
-              </p>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="nav-item active">' : '<li class="nav-item">'; ?>
+            <a class="nav-link" href="../domain/domain-list.php">
+              <i class="material-icons">list</i>
+              <p>Virutal Machines</p>
             </a>
-            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php" || basename($_SERVER['PHP_SELF']) == "domain-single.php" || basename($_SERVER['PHP_SELF']) == "domain-create.php" || basename($_SERVER['PHP_SELF']) == "domain-add-volume.php" || basename($_SERVER['PHP_SELF']) == "domain-add-iso.php" || basename($_SERVER['PHP_SELF']) == "domain-add-network.php") ? 'show' : ''; ?>" style="" id="pagesDomains">
-              <ul class="nav">
-                <?php echo (basename($_SERVER['PHP_SELF']) == "domain-list.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../domain/domain-list.php">
-                    <span class="sidebar-mini-icon">LV</span>
-                    <span class="sidebar-normal"> VM List</span>
-                  </a>
-                </li>
-                <?php echo (basename($_SERVER['PHP_SELF']) == "domain-create.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../domain/domain-create.php">
-                    <span class="sidebar-mini-icon">CV</span>
-                    <span class="sidebar-normal"> Create New VM</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesStorage" <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
-              <i class="nc-icon nc-box"></i>
-              <p>
-                Storage
-                <b class="caret"></b>
-              </p>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php") ? '<li class="nav-item active">' : '<li class="nav-item">'; ?>
+            <a class="nav-link" href="../storage/storage-pools.php">
+              <i class="material-icons">storage</i>
+              <p>Storage</p>
             </a>
-            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php" || basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? 'show' : ''; ?>" id="pagesStorage">
-              <ul class="nav">
-                <?php echo (basename($_SERVER['PHP_SELF']) == "storage-pools.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../storage/storage-pools.php">
-                    <span class="sidebar-mini-icon">SP</span>
-                    <span class="sidebar-normal"> Storage Pools </span>
-                  </a>
-                </li>
-                <?php echo (basename($_SERVER['PHP_SELF']) == "storage-add-pool.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../storage/storage-add-pool.php">
-                    <span class="sidebar-mini-icon">CP</span>
-                    <span class="sidebar-normal"> Create New Pool </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
 
-          <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
-            <a data-toggle="collapse" href="#pagesNetwork" <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? 'aria-expanded="true" class="" ' : ''; ?> >
-              <i class="nc-icon nc-vector"></i>
-              <p>
-                Network
-                <b class="caret"></b>
-              </p>
+          <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php") ? '<li class="nav-item active">' : '<li class="nav-item">'; ?>
+            <a class="nav-link" href="../network/network-list.php">
+              <i class="material-icons">device_hub</i>
+              <p>Networks</p>
             </a>
-            <div class="collapse <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php" || basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? 'show' : ''; ?>" id="pagesNetwork">
-              <ul class="nav">
-                <?php echo (basename($_SERVER['PHP_SELF']) == "network-list.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../network/network-list.php">
-                    <span class="sidebar-mini-icon">NL</span>
-                    <span class="sidebar-normal"> Network List </span>
-                  </a>
-                </li>
-                <?php echo (basename($_SERVER['PHP_SELF']) == "network-add-lan.php") ? '<li class="active">' : '<li>'; ?>
-                  <a href="../network/network-add-lan.php">
-                    <span class="sidebar-mini-icon">CN</span>
-                    <span class="sidebar-normal"> Create New Network </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
           </li>
 
         </ul>
@@ -110,56 +57,62 @@
 
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <a class="navbar-brand" href="#">Dashboard</a>
+            <a class="navbar-brand" href="javascript:void(0)">DASHBOARD</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+          <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
 
-<?php
-//Notification if software update is available
-if ($_SESSION['update_available'] == true) { ?>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
+              <?php
+              //Notification if software update is available
+              if ($_SESSION['update_available'] == true) { ?>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javscript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">notifications</i>
                   <span class="notification">1</span>
+                  <p class="d-lg-none d-md-block">
+                    Some Actions
+                  </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item">New Update Available</a>
+                  <a class="dropdown-item" href="../config/update.php">New Update Available</a>
                 </div>
               </li>
-<?php } ?>
+              <?php } ?>
 
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-settings-gear-65"></i>
+              <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">settings</i>
+                  <p class="d-lg-none d-md-block">
+                    Settings
+                  </p>
                 </a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="../config/update.php">Update</a>
+                  <a class="dropdown-item" href="../config/settings.php">Settings</a>
                 </div>
               </li>
 
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownSettingsLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">person</i>
                   <?php echo htmlentities($_SESSION['username']); ?>
+                  <p class="d-lg-none d-md-block">
+
+                  </p>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownSettingsLink">
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="../config/preferences.php">Preferences</a>
                   <a class="dropdown-item" href="../config/setup-password-change.php">Change Password</a>
                   <a class="dropdown-item" href="../../index.php?action=logout">Logout</a>
                 </div>

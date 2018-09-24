@@ -88,13 +88,15 @@ if (isset($_SESSION['source_file'])) {
   $newXML = $domXML->asXML();
   $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
 
-  $ret = $lv->domain_change_xml($domName, $newXML); //third param is flags
+  $notification = $lv->domain_change_xml($domName, $newXML) ? "" : "Cannot add ISO to the guest: ".$lv->get_last_error();
 
   unset($_SESSION['source_file']);
 
-  //Return back to the domain-single page
-  header("Location: domain-single.php?uuid=".$uuid);
-  exit;
+  //Return back to the domain-single page if successful
+  if (!$notification){
+    header("Location: domain-single.php?uuid=".$uuid);
+    exit;
+  }
 }
 
 require('../navbar.php');
@@ -102,70 +104,79 @@ require('../navbar.php');
 ?>
 
 <div class="content">
-  <div class="card">
-    <form action="" method="POST">
-      <div class="card-header">
-        <h4 class="card-title"> Add ISO image to <?php echo $domName; ?></h4>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-4 col-md-5 col-sm-4 col-6">
-            <div class="nav-tabs-navigation verical-navs">
-              <div class="nav-tabs-wrapper">
-                <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#optical" role="tab" data-toggle="tab">Optical Storage</a>
-                  </li>
-                </ul>
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card card-stats-center">
+        <form action="" method="POST">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">album</i>
+            </div>
+            <h3 class="card-title">Add ISO Optical File</h3>
+            <p class="card-category">Virtual Machine: <?php echo $domName; ?></p>
+          </div>
+          <div class="card-body">
+            <br />
+            <div class="row">
+              <label class="col-3 col-form-label">ISO File: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select class="form-control" name="source_file">
+                    <option value="none">Select File</option>
+                    <?php
+                    $pools = $lv->get_storagepools();
+                    for ($i = 0; $i < sizeof($pools); $i++) {
+                      $info = $lv->get_storagepool_info($pools[$i]);
+                      if ($info['volume_count'] > 0) {
+                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                        $tmp_keys = array_keys($tmp);
+                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                          if (strtolower($ext) == "iso")
+                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                        }
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
               </div>
             </div>
+          </div> <!-- end card body -->
+          <div class="card-footer justify-content-center">
+            <button type="submit" class="btn btn-warning">Submit</button>
           </div>
-
-          <div class="col-lg-8 col-md-7 col-sm-8 col-6">
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div class="tab-pane active" id="optical">
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">ISO File: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <select class="form-control" name="source_file">
-                        <option value="none">Select File</option>
-                        <?php
-                        $pools = $lv->get_storagepools();
-                        for ($i = 0; $i < sizeof($pools); $i++) {
-                          $info = $lv->get_storagepool_info($pools[$i]);
-                          if ($info['volume_count'] > 0) {
-                            $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                            $tmp_keys = array_keys($tmp);
-                            for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                              $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                              $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                              if (strtolower($ext) == "iso")
-                                echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                            }
-                          }
-                        }
-                        ?>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-
-              </div> <!-- end tab pane -->
-            </div> <!-- end tab content -->
-          </div>
-
-        </div>
-      </div> <!-- end card body -->
-      <div class="card-footer text-right">
-        <button type="submit" class="btn btn-danger">Submit</button>
-      </div>
-    </form>
-  </div> <!-- end card -->
+        </form>
+      </div> <!-- end card -->
+    </div>
+  </div>
 </div> <!-- end content -->
+
+<script>
+window.onload =  function() {
+  <?php
+  if ($notification) {
+    echo "showNotification(\"top\",\"right\",\"$notification\");";
+  }
+  ?>
+}
+
+function showNotification(from, align, text){
+    color = 'warning';
+    $.notify({
+        icon: "",
+        message: text
+      },{
+          type: color,
+          timer: 500,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+}
+</script>
 
 <?php
 require('../footer.php');

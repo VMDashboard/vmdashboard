@@ -111,7 +111,6 @@ if ($_SESSION['domain_type'] == "kvm") {
     <features>
       <acpi/>
       <apic/>
-      <vmport state='off'/>
     </features>";
 
     //Linux or Unix domains can use vda and virtio
@@ -244,7 +243,7 @@ if ($_SESSION['domain_type'] == "kvm") {
 
   //Check for error on creating the domain
   if (!$new_domain){
-    $domain_error = 'Error creating domain: '.$lv->get_last_error();
+    $notification = 'Error creating domain: '.$lv->get_last_error();
   }
 
   //Create and add storage volume to newly created virtual machine
@@ -252,7 +251,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     $volume_size = 0;
     $new_disk = $lv->storagevolume_create($storage_pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
     if (!$new_disk){
-      $domain_error = $domain_error . " Error creating disk: ".$lv->get_last_error();
+      $notification = $notification . " Error creating disk: ".$lv->get_last_error();
     }
     $res = $new_domain;
     $img = libvirt_storagevolume_get_path($new_disk);
@@ -261,7 +260,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     $driver = $driver_type;
     $new_disk_add = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
     if (!$new_disk_add){
-      $domain_error = $domain_error . " Error adding disk: ".$lv->get_last_error();
+      $notification = $notification . " Error adding disk: ".$lv->get_last_error();
     }
   }
 
@@ -289,9 +288,10 @@ if ($_SESSION['domain_type'] == "kvm") {
   unset($_SESSION['source_mode']);
   unset($_SESSION['source_network']);
 
-  if(!$domain_error) {
-  header('Location: ../domain/domain-list.php');
-  exit;
+  //Return back to domain-list.php if creation is successful
+  if(!$notification) {
+    header('Location: ../domain/domain-list.php');
+    exit;
   }
 }
 
@@ -299,18 +299,351 @@ $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address
 
 require('../navbar.php');
 
-//If there was an error on creating the domain, alert user. The error has single quotes
-if ($domain_error != "") {
-  echo "
-    <script>
-      var alert_msg = \"$domain_error\"
-      swal(alert_msg);
-    </script>";
-}
-
 ?>
 
+<div class="content">
+
+  <div class="row">
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card card-stats-center">
+        <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">phonelink</i>
+            </div>
+            <h3 class="card-title">Create new virtual machine</h3>
+            <p class="card-category">Initial Setup</p>
+          </div>
+          <div class="card-body">
+            <br/> <br />
+            <div style="text-align:center;">GENERAL INFO</div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Domain Name: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">OS Platform: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select class="form-control" name="os_platform">
+                    <option value="linux">Linux</option>
+                    <option value="unix">Unix</option>
+                    <option value="windows">Windows</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Architecture: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select class="form-control" name="os_arch">
+                    <?php
+                    $tmp = $lv->host_get_node_info(); // Get and array of information on the host
+                    $arch = $tmp['model']; //Set the Architecture. Used in the General form. Ex., x86_64
+                    ?>
+                    <option value="<?php echo $arch; ?>"><?php echo $arch; ?></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Virtual CPUs: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <input type="number" id="vcpu" name="vcpu" required="required" class="form-control" min="1" value="2">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Memory: </label>
+              <div class="col-4">
+                <div class="form-group">
+                  <input type="number" id="vcpu" name="memory" required="required" class="form-control" min="1" value="4">
+                </div>
+              </div>
+              <div class="col-2 checkbox-radios">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="memory_unit" value="MiB"> MB
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="memory_unit" value="GiB" checked="checked"> GB
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <br/> <br /> <br /> <br />
+            <div style="text-align:center;">DISK VOLUME</div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Source File: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_volume">
+                    <option value="none"> Select Disk </option>
+                    <option value="new"> Create New Disk Image </option>
+                    <?php
+                    $pools = $lv->get_storagepools();
+                    for ($i = 0; $i < sizeof($pools); $i++) {
+                      $info = $lv->get_storagepool_info($pools[$i]);
+                      if ($info['volume_count'] > 0) {
+                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                        $tmp_keys = array_keys($tmp);
+                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                          if (strtolower($ext) != "iso")
+                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                        }
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Volume Name: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="new" style="display:none;">
+                  <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Volume Size: </label>
+              <div class="col-4 diskChange" id="new" style="display:none;">
+                <div class="form-group">
+                  <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
+                </div>
+              </div>
+              <div class="col-2 checkbox-radios diskChange" id="new" style="display:none;">
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="new_unit" value="M"> MB
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="new_unit" value="G" checked="checked"> GB
+                    <span class="circle">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Driver Type: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="new" style="display:none;">
+                  <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
+                    <option value="qcow2" selected="selected">qcow2</option>
+                    <option value="raw">raw</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Storage Pool: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="new" style="display:none;">
+                  <select class="form-control" onchange="newExtenstion(this.form)" name="storage_pool">
+                    <?php
+                    $counter = 0;
+                    for ($i = 0; $i < sizeof($pools); $i++) {
+                      //get the pool resource to use with refreshing the pool data
+                      $res = $lv->get_storagepool_res($pools[$i]);
+                      //refreshing the data before displaying because ISOs were not refreshing automatically and also the Available data was not correct after adding volumes
+                      $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
+                      //getting the pool information to display the data in a table
+                      $info = $lv->get_storagepool_info($pools[$i]);
+                      $poolName = $pools[$i];
+
+                      $act = $info['active'] ? 'Active' : 'Inactive';
+                      if ($act == "Active") {
+                        echo "<option value=\"$poolName\">$poolName</option>";
+                        $counter++; //Increments only if a valid storage pool exist
+                      }
+                    }
+                    if ($counter == 0) {
+                      echo "<option value=\"none\">No storage pools available</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <br/> <br /> <br /> <br />
+            <div style="text-align:center;">OPTICAL STORAGE</div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Select File: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select class="form-control" name="source_file_cd">
+                    <option value="none">Select File</option>
+                    <?php
+                    $pools = $lv->get_storagepools();
+                    for ($i = 0; $i < sizeof($pools); $i++) {
+                      $info = $lv->get_storagepool_info($pools[$i]);
+                      if ($info['volume_count'] > 0) {
+                        $tmp = $lv->storagepool_get_volume_information($pools[$i]);
+                        $tmp_keys = array_keys($tmp);
+                        for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                          $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
+                          $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
+                          if (strtolower($ext) == "iso")
+                            echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
+                        }
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <br/> <br /> <br /> <br />
+            <div style="text-align:center;">NETWORKING</div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">Interface type: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <select class="form-control" onchange="changeOptions(this)" name="interface_type">
+                    <option value="network" selected="selected">nat</option>
+                    <option value="direct">bridge</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label">MAC Address: </label>
+              <div class="col-6">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Enter MAC address: 11:22:33:44:55:66" name="mac_address" value="<?php echo $random_mac; ?>">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label netChange" id="direct" style="display:none;">Host Interface: </label>
+              <div class="col-6">
+                <div class="form-group netChange" id="direct" style="display:none;">
+                  <select class="form-control" name="source_dev">
+                    <?php
+                    $tmp = $lv->get_node_device_cap_options();
+                    for ($i = 0; $i < sizeof($tmp); $i++) {
+                      $tmp1 = $lv->get_node_devices($tmp[$i]);
+                      for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
+                        $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
+                        if ($tmp2['capability'] == 'net') {
+                          $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
+                          echo "<option value='$ident'> $ident </option>";
+                        }
+                      }
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label" id="direct" style="display:none;">Model: </label>
+              <div class="col-6">
+                <div class="form-group" id="direct" style="display:none;">
+                  <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label netChange" id="network">Model: </label>
+              <div class="col-6">
+                <div class="form-group netChange" id="network">
+                  <select class="form-control" name="source_network">
+                    <?php
+                    $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
+                    for ($i = 0; $i < sizeof($tmp); $i++) {
+                      $tmp2 = $lv->get_network_information($tmp[$i]);
+                      echo "<option value='" . $tmp2['name'] . "'>" . $tmp2['name'] . "</option>";
+                    }
+                    ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer justify-content-center">
+            <div class="stats">
+              <button type="submit" class="btn btn-warning">Create</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+  </div> <!-- End Row -->
+</div>
+
 <script>
+window.onload =  function() {
+  <?php
+  if ($notification) {
+    echo "showNotification(\"top\",\"right\",\"$notification\");";
+  }
+  ?>
+}
+
+function showNotification(from, align, text){
+    color = 'warning';
+    $.notify({
+        icon: "",
+        message: text
+      },{
+          type: color,
+          timer: 500,
+          placement: {
+              from: from,
+              align: align
+          }
+      });
+}
+
 function diskChangeOptions(selectEl) {
   let selectedValue = selectEl.options[selectEl.selectedIndex].value;
     if (selectedValue.charAt(0) === "/") {
@@ -365,347 +698,6 @@ function changeOptions(selectEl) {
 }
 
 </script>
-
-<div class="content">
-  <div class="card">
-    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-    <div class="card-header">
-      <h4 class="card-title"> New Virtual Machine</h4>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-4 col-md-5 col-sm-4 col-6">
-          <div class="nav-tabs-navigation verical-navs">
-            <div class="nav-tabs-wrapper">
-              <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" href="#general" role="tab" data-toggle="tab">General</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#storage" role="tab" data-toggle="tab">Storage Volume</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#optical" role="tab" data-toggle="tab">Optical Storage</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#network" role="tab" data-toggle="tab">Network</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-8 col-md-7 col-sm-8 col-6">
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div class="tab-pane active" id="general">
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Domain Name: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <input type="text" class="form-control" id="domain_name" required="required" value="newVM" onkeyup="autoDiskName(this.form)" placeholder="Enter a Unique Virtual Machine Name (required)" name="domain_name">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">OS Platform: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <select class="form-control" name="os_platform">
-                      <option value="linux">Linux</option>
-                      <option value="unix">Unix</option>
-                      <option value="windows">Windows</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Architecture: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <select class="form-control" name="os_arch">
-                      <?php
-                      $tmp = $lv->host_get_node_info(); // Get and array of information on the host
-                      $arch = $tmp['model']; //Set the Architecture. Used in the General form. Ex., x86_64
-                      ?>
-                      <option value="<?php echo $arch; ?>"><?php echo $arch; ?></option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Virtual CPUs: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <input type="number" id="vcpu" name="vcpu" required="required" class="form-control" min="1" value="2">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Memory: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <input type="number" id="vcpu" name="memory" required="required" class="form-control" min="1" value="4">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Memory Unit: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <div id="memory_unit" class="btn-group" data-toggle="buttons">
-                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                        <input type="radio" name="memory_unit" value="MiB"> MB
-                      </label>
-                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
-                        <input type="radio" name="memory_unit" value="GiB" checked="checked"> GB
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <div class="tab-pane" id="storage">
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Source File: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <select onchange="diskChangeOptions(this)"  class="form-control" name="source_file_volume">
-                      <option value="none"> Select Disk </option>
-                      <option value="new"> Create New Disk Image </option>
-                      <?php
-                      $pools = $lv->get_storagepools();
-                      for ($i = 0; $i < sizeof($pools); $i++) {
-                        $info = $lv->get_storagepool_info($pools[$i]);
-                        if ($info['volume_count'] > 0) {
-                          $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                          $tmp_keys = array_keys($tmp);
-                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                            $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                            $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                            if (strtolower($ext) != "iso")
-                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                          }
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Volume Name: </label>
-                <div class="col-sm-7">
-                  <div class="form-group diskChange" id="new" style="display:none;">
-                    <input type="text" class="form-control" id="DataImageName" value="newVM.qcow2" placeholder="Enter new disk name" name="new_volume_name">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Volume Size: </label>
-                <div class="col-sm-7">
-                  <div class="form-group diskChange" id="new" style="display:none;">
-                    <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Memory Unit: </label>
-                <div class="col-sm-7">
-                  <div class="form-group diskChange" id="new" style="display:none;">
-                    <div id="new_unit" class="btn-group" data-toggle="buttons">
-                      <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                        <input type="radio" name="new_unit" value="M"> MB
-                      </label>
-                      <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-primary active">
-                        <input type="radio" name="new_unit" value="G" checked="checked"> GB
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Driver Type: </label>
-                <div class="col-sm-7">
-                  <div class="form-group diskChange" id="new" style="display:none;">
-                    <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
-                      <option value="qcow2" selected="selected">qcow2</option>
-                      <option value="raw">raw</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label diskChange" id="new" style="display:none;">Storage Pool: </label>
-                <div class="col-sm-7">
-                  <div class="form-group diskChange" id="new" style="display:none;">
-                    <select class="form-control" onchange="newExtenstion(this.form)" name="storage_pool">
-                      <?php
-                      $counter = 0;
-                      for ($i = 0; $i < sizeof($pools); $i++) {
-                        //get the pool resource to use with refreshing the pool data
-                        $res = $lv->get_storagepool_res($pools[$i]);
-                        //refreshing the data before displaying because ISOs were not refreshing automatically and also the Available data was not correct after adding volumes
-                        $msg = $lv->storagepool_refresh($res) ? "Pool has been refreshed" : "Error refreshing pool: ".$lv->get_last_error();
-                        //getting the pool information to display the data in a table
-                        $info = $lv->get_storagepool_info($pools[$i]);
-                        $poolName = $pools[$i];
-
-                        $act = $info['active'] ? 'Active' : 'Inactive';
-                        if ($act == "Active") {
-                          echo "<option value=\"$poolName\">$poolName</option>";
-                          $counter++; //Increments only if a valid storage pool exist
-                        }
-                      }
-                      if ($counter == 0) {
-                        echo "<option value=\"none\">No storage pools available</option>";
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="tab-pane" id="optical">
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Select File: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <select class="form-control" name="source_file_cd">
-                      <option value="none">Select File</option>
-                      <?php
-                      $pools = $lv->get_storagepools();
-                      for ($i = 0; $i < sizeof($pools); $i++) {
-                        $info = $lv->get_storagepool_info($pools[$i]);
-                        if ($info['volume_count'] > 0) {
-                          $tmp = $lv->storagepool_get_volume_information($pools[$i]);
-                          $tmp_keys = array_keys($tmp);
-                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
-                            $path = base64_encode($tmp[$tmp_keys[$ii]]['path']);
-                            $ext = pathinfo($tmp_keys[$ii], PATHINFO_EXTENSION);
-                            if (strtolower($ext) == "iso")
-                              echo "<option value='" . $tmp[$tmp_keys[$ii]]['path'] . "'>" . $tmp[$tmp_keys[$ii]]['path'] . "</option>";
-                          }
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-
-            <div class="tab-pane" id="network">
-              <div class="row">
-                <label class="col-sm-2 col-form-label">Interface type: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <select class="form-control" onchange="changeOptions(this)" name="interface_type">
-                      <option value="network" selected="selected">nat</option>
-                      <option value="direct">bridge</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label">MAC Address: </label>
-                <div class="col-sm-7">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter MAC address: 11:22:33:44:55:66" name="mac_address" value="<?php echo $random_mac; ?>">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label netChange" id="direct" style="display:none;">Host Interface: </label>
-                <div class="col-sm-7">
-                  <div class="form-group netChange" id="direct" style="display:none;">
-                    <select class="form-control" name="source_dev">
-                      <?php
-                      $tmp = $lv->get_node_device_cap_options();
-                      for ($i = 0; $i < sizeof($tmp); $i++) {
-                        $tmp1 = $lv->get_node_devices($tmp[$i]);
-                        for ($ii = 0; $ii < sizeof($tmp1); $ii++) {
-                          $tmp2 = $lv->get_node_device_information($tmp1[$ii]);
-                          if ($tmp2['capability'] == 'net') {
-                            $ident = array_key_exists('interface_name', $tmp2) ? $tmp2['interface_name'] : 'N/A';
-                            echo "<option value='$ident'> $ident </option>";
-                          }
-                        }
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label netChange" id="direct" style="display:none;">Model: </label>
-                <div class="col-sm-7">
-                  <div class="form-group netChange" id="direct" style="display:none;">
-                    <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <label class="col-sm-2 col-form-label netChange" id="network">Model: </label>
-                <div class="col-sm-7">
-                  <div class="form-group netChange" id="network">
-                    <select class="form-control" name="source_network">
-                      <?php
-                      $tmp = $lv->get_networks(VIR_NETWORKS_ALL);
-                      for ($i = 0; $i < sizeof($tmp); $i++) {
-                        $tmp2 = $lv->get_network_information($tmp[$i]);
-                        echo "<option value='" . $tmp2['name'] . "'>" . $tmp2['name'] . "</option>";
-                      }
-                      ?>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-
-
-
-            </div>
-
-
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="card-footer text-right">
-      <button type="submit" class="btn btn-danger">Create</button>
-    </div>
-    </form>
-  </div>
-</div>
 
 <?php
 require('../footer.php');

@@ -98,61 +98,49 @@ function checkPassword()
 
 
 <div class="content">
-  <div class="card">
-    <form action="" method="POST">
-      <div class="card-header">
-        <h4 class="card-title"> Change password for  <?php echo $_SESSION['username']; ?></h4>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-4 col-md-5 col-sm-4 col-6">
-            <div class="nav-tabs-navigation verical-navs">
-              <div class="nav-tabs-wrapper">
-                <ul class="nav nav-tabs flex-column nav-stacked" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#passwordChange" role="tab" data-toggle="tab">Change Password</a>
-                  </li>
-                </ul>
+  <div class="row">
+
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+      <div class="card card-stats-center">
+        <form action="" method="POST">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">album</i>
+            </div>
+            <h3 class="card-title">Password Change</h3>
+            <p class="card-category">User: <?php echo $_SESSION['username']; ?></p>
+          </div>
+          <div class="card-body">
+            <br />
+
+            <div class="row">
+              <label class="col-5 col-form-label">New Password: </label>
+              <div class="col-4">
+                <div class="form-group">
+                  <input type="password" required="required" placeholder="New Password" class="form-control" name="password" id="pass1" onfocusout="checkPassword();"/>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="col-lg-8 col-md-7 col-sm-8 col-6">
-            <!-- Tab panes -->
-            <div class="tab-content">
-              <div class="tab-pane active" id="passwordChange">
-
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">New Password: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input type="password" required="required" placeholder="New Password" class="form-control" name="password" id="pass1" onfocusout="checkPassword();"/>
-                    </div>
-                  </div>
+            <div class="row">
+              <label class="col-5 col-form-label">New Password: </label>
+              <div class="col-4">
+                <div class="form-group">
+                  <input type="password" required="required" placeholder="Confirm Password" class="form-control" name="confirm_password" id="pass2" onkeyup="checkPassword();"/>
                 </div>
+              </div>
+            </div>
 
-                <div class="row">
-                  <label class="col-sm-2 col-form-label">New Password: </label>
-                  <div class="col-sm-7">
-                    <div class="form-group">
-                      <input type="password" required="required" placeholder="Confirm Password" class="form-control" name="confirm_password" id="pass2" onkeyup="checkPassword();"/>
-                    </div>
-                  </div>
-                </div>
+            <span id="confirmMessage" class="confirmMessage"></span>
 
-                <span id="confirmMessage" class="confirmMessage"></span>
-
-              </div> <!-- end tab pane -->
-            </div> <!-- end tab content -->
+          </div> <!-- end card body -->
+          <div class="card-footer justify-content-center">
+            <button type="submit" class="btn btn-warning">Submit</button>
           </div>
-
-        </div>
-      </div> <!-- end card body -->
-      <div class="card-footer text-right">
-        <input type="submit" class="btn btn-danger" name="action" value="Change" >
-      </div>
-    </form>
-  </div> <!-- end card -->
+        </form>
+      </div> <!-- end card -->
+    </div>
+  </div>
 </div> <!-- end content -->
 
 <?php

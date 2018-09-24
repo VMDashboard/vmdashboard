@@ -879,6 +879,7 @@ class Libvirt {
         return ($tmp) ? $tmp : $this->_set_last_error();
     }
 
+
     function network_get_xml($network) {
         $net = $this->get_network_res($network);
         if (!$net)
@@ -887,6 +888,7 @@ class Libvirt {
         $tmp = libvirt_network_get_xml_desc($net, NULL);
         return ($tmp) ? $tmp : $this->_set_last_error();;
     }
+
 
     function domain_get_id($domain, $name = false) {
         $dom = $this->get_domain_object($domain);
