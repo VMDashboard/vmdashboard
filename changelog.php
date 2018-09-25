@@ -3,12 +3,12 @@
 <h4>Changelog</h4>
 [18.09.24] - 24.SEPT.2018
 *Added settings page. Users can now change location of the SSL certificate for noVNC connection
-*Added user prefereneces to change theme. Added a dark theme
+*Added user preferences to change theme. Added a dark theme
 *The default theme now has a black navigation menu. The entire site theme is now based on the MIT Licensed Material Dark theme from creative-tim.com
-*Modified user sidebar navigation to include just Host, Virtual Machines, Storage, and Networking, simplifing the menu
+*Modified user sidebar navigation to include just Host, Virtual Machines, Storage, and Networking, simplifying the menu
 *Creating a new vm, storage pool, storage volume, and network fall on their respective pages
 *Improved layout of the noVNC connection on domain-single.php
-*Hid the XML on the domain-single.php page until user wants to edit it. Preventing accidential changes to guest
+*Hid the XML on the domain-single.php page until user wants to edit it. Preventing accidental changes to guest
 *Improved layout of the Host page Information
 *Increased the number of error notifications that exist
 *Changed the wallpapers on configuration pages
