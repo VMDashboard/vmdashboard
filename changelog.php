@@ -1,6 +1,11 @@
 <?php header('Location: index.php'); ?>
 <hr>
 <h4>Changelog</h4>
+[18.09.28] - 28.Sept.2018
+*Fixed bug on Host page that shows incorrect CPU and Memory stats
+*Added new option for SSL Key file in settings. Allowing uses to set key different than cert.
+
+
 [18.09.24] - 24.SEPT.2018
 *Added settings page. Users can now change location of the SSL certificate for noVNC connection
 *Added user preferences to change theme. Added a dark theme

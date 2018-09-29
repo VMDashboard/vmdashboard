@@ -136,7 +136,7 @@ if ($action == 'domain-snapshot-xml') {
 //Domain XML Changes
 if ($action == 'domain-edit') {
   $xml = $_SESSION['xmldesc'];
-    $notification = $lv->domain_change_xml($domName, $xml) ? "XML for $domName has been changed" : 'Error changing domain XML: '.$lv->get_last_error();
+    $notification = $lv->domain_change_xml($domName, $xml) ? "XML for $domName has been updated" : 'Error changing domain XML: '.$lv->get_last_error();
     $domName = $lv->domain_get_name_by_uuid($uuid); //If the name is changed in XML will need to get it again
 
 }
