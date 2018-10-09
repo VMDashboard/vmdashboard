@@ -1,7 +1,7 @@
 <?php header('Location: index.php'); ?>
 <hr>
 <h4>Changelog</h4>
-[18.10.??] - ??.Oct.2018
+[18.10.09] - 09.Oct.2018
 *Renamed the software from OpenVM Dashboard to VM Dashboard
 *Changed github repository to https://github.com/VMDashboard/vmdashboard.git
 *Added support for VM Dashboard on RedHat/CentOS
