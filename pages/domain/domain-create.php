@@ -240,7 +240,6 @@ if ($_SESSION['domain_type'] == "kvm") {
       <feature policy='disable' name='pdcm'/>
       <feature policy='disable' name='dca'/>
       <feature policy='require' name='x2apic'/>
-      <feature policy='require' name='stibp'/>
       <feature policy='require' name='ssbd'/>
       <feature policy='require' name='rdtscp'/>
       <feature policy='require' name='hypervisor'/>
@@ -258,6 +257,8 @@ if ($_SESSION['domain_type'] == "kvm") {
       </memballoon>
     </devices>
     </domain> ";
+
+    //This feature is causing error on R710 with ubuntu 16.04 Host <feature policy='require' name='stibp'/>
 
   //Define the new guest domain based off the XML information
   $new_domain = $lv->domain_define($xml);
