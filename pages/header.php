@@ -26,7 +26,14 @@
   $openvm_result = $conn->query($sql);
   //if openvm_users table exists and has any values, rename the tables to vmdashboard
   if (mysqli_num_rows($openvm_result) != 0 ) {
-    $sql = "RENAME TABLE openvm_users TO vmdashboard_users, openvm_config TO vmdashboard_config";
+    $sql = "RENAME TABLE openvm_users TO vmdashboard_users";
+    $rename_result = $conn->query($sql);
+  }
+  $sql = "select * from openvm_config;"; //check to see if openvm_users table exits
+  $openvm_result = $conn->query($sql);
+  //if openvm_users table exists and has any values, rename the tables to vmdashboard
+  if (mysqli_num_rows($openvm_result) != 0 ) {
+    $sql = "RENAME TABLE openvm_config TO vmdashboard_config";
     $rename_result = $conn->query($sql);
   }
 
