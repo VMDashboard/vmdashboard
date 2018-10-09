@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!doctype html>
 <html lang="en">
   <head>
-    <title>OpenVM Dashboard</title>
+    <title>VM Dashboard</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Material Dashboard CSS -->
     <link rel="stylesheet" href="../../assets/css/material-dashboard.css?v=2.0.2">
 
-    <link rel="stylesheet" href="../../assets/css/openvm-dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/vm-dashboard.css">
 
   </head>
   <body class="off-canvas-sidebar">
@@ -182,22 +182,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <nav class="float-left">
               <ul>
                 <li>
-                  <a href="https://openvm.tech">
-                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp OPENVM.TECH
+                  <a href="https://vmdashboard.org">
+                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp VMDASHBOARD.ORG
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/about/">
+                  <a href="https://vmdashboard.org/about/">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/news/">
+                  <a href="https://vmdashboard.org/news/">
                     News
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/feedback/">
+                  <a href="https://vmdashboard.org/feedback/">
                     Feedback
                   </a>
                 </li>
@@ -208,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               &copy;
               <script>
                 document.write(new Date().getFullYear())
-              </script>, OpenVM.
+              </script>, VM Dashboard.
             </div>
           </div>
         </footer>

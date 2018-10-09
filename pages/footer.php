@@ -3,22 +3,22 @@
             <nav class="float-left">
               <ul>
                 <li>
-                  <a href="https://openvm.tech">
-                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp OPENVM.TECH
+                  <a href="https://vmdashboard.org">
+                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp VMDASHBOARD.ORG
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/about/">
+                  <a href="https://vmdashboard.org/about/">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/news/">
+                  <a href="https://vmdashboard.org/news/">
                     News
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/feedback/">
+                  <a href="https://vmdashboard.org/feedback/">
                     Feedback
                   </a>
                 </li>
@@ -29,7 +29,7 @@
               &copy;
               <script>
                 document.write(new Date().getFullYear())
-              </script>, OpenVM.
+              </script>, VM Dashboard.
             </div>
           </div>
         </footer>
@@ -56,5 +56,10 @@
     <!-- Material Dashboard Core initialisations of plugins and Bootstrap Material Design Library -->
     <script src="../../assets/js/material-dashboard.js?v=2.1.0"></script>
 
+    <script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+      })
+    </script>
   </body>
 </html>

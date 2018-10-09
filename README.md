@@ -1,5 +1,6 @@
-The OpenVM Dashboard is currently developed to run best on the Ubuntu 16.04 and 18.04 operating systems.
+With the purchase of the https://vmdashboard.org domain, OpenVM is renamed to VM Dashboard. It is still the same great open source project, just a new name.
 
-To download and install the software, follow the guide at: https://openvm.tech/download/
+In addition to the name change, VM Dashboard now supports CentOS 7.
+Setup instructions for Ubuntu and CentOS are available at https://vmdashboard.org/download
 
-Screenshots can be viewed at https://openvm.tech/screenshots
+New to the software? Screenshots can be viewed at https://vmdashboard.org/screenshots

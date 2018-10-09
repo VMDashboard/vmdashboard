@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-      OpenVM Dashboard
+      VM Dashboard
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -15,10 +15,19 @@
     <!-- CSS Files -->
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../../assets/css/material-dashboard.css?v=2.0.1" rel="stylesheet" />
-    <link href="../../assets/css/openvm-dashboard.css" rel="stylesheet" />
+    <link href="../../assets/css/vm-dashboard.css" rel="stylesheet" />
   </head>
 
   <?php
+  //bring in the language
+  if ($_SESSION['language'] == "english") {
+    require('config/lang/english.php');
+  } elseif ($_SESSION['language'] == "spanish") {
+    require('config/lang/spanish.php');
+  } else {
+    require('config/lang/english.php');
+  }
+
   //bring in the libvirt class and methods
   require('../libvirt.php');
   $lv = new Libvirt();

@@ -22,21 +22,38 @@ if (isset($_POST['update'])) {
 // Add the header information
 require('../header.php');
 
-//Set variables
-
 // Domain Actions
 if (isset($_SESSION['update'])) {
   $path = exec("which git"); //determine the absolute path to git
   ($path == "") ? $notification = "It does not appear as though git is installed" : $notification = "";
-  $tmp = shell_exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Use shell_exec to display all the output, not just last line. Redirect STDERR and STDOUT to variable
-  //Remove session variables so that if page reloads it will not perform actions again
-  unset($_SESSION['update']);
-  unset($_SESSION['update_available']);
+  //If git is not installed, then do not run the git commands
+  if ($path != "") {
+    //$tmp = shell_exec("cd .. && cd .. && $path pull 2>&1"); //run git at the web root directory. Use shell_exec to display all the output, not just last line. Redirect STDERR and STDOUT to variable
+    $setOrigin = shell_exec("cd .. && cd .. && $path remote set-url origin https://github.com/VMDashboard/vmdashboard.git 2>&1");
+    $fetchOrigin = shell_exec("cd .. && cd .. && $path fetch origin master 2>&1");
+    $resetOrigin = shell_exec("cd .. && cd .. && $path reset --hard origin/master 2>&1");
+
+    //Change name of tables if still using openvm
+    require('config.php');
+    $sql = "select * from openvm_users;"; //check to see if openvm_users table exits
+    $openvm_result = $conn->query($sql);
+    //if openvm_users table exists and has any values, rename the tables to vmdashboard
+    if (mysqli_num_rows($openvm_result) != 0 ) {
+      $sql = "RENAME TABLE openvm_users TO vmdashboard_users, openvm_config TO vmdashboard_config";
+      $rename_result = $conn->query($sql);
+    }
+  }
 }
 
 $arrayLatest = $_SESSION['update_version'];
 $arrayExisting = file('version.php');
 $existingExploded = explode('.', $arrayExisting[1]);
+
+if ($arrayLatest[1] == $arrayExisting[1]) {
+  //Remove session variables so that if page reloads it will not perform actions again
+  unset($_SESSION['update']);
+  unset($_SESSION['update_available']);
+}
 
 require('../navbar.php');
 
@@ -45,7 +62,7 @@ require('../navbar.php');
 <div class="content">
   <div class="row">
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card card-left">
+      <div class="card card-stats-left">
         <form action="" method="POST">
           <div class="card-header card-header-warning card-header-icon">
             <div class="card-icon">
@@ -67,10 +84,13 @@ require('../navbar.php');
             <?php }
 
             if ($_SESSION['update_available'] == false) { ?>
-              <h6>You are running the lastest version of OpenVM Dashboard.</h6>
+              <h6>You are running the lastest version of VM Dashboard.</h6>
             <?php } ?>
 
-            <br /><pre><?php echo $tmp; ?></pre><br />
+            <br />
+            <pre><?php echo $fetchOrigin; ?></pre>
+            <pre><?php echo $resetOrigin; ?></pre>
+            <br />
 
             <?php
             //Display the changelog on the update page

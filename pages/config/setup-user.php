@@ -12,9 +12,9 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
   if (isset($_POST['account']) && $_POST['password'] == $_POST['confirm_password']){
 
     //Use apps/password_compat for PHP version 5.4. Needed for CentOS 7 default version of PHP
-    //if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-    //require('../../apps/password_compat/lib/password.php');
-    //}
+    if (version_compare(PHP_VERSION, '5.5.0', '<')) {
+      require('../../apps/password_compat/lib/password.php');
+    }
 
     //Capturing the POST Data
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
@@ -22,13 +22,13 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
     $password = $_POST['password']; //do not need to sanitize because it will be hashed
 
     // Checking for Duplicate usernames
-    $sql = "SELECT username FROM openvm_users WHERE username = '$username';";
+    $sql = "SELECT username FROM vmdashboard_users WHERE username = '$username';";
     $result = $conn->query($sql);
     if (mysqli_num_rows($result) != 0 ) {
 	    $ret = "Username is not available";
     } else {
       // Checking for Duplicate emails
-      $sql = "SELECT email FROM openvm_users WHERE email = '$email';";
+      $sql = "SELECT email FROM vmdashboard_users WHERE email = '$email';";
       $result = $conn->query($sql);
       if (mysqli_num_rows($result) != 0 ) {
 	      $ret = "Email address is already in use";
@@ -37,7 +37,7 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
         $hash = password_hash($password, PASSWORD_BCRYPT);
 
         //Creating the users tables
-        $sql = "CREATE TABLE IF NOT EXISTS openvm_users (
+        $sql = "CREATE TABLE IF NOT EXISTS vmdashboard_users (
           userid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
           username varchar(255),
           email varchar(255),
@@ -46,7 +46,7 @@ if (isset($_SESSION['username']) || $_SESSION['initial_setup'] == true) {
         $conn->query($sql);
 
         // Adding the user
-        $sql = "INSERT INTO openvm_users (username, email, password)
+        $sql = "INSERT INTO vmdashboard_users (username, email, password)
           VALUES ('$username', '$email', '$hash');";
 
         // Executing the SQL statement
@@ -103,7 +103,7 @@ function checkPassword()
 <!doctype html>
 <html lang="en">
   <head>
-    <title>OpenVM Dashboard</title>
+    <title>VM Dashboard</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -119,7 +119,7 @@ function checkPassword()
     <!-- Material Dashboard CSS -->
     <link rel="stylesheet" href="../../assets/css/material-dashboard.css?v=2.0.2">
 
-    <link rel="stylesheet" href="../../assets/css/openvm-dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/vm-dashboard.css">
 
   </head>
   <body class="off-canvas-sidebar">
@@ -219,22 +219,22 @@ function checkPassword()
             <nav class="float-left">
               <ul>
                 <li>
-                  <a href="https://openvm.tech">
-                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp OPENVM.TECH
+                  <a href="https://vmdashboard.org">
+                    <img src="../../assets/img/squarelogo.png" width="20px"> &nbsp VMDASHBOARD.ORG
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/about/">
+                  <a href="https://vmdashboard.org/about/">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/news/">
+                  <a href="https://vmdashboard.org/news/">
                     News
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/feedback/">
+                  <a href="https://vmdashboard.org/feedback/">
                     Feedback
                   </a>
                 </li>
@@ -245,7 +245,7 @@ function checkPassword()
               &copy;
               <script>
                 document.write(new Date().getFullYear())
-              </script>, OpenVM.
+              </script>, VM Dashboard.
             </div>
           </div>
         </footer>

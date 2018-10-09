@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $password = $_POST['password'];
 
   // Creating the SQL statement
-  $sql = "SELECT password, userid FROM openvm_users WHERE username = '$username' LIMIT 1;";
+  $sql = "SELECT password, userid FROM vmdashboard_users WHERE username = '$username' LIMIT 1;";
 
   // Executing the SQL statement
   $result = $conn->query($sql);
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['username'] = $username;
     $_SESSION['userid'] = $userid; //used to set items such as themeColor in index.php
 
-    $arrayLatest = file('https://openvm.tech/version.php'); //Check for a newer version of OpenVM
+    $arrayLatest = file('https://vmdashboard.org/version.php'); //Check for a newer version of OpenVM
     $arrayExisting = file('config/version.php'); //Check the existing version of OpenVM
     $latestExploded = explode('.', $arrayLatest[1]); //Seperate Major.Minor.Patch
     $existingExploded = explode('.', $arrayExisting[1]); //Seperate Major.Minor.Patch
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //Setting the user's theme color choice
-    $sql = "SELECT value, userid FROM openvm_config WHERE name = 'theme_color';";
+    $sql = "SELECT value, userid FROM vmdashboard_config WHERE name = 'theme_color';";
     $result = $conn->query($sql);
     // Extracting the record
     if (mysqli_num_rows($result) != 0 ) {
@@ -56,6 +56,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $_SESSION['themeColor'] = $row['value'];
         }
       }
+    } else {
+      $_SESSION['themeColor'] = "white";
+    }
+
+    //Setting the user's language choice
+    $sql = "SELECT value, userid FROM vmdashboard_config WHERE name = 'language';";
+    $result = $conn->query($sql);
+    // Extracting the record
+    if (mysqli_num_rows($result) != 0 ) {
+      while ($row = $result->fetch_assoc()) {
+        if ($_SESSION['userid'] == $row['userid']){
+          $_SESSION['language'] = $row['value'];
+        }
+      }
+    } else {
+      $_SESSION['language'] = "english";
     }
 
     //Send the user back to the page they came from or to index.php
@@ -82,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!doctype html>
 <html lang="en">
   <head>
-    <title>OpenVM Dashboard</title>
+    <title>VM Dashboard</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
@@ -98,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Material Dashboard CSS -->
     <link rel="stylesheet" href="../assets/css/material-dashboard.css?v=2.0.2">
 
-    <link rel="stylesheet" href="../assets/css/openvm-dashboard.css">
+    <link rel="stylesheet" href="../assets/css/vm-dashboard.css">
 
   </head>
   <body class="off-canvas-sidebar">
@@ -176,22 +192,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <nav class="float-left">
               <ul>
                 <li>
-                  <a href="https://openvm.tech">
-                    <img src="../assets/img/squarelogo.png" width="20px"> &nbsp OPENVM.TECH
+                  <a href="https://vmdashboard.org">
+                    <img src="../assets/img/squarelogo.png" width="20px"> &nbsp VMDASHBOARD.ORG
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/about/">
+                  <a href="https://vmdashboard.org/about/">
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/news/">
+                  <a href="https://vmdashboard.org/news/">
                     News
                   </a>
                 </li>
                 <li>
-                  <a href="https://openvm.tech/feedback/">
+                  <a href="https://vmdashboard.org/feedback/">
                     Feedback
                   </a>
                 </li>
@@ -202,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               &copy;
               <script>
                 document.write(new Date().getFullYear())
-              </script>, OpenVM.
+              </script>, VM Dashboard.
             </div>
           </div>
         </footer>

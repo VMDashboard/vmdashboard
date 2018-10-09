@@ -1,6 +1,17 @@
 <?php header('Location: index.php'); ?>
 <hr>
 <h4>Changelog</h4>
+[18.10.??] - ??.Oct.2018
+*Renamed the software from OpenVM Dashboard to VM Dashboard
+*Changed github repository to https://github.com/VMDashboard/vmdashboard.git
+*Added support for VM Dashboard on RedHat/CentOS
+*Improved XML Definitions of VMs
+*Fixed login redirect link on /pages/vnc.php to direct to correct url
+*Improved appearance of radio buttons in the dark-theme
+*Improved updating process. Now instead of git pull, fetching the origin and reseting it. This will override any changes to local files.
+*Added popovers to display additional information. Used in /pages/config/settings.php
+
+
 [18.09.28] - 28.Sept.2018
 *Fixed bug on Host page that shows incorrect CPU and Memory stats
 *Added new option for SSL Key file in settings. Allowing uses to set key different than cert.

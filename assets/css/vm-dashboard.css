@@ -1,3 +1,16 @@
+/* Move cards up closer to the top */
+.card {
+    margin-top: 0px;
+  }
+
+/*Change the body background color of popovers*/
+.popover-body {
+    padding: 10px 15px 15px;
+    line-height: 1.4;
+    color: #555;
+    background-color: #eee;
+}
+
 /*Change the dark theme's notification from purple to orange*/
 .dark-edition .navbar .notification {
     background: linear-gradient(60deg, #c86e04, #fa8a05);
@@ -83,9 +96,13 @@ a, a:hover, a:active a:focus {
     background-color: #fa8a05;
 }
 
-/* Change radio button outer color to orange */
+/* Change radio button outer color to grey */
 .form-check .form-check-input:checked ~ .circle {
-    border-color: #fa8a05;
+    border-color: #AAAAAA;
+}
+
+.form-check .form-check-input ~ .circle {
+    border-color: #AAAAAA;
 }
 
 

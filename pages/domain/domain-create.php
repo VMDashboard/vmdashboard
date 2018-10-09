@@ -96,7 +96,6 @@ if ($_SESSION['domain_type'] == "kvm") {
         <vapic state='on'/>
         <spinlocks state='on' retries='8191'/>
       </hyperv>
-      <vmport state='off'/>
     </features>";
 
     //Volume type and bus needed for Windows
@@ -221,8 +220,30 @@ if ($_SESSION['domain_type'] == "kvm") {
 
     " . $features . "
 
-    <cpu mode='custom' match='exact'>
-      <model fallback='allow'>Nehalem</model>
+    <cpu mode='custom' match='exact' check='full'>
+      <model fallback='forbid'>Nehalem-IBRS</model>
+      <vendor>Intel</vendor>
+      <feature policy='require' name='vme'/>
+      <feature policy='disable' name='ds'/>
+      <feature policy='disable' name='acpi'/>
+      <feature policy='require' name='ss'/>
+      <feature policy='disable' name='ht'/>
+      <feature policy='disable' name='tm'/>
+      <feature policy='disable' name='pbe'/>
+      <feature policy='disable' name='dtes64'/>
+      <feature policy='disable' name='monitor'/>
+      <feature policy='disable' name='ds_cpl'/>
+      <feature policy='disable' name='vmx'/>
+      <feature policy='disable' name='est'/>
+      <feature policy='disable' name='tm2'/>
+      <feature policy='disable' name='xtpr'/>
+      <feature policy='disable' name='pdcm'/>
+      <feature policy='disable' name='dca'/>
+      <feature policy='require' name='x2apic'/>
+      <feature policy='require' name='stibp'/>
+      <feature policy='require' name='ssbd'/>
+      <feature policy='require' name='rdtscp'/>
+      <feature policy='require' name='hypervisor'/>
     </cpu>
 
     <clock offset='" . $clock_offset . "'/>

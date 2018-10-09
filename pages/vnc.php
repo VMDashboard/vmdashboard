@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 
 // If there is no username, then we need to send them to the login
 if (!isset($_SESSION['username'])){
-  header('Location: ../login.php');
+  header('Location: login.php');
 }
 
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
@@ -22,7 +22,7 @@ $token = $_GET['token'];
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-      OpenVM Dashboard
+      VM Dashboard
     </title>
   </head>
 

@@ -1,41 +1,37 @@
 <?php
 
-// English language configuration
+// Spanish language configuration
 $lang = array (
 
   /* setup-database.php */
-  'save_error' => "Unable to save configuration, check folder permissions",
-  'database_setup' => "Database Setup",
-  'database_name' => "Database Name",
-  'database_username' => "Database Username",
-  'database_password' => "Database Password",
-  'database_host' => "Database Host",
+  'save_error' => "No se puede guardar la configuración, compruebe los permisos de carpeta",
+  'database_setup' => "Configuración de la base de datos",
+  'database_name' => "Nombre de la base de datos",
+  'database_username' => "Nombre de usuario de la base de datos",
+  'database_password' => "Contraseña de la base de datos",
+  'database_host' => "Base de datos host",
 
 
   /* pages/host/host-info.php */
-  /* XML CARD */
-  'xml_dump' => "XML Dump",
-  'xml' => "XML",
-  'hide' => "Hide",
   /* SYSTEM CARD */
-  'system' => "System",
-  'host' => "Host",
-  'hardware_vendor' => "Hardware Vendor",
-  'product' => "Product",
-  'serial' => "Serial",
-  'firmware_vendor' => "Firmware Vendor",
-  'firmware_version' => "Firmware Version",
-  'firmware_release_date' => "Firmware Release Date",
-  'action' => "Action",
+  'system' => "Sistema",
+  'host' => "Anfitrión",
+  'hardware_vendor' => "Proveedor de hardware",
+  'product' => "Producto",
+  'serial' => "De serie",
+  'firmware_vendor' => "Vendedor de Firmware",
+  'firmware_version' => "Versión de firmware",
+  'firmware_release_date' => "Fecha de lanzamiento del firmware",
+  'action' => "Acción",
   /* CPU CARD */
   'cpu' => "CPU",
-  'cpu_percentage' => "CPU Percentage",
-  'total_processor_count' => "Total Processor Count",
-  'processor_speed' => "Processor Speed",
-  'processor_nodes' => "Processor Nodes",
-  'processor_sockets' => "Processor Sockets",
-  'processor_cores' => "Processor Cores",
-  'processor_threads' => "Processor Threads",
+  'cpu_percentage' => "Porcentaje de CPU",
+  'total_processor_count' => "Recuento total del procesador",
+  'processor_speed' => "Velocidad del procesador",
+  'processor_nodes' => "Nodos del procesador",
+  'processor_sockets' => "Zócalos del procesador",
+  'processor_cores' => "Núcleos del procesador",
+  'processor_threads' => "Hilos del procesador",
   /* MEMORY CARD */
   'memory' => "Memory",
   'memory_percentage' => "Memory Percentage",
@@ -85,8 +81,9 @@ $lang = array (
   //'action' => "Action", //repeated value
   /* MISC */
   'unknown' => "Unknown",
-
-
+  'xml_dump' => "XML Dump",
+  'xml' => "XML",
+  'hide' => "Hide",
 
 	 );
 ?>

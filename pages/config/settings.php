@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 require('config.php');
 // Creating table if necessary to store setttings
-$sql = "CREATE TABLE IF NOT EXISTS openvm_config ( name VARCHAR(255), value VARCHAR(255), userid int );";
+$sql = "CREATE TABLE IF NOT EXISTS vmdashboard_config ( name VARCHAR(255), value VARCHAR(255), userid int );";
 $result = $conn->query($sql);
 
 //If the SSL Cert File Path has been changed change it now
@@ -40,14 +40,14 @@ if (isset($_SESSION['cert_path'])) {
   $cert_path = $_SESSION['cert_path'];
   unset($_SESSION['cert_path']);
 
-  $sql = "SELECT name FROM openvm_config WHERE name = 'cert_path';";
+  $sql = "SELECT name FROM vmdashboard_config WHERE name = 'cert_path';";
   $result = $conn->query($sql);
 
   if (mysqli_num_rows($result) == 0 ) {
-    $sql = "INSERT INTO openvm_config (name, value) VALUES ('cert_path', '$cert_path');";
+    $sql = "INSERT INTO vmdashboard_config (name, value) VALUES ('cert_path', '$cert_path');";
     $result = $conn->query($sql);
   } else {
-    $sql = "UPDATE openvm_config SET value = '$cert_path' WHERE name = 'cert_path';";
+    $sql = "UPDATE vmdashboard_config SET value = '$cert_path' WHERE name = 'cert_path';";
     $result = $conn->query($sql);
   }
 }
@@ -57,21 +57,21 @@ if (isset($_SESSION['key_path'])) {
   $key_path = $_SESSION['key_path'];
   unset($_SESSION['key_path']);
 
-  $sql = "SELECT name FROM openvm_config WHERE name = 'key_path';";
+  $sql = "SELECT name FROM vmdashboard_config WHERE name = 'key_path';";
   $result = $conn->query($sql);
 
   if (mysqli_num_rows($result) == 0 ) {
-    $sql = "INSERT INTO openvm_config (name, value) VALUES ('key_path', '$key_path');";
+    $sql = "INSERT INTO vmdashboard_config (name, value) VALUES ('key_path', '$key_path');";
     $result = $conn->query($sql);
   } else {
-    $sql = "UPDATE openvm_config SET value = '$key_path' WHERE name = 'key_path';";
+    $sql = "UPDATE vmdashboard_config SET value = '$key_path' WHERE name = 'key_path';";
     $result = $conn->query($sql);
   }
 }
 
 
 //Get the current noVNC cert path to use as placeholder for textbox
-$sql = "SELECT value FROM openvm_config WHERE name = 'cert_path' LIMIT 1;";
+$sql = "SELECT value FROM vmdashboard_config WHERE name = 'cert_path' LIMIT 1;";
 $result = $conn->query($sql);
 if (mysqli_num_rows($result) != 0 ) {
   while ($row = $result->fetch_assoc()) {
@@ -82,7 +82,7 @@ if (mysqli_num_rows($result) != 0 ) {
 }
 
 //Get the current noVNC key path to use as placeholder for textbox
-$sql = "SELECT value FROM openvm_config WHERE name = 'key_path' LIMIT 1;";
+$sql = "SELECT value FROM vmdashboard_config WHERE name = 'key_path' LIMIT 1;";
 $result = $conn->query($sql);
 if (mysqli_num_rows($result) != 0 ) {
   while ($row = $result->fetch_assoc()) {
@@ -119,9 +119,10 @@ require('../navbar.php');
               <div class="col-6">
                 <div class="form-group">
                   <input type="text" value="<?php echo $cert_path; ?>" class="form-control" name="cert_path" />
-                  <br />
-                  <p>*You will need to restart your server or kill the python process using port 6080 to apply the change. Default file path: /etc/ssl/self.pem</p>
                 </div>
+              </div>
+              <div class="col-1 col-form-label">
+                <i class="material-icons" data-toggle="popover" title="SSL Certificate" data-content="You will need to restart your server or kill the python process using port 6080 to apply the change, then log back in to apply. Default file path: /etc/ssl/self.pem">description</i>
               </div>
             </div>
 
@@ -130,9 +131,10 @@ require('../navbar.php');
               <div class="col-6">
                 <div class="form-group">
                   <input type="text" value="<?php echo $key_path; ?>" class="form-control" name="key_path" />
-                  <br />
-                  <p>*You will need to restart your server or kill the python process using port 6080 to apply the change. Default file path is not set</p>
                 </div>
+              </div>
+              <div class="col-1 col-form-label">
+                <i class="material-icons" data-toggle="popover" title="SSL Key" data-content="You will need to restart your server or kill the python process using port 6080 to apply the change, then log back in to apply. Default file path is not set">description</i>
               </div>
             </div>
           </div> <!-- end card body -->

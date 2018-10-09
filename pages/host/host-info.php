@@ -55,7 +55,7 @@ $device_cap = $lv->get_node_device_cap_options(); //Get Host Device Options
 
 // Used when the user clicks the XML link. Will display XML data
 if ($action == 'dumpxml') {
-  $xml_data = 'XML dump of node device <i>'.$name.'</i>:<br/><br/>'.htmlentities($lv->get_node_device_xml($name, false));
+  $xml_data = htmlentities($lv->get_node_device_xml($name, false));
 }
 
 $ci  = $lv->get_connect_information();
@@ -71,19 +71,20 @@ if ($ci['uri'])
     //If we have returned XML data, display it
     if ($xml_data) { ?>
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" id="view-xml">
-      <div class="card">
+      <div class="card card-stats-left">
         <div class="card-header card-header-warning card-header-icon">
           <div class="card-icon">
             <i class="material-icons">code</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">XML</h3>
+          <h3 class="card-title"><?php echo $lang['xml']; ?></h3>
+          <p class="card-category"><?php echo $lang['xml_dump'] . ": " . $name; ?></p>
         </div>
         <div class="card-body">
           <?php echo "<pre class=\"xml\" >$xml_data</pre>"; ?>
           <br />
           <form action="" method="POST">
-            <input type="button" value="Hide" onclick="clearXML()">
+            <input type="button" value="<?php echo $lang['hide']; ?>" onclick="clearXML()">
           </form>
           <br />
         </div>
@@ -102,7 +103,7 @@ if ($ci['uri'])
             <i class="material-icons">computer</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">System</h3>
+          <h3 class="card-title"><?php echo $lang['system'];?></h3>
         </div>
         <div class="card-body">
           <?php
@@ -114,23 +115,23 @@ if ($ci['uri'])
 
               for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                 $tmp1 = $lv->get_node_device_information($tmp[$ii]);
-                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">XML</a>";
+                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">" . $lang['xml'] . "</a>";
 
-                $vendor = array_key_exists('hardware_vendor', $tmp1) ? $tmp1['hardware_vendor'] : 'Unknown';
-                $product_name = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : 'Unknown';
-                $serial = array_key_exists('hardware_serial', $tmp1) ? $tmp1['hardware_serial'] : 'Unknown';
-                $firmware_vender = array_key_exists('firmware_vendor', $tmp1) ? $tmp1['firmware_vendor'] : 'Unknown';
-                $firmware_version = array_key_exists('firmware_version', $tmp1) ? $tmp1['firmware_version'] : 'Unknown';
-                $firmware_release_date = array_key_exists('firmware_release_date', $tmp1) ? $tmp1['firmware_release_date'] : 'Unknown';
+                $vendor = array_key_exists('hardware_vendor', $tmp1) ? $tmp1['hardware_vendor'] : $lang['unknown'];
+                $product_name = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : $lang['unknown'];
+                $serial = array_key_exists('hardware_serial', $tmp1) ? $tmp1['hardware_serial'] : $lang['unknown'];
+                $firmware_vender = array_key_exists('firmware_vendor', $tmp1) ? $tmp1['firmware_vendor'] : $lang['unknown'];
+                $firmware_version = array_key_exists('firmware_version', $tmp1) ? $tmp1['firmware_version'] : $lang['unknown'];
+                $firmware_release_date = array_key_exists('firmware_release_date', $tmp1) ? $tmp1['firmware_release_date'] : $lang['unknown'];
 
-                echo "<strong>Host:</strong> $hn <br />";
-                echo "<strong>Hardware Vendor:</strong> $vendor <br />";
-                echo "<strong>Product:</strong> $product_name <br />";
-                echo "<strong>Serial:</strong> $serial <br />";
-                echo "<strong>Firmware Vendor:</strong> {$tmp1['firmware_vendor']} <br />";
-                echo "<strong>Firmware Version:</strong> $firmware_vender </br />";
-                echo "<strong>Firmware Release Date: </strong> $firmware_release_date <br />";
-                echo "<strong>Action:</strong> $act <br /> <br />";
+                echo "<strong>" . $lang['host'] . ":</strong> $hn <br />";
+                echo "<strong>" . $lang['hardware_vendor'] . ":</strong> $vendor <br />";
+                echo "<strong>" . $lang['product'] . ":</strong> $product_name <br />";
+                echo "<strong>" . $lang['serial'] . ":</strong> $serial <br />";
+                echo "<strong>" . $lang['firmware_vendor'] . ":</strong> {$tmp1['firmware_vendor']} <br />";
+                echo "<strong>" . $lang['firmware_version'] . ":</strong> $firmware_vender </br />";
+                echo "<strong>" . $lang['firmware_release_date'] . ":</strong> $firmware_release_date <br />";
+                echo "<strong>" . $lang['action'] . ":</strong> $act <br /> <br />";
               }
             }
           }
@@ -150,20 +151,20 @@ if ($ci['uri'])
             <i class="material-icons">flip_to_front</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">CPU</h3>
+          <h3 class="card-title"><?php echo $lang['cpu']; ?></h3>
         </div>
         <div class="card-body">
-          <strong>CPU Percentage:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
+          <strong><?php echo $lang['cpu_percentage']; ?>:</strong> <?php echo $cpu_percentage . "%"; ?> <br />
           <div class="progress">
             <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $cpu_percentage . '%'; ?>" aria-valuenow="<?php echo $cpu_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
           </div> <br />
           <?php
-          echo "<strong>Total processor count:</strong> {$host_node_info['cpus']} <br>";
-          echo "<strong>Processor speed:</strong> {$host_node_info['mhz']} MHz <br>";
-          echo "<strong>Processor nodes:</strong> {$host_node_info['nodes']} <br>";
-          echo "<strong>Processor sockets:</strong> {$host_node_info['sockets']} <br>";
-          echo "<strong>Processor cores:</strong> {$host_node_info['cores']} <br>";
-          echo "<strong>Processor threads:</strong> {$host_node_info['threads']} <br>";
+          echo "<strong>" . $lang['total_processor_count'] . ":</strong> {$host_node_info['cpus']} <br>";
+          echo "<strong>" . $lang['processor_speed'] . ":</strong> {$host_node_info['mhz']} MHz <br>";
+          echo "<strong>" . $lang['processor_nodes'] . ":</strong> {$host_node_info['nodes']} <br>";
+          echo "<strong>" . $lang['processor_sockets'] . ":</strong> {$host_node_info['sockets']} <br>";
+          echo "<strong>" . $lang['processor_cores'] . ":</strong> {$host_node_info['cores']} <br>";
+          echo "<strong>" . $lang['processor_threads'] . ":</strong> {$host_node_info['threads']} <br>";
           ?>
         </div>
         <div class="card-footer">
@@ -180,19 +181,19 @@ if ($ci['uri'])
             <i class="material-icons">content_copy</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">Memory</h3>
+          <h3 class="card-title"><?php echo $lang['memory']; ?></h3>
         </div>
         <div class="card-body">
-          <strong>Memory Percentage:</strong> <?php echo $mem_percentage . "%"; ?> <br />
+          <strong><?php echo $lang['memory_percentage']; ?>:</strong> <?php echo $mem_percentage . "%"; ?> <br />
           <div class="progress">
             <div class="progress-bar progress-bar-danger" role="progressbar" style="width: <?php echo $mem_percentage . '%'; ?>" aria-valuenow="<?php echo $mem_percentage; ?>" aria-valuemin="0" aria-valuemax="100"></div>
           </div> <br />
           <?php
-          echo "<strong>Total memory:</strong> " . number_format(($host_node_info['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
-          echo "<strong>Used Memory:</strong> " . number_format((($host_node_info['memory'] - $mem_stats['free'] - $mem_stats['buffers'] - $mem_stats['cached']) / 1048576), 2, '.', ' ') . " GB <br>";
-          echo "<strong>Free Memory:</strong> " . number_format(($mem_stats['free'] / 1048576), 2, '.', ' ') . " GB <br>";
-          echo "<strong>Buffered Memory:</strong> " . number_format(($mem_stats['buffers'] / 1048576), 2, '.', ' ') . " GB <br>";
-          echo "<strong>Cached Memory:</strong> " . number_format(($mem_stats['cached'] / 1048576), 2, '.', ' ') . " GB <br>";
+          echo "<strong>" . $lang['total_memory'] . ":</strong> " . number_format(($host_node_info['memory'] / 1048576), 2, '.', ' ') . " GB <br>";
+          echo "<strong>" . $lang['used_memory'] . ":</strong> " . number_format((($host_node_info['memory'] - $mem_stats['free'] - $mem_stats['buffers'] - $mem_stats['cached']) / 1048576), 2, '.', ' ') . " GB <br>";
+          echo "<strong>" . $lang['free_memory'] . ":</strong> " . number_format(($mem_stats['free'] / 1048576), 2, '.', ' ') . " GB <br>";
+          echo "<strong>" . $lang['buffered_memory'] . ":</strong> " . number_format(($mem_stats['buffers'] / 1048576), 2, '.', ' ') . " GB <br>";
+          echo "<strong>" . $lang['cached_memory'] . ":</strong> " . number_format(($mem_stats['cached'] / 1048576), 2, '.', ' ') . " GB <br>";
           ?>
         </div>
         <div class="card-footer">
@@ -209,16 +210,16 @@ if ($ci['uri'])
             <i class="material-icons">devices</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">Hypervisor</h3>
+          <h3 class="card-title"><?php echo $lang['hypervisor']; ?></h3>
         </div>
         <div class="card-body">
           <?php
           if (strlen($info) > 2)
               $info[ strlen($info) - 2 ] = ' ';
-          echo "<strong>Hypervisor:</strong> {$ci['hypervisor_string']} <br>";
-          echo "<strong>Host Location:</strong> localhost <br>";
-          echo "<strong>Connection:</strong> $info <br>";
-          echo "<strong>Architecture:</strong> $arch <br>";
+          echo "<strong>" . $lang['hypervisor'] . ":</strong> {$ci['hypervisor_string']} <br>";
+          echo "<strong>" . $lang['host_location'] . ":</strong> localhost <br>";
+          echo "<strong>" . $lang['connection'] . ":</strong> $info <br>";
+          echo "<strong>" . $lang['architecture'] . ":</strong> $arch <br>";
           ?>
         </div>
         <div class="card-footer">
@@ -235,7 +236,7 @@ if ($ci['uri'])
             <i class="material-icons">storage</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">Storage</h3>
+          <h3 class="card-title"><?php echo $lang['storage']; ?></h3>
         </div>
         <div class="card-body">
           <?php
@@ -246,19 +247,19 @@ if ($ci['uri'])
               echo "<div class='table-responsive'>" .
                 "<table class='table'>" .
                 "<tr>" .
-                "<th> Device name </th>" .
-                "<th> Location </th>" .
-                "<th> Bus </th>" .
-                "<th> Vendor </th>" .
-                "<th> Model </th>" .
-                "<th> Action </th>" .
+                "<th> " . $lang['device_name'] . "</th>" .
+                "<th> " . $lang['location'] . "</th>" .
+                "<th> " . $lang['bus'] . "</th>" .
+                "<th> " . $lang['vendor'] . "</th>" .
+                "<th> " . $lang['model'] . "</th>" .
+                "<th> " . $lang['action'] . "</th>" .
                 "</tr>";
 
               for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                 $tmp1 = $lv->get_node_device_information($tmp[$ii]);
-                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">XML</a>";
+                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">" . $lang['xml'] . "</a>";
                 $node_device = $tmp1['name'];
-                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : 'Unknown';
+                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : $lang['unknown'];
 
                 //Pulling XML data that is not available from libvirt API
                 $deviceXML = new SimpleXMLElement($lv->get_node_device_xml($node_device, false));
@@ -294,7 +295,7 @@ if ($ci['uri'])
             <i class="material-icons">device_hub</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">Network</h3>
+          <h3 class="card-title"><?php echo $lang['network']; ?></h3>
         </div>
         <div class="card-body">
           <?php
@@ -307,18 +308,18 @@ if ($ci['uri'])
               echo "<div class='table-responsive'>" .
                 "<table class='table'>" .
                 "<tr>" .
-                "<th> Device name </th>" .
-                "<th> Interface </th>" .
-                "<th> Driver name </th>" .
-                "<th> MAC Address </th>" .
-                "<th> Network Speed </th>" .
-                "<th> Network State </th>" .
-                "<th> Action </th>" .
+                "<th> " . $lang['device_name'] . "</th>" .
+                "<th> " . $lang['interface'] . "</th>" .
+                "<th> " . $lang['driver_name'] . "</th>" .
+                "<th> " . $lang['mac_address'] . "</th>" .
+                "<th> " . $lang['network_speed'] . "</th>" .
+                "<th> " . $lang['network_state'] . "</th>" .
+                "<th> " . $lang['action'] . "</th>" .
                 "</tr>";
 
               for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                 $tmp1 = $lv->get_node_device_information($tmp[$ii]);
-                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">XML</a>";
+                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">" . $lang['xml'] . "</a>";
                 $node_device = $tmp1['name'];
                 $interface = array_key_exists('interface_name', $tmp1) ? $tmp1['interface_name'] : '-';
                 $driver = array_key_exists('capabilities', $tmp1) ? $tmp1['capabilities'] : '-';
@@ -329,7 +330,7 @@ if ($ci['uri'])
                 $net_speed = $deviceXML->capability->link[speed];
                 $net_state = $deviceXML->capability->link[state];
                 if (!$net_speed) {
-                  $net_speed = "---- ";
+                  $net_speed = "- - - - ";
                 }
 
                 echo "<tr>" .
@@ -361,7 +362,7 @@ if ($ci['uri'])
             <i class="material-icons">usb</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">USB</h3>
+          <h3 class="card-title"><?php echo $lang['usb']; ?></h3>
         </div>
         <div class="card-body">
           <?php
@@ -373,20 +374,20 @@ if ($ci['uri'])
               echo "<div class='table-responsive'>" .
                 "<table class='table'>" .
                 "<tr>" .
-                "<th> Device name </th>" .
-                "<th> Identification </th>" .
-                "<th> Driver name </th>" .
-                "<th> Vendor </th>" .
-                "<th> Product </th>" .
-                "<th> Action </th>" .
+                "<th> " . $lang['device_name'] . "</th>" .
+                "<th> " . $lang['identification'] . "</th>" .
+                "<th> " . $lang['driver_name'] . "</th>" .
+                "<th> " . $lang['vendor'] . "</th>" .
+                "<th> " . $lang['product'] . "</th>" .
+                "<th> " . $lang['action'] . "</th>" .
                 "</tr>";
 
               for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                 $tmp1 = $lv->get_node_device_information($tmp[$ii]);
-                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">XML</a>";
-                $driver  = array_key_exists('driver_name', $tmp1) ? $tmp1['driver_name'] : 'None';
-                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : 'Unknown';
-                $product = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : 'Unknown';
+                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">" . $lang['xml'] . "</a>";
+                $driver  = array_key_exists('driver_name', $tmp1) ? $tmp1['driver_name'] : $lang['unknown'];
+                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : $lang['unknown'];
+                $product = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : $lang['unknown'];
 
                 if (array_key_exists('vendor_id', $tmp1) && array_key_exists('product_id', $tmp1))
                   $ident = $tmp1['vendor_id'].':'.$tmp1['product_id'];
@@ -421,7 +422,7 @@ if ($ci['uri'])
             <i class="material-icons">indeterminate_check_box</i>
           </div>
           <p class="card-category"></p>
-          <h3 class="card-title">PCI</h3>
+          <h3 class="card-title"><?php echo $lang['pci']; ?></h3>
         </div>
         <div class="card-body">
           <?php
@@ -433,20 +434,20 @@ if ($ci['uri'])
               echo "<div class='table-responsive'>" .
                 "<table class='table'>" .
                 "<tr>" .
-                "<th> Device name </th>" .
-                "<th> Identification </th>" .
-                "<th> Driver name </th>" .
-                "<th> Vendor </th>" .
-                "<th> Product </th>" .
-                "<th> Action </th>" .
+                "<th> " . $lang['device_name'] . "</th>" .
+                "<th> " . $lang['identification'] . "</th>" .
+                "<th> " . $lang['driver_name'] . "</th>" .
+                "<th> " . $lang['vendor'] . "</th>" .
+                "<th> " . $lang['product'] . "</th>" .
+                "<th> " . $lang['action'] . "</th>" .
                 "</tr>";
 
               for ($ii = 0; $ii < sizeof($tmp); $ii++) {
                 $tmp1 = $lv->get_node_device_information($tmp[$ii]);
-                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">XML</a>";
-                $driver  = array_key_exists('driver_name', $tmp1) ? $tmp1['driver_name'] : 'None';
-                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : 'Unknown';
-                $product = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : 'Unknown';
+                $act = "<a title='XML Data' href=\"?action=dumpxml&amp;name={$tmp1['name']}\">" . $lang['xml'] . "</a>";
+                $driver  = array_key_exists('driver_name', $tmp1) ? $tmp1['driver_name'] : $lang['unknown'];
+                $vendor  = array_key_exists('vendor_name', $tmp1) ? $tmp1['vendor_name'] : $lang['unknown'];
+                $product = array_key_exists('product_name', $tmp1) ? $tmp1['product_name'] : $lang['unknown'];
 
                 if (array_key_exists('vendor_id', $tmp1) && array_key_exists('product_id', $tmp1))
                   $ident = $tmp1['vendor_id'].':'.$tmp1['product_id'];

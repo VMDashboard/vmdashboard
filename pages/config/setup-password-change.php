@@ -36,7 +36,7 @@ if ($_SESSION['action'] == 'Change') {
   require('config.php');
 
   // Adding the user
-  $sql = "UPDATE openvm_users SET password='$hash' WHERE username='$username'";
+  $sql = "UPDATE vmdashboard_users SET password='$hash' WHERE username='$username'";
     // Executing the SQL statement
     if ($conn->query($sql) === TRUE) {
       //Unset the SESSION variables

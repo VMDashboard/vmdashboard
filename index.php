@@ -15,7 +15,7 @@ if (file_exists($path)) {
   require('./pages/config/config.php');
 
   //Setting the SSL Certificate file path
-  $sql = "SELECT value FROM openvm_config WHERE name = 'cert_path' LIMIT 1;";
+  $sql = "SELECT value FROM vmdashboard_config WHERE name = 'cert_path' LIMIT 1;";
   $result = $conn->query($sql);
   // Extracting the record
   if (mysqli_num_rows($result) != 0 ) {
@@ -30,7 +30,7 @@ if (file_exists($path)) {
   }
 
   //Setting the SSL Certificate file path
-  $sql = "SELECT value FROM openvm_config WHERE name = 'key_path' LIMIT 1;";
+  $sql = "SELECT value FROM vmdashboard_config WHERE name = 'key_path' LIMIT 1;";
   $result = $conn->query($sql);
   // Extracting the record
   if (mysqli_num_rows($result) != 0 ) {
