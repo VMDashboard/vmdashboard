@@ -14,6 +14,22 @@ $path = dirname(__FILE__) . "/pages/config/config.php";
 if (file_exists($path)) {
   require('./pages/config/config.php');
 
+  //Change name of tables if still using openvm
+  $sql = "select * from openvm_users;"; //check to see if openvm_users table exits
+  $openvm_result = $conn->query($sql);
+  //if openvm_users table exists and has any values, rename the tables to vmdashboard
+  if (mysqli_num_rows($openvm_result) != 0 ) {
+    $sql = "RENAME TABLE openvm_users TO vmdashboard_users";
+    $rename_result = $conn->query($sql);
+  }
+  $sql = "select * from openvm_config;"; //check to see if openvm_users table exits
+  $openvm_result = $conn->query($sql);
+  //if openvm_users table exists and has any values, rename the tables to vmdashboard
+  if (mysqli_num_rows($openvm_result) != 0 ) {
+    $sql = "RENAME TABLE openvm_config TO vmdashboard_config";
+    $rename_result = $conn->query($sql);
+  }
+
   //Setting the SSL Certificate file path
   $sql = "SELECT value FROM vmdashboard_config WHERE name = 'cert_path' LIMIT 1;";
   $result = $conn->query($sql);

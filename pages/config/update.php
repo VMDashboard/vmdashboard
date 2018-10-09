@@ -32,23 +32,6 @@ if (isset($_SESSION['update'])) {
     $setOrigin = shell_exec("cd .. && cd .. && $path remote set-url origin https://github.com/VMDashboard/vmdashboard.git 2>&1");
     $fetchOrigin = shell_exec("cd .. && cd .. && $path fetch origin master 2>&1");
     $resetOrigin = shell_exec("cd .. && cd .. && $path reset --hard origin/master 2>&1");
-
-    //Change name of tables if still using openvm
-    require('config.php');
-    $sql = "select * from openvm_users;"; //check to see if openvm_users table exits
-    $openvm_result = $conn->query($sql);
-    //if openvm_users table exists and has any values, rename the tables to vmdashboard
-    if (mysqli_num_rows($openvm_result) != 0 ) {
-      $sql = "RENAME TABLE openvm_users TO vmdashboard_users";
-      $rename_result = $conn->query($sql);
-    }
-    $sql = "select * from openvm_config;"; //check to see if openvm_users table exits
-    $openvm_result = $conn->query($sql);
-    //if openvm_users table exists and has any values, rename the tables to vmdashboard
-    if (mysqli_num_rows($openvm_result) != 0 ) {
-      $sql = "RENAME TABLE openvm_config TO vmdashboard_config";
-      $rename_result = $conn->query($sql);
-    }
   }
 }
 
