@@ -19,6 +19,18 @@
   </head>
 
   <?php
+
+  //Change name of tables if still using openvm
+  require('../config/config.php');
+  $sql = "select * from openvm_users;"; //check to see if openvm_users table exits
+  $openvm_result = $conn->query($sql);
+  //if openvm_users table exists and has any values, rename the tables to vmdashboard
+  if (mysqli_num_rows($openvm_result) != 0 ) {
+    $sql = "RENAME TABLE openvm_users TO vmdashboard_users, openvm_config TO vmdashboard_config";
+    $rename_result = $conn->query($sql);
+  }
+
+
   //bring in the language
   if ($_SESSION['language'] == "english") {
     require('config/lang/english.php');
