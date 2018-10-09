@@ -48,8 +48,9 @@ if (isset($_SESSION['update'])) {
 $arrayLatest = $_SESSION['update_version'];
 $arrayExisting = file('version.php');
 $existingExploded = explode('.', $arrayExisting[1]);
+$latestExploded = explode('.',$arrayLatest[1]);
 
-if ($arrayLatest[1] == $arrayExisting[1]) {
+if ($existingExploded >= $latestExploded) {
   //Remove session variables so that if page reloads it will not perform actions again
   unset($_SESSION['update']);
   unset($_SESSION['update_available']);
