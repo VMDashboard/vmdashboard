@@ -33,11 +33,11 @@
 
   //bring in the language
   if ($_SESSION['language'] == "english") {
-    require('config/lang/english.php');
+    require('../config/lang/english.php');
   } elseif ($_SESSION['language'] == "spanish") {
-    require('config/lang/spanish.php');
+    require('../config/lang/spanish.php');
   } else {
-    require('config/lang/english.php');
+    require('../config/lang/english.php');
   }
 
   //bring in the libvirt class and methods
