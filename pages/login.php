@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   //Use apps/password_compat for PHP version 5.4. Needed for CentOS 7 default version of PHP
   if (version_compare(PHP_VERSION, '5.5.0', '<')) {
-  require('../apps/password_compat/lib/password.php');
+  require('../apps/password_compat_vm/lib/password.php');
   }
 
   $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);

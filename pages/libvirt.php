@@ -19,7 +19,7 @@ class Libvirt {
         if (!libvirt_logfile_set($filename))
             return $this->_set_last_error();
         return true;
-    }
+    } 
 
     function print_resources() {
         return libvirt_print_binding_resources();
