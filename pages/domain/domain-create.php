@@ -221,7 +221,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     " . $features . "
 
     <cpu mode='custom' match='exact' check='full'>
-      <model fallback='forbid'>Nehalem</model>
+      <model fallback='forbid'>Nehalem-IBRS</model>
       <feature policy='require' name='vme'/>
       <feature policy='require' name='x2apic'/>
       <feature policy='require' name='hypervisor'/>
