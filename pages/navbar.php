@@ -16,7 +16,7 @@ if (isset($_SESSION[themeColor])){
       -->
       <div class="logo">
         <a href="http://vmdashboard.org" class="simple-text logo-normal">
-          <img src="../../assets/img/squarelogo.png" width="24px"> &ensp; Dashboard
+          <img src="../../assets/img/squarelogo.png" width="24px"> &ensp; VM Dashboard
         </a>
       </div>
 

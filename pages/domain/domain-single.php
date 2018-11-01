@@ -287,9 +287,10 @@ unset($_SESSION['xmldesc']);
           if ($state == "running") {
             //Lets get the vnc console preview of the running domain
             ?>
-            <a href="../vnc.php?token=<?php echo $randomString; ?>" target="_blank">
+            <div  style="position:relative;">
               <iframe src="<?php echo $url; ?>:6080/vnc_screen.html?view_only=true&path=&scale=true&token=<?php echo $randomString ?>" style="width: 295px; height: 221px; border: none;"></iframe>
-            </a>
+              <a href="../vnc.php?token=<?php echo $randomString; ?>" target="_blank"  style="position:absolute; top:0; left:0; display:inline-block; width:100%; height:100%; z-index:99;"></a>
+            </div>
             <?php
           } else if ($state == "paused") {
             echo "<img src='../../assets/img/paused.png' width='295px' height='221px' >";

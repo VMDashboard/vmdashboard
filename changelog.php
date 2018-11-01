@@ -1,7 +1,11 @@
 <?php header('Location: index.php'); ?>
 <hr>
 <h4>Changelog</h4>
-[18.10.09] - 09.Oct.2018
+[18.11.01] - 01.NOV.2018
+*Made the Console window in domain-single.php clickable to tab with console
+*Stripped default cpu options from domain-create.php. Some of the options caused vm to now boot up on certain host hardware configurations. Now relies on default libvirt settings.
+
+[18.10.09] - 09.OCT.2018
 *Renamed the software from OpenVM Dashboard to VM Dashboard
 *Changed github repository to https://github.com/VMDashboard/vmdashboard.git
 *Added support for VM Dashboard on RedHat/CentOS
@@ -12,7 +16,7 @@
 *Added popovers to display additional information. Used in /pages/config/settings.php
 
 
-[18.09.28] - 28.Sept.2018
+[18.09.28] - 28.SEPT.2018
 *Fixed bug on Host page that shows incorrect CPU and Memory stats
 *Added new option for SSL Key file in settings. Allowing uses to set key different than cert.
 
