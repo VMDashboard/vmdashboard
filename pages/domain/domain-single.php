@@ -287,8 +287,8 @@ unset($_SESSION['xmldesc']);
           if ($state == "running") {
             //Lets get the vnc console preview of the running domain
             ?>
-            <div  style="position:relative;">
-              <iframe src="<?php echo $url; ?>:6080/vnc_screen.html?view_only=true&path=&scale=true&token=<?php echo $randomString ?>" style="width: 295px; height: 221px; border: none;"></iframe>
+            <div style="position:relative; width: 295px; height: 221px; margin-left:auto; margin-right:0;">
+              <iframe src="<?php echo $url; ?>:6080/vnc_screen.html?view_only=true&path=&scale=true&token=<?php echo $randomString ?>" style="width: 100%; height: 100%; border: none;"></iframe>
               <a href="../vnc.php?token=<?php echo $randomString; ?>" target="_blank"  style="position:absolute; top:0; left:0; display:inline-block; width:100%; height:100%; z-index:99;"></a>
             </div>
             <?php
@@ -305,7 +305,7 @@ unset($_SESSION['xmldesc']);
         </div>
       </div>
     </div>
-
+    
     <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
       <div class="card card-stats">
         <div class="card-header card-header-warning card-header-icon">
