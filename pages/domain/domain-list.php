@@ -75,12 +75,14 @@ if ($action == 'domain-destroy') {
     </div>
     <div class="card-body">
 
-      <a href="domain-create.php"><i class="fa fa-plus"></i> Create virtual machine </a> <br /> <br />
+      <a href="domain-create.php"><i class="fa fa-plus"></i> Create Virtual Machine </a>  &nbsp; &nbsp; &nbsp; &nbsp;
+      <a href="domain-create-xml.php"><i class="fa fa-plus"></i> Define VM from XML</a> 
+      <br /> <br />
 
       <div class="table-responsive">
         <table class="table table-hover">
           <thead class="text-none">
-            <th>Guest Name</th>
+            <th>Name</th>
             <th>CPUs</th>
             <th>Memory</th>
             <th>Memory Usage</th>

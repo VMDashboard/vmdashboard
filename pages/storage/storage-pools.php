@@ -78,7 +78,7 @@ function volumeDeleteWarning(linkURL, fileName) {
 </script>
 
 <div class="content">
-  <p style="text-align:right; padding-right:20px;"><a  href="storage-add-pool.php"><i class="fa fa-plus"></i> Add storage pool </a> </p>
+  <p style="text-align:right; padding-right:20px;"><a  href="storage-add-pool.php"><i class="fa fa-plus"></i> Add Storage Pool </a> </p>
 
   <?php
   $pools = $lv->get_storagepools();
@@ -98,7 +98,7 @@ function volumeDeleteWarning(linkURL, fileName) {
           <p>There are no configured storage pools. Please <a href="storage-add-pool.php">create</a> a new storage pool, then start it.</p>
           <p>Storage pools are used to contain the storage volumes (disk drives) and ISO files of your virtual machines</p>
           <br />
-          <a href="storage-add-pool.php"><i class="fa fa-plus"></i> Add storage pool </a> <br /> <br />
+          <a href="storage-add-pool.php"><i class="fa fa-plus"></i> Add Storage Pool </a> <br /> <br />
         </div>
       </div>
     </div>
@@ -148,7 +148,7 @@ function volumeDeleteWarning(linkURL, fileName) {
         <div class="card-body">
           <?php
           if ($act == "Active")
-          echo "<a href=\"storage-add-volume.php?pool=$pools[$i]\"><i class=\"fa fa-plus\"></i> Create new volume </a>";
+          echo "<a href=\"storage-add-volume.php?pool=$pools[$i]\"><i class=\"fa fa-plus\"></i> Create New Volume </a>";
           ?>
 
           <br /><br />

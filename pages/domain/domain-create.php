@@ -1,4 +1,7 @@
 <?php
+
+//Create function that will add domain flags
+
 // If the SESSION has not been started, start it now
 if (!isset($_SESSION)) {
     session_start();
@@ -24,267 +27,273 @@ function clean_input($data) {
 // We are now going to grab any GET/POST data and put in in SESSION data, then clear it.
 // This will prevent duplicatig actions when page is reloaded.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-  //General Section
+  
+  //----General Section----//
   $_SESSION['domain_type'] = "kvm"; //set to "kvm" as this is the only supported type at this time
   $_SESSION['domain_name'] = clean_input($_POST['domain_name']); //removes spaces and sanitizes
   $_SESSION['memory_unit'] = $_POST['memory_unit']; //choice of "MiB" or "GiB"
   $_SESSION['memory'] = $_POST['memory']; //number input, still need to sanitze for number and verify it is not zero
   $_SESSION['vcpu'] = $_POST['vcpu']; //number input, still need to sanitze for number and verify it is not zero, also may need to set limit to host CPU#
-  $_SESSION['os_arch'] = $_POST['os_arch']; //VMs will use the same Architecture as the host server
-  $_SESSION['os_type'] = "hvm"; //hvm is standard operating system VM
   $_SESSION['clock_offset'] = "localtime"; //set to localtime
   $_SESSION['os_platform'] = $_POST['os_platform']; //Used to determine what goes in XML. Ex. Windows VMs need extra options
-  //Storage Volume Section
+  
+  //----Storage Volume Section----//
   $_SESSION['source_file_volume'] = $_POST['source_file_volume']; //This will be the volume image that the user selects
   $_SESSION['volume_image_name'] = clean_input($_POST['new_volume_name']); //This is used when a new volume must be created
-  $_SESSION['volume_capacity'] = $_POST['new_volume_size'];
-  $_SESSION['unit'] = $_POST['new_unit'];
-  $_SESSION['volume_size'] = $_POST['new_volume_size'];
-  $_SESSION['driver_type'] = $_POST['new_driver_type'];
-  $_SESSION['storage_pool'] = $_POST['storage_pool'];
-  //Optical Storage Section
-  $_SESSION['source_file_cd'] = $_POST['source_file_cd'];
-  //Network Section
-  $_SESSION['interface_type'] = $_POST['interface_type'];
-  $_SESSION['mac_address'] = clean_input($_POST['mac_address']);
-  $_SESSION['source_dev'] = $_POST['source_dev'];
-  $_SESSION['source_mode'] = $_POST['source_mode'];
-  $_SESSION['source_network'] = $_POST['source_network'];
+  $_SESSION['volume_capacity'] = $_POST['new_volume_size']; //in Gigabytes
+  $_SESSION['volume_size'] = $_POST['new_volume_size']; //in Gigabytes, set to the same size as capacity
+  $_SESSION['driver_type'] = $_POST['new_driver_type']; //qcow2 or raw
+  $_SESSION['target_bus'] = $_POST['new_target_bus']; //virtia, sata, scsi
+  $_SESSION['storage_pool'] = $_POST['storage_pool']; //Where the storage volume will be created
+  $_SESSION['existing_driver_type'] = $_POST['existing_driver_type']; //qcow2 or raw for existing storage
+  $_SESSION['existing_target_bus'] = $_POST['existing_target_bus']; //virtio, ide, sata, or scsi for existing storage
+  
+  //----Optical Storage Section----//
+  $_SESSION['source_file_cd'] = $_POST['source_file_cd']; //file location is ISO file for booting
+  
+  //----Network Section----//
+  $_SESSION['mac_address'] = clean_input($_POST['mac_address']); //mac address for network device
+  $_SESSION['model_type'] = $_POST['model_type']; //virtio, e1000, etc
+  $_SESSION['source_network'] = $_POST['source_network']; //default or any created network bridge
 
   header("Location: ".$_SERVER['PHP_SELF']);
   exit;
-}
+
+} //End if POST data is set
+
 
 if ($_SESSION['domain_type'] == "kvm") {
-  //General Section
-  $domain_type = $_SESSION['domain_type'];
-  $domain_name = $_SESSION['domain_name'];
-  $memory_unit = $_SESSION['memory_unit'];
-  $memory = $_SESSION['memory'];
-  $vcpu = $_SESSION['vcpu'];
-  $os_arch = $_SESSION['os_arch'];
-  $os_type = $_SESSION['os_type'];
-  $clock_offset = $_SESSION['clock_offset'];
-  $os_platform = $_SESSION['os_platform'];
-  //Storage Volume Section
-  $source_file_volume = $_SESSION['source_file_volume'];
-  $volume_image_name = $_SESSION['volume_image_name'];
-  $volume_capacity = $_SESSION['volume_capacity'];
-  $unit = $_SESSION['unit'];
-  $volume_size = $_SESSION['volume_size'];
-  $driver_type = $_SESSION['driver_type'];
-  $storage_pool = $_SESSION['storage_pool'];
-  //Optical Storage Section
-  $source_file_cd = $_SESSION['source_file_cd'];
-  //Network Section
-  $interface_type = $_SESSION['interface_type'];
-  $mac_address = $_SESSION['mac_address'];
-  $source_dev = $_SESSION['source_dev'];
-  $source_mode = $_SESSION['source_mode'];
-  $source_network = $_SESSION['source_network'];
 
 
-  //OS XML Information
-  if ($os_platform == "windows") {
-    //BIOS Featurs
-    $features = "
-    <features>
-      <acpi/>
-      <apic/>
-      <hyperv>
-        <relaxed state='on'/>
-        <vapic state='on'/>
-        <spinlocks state='on' retries='8191'/>
-      </hyperv>
-    </features>";
+  //--------------------- CREATE VIRTUAL MACHINE SECTION ---------------------//
 
-    //Volume type and bus needed for Windows
-    $target_dev_volume = "sda";
-    $target_bus_volume = "sata";
-
-    //Networking model for Windows
-    $model_type = "rtl8139";
-  } else {
-    //Features not necessary for Linux or Unix domains
-    $features = "
-    <features>
-      <acpi/>
-      <apic/>
-    </features>";
-
-    //Linux or Unix domains can use vda and virtio
-    $target_dev_volume = "vda";
-    $target_bus_volume = "virtio";
-
-    //Networking model for Linux
-    $model_type = "virtio";
-  }
-
-  //Hard drive information
-  $disk_type_volume = "file";
-  $disk_device_volume = "disk";
-  $driver_name_volume = "qemu";
-
-  //determine disk file extension to determine driver type
-  $dot_array = explode('.', $source_file_volume); //seperates string into array based on "."
-  $extension = end($dot_array); //end returns the last element in the array, which should be the extension
-  if ($extension == "qcow2") {
-    $driver_type_volume = "qcow2";
-  } else {
-    $driver_type_volume = "raw";
-  }
-
-  //determine what the hard drive volume xml will be.
-  switch ($source_file_volume) {
-    case "none":
-      $volume_xml = ""; //Will not add a storage volume is "None" is selected
-      break;
-
-    case "new":
-      $volume_xml = ""; //New storage volumes will be created & added only after successful creating of virtual machine domain
-      break;
-
-    default:
-      $volume_xml = "
-      <disk type='" . $disk_type_volume . "' device='" . $disk_device_volume . "'>
-      <driver name='" . $driver_name_volume . "' type='" . $driver_type_volume . "'/>
-      <source file='" . $source_file_volume . "'/>
-      <target dev='" . $target_dev_volume . "' bus='" . $target_bus_volume . "'/>
-      </disk>"; //This option is for adding existing storage volumes to a new virtual machine domain
-  }
-
-
-  //CD-DVD ISO Information
-  $disk_type_cd = "file";
-  $disk_device_cd = "cdrom";
-  $driver_name_cd = "qemu";
-  $driver_type_cd = "raw";
-  $target_dev_volume == "vda" ? $target_dev_cd = "hda" : $target_dev_cd = "hdb";
-  $target_bus_cd = "ide";
-
-  if ($source_file_cd == "none") {
-    $cd_xml = "";
-  } else {
-    $cd_xml = "
-      <disk type='" . $disk_type_cd . "' device='" . $disk_device_cd . "'>
-      <driver name='" . $driver_name_cd . "' type='" . $driver_type_cd . "'/>
-      <source file='" . $source_file_cd . "'/>
-      <target dev='" . $target_dev_cd . "' bus='" . $target_bus_cd . "'/>
-      <readonly/>
-      </disk>";
-  }
-
-
-  //Network Information
-  if ($interface_type == "network") {
-    $network_interface_xml = "
-      <interface type='" . $interface_type . "'>
-        <mac address='" . $mac_address . "'/>
-        <source network='" . $source_network . "'/>
-        <model type='" . $model_type . "'/>
-      </interface>";
-  }
-
-  if ($interface_type == "direct") {
-    $network_interface_xml = "
-      <interface type='" . $interface_type . "'>
-        <mac address='" . $mac_address . "'/>
-        <source dev='" . $source_dev . "' mode='" . $source_mode . "'/>
-        <model type='" . $model_type . "'/>
-      </interface>";
-  }
-
-
-  //Graphics Information
-  $graphics_type = "vnc";
-  $graphics_port = "-1";
-  $autoport = "yes";
-
-
-  //Final XML
-  $xml = "
-    <domain type='" . $domain_type . "'>
-    <name>" . $domain_name . "</name>
-    <description>
-      " . $os_platform . " platform
-    </description>
-    <memory unit='" . $memory_unit . "'>" . $memory . "</memory>
-    <vcpu>" . $vcpu . "</vcpu>
-
-    <os>
-      <type arch='" . $os_arch . "'>" . $os_type . "</type>
-      <boot dev='hd'/>
-      <boot dev='cdrom'/>
-      <boot dev='network'/>
-    </os>
-
-    " . $features . "
-
+  $domain_type = $_SESSION['domain_type']; //hard coded as "kvm" for now
+  $domain_name = $_SESSION['domain_name']; //sanatized name for virtual machine
+  $description = "Created by vmdashboard.org"; //plug for software that helped put virtual machine together
+  $memory_unit = $_SESSION['memory_unit']; //either MiB or GiB
+  $memory = $_SESSION['memory']; //whatever the user sets
+  $vcpu = $_SESSION['vcpu']; //whatever the user sets, defaults to 1
+  $clock_offset = $_SESSION['clock_offset']; //hard coded as "localtime" for now
+  $os_platform = $_SESSION['os_platform']; //determines if bios features need to be set, needed for Windows
   
-
-    <clock offset='" . $clock_offset . "'/>
-
+  $vm_xml = "
+    <domain type='$domain_type'>
+    <name>$domain_name</name>
+    <description>$description</description>
+    <memory unit='$memory_unit'>$memory</memory>
+    <vcpu>$vcpu</vcpu>
+    <os>
+    <type>hvm</type>
+        <boot dev='hd'/>
+        <boot dev='cdrom'/>
+        <boot dev='network'/>
+    </os>
+    <features>
+      <acpi/>
+      <apic/>
+    </features>
+    <clock offset='localtime'/>
     <devices>
-      " . $volume_xml . "
-      " . $cd_xml . "
-      " . $network_interface_xml . "
-      <graphics type='" . $graphics_type . "' port='" . $graphics_port . "' autoport='" . $autoport . "'/>
-      <memballoon model='virtio'>
+        <graphics type='vnc' port='-1' autoport='yes'/>
+        <video>
+          <model type='qxl'/>
+        </video>
+        <memballoon model='virtio'>
             <stats period='10'/>
-      </memballoon>
+        </memballoon>
     </devices>
     </domain> ";
 
-    //This feature is causing error on R710 with ubuntu 16.04 Host <feature policy='require' name='stibp'/>
+  $new_vm = $lv->domain_define($vm_xml); //Define the new virtual machine using libvirt, based off the XML information  
+  if (!$new_vm){
+    $notification = 'Error creating domain: '.$lv->get_last_error(); //let the user know if there is an error
+  }
 
-  //Define the new guest domain based off the XML information
-  $new_domain = $lv->domain_define($xml);
 
-  //Check for error on creating the domain
-  if (!$new_domain){
-    $notification = 'Error creating domain: '.$lv->get_last_error();
+  //--------------------- STORAGE VOLUME SECTION ---------------------//
+
+  $storage_pool = $_SESSION['storage_pool']; //"default" storage pool is default choice
+  $volume_image_name = $_SESSION['volume_image_name']; //Sanitized disk name, should end in .qcow2 or .img
+  $volume_capacity = $_SESSION['volume_capacity']; //Disk size set by user, defaults to 40
+  $unit = "G"; // Gigabytes
+  $volume_size = $_SESSION['volume_size'];
+  $driver_type = $_SESSION['driver_type'];
+  $target_bus = $_SESSION['target_bus'];
+  $source_file_volume = $_SESSION['source_file_volume'];
+  $existing_driver_type = $_SESSION['existing_driver_type']; //qcow2 or raw
+  $existing_target_bus = $_SESSION['existing_target_bus']; //virtio, sata, or scsi
+
+  if ($source_file_volume == "new" && $new_vm != false) {
+    $new_disk = $lv->storagevolume_create($storage_pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
+      
+    if (!$new_disk){
+      $notification = $notification . " Error creating disk: " . $lv->get_last_error();
+    } else {
+      $disk_path = libvirt_storagevolume_get_path($new_disk);
+
+      if ($target_bus == "virtio"){
+        $target_dev = "vda";
+      }
+
+      if ($target_bus == "sata" || $target_bus == "scsi"){
+        $target_dev = "sda";
+      }
+
+      if ($existing_target_bus == "ide"){
+        $target_dev = "hda";
+      }
+
+      $res = $new_vm;
+      $img = $disk_path;
+      $dev = $target_dev;
+      $typ = $target_bus;
+      $driver = $driver_type;
+      $add_new_disk_to_vm = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+      if (!$add_new_disk_to_vm){
+        $notification = $notification . " Error adding disk to virtual machine: ".$lv->get_last_error();
+      }
+    }
   }
 
   //Create and add storage volume to newly created virtual machine
-  if ($source_file_volume == "new" && $new_domain != false) {
-    $volume_size = 0;
-    $new_disk = $lv->storagevolume_create($storage_pool, $volume_image_name, $volume_capacity.$unit, $volume_size.$unit, $driver_type);
-    if (!$new_disk){
-      $notification = $notification . " Error creating disk: ".$lv->get_last_error();
+  if ($source_file_volume != "none" && $source_file_volume != "new" && $new_vm != false) {
+
+    if ($existing_target_bus == "virtio"){
+      $target_dev = "vda";
     }
-    $res = $new_domain;
-    $img = libvirt_storagevolume_get_path($new_disk);
-    $dev = $target_dev_volume;
-    $typ = $target_bus_volume;
-    $driver = $driver_type;
-    $new_disk_add = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
-    if (!$new_disk_add){
-      $notification = $notification . " Error adding disk: ".$lv->get_last_error();
+
+    if ($existing_target_bus == "sata" || $existing_target_bus == "scsi"){
+      $target_dev = "sda";
+    }
+
+    if ($existing_target_bus == "ide"){
+      $target_dev = "hda";
+    }
+
+    $res = $new_vm;
+    $img = $source_file_volume;
+    $dev = $target_dev;
+    $typ = $existing_target_bus;
+    $driver = $existing_driver_type;
+    $add_existing_disk_to_vm = $lv->domain_disk_add($res, $img, $dev, $typ, $driver);
+    if (!$add_existing_disk_to_vm){
+      $notification = $notification . " Error adding disk to virtual machine: ".$lv->get_last_error();
     }
   }
 
 
+//--------------------- OPTICAL STORAGE SECTION ---------------------//
+
+  //Optical Storage Section
+  $source_file_cd = $_SESSION['source_file_cd'];
+
+  if ($source_file_cd != "none") {
+
+    $domName = $new_vm;
+    $dom = $lv->get_domain_object($domName);
+    $domXML = new SimpleXMLElement($lv->domain_get_xml($domName));
+
+    //If $target_bus type is ide then we need to determine highest assigned value of drive, because storage may be using hda ex. hda, hdb, hdc...
+    $ide_array = array();
+    for ($i = 'a'; $i < 'z'; $i++)
+      $ide_array[] = "hd" . $i;
+
+    $tmp = libvirt_domain_get_disk_devices($dom);
+    $result = array_intersect($ide_array,$tmp);
+    if (count($result) > 0 ) {
+      $highestresult = max($result);
+      $target_dev = ++$highestresult;
+    } else {
+      $target_dev = "hda";
+    }
+  
+    //add a new cdrom XML
+    $disk = $domXML->devices->addChild('disk');
+    $disk->addAttribute('type','file');
+    $disk->addAttribute('device','cdrom');
+  
+    $driver = $disk->addChild('driver');
+    $driver->addAttribute('name','qemu');
+    $driver->addAttribute('type','raw');
+  
+    $source = $disk->addChild('source');
+    $source->addAttribute('file',$source_file_cd);
+  
+    $target = $disk->addChild('target');
+    $target->addAttribute('dev',$target_dev);
+    $target->addAttribute('bus','ide');
+  
+    $newXML = $domXML->asXML();
+    $newXML = str_replace('<?xml version="1.0"?>', '', $newXML);
+    
+    $add_iso_file = $lv->domain_change_xml($domName, $newXML);
+    if (!$add_iso_file){
+      $notification = $notification . " Error adding ISO to virtual machine: ".$lv->get_last_error();
+    }
+  }
+
+
+  //--------------------- NETWORK SECTION ---------------------//
+  //Network Section
+  $mac_address = $_SESSION['mac_address'];
+  $model_type = $_SESSION['model_type']; //virtio, rtl8139, e1000
+  $source_network = $_SESSION['source_network']; //default, br0, etc
+  
+  //Sets the default network model driver to virtio for Linux Virtual Machines
+  if ($_SESSION['os_platform'] == "linux" && $model_type == "default") {
+    $model_type = "virtio";
+  }
+
+  //Sets the default network model driver to rtl8139 for Windows Virtual Machines
+  if ($_SESSION['os_platform'] == "windows" && $model_type == "default") {
+    $model_type = "rtl8139";
+  }
+
+  //In the future, when application is written to include Apple, change e1000 driver to e1000-82545em driver, works on High Sierra
+  if ($_SESSION['os_platform'] == "mac" && $model_type == "default") {
+    $model_type = "e1000-82545em";
+  }
+
+  $domName = $new_vm;
+  $add_nat_network = $lv->domain_nic_add($domName, $mac_address, $source_network, $model_type);
+  if (!$add_nat_network){
+    $notification = $notification . " Error adding NAT network to virtual machine: ".$lv->get_last_error();
+  }
+  
+
+//--------------------- HYPERVISOR FEATURES SECTION ---------------------//  
+
+  if ($os_platform == "windows") {
+    $hypervisorSettings = shell_exec("virt-xml $domain_name --edit --features hyperv_relaxed=on,hyperv_vapic=on,hyperv_spinlocks=on,hyperv_spinlocks_retries=8191");
+    if (!$hypervisorSettings) {
+      $notification = $notification . " Error adding hypervisor features to virtual machine guest.";
+    }
+  } //thinking that I should change this to XML editing, some servers may not allow shell_exec
+
+  //Remove SESSION varibles created for domain creation
+  //General variables
   unset($_SESSION['domain_type']);
   unset($_SESSION['domain_name']);
   unset($_SESSION['memory_unit']);
   unset($_SESSION['memory']);
   unset($_SESSION['vcpu']);
-  unset($_SESSION['os_arch']);
-  unset($_SESSION['os_type']);
   unset($_SESSION['clock_offset']);
   unset($_SESSION['os_platform']);
+  //Storage variables
   unset($_SESSION['source_file_volume']);
   unset($_SESSION['volume_image_name']);
   unset($_SESSION['volume_capacity']);
-  unset($_SESSION['unit']);
   unset($_SESSION['volume_size']);
-  unset($_SESSION['new_driver_type']);
+  unset($_SESSION['driver_type']);
+  unset($_SESSION['target_bus']);
   unset($_SESSION['storage_pool']);
+  unset($_SESSION['existing_driver_type']);
+  unset($_SESSION['existing_target_bus']);
+  //ISO variables
   unset($_SESSION['source_file_cd']);
-  unset($_SESSION['interface_type']);
+  //Network variables
   unset($_SESSION['mac_address']);
-  unset($_SESSION['source_dev']);
-  unset($_SESSION['source_mode']);
+  unset($_SESSION['model_type']);
   unset($_SESSION['source_network']);
 
   //Return back to domain-list.php if creation is successful
@@ -292,7 +301,7 @@ if ($_SESSION['domain_type'] == "kvm") {
     header('Location: ../domain/domain-list.php');
     exit;
   }
-}
+} //Ends if SESSION is "kvm"
 
 $random_mac = $lv->generate_random_mac_addr(); //used to set default mac address value in form field
 
@@ -335,22 +344,8 @@ require('../navbar.php');
                     <option value="linux">Linux</option>
                     <option value="unix">Unix</option>
                     <option value="windows">Windows</option>
+                    <!--<option value="mac">Macintosh</option>-->
                     <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <label class="col-3 col-form-label">Architecture: </label>
-              <div class="col-6">
-                <div class="form-group">
-                  <select class="form-control" name="os_arch">
-                    <?php
-                    $tmp = $lv->host_get_node_info(); // Get and array of information on the host
-                    $arch = $tmp['model']; //Set the Architecture. Used in the General form. Ex., x86_64
-                    ?>
-                    <option value="<?php echo $arch; ?>"><?php echo $arch; ?></option>
                   </select>
                 </div>
               </div>
@@ -433,28 +428,10 @@ require('../navbar.php');
             </div>
 
             <div class="row">
-              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Volume Size: </label>
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Volume Size (GB): </label>
               <div class="col-4 diskChange" id="new" style="display:none;">
                 <div class="form-group">
                   <input type="number" class="form-control" value="40" min="1" name="new_volume_size">
-                </div>
-              </div>
-              <div class="col-2 checkbox-radios diskChange" id="new" style="display:none;">
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="new_unit" value="M"> MB
-                    <span class="circle">
-                      <span class="check"></span>
-                    </span>
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="new_unit" value="G" checked="checked"> GB
-                    <span class="circle">
-                      <span class="check"></span>
-                    </span>
-                  </label>
                 </div>
               </div>
             </div>
@@ -466,6 +443,20 @@ require('../navbar.php');
                   <select class="form-control" onchange="newExtenstion(this.form)" name="new_driver_type">
                     <option value="qcow2" selected="selected">qcow2</option>
                     <option value="raw">raw</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="new" style="display:none;">Target bus: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="new" style="display:none;">
+                  <select  class="form-control" name="new_target_bus" >
+                    <option value="virtio" selected="selected">virtio</option>
+                    <option value="sata">sata</option>
+                    <option value="scsi">scsi</option>
+                    <option value="ide">ide</option>  
                   </select>
                 </div>
               </div>
@@ -497,6 +488,32 @@ require('../navbar.php');
                       echo "<option value=\"none\">No storage pools available</option>";
                     }
                     ?>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="existing" style="display:none;">Driver type: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="existing" style="display:none;">
+                  <select  class="form-control" name="existing_driver_type" >
+                    <option value="qcow2" selected="selected">qcow2</option>
+                    <option value="raw">raw</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-3 col-form-label diskChange" id="existing" style="display:none;">Target bus: </label>
+              <div class="col-6">
+                <div class="form-group diskChange" id="existing" style="display:none;">
+                  <select  class="form-control" name="existing_target_bus" >
+                    <option value="virtio" selected="selected">virtio</option>
+                    <option value="sata">sata</option>
+                    <option value="scsi">scsi</option>
+                    <option value="ide">ide</option>
                   </select>
                 </div>
               </div>
@@ -536,26 +553,31 @@ require('../navbar.php');
             <div style="text-align:center;">NETWORKING</div>
 
             <div class="row">
-              <label class="col-3 col-form-label">Interface type: </label>
+              <label class="col-3 col-form-label">MAC Address: </label>
               <div class="col-6">
                 <div class="form-group">
-                  <select class="form-control" onchange="changeOptions(this)" name="interface_type">
-                    <option value="network" selected="selected">nat</option>
-                    <option value="direct">bridge</option>
-                  </select>
+                  <input type="text" class="form-control" placeholder="Enter MAC address: 12:34:56:78:9A:BC" name="mac_address" value="<?php echo $random_mac; ?>">
                 </div>
               </div>
             </div>
 
             <div class="row">
-              <label class="col-3 col-form-label">MAC Address: </label>
+              <label class="col-3 col-form-label">Model Type: </label>
               <div class="col-6">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Enter MAC address: 11:22:33:44:55:66" name="mac_address" value="<?php echo $random_mac; ?>">
+                  <select class="form-control" name="model_type">
+                    <?php
+                      $models = $lv->get_nic_models();
+                      for ($i = 0; $i < sizeof($models); $i++) {
+                        echo "<option value=\"$models[$i]\"> $models[$i] </option>";
+                      }
+                    ?>
+                  </select>
                 </div>
               </div>
             </div>
 
+            <!-- List Host Interfaces, may be good to save this for when selecting bridge adapter
             <div class="row">
               <label class="col-3 col-form-label netChange" id="direct" style="display:none;">Host Interface: </label>
               <div class="col-6">
@@ -578,20 +600,12 @@ require('../navbar.php');
                 </div>
               </div>
             </div>
+            -->
 
             <div class="row">
-              <label class="col-3 col-form-label" id="direct" style="display:none;">Model: </label>
+              <label class="col-3 col-form-label">Network Source: </label>
               <div class="col-6">
-                <div class="form-group" id="direct" style="display:none;">
-                  <input type="text" class="form-control" readonly="readonly" name="source_mode" value="bridge">
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <label class="col-3 col-form-label netChange" id="network">Model: </label>
-              <div class="col-6">
-                <div class="form-group netChange" id="network">
+                <div class="form-group">
                   <select class="form-control" name="source_network">
                     <?php
                     $tmp = $lv->get_networks(VIR_NETWORKS_ALL);

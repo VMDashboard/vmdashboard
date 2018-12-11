@@ -22,7 +22,6 @@ function clean_input($data) {
 // This will prevent duplicatig actions when page is reloaded.
 if (isset($_POST['network_name'])) {
   $_SESSION['network_name'] = clean_input($_POST['network_name']);
-  $_SESSION['forward_mode'] = $_POST['forward_mode'];
   $_SESSION['mac_address'] = $_POST['mac_address'];
   $_SESSION['ip_address'] = clean_input($_POST['ip_address']);
   $_SESSION['subnet_mask'] = $_POST['subnet_mask'];
@@ -38,7 +37,6 @@ require('../header.php');
 
 if (isset($_SESSION['network_name'])) {
   $network_name = $_SESSION['network_name'];
-  $forward_mode = $_SESSION['forward_mode'];
   $mac_address = $_SESSION['mac_address'];
   $ip_address = $_SESSION['ip_address'];
   $subnet_mask = $_SESSION['subnet_mask'];
@@ -46,7 +44,6 @@ if (isset($_SESSION['network_name'])) {
   $dhcp_start_address = $_SESSION['dhcp_start_address'];
   $dhcp_end_address = $_SESSION['dhcp_end_address'];
   unset($_SESSION['network_name']);
-  unset($_SESSION['forward_mode']);
   unset($_SESSION['mac_address']);
   unset($_SESSION['ip_address']);
   unset($_SESSION['subnet_mask']);
@@ -57,7 +54,7 @@ if (isset($_SESSION['network_name'])) {
   $xml = "
   <network>
     <name>$network_name</name>
-    <forward mode='$forward_mode'/>
+    <forward mode='nat'/>
     <mac address='$mac_address'/>
     <ip address='$ip_address' netmask='$subnet_mask'>
       <dhcp>
@@ -77,8 +74,14 @@ if (isset($_SESSION['network_name'])) {
     </network>";
   }
 
-  $notification = $lv->network_define_xml($xml)? "" : 'Error while creating network: '.$lv->get_last_error();
 
+  $network_add = $lv->network_define_xml($xml);
+ 
+  if (!$network_add){
+    $notification = "Error defining network: " . $lv->get_last_error();
+    $notification = filter_var($notification,FILTER_SANITIZE_SPECIAL_CHARS); //Error message will contain special characters
+  }
+  
   //Return back to the domain-single page if successful
   if (!$notification){
     header('Location: network-list.php');
@@ -104,7 +107,7 @@ $random_mac = $lv->generate_random_mac_addr();
               <i class="material-icons">device_hub</i>
             </div>
             <h3 class="card-title">Create Private Network</h3>
-            <p class="card-category">New Private LAN</p>
+            <p class="card-category">Local Area Network Settings</p>
           </div>
           <div class="card-body">
             <br />
@@ -113,17 +116,6 @@ $random_mac = $lv->generate_random_mac_addr();
               <div class="col-6">
                 <div class="form-group">
                   <input type="text" value="vNetwork" required="required" placeholder="Enter name for new network connection " class="form-control" name="network_name" />
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <label class="col-3 col-form-label">Forward Mode: </label>
-              <div class="col-6">
-                <div class="form-group">
-                  <select class="form-control" name="forward_mode">
-                    <option value="nat" selected>nat</option>
-                  </select>
                 </div>
               </div>
             </div>

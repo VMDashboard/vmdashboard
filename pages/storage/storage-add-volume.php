@@ -72,7 +72,7 @@ require('../navbar.php');
             <div class="card-icon">
               <i class="material-icons">device_hub</i>
             </div>
-            <h3 class="card-title">Create storage volume</h3>
+            <h3 class="card-title">Create Storage Volume</h3>
             <p class="card-category">Host: <?php echo $hn; ?></p>
           </div>
           <div class="card-body">

@@ -61,8 +61,6 @@ if ($action == 'dumpxml') {
 
 }
 
-
-
 require('../navbar.php');
 
 ?>
@@ -79,14 +77,17 @@ require('../navbar.php');
     </div>
     <div class="card-body">
 
-      <a href="network-add-lan.php"><i class="fa fa-plus"></i> Create new network</a> <br /> <br />
+      <a href="network-add-lan.php"><i class="fa fa-plus"></i> Create NAT Network</a> &nbsp; &nbsp; &nbsp; &nbsp;
+      <a href="network-add-macvtap.php"><i class="fa fa-plus"></i> Create Macvtap Bridge</a> &nbsp; &nbsp; &nbsp; &nbsp;
+      <a href="network-add-xml.php"><i class="fa fa-plus"></i> Define Network from XML</a> 
+      <br /> <br />
 
       <?php echo $network_xml; ?>
       <div class="table-responsive">
         <table class="table table-hover">
           <thead class="text-none">
-            <th>Network name</th>
-            <th>Network state</th>
+            <th>Name</th>
+            <th>State</th>
             <th>Gateway IP Address</th>
             <th>IP Address Range</th>
             <th>Forwarding</th>

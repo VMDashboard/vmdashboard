@@ -15,7 +15,7 @@ if (isset($_SESSION[themeColor])){
         Tip 2: you can also add an image using data-image tag
       -->
       <div class="logo">
-        <a href="http://vmdashboard.org" class="simple-text logo-normal">
+        <a href="../../index.php" class="simple-text logo-normal">
           <img src="../../assets/img/squarelogo.png" width="24px"> &ensp; VM Dashboard
         </a>
       </div>
