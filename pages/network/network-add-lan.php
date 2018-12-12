@@ -115,7 +115,7 @@ $random_mac = $lv->generate_random_mac_addr();
               <label class="col-3 col-form-label">Network Name: </label>
               <div class="col-6">
                 <div class="form-group">
-                  <input type="text" value="vNetwork" required="required" placeholder="Enter name for new network connection " class="form-control" name="network_name" />
+                  <input type="text" value="vnet0" required="required" placeholder="Enter name for new network connection " class="form-control" name="network_name" />
                 </div>
               </div>
             </div>
