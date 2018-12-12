@@ -11,6 +11,11 @@
     background-color: #eee;
 }
 
+.dark-edition .form-control {
+  color: #ccc;
+  background-color: #191919;
+}
+
 /*Change the dark theme's notification from purple to orange*/
 .dark-edition .navbar .notification {
     background: linear-gradient(60deg, #c86e04, #fa8a05);
