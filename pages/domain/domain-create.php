@@ -104,6 +104,45 @@ if ($_SESSION['domain_type'] == "kvm") {
     </devices>
     </domain> ";
 
+
+    //--------------------- XML IF WINDOWS VM ---------------------//  
+
+  if ($os_platform == "windows") {
+    $vm_xml = "
+    <domain type='$domain_type'>
+    <name>$domain_name</name>
+    <description>$description</description>
+    <memory unit='$memory_unit'>$memory</memory>
+    <vcpu>$vcpu</vcpu>
+    <os>
+    <type>hvm</type>
+        <boot dev='hd'/>
+        <boot dev='cdrom'/>
+        <boot dev='network'/>
+    </os>
+    <features>
+      <acpi/>
+      <apic/>
+      <hyperv>
+        <relaxed state='on'/>
+        <vapic state='on'/>
+        <spinlocks state='on' retries='8191'/>
+      </hyperv>
+    </features>
+    <clock offset='localtime'/>
+    <devices>
+        <graphics type='vnc' port='-1' autoport='yes'/>
+        <video>
+          <model type='qxl'/>
+        </video>
+        <memballoon model='virtio'>
+            <stats period='10'/>
+        </memballoon>
+    </devices>
+    </domain> ";
+
+  } 
+
   $new_vm = $lv->domain_define($vm_xml); //Define the new virtual machine using libvirt, based off the XML information  
   if (!$new_vm){
     $notification = 'Error creating domain: '.$lv->get_last_error(); //let the user know if there is an error
@@ -260,15 +299,6 @@ if ($_SESSION['domain_type'] == "kvm") {
     $notification = $notification . " Error adding NAT network to virtual machine: ".$lv->get_last_error();
   }
   
-
-//--------------------- HYPERVISOR FEATURES SECTION ---------------------//  
-
-  if ($os_platform == "windows") {
-    $hypervisorSettings = shell_exec("virt-xml $domain_name --edit --features hyperv_relaxed=on,hyperv_vapic=on,hyperv_spinlocks=on,hyperv_spinlocks_retries=8191");
-    if (!$hypervisorSettings) {
-      $notification = $notification . " Error adding hypervisor features to virtual machine guest.";
-    }
-  } //thinking that I should change this to XML editing, some servers may not allow shell_exec
 
   //Remove SESSION varibles created for domain creation
   //General variables

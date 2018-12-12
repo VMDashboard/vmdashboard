@@ -99,10 +99,24 @@ $random_mac = $lv->generate_random_mac_addr();
               <div class="col-6">
                 <div class="form-group">
                   <select class="form-control" name="interface_dev">
-                    <option value="eno1">eno1</option>
-                    <option value="eno2">eno2</option>
-                    <option value="eno3">eno3</option>
-                    <option value="eno4">eno4</option>
+                    <?php
+                      $device_cap = $lv->get_node_device_cap_options(); //Get Host Device Options
+                      //Loop through each Host device looking for network devices
+                      for ($i = 0; $i < sizeof($device_cap); $i++) {
+                        //Just pull out NET data of host device capabilites
+                        if ($device_cap[$i] == "net"){
+                          $tmp = $lv->get_node_devices($device_cap[$i]);
+                          //Loop through each network device
+                          for ($ii = 0; $ii < sizeof($tmp); $ii++) {
+                            $tmp1 = $lv->get_node_device_information($tmp[$ii]);
+                            $interface = array_key_exists('interface_name', $tmp1) ? $tmp1['interface_name'] : '-';
+                            $mac_address = array_key_exists('address', $tmp1) ? $tmp1['address'] : '-';
+                            //echo "<option value=\"$interface\">" . $interface . "-" . $mac_address . "</option>";
+                            echo "<option value=\"$interface\">$interface ($mac_address) </option>";
+                          }
+                        }
+                      }
+                    ?>
                   </select>
                 </div>
               </div>
