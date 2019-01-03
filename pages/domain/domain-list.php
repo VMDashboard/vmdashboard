@@ -500,7 +500,7 @@
 
 <!-- Hidden modal for creating a virtual machine domain-->
 <div id="create-domain-modal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content <?php if($_SESSION['themeColor'] == "dark-edition") { echo "modal-dark"; } ?>">
 			<div class="modal-header">
         <h5 class="modal-title">Create Virtual Machine</h5>
