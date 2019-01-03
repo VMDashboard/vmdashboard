@@ -33,11 +33,6 @@ $host_os = $os_info['name'];
       <a class="navbar-brand navbar-dark col-sm-3 col-md-2 mr-0" href="../../index.php"><img src="../../assets/img/squarelogo.png" width="28px"> &ensp; VM Dashboard</a>
       <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search"> -->
       <ul class="navbar-nav px-3">
-        <?php if ($_SESSION['update_available'] == true) { ?>
-            <li class="nav-item">
-                <a class="nav-link" href="../config/update.php">New Update Available</a>
-            </li>
-        <?php } ?>
 
         <li class="nav-item">
             <?php
