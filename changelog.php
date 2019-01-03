@@ -1,6 +1,15 @@
 <?php header('Location: index.php'); ?>
 <hr>
 <h4>Changelog</h4>
+[19.01.03] - 03.JAN.2019
+*Rewriting of the theme, using bootstrap dashboard example as base theme
+*Added events log that will list the last three events that occured for a vitual machine. Will need to intitally logout and login to start recording events
+*Redesigned the initial setup page of VM Dashboard to a single configuration page
+*Minimized the number of pages by using bootstrap modals for configuration tasks
+*Fixed CentOS host issue with Windows Server 2016 guest giving a BSOD because of CPU settings
+*Modified sidemar menu, strucuted for future use of multiple host machines (clustering)
+
+
 [18.12.11] - 11.DEC.2018
 *Improved how virtual machines are created by adding better error notifications, breaking the process into several steps of creation to handle errors 
 *Modified XML stucture of a new Virtual Machine to no longer define CPU features, rather allowing for default libvirt configuration on cpus
@@ -8,9 +17,11 @@
 *Added support for creating virtual machines and network adapters from XML directly
 *Fixed CSS for dropdown select options for Chrome on Windows platform
 
+
 [18.11.01] - 01.NOV.2018
 *Made the Console window in domain-single.php clickable to tab with console
 *Stripped default cpu options from domain-create.php. Some of the options caused vm to now boot up on certain host hardware configurations. Now relies on default libvirt settings.
+
 
 [18.10.09] - 09.OCT.2018
 *Renamed the software from OpenVM Dashboard to VM Dashboard

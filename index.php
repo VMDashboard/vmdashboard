@@ -30,6 +30,16 @@ if (file_exists($path)) {
     $rename_result = $conn->query($sql);
   }
 
+  //Create the vmdashboard_events table
+  $sql = "CREATE TABLE IF NOT EXISTS vmdashboard_events (
+    eventid INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    description varchar(255),
+    host_uuid varchar(255),
+    domain_uuid varchar(255),
+    userid INT,
+    date datetime)";
+  $event_result = $conn->query($sql);
+
   //Setting the SSL Certificate file path
   $sql = "SELECT value FROM vmdashboard_config WHERE name = 'cert_path' LIMIT 1;";
   $result = $conn->query($sql);
@@ -93,9 +103,9 @@ if (isset($_SESSION['username'])) {
 } elseif (file_exists($path)) {
   header('Location: pages/login.php');
 
-//If the user is not logged in and the config.php has not yet been created send them to setup the database connection.
+//If the user is not logged in and the config.php has not yet been created send them to setup configuration.
 } else {
-header('Location: pages/config/setup-database.php');
+header('Location: pages/config/setup-configuration.php');
 }
 
 ?>

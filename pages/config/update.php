@@ -50,79 +50,62 @@ require('../navbar.php');
 
 ?>
 
-<div class="content">
-  <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card card-stats-left">
-        <form action="" method="POST">
-          <div class="card-header card-header-warning card-header-icon">
-            <div class="card-icon">
-              <i class="material-icons">album</i>
+
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 <?php if($_SESSION['themeColor'] == "dark-edition") { echo "main-dark"; } ?> ">
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+        <!-- <h1 class="h2">Virtual Machine from XML</h1> -->
+      </div>
+
+      <form action="" method="POST">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+          <div class="card <?php if($_SESSION['themeColor'] == "dark-edition") { echo "card-dark"; } ?> ">
+
+            <div class="card-header text-center">
+              <span class="card-title">Software Update</span>
             </div>
-            <h3 class="card-title">Update</h3>
-            <p class="card-category">Installed version: <?php echo $arrayExisting[1]; ?></p>
-          </div>
-          <div class="card-body">
-            <br />
+            <div class="card-body">
+              <h5>Installed version: <?php echo $arrayExisting[1]; ?></h5>
 
-            <?php
-            //$_SESSION['update'] and $_SESSION['update_version'] are set in login.php
+              <?php
+                //$_SESSION['update'] and $_SESSION['update_version'] are set in login.php
 
-            if ($_SESSION['update_available'] == true) { ?>
-              <h6>There is an update available!</h6>
-              <p>The newest release is <?php echo $arrayLatest[1]; ?> </p>
-              <input type="submit" name="update" value="Update Now" class="btn btn-warning">
-            <?php }
+                if ($_SESSION['update_available'] == true) { ?>
+                  <h5>Status: There is an update available!</h5>
+                  <p>The newest release is <?php echo $arrayLatest[1]; ?> </p>
+                  <input type="submit" name="update" value="Update Now" class="btn btn-warning">
+                <?php }
 
-            if ($_SESSION['update_available'] == false) { ?>
-              <h6>You are running the lastest version of VM Dashboard.</h6>
-            <?php } ?>
+                if ($_SESSION['update_available'] == false) { ?>
+                  <h5>Status: You are running the lastest version of VMDashboard.</h5>
+                <?php } ?>
 
-            <br />
-            <pre><?php echo $fetchOrigin; ?></pre>
-            <pre><?php echo $resetOrigin; ?></pre>
-            <br />
+                <br />
+                <pre><?php echo $fetchOrigin; ?></pre>
+                <pre><?php echo $resetOrigin; ?></pre>
+                <br />
 
-            <?php
-            //Display the changelog on the update page
-            $changelog = file('../../changelog.php');
-            $length = count($changelog);
-            for ($i = 1; $i < $length; $i++) { //starting at index 1, 0 index is a php line.
-              print $changelog[$i] . "<br />";
-            }
-            ?>
+                <?php
+                //Display the changelog on the update page
+                $changelog = file('../../changelog.php');
+                $length = count($changelog);
+                for ($i = 1; $i < $length; $i++) { //starting at index 1, 0 index is a php line.
+                  print $changelog[$i] . "<br />";
+                }
+              ?>
 
-          </div> <!-- end card body -->
-        </form>
-      </div> <!-- end card -->
-    </div>
-  </div>
+            </div> <!-- end card body -->
+
+          </div> <!-- end card -->
+        </div>
+      </form>
+    </main>
+  </div> 
 </div> <!-- end content -->
 
-<script>
-window.onload =  function() {
-  <?php
-  if ($notification) {
-    echo "showNotification(\"top\",\"right\",\"$notification\");";
-  }
-  ?>
-}
-
-function showNotification(from, align, text){
-    color = 'warning';
-    $.notify({
-        icon: "",
-        message: text
-      },{
-          type: color,
-          timer: 500,
-          placement: {
-              from: from,
-              align: align
-          }
-      });
-}
-</script>
 
 <?php
 require('../footer.php');

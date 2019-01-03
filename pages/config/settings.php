@@ -99,53 +99,55 @@ require('../navbar.php');
 ?>
 
 
-<div class="content">
-  <div class="row">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-      <div class="card card-stats-center">
-        <form action="" method="POST">
-          <div class="card-header card-header-warning card-header-icon">
-            <div class="card-icon">
-              <i class="material-icons">album</i>
-            </div>
-            <h3 class="card-title">Settings</h3>
-            <p class="card-category">User: <?php echo $_SESSION['username']; ?></p>
-          </div>
-          <div class="card-body">
-            <br />
 
-            <div class="row">
-              <label class="col-3 col-form-label">SSL Certificate File Path (VNC): </label>
-              <div class="col-6">
-                <div class="form-group">
-                  <input type="text" value="<?php echo $cert_path; ?>" class="form-control" name="cert_path" />
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4 <?php if($_SESSION['themeColor'] == "dark-edition") { echo "main-dark"; } ?> ">
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3">
+        <!-- <h1 class="h2">Virtual Machine from XML</h1> -->
+      </div>
+
+      <form action="" method="POST">
+
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+          <div class="card <?php if($_SESSION['themeColor'] == "dark-edition") { echo "card-dark"; } ?> ">
+
+            <div class="card-header text-center">
+              <span class="card-title">Settings</span>
+            </div>
+            <div class="card-body">
+
+              <div class="row">
+                <label class="col-3 col-form-label text-right">SSL Certificate File Path (VNC): </label>
+                <div class="col-6">
+                  <div class="form-group">
+                    <input type="text" value="<?php echo $cert_path; ?>" class="form-control" name="cert_path" />
+                  </div>
                 </div>
               </div>
-              <div class="col-1 col-form-label">
-                <i class="material-icons" data-toggle="popover" title="SSL Certificate" data-content="You will need to restart your server or kill the python process using port 6080 to apply the change, then log back in to apply. Default file path: /etc/ssl/self.pem">description</i>
-              </div>
-            </div>
 
-            <div class="row">
-              <label class="col-3 col-form-label">SSL Key File Path (VNC): </label>
-              <div class="col-6">
-                <div class="form-group">
-                  <input type="text" value="<?php echo $key_path; ?>" class="form-control" name="key_path" />
+              <div class="row">
+                <label class="col-3 col-form-label text-right">SSL Key File Path (VNC): </label>
+                <div class="col-6">
+                  <div class="form-group">
+                    <input type="text" value="<?php echo $key_path; ?>" class="form-control" name="key_path" />
+                  </div>
                 </div>
               </div>
-              <div class="col-1 col-form-label">
-                <i class="material-icons" data-toggle="popover" title="SSL Key" data-content="You will need to restart your server or kill the python process using port 6080 to apply the change, then log back in to apply. Default file path is not set">description</i>
-              </div>
+
+            </div> <!-- end card body -->
+
+            <div class="card-footer justify-content-center text-center">
+              <button type="submit" class="btn btn-primary text-center">Submit</button>
             </div>
-          </div> <!-- end card body -->
-          <div class="card-footer justify-content-center">
-            <button type="submit" class="btn btn-warning">Submit</button>
-          </div>
-        </form>
-      </div> <!-- end card -->
-    </div>
-  </div>
+
+          </div> <!-- end card -->
+        </div>
+      </form>
+    </main>
+  </div> 
 </div> <!-- end content -->
+
 
 <?php
 require('../footer.php');

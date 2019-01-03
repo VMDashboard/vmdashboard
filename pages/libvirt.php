@@ -315,7 +315,7 @@ class Libvirt {
             $tmp = libvirt_domain_get_network_info($dom, $macs[$i]);
             if ($tmp)
                 //$ret[] = $tmp;
-                //added by me because it is not working correctly
+                //Added for VMDashboard because it is not working correctly
                 $ret[] = array(
                 							'mac' => $macs[$i],
                 							'network' => $tmp[$i],
@@ -439,7 +439,7 @@ class Libvirt {
     function list_domain_snapshots($domain) {
       $tmp = libvirt_list_domain_snapshots($domain);
       return ($tmp) ? $tmp : $this->_set_last_error();
-    } //added by me
+    } //Added for VMDashboard
 
     function get_storagepool_res($res) {
         if ($res == false)
@@ -506,35 +506,33 @@ class Libvirt {
     }
 
 
-    //added by me
     function storagepool_define_xml($xml) {
       $ret = libvirt_storagepool_define_xml($this->conn, $xml);
       return ($ret) ? $ret : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
-    //added by me
+   
     function storagepool_undefine($res) {
       $ret = libvirt_storagepool_undefine($res);
       return ($ret) ? $ret : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
-    //added by me
+
     function storagepool_destroy($res) {
       $ret = libvirt_storagepool_destroy($res);
       return ($ret) ? $ret : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
-    //added by me
+
     function storagepool_create($res) {
       $ret = libvirt_storagepool_create($res);
       return ($ret) ? $ret : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
-    //added by me
     function storagepool_refresh($res) {
       $ret = libvirt_storagepool_refresh($res);
       return ($ret) ? $ret : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
 
     function storagevolume_delete($path) {
@@ -608,23 +606,34 @@ class Libvirt {
     }
 
 
-    //Used to clone the storage volumes
-    function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name) {
+ 
+    function storagevolume_create_xml_from($pool_name, $original_volume_path, $original_volume_name, $clone_name) {
         $pool = $this->get_storagepool_res($pool_name);
         $original_volume = libvirt_storagevolume_lookup_by_path($this->conn, $original_volume_path);
 
         $original_filename = pathinfo($original_volume_name, PATHINFO_FILENAME);
         $original_extension = pathinfo($original_volume_name, PATHINFO_EXTENSION);
-        $time = date('Y-m-d_H-i-s');
-        $name = $original_filename . "_$time." . $original_extension;
+        
+        if (strtolower($original_extension) == "img"){
+            $format_type = "raw";
+        } else {
+            $format_type = strtolower($original_extension);
+        }
 
-        $xml = "<volume>\n".
-        "  <name>$name</name>\n".
-        "</volume>";
+        $xml = "
+        <volume>
+            <name>$clone_name</name>
+            <target>
+                <format type='$format_type'/>
+            </target>
+        </volume>
+        ";
 
         $tmp = libvirt_storagevolume_create_xml_from($pool, $xml, $original_volume);
         return ($tmp) ? $tmp : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
+
+
 
     function get_hypervisor_name() {
         $tmp = libvirt_connect_get_information($this->conn);
@@ -683,18 +692,19 @@ class Libvirt {
         return true;
     }
 
-    //added by me, creates new private network
+   
     function network_define_xml($xml) {
       $tmp = libvirt_network_define_xml($this->conn, $xml);
       return ($tmp) ? $tmp : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
 
-    //added by me, removes private network
+
     function network_undefine($network) {
       $net = libvirt_network_get($this->conn, $network);
       $tmp = libvirt_network_undefine($net);
       return ($tmp) ? $tmp : $this->_set_last_error();
-    }
+    } //Added for VMDashboard
+
 
     function translate_storagepool_state($state) {
         switch ($state) {
@@ -960,7 +970,7 @@ class Libvirt {
 
         $tmp = libvirt_domain_suspend($dom);
         return ($tmp) ? $tmp : $this->_set_last_error();
-    } //added by me
+    } //Added for VMDashboard
 
     function domain_resume($domain) {
         $dom = $this->get_domain_object($domain);
@@ -969,7 +979,7 @@ class Libvirt {
 
         $tmp = libvirt_domain_resume($dom);
         return ($tmp) ? $tmp : $this->_set_last_error();
-    } //added by me
+    } //Added for VMDashboard
 
 
     function domain_update_device($domain, $xml, $flags=false) {
@@ -979,7 +989,7 @@ class Libvirt {
 
         $tmp = libvirt_domain_update_device($res, $xml);
         return ($tmp) ? $tmp : $this->_set_last_error();
-    } //added by me
+    } //Added for VMDashboard
 
 
 
@@ -1008,7 +1018,7 @@ class Libvirt {
 
         $tmp = libvirt_domain_snapshot_create($dom);
         return ($tmp) ? $tmp : $this->_set_last_error();
-    } //added by me
+    } //Added for VMDashboard
 
     function domain_undefine($domain) {
         $dom = $this->get_domain_object($domain);
