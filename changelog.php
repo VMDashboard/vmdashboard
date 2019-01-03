@@ -3,11 +3,11 @@
 <h4>Changelog</h4>
 [19.01.03] - 03.JAN.2019
 *Rewriting of the theme, using bootstrap dashboard example as base theme
-*Added events log that will list the last three events that occured for a vitual machine. Will need to intitally logout and login to start recording events
+*Added events log that will list the last three events that occurred for a virtual machine. Will need to initially logout and login to start recording events
 *Redesigned the initial setup page of VM Dashboard to a single configuration page
 *Minimized the number of pages by using bootstrap modals for configuration tasks
 *Fixed CentOS host issue with Windows Server 2016 guest giving a BSOD because of CPU settings
-*Modified sidemar menu, strucuted for future use of multiple host machines (clustering)
+*Modified sidebar menu, structured for future use of multiple host machines (clustering)
 
 
 [18.12.11] - 11.DEC.2018
