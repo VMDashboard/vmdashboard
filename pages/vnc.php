@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])){
 }
 
 $protocol = isset($_SERVER['HTTPS']) ? "https://" : "http://";
-$url = $protocol . $_SERVER['HTTP_HOST'];
+$url = $protocol . $_SERVER['SERVER_NAME'];
 $token = $_GET['token'];
 ?>
 
